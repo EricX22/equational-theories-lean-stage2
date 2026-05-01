@@ -1,5 +1,5 @@
 """
-Marathon triage solver — gpt-oss-120b, two-pass with budget-aware priority.
+Marathon triage solver — two-pass with budget-aware priority.
 
 Strategy:
 

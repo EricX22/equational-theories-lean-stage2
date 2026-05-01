@@ -22,14 +22,14 @@ python3 -m pipeline.runner \
   --submission examples/solo/demos/baseline \
   --problems examples/problems/sample_20.json
 
-# oss_twophase: deeper search + analysis-then-implementation LLM
+# twophase: deeper search + analysis-then-implementation LLM
 python3 -m pipeline.runner \
-  --submission examples/solo/demos/oss_twophase \
+  --submission examples/solo/demos/twophase \
   --problems examples/problems/sample_20.json
 
-# oss_opnorm reference: 16 deterministic strategies + structural-context LLM
+# opnorm reference: 16 deterministic strategies + structural-context LLM
 python3 -m pipeline.runner \
-  --submission examples/solo/demos/oss_opnorm \
+  --submission examples/solo/demos/opnorm \
   --problems examples/problems/sample_20.json
 ```
 
@@ -40,12 +40,12 @@ Your submission is a **single file**: `solver.py`, up to 500 KB. If your solver 
 The three Solo demos form a learning ladder:
 
 - `baseline` — no LLM required; brute-force + singleton + generic LLM fallback. The simplest starting point and a complete reference for the stdin/stdout protocol.
-- `oss_twophase` — gpt-oss-120b; deeper deterministic search plus an analysis-then-implementation two-phase LLM. Shown in Walkthrough 1.
-- `oss_opnorm` — gpt-oss-120b; flagship reference mining solver — 16 deterministic strategies fed into a structural-context LLM call. Shown in Walkthrough 3.
+- `twophase` — gpt-oss-120b; deeper deterministic search plus an analysis-then-implementation two-phase LLM. Shown in Walkthrough 1.
+- `opnorm` — gpt-oss-120b; flagship reference mining solver — 16 deterministic strategies fed into a structural-context LLM call. Shown in Walkthrough 3.
 
 ---
 
-## Walkthrough 1: Deterministic Counterexample (`oss_twophase`)
+## Walkthrough 1: Deterministic Counterexample (`twophase`)
 
 **Problem**: `false_919_872` -- Does Equation919 imply Equation872?
 
@@ -56,7 +56,7 @@ The three Solo demos form a learning ladder:
 
 ### What happens
 
-The `oss_twophase` solver's deterministic stage exhaustively searches Cayley tables on Fin 2 through Fin 7. It finds a counterexample on **Fin 5** -- a 5x5 operation table where Equation919 holds but Equation872 does not.
+The `twophase` solver's deterministic stage exhaustively searches Cayley tables on Fin 2 through Fin 7. It finds a counterexample on **Fin 5** -- a 5x5 operation table where Equation919 holds but Equation872 does not.
 
 ### Interaction log
 
@@ -189,7 +189,7 @@ This shows the feedback loop: each judge error is automatically included in `{hi
 
 ---
 
-## Walkthrough 3: Reference Mining Solver (`oss_opnorm`)
+## Walkthrough 3: Reference Mining Solver (`opnorm`)
 
 **Problem**: `normal_0121` -- Does Equation3580 imply Equation4304?
 
@@ -200,9 +200,9 @@ This shows the feedback loop: each judge error is automatically included in `{hi
 
 ### What happens
 
-`oss_opnorm` is the flagship reference mining solver — not a teaching demo. It runs **16 deterministic proof strategies** (counterexample search on Fin 2-7, singleton detection, library lookup, constancy lemmas, BFS near-miss search, several calc-chain variants). All 16 fail for this problem. On the first LLM call the model emits a correct 3-step `calc` proof and the judge accepts immediately.
+`opnorm` is the flagship reference mining solver — not a teaching demo. It runs **16 deterministic proof strategies** (counterexample search on Fin 2-7, singleton detection, library lookup, constancy lemmas, BFS near-miss search, several calc-chain variants). All 16 fail for this problem. On the first LLM call the model emits a correct 3-step `calc` proof and the judge accepts immediately.
 
-The shape of the win mirrors structural-context calc proofs, but the method is triggered autonomously from solver-side constancy analysis rather than a hand-crafted prompt for a designed problem. This was captured during a 1000-problem mining sweep over the `normal` set and is the first LLM-guided win catalogued for `oss_opnorm` (mining run dated 2026-04-23).
+The shape of the win mirrors structural-context calc proofs, but the method is triggered autonomously from solver-side constancy analysis rather than a hand-crafted prompt for a designed problem. This was captured during a 1000-problem mining sweep over the `normal` set and is the first LLM-guided win catalogued for `opnorm` (mining run dated 2026-04-23).
 
 ### Solver's analysis (sent to LLM via `{solver.*}` placeholders, excerpt)
 
@@ -260,14 +260,14 @@ The mining-sweep sweet spot: deterministic strategies cover the easy bulk, and w
 | Demo | Model | Strategy | LLM Role |
 |------|-------|----------|----------|
 | `baseline` | OpenRouter default | Brute-force + singleton + generic LLM fallback | Generic — retries with error feedback |
-| `oss_twophase` | gpt-oss-120b | Deeper search + two-phase LLM | Structured — analysis phase, then implementation |
-| `oss_opnorm` | gpt-oss-120b | 16 deterministic strategies + structural-context LLM | Flagship — fed constancy / near-miss / instantiation analysis |
+| `twophase` | gpt-oss-120b | Deeper search + two-phase LLM | Structured — analysis phase, then implementation |
+| `opnorm` | gpt-oss-120b | 16 deterministic strategies + structural-context LLM | Flagship — fed constancy / near-miss / instantiation analysis |
 
 ## Key Takeaways for Contestants
 
 1. **Deterministic strategies first**: Counterexample search on Fin 2-7 solves most false problems. Singleton detection, library matching, and transitive chains solve many true problems. No LLM needed.
 
-2. **The prompt matters more than the solver loop**: The difference between `baseline` (generic prompt, several LLM rounds for a simple problem) and `oss_opnorm` (specialized prompt with solver-side structural analysis, often one LLM round for a hard problem) is largely in the prompt template and the structural context it receives.
+2. **The prompt matters more than the solver loop**: The difference between `baseline` (generic prompt, several LLM rounds for a simple problem) and `opnorm` (specialized prompt with solver-side structural analysis, often one LLM round for a hard problem) is largely in the prompt template and the structural context it receives.
 
 3. **Judge feedback is free information**: Each judge error is automatically included in `{history.attempts}`. Design your prompt to help the LLM learn from these errors.
 

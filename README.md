@@ -153,7 +153,7 @@ python3 scripts/run_marathon.py \
 # forwarded into the solver subprocess.
 export OPENROUTER_API_KEY=sk-...
 python3 scripts/run_marathon.py \
-  --solver examples/marathon/demos/triage_oss \
+  --solver examples/marathon/demos/triage \
   --manifest examples/problems/normal.jsonl \
   --compression-ratio 0.5
 ```
@@ -249,18 +249,18 @@ examples/
 │   └── demos/
 │       ├── baseline/             #   Brute-force + singleton + generic LLM fallback (start here)
 │       │   └── solver.py
-│       ├── oss_twophase/         #   gpt-oss-120b: deeper search + analysis-then-implementation LLM
+│       ├── twophase/         #   gpt-oss-120b: deeper search + analysis-then-implementation LLM
 │       │   └── solver.py
-│       └── oss_opnorm/           #   gpt-oss-120b: 16 deterministic strategies + structural-context LLM (flagship)
+│       └── opnorm/           #   gpt-oss-120b: 16 deterministic strategies + structural-context LLM (flagship)
 │           └── solver.py
 └── marathon/
     ├── TUTORIAL.md               # Marathon: 3 walkthroughs (baseline / triage / cross-problem state)
     └── demos/
         ├── baseline/             #   Sequential brute-force, no LLM (start here, zero token cost)
         │   └── solver.py
-        ├── triage_oss/           #   Difficulty-sorted Pass B + budget-aware Pass C refinement (entry-level LLM)
+        ├── triage/           #   Difficulty-sorted Pass B + budget-aware Pass C refinement (entry-level LLM)
         │   └── solver.py
-        └── fewshot_oss/          #   In-run lemma cache + few-shot transfer (cross-problem state, Marathon-only)
+        └── fewshot/          #   In-run lemma cache + few-shot transfer (cross-problem state, Marathon-only)
             └── solver.py
 ```
 
@@ -280,12 +280,12 @@ python3 -m pipeline.runner \
 
 # OSS two-phase demo on 200 problems
 python3 -m pipeline.runner \
-  --submission examples/solo/demos/oss_twophase \
+  --submission examples/solo/demos/twophase \
   --problems examples/problems/sample_200.json
 
 # OSS opnorm reference solver on 200 problems
 python3 -m pipeline.runner \
-  --submission examples/solo/demos/oss_opnorm \
+  --submission examples/solo/demos/opnorm \
   --problems examples/problems/sample_200.json
 
 # Custom output path
@@ -329,8 +329,8 @@ Any typo in `--problem-ids` or an empty problem set fails with exit code `2` rat
 **Marathon** — see [`examples/marathon/TUTORIAL.md`](examples/marathon/TUTORIAL.md) for three walkthroughs of marathon-specific strategies:
 
 1. **Free counterexample harvest** -- baseline brute-force pass clears ~40-50% of `normal` at zero token cost
-2. **Triage + refinement** -- difficulty-sorted Pass B + budget-aware Pass C re-attempt on failures (`triage_oss`)
-3. **Marathon-distinctive: in-run lemma cache + few-shot transfer** -- `fewshot_oss` accumulates winning patterns across problems and prepends them to later prompts; cross-problem state is structurally impossible in Solo
+2. **Triage + refinement** -- difficulty-sorted Pass B + budget-aware Pass C re-attempt on failures (`triage`)
+3. **Marathon-distinctive: in-run lemma cache + few-shot transfer** -- `fewshot` accumulates winning patterns across problems and prepends them to later prompts; cross-problem state is structurally impossible in Solo
 
 ## Problem Format
 
@@ -847,14 +847,14 @@ Exits `0` when the sandbox image boots, blocks network, and blocks writes to the
 │   │   ├── TUTORIAL.md
 │   │   └── demos/
 │   │       ├── baseline/            #     Brute-force + singleton + LLM fallback (start here)
-│   │       ├── oss_twophase/        #     gpt-oss-120b + two-phase strategy
-│   │       └── oss_opnorm/          #     gpt-oss-120b + opnorm flagship reference solver
+│   │       ├── twophase/        #     gpt-oss-120b + two-phase strategy
+│   │       └── opnorm/          #     gpt-oss-120b + opnorm flagship reference solver
 │   └── marathon/                    #   Marathon track: 3 reference demos + tutorial
 │       ├── TUTORIAL.md
 │       └── demos/
 │           ├── baseline/            #     Sequential brute-force, no LLM (start here, zero token cost)
-│           ├── triage_oss/          #     Difficulty-sorted Pass B + budget-aware Pass C refinement
-│           └── fewshot_oss/         #     In-run lemma cache + few-shot transfer (Marathon-only strategy)
+│           ├── triage/          #     Difficulty-sorted Pass B + budget-aware Pass C refinement
+│           └── fewshot/         #     In-run lemma cache + few-shot transfer (Marathon-only strategy)
 │           # Each demo is a single solver.py
 │
 ├── tests/                           # Test data

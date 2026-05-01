@@ -1,5 +1,5 @@
 """
-oss_opnorm — flagship reference mining solver (Solo track).
+opnorm — flagship reference mining solver (Solo track).
 
 Strategy: 16 deterministic proof strategies (counterexample search on
 Fin 2-7, singleton detection, library lookup, constancy lemmas, BFS

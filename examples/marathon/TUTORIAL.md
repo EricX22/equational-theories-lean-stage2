@@ -17,14 +17,14 @@ python3 scripts/run_marathon.py \
   --manifest tests/marathon_fixtures/manifests/normal_5.jsonl \
   --budget-seconds 60 --budget-tokens 0
 
-# triage_oss: difficulty-sorted LLM Pass B + budget-aware Pass C refinement.
+# triage: difficulty-sorted LLM Pass B + budget-aware Pass C refinement.
 python3 scripts/run_marathon.py \
-  --solver examples/marathon/demos/triage_oss \
+  --solver examples/marathon/demos/triage \
   --manifest tests/marathon_fixtures/manifests/normal_5.jsonl
 
-# fewshot_oss: in-run lemma cache + relevance-ranked few-shot prompt.
+# fewshot: in-run lemma cache + relevance-ranked few-shot prompt.
 python3 scripts/run_marathon.py \
-  --solver examples/marathon/demos/fewshot_oss \
+  --solver examples/marathon/demos/fewshot \
   --manifest tests/marathon_fixtures/manifests/normal_5.jsonl
 ```
 
@@ -47,8 +47,8 @@ A submission is one file: `solver.py`, ≤500 KB. The marathon runner sets `JUDG
 The three Marathon demos under `examples/marathon/demos/` form a learning ladder:
 
 - `baseline` — no LLM; brute-force counterexample search on Fin 2..3 across every problem. The free-yield floor.
-- `triage_oss` — gpt-oss-120b; difficulty-sorted Pass B + budget-aware Pass C refinement on Pass-B failures. Entry-level LLM-using marathon solver.
-- `fewshot_oss` — gpt-oss-120b; in-run lemma cache + few-shot transfer (a submitted proof becomes prompt context for later problems). Marathon-only strategy — cross-problem state is structurally impossible in Solo.
+- `triage` — gpt-oss-120b; difficulty-sorted Pass B + budget-aware Pass C refinement on Pass-B failures. Entry-level LLM-using marathon solver.
+- `fewshot` — gpt-oss-120b; in-run lemma cache + few-shot transfer (a submitted proof becomes prompt context for later problems). Marathon-only strategy — cross-problem state is structurally impossible in Solo.
 
 ---
 
@@ -97,7 +97,7 @@ The remaining walkthroughs all start with the same brute-force pass, then layer 
 
 ---
 
-## Walkthrough 2: Triage + Refinement (`triage_oss`)
+## Walkthrough 2: Triage + Refinement (`triage`)
 
 **Manifest**: `tests/marathon_fixtures/manifests/normal_5.jsonl`.
 
@@ -143,9 +143,9 @@ Pass C is the deliberate counter-balance: cheap-first ordering plus low effort c
 
 ---
 
-## Walkthrough 3: Marathon-Distinctive Strategy (`fewshot_oss`)
+## Walkthrough 3: Marathon-Distinctive Strategy (`fewshot`)
 
-`fewshot_oss` implements a strategy **only Marathon mode makes possible**: it uses cross-problem state — patterns that worked on earlier problems become prompt context for later ones. This is structurally impossible in Solo, where each problem gets its own subprocess and its own LLM context window.
+`fewshot` implements a strategy **only Marathon mode makes possible**: it uses cross-problem state — patterns that worked on earlier problems become prompt context for later ones. This is structurally impossible in Solo, where each problem gets its own subprocess and its own LLM context window.
 
 ### In-Run Lemma Cache + Few-Shot Transfer
 
@@ -177,7 +177,7 @@ The same submitted answers are also persisted to `<scratch>/proof_lib.jsonl` for
 
 ### Where to take this next
 
-`fewshot_oss` is a starting point, not a finished product. Natural directions to fork it:
+`fewshot` is a starting point, not a finished product. Natural directions to fork it:
 
 - **Prompt-context engineering** — tune the few-shot relevance score, raise `K`, swap variable-set overlap for a richer feature (term shape, constancy patterns, ID-pair distance in the equation graph).
 - **Budget allocation across passes** — combine cross-problem state with non-uniform per-problem effort: a low-effort first pass to seed the pool, then a higher-effort second pass that consumes the pool as few-shot context. Marathon's shared global budget is what makes this expressible.
@@ -190,14 +190,14 @@ The same submitted answers are also persisted to `<scratch>/proof_lib.jsonl` for
 | Demo          | LLM | Strategy                                                                | Marathon-distinctive? |
 | ------------- | --- | ----------------------------------------------------------------------- | --------------------- |
 | `baseline`    | no  | brute-force counterexample only                                         | no — same as a Solo brute-force solver run sequentially |
-| `triage_oss`  | yes | brute-force + difficulty-sorted Pass B + budget-aware Pass C refinement | partial — refinement loop is feasible in Solo too |
-| `fewshot_oss` | yes | brute-force + in-run lemma cache + few-shot transfer                    | **yes** — requires cross-problem state |
+| `triage`  | yes | brute-force + difficulty-sorted Pass B + budget-aware Pass C refinement | partial — refinement loop is feasible in Solo too |
+| `fewshot` | yes | brute-force + in-run lemma cache + few-shot transfer                    | **yes** — requires cross-problem state |
 
 ## Key Takeaways for Marathon Contestants
 
 1. **Take the free counterexamples first.** Brute-force on Fin 2..3 is essentially free and clears 40-50% of `normal`. Don't spend any LLM budget on a problem you haven't first checked for a small Cayley counterexample. Every demo here starts with this pass for that reason.
 
-2. **Triage is the central decision.** The shared global budget means every token spent on problem A is a token not spent on problem B. Demos that decide *which* problems to attempt and *in what order* (`triage_oss`, `fewshot_oss`) consistently outperform a strict-sequential walk on the same budget.
+2. **Triage is the central decision.** The shared global budget means every token spent on problem A is a token not spent on problem B. Demos that decide *which* problems to attempt and *in what order* (`triage`, `fewshot`) consistently outperform a strict-sequential walk on the same budget.
 
 3. **Watch the helper's pre-call budget gate.** `marathon_llm.call_llm` refuses any call where `prompt_tokens + max_output_tokens > budget_remaining`. If you set `max_output_tokens = 32768` on a compressed budget, **every** call gets refused before contacting upstream and your solver looks like it's hung but is actually thrashing through error-returns. The reference demos default to `max_output_tokens = 8192`; raise this only when you know the budget can absorb it.
 

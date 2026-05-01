@@ -1,5 +1,5 @@
 """
-Marathon few-shot solver — gpt-oss-120b, in-run lemma cache + few-shot transfer.
+Marathon few-shot solver — in-run lemma cache + few-shot transfer.
 
 This demo showcases the single most marathon-distinctive strategy: a solver
 that builds its own proof library from problems it has already solved

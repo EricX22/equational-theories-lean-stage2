@@ -18,7 +18,7 @@ Strategy (both modes):
 
 This baseline does not call the LLM and does not aim to maximize score —
 it exists to prove the marathon E2E pipeline runs cleanly. Real solvers
-(triage_oss, fewshot_oss) build on top of this contract.
+(triage, fewshot) build on top of this contract.
 """
 
 PROMPT = """You are solving equational theory problems in Lean 4.

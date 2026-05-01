@@ -1,5 +1,5 @@
 """
-oss_twophase — two-phase LLM strategy: first ask the LLM for direction + plan, then execute.
+twophase — two-phase LLM strategy: first ask the LLM for direction + plan, then execute.
 
 Key idea: Phase 1 asks the LLM to analyze the problem and decide true/false
 with reasoning, WITHOUT writing any code. Phase 2 uses the LLM's analysis

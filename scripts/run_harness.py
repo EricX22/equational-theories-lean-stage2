@@ -123,8 +123,8 @@ def run_pipeline_prompt_cases() -> list[dict[str, Any]]:
     # with placeholder tokens, and no stray prompt.txt alongside.
     demo_names = [
         "baseline",
-        "oss_twophase",
-        "oss_opnorm",
+        "twophase",
+        "opnorm",
     ]
     all_ok = True
     drift: list[str] = []
@@ -1200,7 +1200,7 @@ def run_pipeline_prompt_cases() -> list[dict[str, Any]]:
 
     # Branch C: default (no llm.base_url, no llm.api_key_env) must still
     # route to OpenRouter with the legacy env-var fallback. Backward-compat
-    # anchor — every existing config in the repo, including oss_opnorm
+    # anchor — every existing config in the repo, including opnorm
     # sweeps that are currently running, must keep working after this feature
     # lands.
     captured_ctor.clear()
