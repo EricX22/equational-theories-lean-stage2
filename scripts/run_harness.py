@@ -2301,6 +2301,11 @@ def run_playground_cases() -> list[dict[str, Any]]:
         'value="hard3"',
         "Submission",
         "Results",
+        # Solo/Marathon track tabs (added 2026-05-01) — Marathon is a
+        # static info panel pointing at the CLI; solo flow is unchanged.
+        'id="tab-solo"',
+        'id="tab-marathon"',
+        'id="track-marathon"',
     ]
     missing_struct = [s for s in required_structure if s not in text]
     _record(
