@@ -233,8 +233,8 @@ def run_stage2():
 
     This baseline isn't intended as a competitive Stage-2 solver; the path
     exists so the dual-mode contract holds. A submission that wants to be
-    competitive in Stage 2 should use one of the demo_oss_* / demo_gemma_*
-    solvers instead.
+    competitive in Stage 2 should start from one of the LLM-using Solo
+    demos under ``examples/solo/demos/`` (e.g. ``twophase`` or ``opnorm``).
     """
     startup = _read_message()
     problem = startup["problem"]
