@@ -55,7 +55,14 @@ fi
 TOOLCHAIN="$(cat "$ROOT/lean-toolchain" | tr -d '[:space:]')"
 info "Required toolchain: $TOOLCHAIN"
 
-elan toolchain install "$TOOLCHAIN"
+# Recent elan (4.x) returns non-zero with "already installed" for an
+# existing toolchain. Probe first so setup.sh stays idempotent under
+# `set -e`.
+if elan toolchain list 2>/dev/null | grep -Fxq "$TOOLCHAIN"; then
+    info "Toolchain $TOOLCHAIN already installed."
+else
+    elan toolchain install "$TOOLCHAIN"
+fi
 elan default "$TOOLCHAIN"
 
 info "Lean version: $(lean --version)"
