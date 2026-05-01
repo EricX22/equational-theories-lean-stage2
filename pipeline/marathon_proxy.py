@@ -312,7 +312,7 @@ class _MarathonProxyHandler(BaseHTTPRequestHandler):
             return
 
         # Forward upstream via the OpenAI SDK (same client surface the
-        # Stage 2 proxy uses). Routes / extra fields like the OpenRouter
+        # Solo proxy uses). Routes / extra fields like the OpenRouter
         # ``provider`` and ``reasoning`` blocks pass through untouched —
         # the solver controls what it asks for; the proxy only enforces
         # auth + token counting.

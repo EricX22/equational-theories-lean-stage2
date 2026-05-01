@@ -14,7 +14,7 @@ Defaults follow the reference in ``docs/marathon_mode.md``:
 half the sum of N Solo per-problem budgets. Smaller values squeeze
 harder; 1.0 means no compression (fair share per problem).
 
-The Stage 2 path (``scripts/run_harness.py`` / ``pipeline/runner.py``) is
+The Solo path (``scripts/run_harness.py`` / ``pipeline/runner.py``) is
 unchanged. This script is the *only* CLI entry for marathon mode.
 """
 from __future__ import annotations

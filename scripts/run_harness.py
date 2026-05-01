@@ -538,7 +538,7 @@ def run_pipeline_prompt_cases() -> list[dict[str, Any]]:
         "" if ok_fast else f"took {elapsed:.1f}s — likely deadlocked on stderr pipe",
     )
 
-    # ── Intake size cap regression (Stage 2 rule: solver.py ≤ 500 KB) ──
+    # ── Intake size cap regression (Solo rule: solver.py ≤ 500 KB) ──
     # A solver larger than config.judge.max_solver_bytes must be rejected at
     # intake without ever launching a subprocess. The previous rule change
     # dropped call-count budgets; this rule is now the sole mechanism that

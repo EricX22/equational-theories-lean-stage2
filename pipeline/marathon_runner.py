@@ -2,10 +2,10 @@
 Marathon-mode runner: launches a solver subprocess with a *global* budget
 spanning N problems, instead of one subprocess per problem.
 
-This is a separate entry point from ``pipeline/runner.py`` (Stage 2). The
-Stage 2 path is unchanged.
+This is a separate entry point from ``pipeline/runner.py`` (Solo). The
+Solo path is unchanged.
 
-Solver contract (env vars; absent → solver runs in Stage 2 stdin/stdout mode
+Solver contract (env vars; absent → solver runs in Solo stdin/stdout mode
 and this module is irrelevant):
 
     JUDGE_MARATHON_MANIFEST       /abs/problems.jsonl     read-only manifest
@@ -113,7 +113,7 @@ def _validate_solver_layout(submission_dir: Path) -> str | None:
     if size > SOLVER_MAX_BYTES:
         return (
             f"solver.py is {size} bytes, exceeds the {SOLVER_MAX_BYTES}-byte "
-            f"limit (Stage 2 reference)"
+            f"limit (Solo reference)"
         )
     return None
 
@@ -190,7 +190,7 @@ def _write_manifest_copy(problems: tuple[dict, ...], dest: Path) -> None:
 # (``pipeline/marathon_proxy.py``) that holds the real key and enforces
 # the token budget at the network layer. The solver only ever sees a
 # 127.0.0.1 base URL plus a per-run shared secret as ``OPENAI_API_KEY``.
-# This is the marathon analogue of the Stage 2 ``pipeline/proxy.py``
+# This is the marathon analogue of the Solo ``pipeline/proxy.py``
 # stdin/stdout mediation — same defensive posture, different I/O shape.
 
 # Where the marathon-side helper module (marathon_llm.py) lives. The

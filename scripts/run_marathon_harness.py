@@ -2,7 +2,7 @@
 Marathon-mode harness: runs every case in tests/marathon_manifest.json and
 asserts the documented behaviour. Exits 0 only when every case passes.
 
-The Stage 2 harness (``scripts/run_harness.py``) is unchanged — this is a
+The Solo harness (``scripts/run_harness.py``) is unchanged — this is a
 parallel entry point so the marathon track has its own gate.
 
 Usage:

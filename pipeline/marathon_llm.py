@@ -116,7 +116,7 @@ def call_llm(
     ``config`` is an optional override dict matching the ``llm`` block of
     ``pipeline/config.json`` (model / base_url / api_key_env /
     max_output_tokens / temperature / provider / reasoning_effort). When
-    omitted, defaults are resolved from env vars and Stage 2 reference
+    omitted, defaults are resolved from env vars and Solo reference
     values, so the helper works out of the box for solvers that just want
     to call ``call_llm("...")``.
 

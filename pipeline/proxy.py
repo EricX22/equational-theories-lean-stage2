@@ -550,7 +550,7 @@ def _build_solver_argv(
 
 
 def _validate_submission_layout(submission_dir: Path) -> str | None:
-    """Enforce the Stage 2 single-file contract at intake.
+    """Enforce the single-file solver contract at intake.
 
     The submission directory must contain exactly one regular file named
     ``solver.py`` — nothing else. No helper modules, no data payloads, no
@@ -589,7 +589,7 @@ def _validate_submission_layout(submission_dir: Path) -> str | None:
 def _load_prompt_template(submission_dir: Path) -> str:
     """Load prompt template for a submission.
 
-    Stage 2 format is single-file: the template lives as a top-level
+    Solo format is single-file: the template lives as a top-level
     ``PROMPT = "..."`` string constant in ``solver.py``. AST-only extraction;
     the module is never imported. Any ``prompt.txt`` in the submission dir is
     intentionally ignored — one rule, one entry point.
