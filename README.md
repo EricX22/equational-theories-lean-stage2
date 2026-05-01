@@ -154,8 +154,11 @@ python3 scripts/run_marathon.py \
 export OPENROUTER_API_KEY=sk-...
 python3 scripts/run_marathon.py \
   --solver examples/marathon/demos/triage \
-  --manifest examples/problems/normal.jsonl \
+  --manifest examples/problems/marathon/normal_100.jsonl \
   --compression-ratio 0.5
+# 100 problems × 600 s × 0.5 ≈ 30 000 s wall-clock. Swap in
+# examples/problems/normal.jsonl (1000 problems, ~83 h at the same
+# compression) when you're ready for the full reference set.
 ```
 
 The runner derives `budget_seconds` and `budget_tokens` from
