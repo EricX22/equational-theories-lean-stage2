@@ -35,8 +35,9 @@ Token budget discipline:
   * The runner watchdog reads the proxy's settled-only counter (so an
     exact-budget legal reservation isn't killed mid-flight) and
     SIGTERMs the solver if billed cost exceeds the budget after settle.
-  * This solver additionally pre-checks budget_remaining() before
-    each Pass-C retry (high-reasoning calls are more expensive).
+  * This solver additionally reserves PASS_C_MIN_BUDGET_FRACTION of
+    cap_tokens for Pass C, so a thirsty Pass B can't drain the
+    budget before the deeper-thought retry gets a turn.
 """
 
 PROMPT_FIRST_TRY = """You are solving an equational-theory implication in Lean 4.
@@ -284,12 +285,9 @@ def _record_pattern(scratch_dir, prob, proof_body):
 
 def run_marathon():
     try:
-        from marathon_llm import call_llm, budget_remaining, tokens_used
+        from marathon_llm import call_llm, tokens_used
     except ImportError:
         call_llm = None  # type: ignore[assignment]
-
-        def budget_remaining():  # noqa: D401
-            return 0
 
         def tokens_used():  # noqa: D401
             return 0
