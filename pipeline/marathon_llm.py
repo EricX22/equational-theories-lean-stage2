@@ -127,6 +127,8 @@ def call_llm(
                    "truncated": bool (optional)}
         error   → {"error": str, "budget_remaining": int}
     """
+    global _last_seen_tokens_total
+
     cfg = dict(config or {})
     model = cfg.get("model") or os.environ.get("JUDGE_MARATHON_MODEL", "openai/gpt-oss-120b")
     # In production these point at the marathon proxy. The runner refuses
@@ -235,7 +237,6 @@ def call_llm(
     # call's usage to our cached value). The proxy in-memory counter
     # remains the single authority — this cache is only the most-recent
     # value the helper has observed.
-    global _last_seen_tokens_total
     _last_seen_tokens_total = _last_seen_tokens_total + int(total_tokens)
     new_total = _last_seen_tokens_total
 

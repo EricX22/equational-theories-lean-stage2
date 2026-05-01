@@ -514,6 +514,25 @@ def main() -> int:
 
     passed = 0
     failed = 0
+
+    # Regression: marathon_llm.py must import cleanly. Solver fixtures
+    # routinely catch the import in try/except (so they can record helper
+    # errors as data), which can mask SyntaxError-class regressions in
+    # the helper module. A direct import smoke is the cheapest fence.
+    helper_name = "marathon_llm.imports"
+    try:
+        import importlib
+        helper = importlib.import_module("pipeline.marathon_llm")
+        for attr in ("call_llm", "budget_remaining", "tokens_used"):
+            if not callable(getattr(helper, attr, None)):
+                raise AttributeError(f"pipeline.marathon_llm.{attr} missing or not callable")
+        print(f"  [PASS] {helper_name}")
+        passed += 1
+    except Exception as exc:  # noqa: BLE001 — cover SyntaxError + ImportError + AttributeError
+        print(f"  [FAIL] {helper_name}")
+        print(f"         - {type(exc).__name__}: {exc}")
+        failed += 1
+
     for case in cases:
         ok, fails = _run_case(case, lean_ok)
         tag = "PASS" if ok else "FAIL"
