@@ -15,11 +15,12 @@ Strategy:
     Lean tactic body. Skip on parse fail or LLM error. Stop early when
     the projected cost of the next call would exceed remaining budget.
 
-  Pass C (refinement, budget permitting):
-    Walk Pass-B failures and retry once with the previous attempt as
-    feedback in the prompt — same shape as Stage 2 multi-round loops.
-    Capped at ``MAX_REFINE_PER_PROBLEM`` per problem so one stubborn
-    target can't drain the budget.
+  Pass C (deeper-thought retry, budget permitting):
+    Walk problems Pass B left *unsubmitted* (parse fail, empty body,
+    LLM error, missing counterexample) and retry once with bumped
+    reasoning effort and a larger output cap. Pass-B successes are
+    never retried — last-write-wins scoring would let a context-free
+    retry overwrite a working answer with a worse one.
 
 Cross-problem experience reuse: each successful Lean proof body is
 appended to ``<scratch>/proof_patterns.jsonl`` so future demos can
@@ -35,7 +36,7 @@ Token budget discipline:
     exact-budget legal reservation isn't killed mid-flight) and
     SIGTERMs the solver if billed cost exceeds the budget after settle.
   * This solver additionally pre-checks budget_remaining() before
-    expensive Pass-C retries.
+    each Pass-C retry (high-reasoning calls are more expensive).
 """
 
 PROMPT_FIRST_TRY = """You are solving an equational-theory implication in Lean 4.
@@ -66,18 +67,6 @@ or
     {"verdict": "false", "counterexample_table": [[0,1],[1,0]]}
 """
 
-PROMPT_REFINE = """Your previous attempt for {problem.equation1_id} → {problem.equation2_id} did not verify.
-
-Previous proof body:
-{prev_proof}
-
-Lean error:
-{prev_error}
-
-Try a different tactic. Same template, same response shape:
-{"verdict": "true", "proof": "<new tactic body>"}
-"""
-
 PROMPT = PROMPT_FIRST_TRY  # for prompt extraction by the proxy (Stage 2 mode)
 
 
@@ -95,7 +84,6 @@ if _LIB_DIR and _LIB_DIR not in sys.path:
     sys.path.insert(0, _LIB_DIR)
 
 
-MAX_REFINE_PER_PROBLEM = 1
 PASS_C_MIN_BUDGET_FRACTION = 0.10  # Reserve 10% of token budget for Pass C; skip if less.
 
 
@@ -242,16 +230,6 @@ def _fill_first(prob):
             .replace("{problem.equation2_id}", eq2_name))
 
 
-def _fill_refine(prob, prev_proof, prev_error):
-    eq1_name = f"Equation{prob['eq1_id']}"
-    eq2_name = f"Equation{prob['eq2_id']}"
-    return (PROMPT_REFINE
-            .replace("{problem.equation1_id}", eq1_name)
-            .replace("{problem.equation2_id}", eq2_name)
-            .replace("{prev_proof}", prev_proof[:1500])
-            .replace("{prev_error}", prev_error[:1500]))
-
-
 # ───────── Triage scoring ─────────
 
 def difficulty_score(prob):
@@ -343,7 +321,7 @@ def run_marathon():
 
     problems = _load_manifest(manifest_path)
     solved: set[str] = set()
-    last_attempt: dict[str, tuple[str, str]] = {}  # id -> (proof, error)
+    submitted_in_b: set[str] = set()  # Pass-B IDs with any answer appended
 
     # ── Pass A: brute-force counterexample on every problem ──
     for prob in problems:
@@ -394,7 +372,7 @@ def run_marathon():
                 continue
             code = make_true_code(body)
             _append_answer(output_path, {"id": prob["id"], "verdict": "true", "code": code})
-            last_attempt[prob["id"]] = (body, "")
+            submitted_in_b.add(prob["id"])
             _record_pattern(scratch_dir, prob, body)
         elif verdict == "false":
             tbl = obj.get("counterexample_table")
@@ -403,21 +381,28 @@ def run_marathon():
                     "id": prob["id"], "verdict": "false",
                     "code": make_false_code(len(tbl), tbl),
                 })
+                submitted_in_b.add(prob["id"])
 
-    # ── Pass C: single refine pass (skipped if budget too low) ──
+    # ── Pass C: deeper-thought retry on Pass-B *no-shows* ──
+    # Only problems Pass B left without any submission (parse fail, empty
+    # body, LLM error, missing counterexample). Pass-B successes are never
+    # retried — last-write-wins scoring would let a context-free retry
+    # overwrite a working answer with a worse one.
     if cap_tokens and tokens_used() < cap_tokens - pass_c_reserve // 2:
+        deep_config = dict(llm_config)
+        deep_config["reasoning_effort"] = "high"
+        deep_config["max_output_tokens"] = 16384
         for prob in remaining:
             if time.monotonic() + tail_margin >= deadline:
                 break
             if cap_tokens and tokens_used() >= cap_tokens:
                 break
             pid = prob["id"]
-            if pid not in last_attempt:
+            if pid in submitted_in_b:
                 continue
-            prev_proof, prev_error = last_attempt[pid]
-            prompt = _fill_refine(prob, prev_proof, prev_error)
+            prompt = _fill_first(prob)
             try:
-                resp = call_llm(prompt, config=llm_config)
+                resp = call_llm(prompt, config=deep_config)
             except Exception:  # noqa: BLE001
                 continue
             if "error" in resp:
@@ -425,14 +410,24 @@ def run_marathon():
                     break
                 continue
             obj = _extract_json(resp.get("response", ""))
-            if not isinstance(obj, dict) or obj.get("verdict") != "true":
+            if not isinstance(obj, dict):
                 continue
-            body = obj.get("proof", "")
-            if not body:
-                continue
-            _append_answer(output_path, {
-                "id": pid, "verdict": "true", "code": make_true_code(body),
-            })
+            verdict = obj.get("verdict")
+            if verdict == "true":
+                body = obj.get("proof", "")
+                if not body:
+                    continue
+                _append_answer(output_path, {
+                    "id": pid, "verdict": "true", "code": make_true_code(body),
+                })
+                _record_pattern(scratch_dir, prob, body)
+            elif verdict == "false":
+                tbl = obj.get("counterexample_table")
+                if isinstance(tbl, list) and tbl:
+                    _append_answer(output_path, {
+                        "id": pid, "verdict": "false",
+                        "code": make_false_code(len(tbl), tbl),
+                    })
 
 
 # ───────── Stage-2 fallback ─────────

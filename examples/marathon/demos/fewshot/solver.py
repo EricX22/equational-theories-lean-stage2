@@ -37,13 +37,13 @@ judge accepts it. Judging happens after the solver exits, so any
 proof the LLM hallucinated and submitted could enter the pool and
 poison later prompts.
 
-Two mitigations are wired in here, both opt-in:
+Two mitigations are wired in here:
 
-  * ``FEWSHOT_VERIFY_BEFORE_CACHE=1`` — gate pool insertion on a cheap
-    *syntactic* prefilter (banned placeholders, balanced delimiters,
-    non-empty body). This is the cheapest layer: it costs ~µs per
-    candidate and catches the most common LLM hallucinations. It is a
-    prefilter, NOT a real Lean check.
+  * Cheap *syntactic* prefilter on by default (banned placeholders,
+    balanced delimiters, non-empty body). It costs ~µs per candidate
+    and catches the most common LLM hallucinations. Set
+    ``FEWSHOT_VERIFY_BEFORE_CACHE=0`` to disable for A/B comparison.
+    It is a prefilter, NOT a real Lean check.
   * Full Lean validation (``lake env lean`` on a per-candidate
     JudgeProblem-equivalent module) is the stricter fork — see the
     ``_prefilter_proof`` docstring for the trade-off and pointer.
@@ -148,14 +148,16 @@ FEWSHOT_K = 2
 # earlier problem doesn't crowd out the actual question.
 MAX_EXAMPLE_PROOF_CHARS = 800
 
-# Opt-in: gate few-shot pool insertion on a cheap structural prefilter.
-# Default off — the demo is meant to showcase the cross-problem state
-# strategy, and the prefilter introduces a small recall hit on
-# borderline-but-correct proofs. See ``_prefilter_proof`` for the
+# Default ON: gate few-shot pool insertion on a cheap structural prefilter.
+# The prefilter is ~µs per candidate and rejects the canonical
+# pool-poisoners (sorry/admit, unbalanced delimiters, empty bodies);
+# leaving it off lets one hallucinated proof contaminate every later
+# prompt. Set ``FEWSHOT_VERIFY_BEFORE_CACHE=0`` (or false/no/off) to
+# disable for an A/B comparison. See ``_prefilter_proof`` for the
 # trade-off and the full-validation fork-target.
 FEWSHOT_VERIFY_BEFORE_CACHE = os.environ.get(
-    "FEWSHOT_VERIFY_BEFORE_CACHE", ""
-).strip().lower() in ("1", "true", "yes", "on")
+    "FEWSHOT_VERIFY_BEFORE_CACHE", "1"
+).strip().lower() not in ("0", "false", "no", "off")
 
 
 # \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 Equation parsing & brute-force counterexample search \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
