@@ -193,6 +193,55 @@ def _structured_tables(n):
         yield t
 
 
+def _named_witness_tables():
+    """Small fixed finite magmas inspired by the Stage 1 witness prompts.
+    The judge still verifies every candidate, so these are safe even if
+    our intuition about a witness is wrong.
+    """
+    # W1: left projection, a ◇ b = a
+    yield "LP", 2, [[0, 0], [1, 1]]
+    # W2: right projection, a ◇ b = b
+    yield "RP", 2, [[0, 1], [0, 1]]
+    # W6: XOR, a ◇ b = a xor b
+    yield "XOR2", 2, [[0, 1], [1, 0]]
+    # W7: MOD3 sum, a ◇ b = (a + b) mod 3
+    yield "MOD3_SUM", 3, [
+        [0, 1, 2],
+        [1, 2, 0],
+        [2, 0, 1],
+    ]
+    # W9: LC3, a ◇ b = (a + 1) mod 3
+    yield "LC3", 3, [
+        [1, 1, 1],
+        [2, 2, 2],
+        [0, 0, 0],
+    ]
+    # W10: RC3, a ◇ b = (b + 1) mod 3
+    yield "RC3", 3, [
+        [1, 2, 0],
+        [1, 2, 0],
+        [1, 2, 0],
+    ]
+    # LC4 / RC4 variants
+    yield "LC4", 4, [[(i + 1) % 4 for _ in range(4)] for i in range(4)]
+    yield "RC4", 4, [[(j + 1) % 4 for j in range(4)] for _ in range(4)]
+    # K0-ish: constant operation
+    yield "K0_2", 2, [[0, 0], [0, 0]]
+
+
+def search_named_witnesses(eq1_text, eq2_text):
+    """Try a short list of known useful finite witness tables."""
+    v1, l1, r1 = parse_equation(eq1_text)
+    v2, l2, r2 = parse_equation(eq2_text)
+    for name, n, table in _named_witness_tables():
+        op = lambda a, b, t=table: t[a][b]
+        if equation_holds(v1, l1, r1, n, op) and not equation_holds(
+            v2, l2, r2, n, op
+        ):
+            return name, n, table
+    return None, None, None
+
+
 def search_counterexample_extended(eq1_text, eq2_text, sizes=(4, 5, 6, 7)):
     """Search structured magma families on Fin 4-7 for a counterexample.
     Cheaper than full enumeration — uses ~30 families per n."""
@@ -521,21 +570,26 @@ def try_two_step_h_chain(problem, eq1_text, eq2_text, max_judge_calls=6):
 
 
 def forces_singleton(eq1_text):
-    """Brute force on Fin 2 (and Fin 3 when cheap): is every magma satisfying
-    h necessarily a singleton? Conservative — used only as an analysis hint."""
+    """Conservative small-model singleton test.
+
+    If ANY magma on Fin 2 or Fin 3 satisfies h, then h does NOT force
+    singleton behavior, because Fin n has at least two carrier elements.
+
+    If no such model exists in the searched sizes, return True as an
+    analysis hint only — we haven't proven this algebraically, just
+    observed it on small cases.
+    """
     v1, l1, r1 = parse_equation(eq1_text)
     for n in (2, 3):
         if n == 3 and len(v1) > 4:
             break
         for enc in range(n ** (n * n)):
             table = [
-                [(enc // (n ** (i * n + j))) % n for j in range(n)] for i in range(n)
+                [(enc // (n ** (i * n + j))) % n for j in range(n)]
+                for i in range(n)
             ]
             op = lambda a, b, t=table: t[a][b]
-            if not equation_holds(v1, l1, r1, n, op):
-                continue
-            distinct = {x for row in table for x in row}
-            if len(distinct) >= 2:
+            if equation_holds(v1, l1, r1, n, op):
                 return False
     return True
 
@@ -804,6 +858,14 @@ def main():
         if call_judge("false", make_false_code(n, table)).get("status") == "accepted":
             return
 
+    # Stage 1.25: named finite witness tables from the Stage 1 prompt library.
+    # A short fixed list of explainable magmas — LP, RP, XOR, MOD3, LC/RC, K0.
+    # Cheap and explainable; judge still verifies the result.
+    name, n, table = search_named_witnesses(eq1, eq2)
+    if n is not None:
+        if call_judge("false", make_false_code(n, table)).get("status") == "accepted":
+            return
+
     # Stage 1.5: extended counterexample search on Fin 4-7 with
     # structured magma families (constant, projection, cyclic, lattice,
     # polynomial, …). Cheap (~30 families per n) but catches the
@@ -862,6 +924,11 @@ def main():
             "STRUCTURAL FINDING: h forces a singleton magma (no non-singleton model "
             "exists on Fin 2 or Fin 3). The implication holds via the lemma "
             "`key : ∀ (a b : G), a = b`. Apply that lemma to the goal."
+        )
+        analysis_lines.append(
+            "IMPORTANT: Treat this as a TRUE proof task. Do NOT output verdict false. "
+            "Do NOT output a counterexample_table. Output only verdict true with a "
+            "Lean proof body."
         )
         if not x_in_rhs:
             analysis_lines.append(
