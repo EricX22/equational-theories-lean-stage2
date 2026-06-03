@@ -49,7 +49,6 @@ If h forces singleton (see analysis), the proof has the form:
 import json
 import re
 import sys
-import time
 from itertools import product
 
 
@@ -176,9 +175,6 @@ def _structured_tables(n):
     # XOR (useful for n that's a power of 2)
     if n in (2, 4, 8):
         yield [[(i ^ j) for j in range(n)] for i in range(n)]
-    # LC3 / RC3: successor-based tables
-    yield [[(i + 1) % n for j in range(n)] for i in range(n)]  # op[i][j] = (i+1) % n
-    yield [[(j + 1) % n for j in range(n)] for i in range(n)]  # op[i][j] = (j+1) % n
     # Const-with-diagonal
     for c in range(n):
         t = [[c] * n for _ in range(n)]
@@ -193,55 +189,6 @@ def _structured_tables(n):
         yield t
 
 
-def _named_witness_tables():
-    """Small fixed finite magmas inspired by the Stage 1 witness prompts.
-    The judge still verifies every candidate, so these are safe even if
-    our intuition about a witness is wrong.
-    """
-    # W1: left projection, a ◇ b = a
-    yield "LP", 2, [[0, 0], [1, 1]]
-    # W2: right projection, a ◇ b = b
-    yield "RP", 2, [[0, 1], [0, 1]]
-    # W6: XOR, a ◇ b = a xor b
-    yield "XOR2", 2, [[0, 1], [1, 0]]
-    # W7: MOD3 sum, a ◇ b = (a + b) mod 3
-    yield "MOD3_SUM", 3, [
-        [0, 1, 2],
-        [1, 2, 0],
-        [2, 0, 1],
-    ]
-    # W9: LC3, a ◇ b = (a + 1) mod 3
-    yield "LC3", 3, [
-        [1, 1, 1],
-        [2, 2, 2],
-        [0, 0, 0],
-    ]
-    # W10: RC3, a ◇ b = (b + 1) mod 3
-    yield "RC3", 3, [
-        [1, 2, 0],
-        [1, 2, 0],
-        [1, 2, 0],
-    ]
-    # LC4 / RC4 variants
-    yield "LC4", 4, [[(i + 1) % 4 for _ in range(4)] for i in range(4)]
-    yield "RC4", 4, [[(j + 1) % 4 for j in range(4)] for _ in range(4)]
-    # K0-ish: constant operation
-    yield "K0_2", 2, [[0, 0], [0, 0]]
-
-
-def search_named_witnesses(eq1_text, eq2_text):
-    """Try a short list of known useful finite witness tables."""
-    v1, l1, r1 = parse_equation(eq1_text)
-    v2, l2, r2 = parse_equation(eq2_text)
-    for name, n, table in _named_witness_tables():
-        op = lambda a, b, t=table: t[a][b]
-        if equation_holds(v1, l1, r1, n, op) and not equation_holds(
-            v2, l2, r2, n, op
-        ):
-            return name, n, table
-    return None, None, None
-
-
 def search_counterexample_extended(eq1_text, eq2_text, sizes=(4, 5, 6, 7)):
     """Search structured magma families on Fin 4-7 for a counterexample.
     Cheaper than full enumeration — uses ~30 families per n."""
@@ -254,6 +201,55 @@ def search_counterexample_extended(eq1_text, eq2_text, sizes=(4, 5, 6, 7)):
                 v2, l2, r2, n, op
             ):
                 return n, table
+    return None, None
+
+
+
+def _perturb_table_one_cell(table):
+    """Yield tables that differ from `table` in exactly one cell.
+
+    This is the first step toward constraint-guided finite model search:
+    rather than enumerating all n^(n*n) magmas, search the local
+    neighborhood of operation families that often work as witnesses.
+    """
+    n = len(table)
+    for i in range(n):
+        for j in range(n):
+            old = table[i][j]
+            for val in range(n):
+                if val == old:
+                    continue
+                t = [row[:] for row in table]
+                t[i][j] = val
+                yield t
+
+
+def search_perturbed_witnesses(eq1_text, eq2_text, sizes=(2, 3, 4), max_bases_per_n=24):
+    """Try one-cell perturbations around structured tables.
+
+    False proofs are finite-model search. A fully exhaustive Fin 4 search is
+    impossible, but many useful witnesses are near a simple algebraic family.
+    This stage uses those families to define a much smaller targeted search.
+    """
+    v1, l1, r1 = parse_equation(eq1_text)
+    v2, l2, r2 = parse_equation(eq2_text)
+    seen = set()
+    for n in sizes:
+        base_count = 0
+        for base in _structured_tables(n):
+            base_count += 1
+            if base_count > max_bases_per_n:
+                break
+            for table in _perturb_table_one_cell(base):
+                key = tuple(tuple(row) for row in table)
+                if key in seen:
+                    continue
+                seen.add(key)
+                op = lambda a, b, t=table: t[a][b]
+                if equation_holds(v1, l1, r1, n, op) and not equation_holds(
+                    v2, l2, r2, n, op
+                ):
+                    return n, table
     return None, None
 
 
@@ -326,6 +322,201 @@ def tree_to_str(tree):
     if tree[0] == "var":
         return tree[1]
     return "(" + tree_to_str(tree[1]) + " \u25c7 " + tree_to_str(tree[2]) + ")"
+
+
+
+def tree_size(tree):
+    if tree[0] == "var":
+        return 1
+    return 1 + tree_size(tree[1]) + tree_size(tree[2])
+
+
+def subterms(tree):
+    out = [tree]
+    if tree[0] == "op":
+        out.extend(subterms(tree[1]))
+        out.extend(subterms(tree[2]))
+    return out
+
+
+def apply_subst_tree(tree, subst):
+    if tree[0] == "var":
+        return subst.get(tree[1], tree)
+    return ("op", apply_subst_tree(tree[1], subst), apply_subst_tree(tree[2], subst))
+
+
+def ordered_unique(seq, max_items=None):
+    out, seen = [], set()
+    for x in seq:
+        if x in seen:
+            continue
+        seen.add(x)
+        out.append(x)
+        if max_items is not None and len(out) >= max_items:
+            break
+    return out
+
+
+def generate_candidate_terms(var_names, seed_terms=(), max_depth=2, max_terms=36, max_size=9):
+    """Generate a small, ordered candidate term universe for true-proof search."""
+    base = [("var", v) for v in var_names]
+    terms = ordered_unique(list(seed_terms) + base)
+    frontier = terms[:]
+    for _ in range(max_depth):
+        new_terms = []
+        left_pool = ordered_unique(terms[:12] + frontier[:12])
+        right_pool = ordered_unique(terms[:12] + frontier[:12])
+        for a in left_pool:
+            for b in right_pool:
+                t = ("op", a, b)
+                if tree_size(t) <= max_size:
+                    new_terms.append(t)
+        old_len = len(terms)
+        terms = ordered_unique(terms + new_terms, max_terms)
+        frontier = terms[old_len:]
+        if len(terms) >= max_terms or not frontier:
+            break
+    indexed = list(enumerate(terms))
+    indexed.sort(key=lambda p: (tree_size(p[1]), p[0]))
+    return [t for _, t in indexed[:max_terms]]
+
+
+def _bounded_arg_pool(candidates, arity, max_arg_combos=20000):
+    if arity <= 0:
+        return []
+    pool = candidates[:]
+    while len(pool) > 1 and (len(pool) ** arity) > max_arg_combos:
+        pool = pool[:-1]
+    return pool
+
+
+def _build_h_edge_graph(h_vars, h_lhs, h_rhs, candidates, max_arg_combos=20000):
+    """Instantiate h over a bounded candidate universe and return adjacency."""
+    arg_pool = _bounded_arg_pool(candidates, len(h_vars), max_arg_combos=max_arg_combos)
+    adj = {}
+    if not arg_pool:
+        return adj
+    for combo in product(arg_pool, repeat=len(h_vars)):
+        subst = dict(zip(h_vars, combo))
+        lhs = apply_subst_tree(h_lhs, subst)
+        rhs = apply_subst_tree(h_rhs, subst)
+        args = " ".join(tree_to_str(subst[v]) for v in h_vars)
+        pf = f"h {args}"
+        adj.setdefault(lhs, []).append((rhs, pf))
+        adj.setdefault(rhs, []).append((lhs, f"({pf}).symm"))
+    return adj
+
+
+def _find_path(adj, start, target, max_depth=4):
+    if start == target:
+        return []
+    q = [(start, [])]
+    seen = {start}
+    head = 0
+    while head < len(q):
+        node, path = q[head]
+        head += 1
+        if len(path) >= max_depth:
+            continue
+        for nxt, pf in adj.get(node, []):
+            if nxt in seen:
+                continue
+            new_path = path + [(node, nxt, pf)]
+            if nxt == target:
+                return new_path
+            seen.add(nxt)
+            q.append((nxt, new_path))
+    return None
+
+
+def calc_from_path(path):
+    if not path:
+        return "rfl"
+    lines = ["calc"]
+    first_lhs, first_rhs, first_pf = path[0]
+    lines.append(f"  {tree_to_str(first_lhs)} = {tree_to_str(first_rhs)} := {first_pf}")
+    for _, rhs, pf in path[1:]:
+        lines.append(f"  _ = {tree_to_str(rhs)} := {pf}")
+    return "\n".join(lines)
+
+
+def try_bounded_equality_graph(problem, eq1_text, eq2_text, max_path_depth=4):
+    """Search for a symbolic equality path from Eq2.lhs to Eq2.rhs."""
+    h_vars = []
+    seen = set()
+    for v in re.findall(r"\b([a-z])\b", eq1_text):
+        if v not in seen:
+            seen.add(v)
+            h_vars.append(v)
+    g_vars = []
+    seen = set()
+    for v in re.findall(r"\b([a-z])\b", eq2_text):
+        if v not in seen:
+            seen.add(v)
+            g_vars.append(v)
+    try:
+        h_lhs_str, h_rhs_str = eq1_text.split("=", 1)
+        g_lhs_str, g_rhs_str = eq2_text.split("=", 1)
+        h_lhs = parse_to_tree(h_lhs_str)
+        h_rhs = parse_to_tree(h_rhs_str)
+        g_lhs = parse_to_tree(g_lhs_str)
+        g_rhs = parse_to_tree(g_rhs_str)
+    except Exception:
+        return False
+
+    seeds = subterms(g_lhs) + subterms(g_rhs)
+    candidates = generate_candidate_terms(g_vars, seeds, max_depth=2, max_terms=34, max_size=9)
+    adj = _build_h_edge_graph(h_vars, h_lhs, h_rhs, candidates, max_arg_combos=22000)
+    path = _find_path(adj, g_lhs, g_rhs, max_depth=max_path_depth)
+    if not path:
+        return False
+    intro = "intro " + " ".join(g_vars) if g_vars else ""
+    body = intro + "\n" + calc_from_path(path)
+    code = make_true_code(body)
+    return call_judge("true", code).get("status") == "accepted"
+
+
+def try_singleton_equality_graph(problem, eq1_text, eq2_text, max_path_depth=5):
+    """Try to prove `∀ p q, p = q` by equality-path search over p/q terms."""
+    h_vars = []
+    seen = set()
+    for v in re.findall(r"\b([a-z])\b", eq1_text):
+        if v not in seen:
+            seen.add(v)
+            h_vars.append(v)
+    eq2_vars = []
+    seen = set()
+    for v in re.findall(r"\b([a-z])\b", eq2_text):
+        if v not in seen:
+            seen.add(v)
+            eq2_vars.append(v)
+    try:
+        h_lhs_str, h_rhs_str = eq1_text.split("=", 1)
+        goal_lhs, goal_rhs = eq2_text.split("=", 1)
+        h_lhs = parse_to_tree(h_lhs_str)
+        h_rhs = parse_to_tree(h_rhs_str)
+    except Exception:
+        return False
+
+    p, q = ("var", "p"), ("var", "q")
+    seeds = [p, q, ("op", p, q), ("op", q, p), ("op", p, p), ("op", q, q)]
+    candidates = generate_candidate_terms(["p", "q"], seeds, max_depth=2, max_terms=32, max_size=9)
+    adj = _build_h_edge_graph(h_vars, h_lhs, h_rhs, candidates, max_arg_combos=26000)
+    path = _find_path(adj, p, q, max_depth=max_path_depth)
+    if not path:
+        return False
+
+    intro = "intro " + " ".join(eq2_vars) if eq2_vars else ""
+    calc = calc_from_path(path)
+    body = (
+        f"{intro}\n"
+        "have key : ∀ (p q : G), p = q := by\n"
+        "  intro p q\n"
+        + "\n".join("  " + line for line in calc.splitlines())
+        + f"\nexact key ({goal_lhs.strip()}) ({goal_rhs.strip()})"
+    )
+    code = make_true_code(body)
+    return call_judge("true", code).get("status") == "accepted"
 
 
 def try_direct_h_application(problem, eq1_text, eq2_text):
@@ -570,26 +761,21 @@ def try_two_step_h_chain(problem, eq1_text, eq2_text, max_judge_calls=6):
 
 
 def forces_singleton(eq1_text):
-    """Conservative small-model singleton test.
-
-    If ANY magma on Fin 2 or Fin 3 satisfies h, then h does NOT force
-    singleton behavior, because Fin n has at least two carrier elements.
-
-    If no such model exists in the searched sizes, return True as an
-    analysis hint only — we haven't proven this algebraically, just
-    observed it on small cases.
-    """
+    """Brute force on Fin 2 (and Fin 3 when cheap): is every magma satisfying
+    h necessarily a singleton? Conservative — used only as an analysis hint."""
     v1, l1, r1 = parse_equation(eq1_text)
     for n in (2, 3):
         if n == 3 and len(v1) > 4:
             break
         for enc in range(n ** (n * n)):
             table = [
-                [(enc // (n ** (i * n + j))) % n for j in range(n)]
-                for i in range(n)
+                [(enc // (n ** (i * n + j))) % n for j in range(n)] for i in range(n)
             ]
             op = lambda a, b, t=table: t[a][b]
-            if equation_holds(v1, l1, r1, n, op):
+            if not equation_holds(v1, l1, r1, n, op):
+                continue
+            distinct = {x for row in table for x in row}
+            if len(distinct) >= 2:
                 return False
     return True
 
@@ -687,9 +873,33 @@ def clean_proof(p):
     )
     if m:
         p = p[m.end() :]
-    # Strip a stray leading `by `
+    # Strip a stray leading `by` wrapper. The newline-specific case matters:
+    # otherwise `by\n  intro ...` can leave indentation that becomes malformed
+    # once make_true_code wraps the body.
+    p = re.sub(r"^\s*by\s*\n", "", p)
     p = re.sub(r"^\s*by\s+", "", p)
     return p.strip()
+
+
+def _goal_vars(eq_text):
+    out = []
+    for v in re.findall(r"\b([a-z])\b", eq_text):
+        if v not in out:
+            out.append(v)
+    return out
+
+
+def intro_arity_ok(proof, eq2_text):
+    """Cheaply filter LLM proofs that introduce too many/few goal vars."""
+    vars_needed = _goal_vars(eq2_text)
+    lines = [line.strip() for line in proof.splitlines() if line.strip()]
+    if not lines:
+        return False
+    if not lines[0].startswith("intro "):
+        return True
+    got = lines[0].split()[1:]
+    return len(got) == len(vars_needed)
+
 
 
 # ── Structural pattern matchers for singleton-forcing h shapes ──
@@ -840,12 +1050,7 @@ def try_structural_singleton_pattern(problem, eq1_text, eq2_text):
 # ── Main ─────────────────────────────────────────────────────────
 
 
-BUDGET_SECONDS = 3600  # total per-problem budget (matches config.json)
-MIN_SECONDS_FOR_LLM = 350  # don't start a new LLM call with less than this left
-
-
 def main():
-    start_time = time.monotonic()
     startup = read_message()
     problem = startup["problem"]
     eq1 = problem["equation1"].replace("*", "\u25c7")
@@ -858,19 +1063,19 @@ def main():
         if call_judge("false", make_false_code(n, table)).get("status") == "accepted":
             return
 
-    # Stage 1.25: named finite witness tables from the Stage 1 prompt library.
-    # A short fixed list of explainable magmas — LP, RP, XOR, MOD3, LC/RC, K0.
-    # Cheap and explainable; judge still verifies the result.
-    name, n, table = search_named_witnesses(eq1, eq2)
-    if n is not None:
-        if call_judge("false", make_false_code(n, table)).get("status") == "accepted":
-            return
-
     # Stage 1.5: extended counterexample search on Fin 4-7 with
     # structured magma families (constant, projection, cyclic, lattice,
     # polynomial, …). Cheap (~30 families per n) but catches the
     # counterexamples that exhaustive Fin 2-3 missed.
     n, table = search_counterexample_extended(eq1, eq2, sizes=(4, 5, 6, 7))
+    if n is not None:
+        if call_judge("false", make_false_code(n, table)).get("status") == "accepted":
+            return
+
+    # Stage 1.6: local table-neighborhood search. Instead of treating
+    # false search as all-or-nothing enumeration, perturb known useful
+    # families by one cell and let the judge verify any candidate witness.
+    n, table = search_perturbed_witnesses(eq1, eq2, sizes=(2, 3, 4))
     if n is not None:
         if call_judge("false", make_false_code(n, table)).get("status") == "accepted":
             return
@@ -890,6 +1095,12 @@ def main():
     if try_two_step_h_chain(problem, eq1, eq2, max_judge_calls=6):
         return
 
+    # Stage 2.25: bounded equality-graph search. This uses the parsed
+    # goal/subterms to build a small term universe, instantiates h inside
+    # that universe, and searches for a calc path from goal_lhs to goal_rhs.
+    if try_bounded_equality_graph(problem, eq1, eq2, max_path_depth=4):
+        return
+
     # Stage 2.3: generic one-line Lean tactics (rw/simp variants).
     # Often closes problems where the goal pattern syntactically
     # matches h's LHS or RHS modulo Lean's unifier.
@@ -901,6 +1112,12 @@ def main():
     if proof is not None:
         if call_judge("true", make_true_code(proof)).get("status") == "accepted":
             return
+
+    # Stage 2.45: singleton equality-graph search. For hard singleton-like
+    # cases, search directly for a bounded equality path p = q over terms
+    # built from arbitrary p/q, then use that stronger lemma to solve Eq2.
+    if try_singleton_equality_graph(problem, eq1, eq2, max_path_depth=5):
+        return
 
     # Stage 2.5: structural singleton-derivation patterns. Each pattern is
     # keyed on the CANONICAL form of h (variables renamed by first
@@ -924,11 +1141,6 @@ def main():
             "STRUCTURAL FINDING: h forces a singleton magma (no non-singleton model "
             "exists on Fin 2 or Fin 3). The implication holds via the lemma "
             "`key : ∀ (a b : G), a = b`. Apply that lemma to the goal."
-        )
-        analysis_lines.append(
-            "IMPORTANT: Treat this as a TRUE proof task. Do NOT output verdict false. "
-            "Do NOT output a counterexample_table. Output only verdict true with a "
-            "Lean proof body."
         )
         if not x_in_rhs:
             analysis_lines.append(
@@ -990,15 +1202,15 @@ def main():
         )
 
     seen = set()
-    MAX_LLM_ATTEMPTS = (
-        10  # hard cap so one stubborn problem can't eat the full hour budget
-    )
+    # The hard-singleton LLM fallback is currently low-yield and expensive;
+    # use it sparingly now that bounded deterministic searches run first.
+    MAX_LLM_ATTEMPTS = 2 if singleton else 4
     consecutive_garbage = 0
     for attempt in range(MAX_LLM_ATTEMPTS):
         elapsed = time.monotonic() - start_time
         remaining = BUDGET_SECONDS - elapsed
         if remaining < MIN_SECONDS_FOR_LLM:
-            break  # not enough time left for an LLM round-trip
+            break
         ctx = {
             "analysis": "\n".join(analysis_lines),
             "attempt": str(attempt),
@@ -1018,12 +1230,14 @@ def main():
             proof = clean_proof(answer.get("proof", ""))
             if not proof or proof in seen:
                 continue
+            if not intro_arity_ok(proof, eq2):
+                continue
             seen.add(proof)
             code = make_true_code(proof)
         elif verdict == "false":
             if singleton:
-                # h forces a singleton magma — no counterexample can exist.
-                # Skip rather than waste a judge call on a provably wrong table.
+                # Small-model analysis says this is singleton-like; do not burn
+                # judge calls on LLM-guessed counterexamples in this branch.
                 continue
             tbl = answer.get("counterexample_table")
             if not tbl or not isinstance(tbl, list):
