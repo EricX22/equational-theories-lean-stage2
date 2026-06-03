@@ -430,6 +430,44 @@ def backtrack_counterexample(eq1_text, eq2_text, sizes=(4, 5), time_limit=10):
     return None, None
 
 
+def search_perturbed_witnesses(eq1_text, eq2_text, max_n=4):
+    """Try single-cell perturbations of canonical base tables to find a counterexample.
+    Returns (n, table) or (None, None)."""
+    import copy
+    v1, l1, r1 = parse_equation(eq1_text)
+    v2, l2, r2 = parse_equation(eq2_text)
+
+    def satisfies_ce(n, table):
+        op = lambda a, b, t=table: t[a][b]
+        return check_equation(v1, l1, r1, n, op) and not check_equation(v2, l2, r2, n, op)
+
+    for n in range(2, max_n + 1):
+        bases = [
+            [[i] * n for i in range(n)],                              # left projection
+            [[j for j in range(n)] for _ in range(n)],                # right projection
+            [[(i + j) % n for j in range(n)] for i in range(n)],     # cyclic add
+            [[max(i, j) for j in range(n)] for i in range(n)],       # max
+            [[min(i, j) for j in range(n)] for i in range(n)],       # min
+        ]
+        for c in range(n):
+            bases.append([[c] * n for _ in range(n)])                 # constant c
+        if n in (2, 4):
+            bases.append([[(i ^ j) for j in range(n)] for i in range(n)])  # XOR
+
+        for base in bases:
+            for i in range(n):
+                for j in range(n):
+                    orig = base[i][j]
+                    for v in range(n):
+                        if v == orig:
+                            continue
+                        table = copy.deepcopy(base)
+                        table[i][j] = v
+                        if satisfies_ce(n, table):
+                            return n, table
+    return None, None
+
+
 # ── Singleton collapse ───────────────────────────────────────────
 
 def try_singleton(problem, eq1_text, eq2_text):
@@ -453,6 +491,293 @@ def try_singleton(problem, eq1_text, eq2_text):
         f"fun a b => (h a {filler}).trans (h b {filler}).symm\n"
         f"exact singleton ({goal_parts[0].strip()}) ({goal_parts[1].strip()})"
     )
+    code = make_true_code(problem, proof)
+    result = call_judge("true", code)
+    return result.get("status") == "accepted"
+
+
+def _bfs_find_chain(eq1_text, start_str, goal_str, fill_vars, max_depth=5, time_limit=12):
+    """Bidirectional BFS from start_str to goal_str via h-rewrites.
+    Returns chain [(path, args, is_symm, tree_before, tree_after), ...] or None.
+    Empty list means start == goal (trivial). None means not found."""
+    import time
+    from itertools import product as _prod
+
+    eq1_vars = parse_variables(eq1_text)
+    parts1 = eq1_text.split('=', 1)
+    if len(parts1) != 2:
+        return None
+
+    eq1_lhs = parts1[0].strip()
+    eq1_rhs = parts1[1].strip()
+    h_lhs_tree = parse_op_tree(eq1_lhs)
+    h_rhs_tree = parse_op_tree(eq1_rhs)
+    h_vars_set = set(eq1_vars)
+
+    h_lhs_vars = set(re.findall(r'\b([a-z])\b', eq1_lhs))
+    h_rhs_vars = set(re.findall(r'\b([a-z])\b', eq1_rhs))
+    rhs_only_vars = sorted(h_rhs_vars - h_lhs_vars)
+    lhs_only_vars = sorted(h_lhs_vars - h_rhs_vars)
+
+    fill_terms = list(fill_vars)
+    for a in fill_vars:
+        for b in fill_vars:
+            t = f'{a} ◇ {b}'
+            if t not in fill_terms:
+                fill_terms.append(t)
+            if len(fill_terms) >= 12:
+                break
+        if len(fill_terms) >= 12:
+            break
+    const_fill = list(fill_vars)
+
+    def _completions(s):
+        free = [v for v in eq1_vars if v not in s]
+        if not free:
+            return [dict(s)]
+        if len(free) > 3:
+            return []
+        pool = fill_vars if len(free) >= 3 else fill_terms
+        return [dict(s, **{v: val for v, val in zip(free, combo)})
+                for combo in _prod(pool, repeat=len(free))]
+
+    def _fmt(full_s):
+        parts_list = []
+        for v in eq1_vars:
+            val = full_s.get(v, fill_vars[0] if fill_vars else 'x')
+            parts_list.append(f'({val})' if '◇' in val else val)
+        return ' '.join(parts_list)
+
+    def _subst(tree, subst):
+        if tree[0] == 'var':
+            return parse_op_tree(subst[tree[1]]) if tree[1] in subst else tree
+        return ('op', _subst(tree[1], subst), _subst(tree[2], subst))
+
+    def _sz(t):
+        return 1 if t[0] == 'var' else 1 + _sz(t[1]) + _sz(t[2])
+
+    MAX_SIZE = 18
+
+    def _rewrites(tree, path=''):
+        results = []
+        # Direct h-application (forward and backward)
+        for pattern, repl, is_sym in [(h_lhs_tree, h_rhs_tree, False),
+                                      (h_rhs_tree, h_lhs_tree, True)]:
+            s = unify_tree(pattern, tree, h_vars_set)
+            if s is not None:
+                for full_s in _completions(s):
+                    r = _subst(repl, full_s)
+                    if _sz(r) <= MAX_SIZE:
+                        results.append((path, r, _fmt(full_s), is_sym))
+        # Constancy rewrites (RHS-only free vars)
+        if rhs_only_vars:
+            s = unify_tree(h_rhs_tree, tree, h_vars_set)
+            if s is not None:
+                for full_s_orig in _completions(s):
+                    orig_args = _fmt(full_s_orig)
+                    free_pos = [eq1_vars.index(v) for v in rhs_only_vars if v in eq1_vars]
+                    for new_vals in _prod(const_fill, repeat=len(free_pos)):
+                        full_s_new = dict(full_s_orig)
+                        changed = False
+                        for pos_idx, nv in zip(free_pos, new_vals):
+                            if full_s_orig.get(eq1_vars[pos_idx], '') != nv:
+                                full_s_new[eq1_vars[pos_idx]] = nv
+                                changed = True
+                        if not changed:
+                            continue
+                        r = _subst(h_rhs_tree, full_s_new)
+                        if _sz(r) <= MAX_SIZE:
+                            results.append((path, r,
+                                            f"CONST|{orig_args}|{_fmt(full_s_new)}", False))
+        # Constancy rewrites (LHS-only free vars)
+        if lhs_only_vars:
+            s = unify_tree(h_lhs_tree, tree, h_vars_set)
+            if s is not None:
+                for full_s_orig in _completions(s):
+                    orig_args = _fmt(full_s_orig)
+                    free_pos = [eq1_vars.index(v) for v in lhs_only_vars if v in eq1_vars]
+                    for new_vals in _prod(const_fill, repeat=len(free_pos)):
+                        full_s_new = dict(full_s_orig)
+                        changed = False
+                        for pos_idx, nv in zip(free_pos, new_vals):
+                            if full_s_orig.get(eq1_vars[pos_idx], '') != nv:
+                                full_s_new[eq1_vars[pos_idx]] = nv
+                                changed = True
+                        if not changed:
+                            continue
+                        r = _subst(h_lhs_tree, full_s_new)
+                        if _sz(r) <= MAX_SIZE:
+                            results.append((path, r,
+                                            f"LCONST|{orig_args}|{_fmt(full_s_new)}", False))
+        # Recurse into subtrees
+        if tree[0] == 'op':
+            for p, sub_r, a, sym in _rewrites(tree[1], path + 'L'):
+                full = ('op', sub_r, tree[2])
+                if _sz(full) <= MAX_SIZE:
+                    results.append((p, full, a, sym))
+            for p, sub_r, a, sym in _rewrites(tree[2], path + 'R'):
+                full = ('op', tree[1], sub_r)
+                if _sz(full) <= MAX_SIZE:
+                    results.append((p, full, a, sym))
+        return results
+
+    def tnorm(tree):
+        return tree_to_str(tree).replace(' ', '')
+
+    def _extract(visited, target):
+        chain = []
+        cur = target
+        while visited[cur] is not None:
+            pn, rp, ra, rs, pt, rt = visited[cur]
+            chain.append((rp, ra, rs, pt, rt))
+            cur = pn
+        chain.reverse()
+        return chain
+
+    t0 = time.time()
+    STATE_LIMIT = 3000
+
+    gl = parse_op_tree(start_str)
+    gr = parse_op_tree(goal_str)
+    fwd_s = tnorm(gl)
+    bwd_s = tnorm(gr)
+
+    if fwd_s == bwd_s:
+        return []
+
+    fwd_vis = {fwd_s: None}
+    bwd_vis = {bwd_s: None}
+    fwd_front = [(gl, fwd_s)]
+    bwd_front = [(gr, bwd_s)]
+
+    for _ in range(max_depth):
+        if time.time() - t0 > time_limit or len(fwd_vis) + len(bwd_vis) > STATE_LIMIT:
+            break
+
+        nxt = []
+        for tree, tn in fwd_front:
+            if time.time() - t0 > time_limit:
+                break
+            for path, new_tree, args, is_sym in _rewrites(tree):
+                nn = tnorm(new_tree)
+                if nn in fwd_vis:
+                    continue
+                fwd_vis[nn] = (tn, path, args, is_sym, tree, new_tree)
+                nxt.append((new_tree, nn))
+                if nn in bwd_vis:
+                    fwd_chain = _extract(fwd_vis, nn)
+                    bwd_raw = _extract(bwd_vis, nn)
+                    bwd_chain = [(rp, ra, not rs, rt, pt)
+                                 for rp, ra, rs, pt, rt in reversed(bwd_raw)]
+                    return fwd_chain + bwd_chain
+            if len(fwd_vis) + len(bwd_vis) > STATE_LIMIT:
+                break
+        fwd_front = nxt
+
+        if time.time() - t0 > time_limit or len(fwd_vis) + len(bwd_vis) > STATE_LIMIT:
+            break
+
+        nxt = []
+        for tree, tn in bwd_front:
+            if time.time() - t0 > time_limit:
+                break
+            for path, new_tree, args, is_sym in _rewrites(tree):
+                nn = tnorm(new_tree)
+                if nn in bwd_vis:
+                    continue
+                bwd_vis[nn] = (tn, path, args, is_sym, tree, new_tree)
+                nxt.append((new_tree, nn))
+                if nn in fwd_vis:
+                    fwd_chain = _extract(fwd_vis, nn)
+                    bwd_raw = _extract(bwd_vis, nn)
+                    bwd_chain = [(rp, ra, not rs, rt, pt)
+                                 for rp, ra, rs, pt, rt in reversed(bwd_raw)]
+                    return fwd_chain + bwd_chain
+            if len(fwd_vis) + len(bwd_vis) > STATE_LIMIT:
+                break
+        bwd_front = nxt
+
+        if not fwd_front and not bwd_front:
+            break
+
+    return None
+
+
+def try_singleton_bfs_proof(problem, eq1_text, eq2_text):
+    """Prove the goal via 'all elements are equal', using BFS to find the chain.
+
+    Searches for p = T1 = ... = q under h, then builds:
+      have key : ∀ (p q : G), p = q := fun p q => calc p = T1 := h ... \n _ = q := ...
+      exact key goal_lhs goal_rhs
+
+    Complements try_singleton, which only handles the single-template case."""
+    eq2_vars = parse_variables(eq2_text)
+    parts2 = eq2_text.split('=', 1)
+    if len(parts2) != 2 or not eq2_vars:
+        return False
+
+    eq2_lhs = parts2[0].strip()
+    eq2_rhs = parts2[1].strip()
+
+    # Pick two singleton variable names that don't collide with eq2_vars
+    used = set(eq2_vars)
+    sv = []
+    for c in 'pqrsuv':
+        if c not in used:
+            sv.append(c)
+        if len(sv) >= 2:
+            break
+    if len(sv) < 2:
+        return False
+    sv1, sv2 = sv[0], sv[1]
+
+    chain = _bfs_find_chain(eq1_text, sv1, sv2, fill_vars=[sv1, sv2],
+                            max_depth=5, time_limit=12)
+    if chain is None:
+        return False  # BFS exhausted without finding a path
+
+    def _just(path, args, is_symm, tree):
+        if args.startswith("CONST|"):
+            _, orig, new = args.split("|", 2)
+            h_expr = f"(h {orig}).symm.trans (h {new})"
+        elif args.startswith("LCONST|"):
+            _, orig, new = args.split("|", 2)
+            h_expr = f"(h {orig}).trans (h {new}).symm"
+        else:
+            h_expr = f"(h {args}).symm" if is_symm else f"h {args}"
+        return wrap_congr_arg(tree, path, h_expr) if path else h_expr
+
+    # Build the term-mode calc chain body (sv1 → sv2)
+    if len(chain) == 0:
+        return False  # trivial p==q shouldn't happen with distinct names
+    elif len(chain) == 1:
+        path, args, is_symm, tree, _ = chain[0]
+        key_body = _just(path, args, is_symm, tree)
+    else:
+        lines = [f"calc {sv1}"]
+        for i, (path, args, is_symm, tree, result_tree) in enumerate(chain):
+            just = _just(path, args, is_symm, tree)
+            inter = tree_to_str(result_tree)
+            if i < len(chain) - 1:
+                lines.append(f"  _ = {inter} := {just}")
+            else:
+                lines.append(f"  _ = {sv2} := {just}")
+        key_body = '\n'.join(lines)
+
+    # Indent the calc body to sit inside "fun sv1 sv2 =>"
+    indented_body = key_body.replace('\n', '\n  ')
+
+    def _arg(expr):
+        return f"({expr})" if ('◇' in expr or ' ' in expr.strip()) else expr
+
+    intro = f"intro {' '.join(eq2_vars)}"
+    have_line = (
+        f"have key : ∀ ({sv1} {sv2} : G), {sv1} = {sv2} := "
+        f"fun {sv1} {sv2} =>\n  {indented_body}"
+    )
+    exact_line = f"exact key {_arg(eq2_lhs)} {_arg(eq2_rhs)}"
+
+    proof = f"{intro}\n{have_line}\n{exact_line}"
     code = make_true_code(problem, proof)
     result = call_judge("true", code)
     return result.get("status") == "accepted"
@@ -4346,6 +4671,15 @@ def main():
     else:
         search_notes.append("No counterexample on Fin 2-3 (exhaustive)")
 
+    n, table = search_perturbed_witnesses(eq1_text, eq2_text, max_n=4)
+    if n is not None:
+        result = call_judge("false", make_false_code(problem, n, table))
+        if result.get("status") == "accepted":
+            return
+        search_notes.append(f"Found Fin {n} perturbed witness but judge rejected")
+    else:
+        search_notes.append("No counterexample via perturbed witnesses (Fin 2-4)")
+
     n, table = extended_counterexample(eq1_text, eq2_text, max_n=5, random_attempts=5000)
     if n is not None:
         result = call_judge("false", make_false_code(problem, n, table))
@@ -4364,8 +4698,10 @@ def main():
     else:
         search_notes.append("No counterexample on Fin 4-5 (backtracking)")
 
-    # Stage 2: Singleton
+    # Stage 2: Singleton (fast template, then BFS)
     if try_singleton(problem, eq1_text, eq2_text):
+        return
+    if try_singleton_bfs_proof(problem, eq1_text, eq2_text):
         return
     search_notes.append("Singleton collapse: not applicable")
 
@@ -4452,8 +4788,18 @@ def main():
                 if result.get("status") == "accepted":
                     return
 
-    # Stage 5: Phase 2 — ask LLM for implementation. Loop until wall-clock
-    # watchdog terminates us or we hit an LLM error (e.g. API unavailable).
+    # Stage 5: Phase 2 — ask LLM for implementation.
+    # Cap: 2 attempts for singleton-like h (bare LHS var absent from RHS), 4 otherwise.
+    _eq1_parts = eq1_text.split('=', 1)
+    _singleton_like = (
+        len(_eq1_parts) == 2
+        and len(_eq1_parts[0].strip()) == 1
+        and _eq1_parts[0].strip() in eq1_vars
+        and _eq1_parts[0].strip() not in set(re.findall(r'\b([a-z])\b', _eq1_parts[1]))
+    )
+    llm_max_attempts = 2 if _singleton_like else 4
+    llm_attempts = 0
+
     seen_answers = set()
     false_attempts = 0
 
@@ -4462,7 +4808,7 @@ def main():
         search_notes.extend(deep_hints)
 
     rnd = -1
-    while True:
+    while llm_attempts < llm_max_attempts:
         rnd += 1
         context = {
             "phase": "2_implementation",
@@ -4482,6 +4828,7 @@ def main():
         if rnd > 0:
             overrides = {"temperature": min(0.3 + rnd * 0.15, 0.9), "seed": rnd}
         llm_result = call_llm(context, overrides=overrides)
+        llm_attempts += 1
         if "error" in llm_result:
             break
 
