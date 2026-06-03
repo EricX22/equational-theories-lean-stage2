@@ -52,6 +52,12 @@ import sys
 import time
 from itertools import product
 
+# ── Timing budget ────────────────────────────────────────────────
+# Total wall-clock seconds the solver is expected to run. Used to
+# avoid starting an LLM call when too little time is left.
+BUDGET_SECONDS = 110
+MIN_SECONDS_FOR_LLM = 8
+
 
 # ── Protocol ────────────────────────────────────────────────────
 
@@ -229,6 +235,43 @@ def _structured_tables(n):
         for i in range(n):
             t[i][0] = i
         yield t
+
+
+def search_named_witnesses(eq1_text, eq2_text):
+    """Check a small set of named magma tables as counterexample witnesses.
+
+    Returns (name, n, table) if any table satisfies eq1 and violates eq2,
+    or (None, None, None) if none match.
+    """
+    v1, l1, r1 = parse_equation(eq1_text)
+    v2, l2, r2 = parse_equation(eq2_text)
+
+    named = {
+        "LP2":      (2, [[0, 0], [1, 1]]),
+        "RP2":      (2, [[0, 1], [0, 1]]),
+        "XOR2":     (2, [[0, 1], [1, 0]]),
+        "LC3":      (3, [[0, 0, 0], [1, 1, 1], [2, 2, 2]]),
+        "RC3":      (3, [[0, 1, 2], [0, 1, 2], [0, 1, 2]]),
+        "Z3":       (3, [[0, 1, 2], [1, 2, 0], [2, 0, 1]]),
+        "MAX3":     (3, [[0, 1, 2], [1, 1, 2], [2, 2, 2]]),
+        "MIN3":     (3, [[0, 0, 0], [0, 1, 1], [0, 1, 2]]),
+        "FLIP3":    (3, [[2, 2, 2], [1, 1, 1], [0, 0, 0]]),
+        "CONST3_0": (3, [[0]*3]*3),
+        "CONST3_1": (3, [[1]*3]*3),
+        "XOR4":     (4, [[(i ^ j) for j in range(4)] for i in range(4)]),
+        "Z4":       (4, [[(i + j) % 4 for j in range(4)] for i in range(4)]),
+        "LP4":      (4, [[i] * 4 for i in range(4)]),
+        "RP4":      (4, [list(range(4)) for _ in range(4)]),
+        "MAX4":     (4, [[max(i, j) for j in range(4)] for i in range(4)]),
+        "MIN4":     (4, [[min(i, j) for j in range(4)] for i in range(4)]),
+    }
+
+    for name, (n, table) in named.items():
+        op = lambda a, b, t=table: t[a][b]
+        if equation_holds(v1, l1, r1, n, op) and not equation_holds(v2, l2, r2, n, op):
+            return name, n, table
+
+    return None, None, None
 
 
 def search_counterexample_extended(eq1_text, eq2_text, sizes=(4, 5, 6, 7)):
