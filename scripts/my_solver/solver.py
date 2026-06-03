@@ -49,6 +49,7 @@ If h forces singleton (see analysis), the proof has the form:
 import json
 import re
 import sys
+import time
 from itertools import product
 
 
@@ -75,6 +76,47 @@ def call_llm(context):
     send_message({"call": "llm", "context": context})
     return read_message()
 
+def trace(msg):
+    """Write lightweight solver-stage diagnostics to stderr.
+
+    These show up in solver_stderr logs without interfering with the
+    JSON stdin/stdout protocol used by the proxy.
+    """
+    print(msg, file=sys.stderr, flush=True)
+
+
+def has_bare_side(eq_text):
+    """True if Eq1 has a bare variable on either side.
+
+    For equations like x = RHS or RHS = x, generic rw [h] often fails
+    because Lean sees the rewrite pattern as a metavariable. In those
+    cases, skip the generic tactic battery and use graph/singleton search.
+    """
+    lhs, rhs = eq_text.split("=", 1)
+    lhs = lhs.strip()
+    rhs = rhs.strip()
+    return (len(lhs) == 1 and lhs.isalpha()) or (len(rhs) == 1 and rhs.isalpha())
+
+
+def goal_vars(eq_text):
+    """Variables in first-appearance order."""
+    out = []
+    for v in re.findall(r"\b([a-z])\b", eq_text):
+        if v not in out:
+            out.append(v)
+    return out
+
+
+def intro_arity_ok(proof, eq2_text):
+    """Filter LLM proofs that introduce too many/few goal variables."""
+    vars_needed = goal_vars(eq2_text)
+    lines = [line.strip() for line in proof.splitlines() if line.strip()]
+    if not lines:
+        return False
+    if not lines[0].startswith("intro "):
+        return True
+    got = lines[0].split()[1:]
+    return len(got) == len(vars_needed)
 
 # ── Equation parsing & magma evaluation ──────────────────────────
 
@@ -1051,203 +1093,236 @@ def try_structural_singleton_pattern(problem, eq1_text, eq2_text):
 
 
 def main():
+    start_time = time.monotonic()
     startup = read_message()
     problem = startup["problem"]
     eq1 = problem["equation1"].replace("*", "\u25c7")
     eq2 = problem["equation2"].replace("*", "\u25c7")
     problem["equation1"], problem["equation2"] = eq1, eq2
 
-    # Stage 1: counterexample search on Fin 2–3.
+    trace(f"[problem] {problem.get('id', '?')} eq1={problem.get('eq1_id')} eq2={problem.get('eq2_id')}")
+    trace(f"[eq1] {eq1}")
+    trace(f"[eq2] {eq2}")
+
+    # Stage 1: exhaustive counterexample search on Fin 2–3.
+    trace("[stage] exhaustive Fin 2-3 counterexample search")
     n, table = search_counterexample(eq1, eq2, max_n=3)
     if n is not None:
+        trace(f"[solved-candidate] exhaustive false witness Fin {n}")
         if call_judge("false", make_false_code(n, table)).get("status") == "accepted":
+            trace("[accepted] exhaustive false witness")
             return
 
-    # Stage 1.5: extended counterexample search on Fin 4-7 with
-    # structured magma families (constant, projection, cyclic, lattice,
-    # polynomial, …). Cheap (~30 families per n) but catches the
-    # counterexamples that exhaustive Fin 2-3 missed.
+    # Stage 1.25: named finite witness tables.
+    trace("[stage] named witness tables")
+    name, n, table = search_named_witnesses(eq1, eq2)
+    if n is not None:
+        trace(f"[solved-candidate] named false witness {name} Fin {n}")
+        if call_judge("false", make_false_code(n, table)).get("status") == "accepted":
+            trace(f"[accepted] named false witness {name}")
+            return
+
+    # Stage 1.35: perturbed structured witnesses.
+    # This is the first false-side search-space narrowing stage:
+    # start from useful structured magmas and perturb one table cell.
+    if "search_perturbed_witnesses" in globals():
+        trace("[stage] perturbed witness tables")
+        n, table = search_perturbed_witnesses(eq1, eq2, sizes=(2, 3, 4))
+        if n is not None:
+            trace(f"[solved-candidate] perturbed false witness Fin {n}")
+            if call_judge("false", make_false_code(n, table)).get("status") == "accepted":
+                trace("[accepted] perturbed false witness")
+                return
+    else:
+        trace("[skip] perturbed witness tables: function missing")
+
+    # Stage 1.5: structured counterexample families on Fin 4–7.
+    trace("[stage] structured Fin 4-7 counterexample search")
     n, table = search_counterexample_extended(eq1, eq2, sizes=(4, 5, 6, 7))
     if n is not None:
+        trace(f"[solved-candidate] structured false witness Fin {n}")
         if call_judge("false", make_false_code(n, table)).get("status") == "accepted":
+            trace("[accepted] structured false witness")
             return
 
-    # Stage 1.6: local table-neighborhood search. Instead of treating
-    # false search as all-or-nothing enumeration, perturb known useful
-    # families by one cell and let the judge verify any candidate witness.
-    n, table = search_perturbed_witnesses(eq1, eq2, sizes=(2, 3, 4))
-    if n is not None:
-        if call_judge("false", make_false_code(n, table)).get("status") == "accepted":
-            return
-
-    # Stage 2: direct h-application via unification. For TRUE problems
-    # where the goal is literally a particular instantiation of h
-    # (or its symmetric form), this emits `exact h <args>` — one
-    # judge call, zero LLM. Covers many problems where the goal RHS
-    # is just h's RHS with one variable substituted.
+    # Stage 2: direct h-application via unification.
+    trace("[stage] direct h application")
     if try_direct_h_application(problem, eq1, eq2):
+        trace("[accepted] direct h application")
         return
 
-    # Stage 2.2: two-step h chain via unification. When the goal is
-    # reachable from h in two `(h …).trans (h …)` steps through some
-    # intermediate term, this finds the substitutions and emits the
-    # chain. Bounded judge-call cost (≤ 6 attempts).
+    # Stage 2.2: two-step h chain.
+    trace("[stage] two-step h chain")
     if try_two_step_h_chain(problem, eq1, eq2, max_judge_calls=6):
+        trace("[accepted] two-step h chain")
         return
 
-    # Stage 2.25: bounded equality-graph search. This uses the parsed
-    # goal/subterms to build a small term universe, instantiates h inside
-    # that universe, and searches for a calc path from goal_lhs to goal_rhs.
-    if try_bounded_equality_graph(problem, eq1, eq2, max_path_depth=4):
-        return
+    # Compute singleton hint earlier so it can route deterministic search.
+    trace("[stage] singleton small-model hint")
+    singleton = forces_singleton(eq1)
+    trace(f"[singleton_hint] {singleton}")
 
-    # Stage 2.3: generic one-line Lean tactics (rw/simp variants).
-    # Often closes problems where the goal pattern syntactically
-    # matches h's LHS or RHS modulo Lean's unifier.
-    if try_generic_tactics(problem, eq1, eq2, max_judge_calls=12):
-        return
+    # Stage 2.25: bounded equality graph from goal lhs to goal rhs.
+    if "try_bounded_equality_graph" in globals():
+        trace("[stage] bounded equality graph")
+        if try_bounded_equality_graph(problem, eq1, eq2, max_path_depth=4):
+            trace("[accepted] bounded equality graph")
+            return
+    else:
+        trace("[skip] bounded equality graph: function missing")
 
-    # Stage 2: trivial singleton template (LHS var not in RHS).
+    # Stage 2.3: singleton equality graph, prioritized before generic rw/simp.
+    if singleton and "try_singleton_equality_graph" in globals():
+        trace("[stage] singleton equality graph")
+        if try_singleton_equality_graph(problem, eq1, eq2, max_path_depth=5):
+            trace("[accepted] singleton equality graph")
+            return
+    elif singleton:
+        trace("[skip] singleton equality graph: function missing")
+
+    # Stage 2.4: generic one-line Lean tactics.
+    # Skip these for bare-side equations because rw [h] often fails with
+    # metavariable-pattern errors and just wastes judge calls.
+    if not has_bare_side(eq1):
+        trace("[stage] generic tactics")
+        if try_generic_tactics(problem, eq1, eq2, max_judge_calls=12):
+            trace("[accepted] generic tactics")
+            return
+    else:
+        trace("[skip] generic tactics: Eq1 has bare side")
+
+    # Stage 2.5: trivial singleton template.
+    trace("[stage] trivial singleton template")
     proof = try_trivial_singleton(eq1, eq2)
     if proof is not None:
         if call_judge("true", make_true_code(proof)).get("status") == "accepted":
+            trace("[accepted] trivial singleton template")
             return
 
-    # Stage 2.45: singleton equality-graph search. For hard singleton-like
-    # cases, search directly for a bounded equality path p = q over terms
-    # built from arbitrary p/q, then use that stronger lemma to solve Eq2.
-    if try_singleton_equality_graph(problem, eq1, eq2, max_path_depth=5):
-        return
-
-    # Stage 2.5: structural singleton-derivation patterns. Each pattern is
-    # keyed on the CANONICAL form of h (variables renamed by first
-    # appearance), so any future problem with the same h-shape gets the
-    # same parameterised proof — not problem-id memoisation.
+    # Stage 2.6: structural singleton templates.
+    trace("[stage] structural singleton pattern")
     if try_structural_singleton_pattern(problem, eq1, eq2):
+        trace("[accepted] structural singleton pattern")
         return
 
-    # Stage 3: LLM with a focused, singleton-aware analysis block.
-    singleton = forces_singleton(eq1)
+    # Stage 3: LLM fallback.
+    trace("[stage] LLM fallback")
     analysis_lines = []
     if singleton:
-        # Detect whether x (the LHS variable of h) also appears in h's RHS.
-        # This dramatically changes which proof shapes will typecheck.
         lhs_str, rhs_str = eq1.split("=", 1)
         lhs_var = lhs_str.strip()
         rhs_vars_set = set(re.findall(r"\b([a-z])\b", rhs_str))
         x_in_rhs = len(lhs_var) == 1 and lhs_var in rhs_vars_set
 
         analysis_lines.append(
-            "STRUCTURAL FINDING: h forces a singleton magma (no non-singleton model "
-            "exists on Fin 2 or Fin 3). The implication holds via the lemma "
-            "`key : ∀ (a b : G), a = b`. Apply that lemma to the goal."
+            "STRUCTURAL FINDING: h appears singleton-like by small-model search "
+            "(no non-singleton model found on searched Fin 2/3 cases). The intended "
+            "proof is TRUE via `key : ∀ (a b : G), a = b`, then applying key to the goal."
         )
+        analysis_lines.append(
+            "IMPORTANT: Treat this as a TRUE proof task. Do NOT output verdict false. "
+            "Do NOT output a counterexample_table. Output only verdict true with a Lean proof body."
+        )
+        analysis_lines.append(
+            "Do NOT prove key using `have h1 := h a a ...; have h2 := h b b ...; "
+            "exact h1.trans h2.symm`. That is invalid unless the middle terms are definitionally identical."
+        )
+
         if not x_in_rhs:
             analysis_lines.append(
-                "Easy case: h's LHS variable does NOT appear in its RHS, so the "
-                "singleton lemma is a one-liner — `fun a b => (h a c1 ... ck).trans "
-                "(h b c1 ... ck).symm` for any fillers c1..ck. (Already attempted "
-                "deterministically — if you see this, the trivial template failed; "
-                "try a calc chain instead.)"
+                "Easy singleton case: h's LHS variable does NOT appear in RHS. A one-line "
+                "proof may work by making a and b equal to the same RHS using identical fillers."
             )
         else:
-            # The hard case — all 6 of sample_20's unsolved problems fall here.
             analysis_lines.append(
-                "Hard case: h's LHS variable `"
-                + lhs_var
-                + "` ALSO appears in its RHS. "
-                "Therefore `(h a c).symm.trans (h b c)` DOES NOT TYPECHECK — "
-                "`h a c` has type `a = R(a, c)` and `h b c` has type `b = R(b, c)` "
-                "whose RHSs differ (one contains `a`, the other `b`). Do not try this."
+                "Hard singleton case: h's LHS variable also appears in RHS. You need a multi-step "
+                "constancy/equality chain. Use explicit `have` lemmas whose middle terms match exactly."
             )
             analysis_lines.append(
-                "Correct strategy (multi-step constancy chain). For each pair of "
-                "elements p, q derive p = q via several `have` lemmas. The exact "
-                "chain depends on h's shape, but the canonical pattern is:"
-            )
-            analysis_lines.append(
-                "  1. Use (h p y₁ z₁ w₁).symm.trans (h p y₂ z₂ w₂) to derive a "
-                "CONSTANCY lemma about p (the RHS of h is constant in free vars, "
-                "all equal p).\n"
-                "  2. From that, build smaller targeted equalities — e.g. "
-                "`(some compound term) = p` — by clever free-var substitution.\n"
-                "  3. Combine multiple such targeted equalities (via `rw` or "
-                "transitivity) to derive `p = q`."
-            )
-            analysis_lines.append(
-                "WORKED EXAMPLE (different h, same singleton-derivation shape).\n"
-                "Suppose h : ∀ x y z, x = (y ◇ x) ◇ z. Then this proof works:\n"
-                "```\n"
-                "have key : ∀ (a b : G), a = b := by\n"
-                "  intro a b\n"
-                "  have e1 : (a ◇ b) ◇ a = b := (h b a a).symm\n"
-                "  have e2 : (b ◇ a) ◇ b = a := (h a b b).symm\n"
-                "  have e3 : a = b ◇ b := by\n"
-                "    have hh := h a (a ◇ b) b\n"
-                "    rw [e1] at hh; exact hh\n"
-                "  have e4 : b = a ◇ b := by\n"
-                "    have hh := h b (b ◇ a) b\n"
-                "    rw [e2] at hh; exact hh\n"
-                "  calc a = b ◇ b := e3\n"
-                "    _ = (a ◇ b) ◇ b := by rw [← e4]\n"
-                "    _ = b := (h b a b).symm\n"
-                "```\n"
-                "Notice: 4 `have` lemmas + a 3-step `calc`. The exact instantiations "
-                "depend on h's structure for this problem; the pattern is the same."
+                "Proof shape:\n"
+                "intro <goal vars>\n"
+                "have key : ∀ (p q : G), p = q := by\n"
+                "  intro p q\n"
+                "  ... several h-instantiations and rewrites ...\n"
+                "exact key <goal_lhs> <goal_rhs>"
             )
     else:
         analysis_lines.append(
-            "No counterexample on Fin 2–3 and no easy singleton. Try a calc chain: "
-            "use h-instantiations to rewrite the goal LHS step-by-step into the goal RHS."
+            "No finite counterexample found by deterministic search and no singleton hint. "
+            "Try a true calc chain from Eq2.lhs to Eq2.rhs using exact h-instantiations, "
+            "or propose a finite counterexample table only if it genuinely satisfies Eq1 and falsifies Eq2."
         )
 
     seen = set()
-    # The hard-singleton LLM fallback is currently low-yield and expensive;
-    # use it sparingly now that bounded deterministic searches run first.
     MAX_LLM_ATTEMPTS = 2 if singleton else 4
     consecutive_garbage = 0
+
     for attempt in range(MAX_LLM_ATTEMPTS):
         elapsed = time.monotonic() - start_time
         remaining = BUDGET_SECONDS - elapsed
+        trace(f"[llm] attempt={attempt} remaining={remaining:.1f}s singleton={singleton}")
+
         if remaining < MIN_SECONDS_FOR_LLM:
+            trace("[stop] not enough time left for another LLM call")
             break
+
         ctx = {
             "analysis": "\n".join(analysis_lines),
             "attempt": str(attempt),
         }
         result = call_llm(ctx)
         if "error" in result:
-            return  # No API key or budget exhausted — nothing more we can do.
+            trace(f"[stop] LLM error: {result.get('error')}")
+            return
+
         answer = extract_json(result.get("response", ""))
         if not answer:
             consecutive_garbage += 1
+            trace("[llm] unparseable response")
             if consecutive_garbage >= 2:
-                return  # LLM is stuck producing unparseable output; cut losses.
+                trace("[stop] repeated unparseable LLM responses")
+                return
             continue
+
         consecutive_garbage = 0
         verdict = answer.get("verdict")
+
         if verdict == "true":
             proof = clean_proof(answer.get("proof", ""))
-            if not proof or proof in seen:
+            if not proof:
+                trace("[llm] empty true proof")
+                continue
+            if proof in seen:
+                trace("[llm] duplicate proof skipped")
                 continue
             if not intro_arity_ok(proof, eq2):
+                trace("[llm] intro arity mismatch skipped")
                 continue
+
             seen.add(proof)
             code = make_true_code(proof)
+
         elif verdict == "false":
             if singleton:
-                # Small-model analysis says this is singleton-like; do not burn
-                # judge calls on LLM-guessed counterexamples in this branch.
+                trace("[llm] skipped false answer because singleton hint is true")
                 continue
+
             tbl = answer.get("counterexample_table")
             if not tbl or not isinstance(tbl, list):
+                trace("[llm] malformed false table")
                 continue
-            code = make_false_code(len(tbl), tbl)
-        else:
-            continue
-        if call_judge(verdict, code).get("status") == "accepted":
-            return
 
+            code = make_false_code(len(tbl), tbl)
+
+        else:
+            trace(f"[llm] unknown verdict: {verdict}")
+            continue
+
+        res = call_judge(verdict, code)
+        trace(f"[judge] LLM candidate status={res.get('status')}")
+        if res.get("status") == "accepted":
+            trace("[accepted] LLM candidate")
+            return
 
 if __name__ == "__main__":
     main()
