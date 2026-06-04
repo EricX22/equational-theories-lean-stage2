@@ -640,27 +640,8 @@ def try_bounded_equality_graph(problem, eq1_text, eq2_text, max_path_depth=4):
 
     seeds = subterms(g_lhs) + subterms(g_rhs)
     candidates = generate_candidate_terms(g_vars, seeds, max_depth=2, max_terms=34, max_size=9)
-    adj = _build_h_edge_graph(
-        h_vars,
-        h_lhs,
-        h_rhs,
-        candidates,
-        max_arg_combos=max_arg_combos,
-    )
-
-    context_terms = ordered_unique(seeds + candidates[:16], max_items=24)
-    added = add_congruence_edges(
-        adj,
-        context_terms=context_terms,
-        max_term_size=max_size + 4,
-        max_new_edges=60000,
-    )
-    trace(
-        f"[strategy-graph] candidates={len(candidates)} "
-        f"direct_nodes={len(adj)} congr_edges_added={added}"
-    )
-
-    path = _find_path(adj, p, q, max_depth=max_path_depth + 1)
+    adj = _build_h_edge_graph(h_vars, h_lhs, h_rhs, candidates, max_arg_combos=22000)
+    path = _find_path(adj, g_lhs, g_rhs, max_depth=max_path_depth)
     if not path:
         return False
     intro = "intro " + " ".join(g_vars) if g_vars else ""
@@ -791,7 +772,19 @@ def try_singleton_equality_graph_with_extra_seeds(
         max_arg_combos=max_arg_combos,
     )
 
-    path = _find_path(adj, p, q, max_depth=max_path_depth)
+    context_terms = ordered_unique(seeds + candidates[:16], max_items=24)
+    added = add_congruence_edges(
+        adj,
+        context_terms=context_terms,
+        max_term_size=max_size + 4,
+        max_new_edges=60000,
+    )
+    trace(
+        f"[strategy-graph] candidates={len(candidates)} "
+        f"direct_nodes={len(adj)} congr_edges_added={added}"
+    )
+
+    path = _find_path(adj, p, q, max_depth=max_path_depth + 1)
     if not path:
         trace(
             f"[strategy-graph] no p→q path; seeds={len(seeds)} "
@@ -884,10 +877,10 @@ def try_llm_strategy_singleton_graph(
         eq1_text,
         eq2_text,
         extra_seed_terms=seed_terms,
-        max_path_depth=6,
-        max_terms=48,
+        max_path_depth=7,
+        max_terms=56,
         max_size=11,
-        max_arg_combos=70000,
+        max_arg_combos=90000,
     )
 
 
