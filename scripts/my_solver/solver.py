@@ -35,12 +35,15 @@ Output ONLY one JSON object. No markdown, no prose. Use `\u25c7` (U+25C7), NEVER
 {solver.mode}
 
 If solver mode is `lemma_strategy`, DO NOT write Lean code.
-Return ONLY this JSON shape:
-{"mode":"lemma_strategy","skeleton":"singleton_path","seed_terms":["p","q","p ◇ q","q ◇ p"],"target_equalities":[["p","q"]]}
+Return ONLY one JSON object with this shape:
+{"mode":"lemma_strategy","skeleton":"singleton_path","seed_terms":[...],"target_equalities":[...]}
 
 For lemma_strategy mode:
 - Use only variables p and q.
-- Suggest small useful intermediate terms.
+- Do not copy the minimal terms p, q, p ◇ q, q ◇ p unless you also add nontrivial larger terms.
+- Suggest 8 to 20 seed terms.
+- Include terms shaped like the hypothesis RHS after replacing variables by p/q.
+- Prefer small terms of size 3 to 9, such as nested products.
 - Do not include `verdict`, `proof`, or `counterexample_table`.
 - Do not use markdown or prose.
 
@@ -125,36 +128,6 @@ def goal_vars(eq_text):
             out.append(v)
     return out
 
-
-BAD_PROOF_TOKENS = [
-    "cases ",
-    "induction ",
-    "sorry",
-    "admit",
-    "axiom ",
-    "by_contra",
-]
-
-
-def proof_uses_bad_tokens(proof):
-    return any(tok in proof for tok in BAD_PROOF_TOKENS)
-
-
-def ensure_goal_intro(proof, eq2_text):
-    """If the LLM forgot to introduce goal variables, prepend the intro line."""
-    vars_needed = goal_vars(eq2_text)
-    if not vars_needed:
-        return proof
-
-    lines = [line for line in proof.splitlines() if line.strip()]
-    if not lines:
-        return proof
-
-    first = lines[0].strip()
-    if first.startswith("intro "):
-        return proof
-
-    return "intro " + " ".join(vars_needed) + "\n" + proof
 
 def intro_arity_ok(proof, eq2_text):
     vars_needed = goal_vars(eq2_text)
@@ -540,6 +513,74 @@ def _build_h_edge_graph(h_vars, h_lhs, h_rhs, candidates, max_arg_combos=20000):
     return adj
 
 
+def _edge_key(src, dst, pf):
+    return (src, dst, pf)
+
+
+def _add_edge(adj, seen_edges, src, dst, pf):
+    key = _edge_key(src, dst, pf)
+    if key in seen_edges:
+        return False
+    seen_edges.add(key)
+    adj.setdefault(src, []).append((dst, pf))
+    return True
+
+
+def _collect_seen_edges(adj):
+    seen = set()
+    for src, outs in adj.items():
+        for dst, pf in outs:
+            seen.add(_edge_key(src, dst, pf))
+    return seen
+
+
+def add_congruence_edges(
+    adj,
+    context_terms,
+    max_term_size=13,
+    max_new_edges=60000,
+):
+    """Add one-step congruence/context edges to an equality graph.
+
+    If the graph has an edge a = b justified by pf, add:
+      a ◇ t = b ◇ t by congrArg (fun r => r ◇ t) pf
+      t ◇ a = t ◇ b by congrArg (fun r => t ◇ r) pf
+
+    This lets the graph perform rewrites inside one product context.
+    """
+    seen_edges = _collect_seen_edges(adj)
+    base_edges = []
+    for src, outs in list(adj.items()):
+        for dst, pf in outs:
+            base_edges.append((src, dst, pf))
+
+    added = 0
+    contexts = list(context_terms)
+
+    for src, dst, pf in base_edges:
+        for t in contexts:
+            left_src = ("op", src, t)
+            left_dst = ("op", dst, t)
+            if tree_size(left_src) <= max_term_size and tree_size(left_dst) <= max_term_size:
+                t_str = tree_to_str(t)
+                new_pf = f"congrArg (fun r => r ◇ {t_str}) ({pf})"
+                if _add_edge(adj, seen_edges, left_src, left_dst, new_pf):
+                    added += 1
+                    if added >= max_new_edges:
+                        return added
+
+            right_src = ("op", t, src)
+            right_dst = ("op", t, dst)
+            if tree_size(right_src) <= max_term_size and tree_size(right_dst) <= max_term_size:
+                t_str = tree_to_str(t)
+                new_pf = f"congrArg (fun r => {t_str} ◇ r) ({pf})"
+                if _add_edge(adj, seen_edges, right_src, right_dst, new_pf):
+                    added += 1
+                    if added >= max_new_edges:
+                        return added
+
+    return added
+
 def _find_path(adj, start, target, max_depth=4):
     if start == target:
         return []
@@ -599,8 +640,27 @@ def try_bounded_equality_graph(problem, eq1_text, eq2_text, max_path_depth=4):
 
     seeds = subterms(g_lhs) + subterms(g_rhs)
     candidates = generate_candidate_terms(g_vars, seeds, max_depth=2, max_terms=34, max_size=9)
-    adj = _build_h_edge_graph(h_vars, h_lhs, h_rhs, candidates, max_arg_combos=22000)
-    path = _find_path(adj, g_lhs, g_rhs, max_depth=max_path_depth)
+    adj = _build_h_edge_graph(
+        h_vars,
+        h_lhs,
+        h_rhs,
+        candidates,
+        max_arg_combos=max_arg_combos,
+    )
+
+    context_terms = ordered_unique(seeds + candidates[:16], max_items=24)
+    added = add_congruence_edges(
+        adj,
+        context_terms=context_terms,
+        max_term_size=max_size + 4,
+        max_new_edges=60000,
+    )
+    trace(
+        f"[strategy-graph] candidates={len(candidates)} "
+        f"direct_nodes={len(adj)} congr_edges_added={added}"
+    )
+
+    path = _find_path(adj, p, q, max_depth=max_path_depth + 1)
     if not path:
         return False
     intro = "intro " + " ".join(g_vars) if g_vars else ""
@@ -802,6 +862,18 @@ def try_llm_strategy_singleton_graph(
         return False
 
     seed_terms = _parse_seed_terms(answer.get("seed_terms", []))
+    p, q = ("var", "p"), ("var", "q")
+    deterministic_extra = [
+        ("op", ("op", p, q), ("op", q, p)),
+        ("op", ("op", q, p), ("op", p, q)),
+        ("op", ("op", p, p), ("op", q, p)),
+        ("op", ("op", q, q), ("op", p, q)),
+        ("op", ("op", p, q), ("op", p, q)),
+        ("op", ("op", q, p), ("op", q, p)),
+        ("op", p, ("op", q, p)),
+        ("op", q, ("op", p, q)),
+    ]
+    seed_terms = ordered_unique(seed_terms + deterministic_extra)
     trace(f"[strategy] parsed {len(seed_terms)} seed terms")
 
     if not seed_terms:
@@ -1502,10 +1574,6 @@ def main():
             "Do NOT prove key using `have h1 := h a a ...; have h2 := h b b ...; "
             "exact h1.trans h2.symm`. That is invalid unless the middle terms are definitionally identical."
         )
-        analysis_lines.append(
-            "Your proof body MUST start by introducing all goal variables, e.g. `intro x y z`. "
-            "Do not start with `by`. Do not use `cases`, `induction`, or `rfl` to prove the singleton lemma."
-        )
 
         if not x_in_rhs:
             analysis_lines.append(
@@ -1535,9 +1603,6 @@ def main():
     seen = set()
     MAX_LLM_ATTEMPTS = 2 if singleton else 4
     consecutive_garbage = 0
-    if budget_seconds < MIN_SECONDS_FOR_LLM:
-        trace(f"[stop] budget {budget_seconds:.1f}s too small for LLM fallback")
-        return
 
     for attempt in range(MAX_LLM_ATTEMPTS):
         elapsed = time.monotonic() - start_time
@@ -1571,26 +1636,19 @@ def main():
 
         if verdict == "true":
             proof = clean_proof(answer.get("proof", ""))
-            proof = ensure_goal_intro(proof, eq2)
-
             if not proof:
                 trace("[llm] empty true proof")
                 continue
-
-            if proof_uses_bad_tokens(proof):
-                trace("[llm] skipped proof with bad/disallowed tactic")
-                continue
-
             if proof in seen:
                 trace("[llm] duplicate proof skipped")
                 continue
-
             if not intro_arity_ok(proof, eq2):
                 trace("[llm] intro arity mismatch skipped")
                 continue
 
             seen.add(proof)
             code = make_true_code(proof)
+
         elif verdict == "false":
             if singleton:
                 trace("[llm] skipped false answer because singleton hint is true")
