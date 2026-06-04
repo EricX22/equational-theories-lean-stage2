@@ -55,8 +55,8 @@ from itertools import product
 # ── Timing budget ────────────────────────────────────────────────
 # Total wall-clock seconds the solver is expected to run. Used to
 # avoid starting an LLM call when too little time is left.
-BUDGET_SECONDS = 110
-MIN_SECONDS_FOR_LLM = 8
+DEFAULT_BUDGET_SECONDS = 3600
+MIN_SECONDS_FOR_LLM = 350
 
 
 # ── Protocol ────────────────────────────────────────────────────
@@ -112,6 +112,36 @@ def goal_vars(eq_text):
             out.append(v)
     return out
 
+
+BAD_PROOF_TOKENS = [
+    "cases ",
+    "induction ",
+    "sorry",
+    "admit",
+    "axiom ",
+    "by_contra",
+]
+
+
+def proof_uses_bad_tokens(proof):
+    return any(tok in proof for tok in BAD_PROOF_TOKENS)
+
+
+def ensure_goal_intro(proof, eq2_text):
+    """If the LLM forgot to introduce goal variables, prepend the intro line."""
+    vars_needed = goal_vars(eq2_text)
+    if not vars_needed:
+        return proof
+
+    lines = [line for line in proof.splitlines() if line.strip()]
+    if not lines:
+        return proof
+
+    first = lines[0].strip()
+    if first.startswith("intro "):
+        return proof
+
+    return "intro " + " ".join(vars_needed) + "\n" + proof
 
 def intro_arity_ok(proof, eq2_text):
     """Filter LLM proofs that introduce too many/few goal variables."""
@@ -846,21 +876,25 @@ def try_two_step_h_chain(problem, eq1_text, eq2_text, max_judge_calls=6):
 
 
 def forces_singleton(eq1_text):
-    """Brute force on Fin 2 (and Fin 3 when cheap): is every magma satisfying
-    h necessarily a singleton? Conservative — used only as an analysis hint."""
+    """Conservative small-model singleton test.
+
+    If ANY magma on Fin 2 or Fin 3 satisfies h, then h does NOT force
+    singleton behavior, because Fin n has at least two carrier elements.
+
+    If no such model exists in the searched sizes, return True as an
+    analysis hint only.
+    """
     v1, l1, r1 = parse_equation(eq1_text)
     for n in (2, 3):
         if n == 3 and len(v1) > 4:
             break
         for enc in range(n ** (n * n)):
             table = [
-                [(enc // (n ** (i * n + j))) % n for j in range(n)] for i in range(n)
+                [(enc // (n ** (i * n + j))) % n for j in range(n)]
+                for i in range(n)
             ]
             op = lambda a, b, t=table: t[a][b]
-            if not equation_holds(v1, l1, r1, n, op):
-                continue
-            distinct = {x for row in table for x in row}
-            if len(distinct) >= 2:
+            if equation_holds(v1, l1, r1, n, op):
                 return False
     return True
 
@@ -1139,6 +1173,8 @@ def main():
     start_time = time.monotonic()
     startup = read_message()
     problem = startup["problem"]
+    budget = startup.get("budget", {})
+    budget_seconds = float(budget.get("timeout_seconds", DEFAULT_BUDGET_SECONDS))
     eq1 = problem["equation1"].replace("*", "\u25c7")
     eq2 = problem["equation2"].replace("*", "\u25c7")
     problem["equation1"], problem["equation2"] = eq1, eq2
@@ -1270,6 +1306,10 @@ def main():
             "Do NOT prove key using `have h1 := h a a ...; have h2 := h b b ...; "
             "exact h1.trans h2.symm`. That is invalid unless the middle terms are definitionally identical."
         )
+        analysis_lines.append(
+            "Your proof body MUST start by introducing all goal variables, e.g. `intro x y z`. "
+            "Do not start with `by`. Do not use `cases`, `induction`, or `rfl` to prove the singleton lemma."
+        )
 
         if not x_in_rhs:
             analysis_lines.append(
@@ -1299,10 +1339,13 @@ def main():
     seen = set()
     MAX_LLM_ATTEMPTS = 2 if singleton else 4
     consecutive_garbage = 0
+    if budget_seconds < MIN_SECONDS_FOR_LLM:
+        trace(f"[stop] budget {budget_seconds:.1f}s too small for LLM fallback")
+        return
 
     for attempt in range(MAX_LLM_ATTEMPTS):
         elapsed = time.monotonic() - start_time
-        remaining = BUDGET_SECONDS - elapsed
+        remaining = budget_seconds - elapsed
         trace(f"[llm] attempt={attempt} remaining={remaining:.1f}s singleton={singleton}")
 
         if remaining < MIN_SECONDS_FOR_LLM:
@@ -1332,19 +1375,26 @@ def main():
 
         if verdict == "true":
             proof = clean_proof(answer.get("proof", ""))
+            proof = ensure_goal_intro(proof, eq2)
+
             if not proof:
                 trace("[llm] empty true proof")
                 continue
+
+            if proof_uses_bad_tokens(proof):
+                trace("[llm] skipped proof with bad/disallowed tactic")
+                continue
+
             if proof in seen:
                 trace("[llm] duplicate proof skipped")
                 continue
+
             if not intro_arity_ok(proof, eq2):
                 trace("[llm] intro arity mismatch skipped")
                 continue
 
             seen.add(proof)
             code = make_true_code(proof)
-
         elif verdict == "false":
             if singleton:
                 trace("[llm] skipped false answer because singleton hint is true")
