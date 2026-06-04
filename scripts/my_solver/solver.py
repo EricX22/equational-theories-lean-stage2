@@ -31,6 +31,19 @@ Goal       ({problem.equation2_id}): {problem.equation2}
 
 Output ONLY one JSON object. No markdown, no prose. Use `\u25c7` (U+25C7), NEVER `*`.
 
+# Solver mode
+{solver.mode}
+
+If solver mode is `lemma_strategy`, DO NOT write Lean code.
+Return ONLY this JSON shape:
+{"mode":"lemma_strategy","skeleton":"singleton_path","seed_terms":["p","q","p ◇ q","q ◇ p"],"target_equalities":[["p","q"]]}
+
+For lemma_strategy mode:
+- Use only variables p and q.
+- Suggest small useful intermediate terms.
+- Do not include `verdict`, `proof`, or `counterexample_table`.
+- Do not use markdown or prose.
+
 For TRUE: {"verdict": "true", "proof": "<tactic body — no `import`, no `theorem`>"}
 For FALSE: {"verdict": "false", "counterexample_table": [[0,1],[1,0]]}
 
@@ -55,8 +68,8 @@ from itertools import product
 # ── Timing budget ────────────────────────────────────────────────
 # Total wall-clock seconds the solver is expected to run. Used to
 # avoid starting an LLM call when too little time is left.
-BUDGET_SECONDS = 110
-MIN_SECONDS_FOR_LLM = 8
+DEFAULT_BUDGET_SECONDS = 3600
+MIN_SECONDS_FOR_LLM = 350
 
 
 # ── Protocol ────────────────────────────────────────────────────
@@ -114,14 +127,19 @@ def goal_vars(eq_text):
 
 
 def intro_arity_ok(proof, eq2_text):
-    """Filter LLM proofs that introduce too many/few goal variables."""
     vars_needed = goal_vars(eq2_text)
     lines = [line.strip() for line in proof.splitlines() if line.strip()]
     if not lines:
         return False
     if not lines[0].startswith("intro "):
         return True
+
     got = lines[0].split()[1:]
+
+    # h is already in scope from `intro G _ h`; the proof body should not introduce it.
+    if "h" in got:
+        return False
+
     return len(got) == len(vars_needed)
 
 # ── Equation parsing & magma evaluation ──────────────────────────
@@ -603,6 +621,173 @@ def try_singleton_equality_graph(problem, eq1_text, eq2_text, max_path_depth=5):
     code = make_true_code(body)
     return call_judge("true", code).get("status") == "accepted"
 
+def _parse_seed_terms(seed_term_strings):
+    """Parse LLM-proposed seed terms, ignoring malformed ones."""
+    out = []
+    for s in seed_term_strings or []:
+        if not isinstance(s, str):
+            continue
+        s = s.replace("*", "◇").strip()
+        if not s:
+            continue
+        try:
+            out.append(parse_to_tree(s))
+        except Exception:
+            continue
+    return out
+
+
+def try_singleton_equality_graph_with_extra_seeds(
+    problem,
+    eq1_text,
+    eq2_text,
+    extra_seed_terms=(),
+    max_path_depth=6,
+    max_terms=48,
+    max_size=11,
+    max_arg_combos=70000,
+):
+    """Try to prove ∀ p q, p = q using deterministic graph search.
+
+    This is like try_singleton_equality_graph, but allows extra seed
+    terms from a strategist. The LLM only proposes terms; Python still
+    builds the graph and generates Lean mechanically.
+    """
+    h_vars = []
+    seen = set()
+    for v in re.findall(r"\b([a-z])\b", eq1_text):
+        if v not in seen:
+            seen.add(v)
+            h_vars.append(v)
+
+    eq2_vars = goal_vars(eq2_text)
+
+    try:
+        h_lhs_str, h_rhs_str = eq1_text.split("=", 1)
+        goal_lhs, goal_rhs = eq2_text.split("=", 1)
+        h_lhs = parse_to_tree(h_lhs_str)
+        h_rhs = parse_to_tree(h_rhs_str)
+    except Exception:
+        return False
+
+    p, q = ("var", "p"), ("var", "q")
+    base_seeds = [
+        p,
+        q,
+        ("op", p, q),
+        ("op", q, p),
+        ("op", p, p),
+        ("op", q, q),
+        ("op", ("op", p, q), p),
+        ("op", ("op", q, p), q),
+        ("op", p, ("op", p, q)),
+        ("op", q, ("op", q, p)),
+    ]
+
+    seeds = ordered_unique(base_seeds + list(extra_seed_terms))
+    candidates = generate_candidate_terms(
+        ["p", "q"],
+        seeds,
+        max_depth=2,
+        max_terms=max_terms,
+        max_size=max_size,
+    )
+
+    adj = _build_h_edge_graph(
+        h_vars,
+        h_lhs,
+        h_rhs,
+        candidates,
+        max_arg_combos=max_arg_combos,
+    )
+
+    path = _find_path(adj, p, q, max_depth=max_path_depth)
+    if not path:
+        trace(
+            f"[strategy-graph] no p→q path; seeds={len(seeds)} "
+            f"candidates={len(candidates)} nodes={len(adj)}"
+        )
+        return False
+
+    intro = "intro " + " ".join(eq2_vars) if eq2_vars else ""
+    calc = calc_from_path(path)
+    body = (
+        f"{intro}\n"
+        "have key : ∀ (p q : G), p = q := by\n"
+        "  intro p q\n"
+        + "\n".join("  " + line for line in calc.splitlines())
+        + f"\nexact key ({goal_lhs.strip()}) ({goal_rhs.strip()})"
+    )
+
+    code = make_true_code(body)
+    return call_judge("true", code).get("status") == "accepted"
+
+
+def try_llm_strategy_singleton_graph(
+    problem,
+    eq1_text,
+    eq2_text,
+    start_time,
+    budget_seconds,
+):
+    """Ask the LLM for seed terms, then run deterministic graph search.
+
+    The LLM is not allowed to write Lean here. It only proposes a
+    search-space expansion for the singleton equality graph.
+    """
+    elapsed = time.monotonic() - start_time
+    remaining = budget_seconds - elapsed
+    if remaining < MIN_SECONDS_FOR_LLM:
+        trace("[strategy] skip: not enough time for LLM strategist")
+        return False
+
+    analysis = (
+        "We need a hard singleton proof. Do not write Lean. "
+        "Suggest seed terms for a deterministic equality-graph search proving "
+        "`∀ p q : G, p = q`. Use only variables p and q. "
+        "The hypothesis is Eq1 and has a bare variable on the left. "
+        "Good seed terms are small products that may appear as intermediate "
+        "terms in h-instantiations."
+    )
+
+    result = call_llm(
+        {
+            "mode": "lemma_strategy",
+            "analysis": analysis,
+            "attempt": "strategy0",
+        }
+    )
+
+    if "error" in result:
+        trace(f"[strategy] LLM error: {result.get('error')}")
+        return False
+
+    answer = extract_json(result.get("response", ""))
+    if not answer:
+        trace("[strategy] unparseable strategy response")
+        return False
+
+    if answer.get("mode") != "lemma_strategy":
+        trace("[strategy] wrong mode in response")
+        return False
+
+    seed_terms = _parse_seed_terms(answer.get("seed_terms", []))
+    trace(f"[strategy] parsed {len(seed_terms)} seed terms")
+
+    if not seed_terms:
+        return False
+
+    return try_singleton_equality_graph_with_extra_seeds(
+        problem,
+        eq1_text,
+        eq2_text,
+        extra_seed_terms=seed_terms,
+        max_path_depth=6,
+        max_terms=48,
+        max_size=11,
+        max_arg_combos=70000,
+    )
+
 
 def try_direct_h_application(problem, eq1_text, eq2_text):
     """If h's `lhs = rhs` unifies with goal's `lhs = rhs` (as a whole),
@@ -846,24 +1031,30 @@ def try_two_step_h_chain(problem, eq1_text, eq2_text, max_judge_calls=6):
 
 
 def forces_singleton(eq1_text):
-    """Brute force on Fin 2 (and Fin 3 when cheap): is every magma satisfying
-    h necessarily a singleton? Conservative — used only as an analysis hint."""
+    """Conservative small-model singleton hint.
+
+    If ANY magma on Fin 2 or Fin 3 satisfies h, then h does NOT force
+    singleton behavior, because the carrier has at least two elements.
+
+    This is only a routing hint, not a Lean proof.
+    """
     v1, l1, r1 = parse_equation(eq1_text)
+
     for n in (2, 3):
         if n == 3 and len(v1) > 4:
             break
+
         for enc in range(n ** (n * n)):
             table = [
-                [(enc // (n ** (i * n + j))) % n for j in range(n)] for i in range(n)
+                [(enc // (n ** (i * n + j))) % n for j in range(n)]
+                for i in range(n)
             ]
             op = lambda a, b, t=table: t[a][b]
-            if not equation_holds(v1, l1, r1, n, op):
-                continue
-            distinct = {x for row in table for x in row}
-            if len(distinct) >= 2:
-                return False
-    return True
 
+            if equation_holds(v1, l1, r1, n, op):
+                return False
+
+    return True
 
 # ── Lean code generation ─────────────────────────────────────────
 
@@ -973,17 +1164,6 @@ def _goal_vars(eq_text):
             out.append(v)
     return out
 
-
-def intro_arity_ok(proof, eq2_text):
-    """Cheaply filter LLM proofs that introduce too many/few goal vars."""
-    vars_needed = _goal_vars(eq2_text)
-    lines = [line.strip() for line in proof.splitlines() if line.strip()]
-    if not lines:
-        return False
-    if not lines[0].startswith("intro "):
-        return True
-    got = lines[0].split()[1:]
-    return len(got) == len(vars_needed)
 
 
 
@@ -1139,6 +1319,10 @@ def main():
     start_time = time.monotonic()
     startup = read_message()
     problem = startup["problem"]
+    budget_info = startup.get("budget", {})
+    budget_seconds = float(
+        budget_info.get("timeout_seconds", DEFAULT_BUDGET_SECONDS)
+    )
     eq1 = problem["equation1"].replace("*", "\u25c7")
     eq2 = problem["equation2"].replace("*", "\u25c7")
     problem["equation1"], problem["equation2"] = eq1, eq2
@@ -1249,6 +1433,24 @@ def main():
         return
 
     # Stage 3: LLM fallback.
+    # Hard singleton cases are currently low-yield: the model often returns
+    # false, wrong intros, or invalid h1.trans h2.symm proofs. Prefer failing
+    # fast unless we later add a shape-specific prompt.
+    if singleton:
+        trace("[stage] LLM strategist singleton graph")
+        if try_llm_strategy_singleton_graph(
+            problem,
+            eq1,
+            eq2,
+            start_time=start_time,
+            budget_seconds=budget_seconds,
+        ):
+            trace("[accepted] LLM strategist singleton graph")
+            return
+
+        trace("[stop] hard singleton reached fallback; strategist failed")
+        return
+
     trace("[stage] LLM fallback")
     analysis_lines = []
     if singleton:
@@ -1302,7 +1504,7 @@ def main():
 
     for attempt in range(MAX_LLM_ATTEMPTS):
         elapsed = time.monotonic() - start_time
-        remaining = BUDGET_SECONDS - elapsed
+        remaining = budget_seconds - elapsed
         trace(f"[llm] attempt={attempt} remaining={remaining:.1f}s singleton={singleton}")
 
         if remaining < MIN_SECONDS_FOR_LLM:
