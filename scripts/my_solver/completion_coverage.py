@@ -1,5 +1,5 @@
 import json, time, sys
-import kb
+import completion_prototype as kb
 
 def load(path):
     out=[]

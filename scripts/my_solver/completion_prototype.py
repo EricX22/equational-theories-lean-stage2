@@ -15,6 +15,8 @@ the existing counterexample search.
 STATUS: decision procedure only. Proof-certificate reconstruction into
 judge-valid Lean is the remaining integration step.
 """
+import sys, time
+sys.setrecursionlimit(8000)
 OP='o'; CEIL=20
 def is_v(t): return t[0]=='V'
 

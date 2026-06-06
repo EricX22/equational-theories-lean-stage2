@@ -1,4 +1,5 @@
-import json, itertools, z3, kb
+import json, itertools, z3
+import completion_prototype as kb
 probs=json.load(open('/tmp/sample_20.json'))
 def sat_eq1(eq1, n):
     # is there an n-element magma satisfying eq1? (n>=2 => non-singleton model exists)
