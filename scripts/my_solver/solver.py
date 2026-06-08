@@ -1407,10 +1407,11 @@ def try_structural_singleton_pattern(problem, eq1_text, eq2_text):
     return False
 
 
-# ── Inlined ordered-completion engine + adapter ──
-import sys as _kc_sys
-_kc_sys.setrecursionlimit(8000)
-import time
+# ── Inlined ordered-completion engine (kc_ namespace) ──
+# Source: docs/completion_engine_reference.py. Deterministic singleton
+# prover; see docs/completion_singleton_approach.md. Modest recursion
+# limit + kc_CEIL term-size bound guard against runaway recursion.
+sys.setrecursionlimit(8000)
 # ===== inlined ordered-completion engine (kc_ namespace) =====
 kc_OP='o'; kc_CEIL=20
 def kc_is_v(t): return t[0]=='V'
@@ -1838,27 +1839,26 @@ def kc_singleton_lean(eq_str, goal_lhs, goal_rhs, goal_vars, tb=20.0):
     return body
 
 
-
 def try_completion_singleton(problem, eq1_text, eq2_text, time_budget=25.0):
-    """Deterministic ordered-completion singleton proof (no LLM).
+    """Deterministic ordered-completion singleton prover (Phase 1).
 
-    Runs proof-carrying Knuth-Bendix completion on Eq1. If Eq1 forces a
-    singleton magma, reconstructs a Lean proof of `forall p q, p = q`
-    and applies it to the goal. The proof is built mechanically from
-    h-instances + congrArg/symm/trans and is internally type-checked
-    (kc_ptype) before submission.
+    Runs proof-carrying Knuth-Bendix completion on Eq1. If it derives an
+    equation between two distinct variables, Eq1 forces a singleton and we
+    emit a mechanically-generated, Python-self-checked Lean proof of
+    `key : forall p q, p = q`, then apply key to the goal. The LLM never
+    authors this proof. See docs/completion_singleton_approach.md.
     """
     gl, gr = eq2_text.split("=", 1)
-    gv = goal_vars(eq2_text)
     try:
-        body = kc_singleton_lean(eq1_text, gl.strip(), gr.strip(), gv, tb=time_budget)
+        body = kc_singleton_lean(
+            eq1_text, gl.strip(), gr.strip(), goal_vars(eq2_text), tb=time_budget
+        )
     except Exception as e:
         trace(f"[completion] error: {e!r}")
         return False
     if not body:
         return False
-    code = make_true_code(body)
-    return call_judge("true", code).get("status") == "accepted"
+    return call_judge("true", make_true_code(body)).get("status") == "accepted"
 
 
 
@@ -1983,13 +1983,15 @@ def main():
         return
 
     # Stage 2.7: deterministic ordered-completion singleton proof.
-    # Proof-carrying Knuth-Bendix completion. Cracks the hard-singleton
-    # class that previously fell through to the (zero-yield) LLM strategist.
-    if singleton:
+    # Decision procedure for the hard-singleton class; runs before the LLM
+    # strategist, which historically yielded zero successes here.
+    if singleton and "try_completion_singleton" in globals():
         trace("[stage] completion singleton")
         if try_completion_singleton(problem, eq1, eq2, time_budget=25.0):
             trace("[accepted] completion singleton")
             return
+    elif singleton:
+        trace("[skip] completion singleton: function missing")
 
     # Stage 3: LLM fallback.
     # Hard singleton cases are currently low-yield: the model often returns
