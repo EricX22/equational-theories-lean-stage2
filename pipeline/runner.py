@@ -41,7 +41,16 @@ def main():
     existing_solved = set()
     existing_results: list[dict] = []
     if Path(output_path).exists():
-        for entry in json.loads(Path(output_path).read_text()):
+        raw = Path(output_path).read_text().strip()
+        try:
+            prior = json.loads(raw) if raw else []
+        except json.JSONDecodeError:
+            # An interrupted run can leave the results file empty or truncated
+            # (write_text truncates before writing). Treat a corrupt file as
+            # "no prior results" rather than crashing the whole run.
+            print(f"  WARNING: ignoring corrupt results file {output_path}", flush=True)
+            prior = []
+        for entry in prior:
             if entry.get("solved"):
                 existing_solved.add(entry["id"])
                 existing_results.append(entry)
@@ -89,8 +98,12 @@ def main():
         }
         results.append(entry)
 
-        # Save after each problem
-        Path(output_path).write_text(json.dumps(results, indent=2, ensure_ascii=False))
+        # Save after each problem. Write to a temp file and atomically rename
+        # so an interrupted run (SLURM timeout, OOM, Ctrl-C) can never leave a
+        # truncated/empty results file that breaks the next run's startup load.
+        _tmp = Path(output_path).with_suffix(".json.tmp")
+        _tmp.write_text(json.dumps(results, indent=2, ensure_ascii=False))
+        _tmp.replace(output_path)
 
         if result["solved"]:
             solved_count += 1

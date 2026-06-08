@@ -1861,110 +1861,6 @@ def try_completion_singleton(problem, eq1_text, eq2_text, time_budget=25.0):
     return call_judge("true", make_true_code(body)).get("status") == "accepted"
 
 
-def kc_nonsingleton_lean(eq_str, goal_lhs, goal_rhs, goal_vars, tb=20.0, maxp=600):
-    """Phase 2 (Engine B2): prove goal_lhs = goal_rhs as a consequence of Eq1
-    WITHOUT singleton collapse. Runs proof-carrying ordered completion on Eq1
-    and normalizes both goal sides w.r.t. the accumulated system; on a common
-    normal form, composes and kc_ptype-CHECKS the proof. Free variables
-    introduced during completion are instantiated to an in-scope goal variable
-    before rendering (mirrors the singleton path's p/q mapping). Returns a Lean
-    proof body, or None."""
-    global kc_H_VARS, kc_H_LHS, kc_H_RHS
-    L, Rr = eq_str.split('=', 1)
-    kc_H_LHS = kc_parse(L); kc_H_RHS = kc_parse(Rr)
-    seen_v = []
-    for v in re.findall(r"\b([a-z])\b", eq_str):
-        if v not in seen_v: seen_v.append(v)
-    kc_H_VARS = seen_v
-    P0 = ('H', tuple(('V', v) for v in kc_H_VARS))
-    E0 = (kc_H_LHS, kc_H_RHS, P0)
-    gl = kc_parse(goal_lhs); gr = kc_parse(goal_rhs)
-
-    def try_goal(rules):
-        nl, Pl = kc_normalize_pf(gl, rules)
-        nr, Pr = kc_normalize_pf(gr, rules)
-        if nl == nr:
-            P = kc_simplify(('TRANS', Pl, ('SYM', Pr)))
-            if kc_ptype(P) == (gl, gr):
-                return P
-        return None
-
-    start = time.time(); processed = []; queue = [E0]; seen = set()
-    P = try_goal(processed)
-    while P is None and queue:
-        if time.time() - start > tb:
-            break
-        queue.sort(key=lambda e: kc_sizecap(e[0], 10**9) + kc_sizecap(e[1], 10**9))
-        s, t, Pp = queue.pop(0)
-        s, t, Pp = kc_norm_eq_pf(s, t, Pp, processed)
-        if s == t:
-            continue
-        k = kc_canon((s, t))
-        if k in seen:
-            continue
-        seen.add(k)
-        rules = processed + [(s, t, Pp)]
-        news = []
-        for f in rules:
-            for cp in kc_crit_pairs_pf((s, t, Pp), f) + kc_crit_pairs_pf(f, (s, t, Pp)):
-                a, b, Pcp = cp
-                a, b, Pcp = kc_norm_eq_pf(a, b, Pcp, rules)
-                if a == b:
-                    continue
-                if kc_sizecap(a, kc_CEIL) > kc_CEIL or kc_sizecap(b, kc_CEIL) > kc_CEIL:
-                    continue
-                kk = kc_canon((a, b))
-                if kk in seen:
-                    continue
-                news.append((a, b, Pcp))
-        processed.append((s, t, Pp))
-        P = try_goal(processed)
-        if P is not None:
-            break
-        queue.extend(news)
-        if len(processed) > maxp:
-            break
-    if P is None:
-        return None
-    if not goal_vars:
-        return None  # need an in-scope element to bind free completion variables
-    gset = set(goal_vars)
-    pv = set()
-    def scan(Q):
-        if Q[0] == 'H':
-            for a in Q[1]: pv.update(kc_vars_of(a))
-        elif Q[0] == 'SYM': scan(Q[1])
-        elif Q[0] == 'TRANS': scan(Q[1]); scan(Q[2])
-        elif Q[0] in ('CL', 'CR'): pv.update(kc_vars_of(Q[1])); scan(Q[2])
-        elif Q[0] == 'REFL': pv.update(kc_vars_of(Q[1]))
-    scan(P)
-    sub = {v: ('V', goal_vars[0]) for v in pv if v not in gset}
-    Pi = kc_inst_proof(P, sub) if sub else P
-    Pi = kc_simplify(Pi)
-    if kc_ptype(Pi) != (gl, gr):
-        return None
-    intro = "intro " + " ".join(goal_vars) if goal_vars else ""
-    return f"{intro}\nexact " + kc_render(Pi)
-
-
-def try_completion_nonsingleton(problem, eq1_text, eq2_text, time_budget=20.0):
-    """Phase 2 adapter: deterministic non-singleton completion proof of
-    goal_lhs = goal_rhs as a consequence of Eq1. Self-checked by kc_ptype
-    before submission; the LLM never authors it."""
-    gl, gr = eq2_text.split("=", 1)
-    try:
-        body = kc_nonsingleton_lean(
-            eq1_text, gl.strip(), gr.strip(), goal_vars(eq2_text), tb=time_budget
-        )
-    except Exception as e:
-        trace(f"[completion-ns] error: {e!r}")
-        return False
-    if not body:
-        return False
-    return call_judge("true", make_true_code(body)).get("status") == "accepted"
-
-
-
 
 # ── Main ─────────────────────────────────────────────────────────
 
@@ -2097,16 +1993,6 @@ def main():
     elif singleton:
         trace("[skip] completion singleton: function missing")
 
-    # Stage 2.8: deterministic non-singleton ordered-completion proof (Phase 2).
-    # Proves goal_lhs = goal_rhs as a consequence of Eq1 without singleton
-    # collapse. Runs before the LLM fallback; captures true non-singleton
-    # cases the LLM proof path historically could not.
-    if "try_completion_nonsingleton" in globals():
-        trace("[stage] completion non-singleton")
-        if try_completion_nonsingleton(problem, eq1, eq2, time_budget=20.0):
-            trace("[accepted] completion non-singleton")
-            return
-
     # Stage 3: LLM fallback.
     # Hard singleton cases are currently low-yield: the model often returns
     # false, wrong intros, or invalid h1.trans h2.symm proofs. Prefer failing
@@ -2174,9 +2060,7 @@ def main():
         )
 
     seen = set()
-    # Non-singleton hard residual is now handled by Stage 2.8 (completion);
-    # the LLM proof path yielded ~1/674 at huge cost, so fail fast here.
-    MAX_LLM_ATTEMPTS = 2 if singleton else 1
+    MAX_LLM_ATTEMPTS = 2 if singleton else 4
     consecutive_garbage = 0
 
     for attempt in range(MAX_LLM_ATTEMPTS):
