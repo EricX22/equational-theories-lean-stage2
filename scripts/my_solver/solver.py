@@ -2056,12 +2056,101 @@ def mf_find_false_model(eq1_text, eq2_text, sizes=(4, 5, 6), per_size=2.5):
     return None
 
 
-def try_model_finder(eq1_text, eq2_text, sizes=(4, 5, 6), per_size=2.5):
-    """False-side stage: backtracking finite-model finder for the Fin 4-6
-    counterexamples that the exhaustive Fin 2-3 + structured Fin 4-7 search
-    misses (generic non-structured tables). Emits a table judged by decideFin!."""
+def mf_walk_find_model(eq1_text, eq2_text, sizes=(5, 6, 7), per_size=2.5,
+                       max_flips=4000, noise=0.3, seed=20260608):
+    """Local-search (WalkSAT/min-conflicts) finite-model finder. Complements the
+    backtracking finder: far better at FINDING satisfiable Fin 5-7 magma models
+    that violate Eq2 (the cases unit-propagation DFS misses). Pure Python,
+    seeded for reproducibility. Returns (n, table_rows) or None; the table is
+    judge-checked, so a wrong one can never be accepted."""
+    import time as _t, itertools as _it, random as _r
+    rng = _r.Random(seed)
+    l1, r1 = eq1_text.split("=", 1)
+    l2, r2 = eq2_text.split("=", 1)
+    A1, B1 = kc_parse(l1), kc_parse(r1)
+    A2, B2 = kc_parse(l2), kc_parse(r2)
+    v1 = goal_vars(eq1_text)
+    v2 = goal_vars(eq2_text)
+    for n in sizes:
+        e1 = [dict(zip(v1, t)) for t in _it.product(range(n), repeat=len(v1))]
+        e2 = [dict(zip(v2, t)) for t in _it.product(range(n), repeat=len(v2))]
+
+        def ev(t, env, tbl):
+            if t[0] == 'V':
+                return env[t[1]]
+            return tbl[ev(t[2][0], env, tbl) * n + ev(t[2][1], env, tbl)]
+
+        def touched(t, env, tbl, acc):
+            if t[0] == 'V':
+                return env[t[1]]
+            a = touched(t[2][0], env, tbl, acc)
+            b = touched(t[2][1], env, tbl, acc)
+            idx = a * n + b
+            acc.add(idx)
+            return tbl[idx]
+
+        def nbad(tbl):
+            c = 0
+            for env in e1:
+                if ev(A1, env, tbl) != ev(B1, env, tbl):
+                    c += 1
+            return c
+
+        def eq2_violated(tbl):
+            for env in e2:
+                if ev(A2, env, tbl) != ev(B2, env, tbl):
+                    return True
+            return False
+
+        start = _t.time()
+        while _t.time() - start < per_size:
+            tbl = [rng.randrange(n) for _ in range(n * n)]
+            for _ in range(max_flips):
+                if _t.time() - start > per_size:
+                    break
+                bad = [env for env in e1 if ev(A1, env, tbl) != ev(B1, env, tbl)]
+                if not bad:
+                    if eq2_violated(tbl):
+                        return n, [[tbl[i * n + j] for j in range(n)] for i in range(n)]
+                    tbl[rng.randrange(n * n)] = rng.randrange(n)
+                    continue
+                env = rng.choice(bad)
+                acc = set()
+                touched(A1, env, tbl, acc)
+                touched(B1, env, tbl, acc)
+                acc = list(acc)
+                if rng.random() < noise:
+                    c = rng.choice(acc)
+                    tbl[c] = rng.randrange(n)
+                else:
+                    best = None; bestc = 10 ** 9
+                    for c in acc:
+                        old = tbl[c]
+                        for val in range(n):
+                            if val == old:
+                                continue
+                            tbl[c] = val
+                            sc = nbad(tbl)
+                            if sc < bestc:
+                                bestc = sc; best = (c, val)
+                        tbl[c] = old
+                    if best:
+                        tbl[best[0]] = best[1]
+    return None
+
+
+def try_model_finder(eq1_text, eq2_text):
+    """False-side stage: find a Fin counterexample (Eq1 holds, Eq2 fails) the
+    exhaustive Fin 2-3 + structured Fin 4-7 search misses. Two complementary
+    pure-Python passes: (1) backtracking + unit propagation (fast, reliable for
+    Fin 4); (2) WalkSAT local search (recovers the harder Fin 5-7 models the DFS
+    misses). Emits a table judged by decideFin!, so a wrong table is never
+    accepted."""
+    out = None
     try:
-        out = mf_find_false_model(eq1_text, eq2_text, sizes=sizes, per_size=per_size)
+        out = mf_find_false_model(eq1_text, eq2_text, sizes=(4, 5, 6), per_size=1.5)
+        if out is None:
+            out = mf_walk_find_model(eq1_text, eq2_text, sizes=(5, 6, 7), per_size=2.0)
     except Exception as e:
         trace(f"[modelfinder] error: {e!r}")
         return False
@@ -2221,7 +2310,7 @@ def main():
     # first; runs before the costly LLM fallback.
     if "try_model_finder" in globals():
         trace("[stage] backtracking model finder")
-        if try_model_finder(eq1, eq2, sizes=(4, 5, 6), per_size=2.5):
+        if try_model_finder(eq1, eq2):
             trace("[accepted] backtracking model finder")
             return
 
