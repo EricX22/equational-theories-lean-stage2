@@ -1964,6 +1964,114 @@ def try_completion_nonsingleton(problem, eq1_text, eq2_text, time_budget=20.0):
     return call_judge("true", make_true_code(body)).get("status") == "accepted"
 
 
+def mf_find_false_model(eq1_text, eq2_text, sizes=(4, 5, 6), per_size=2.5):
+    """Backtracking finite-model finder (pure Python, Mace4-style). Searches for
+    a magma on Fin n that satisfies Eq1 and violates Eq2 by unit-propagating the
+    ground instances of Eq1 over the partial op-table and branching on
+    undetermined cells. Returns (n, table_rows) or None. The emitted table is
+    judge-checkable via make_false_code/decideFin!, so a wrong table can never be
+    accepted. Pure Python — no z3/SMT (those are dev-time only)."""
+    import time as _t, itertools as _it
+    l1, r1 = eq1_text.split("=", 1)
+    l2, r2 = eq2_text.split("=", 1)
+    A1, B1 = kc_parse(l1), kc_parse(r1)
+    A2, B2 = kc_parse(l2), kc_parse(r2)
+    v1 = goal_vars(eq1_text)
+    v2 = goal_vars(eq2_text)
+    for n in sizes:
+        tbl = [None] * (n * n)
+        e1 = [dict(zip(v1, t)) for t in _it.product(range(n), repeat=len(v1))]
+        e2 = [dict(zip(v2, t)) for t in _it.product(range(n), repeat=len(v2))]
+
+        def ev2(t, env):
+            if t[0] == 'V':
+                return ('val', env[t[1]])
+            ra = ev2(t[2][0], env)
+            if ra[0] != 'val':
+                return ('none',)
+            rb = ev2(t[2][1], env)
+            if rb[0] != 'val':
+                return ('none',)
+            idx = ra[1] * n + rb[1]
+            v = tbl[idx]
+            return ('val', v) if v is not None else ('open', idx)
+
+        def propagate(trail):
+            changed = True
+            while changed:
+                changed = False
+                for env in e1:
+                    sl = ev2(A1, env)
+                    sr = ev2(B1, env)
+                    if sl[0] == 'val' and sr[0] == 'val':
+                        if sl[1] != sr[1]:
+                            return False
+                    elif sl[0] == 'val' and sr[0] == 'open':
+                        tbl[sr[1]] = sl[1]; trail.append(sr[1]); changed = True
+                    elif sr[0] == 'val' and sl[0] == 'open':
+                        tbl[sl[1]] = sr[1]; trail.append(sl[1]); changed = True
+            return True
+
+        def eq2_violated():
+            for env in e2:
+                sl = ev2(A2, env)
+                sr = ev2(B2, env)
+                if sl[0] == 'val' and sr[0] == 'val' and sl[1] != sr[1]:
+                    return True
+            return False
+
+        start = _t.time()
+
+        def dfs():
+            if _t.time() - start > per_size:
+                return None
+            trail = []
+            if not propagate(trail):
+                for i in trail:
+                    tbl[i] = None
+                return None
+            idx = -1
+            for i in range(n * n):
+                if tbl[i] is None:
+                    idx = i; break
+            if idx < 0:
+                if eq2_violated():
+                    return [tbl[i * n + j] for i in range(n) for j in range(n)]
+                for i in trail:
+                    tbl[i] = None
+                return None
+            for val in range(n):
+                tbl[idx] = val
+                r = dfs()
+                if r is not None:
+                    return r
+                tbl[idx] = None
+            for i in trail:
+                tbl[i] = None
+            return None
+
+        flat = dfs()
+        if flat is not None:
+            return n, [[flat[i * n + j] for j in range(n)] for i in range(n)]
+    return None
+
+
+def try_model_finder(eq1_text, eq2_text, sizes=(4, 5, 6), per_size=2.5):
+    """False-side stage: backtracking finite-model finder for the Fin 4-6
+    counterexamples that the exhaustive Fin 2-3 + structured Fin 4-7 search
+    misses (generic non-structured tables). Emits a table judged by decideFin!."""
+    try:
+        out = mf_find_false_model(eq1_text, eq2_text, sizes=sizes, per_size=per_size)
+    except Exception as e:
+        trace(f"[modelfinder] error: {e!r}")
+        return False
+    if not out:
+        return False
+    n, table = out
+    return call_judge("false", make_false_code(n, table)).get("status") == "accepted"
+
+
+
 
 
 # ── Main ─────────────────────────────────────────────────────────
@@ -2105,6 +2213,16 @@ def main():
         trace("[stage] completion non-singleton")
         if try_completion_nonsingleton(problem, eq1, eq2, time_budget=20.0):
             trace("[accepted] completion non-singleton")
+            return
+
+    # Stage 2.9: backtracking finite-model finder (false side).
+    # Catches generic Fin 4-6 counterexamples the structured search misses.
+    # Placed after the true-proof stages so true cases are mostly solved
+    # first; runs before the costly LLM fallback.
+    if "try_model_finder" in globals():
+        trace("[stage] backtracking model finder")
+        if try_model_finder(eq1, eq2, sizes=(4, 5, 6), per_size=2.5):
+            trace("[accepted] backtracking model finder")
             return
 
     # Stage 3: LLM fallback.
