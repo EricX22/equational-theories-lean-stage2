@@ -1,5 +1,6 @@
 """
 SAIR Equational Theories Stage 2 — minimal solver.
+(2026-06-10: added affine-model stage + domain-propagation finder portfolio.)
 
 Three stages, smallest viable implementation:
 
@@ -73,6 +74,11 @@ from itertools import product
 # avoid starting an LLM call when too little time is left.
 DEFAULT_BUDGET_SECONDS = 3600
 MIN_SECONDS_FOR_LLM = 350
+# Wall-clock budget for the domain-propagation model-finder portfolio
+# (Stage 2.9 first pass). Generous relative to the old 2s/size finders:
+# the solo budget is 3600s and the LLM is essentially unused, so spending
+# tens of seconds on the false side is nearly free.
+MF2_PORTFOLIO_BUDGET = 60.0
 # Non-singleton LLM proof fallback is disabled: it returns unusable
 # lemma_strategy output, has solved ~0 cases, and costs 20-340s each (one hard2
 # case burned 337s on a single call). The deterministic stages (completion +
@@ -1969,6 +1975,83 @@ def try_completion_nonsingleton(problem, eq1_text, eq2_text, time_budget=20.0):
     return call_judge("true", make_true_code(body)).get("status") == "accepted"
 
 
+# ── Affine model stage (af_ namespace) ──────────────────────────
+# op(x,y) = (a*x + b*y + c) mod n. Eq1 holds identically iff per-variable
+# coefficients and the constant term match mod n — checked SYMBOLICALLY in
+# O(eq size), so any modulus n is reachable (far past the search finders'
+# Fin 7-8 ceiling). The constant term is linear in c (multiplier m follows
+# m(l◇r) = a*m(l) + b*m(r) + 1), so c is solved, not enumerated.
+# Inspired by the ETP paper's "linear models" disproof family.
+
+
+def af_eval(t, a, b, n):
+    """Return (coeff dict var->int, c-multiplier) of term value mod n.
+    value = sum coeff_v * v + m * c  (mod n)."""
+    if t[0] == 'V':
+        return {t[1]: 1}, 0
+    cl, ml = af_eval(t[2][0], a, b, n)
+    cr, mr = af_eval(t[2][1], a, b, n)
+    co = {}
+    for v in set(cl) | set(cr):
+        co[v] = (a * cl.get(v, 0) + b * cr.get(v, 0)) % n
+    return co, (a * ml + b * mr + 1) % n
+
+
+def af_find(eq1_text, eq2_text, max_decide_cost=400_000, max_n=40, deadline=None):
+    """Search (n, a, b), solve for c. Returns (n, table) or None.
+    max_decide_cost bounds n^max(vars) so the judge's decideFin! stays fast;
+    max_n bounds the false-cert byte size."""
+    import math
+    k = max(len(goal_vars(eq1_text)), len(goal_vars(eq2_text)))
+    ns = [n for n in range(2, max_n + 1) if n ** k <= max_decide_cost]
+    l1, r1 = eq1_text.split("=", 1)
+    l2, r2 = eq2_text.split("=", 1)
+    L1, R1, L2, R2 = map(kc_parse, (l1, r1, l2, r2))
+    for n in ns:
+        if deadline is not None and time.time() > deadline:
+            return None
+        for a in range(n):
+            for b in range(n):
+                cL1, m1 = af_eval(L1, a, b, n)
+                cR1, n1 = af_eval(R1, a, b, n)
+                if any(cL1.get(v, 0) != cR1.get(v, 0) for v in set(cL1) | set(cR1)):
+                    continue
+                d1 = (m1 - n1) % n  # need c*d1 == 0 (mod n) for Eq1
+                if d1 == 0:
+                    cands = range(n)
+                else:
+                    cands = range(0, n, n // math.gcd(n, d1))
+                cL2, m2 = af_eval(L2, a, b, n)
+                cR2, n2 = af_eval(R2, a, b, n)
+                var_diff = any(cL2.get(v, 0) != cR2.get(v, 0) for v in set(cL2) | set(cR2))
+                d2 = (m2 - n2) % n
+                for c in cands:
+                    if var_diff or (c * d2) % n != 0:
+                        tbl = [[(a * i + b * j + c) % n for j in range(n)] for i in range(n)]
+                        return n, tbl
+    return None
+
+
+def try_affine_model(eq1_text, eq2_text):
+    """False-side stage: symbolic affine counterexample (any modulus).
+    Self-verified in Python before submission; judged by decideFin!, so a
+    wrong table can never be accepted."""
+    try:
+        out = af_find(eq1_text, eq2_text)
+    except Exception as e:
+        trace(f"[affine] error: {e!r}")
+        return False
+    if not out:
+        return False
+    n, table = out
+    v1, l1, r1 = parse_equation(eq1_text)
+    v2, l2, r2 = parse_equation(eq2_text)
+    op = lambda x, y, t=table: t[x][y]
+    if not (equation_holds(v1, l1, r1, n, op) and not equation_holds(v2, l2, r2, n, op)):
+        return False
+    return call_judge("false", make_false_code(n, table)).get("status") == "accepted"
+
+
 def mf_find_false_model(eq1_text, eq2_text, sizes=(4, 5, 6), per_size=2.5):
     """Backtracking finite-model finder (pure Python, Mace4-style). Searches for
     a magma on Fin n that satisfies Eq1 and violates Eq2 by unit-propagating the
@@ -2276,6 +2359,310 @@ def mf_directed_find_model(eq1_text, eq2_text, sizes=(4, 5, 6, 7), per_size=2.0)
     return None
 
 
+# ── Domain-propagation model finder (mf2_ namespace) ────────────
+# SEM/Mace4-style: per-cell bitmask domains; every Eq1 ground instance is
+# re-evaluated bottom-up with value SETS (union over arg combos — a sound
+# over-approximation, so an empty LHS∩RHS intersection is a conflict). Unit
+# rules assign/prune single open cells. MRV branching + least-number symmetry
+# breaking via the designated-elements rule (allowed values = domain∩D plus
+# ONE fresh representative, D = row/col/value of assigned cells + branch
+# cell's indices + directed-env constants). Quasigroup/Latin modes add
+# alldifferent row/col pruning — empirically most hard2/hard1 residual
+# counterexamples are (idempotent) quasigroups, where this search needs only
+# a handful of nodes even at Fin 8.
+
+
+def mf2_compile(t, env):
+    if t[0] == 'V':
+        return env[t[1]]
+    return ('c', mf2_compile(t[2][0], env), mf2_compile(t[2][1], env))
+
+
+class mf2_Finder:
+    def __init__(self, eq1, eq2, n):
+        import itertools as _it
+        self.n = n
+        self.eq1_text, self.eq2_text = eq1, eq2
+        l1, r1 = eq1.split("=", 1)
+        l2, r2 = eq2.split("=", 1)
+        A1, B1 = kc_parse(l1), kc_parse(r1)
+        self.A2s, self.B2s = kc_parse(l2), kc_parse(r2)
+        v1 = goal_vars(eq1)
+        self.insts = []
+        for vals in _it.product(range(n), repeat=len(v1)):
+            env = dict(zip(v1, vals))
+            self.insts.append((mf2_compile(A1, env), mf2_compile(B1, env), True))
+        self.neq_idx = None
+
+    def add_neq(self, env):
+        self.insts.append((mf2_compile(self.A2s, env), mf2_compile(self.B2s, env), False))
+        self.neq_idx = len(self.insts) - 1
+        self.pinned = 0
+        for v in env.values():
+            self.pinned |= 1 << v
+
+    def solve(self, deadline, qg=False, idem=False, rows=None, cols=None):
+        n = self.n
+        full = (1 << n) - 1
+        dom = [full] * (n * n)
+        self.adr = qg if rows is None else rows
+        self.adc = qg if cols is None else cols
+        self.qg = self.adr or self.adc
+        if idem:
+            for i in range(n):
+                dom[i * n + i] = 1 << i
+        watch = [set() for _ in range(n * n)]
+        sbit = [1 << v for v in range(n)]
+        popcount = getattr(int, "bit_count", None) or (lambda x: bin(x).count("1"))
+
+        def eval_sets(term, dom):
+            if isinstance(term, int):
+                return sbit[term], -1, ()
+            ml, _, tl = eval_sets(term[1], dom)
+            mr, _, tr = eval_sets(term[2], dom)
+            out = 0
+            unit = -1
+            a_vals = [a for a in range(n) if ml >> a & 1]
+            b_vals = [b for b in range(n) if mr >> b & 1]
+            cells = []
+            for a in a_vals:
+                base = a * n
+                for b in b_vals:
+                    c = base + b
+                    cells.append(c)
+                    out |= dom[c]
+            if len(cells) == 1 and popcount(dom[cells[0]]) > 1:
+                unit = cells[0]
+            return out, unit, tl + tr + tuple(cells)
+
+        def check_inst(i, dom, pending):
+            L, R, is_eq = self.insts[i]
+            mL, uL, tL = eval_sets(L, dom)
+            mR, uR, tR = eval_sets(R, dom)
+            # watches only grow: after backtrack domains widen, so an old
+            # dependency may become live again — never discard.
+            for c in set(tL) | set(tR):
+                watch[c].add(i)
+            if is_eq:
+                if (mL & mR) == 0:
+                    return False
+                if uR >= 0 and popcount(mL) == 1:
+                    pending.append((uR, mL))
+                if uL >= 0 and popcount(mR) == 1:
+                    pending.append((uL, mR))
+            else:
+                if popcount(mL) == 1 and mL == mR and uL < 0 and uR < 0:
+                    return False
+                if uR >= 0 and popcount(mL) == 1:
+                    pending.append((uR, dom[uR] & ~mL))
+                if uL >= 0 and popcount(mR) == 1:
+                    pending.append((uL, dom[uL] & ~mR))
+            return True
+
+        def qg_prune(cell, vmask, trail, queue):
+            r, c = cell // n, cell % n
+            others = []
+            if self.adr:
+                others += [r * n + jj for jj in range(n) if jj != c]
+            if self.adc:
+                others += [ii * n + c for ii in range(n) if ii != r]
+            for other in others:
+                od = dom[other]
+                if od & vmask:
+                    nd = od & ~vmask
+                    if nd == 0:
+                        return False
+                    trail.append((other, od))
+                    dom[other] = nd
+                    for j in watch[other]:
+                        queue.append(j)
+                    if nd & (nd - 1) == 0:
+                        if not qg_prune(other, nd, trail, queue):
+                            return False
+            return True
+
+        def propagate(dom, dirty, trail):
+            queue = list(dirty)
+            qi = 0
+            while qi < len(queue):
+                i = queue[qi]; qi += 1
+                pending = []
+                if not check_inst(i, dom, pending):
+                    return False
+                for cell, mask in pending:
+                    new = dom[cell] & mask
+                    if new == dom[cell]:
+                        continue
+                    if new == 0:
+                        return False
+                    trail.append((cell, dom[cell]))
+                    dom[cell] = new
+                    for j in watch[cell]:
+                        if j not in queue[qi:]:
+                            queue.append(j)
+                    if self.qg and new & (new - 1) == 0:
+                        if not qg_prune(cell, new, trail, queue):
+                            return False
+            return True
+
+        trail0 = []
+        ok0 = True
+        if self.qg and idem:
+            q0 = []
+            for i in range(n):
+                if not qg_prune(i * n + i, dom[i * n + i], trail0, q0):
+                    ok0 = False
+                    break
+        # initial propagation only does work if some domain is restricted
+        all_dirty = False
+        if idem or self.neq_idx is not None:
+            if not ok0 or not propagate(dom, range(len(self.insts)), trail0):
+                return None
+        else:
+            all_dirty = True
+
+        pinned = getattr(self, "pinned", 0)
+
+        def designated(dom):
+            D = pinned
+            for c in range(n * n):
+                d = dom[c]
+                if d and d & (d - 1) == 0:
+                    D |= d | (1 << (c // n)) | (1 << (c % n))
+            return D
+
+        def dfs(dom, depth):
+            if time.time() > deadline:
+                raise TimeoutError
+            best = -1; bestc = n + 1
+            for c in range(n * n):
+                pc = popcount(dom[c])
+                if 1 < pc < bestc:
+                    bestc = pc; best = c
+                    if pc == 2:
+                        break
+            if best < 0:
+                # fully assigned: concrete-verify Eq1 holds AND Eq2 fails
+                tbl = [[dom[i * n + j].bit_length() - 1 for j in range(n)] for i in range(n)]
+                op = lambda a, b: tbl[a][b]
+                v1, l1, r1 = parse_equation(self.eq1_text)
+                v2, l2, r2 = parse_equation(self.eq2_text)
+                if equation_holds(v1, l1, r1, n, op) and not equation_holds(v2, l2, r2, n, op):
+                    return tbl
+                return None
+            D = designated(dom) | (1 << (best // n)) | (1 << (best % n))
+            fresh = dom[best] & ~D
+            cand = dom[best] & D
+            if fresh:
+                cand |= fresh & (-fresh)  # one fresh representative (lowest)
+            for v in range(n):
+                if not (cand >> v & 1):
+                    continue
+                trail = [(best, dom[best])]
+                dom[best] = 1 << v
+                if all_dirty and depth == 0:
+                    q0 = list(range(len(self.insts)))
+                else:
+                    q0 = list(watch[best])
+                okq = True
+                if self.qg:
+                    okq = qg_prune(best, 1 << v, trail, q0)
+                if okq and propagate(dom, q0, trail):
+                    r = dfs(dom, depth + 1)
+                    if r is not None:
+                        return r
+                for cell, old in reversed(trail):
+                    dom[cell] = old
+            return None
+
+        try:
+            return dfs(dom, 0)
+        except TimeoutError:
+            return None
+
+
+# (mode, n, weight) — weights normalized against the per-problem budget.
+# Ordering: cheap idempotent-quasigroup probes and small general/directed
+# search first, Latin variants next, the expensive general Fin 6-7 last.
+mf2_SCHEDULE = [
+    ("idem", 4, 0.3), ("idem", 5, 0.5), ("idem", 6, 0.8),
+    ("directed", 4, 0.8),
+    ("general", 4, 0.8), ("general", 5, 1.5),
+    ("idem", 7, 1.2), ("idem", 8, 2.5),
+    ("qg", 4, 0.3), ("qg", 5, 0.8), ("qg", 6, 1.0),
+    ("rows", 4, 0.3), ("rows", 5, 0.8), ("rows", 6, 1.0),
+    ("cols", 4, 0.3), ("cols", 5, 0.8), ("cols", 6, 1.0),
+    ("general", 6, 2.5),
+    ("qg", 7, 1.2), ("rows", 7, 1.2), ("cols", 7, 1.2),
+    ("idem", 9, 2.0), ("qg", 8, 2.0),
+    ("general", 7, 3.0),
+    ("directed", 5, 2.0), ("directed", 6, 3.0),
+]
+
+mf2_MINABS = {("idem", 8): 2.2, ("idem", 9): 2.5, ("qg", 8): 2.2,
+              ("directed", 4): 1.0, ("general", 4): 1.0}
+
+
+def mf2_find_portfolio(eq1, eq2, budget_s):
+    """Weighted (mode, size) schedule over the domain-propagation finder.
+    Returns (n, table) or None. Skips (mode, n) cells whose ground-instance
+    count would be unmanageable in pure Python."""
+    start = time.time()
+    total_w = sum(w for _, _, w in mf2_SCHEDULE)
+    scale = budget_s / total_w
+    k1 = len(goal_vars(eq1))
+    v2 = goal_vars(eq2)
+
+    def left():
+        return budget_s - (time.time() - start)
+
+    for mode, n, w in mf2_SCHEDULE:
+        if left() <= 0.2:
+            return None
+        if n ** k1 > 40000:
+            continue
+        slot = min(max(w * scale, mf2_MINABS.get((mode, n), 0.3)), left())
+        if mode == "directed":
+            envs = []
+
+            def gen(prefix):
+                if len(prefix) == len(v2):
+                    envs.append(dict(zip(v2, prefix)))
+                    return
+                hi = (max(prefix) + 1) if prefix else 0
+                for v in range(min(hi, n - 1) + 1):
+                    gen(prefix + [v])
+
+            gen([])
+            per = max(0.3, slot / max(1, len(envs)))
+            t_end = time.time() + slot
+            for env in envs:
+                if time.time() > t_end or left() <= 0:
+                    break
+                f = mf2_Finder(eq1, eq2, n)
+                f.add_neq(env)
+                r = f.solve(min(time.time() + per, t_end))
+                if r is not None:
+                    trace(f"[mf2] directed Fin{n}")
+                    return n, r
+            continue
+        f = mf2_Finder(eq1, eq2, n)
+        kw = {}
+        if mode == "idem":
+            kw = dict(qg=True, idem=True)
+        elif mode == "qg":
+            kw = dict(qg=True)
+        elif mode == "rows":
+            kw = dict(rows=True, cols=False)
+        elif mode == "cols":
+            kw = dict(rows=False, cols=True)
+        r = f.solve(time.time() + slot, **kw)
+        if r is not None:
+            trace(f"[mf2] {mode} Fin{n}")
+            return n, r
+    return None
+
+
 def try_model_finder(eq1_text, eq2_text):
     """False-side stage: find a Fin counterexample (Eq1 holds, Eq2 fails) the
     exhaustive Fin 2-3 + structured Fin 4-7 search misses. Three complementary
@@ -2286,7 +2673,9 @@ def try_model_finder(eq1_text, eq2_text):
     table is never accepted."""
     out = None
     try:
-        out = mf_find_false_model(eq1_text, eq2_text, sizes=(4, 5, 6), per_size=1.5)
+        out = mf2_find_portfolio(eq1_text, eq2_text, budget_s=MF2_PORTFOLIO_BUDGET)
+        if out is None:
+            out = mf_find_false_model(eq1_text, eq2_text, sizes=(4, 5, 6), per_size=1.5)
         if out is None:
             out = mf_walk_find_model(eq1_text, eq2_text, sizes=(5, 6, 7), per_size=2.0)
         if out is None:
@@ -2297,6 +2686,13 @@ def try_model_finder(eq1_text, eq2_text):
     if not out:
         return False
     n, table = out
+    # Self-verify before submission (sound: decideFin! checks the same thing)
+    v1, l1, r1 = parse_equation(eq1_text)
+    v2, l2, r2 = parse_equation(eq2_text)
+    op = lambda a, b, t=table: t[a][b]
+    if not (equation_holds(v1, l1, r1, n, op) and not equation_holds(v2, l2, r2, n, op)):
+        trace("[modelfinder] candidate failed self-verification; dropped")
+        return False
     return call_judge("false", make_false_code(n, table)).get("status") == "accepted"
 
 
@@ -2338,6 +2734,15 @@ def main():
         trace(f"[solved-candidate] named false witness {name} Fin {n}")
         if call_judge("false", make_false_code(n, table)).get("status") == "accepted":
             trace(f"[accepted] named false witness {name}")
+            return
+
+    # Stage 1.3: symbolic affine models (a*x + b*y + c mod n).
+    # Microseconds per (n,a,b) cell; reaches moduli far past the search
+    # finders (e.g. Z13 with op=7x+7y). Runs early because it is cheap.
+    if "try_affine_model" in globals():
+        trace("[stage] affine model search")
+        if try_affine_model(eq1, eq2):
+            trace("[accepted] affine model")
             return
 
     # Stage 1.35: perturbed structured witnesses.
