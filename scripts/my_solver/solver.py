@@ -73,6 +73,11 @@ from itertools import product
 # avoid starting an LLM call when too little time is left.
 DEFAULT_BUDGET_SECONDS = 3600
 MIN_SECONDS_FOR_LLM = 350
+# Non-singleton LLM proof fallback is disabled: it returns unusable
+# lemma_strategy output, has solved ~0 cases, and costs 20-340s each (one hard2
+# case burned 337s on a single call). The deterministic stages (completion +
+# model finder) cover this residual. Flip to True to re-enable.
+ENABLE_NS_LLM_FALLBACK = False
 
 
 # ── Protocol ────────────────────────────────────────────────────
@@ -2331,6 +2336,13 @@ def main():
             return
 
         trace("[stop] hard singleton reached fallback; strategist failed")
+        return
+
+    # Fast-fail gate: the singleton path has already returned above, so only the
+    # non-singleton residual reaches here. The LLM proof fallback does not help it,
+    # so stop rather than burn a costly call.
+    if not ENABLE_NS_LLM_FALLBACK:
+        trace("[stop] non-singleton residual: skipping low-yield LLM fallback")
         return
 
     trace("[stage] LLM fallback")
