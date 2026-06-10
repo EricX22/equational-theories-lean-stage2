@@ -6,14 +6,14 @@ _Last updated: 2026-06-08. Single-file solver at `scripts/my_solver/solver.py` (
 
 | Problem set | Solved | Wrong | Solver version measured |
 |---|---|---|---|
-| normal (1000) | **96.9%** (969) | 0 | Phase 1+2 + LLM curb |
-| hard1 (69) | **78.3%** (54) | 0 | + model finder (DFS) |
-| hard2 (200) | **79.5%** (159) | 0 | + WalkSAT (latest engine) |
-| hard3 (400) | **89.8%** (359) | 0 | + model finder (DFS) |
+| normal (1000) | **97.2%** (972) | 0 | current engine |
+| hard1 (69) | **78.3%** (54) | 0 | current engine |
+| hard2 (200) | **79.5%** (159) | 0 | current engine |
+| hard3 (400) | **89.8%** (359) | 0 | current engine |
 
 **Zero wrong answers anywhere** — structural, not luck: every accepted output is checked by the Lean judge (proofs type-checked, counterexample tables run through `decideFin!`). The only failure mode is *missing* (gave up / certificate rejected), never *wrong*. The real metric is coverage.
 
-> Caveat: only hard2 has been re-run on the *current* engine (WalkSAT + fast-fail). normal/hard1/hard3 numbers predate WalkSAT and the LLM fast-fail, so they should tick up on a re-run (especially their false residual).
+> All four sets have now been measured on the current engine. The WalkSAT pass added +3 on normal (96.9%→97.2%, all false-side); hard1/hard2/hard3 were unchanged — their remaining false cases are the genuinely-hard Fin 6+ kind that WalkSAT also misses.
 
 ## 2. What's implemented — the stage pipeline
 
@@ -25,6 +25,7 @@ The solver tries cheap/deterministic stages first and only reaches the LLM as a 
 - One/two-cell perturbations of structured tables
 - Structured Fin 4-7 families
 - **[new] Stage 2.9 — backtracking finite-model finder**: unit-propagates Eq1 over the partial op-table, branches on undetermined cells (reliable for Fin 4); then a **WalkSAT / min-conflicts local search** for the harder Fin 5-7 models the DFS can't find. Placed *after* the true-proof stages so true cases mostly resolve first.
+- **[new] Stage 2.9c — Eq2-directed finder + duality**: third pass inside `try_model_finder`. Forces the Eq2 violation up front (posts `eval(Eq2.lhs)=u` as a ground constraint for each Eq2 assignment/target), then completes Eq1 by unit-propagation DFS under the **least-number heuristic** (introduce value k+1 only after k appears — cuts carrier-relabeling duplicates). Each size is also tried on the **dual** (operands swapped) and transposed back. On a standalone replay of the hard2 false set it added **+5 verified counterexamples** the DFS/WalkSAT passes miss — `hard2_0016/0181/0192` (Fin 6), `hard2_0068/0092` (Fin 5) — exactly the documented Fin 6+/awkward-Fin-5 class. Zero invalid tables. `hard2_0002` (z3-only Fin 5) still resists.
 
 **True side (prove Eq1 ⇒ Eq2 in Lean):**
 - Direct `h` instantiation; two-step `h` chain
@@ -45,7 +46,7 @@ The solver tries cheap/deterministic stages first and only reaches the LLM as a 
 
 | Set | Unsolved | gold-TRUE | gold-FALSE | Dominant gap |
 |---|---|---|---|---|
-| normal | 31 | 24 | 7 | true (hard non-singleton) |
+| normal | 28 | 24 | 4 | true (hard non-singleton) |
 | hard1 | 15 | 6 | 9 | mixed |
 | hard2 | 41 | 15 | 26 | false (hard Fin 6+/awkward) |
 | hard3 | 41 | 39 | 2 | true (hard non-singleton) |
@@ -69,6 +70,7 @@ The DFS finder gets Fin 4 reliably; WalkSAT recovered most Fin 5. What remains n
 - Backtracking model finder → hard1 50.7%→78.3% (+19).
 - WalkSAT local-search pass → hard2 70.5%→79.5% (model finder 33→51, +18 false solves).
 - runner.py robustness fixes.
+- Eq2-directed finder + duality (Stage 2.9c) → +5 verified hard2-false counterexamples beyond DFS/WalkSAT in a standalone replay (Fin 5 and Fin 6, the documented hard class), 0 invalid. Awaiting a full real-judge run to confirm net new solves over the complete pipeline.
 
 **Investigated, not shipped:**
 - **Phase 4 goal-directed search** (for the true residual). Decision-only search finds paths for ~part of the residual, but the *proof-carrying* version is low-yield in tractable form: a valid Lean proof needs the search to reach `goal_rhs` *exactly* (the decision prototype counted alpha-equivalent matches, which overcounted ~6/10), and the higher-coverage "fresh variable" config hits the documented rename cycle (a lemma var binding to a term containing itself). The safe config produced one verified-valid proof (hard3_0376) but missed most of the sampled residual. This is the genuine research frontier.

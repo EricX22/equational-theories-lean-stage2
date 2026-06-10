@@ -2144,18 +2144,153 @@ def mf_walk_find_model(eq1_text, eq2_text, sizes=(5, 6, 7), per_size=2.5,
     return None
 
 
+def _md_dual(t):
+    """Swap the operands of every product (term dual). If Eq1 ⇒ Eq2 is
+    false, so is the dual implication, and a model for the dual transposes
+    directly into a model for the original — a free second shot per size."""
+    if t[0] != 'F':
+        return t
+    return ('F', kc_OP, (_md_dual(t[2][1]), _md_dual(t[2][0])))
+
+
+def _md_directed_core(A1, B1, A2, B2, v1, v2, n, budget):
+    """Search Fin n for a magma satisfying Eq1 and violating Eq2 by *forcing the
+    violation first*: for each Eq2 assignment and target value u, post the ground
+    constraint eval(Eq2.lhs)=u, then complete Eq1 by unit propagation + DFS under
+    the least-number heuristic (only introduce value k+1 after k has appeared,
+    which cuts carrier-relabeling duplicates). Any completion that still leaves
+    some Eq2 instance violated is a witness. Returns a flat table or None.
+    Target constants are marked ('K', v). Pure Python — no z3/SMT."""
+    import time as _t, itertools as _it
+    e1 = [dict(zip(v1, t)) for t in _it.product(range(n), repeat=len(v1))]
+    e2 = [dict(zip(v2, t)) for t in _it.product(range(n), repeat=len(v2))]
+    start = _t.time()
+
+    def ev2(t, env, tbl):
+        if t[0] == 'V':
+            return ('val', env[t[1]])
+        if t[0] == 'K':
+            return ('val', t[1])
+        ra = ev2(t[2][0], env, tbl)
+        if ra[0] != 'val':
+            return ('none',)
+        rb = ev2(t[2][1], env, tbl)
+        if rb[0] != 'val':
+            return ('none',)
+        idx = ra[1] * n + rb[1]
+        v = tbl[idx]
+        return ('val', v) if v is not None else ('open', idx)
+
+    def propagate(tbl, cons, trail):
+        changed = True
+        while changed:
+            changed = False
+            for (L, R, env) in cons:
+                sl = ev2(L, env, tbl); sr = ev2(R, env, tbl)
+                if sl[0] == 'val' and sr[0] == 'val':
+                    if sl[1] != sr[1]:
+                        return False
+                elif sl[0] == 'val' and sr[0] == 'open':
+                    tbl[sr[1]] = sl[1]; trail.append(sr[1]); changed = True
+                elif sr[0] == 'val' and sl[0] == 'open':
+                    tbl[sl[1]] = sr[1]; trail.append(sl[1]); changed = True
+        return True
+
+    def eq2_violated(tbl):
+        for env in e2:
+            sl = ev2(A2, env, tbl); sr = ev2(B2, env, tbl)
+            if sl[0] == 'val' and sr[0] == 'val' and sl[1] != sr[1]:
+                return True
+        return False
+
+    base = [(A1, B1, env) for env in e1]
+
+    def solve_with_seed(seed):
+        tbl = [None] * (n * n)
+        cons = base + seed
+
+        def dfs():
+            if _t.time() - start > budget:
+                return None
+            trail = []
+            if not propagate(tbl, cons, trail):
+                for i in trail:
+                    tbl[i] = None
+                return None
+            cur_max = -1; idx = -1
+            for i in range(n * n):
+                v = tbl[i]
+                if v is None:
+                    if idx < 0:
+                        idx = i
+                elif v > cur_max:
+                    cur_max = v
+            if idx < 0:
+                if eq2_violated(tbl):
+                    return tbl[:]
+                for i in trail:
+                    tbl[i] = None
+                return None
+            hi = min(n - 1, cur_max + 1)  # least-number heuristic
+            for val in range(hi + 1):
+                tbl[idx] = val
+                r = dfs()
+                if r is not None:
+                    return r
+                tbl[idx] = None
+            for i in trail:
+                tbl[i] = None
+            return None
+
+        return dfs()
+
+    for env in e2:
+        for u in range(n):
+            if _t.time() - start > budget:
+                return None
+            r = solve_with_seed([(A2, ('K', u), env)])
+            if r is not None:
+                return r
+    return None
+
+
+def mf_directed_find_model(eq1_text, eq2_text, sizes=(4, 5, 6, 7), per_size=2.0):
+    """Eq2-directed model finder with a duality pass. Complements the DFS and
+    WalkSAT finders: by committing to the Eq2 violation up front it reaches the
+    awkward Fin 5 / Fin 6 counterexamples they miss. Each size is tried on the
+    problem and (transposed) on its dual. Returns (n, table_rows) or None; the
+    table is judge-checked by decideFin!, so a wrong one is never accepted."""
+    l1, r1 = eq1_text.split("=", 1)
+    l2, r2 = eq2_text.split("=", 1)
+    A1, B1 = kc_parse(l1), kc_parse(r1)
+    A2, B2 = kc_parse(l2), kc_parse(r2)
+    v1, v2 = goal_vars(eq1_text), goal_vars(eq2_text)
+    dA1, dB1, dA2, dB2 = _md_dual(A1), _md_dual(B1), _md_dual(A2), _md_dual(B2)
+    for n in sizes:
+        flat = _md_directed_core(A1, B1, A2, B2, v1, v2, n, per_size / 2.0)
+        if flat is not None:
+            return n, [[flat[i * n + j] for j in range(n)] for i in range(n)]
+        flat = _md_directed_core(dA1, dB1, dA2, dB2, v1, v2, n, per_size / 2.0)
+        if flat is not None:  # transpose the dual model back to the original
+            return n, [[flat[j * n + i] for j in range(n)] for i in range(n)]
+    return None
+
+
 def try_model_finder(eq1_text, eq2_text):
     """False-side stage: find a Fin counterexample (Eq1 holds, Eq2 fails) the
-    exhaustive Fin 2-3 + structured Fin 4-7 search misses. Two complementary
+    exhaustive Fin 2-3 + structured Fin 4-7 search misses. Three complementary
     pure-Python passes: (1) backtracking + unit propagation (fast, reliable for
-    Fin 4); (2) WalkSAT local search (recovers the harder Fin 5-7 models the DFS
-    misses). Emits a table judged by decideFin!, so a wrong table is never
-    accepted."""
+    Fin 4); (2) WalkSAT local search (recovers many Fin 5-7 models the DFS
+    misses); (3) Eq2-directed DFS + duality (reaches the awkward Fin 5 / Fin 6
+    models the first two miss). Emits a table judged by decideFin!, so a wrong
+    table is never accepted."""
     out = None
     try:
         out = mf_find_false_model(eq1_text, eq2_text, sizes=(4, 5, 6), per_size=1.5)
         if out is None:
             out = mf_walk_find_model(eq1_text, eq2_text, sizes=(5, 6, 7), per_size=2.0)
+        if out is None:
+            out = mf_directed_find_model(eq1_text, eq2_text, sizes=(4, 5, 6, 7), per_size=2.0)
     except Exception as e:
         trace(f"[modelfinder] error: {e!r}")
         return False
