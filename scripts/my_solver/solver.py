@@ -78,7 +78,12 @@ MIN_SECONDS_FOR_LLM = 350
 # (Stage 2.9 first pass). Generous relative to the old 2s/size finders:
 # the solo budget is 3600s and the LLM is essentially unused, so spending
 # tens of seconds on the false side is nearly free.
-MF2_PORTFOLIO_BUDGET = 60.0
+MF2_PORTFOLIO_BUDGET = 240.0  # was 60.0; per-problem cap is 3600s and the
+# false-side finder was the scarce resource. Funds the extended large-Fin
+# schedule tier below. Only spent on cases the true-proof stages did not close.
+SAT_FINDER_BUDGET = 120.0  # complete CDCL false-finder; runs only on
+# non-singleton cases the mf2 portfolio missed. Cracks the hard general Fin 6
+# residual; bounded so it can't run away on a genuinely-true (unsat) case.
 # Non-singleton LLM proof fallback is disabled: it returns unusable
 # lemma_strategy output, has solved ~0 cases, and costs 20-340s each (one hard2
 # case burned 337s on a single call). The deterministic stages (completion +
@@ -2597,10 +2602,28 @@ mf2_SCHEDULE = [
     ("idem", 9, 2.0), ("qg", 8, 2.0),
     ("general", 7, 3.0),
     ("directed", 5, 2.0), ("directed", 6, 3.0),
+    # Extended large-Fin tier (2026-06-12). The finder is schedule-exhaustion-
+    # bound, not clock-bound: on the genuinely-hard residual the Fin<=9 schedule
+    # completes in ~15s, so the spare per-problem budget (cap is 3600s) is only
+    # useful if it also searches BIGGER models. These cells are strictly
+    # additive — they run after everything above, so they can only add solves,
+    # never remove them, and every table is still verified by decideFin!.
+    ("rows", 8, 1.5), ("cols", 8, 1.5),
+    ("qg", 9, 2.5), ("rows", 9, 2.0), ("cols", 9, 2.0),
+    ("idem", 10, 3.0), ("qg", 10, 3.0),
+    ("idem", 11, 3.0), ("qg", 11, 3.0),
+    ("directed", 7, 3.0), ("general", 8, 3.0),
 ]
 
 mf2_MINABS = {("idem", 8): 2.2, ("idem", 9): 2.5, ("qg", 8): 2.2,
-              ("directed", 4): 1.0, ("general", 4): 1.0}
+              ("directed", 4): 1.0, ("general", 4): 1.0,
+              # Floors for the extended large-Fin tier so a big search space
+              # isn't abandoned after a fraction of a second when many cells
+              # share the budget.
+              ("qg", 9): 2.5, ("rows", 9): 2.0, ("cols", 9): 2.0,
+              ("idem", 10): 3.0, ("qg", 10): 3.0,
+              ("idem", 11): 3.0, ("qg", 11): 3.0,
+              ("directed", 7): 2.5, ("general", 8): 2.5}
 
 
 def mf2_find_portfolio(eq1, eq2, budget_s):
@@ -2697,6 +2720,441 @@ def try_model_finder(eq1_text, eq2_text):
 
 
 
+
+
+# ── SAT-based complete false-model finder (pure Python; no z3) ──────
+# Sound & complete finite-model search for the hard FALSE residual that the
+# heuristic mf2 portfolio misses: general (non-quasigroup, non-affine) magmas
+# on Fin 5-7 whose op-table is highly constrained. Encodes "Eq1 holds for ALL
+# variable assignments AND some assignment violates Eq2" as CNF — one-hot cell
+# variables plus definitional subterm-value clauses (leaf products collapse
+# straight onto cell vars) — and solves with an in-process CDCL (2-watched
+# literals, 1-UIP learning, VSIDS, phase saving, Luby restarts). Every model is
+# still self-verified here and judged by decideFin!, so a bad encoding can only
+# ever miss, never produce a wrong answer. Closes the Fin 6 general residual
+# (e.g. hard2_0093/0124/0125/0176, hard1_0009) the quasigroup modes can't reach.
+
+def _sat_luby(i):
+    k = 1
+    while True:
+        if i == (1 << k) - 1:
+            return 1 << (k - 1)
+        if (1 << (k - 1)) <= i < (1 << k) - 1:
+            return _sat_luby(i - (1 << (k - 1)) + 1)
+        k += 1
+
+
+class _SatCDCL:
+    def __init__(self, nvars):
+        self.n = nvars
+        self.clauses = []
+        self.watches = {}
+        for v in range(1, nvars + 1):
+            self.watches[v] = []
+            self.watches[-v] = []
+        self.assign = {}
+        self.level = {}
+        self.reason = {}
+        self.trail = []
+        self.qhead = 0
+        self.dl = 0
+        self.act = [0.0] * (nvars + 1)
+        self.inc = 1.0
+        self.ok = True
+        self.phase = {}
+
+    def add_clause(self, lits):
+        seen = set()
+        out = []
+        for l in lits:
+            if -l in seen:
+                return
+            if l not in seen:
+                seen.add(l)
+                out.append(l)
+        if not out:
+            self.ok = False
+            return
+        ci = len(self.clauses)
+        self.clauses.append(out)
+        if len(out) == 1:
+            if not self._enqueue(out[0], None):
+                self.ok = False
+        else:
+            self.watches[out[0]].append(ci)
+            self.watches[out[1]].append(ci)
+
+    def val(self, lit):
+        a = self.assign.get(abs(lit))
+        return None if a is None else (a == (lit > 0))
+
+    def _enqueue(self, lit, reason):
+        v = abs(lit)
+        want = lit > 0
+        a = self.assign.get(v)
+        if a is not None:
+            return a == want
+        self.assign[v] = want
+        self.level[v] = self.dl
+        self.reason[v] = reason
+        self.trail.append(lit)
+        return True
+
+    def _propagate(self):
+        while self.qhead < len(self.trail):
+            p = self.trail[self.qhead]
+            self.qhead += 1
+            fl = -p
+            wl = self.watches[fl]
+            self.watches[fl] = new = []
+            i = 0
+            conflict = None
+            while i < len(wl):
+                ci = wl[i]
+                i += 1
+                cl = self.clauses[ci]
+                if cl[0] == fl:
+                    cl[0], cl[1] = cl[1], cl[0]
+                if self.val(cl[0]) is True:
+                    new.append(ci)
+                    continue
+                rep = -1
+                for k in range(2, len(cl)):
+                    if self.val(cl[k]) is not False:
+                        rep = k
+                        break
+                if rep != -1:
+                    cl[1], cl[rep] = cl[rep], cl[1]
+                    self.watches[cl[1]].append(ci)
+                    continue
+                new.append(ci)
+                if self.val(cl[0]) is False:
+                    conflict = ci
+                    new.extend(wl[i:])
+                    break
+                else:
+                    self._enqueue(cl[0], ci)
+            if conflict is not None:
+                return conflict
+        return None
+
+    def _bump(self, v):
+        self.act[v] += self.inc
+        if self.act[v] > 1e100:
+            for i in range(1, self.n + 1):
+                self.act[i] *= 1e-100
+            self.inc *= 1e-100
+
+    def _analyze(self, conf):
+        learnt = [None]
+        seen = set()
+        counter = 0
+        idx = len(self.trail) - 1
+        ci = conf
+        p = None
+        while True:
+            cl = self.clauses[ci]
+            start = 0 if p is None else 1
+            for j in range(start, len(cl)):
+                q = cl[j]
+                v = abs(q)
+                if v in seen or self.level[v] == 0:
+                    continue
+                seen.add(v)
+                self._bump(v)
+                if self.level[v] >= self.dl:
+                    counter += 1
+                else:
+                    learnt.append(q)
+            while abs(self.trail[idx]) not in seen:
+                idx -= 1
+            p = self.trail[idx]
+            idx -= 1
+            seen.discard(abs(p))
+            counter -= 1
+            if counter == 0:
+                break
+            ci = self.reason[abs(p)]
+        learnt[0] = -p
+        if len(learnt) == 1:
+            return learnt, 0
+        mxi = 1
+        mx = self.level[abs(learnt[1])]
+        for i in range(2, len(learnt)):
+            if self.level[abs(learnt[i])] > mx:
+                mx = self.level[abs(learnt[i])]
+                mxi = i
+        learnt[1], learnt[mxi] = learnt[mxi], learnt[1]
+        return learnt, self.level[abs(learnt[1])]
+
+    def _backtrack(self, lvl):
+        while self.trail and self.level[abs(self.trail[-1])] > lvl:
+            lit = self.trail.pop()
+            v = abs(lit)
+            self.phase[v] = self.assign[v]
+            del self.assign[v]
+            del self.level[v]
+            self.reason.pop(v, None)
+        self.qhead = len(self.trail)
+        self.dl = lvl
+
+    def _pick(self):
+        best = -1
+        ba = -1.0
+        for v in range(1, self.n + 1):
+            if v not in self.assign and self.act[v] > ba:
+                ba = self.act[v]
+                best = v
+        return best if best != -1 else None
+
+    def solve(self, deadline=None):
+        import time as _t
+        if not self.ok:
+            return False
+        if self._propagate() is not None:
+            return False
+        confl = 0
+        lubi = 1
+        unit = 100
+        since = 0
+        while True:
+            c = self._propagate()
+            if c is not None:
+                confl += 1
+                since += 1
+                if self.dl == 0:
+                    return False
+                learnt, bl = self._analyze(c)
+                self._backtrack(bl)
+                ci = len(self.clauses)
+                self.clauses.append(learnt)
+                if len(learnt) == 1:
+                    self._enqueue(learnt[0], None)
+                else:
+                    self.watches[learnt[0]].append(ci)
+                    self.watches[learnt[1]].append(ci)
+                    self._enqueue(learnt[0], ci)
+                self.inc /= 0.95
+                if since >= unit * _sat_luby(lubi):
+                    lubi += 1
+                    since = 0
+                    self._backtrack(0)
+                if deadline and (confl & 1023) == 0 and _t.time() > deadline:
+                    return None
+            else:
+                v = self._pick()
+                if v is None:
+                    return True
+                self.dl += 1
+                lit = v if self.phase.get(v, False) else -v
+                self._enqueue(lit, None)
+
+    def model(self):
+        return {v: self.assign.get(v, False) for v in range(1, self.n + 1)}
+
+
+def sat_parse_tree(text):
+    vs = []
+    seen = set()
+    for v in re.findall(r"\b([a-z])\b", text):
+        if v not in seen:
+            seen.add(v)
+            vs.append(v)
+
+    def to(s):
+        s = s.strip()
+        while len(s) >= 2 and s[0] == "(" and s[-1] == ")":
+            d = 0
+            m = True
+            for i, c in enumerate(s):
+                d += c == "("
+                d -= c == ")"
+                if d == 0 and i < len(s) - 1:
+                    m = False
+                    break
+            if m:
+                s = s[1:-1].strip()
+            else:
+                break
+        d = 0
+        last = -1
+        for i, c in enumerate(s):
+            d += c == "("
+            d -= c == ")"
+            if (c == "◇" or c == "*") and d == 0:
+                last = i
+        if last >= 0:
+            return ("op", to(s[:last]), to(s[last + 1:]))
+        return ("var", s)
+
+    l, r = text.split("=", 1)
+    return vs, to(l), to(r)
+
+
+class _SatEnc:
+    def __init__(self, n):
+        self.n = n
+        self.nv = n * n * n
+        self.clauses = []
+
+    def V(self, a, b, k):
+        return 1 + ((a * self.n + b) * self.n + k)
+
+    def alloc(self):
+        self.nv += 1
+        return self.nv
+
+    def add(self, c):
+        self.clauses.append(c)
+
+    def exactly_one(self, lits):
+        self.add(list(lits))
+        for i in range(len(lits)):
+            for j in range(i + 1, len(lits)):
+                self.add([-lits[i], -lits[j]])
+
+    def cells(self):
+        n = self.n
+        for a in range(n):
+            for b in range(n):
+                self.exactly_one([self.V(a, b, k) for k in range(n)])
+
+    def litof(self, handle, k):
+        if handle[0] == "const":
+            return True if k == handle[1] else False
+        return handle[1][k]
+
+    def value(self, node, g):
+        n = self.n
+        if node[0] == "var":
+            return ("const", g[node[1]])
+        HL = self.value(node[1], g)
+        HR = self.value(node[2], g)
+        if HL[0] == "const" and HR[0] == "const":
+            i, j = HL[1], HR[1]
+            return ("lits", [self.V(i, j, k) for k in range(n)])
+        T = [self.alloc() for _ in range(n)]
+        self.exactly_one(T)
+        for i in range(n):
+            li = self.litof(HL, i)
+            if li is False:
+                continue
+            for j in range(n):
+                lj = self.litof(HR, j)
+                if lj is False:
+                    continue
+                for k in range(n):
+                    cl = []
+                    if li is not True:
+                        cl.append(-li)
+                    if lj is not True:
+                        cl.append(-lj)
+                    cl.append(-self.V(i, j, k))
+                    cl.append(T[k])
+                    self.add(cl)
+        return ("lits", T)
+
+    def eq_force(self, A, B):
+        for k in range(self.n):
+            la = self.litof(A, k)
+            lb = self.litof(B, k)
+            if la is True:
+                if lb is True:
+                    continue
+                if lb is False:
+                    self.add([])
+                else:
+                    self.add([lb])
+            elif la is False:
+                if lb is True:
+                    self.add([])
+                elif lb is False:
+                    continue
+                else:
+                    self.add([-lb])
+            else:
+                if lb is True:
+                    self.add([la])
+                elif lb is False:
+                    self.add([-la])
+                else:
+                    self.add([-la, lb])
+                    self.add([la, -lb])
+
+
+def sat_find_model(eq1_text, eq2_text, n, deadline):
+    v1, l1, r1 = sat_parse_tree(eq1_text)
+    v2, l2, r2 = sat_parse_tree(eq2_text)
+    E = _SatEnc(n)
+    E.cells()
+    for g in product(range(n), repeat=len(v1)):
+        env = dict(zip(v1, g))
+        A = E.value(l1, env)
+        B = E.value(r1, env)
+        E.eq_force(A, B)
+    zs = []
+    for g in product(range(n), repeat=len(v2)):
+        env = dict(zip(v2, g))
+        A = E.value(l2, env)
+        B = E.value(r2, env)
+        z = E.alloc()
+        zs.append(z)
+        for k in range(n):
+            la = E.litof(A, k)
+            lb = E.litof(B, k)
+            cl = [-z]
+            if la is True:
+                pass
+            elif la is False:
+                continue
+            else:
+                cl.append(-la)
+            if lb is True:
+                pass
+            elif lb is False:
+                continue
+            else:
+                cl.append(-lb)
+            E.add(cl)
+    E.add(zs)
+    s = _SatCDCL(E.nv)
+    for c in E.clauses:
+        s.add_clause(c)
+    if s.solve(deadline=deadline) is not True:
+        return None
+    m = s.model()
+    return [[next(k for k in range(n) if m[E.V(a, b, k)]) for b in range(n)]
+            for a in range(n)]
+
+
+def try_sat_finder(eq1_text, eq2_text, sizes=(5, 6, 7), budget=SAT_FINDER_BUDGET):
+    """Last-resort false-side stage: complete CDCL model search for the hard
+    general residual the heuristic finders miss. Self-verifies before judging."""
+    import time as _t
+    out = None
+    try:
+        per = budget / max(1, len(sizes))
+        for n in sizes:
+            if n ** 3 * (n ** len(goal_vars(eq1_text))) > 4_000_000:
+                continue  # encoding too large for pure Python at this size
+            tbl = sat_find_model(eq1_text, eq2_text, n, _t.time() + per)
+            if tbl is not None:
+                out = (n, tbl)
+                break
+    except Exception as e:
+        trace(f"[satfinder] error: {e!r}")
+        return False
+    if not out:
+        return False
+    n, table = out
+    v1, l1, r1 = parse_equation(eq1_text)
+    v2, l2, r2 = parse_equation(eq2_text)
+    op = lambda a, b, t=table: t[a][b]
+    if not (equation_holds(v1, l1, r1, n, op) and not equation_holds(v2, l2, r2, n, op)):
+        trace("[satfinder] candidate failed self-verification; dropped")
+        return False
+    trace(f"[satfinder] Fin{n} candidate")
+    return call_judge("false", make_false_code(n, table)).get("status") == "accepted"
 
 
 # ── Main ─────────────────────────────────────────────────────────
@@ -2857,6 +3315,16 @@ def main():
         trace("[stage] backtracking model finder")
         if try_model_finder(eq1, eq2):
             trace("[accepted] backtracking model finder")
+            return
+
+    # Stage 2.95: SAT-based complete false-model finder. Catches the hard
+    # general (non-quasigroup) Fin 5-7 counterexamples the heuristic portfolio
+    # misses. Gated to non-singleton cases (a singleton hint means TRUE, so no
+    # counterexample exists) and bounded so it can't run away on a true case.
+    if not singleton and "sat_find_model" in globals():
+        trace("[stage] SAT false-model finder")
+        if try_sat_finder(eq1, eq2, sizes=(5, 6, 7), budget=SAT_FINDER_BUDGET):
+            trace("[accepted] SAT false-model finder")
             return
 
     # Stage 3: LLM fallback.
