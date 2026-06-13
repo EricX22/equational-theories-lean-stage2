@@ -1171,11 +1171,16 @@ def forces_singleton(eq1_text):
 
 
 def make_false_code(n, table):
+    # set_option maxRecDepth: decideFin! recurses over all n^vars ground
+    # instances; the Lean default (512) is exceeded by Fin 6+ tables, which
+    # silently rejected every larger counterexample ("maximum recursion depth
+    # has been reached"). Bumping it unblocks the entire Fin 6-9 false side.
     return (
         "import JudgeProblem\n"
         "import JudgeDecide.DecideBang\n"
         "import JudgeFinOp.MemoFinOp\n"
         "open MemoFinOp\n\n"
+        "set_option maxRecDepth 100000\n\n"
         "def submission : Goal := by\n"
         f'  let m : Magma (Fin {n}) := {{ op := finOpTable "{json.dumps(table)}" }}\n'
         f"  refine \u27e8Fin {n}, m, ?_\u27e9\n"

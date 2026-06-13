@@ -1,0 +1,3440 @@
+[
+  {
+    "id": "hard1_0003",
+    "eq1_id": 286,
+    "eq2_id": 1238,
+    "elapsed_seconds": 7.8,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (((((((h (((y ◇ x) ◇ x) ◇ x) (x ◇ x) x)).trans ((congrArg (fun s => s ◇ (((y ◇ x) ◇ x) ◇ x)) ((h x x (x ◇ x))).symm)))).symm).trans (((((h x (x ◇ x) ((y ◇ x) ◇ x))).trans ((congrArg (fun s => s ◇ x) ((h ((y ◇ x) ◇ x) x (x ◇ x))).symm)))).symm))).symm\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (((((((h (((y ◇ x) ◇ x) ◇ x) (x ◇ x) x)).trans ((congrArg (fun s => s ◇ (((y ◇ x) ◇ x) ◇ x)) ((h x x (x ◇ x))).symm)))).symm).trans (((((h x (x ◇ x) ((y ◇ x) ◇ x))).trans ((congrArg (fun s => s ◇ x) ((h ((y ◇ x) ◇ x) x (x ◇ x))).symm)))).symm))).symm\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 7.55
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0003 eq1=286 eq2=1238\n[eq1] x = ((y ◇ y) ◇ z) ◇ x\n[eq2] x = x ◇ (((y ◇ x) ◇ x) ◇ x)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0004",
+    "eq1_id": 4634,
+    "eq2_id": 4340,
+    "elapsed_seconds": 7.53,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 0, 0], [2, 0, 0], [0, 0, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 0, 0], [2, 0, 0], [0, 0, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 7.45
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0004 eq1=4634 eq2=4340\n[eq1] (x ◇ y) ◇ x = (x ◇ z) ◇ w\n[eq2] x ◇ (y ◇ y) = x ◇ (z ◇ y)\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 3\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0006",
+    "eq1_id": 363,
+    "eq2_id": 373,
+    "elapsed_seconds": 8.93,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 2) := { op := finOpTable \"[[0, 0], [1, 1]]\" }\n  refine ⟨Fin 2, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 2) := { op := finOpTable \"[[0, 0], [1, 1]]\" }\n  refine ⟨Fin 2, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 8.83
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0006 eq1=363 eq2=373\n[eq1] x ◇ x = (x ◇ y) ◇ z\n[eq2] x ◇ x = (y ◇ z) ◇ w\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 2\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0007",
+    "eq1_id": 2343,
+    "eq2_id": 3446,
+    "elapsed_seconds": 5.16,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  exact ((((((((h y (x ◇ (x ◇ (x ◇ x))) x)).trans ((congrArg (fun s => s ◇ y) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ ((x ◇ (x ◇ (x ◇ x))) ◇ x)) x x)).symm)))).trans ((((congrArg (fun s => s ◇ y) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ x) x x)).symm)).trans ((congrArg (fun s => s ◇ y) ((h x x x)).symm)))))).symm).trans ((((((((((((h (w ◇ (w ◇ y)) (x ◇ (x ◇ (x ◇ x))) z)).trans ((congrArg (fun s => s ◇ (w ◇ (w ◇ y))) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ ((x ◇ (x ◇ (x ◇ x))) ◇ z)) x x)).symm)))).trans ((((congrArg (fun s => s ◇ (w ◇ (w ◇ y))) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ z) x x)).symm)).trans ((congrArg (fun s => s ◇ (w ◇ (w ◇ y))) ((h z x x)).symm)))))).symm).trans (((((((h (w ◇ y) (x ◇ (x ◇ (x ◇ x))) w)).trans ((congrArg (fun s => s ◇ (w ◇ y)) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ ((x ◇ (x ◇ (x ◇ x))) ◇ w)) x x)).symm)))).trans ((((congrArg (fun s => s ◇ (w ◇ y)) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ w) x x)).symm)).trans ((congrArg (fun s => s ◇ (w ◇ y)) ((h w x x)).symm)))))).symm))).trans (((((((h y (x ◇ (x ◇ (x ◇ x))) w)).trans ((congrArg (fun s => s ◇ y) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ ((x ◇ (x ◇ (x ◇ x))) ◇ w)) x x)).symm)))).trans ((((congrArg (fun s => s ◇ y) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ w) x x)).symm)).trans ((congrArg (fun s => s ◇ y) ((h w x x)).symm)))))).symm))).symm))\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  exact ((((((((h y (x ◇ (x ◇ (x ◇ x))) x)).trans ((congrArg (fun s => s ◇ y) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ ((x ◇ (x ◇ (x ◇ x))) ◇ x)) x x)).symm)))).trans ((((congrArg (fun s => s ◇ y) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ x) x x)).symm)).trans ((congrArg (fun s => s ◇ y) ((h x x x)).symm)))))).symm).trans ((((((((((((h (w ◇ (w ◇ y)) (x ◇ (x ◇ (x ◇ x))) z)).trans ((congrArg (fun s => s ◇ (w ◇ (w ◇ y))) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ ((x ◇ (x ◇ (x ◇ x))) ◇ z)) x x)).symm)))).trans ((((congrArg (fun s => s ◇ (w ◇ (w ◇ y))) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ z) x x)).symm)).trans ((congrArg (fun s => s ◇ (w ◇ (w ◇ y))) ((h z x x)).symm)))))).symm).trans (((((((h (w ◇ y) (x ◇ (x ◇ (x ◇ x))) w)).trans ((congrArg (fun s => s ◇ (w ◇ y)) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ ((x ◇ (x ◇ (x ◇ x))) ◇ w)) x x)).symm)))).trans ((((congrArg (fun s => s ◇ (w ◇ y)) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ w) x x)).symm)).trans ((congrArg (fun s => s ◇ (w ◇ y)) ((h w x x)).symm)))))).symm))).trans (((((((h y (x ◇ (x ◇ (x ◇ x))) w)).trans ((congrArg (fun s => s ◇ y) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ ((x ◇ (x ◇ (x ◇ x))) ◇ w)) x x)).symm)))).trans ((((congrArg (fun s => s ◇ y) ((h ((x ◇ (x ◇ (x ◇ x))) ◇ w) x x)).symm)).trans ((congrArg (fun s => s ◇ y) ((h w x x)).symm)))))).symm))).symm))\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 4.9
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0007 eq1=2343 eq2=3446\n[eq1] x = (y ◇ (y ◇ (y ◇ z))) ◇ x\n[eq2] x ◇ y = z ◇ (w ◇ (w ◇ y))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0010",
+    "eq1_id": 4609,
+    "eq2_id": 4341,
+    "elapsed_seconds": 9.31,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 0, 0], [1, 2, 0], [0, 0, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 0, 0], [1, 2, 0], [0, 0, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 9.21
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0010 eq1=4609 eq2=4341\n[eq1] (x ◇ x) ◇ y = (y ◇ y) ◇ z\n[eq2] x ◇ (y ◇ y) = x ◇ (z ◇ z)\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 3\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0011",
+    "eq1_id": 1880,
+    "eq2_id": 2031,
+    "elapsed_seconds": 7.39,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 2) := { op := finOpTable \"[[1, 1], [0, 0]]\" }\n  refine ⟨Fin 2, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 2) := { op := finOpTable \"[[1, 1], [0, 0]]\" }\n  refine ⟨Fin 2, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 7.31
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0011 eq1=1880 eq2=2031\n[eq1] x = (x ◇ (y ◇ z)) ◇ (w ◇ y)\n[eq2] x = (y ◇ (z ◇ w)) ◇ (u ◇ z)\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 2\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0012",
+    "eq1_id": 4653,
+    "eq2_id": 4270,
+    "elapsed_seconds": 6.32,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 0, 0], [2, 2, 0], [0, 0, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 0, 0], [2, 2, 0], [0, 0, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 6.21
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0012 eq1=4653 eq2=4270\n[eq1] (x ◇ y) ◇ x = (z ◇ w) ◇ u\n[eq2] x ◇ (x ◇ x) = x ◇ (y ◇ y)\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 3\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0018",
+    "eq1_id": 2105,
+    "eq2_id": 1229,
+    "elapsed_seconds": 7.21,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact ((((congrArg (fun s => x ◇ s) (congrArg (fun s => s ◇ y) (((((h ((x ◇ y) ◇ x) (((x ◇ y) ◇ x) ◇ ((x ◇ y) ◇ x)) ((x ◇ y) ◇ x))).trans ((congrArg (fun s => s ◇ (((x ◇ y) ◇ x) ◇ ((x ◇ y) ◇ x))) ((h ((x ◇ y) ◇ x) ((x ◇ y) ◇ x) ((x ◇ y) ◇ x))).symm)))).trans (((h y x ((x ◇ y) ◇ x))).symm))))).trans (((((h x (x ◇ x) y)).trans ((congrArg (fun s => s ◇ (y ◇ y)) ((h x x x)).symm)))).symm))).symm\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact ((((congrArg (fun s => x ◇ s) (congrArg (fun s => s ◇ y) (((((h ((x ◇ y) ◇ x) (((x ◇ y) ◇ x) ◇ ((x ◇ y) ◇ x)) ((x ◇ y) ◇ x))).trans ((congrArg (fun s => s ◇ (((x ◇ y) ◇ x) ◇ ((x ◇ y) ◇ x))) ((h ((x ◇ y) ◇ x) ((x ◇ y) ◇ x) ((x ◇ y) ◇ x))).symm)))).trans (((h y x ((x ◇ y) ◇ x))).symm))))).trans (((((h x (x ◇ x) y)).trans ((congrArg (fun s => s ◇ (y ◇ y)) ((h x x x)).symm)))).symm))).symm\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 6.93
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0018 eq1=2105 eq2=1229\n[eq1] x = ((y ◇ x) ◇ y) ◇ (z ◇ z)\n[eq2] x = x ◇ (((x ◇ y) ◇ x) ◇ y)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0019",
+    "eq1_id": 3926,
+    "eq2_id": 3920,
+    "elapsed_seconds": 7.83,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 0, 0], [1, 1, 1], [0, 1, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 0, 0], [1, 1, 1], [0, 1, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 7.71
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0019 eq1=3926 eq2=3920\n[eq1] x ◇ y = (x ◇ (y ◇ x)) ◇ z\n[eq2] x ◇ y = (x ◇ (x ◇ z)) ◇ x\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 3\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0020",
+    "eq1_id": 4508,
+    "eq2_id": 4527,
+    "elapsed_seconds": 7.49,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 2) := { op := finOpTable \"[[0, 1], [0, 1]]\" }\n  refine ⟨Fin 2, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 2) := { op := finOpTable \"[[0, 1], [0, 1]]\" }\n  refine ⟨Fin 2, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 7.44
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0020 eq1=4508 eq2=4527\n[eq1] x ◇ (y ◇ z) = (x ◇ x) ◇ z\n[eq2] x ◇ (y ◇ z) = (y ◇ y) ◇ x\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 2\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0022",
+    "eq1_id": 3961,
+    "eq2_id": 3722,
+    "elapsed_seconds": 8.69,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 2, 0], [2, 1, 1], [0, 1, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 2, 0], [2, 1, 1], [0, 1, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 8.61
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0022 eq1=3961 eq2=3722\n[eq1] x ◇ y = (y ◇ (y ◇ x)) ◇ x\n[eq2] x ◇ y = (x ◇ y) ◇ (x ◇ y)\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 3\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0026",
+    "eq1_id": 2890,
+    "eq2_id": 3261,
+    "elapsed_seconds": 8.99,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 0, 2], [1, 1, 1], [0, 0, 2]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 0, 2], [1, 1, 1], [0, 0, 2]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 8.87
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0026 eq1=2890 eq2=3261\n[eq1] x = ((x ◇ (y ◇ z)) ◇ z) ◇ x\n[eq2] x ◇ x = x ◇ (y ◇ (y ◇ x))\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 3\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0027",
+    "eq1_id": 54,
+    "eq2_id": 2695,
+    "elapsed_seconds": 5.74,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w u\n  exact (((((((((h ((x ◇ y) ◇ (z ◇ w)) u (u ◇ x))).trans ((congrArg (fun s => ((x ◇ y) ◇ (z ◇ w)) ◇ s) ((h u ((x ◇ y) ◇ (z ◇ w)) x)).symm)))).symm).trans (((((h (x ◇ y) (z ◇ w) ((z ◇ w) ◇ x))).trans ((congrArg (fun s => (x ◇ y) ◇ s) ((h (z ◇ w) (x ◇ y) x)).symm)))).symm))).trans (((((h x y (y ◇ x))).trans ((congrArg (fun s => x ◇ s) ((h y x x)).symm)))).symm))).symm\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w u\n  exact (((((((((h ((x ◇ y) ◇ (z ◇ w)) u (u ◇ x))).trans ((congrArg (fun s => ((x ◇ y) ◇ (z ◇ w)) ◇ s) ((h u ((x ◇ y) ◇ (z ◇ w)) x)).symm)))).symm).trans (((((h (x ◇ y) (z ◇ w) ((z ◇ w) ◇ x))).trans ((congrArg (fun s => (x ◇ y) ◇ s) ((h (z ◇ w) (x ◇ y) x)).symm)))).symm))).trans (((((h x y (y ◇ x))).trans ((congrArg (fun s => x ◇ s) ((h y x x)).symm)))).symm))).symm\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 5.43
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0027 eq1=54 eq2=2695\n[eq1] x = x ◇ (y ◇ (x ◇ z))\n[eq2] x = ((x ◇ y) ◇ (z ◇ w)) ◇ u\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0029",
+    "eq1_id": 1738,
+    "eq2_id": 3972,
+    "elapsed_seconds": 7.7,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 2, 1], [0, 0, 1], [0, 2, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 2, 1], [0, 0, 1], [0, 2, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 7.6
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0029 eq1=1738 eq2=3972\n[eq1] x = (y ◇ y) ◇ ((z ◇ x) ◇ x)\n[eq2] x ◇ y = (y ◇ (z ◇ x)) ◇ y\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 3\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0035",
+    "eq1_id": 868,
+    "eq2_id": 2243,
+    "elapsed_seconds": 6.55,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact ((((congrArg (fun s => s ◇ x) ((((h x x (y ◇ x) (x ◇ x) (x ◇ x))).trans ((congrArg (fun s => x ◇ s) ((h (x ◇ (y ◇ x)) x x x x)).symm)))).symm)).trans (((((((h x x ((x ◇ x) ◇ (x ◇ x)) (x ◇ x) (x ◇ x))).trans ((congrArg (fun s => x ◇ s) ((h (x ◇ ((x ◇ x) ◇ (x ◇ x))) x x x x)).symm)))).trans ((congrArg (fun s => x ◇ s) ((h x x x x x)).symm)))).symm))).symm\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact ((((congrArg (fun s => s ◇ x) ((((h x x (y ◇ x) (x ◇ x) (x ◇ x))).trans ((congrArg (fun s => x ◇ s) ((h (x ◇ (y ◇ x)) x x x x)).symm)))).symm)).trans (((((((h x x ((x ◇ x) ◇ (x ◇ x)) (x ◇ x) (x ◇ x))).trans ((congrArg (fun s => x ◇ s) ((h (x ◇ ((x ◇ x) ◇ (x ◇ x))) x x x x)).symm)))).trans ((congrArg (fun s => x ◇ s) ((h x x x x x)).symm)))).symm))).symm\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 6.07
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0035 eq1=868 eq2=2243\n[eq1] x = x ◇ ((y ◇ z) ◇ (w ◇ u))\n[eq2] x = (x ◇ (x ◇ (y ◇ x))) ◇ x\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0038",
+    "eq1_id": 3919,
+    "eq2_id": 3330,
+    "elapsed_seconds": 10.04,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 0, 0], [1, 1, 1], [0, 1, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 0, 0], [1, 1, 1], [0, 1, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 9.92
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0038 eq1=3919 eq2=3330\n[eq1] x ◇ y = (x ◇ (x ◇ y)) ◇ z\n[eq2] x ◇ y = x ◇ (z ◇ (y ◇ y))\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 3\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0040",
+    "eq1_id": 1070,
+    "eq2_id": 3950,
+    "elapsed_seconds": 5.04,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w u\n  exact ((((((((((h x y ((x ◇ (x ◇ x)) ◇ x) ((x ◇ (x ◇ x)) ◇ x))).trans ((congrArg (fun s => x ◇ s) ((h (y ◇ (((x ◇ (x ◇ x)) ◇ x) ◇ ((x ◇ (x ◇ x)) ◇ x))) x x x)).symm)))).trans ((congrArg (fun s => x ◇ s) (congrArg (fun s => y ◇ s) ((h ((x ◇ (x ◇ x)) ◇ x) x x x)).symm))))).trans ((congrArg (fun s => x ◇ s) ((h y x x x)).symm)))).symm).trans (((((congrArg (fun s => s ◇ u) ((((((h x z w ((x ◇ (x ◇ x)) ◇ x))).trans ((congrArg (fun s => x ◇ s) ((h (z ◇ (w ◇ ((x ◇ (x ◇ x)) ◇ x))) x x x)).symm)))).trans ((congrArg (fun s => x ◇ s) (congrArg (fun s => z ◇ s) ((h w x x x)).symm))))).symm)).trans (((((((((h x u ((x ◇ (x ◇ x)) ◇ x) ((x ◇ (x ◇ x)) ◇ x))).trans ((congrArg (fun s => x ◇ s) ((h (u ◇ (((x ◇ (x ◇ x)) ◇ x) ◇ ((x ◇ (x ◇ x)) ◇ x))) x x x)).symm)))).trans ((congrArg (fun s => x ◇ s) (congrArg (fun s => u ◇ s) ((h ((x ◇ (x ◇ x)) ◇ x) x x x)).symm))))).trans ((congrArg (fun s => x ◇ s) ((h u x x x)).symm)))).symm))).symm))\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w u\n  exact ((((((((((h x y ((x ◇ (x ◇ x)) ◇ x) ((x ◇ (x ◇ x)) ◇ x))).trans ((congrArg (fun s => x ◇ s) ((h (y ◇ (((x ◇ (x ◇ x)) ◇ x) ◇ ((x ◇ (x ◇ x)) ◇ x))) x x x)).symm)))).trans ((congrArg (fun s => x ◇ s) (congrArg (fun s => y ◇ s) ((h ((x ◇ (x ◇ x)) ◇ x) x x x)).symm))))).trans ((congrArg (fun s => x ◇ s) ((h y x x x)).symm)))).symm).trans (((((congrArg (fun s => s ◇ u) ((((((h x z w ((x ◇ (x ◇ x)) ◇ x))).trans ((congrArg (fun s => x ◇ s) ((h (z ◇ (w ◇ ((x ◇ (x ◇ x)) ◇ x))) x x x)).symm)))).trans ((congrArg (fun s => x ◇ s) (congrArg (fun s => z ◇ s) ((h w x x x)).symm))))).symm)).trans (((((((((h x u ((x ◇ (x ◇ x)) ◇ x) ((x ◇ (x ◇ x)) ◇ x))).trans ((congrArg (fun s => x ◇ s) ((h (u ◇ (((x ◇ (x ◇ x)) ◇ x) ◇ ((x ◇ (x ◇ x)) ◇ x))) x x x)).symm)))).trans ((congrArg (fun s => x ◇ s) (congrArg (fun s => u ◇ s) ((h ((x ◇ (x ◇ x)) ◇ x) x x x)).symm))))).trans ((congrArg (fun s => x ◇ s) ((h u x x x)).symm)))).symm))).symm))\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 4.67
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0040 eq1=1070 eq2=3950\n[eq1] x = x ◇ ((y ◇ (z ◇ w)) ◇ w)\n[eq2] x ◇ y = (x ◇ (z ◇ w)) ◇ u\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0041",
+    "eq1_id": 3118,
+    "eq2_id": 3441,
+    "elapsed_seconds": 5.39,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  exact ((((((h y (y ◇ x) x)).trans ((congrArg (fun s => s ◇ y) ((h x y (y ◇ x))).symm)))).symm).trans ((((((((((h (w ◇ (z ◇ y)) ((w ◇ (z ◇ y)) ◇ z) z)).trans ((congrArg (fun s => s ◇ (w ◇ (z ◇ y))) ((h z (w ◇ (z ◇ y)) ((w ◇ (z ◇ y)) ◇ z))).symm)))).symm).trans (((((h (z ◇ y) ((z ◇ y) ◇ w) w)).trans ((congrArg (fun s => s ◇ (z ◇ y)) ((h w (z ◇ y) ((z ◇ y) ◇ w))).symm)))).symm))).trans (((((h y (y ◇ z) z)).trans ((congrArg (fun s => s ◇ y) ((h z y (y ◇ z))).symm)))).symm))).symm))\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  exact ((((((h y (y ◇ x) x)).trans ((congrArg (fun s => s ◇ y) ((h x y (y ◇ x))).symm)))).symm).trans ((((((((((h (w ◇ (z ◇ y)) ((w ◇ (z ◇ y)) ◇ z) z)).trans ((congrArg (fun s => s ◇ (w ◇ (z ◇ y))) ((h z (w ◇ (z ◇ y)) ((w ◇ (z ◇ y)) ◇ z))).symm)))).symm).trans (((((h (z ◇ y) ((z ◇ y) ◇ w) w)).trans ((congrArg (fun s => s ◇ (z ◇ y)) ((h w (z ◇ y) ((z ◇ y) ◇ w))).symm)))).symm))).trans (((((h y (y ◇ z) z)).trans ((congrArg (fun s => s ◇ y) ((h z y (y ◇ z))).symm)))).symm))).symm))\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 5.12
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0041 eq1=3118 eq2=3441\n[eq1] x = (((y ◇ x) ◇ y) ◇ z) ◇ x\n[eq2] x ◇ y = z ◇ (w ◇ (z ◇ y))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0044",
+    "eq1_id": 234,
+    "eq2_id": 3065,
+    "elapsed_seconds": 4.86,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (((((h x (x ◇ (x ◇ x)) (((x ◇ y) ◇ x) ◇ x))).trans ((congrArg (fun s => s ◇ x) ((h ((x ◇ (x ◇ x)) ◇ (((x ◇ y) ◇ x) ◇ x)) x x)).symm)))).trans ((congrArg (fun s => s ◇ x) ((h (((x ◇ y) ◇ x) ◇ x) x x)).symm)))\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (((((h x (x ◇ (x ◇ x)) (((x ◇ y) ◇ x) ◇ x))).trans ((congrArg (fun s => s ◇ x) ((h ((x ◇ (x ◇ x)) ◇ (((x ◇ y) ◇ x) ◇ x)) x x)).symm)))).trans ((congrArg (fun s => s ◇ x) ((h (((x ◇ y) ◇ x) ◇ x) x x)).symm)))\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 4.57
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0044 eq1=234 eq2=3065\n[eq1] x = (y ◇ (y ◇ z)) ◇ x\n[eq2] x = (((x ◇ y) ◇ x) ◇ x) ◇ x\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0048",
+    "eq1_id": 242,
+    "eq2_id": 3197,
+    "elapsed_seconds": 8.61,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 1, 2], [0, 0, 1], [0, 0, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 1, 2], [0, 0, 1], [0, 0, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 8.55
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0048 eq1=242 eq2=3197\n[eq1] x = (y ◇ (z ◇ y)) ◇ x\n[eq2] x = (((y ◇ z) ◇ y) ◇ y) ◇ x\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 3\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0049",
+    "eq1_id": 4541,
+    "eq2_id": 4578,
+    "elapsed_seconds": 7.44,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 2) := { op := finOpTable \"[[0, 1], [1, 0]]\" }\n  refine ⟨Fin 2, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 2) := { op := finOpTable \"[[0, 1], [1, 0]]\" }\n  refine ⟨Fin 2, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 7.35
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0049 eq1=4541 eq2=4578\n[eq1] x ◇ (y ◇ z) = (z ◇ x) ◇ y\n[eq2] x ◇ (y ◇ z) = (w ◇ u) ◇ y\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 2\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0050",
+    "eq1_id": 1274,
+    "eq2_id": 2647,
+    "elapsed_seconds": 5.3,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact ((((((congrArg (fun s => s ◇ y) ((((((h (x ◇ x) x y (((x ◇ x) ◇ x) ◇ x) (((x ◇ x) ◇ x) ◇ x))).trans ((congrArg (fun s => (x ◇ x) ◇ s) ((h ((x ◇ y) ◇ (((x ◇ x) ◇ x) ◇ x)) x x x x)).symm)))).trans ((congrArg (fun s => (x ◇ x) ◇ s) ((h (x ◇ y) x x x x)).symm)))).symm)).trans (((((((((h (x ◇ x) y (((x ◇ x) ◇ x) ◇ x) (((x ◇ x) ◇ x) ◇ x) (((x ◇ x) ◇ x) ◇ x))).trans ((congrArg (fun s => (x ◇ x) ◇ s) ((h ((y ◇ (((x ◇ x) ◇ x) ◇ x)) ◇ (((x ◇ x) ◇ x) ◇ x)) x x x x)).symm)))).trans ((congrArg (fun s => (x ◇ x) ◇ s) ((h (y ◇ (((x ◇ x) ◇ x) ◇ x)) x x x x)).symm)))).trans ((congrArg (fun s => (x ◇ x) ◇ s) ((h y x x x x)).symm)))).symm))).trans (((((((((h x x (((x ◇ x) ◇ x) ◇ x) (((x ◇ x) ◇ x) ◇ x) (((x ◇ x) ◇ x) ◇ x))).trans ((congrArg (fun s => x ◇ s) ((h ((x ◇ (((x ◇ x) ◇ x) ◇ x)) ◇ (((x ◇ x) ◇ x) ◇ x)) x x x x)).symm)))).trans ((congrArg (fun s => x ◇ s) ((h (x ◇ (((x ◇ x) ◇ x) ◇ x)) x x x x)).symm)))).trans ((congrArg (fun s => x ◇ s) ((h x x x x x)).symm)))).symm))).symm\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact ((((((congrArg (fun s => s ◇ y) ((((((h (x ◇ x) x y (((x ◇ x) ◇ x) ◇ x) (((x ◇ x) ◇ x) ◇ x))).trans ((congrArg (fun s => (x ◇ x) ◇ s) ((h ((x ◇ y) ◇ (((x ◇ x) ◇ x) ◇ x)) x x x x)).symm)))).trans ((congrArg (fun s => (x ◇ x) ◇ s) ((h (x ◇ y) x x x x)).symm)))).symm)).trans (((((((((h (x ◇ x) y (((x ◇ x) ◇ x) ◇ x) (((x ◇ x) ◇ x) ◇ x) (((x ◇ x) ◇ x) ◇ x))).trans ((congrArg (fun s => (x ◇ x) ◇ s) ((h ((y ◇ (((x ◇ x) ◇ x) ◇ x)) ◇ (((x ◇ x) ◇ x) ◇ x)) x x x x)).symm)))).trans ((congrArg (fun s => (x ◇ x) ◇ s) ((h (y ◇ (((x ◇ x) ◇ x) ◇ x)) x x x x)).symm)))).trans ((congrArg (fun s => (x ◇ x) ◇ s) ((h y x x x x)).symm)))).symm))).trans (((((((((h x x (((x ◇ x) ◇ x) ◇ x) (((x ◇ x) ◇ x) ◇ x) (((x ◇ x) ◇ x) ◇ x))).trans ((congrArg (fun s => x ◇ s) ((h ((x ◇ (((x ◇ x) ◇ x) ◇ x)) ◇ (((x ◇ x) ◇ x) ◇ x)) x x x x)).symm)))).trans ((congrArg (fun s => x ◇ s) ((h (x ◇ (((x ◇ x) ◇ x) ◇ x)) x x x x)).symm)))).trans ((congrArg (fun s => x ◇ s) ((h x x x x x)).symm)))).symm))).symm\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 4.83
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0050 eq1=1274 eq2=2647\n[eq1] x = x ◇ (((y ◇ z) ◇ w) ◇ u)\n[eq2] x = ((x ◇ x) ◇ (x ◇ y)) ◇ y\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0051",
+    "eq1_id": 4150,
+    "eq2_id": 4243,
+    "elapsed_seconds": 6.51,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 2) := { op := finOpTable \"[[1, 1], [0, 0]]\" }\n  refine ⟨Fin 2, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 2) := { op := finOpTable \"[[1, 1], [0, 0]]\" }\n  refine ⟨Fin 2, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 6.44
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0051 eq1=4150 eq2=4243\n[eq1] x ◇ y = ((x ◇ z) ◇ w) ◇ y\n[eq2] x ◇ y = ((z ◇ w) ◇ x) ◇ y\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 2\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0052",
+    "eq1_id": 169,
+    "eq2_id": 2056,
+    "elapsed_seconds": 4.48,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact ((((congrArg (fun s => s ◇ (z ◇ x)) (((((h ((x ◇ y) ◇ x) ((x ◇ y) ◇ x))).trans ((congrArg (fun s => s ◇ (((x ◇ y) ◇ x) ◇ ((x ◇ y) ◇ x))) ((h x (x ◇ y))).symm)))).trans ((congrArg (fun s => x ◇ s) ((h x (x ◇ y))).symm))))).trans (((((h x z)).trans (((((((h ((x ◇ x) ◇ (z ◇ x)) ((x ◇ x) ◇ (z ◇ x)))).trans ((congrArg (fun s => s ◇ (((x ◇ x) ◇ (z ◇ x)) ◇ ((x ◇ x) ◇ (z ◇ x)))) ((h (z ◇ x) (x ◇ x))).symm)))).trans ((congrArg (fun s => (z ◇ x) ◇ s) ((h (z ◇ x) (x ◇ x))).symm)))).symm))).symm))).symm\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact ((((congrArg (fun s => s ◇ (z ◇ x)) (((((h ((x ◇ y) ◇ x) ((x ◇ y) ◇ x))).trans ((congrArg (fun s => s ◇ (((x ◇ y) ◇ x) ◇ ((x ◇ y) ◇ x))) ((h x (x ◇ y))).symm)))).trans ((congrArg (fun s => x ◇ s) ((h x (x ◇ y))).symm))))).trans (((((h x z)).trans (((((((h ((x ◇ x) ◇ (z ◇ x)) ((x ◇ x) ◇ (z ◇ x)))).trans ((congrArg (fun s => s ◇ (((x ◇ x) ◇ (z ◇ x)) ◇ ((x ◇ x) ◇ (z ◇ x)))) ((h (z ◇ x) (x ◇ x))).symm)))).trans ((congrArg (fun s => (z ◇ x) ◇ s) ((h (z ◇ x) (x ◇ x))).symm)))).symm))).symm))).symm\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 4.32
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0052 eq1=169 eq2=2056\n[eq1] x = (y ◇ x) ◇ (y ◇ x)\n[eq2] x = ((x ◇ y) ◇ x) ◇ (z ◇ x)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0053",
+    "eq1_id": 3738,
+    "eq2_id": 3727,
+    "elapsed_seconds": 6.78,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 2, 0], [1, 1, 1], [0, 2, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 2, 0], [1, 1, 1], [0, 2, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 6.67
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0053 eq1=3738 eq2=3727\n[eq1] x ◇ y = (x ◇ z) ◇ (y ◇ w)\n[eq2] x ◇ y = (x ◇ y) ◇ (z ◇ x)\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 3\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0055",
+    "eq1_id": 1400,
+    "eq2_id": 1364,
+    "elapsed_seconds": 9.25,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 2) := { op := finOpTable \"[[1, 0], [1, 0]]\" }\n  refine ⟨Fin 2, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 2) := { op := finOpTable \"[[1, 0], [1, 0]]\" }\n  refine ⟨Fin 2, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 9.16
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0055 eq1=1400 eq2=1364\n[eq1] x = y ◇ (((z ◇ w) ◇ x) ◇ x)\n[eq2] x = y ◇ (((z ◇ x) ◇ w) ◇ w)\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 2\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0056",
+    "eq1_id": 1953,
+    "eq2_id": 608,
+    "elapsed_seconds": 4.66,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w u\n  exact (((((((h (w ◇ (u ◇ x)) (x ◇ (x ◇ x)) y z)).trans ((congrArg (fun s => s ◇ (z ◇ (w ◇ (u ◇ x)))) ((h y x x (x ◇ (x ◇ x)))).symm)))).symm).trans (((((h x (x ◇ (x ◇ x)) w u)).trans ((congrArg (fun s => s ◇ (u ◇ x)) ((h w x x (x ◇ (x ◇ x)))).symm)))).symm))).symm\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w u\n  exact (((((((h (w ◇ (u ◇ x)) (x ◇ (x ◇ x)) y z)).trans ((congrArg (fun s => s ◇ (z ◇ (w ◇ (u ◇ x)))) ((h y x x (x ◇ (x ◇ x)))).symm)))).symm).trans (((((h x (x ◇ (x ◇ x)) w u)).trans ((congrArg (fun s => s ◇ (u ◇ x)) ((h w x x (x ◇ (x ◇ x)))).symm)))).symm))).symm\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 4.29
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0056 eq1=1953 eq2=608\n[eq1] x = (y ◇ (y ◇ z)) ◇ (w ◇ x)\n[eq2] x = y ◇ (z ◇ (w ◇ (u ◇ x)))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0059",
+    "eq1_id": 298,
+    "eq2_id": 1045,
+    "elapsed_seconds": 6.47,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (((((((h ((y ◇ (y ◇ x)) ◇ x) (x ◇ x) x)).trans ((congrArg (fun s => s ◇ ((y ◇ (y ◇ x)) ◇ x)) ((h x x x)).symm)))).symm).trans (((((h x (x ◇ (y ◇ (y ◇ x))) (y ◇ (y ◇ x)))).trans ((congrArg (fun s => s ◇ x) ((h (y ◇ (y ◇ x)) x (y ◇ (y ◇ x)))).symm)))).symm))).symm\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (((((((h ((y ◇ (y ◇ x)) ◇ x) (x ◇ x) x)).trans ((congrArg (fun s => s ◇ ((y ◇ (y ◇ x)) ◇ x)) ((h x x x)).symm)))).symm).trans (((((h x (x ◇ (y ◇ (y ◇ x))) (y ◇ (y ◇ x)))).trans ((congrArg (fun s => s ◇ x) ((h (y ◇ (y ◇ x)) x (y ◇ (y ◇ x)))).symm)))).symm))).symm\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 6.2
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0059 eq1=298 eq2=1045\n[eq1] x = ((y ◇ z) ◇ z) ◇ x\n[eq2] x = x ◇ ((y ◇ (y ◇ x)) ◇ x)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0060",
+    "eq1_id": 3184,
+    "eq2_id": 1288,
+    "elapsed_seconds": 5.2,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (((((((h (((x ◇ y) ◇ y) ◇ x) (x ◇ (((x ◇ y) ◇ y) ◇ x)) y)).trans ((congrArg (fun s => s ◇ (((x ◇ y) ◇ y) ◇ x)) ((h y x (((x ◇ y) ◇ y) ◇ x))).symm)))).symm).trans (((((h x (x ◇ x) ((x ◇ y) ◇ y))).trans ((congrArg (fun s => s ◇ x) ((h ((x ◇ y) ◇ y) x x)).symm)))).symm))).symm\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (((((((h (((x ◇ y) ◇ y) ◇ x) (x ◇ (((x ◇ y) ◇ y) ◇ x)) y)).trans ((congrArg (fun s => s ◇ (((x ◇ y) ◇ y) ◇ x)) ((h y x (((x ◇ y) ◇ y) ◇ x))).symm)))).symm).trans (((((h x (x ◇ x) ((x ◇ y) ◇ y))).trans ((congrArg (fun s => s ◇ x) ((h ((x ◇ y) ◇ y) x x)).symm)))).symm))).symm\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 4.91
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0060 eq1=3184 eq2=1288\n[eq1] x = (((y ◇ z) ◇ x) ◇ z) ◇ x\n[eq2] x = y ◇ (((x ◇ y) ◇ y) ◇ x)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0061",
+    "eq1_id": 447,
+    "eq2_id": 1247,
+    "elapsed_seconds": 4.95,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  exact (((h x (((y ◇ x) ◇ z) ◇ w) (x ◇ ((x ◇ (((y ◇ x) ◇ z) ◇ w)) ◇ (((y ◇ x) ◇ z) ◇ w))))).trans ((congrArg (fun s => x ◇ s) ((((h (((y ◇ x) ◇ z) ◇ w) (x ◇ ((x ◇ (((y ◇ x) ◇ z) ◇ w)) ◇ (((y ◇ x) ◇ z) ◇ w))) (x ◇ (((y ◇ x) ◇ z) ◇ w)))).trans ((congrArg (fun s => (((y ◇ x) ◇ z) ◇ w) ◇ s) (congrArg (fun s => (x ◇ ((x ◇ (((y ◇ x) ◇ z) ◇ w)) ◇ (((y ◇ x) ◇ z) ◇ w))) ◇ s) ((h (x ◇ (((y ◇ x) ◇ z) ◇ w)) (((y ◇ x) ◇ z) ◇ w) x)).symm))))).symm)))\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  exact (((h x (((y ◇ x) ◇ z) ◇ w) (x ◇ ((x ◇ (((y ◇ x) ◇ z) ◇ w)) ◇ (((y ◇ x) ◇ z) ◇ w))))).trans ((congrArg (fun s => x ◇ s) ((((h (((y ◇ x) ◇ z) ◇ w) (x ◇ ((x ◇ (((y ◇ x) ◇ z) ◇ w)) ◇ (((y ◇ x) ◇ z) ◇ w))) (x ◇ (((y ◇ x) ◇ z) ◇ w)))).trans ((congrArg (fun s => (((y ◇ x) ◇ z) ◇ w) ◇ s) (congrArg (fun s => (x ◇ ((x ◇ (((y ◇ x) ◇ z) ◇ w)) ◇ (((y ◇ x) ◇ z) ◇ w))) ◇ s) ((h (x ◇ (((y ◇ x) ◇ z) ◇ w)) (((y ◇ x) ◇ z) ◇ w) x)).symm))))).symm)))\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 4.69
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0061 eq1=447 eq2=1247\n[eq1] x = x ◇ (y ◇ (z ◇ (x ◇ y)))\n[eq2] x = x ◇ (((y ◇ x) ◇ z) ◇ w)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0063",
+    "eq1_id": 302,
+    "eq2_id": 1217,
+    "elapsed_seconds": 4.69,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w u\n  exact (((((((h ((z ◇ (w ◇ u)) ◇ x) (x ◇ x) x y)).trans ((congrArg (fun s => s ◇ ((z ◇ (w ◇ u)) ◇ x)) ((h y x x x)).symm)))).symm).trans (((((h x (x ◇ x) x (z ◇ (w ◇ u)))).trans ((congrArg (fun s => s ◇ x) ((h (z ◇ (w ◇ u)) x x x)).symm)))).symm))).symm\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w u\n  exact (((((((h ((z ◇ (w ◇ u)) ◇ x) (x ◇ x) x y)).trans ((congrArg (fun s => s ◇ ((z ◇ (w ◇ u)) ◇ x)) ((h y x x x)).symm)))).symm).trans (((((h x (x ◇ x) x (z ◇ (w ◇ u)))).trans ((congrArg (fun s => s ◇ x) ((h (z ◇ (w ◇ u)) x x x)).symm)))).symm))).symm\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 4.42
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0063 eq1=302 eq2=1217\n[eq1] x = ((y ◇ z) ◇ w) ◇ x\n[eq2] x = y ◇ ((z ◇ (w ◇ u)) ◇ x)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0064",
+    "eq1_id": 862,
+    "eq2_id": 2466,
+    "elapsed_seconds": 5.25,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (((((((((h (x ◇ ((y ◇ y) ◇ x)) x ((x ◇ x) ◇ (x ◇ x)))).trans ((congrArg (fun s => (x ◇ ((y ◇ y) ◇ x)) ◇ s) (congrArg (fun s => s ◇ (((x ◇ x) ◇ (x ◇ x)) ◇ ((x ◇ x) ◇ (x ◇ x)))) ((h x x x)).symm))))).trans ((((congrArg (fun s => (x ◇ ((y ◇ y) ◇ x)) ◇ s) (congrArg (fun s => x ◇ s) ((h ((x ◇ x) ◇ (x ◇ x)) x x)).symm))).trans ((congrArg (fun s => (x ◇ ((y ◇ y) ◇ x)) ◇ s) ((h x x x)).symm)))))).symm).trans (((((((h x ((y ◇ y) ◇ x) ((x ◇ x) ◇ (x ◇ x)))).trans ((congrArg (fun s => x ◇ s) (congrArg (fun s => s ◇ (((x ◇ x) ◇ (x ◇ x)) ◇ ((x ◇ x) ◇ (x ◇ x)))) ((h ((y ◇ y) ◇ x) x x)).symm))))).trans ((((congrArg (fun s => x ◇ s) (congrArg (fun s => ((y ◇ y) ◇ x) ◇ s) ((h ((x ◇ x) ◇ (x ◇ x)) x x)).symm))).trans ((congrArg (fun s => x ◇ s) ((h ((y ◇ y) ◇ x) x x)).symm)))))).symm))).symm\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (((((((((h (x ◇ ((y ◇ y) ◇ x)) x ((x ◇ x) ◇ (x ◇ x)))).trans ((congrArg (fun s => (x ◇ ((y ◇ y) ◇ x)) ◇ s) (congrArg (fun s => s ◇ (((x ◇ x) ◇ (x ◇ x)) ◇ ((x ◇ x) ◇ (x ◇ x)))) ((h x x x)).symm))))).trans ((((congrArg (fun s => (x ◇ ((y ◇ y) ◇ x)) ◇ s) (congrArg (fun s => x ◇ s) ((h ((x ◇ x) ◇ (x ◇ x)) x x)).symm))).trans ((congrArg (fun s => (x ◇ ((y ◇ y) ◇ x)) ◇ s) ((h x x x)).symm)))))).symm).trans (((((((h x ((y ◇ y) ◇ x) ((x ◇ x) ◇ (x ◇ x)))).trans ((congrArg (fun s => x ◇ s) (congrArg (fun s => s ◇ (((x ◇ x) ◇ (x ◇ x)) ◇ ((x ◇ x) ◇ (x ◇ x)))) ((h ((y ◇ y) ◇ x) x x)).symm))))).trans ((((congrArg (fun s => x ◇ s) (congrArg (fun s => ((y ◇ y) ◇ x) ◇ s) ((h ((x ◇ x) ◇ (x ◇ x)) x x)).symm))).trans ((congrArg (fun s => x ◇ s) ((h ((y ◇ y) ◇ x) x x)).symm)))))).symm))).symm\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 4.97
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0064 eq1=862 eq2=2466\n[eq1] x = x ◇ ((y ◇ z) ◇ (z ◇ z))\n[eq2] x = (x ◇ ((y ◇ y) ◇ x)) ◇ x\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0065",
+    "eq1_id": 59,
+    "eq2_id": 2240,
+    "elapsed_seconds": 5.21,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact ((((congrArg (fun s => s ◇ x) ((((h x (x ◇ (x ◇ y)) (x ◇ y))).trans ((congrArg (fun s => x ◇ s) ((h (x ◇ (x ◇ y)) (x ◇ y) x)).symm)))).symm)).trans (((((h x x x)).trans ((congrArg (fun s => x ◇ s) ((((h x (x ◇ x) x)).trans ((congrArg (fun s => x ◇ s) ((h (x ◇ x) x x)).symm)))).symm)))).symm))).symm\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact ((((congrArg (fun s => s ◇ x) ((((h x (x ◇ (x ◇ y)) (x ◇ y))).trans ((congrArg (fun s => x ◇ s) ((h (x ◇ (x ◇ y)) (x ◇ y) x)).symm)))).symm)).trans (((((h x x x)).trans ((congrArg (fun s => x ◇ s) ((((h x (x ◇ x) x)).trans ((congrArg (fun s => x ◇ s) ((h (x ◇ x) x x)).symm)))).symm)))).symm))).symm\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 4.96
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0065 eq1=59 eq2=2240\n[eq1] x = x ◇ (y ◇ (z ◇ y))\n[eq2] x = (x ◇ (x ◇ (x ◇ y))) ◇ x\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0068",
+    "eq1_id": 3478,
+    "eq2_id": 4316,
+    "elapsed_seconds": 10.28,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 0, 1], [0, 0, 1], [1, 0, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 3) := { op := finOpTable \"[[0, 0, 1], [0, 0, 1], [1, 0, 0]]\" }\n  refine ⟨Fin 3, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 10.22
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0068 eq1=3478 eq2=4316\n[eq1] x ◇ x = y ◇ ((x ◇ z) ◇ y)\n[eq2] x ◇ (y ◇ x) = x ◇ (z ◇ x)\n[stage] exhaustive Fin 2-3 counterexample search\n[solved-candidate] exhaustive false witness Fin 3\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0069",
+    "eq1_id": 286,
+    "eq2_id": 532,
+    "elapsed_seconds": 5.3,
+    "solved": true,
+    "verdict": "true",
+    "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  exact (((((((((((h (y ◇ (z ◇ (w ◇ x))) (x ◇ x) y)).trans ((congrArg (fun s => s ◇ (y ◇ (z ◇ (w ◇ x)))) ((h y x (x ◇ x))).symm)))).symm).trans (((((h (z ◇ (w ◇ x)) (x ◇ x) y)).trans ((congrArg (fun s => s ◇ (z ◇ (w ◇ x))) ((h y x (x ◇ x))).symm)))).symm))).trans (((((h (w ◇ x) (x ◇ x) z)).trans ((congrArg (fun s => s ◇ (w ◇ x)) ((h z x (x ◇ x))).symm)))).symm))).trans (((((h x (x ◇ x) w)).trans ((congrArg (fun s => s ◇ x) ((h w x (x ◇ x))).symm)))).symm))).symm\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  exact (((((((((((h (y ◇ (z ◇ (w ◇ x))) (x ◇ x) y)).trans ((congrArg (fun s => s ◇ (y ◇ (z ◇ (w ◇ x)))) ((h y x (x ◇ x))).symm)))).symm).trans (((((h (z ◇ (w ◇ x)) (x ◇ x) y)).trans ((congrArg (fun s => s ◇ (z ◇ (w ◇ x))) ((h y x (x ◇ x))).symm)))).symm))).trans (((((h (w ◇ x) (x ◇ x) z)).trans ((congrArg (fun s => s ◇ (w ◇ x)) ((h z x (x ◇ x))).symm)))).symm))).trans (((((h x (x ◇ x) w)).trans ((congrArg (fun s => s ◇ x) ((h w x (x ◇ x))).symm)))).symm))).symm\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 5.08
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0069 eq1=286 eq2=532\n[eq1] x = ((y ◇ y) ◇ z) ◇ x\n[eq2] x = y ◇ (y ◇ (z ◇ (w ◇ x)))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0001",
+    "eq1_id": 706,
+    "eq2_id": 4204,
+    "elapsed_seconds": 16.79,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3], [1, 2, 0, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3], [1, 2, 0, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 16.24
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0001 eq1=706 eq2=4204\n[eq1] x = y ◇ (y ◇ ((x ◇ y) ◇ x))\n[eq2] x ◇ y = ((z ◇ x) ◇ w) ◇ y\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0002",
+    "eq1_id": 4555,
+    "eq2_id": 4437,
+    "elapsed_seconds": 62.71,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 5) := { op := finOpTable \"[[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 1], [0, 0, 3, 0, 0]]\" }\n  refine ⟨Fin 5, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 13,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ (x ◇ ?w) ◇ ?w = (x ◇ y) ◇ z\ncase w\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G"
+        },
+        "elapsed": 2.03
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (?z ◇ ?w) ◇ ?w\nin the target expression\n  x ◇ (y ◇ x) = (x ◇ y) ◇ z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ x ◇ (y ◇ x) = (x ◇ y) ◇ z"
+        },
+        "elapsed": 1.82
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  simp only [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 2.07
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  simp only [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.88
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [← h, ← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (?z ◇ ?w) ◇ ?w\nin the target expression\n  x ◇ (y ◇ x) = (x ◇ y) ◇ z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ x ◇ (y ◇ x) = (x ◇ y) ◇ z"
+        },
+        "elapsed": 1.87
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [h, h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ (?z ◇ ?w) ◇ ?w = (x ◇ y) ◇ z\ncase y\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G\ncase w\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G"
+        },
+        "elapsed": 2.08
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  simp only [← h]; rfl\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.9
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  repeat rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+        },
+        "elapsed": 9.5
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact h x x x x\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h x x x x\nhas type\n  x ◇ (x ◇ x) = (x ◇ x) ◇ x\nbut is expected to have type\n  x ◇ (y ◇ x) = (x ◇ y) ◇ z"
+        },
+        "elapsed": 2.22
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact (h x x x x).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h x x x x)\nhas type\n  (x ◇ x) ◇ x = x ◇ (x ◇ x)\nbut is expected to have type\n  x ◇ (y ◇ x) = (x ◇ y) ◇ z"
+        },
+        "elapsed": 2.03
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact h y y y y\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h y y y y\nhas type\n  y ◇ (y ◇ y) = (y ◇ y) ◇ y\nbut is expected to have type\n  x ◇ (y ◇ x) = (x ◇ y) ◇ z"
+        },
+        "elapsed": 1.91
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact (h y y y y).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h y y y y)\nhas type\n  (y ◇ y) ◇ y = y ◇ (y ◇ y)\nbut is expected to have type\n  x ◇ (y ◇ x) = (x ◇ y) ◇ z"
+        },
+        "elapsed": 2.01
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 5) := { op := finOpTable \"[[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 1], [0, 0, 3, 0, 0]]\" }\n  refine ⟨Fin 5, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 9.23
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0002 eq1=4555 eq2=4437\n[eq1] x ◇ (y ◇ z) = (z ◇ w) ◇ w\n[eq2] x ◇ (y ◇ x) = (x ◇ y) ◇ z\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[stage] generic tactics\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0014",
+    "eq1_id": 1480,
+    "eq2_id": 572,
+    "elapsed_seconds": 10.28,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 1, 1], [2, 0, 3, 3], [0, 0, 1, 1], [2, 0, 3, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 1, 1], [2, 0, 3, 3], [0, 0, 1, 1], [2, 0, 3, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 9.69
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0014 eq1=1480 eq2=572\n[eq1] x = (y ◇ x) ◇ (x ◇ (x ◇ z))\n[eq2] x = y ◇ (z ◇ (z ◇ (x ◇ y)))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] True\n[stage] bounded equality graph\n[stage] singleton equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion singleton\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0015",
+    "eq1_id": 3265,
+    "eq2_id": 4269,
+    "elapsed_seconds": 62.92,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 1], [0, 0, 3, 0]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 13,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ x ◇ (x ◇ (?y ◇ (?z ◇ ?y))) = x ◇ (y ◇ x)\ncase y\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G"
+        },
+        "elapsed": 1.82
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?x ◇ (?y ◇ (?z ◇ ?y))\nin the target expression\n  x ◇ (x ◇ x) = x ◇ (y ◇ x)\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ x ◇ (x ◇ x) = x ◇ (y ◇ x)"
+        },
+        "elapsed": 1.76
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 2.06
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.94
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [← h, ← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?x ◇ (?y ◇ (?z ◇ ?y))\nin the target expression\n  x ◇ (x ◇ x) = x ◇ (y ◇ x)\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ x ◇ (x ◇ x) = x ◇ (y ◇ x)"
+        },
+        "elapsed": 1.86
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [h, h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ x ◇ (x ◇ (?x ◇ (?x ◇ (?y ◇ (?z ◇ ?y))))) = x ◇ (y ◇ x)\ncase x\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G\ncase y\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G"
+        },
+        "elapsed": 2.0
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [← h]; rfl\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 2.09
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  repeat rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+        },
+        "elapsed": 13.02
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact h x x x\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h x x x\nhas type\n  x ◇ x = x ◇ (x ◇ (x ◇ x))\nbut is expected to have type\n  x ◇ (x ◇ x) = x ◇ (y ◇ x)"
+        },
+        "elapsed": 1.84
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (h x x x).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h x x x)\nhas type\n  x ◇ (x ◇ (x ◇ x)) = x ◇ x\nbut is expected to have type\n  x ◇ (x ◇ x) = x ◇ (y ◇ x)"
+        },
+        "elapsed": 1.9
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact h y y y\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h y y y\nhas type\n  y ◇ y = y ◇ (y ◇ (y ◇ y))\nbut is expected to have type\n  x ◇ (x ◇ x) = x ◇ (y ◇ x)"
+        },
+        "elapsed": 2.03
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (h y y y).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h y y y)\nhas type\n  y ◇ (y ◇ (y ◇ y)) = y ◇ y\nbut is expected to have type\n  x ◇ (x ◇ x) = x ◇ (y ◇ x)"
+        },
+        "elapsed": 1.9
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 1], [0, 0, 3, 0]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 8.2
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0015 eq1=3265 eq2=4269\n[eq1] x ◇ x = x ◇ (y ◇ (z ◇ y))\n[eq2] x ◇ (x ◇ x) = x ◇ (y ◇ x)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[stage] generic tactics\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0016",
+    "eq1_id": 1446,
+    "eq2_id": 1448,
+    "elapsed_seconds": 30.7,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[1, 0, 0, 1], [0, 0, 0, 0], [3, 3, 3, 3], [2, 2, 2, 2]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[1, 0, 0, 1], [0, 0, 0, 0], [3, 3, 3, 3], [2, 2, 2, 2]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 9.72
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0016 eq1=1446 eq2=1448\n[eq1] x = (x ◇ y) ◇ (x ◇ (y ◇ z))\n[eq2] x = (x ◇ y) ◇ (x ◇ (z ◇ y))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0024",
+    "eq1_id": 706,
+    "eq2_id": 860,
+    "elapsed_seconds": 9.95,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3], [1, 2, 0, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3], [1, 2, 0, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 9.44
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0024 eq1=706 eq2=860\n[eq1] x = y ◇ (y ◇ ((x ◇ y) ◇ x))\n[eq2] x = x ◇ ((y ◇ z) ◇ (z ◇ x))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0025",
+    "eq1_id": 3008,
+    "eq2_id": 1131,
+    "elapsed_seconds": 32.0,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 5) := { op := finOpTable \"[[0, 1, 2, 3, 4], [1, 0, 3, 4, 2], [2, 4, 0, 1, 3], [3, 2, 4, 0, 1], [4, 3, 1, 2, 0]]\" }\n  refine ⟨Fin 5, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 5) := { op := finOpTable \"[[0, 1, 2, 3, 4], [1, 0, 3, 4, 2], [2, 4, 0, 1, 3], [3, 2, 4, 0, 1], [4, 3, 1, 2, 0]]\" }\n  refine ⟨Fin 5, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 9.15
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0025 eq1=3008 eq2=1131\n[eq1] x = ((y ◇ (z ◇ z)) ◇ x) ◇ y\n[eq2] x = y ◇ ((y ◇ (z ◇ x)) ◇ z)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0028",
+    "eq1_id": 3583,
+    "eq2_id": 4406,
+    "elapsed_seconds": 51.9,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 0, 3], [0, 0, 0, 3], [0, 3, 3, 3], [0, 3, 3, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 13,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ ?z ◇ ((x ◇ x) ◇ (x ◇ y)) = (y ◇ x) ◇ y\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G"
+        },
+        "elapsed": 1.89
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?z ◇ ((?x ◇ ?x) ◇ ?y)\nin the target expression\n  x ◇ (x ◇ y) = (y ◇ x) ◇ y\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ x ◇ (x ◇ y) = (y ◇ x) ◇ y"
+        },
+        "elapsed": 1.96
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 2.16
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 2.02
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [← h, ← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?z ◇ ((?x ◇ ?x) ◇ ?y)\nin the target expression\n  x ◇ (x ◇ y) = (y ◇ x) ◇ y\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ x ◇ (x ◇ y) = (y ◇ x) ◇ y"
+        },
+        "elapsed": 1.86
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [h, h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ ?z ◇ ((?x ◇ ?x) ◇ ((x ◇ x) ◇ (x ◇ y))) = (y ◇ x) ◇ y\ncase x\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G"
+        },
+        "elapsed": 1.85
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [← h]; rfl\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 2.02
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  repeat rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+        },
+        "elapsed": 22.48
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact h x x x\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h x x x\nhas type\n  x ◇ x = x ◇ ((x ◇ x) ◇ x)\nbut is expected to have type\n  x ◇ (x ◇ y) = (y ◇ x) ◇ y"
+        },
+        "elapsed": 1.89
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (h x x x).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h x x x)\nhas type\n  x ◇ ((x ◇ x) ◇ x) = x ◇ x\nbut is expected to have type\n  x ◇ (x ◇ y) = (y ◇ x) ◇ y"
+        },
+        "elapsed": 1.98
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact h y y y\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h y y y\nhas type\n  y ◇ y = y ◇ ((y ◇ y) ◇ y)\nbut is expected to have type\n  x ◇ (x ◇ y) = (y ◇ x) ◇ y"
+        },
+        "elapsed": 1.73
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (h y y y).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h y y y)\nhas type\n  y ◇ ((y ◇ y) ◇ y) = y ◇ y\nbut is expected to have type\n  x ◇ (x ◇ y) = (y ◇ x) ◇ y"
+        },
+        "elapsed": 1.73
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 0, 3], [0, 0, 0, 3], [0, 3, 3, 3], [0, 3, 3, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 7.86
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0028 eq1=3583 eq2=4406\n[eq1] x ◇ y = z ◇ ((x ◇ x) ◇ y)\n[eq2] x ◇ (x ◇ y) = (y ◇ x) ◇ y\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[stage] generic tactics\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0031",
+    "eq1_id": 2089,
+    "eq2_id": 900,
+    "elapsed_seconds": 8.45,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 1, 1], [2, 2, 2, 2], [3, 3, 2, 2], [0, 0, 1, 1]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 1, 1], [2, 2, 2, 2], [3, 3, 2, 2], [0, 0, 1, 1]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 7.88
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0031 eq1=2089 eq2=900\n[eq1] x = ((y ◇ x) ◇ x) ◇ (x ◇ z)\n[eq2] x = y ◇ ((x ◇ z) ◇ (z ◇ w))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] True\n[stage] bounded equality graph\n[stage] singleton equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion singleton\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0032",
+    "eq1_id": 2089,
+    "eq2_id": 404,
+    "elapsed_seconds": 8.95,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 1, 1], [2, 2, 2, 2], [3, 3, 2, 2], [0, 0, 1, 1]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 1, 1], [2, 2, 2, 2], [3, 3, 2, 2], [0, 0, 1, 1]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 8.4
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0032 eq1=2089 eq2=404\n[eq1] x = ((y ◇ x) ◇ x) ◇ (x ◇ z)\n[eq2] x ◇ y = (z ◇ z) ◇ z\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] True\n[stage] bounded equality graph\n[stage] singleton equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion singleton\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0036",
+    "eq1_id": 3290,
+    "eq2_id": 3264,
+    "elapsed_seconds": 61.88,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 3], [0, 3, 1, 0]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 13,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ ?y ◇ (?z ◇ (x ◇ ?z)) = x ◇ (y ◇ (z ◇ x))\ncase y\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G"
+        },
+        "elapsed": 1.77
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?y ◇ (?z ◇ (?x ◇ ?z))\nin the target expression\n  x ◇ x = x ◇ (y ◇ (z ◇ x))\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ x ◇ x = x ◇ (y ◇ (z ◇ x))"
+        },
+        "elapsed": 1.9
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  simp only [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.92
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  simp only [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.75
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [← h, ← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?y ◇ (?z ◇ (?x ◇ ?z))\nin the target expression\n  x ◇ x = x ◇ (y ◇ (z ◇ x))\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ x ◇ x = x ◇ (y ◇ (z ◇ x))"
+        },
+        "elapsed": 1.98
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [h, h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ ?y ◇ (?z ◇ ((?z ◇ (x ◇ ?z)) ◇ ?z)) = x ◇ (y ◇ (z ◇ x))\ncase y\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G"
+        },
+        "elapsed": 1.69
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  simp only [← h]; rfl\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.8
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  repeat rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+        },
+        "elapsed": 30.44
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact h x x x\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h x x x\nhas type\n  x ◇ x = x ◇ (x ◇ (x ◇ x))\nbut is expected to have type\n  x ◇ x = x ◇ (y ◇ (z ◇ x))"
+        },
+        "elapsed": 1.95
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact (h x x x).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h x x x)\nhas type\n  x ◇ (x ◇ (x ◇ x)) = x ◇ x\nbut is expected to have type\n  x ◇ x = x ◇ (y ◇ (z ◇ x))"
+        },
+        "elapsed": 1.88
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact h y y y\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h y y y\nhas type\n  y ◇ y = y ◇ (y ◇ (y ◇ y))\nbut is expected to have type\n  x ◇ x = x ◇ (y ◇ (z ◇ x))"
+        },
+        "elapsed": 1.96
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact (h y y y).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h y y y)\nhas type\n  y ◇ (y ◇ (y ◇ y)) = y ◇ y\nbut is expected to have type\n  x ◇ x = x ◇ (y ◇ (z ◇ x))"
+        },
+        "elapsed": 1.68
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 3], [0, 3, 1, 0]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 10.27
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0036 eq1=3290 eq2=3264\n[eq1] x ◇ x = y ◇ (z ◇ (x ◇ z))\n[eq2] x ◇ x = x ◇ (y ◇ (z ◇ x))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[stage] generic tactics\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0039",
+    "eq1_id": 830,
+    "eq2_id": 1229,
+    "elapsed_seconds": 13.15,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 5) := { op := finOpTable \"[[0, 0, 0, 0, 0], [1, 1, 0, 0, 0], [2, 0, 2, 0, 0], [3, 2, 3, 3, 2], [3, 3, 4, 4, 4]]\" }\n  refine ⟨Fin 5, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 5) := { op := finOpTable \"[[0, 0, 0, 0, 0], [1, 1, 0, 0, 0], [2, 0, 2, 0, 0], [3, 2, 3, 3, 2], [3, 3, 4, 4, 4]]\" }\n  refine ⟨Fin 5, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 10.81
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0039 eq1=830 eq2=1229\n[eq1] x = x ◇ ((x ◇ y) ◇ (z ◇ z))\n[eq2] x = x ◇ (((x ◇ y) ◇ x) ◇ y)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0042",
+    "eq1_id": 168,
+    "eq2_id": 431,
+    "elapsed_seconds": 8.63,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 1, 1], [2, 2, 3, 3], [0, 0, 1, 1], [2, 2, 3, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 1, 1], [2, 2, 3, 3], [0, 0, 1, 1], [2, 2, 3, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 8.22
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0042 eq1=168 eq2=431\n[eq1] x = (y ◇ x) ◇ (x ◇ z)\n[eq2] x = x ◇ (y ◇ (x ◇ (y ◇ z)))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] True\n[stage] bounded equality graph\n[stage] singleton equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion singleton\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0043",
+    "eq1_id": 3277,
+    "eq2_id": 3473,
+    "elapsed_seconds": 64.64,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 0, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 2, 0, 0]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 13,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ ?y ◇ (x ◇ (?z ◇ ?w)) = y ◇ ((?y ◇ (x ◇ (?z ◇ ?w))) ◇ z)\ncase y\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G\ncase w\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G"
+        },
+        "elapsed": 2.14
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?y ◇ (?x ◇ (?z ◇ ?w))\nin the target expression\n  x ◇ x = y ◇ ((x ◇ x) ◇ z)\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ x ◇ x = y ◇ ((x ◇ x) ◇ z)"
+        },
+        "elapsed": 2.06
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  simp only [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.99
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  simp only [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.7
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [← h, ← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?y ◇ (?x ◇ (?z ◇ ?w))\nin the target expression\n  x ◇ x = y ◇ ((x ◇ x) ◇ z)\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ x ◇ x = y ◇ ((x ◇ x) ◇ z)"
+        },
+        "elapsed": 1.96
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [h, h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ ?y ◇ ((x ◇ (?z ◇ ?w)) ◇ (?z ◇ ?w)) = y ◇ ((?y ◇ ((x ◇ (?z ◇ ?w)) ◇ (?z ◇ ?w))) ◇ z)\ncase y\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G\ncase w\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G\ncase w\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G"
+        },
+        "elapsed": 2.0
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  simp only [← h]; rfl\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.95
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  repeat rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+        },
+        "elapsed": 12.26
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact h x x x x\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h x x x x\nhas type\n  x ◇ x = x ◇ (x ◇ (x ◇ x))\nbut is expected to have type\n  x ◇ x = y ◇ ((x ◇ x) ◇ z)"
+        },
+        "elapsed": 1.99
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact (h x x x x).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h x x x x)\nhas type\n  x ◇ (x ◇ (x ◇ x)) = x ◇ x\nbut is expected to have type\n  x ◇ x = y ◇ ((x ◇ x) ◇ z)"
+        },
+        "elapsed": 1.78
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact h y y y y\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h y y y y\nhas type\n  y ◇ y = y ◇ (y ◇ (y ◇ y))\nbut is expected to have type\n  x ◇ x = y ◇ ((x ◇ x) ◇ z)"
+        },
+        "elapsed": 2.16
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact (h y y y y).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h y y y y)\nhas type\n  y ◇ (y ◇ (y ◇ y)) = y ◇ y\nbut is expected to have type\n  x ◇ x = y ◇ ((x ◇ x) ◇ z)"
+        },
+        "elapsed": 1.83
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 0, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 2, 0, 0]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 9.05
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0043 eq1=3277 eq2=3473\n[eq1] x ◇ x = y ◇ (x ◇ (z ◇ w))\n[eq2] x ◇ x = y ◇ ((x ◇ x) ◇ z)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[stage] generic tactics\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0045",
+    "eq1_id": 1480,
+    "eq2_id": 1882,
+    "elapsed_seconds": 9.03,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 1, 1], [2, 0, 3, 3], [0, 0, 1, 1], [2, 0, 3, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 1, 1], [2, 0, 3, 3], [0, 0, 1, 1], [2, 0, 3, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 8.46
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0045 eq1=1480 eq2=1882\n[eq1] x = (y ◇ x) ◇ (x ◇ (x ◇ z))\n[eq2] x = (x ◇ (y ◇ z)) ◇ (w ◇ w)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] True\n[stage] bounded equality graph\n[stage] singleton equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion singleton\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0047",
+    "eq1_id": 1486,
+    "eq2_id": 913,
+    "elapsed_seconds": 10.27,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 1, 1], [2, 2, 3, 3], [0, 0, 1, 1], [2, 2, 3, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 1, 1], [2, 2, 3, 3], [0, 0, 1, 1], [2, 2, 3, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 9.75
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0047 eq1=1486 eq2=913\n[eq1] x = (y ◇ x) ◇ (x ◇ (z ◇ z))\n[eq2] x = y ◇ ((y ◇ x) ◇ (z ◇ y))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] True\n[stage] bounded equality graph\n[stage] singleton equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion singleton\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0057",
+    "eq1_id": 964,
+    "eq2_id": 698,
+    "elapsed_seconds": 32.49,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3], [1, 2, 0, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3], [1, 2, 0, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 9.7
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0057 eq1=964 eq2=698\n[eq1] x = y ◇ ((z ◇ y) ◇ (y ◇ x))\n[eq2] x = y ◇ (x ◇ ((z ◇ w) ◇ x))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0058",
+    "eq1_id": 4574,
+    "eq2_id": 4438,
+    "elapsed_seconds": 62.81,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 2], [0, 2, 0, 0]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 13,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ (?w ◇ ?w) ◇ x = (x ◇ z) ◇ x\ncase w\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G"
+        },
+        "elapsed": 1.88
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (?w ◇ ?w) ◇ ?z\nin the target expression\n  x ◇ (y ◇ x) = (x ◇ z) ◇ x\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ x ◇ (y ◇ x) = (x ◇ z) ◇ x"
+        },
+        "elapsed": 1.72
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  simp only [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.82
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  simp only [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.91
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [← h, ← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (?w ◇ ?w) ◇ ?z\nin the target expression\n  x ◇ (y ◇ x) = (x ◇ z) ◇ x\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ x ◇ (y ◇ x) = (x ◇ z) ◇ x"
+        },
+        "elapsed": 1.97
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  rw [h, h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ ((?w ◇ ?w) ◇ ?z) ◇ x = (x ◇ z) ◇ x\ncase y\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G\ncase w\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z : G\n⊢ G"
+        },
+        "elapsed": 1.73
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  simp only [← h]; rfl\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.82
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  repeat rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+        },
+        "elapsed": 9.54
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact h x x x x\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h x x x x\nhas type\n  x ◇ (x ◇ x) = (x ◇ x) ◇ x\nbut is expected to have type\n  x ◇ (y ◇ x) = (x ◇ z) ◇ x"
+        },
+        "elapsed": 1.8
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact (h x x x x).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h x x x x)\nhas type\n  (x ◇ x) ◇ x = x ◇ (x ◇ x)\nbut is expected to have type\n  x ◇ (y ◇ x) = (x ◇ z) ◇ x"
+        },
+        "elapsed": 2.03
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact h y y y y\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h y y y y\nhas type\n  y ◇ (y ◇ y) = (y ◇ y) ◇ y\nbut is expected to have type\n  x ◇ (y ◇ x) = (x ◇ z) ◇ x"
+        },
+        "elapsed": 1.78
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z\n  exact (h y y y y).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h y y y y)\nhas type\n  (y ◇ y) ◇ y = y ◇ (y ◇ y)\nbut is expected to have type\n  x ◇ (y ◇ x) = (x ◇ z) ◇ x"
+        },
+        "elapsed": 1.79
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 2], [0, 2, 0, 0]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 9.64
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0058 eq1=4574 eq2=4438\n[eq1] x ◇ (y ◇ z) = (w ◇ w) ◇ z\n[eq2] x ◇ (y ◇ x) = (x ◇ z) ◇ x\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[stage] generic tactics\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0066",
+    "eq1_id": 2180,
+    "eq2_id": 3116,
+    "elapsed_seconds": 9.2,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 2, 3, 1], [3, 1, 0, 2], [1, 3, 2, 0], [2, 0, 1, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 4) := { op := finOpTable \"[[0, 2, 3, 1], [3, 1, 0, 2], [1, 3, 2, 0], [2, 0, 1, 3]]\" }\n  refine ⟨Fin 4, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 8.86
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0066 eq1=2180 eq2=3116\n[eq1] x = ((y ◇ z) ◇ y) ◇ (x ◇ z)\n[eq2] x = (((y ◇ x) ◇ y) ◇ y) ◇ y\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0037",
+    "eq1_id": 1336,
+    "eq2_id": 419,
+    "elapsed_seconds": 50.32,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 5) := { op := finOpTable \"[[0, 2, 1, 3, 4], [3, 2, 1, 4, 0], [4, 2, 1, 0, 3], [0, 2, 1, 3, 4], [0, 2, 1, 3, 4]]\" }\n  refine ⟨Fin 5, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\ndef submission : Goal := by\n  let m : Magma (Fin 5) := { op := finOpTable \"[[0, 2, 1, 3, 4], [3, 2, 1, 4, 0], [4, 2, 1, 0, 3], [0, 2, 1, 3, 4], [0, 2, 1, 3, 4]]\" }\n  refine ⟨Fin 5, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 8.69
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0037 eq1=1336 eq2=419\n[eq1] x = y ◇ (((y ◇ z) ◇ y) ◇ x)\n[eq2] x = x ◇ (x ◇ (y ◇ (y ◇ x)))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n[mf2] directed Fin5\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0005",
+    "eq1_id": 2805,
+    "eq2_id": 3891,
+    "elapsed_seconds": 44.0,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 8) := { op := finOpTable \"[[0, 2, 5, 1, 3, 6, 7, 4], [4, 1, 7, 2, 6, 3, 5, 0], [3, 5, 2, 7, 0, 4, 1, 6], [7, 6, 4, 3, 1, 2, 0, 5], [6, 7, 1, 5, 4, 0, 2, 3], [1, 4, 6, 0, 7, 5, 3, 2], [2, 0, 3, 4, 5, 7, 6, 1], [5, 3, 0, 6, 2, 1, 4, 7]]\" }\n  refine ⟨Fin 8, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 8) := { op := finOpTable \"[[0, 2, 5, 1, 3, 6, 7, 4], [4, 1, 7, 2, 6, 3, 5, 0], [3, 5, 2, 7, 0, 4, 1, 6], [7, 6, 4, 3, 1, 2, 0, 5], [6, 7, 1, 5, 4, 0, 2, 3], [1, 4, 6, 0, 7, 5, 3, 2], [2, 0, 3, 4, 5, 7, 6, 1], [5, 3, 0, 6, 2, 1, 4, 7]]\" }\n  refine ⟨Fin 8, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 15.13
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0005 eq1=2805 eq2=3891\n[eq1] x = ((y ◇ z) ◇ (z ◇ x)) ◇ y\n[eq2] x ◇ x = (y ◇ (y ◇ y)) ◇ y\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n[mf2] idem Fin8\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0008",
+    "eq1_id": 646,
+    "eq2_id": 1020,
+    "elapsed_seconds": 52.76,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 6) := { op := finOpTable \"[[1, 2, 0, 0, 0, 0], [1, 3, 1, 4, 1, 1], [1, 2, 2, 1, 2, 2], [5, 3, 3, 0, 3, 3], [2, 3, 4, 2, 4, 4], [2, 0, 5, 0, 5, 5]]\" }\n  refine ⟨Fin 6, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 6) := { op := finOpTable \"[[1, 2, 0, 0, 0, 0], [1, 3, 1, 4, 1, 1], [1, 2, 2, 1, 2, 2], [5, 3, 3, 0, 3, 3], [2, 3, 4, 2, 4, 4], [2, 0, 5, 0, 5, 5]]\" }\n  refine ⟨Fin 6, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 8.85
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0008 eq1=646 eq2=1020\n[eq1] x = x ◇ (y ◇ ((y ◇ z) ◇ y))\n[eq2] x = x ◇ ((x ◇ (x ◇ x)) ◇ x)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n[mf2] directed Fin6\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0009",
+    "eq1_id": 2656,
+    "eq2_id": 2863,
+    "elapsed_seconds": 206.97,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 6) := { op := finOpTable \"[[5, 5, 5, 5, 5, 5], [2, 3, 3, 3, 3, 1], [1, 1, 1, 1, 2, 3], [3, 2, 2, 2, 1, 2], [0, 0, 0, 0, 0, 0], [4, 4, 4, 4, 4, 4]]\" }\n  refine ⟨Fin 6, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 6) := { op := finOpTable \"[[5, 5, 5, 5, 5, 5], [2, 3, 3, 3, 3, 1], [1, 1, 1, 1, 2, 3], [3, 2, 2, 2, 1, 2], [0, 0, 0, 0, 0, 0], [4, 4, 4, 4, 4, 4]]\" }\n  refine ⟨Fin 6, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 9.06
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0009 eq1=2656 eq2=2863\n[eq1] x = ((x ◇ x) ◇ (y ◇ z)) ◇ y\n[eq2] x = ((x ◇ (y ◇ x)) ◇ x) ◇ y\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n[stage] SAT false-model finder\n[satfinder] Fin6 candidate\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0013",
+    "eq1_id": 4208,
+    "eq2_id": 3356,
+    "elapsed_seconds": 139.97,
+    "solved": false,
+    "verdict": null,
+    "code": null,
+    "llm_calls": 0,
+    "judge_calls": 12,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ ((?z ◇ y) ◇ x) ◇ x = y ◇ (y ◇ (y ◇ y))\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G"
+        },
+        "elapsed": 1.73
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ((?z ◇ ?y) ◇ ?x) ◇ ?x\nin the target expression\n  x ◇ y = y ◇ (y ◇ (y ◇ y))\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ x ◇ y = y ◇ (y ◇ (y ◇ y))"
+        },
+        "elapsed": 1.5
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.56
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.57
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [← h, ← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ((?z ◇ ?y) ◇ ?x) ◇ ?x\nin the target expression\n  x ◇ y = y ◇ (y ◇ (y ◇ y))\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ x ◇ y = y ◇ (y ◇ (y ◇ y))"
+        },
+        "elapsed": 1.46
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [h, h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ ((?z ◇ x) ◇ ((?z ◇ y) ◇ x)) ◇ ((?z ◇ y) ◇ x) = y ◇ (y ◇ (y ◇ y))\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G"
+        },
+        "elapsed": 1.63
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [← h]; rfl\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.51
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  repeat rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+        },
+        "elapsed": 21.45
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact h x x x\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h x x x\nhas type\n  x ◇ x = ((x ◇ x) ◇ x) ◇ x\nbut is expected to have type\n  x ◇ y = y ◇ (y ◇ (y ◇ y))"
+        },
+        "elapsed": 1.51
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (h x x x).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h x x x)\nhas type\n  ((x ◇ x) ◇ x) ◇ x = x ◇ x\nbut is expected to have type\n  x ◇ y = y ◇ (y ◇ (y ◇ y))"
+        },
+        "elapsed": 1.7
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact h y y y\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h y y y\nhas type\n  y ◇ y = ((y ◇ y) ◇ y) ◇ y\nbut is expected to have type\n  x ◇ y = y ◇ (y ◇ (y ◇ y))"
+        },
+        "elapsed": 1.45
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (h y y y).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h y y y)\nhas type\n  ((y ◇ y) ◇ y) ◇ y = y ◇ y\nbut is expected to have type\n  x ◇ y = y ◇ (y ◇ (y ◇ y))"
+        },
+        "elapsed": 1.56
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0013 eq1=4208 eq2=3356\n[eq1] x ◇ y = ((z ◇ y) ◇ x) ◇ x\n[eq2] x ◇ y = y ◇ (y ◇ (y ◇ y))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[stage] generic tactics\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n[stage] SAT false-model finder\n[stop] non-singleton residual: skipping low-yield LLM fallback\n",
+        "returncode": 0
+      }
+    ]
+  },
+  {
+    "id": "hard1_0017",
+    "eq1_id": 1286,
+    "eq2_id": 2891,
+    "elapsed_seconds": 12.8,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 7) := { op := finOpTable \"[[0, 6, 5, 4, 3, 2, 1], [2, 1, 0, 6, 5, 4, 3], [4, 3, 2, 1, 0, 6, 5], [6, 5, 4, 3, 2, 1, 0], [1, 0, 6, 5, 4, 3, 2], [3, 2, 1, 0, 6, 5, 4], [5, 4, 3, 2, 1, 0, 6]]\" }\n  refine ⟨Fin 7, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 7) := { op := finOpTable \"[[0, 6, 5, 4, 3, 2, 1], [2, 1, 0, 6, 5, 4, 3], [4, 3, 2, 1, 0, 6, 5], [6, 5, 4, 3, 2, 1, 0], [1, 0, 6, 5, 4, 3, 2], [3, 2, 1, 0, 6, 5, 4], [5, 4, 3, 2, 1, 0, 6]]\" }\n  refine ⟨Fin 7, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 12.63
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0017 eq1=1286 eq2=2891\n[eq1] x = y ◇ (((x ◇ y) ◇ x) ◇ y)\n[eq2] x = ((x ◇ (y ◇ z)) ◇ z) ◇ y\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0021",
+    "eq1_id": 907,
+    "eq2_id": 221,
+    "elapsed_seconds": 11.12,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 7) := { op := finOpTable \"[[0, 1, 2, 3, 4, 5, 6], [4, 5, 6, 0, 1, 2, 3], [1, 2, 3, 4, 5, 6, 0], [5, 6, 0, 1, 2, 3, 4], [2, 3, 4, 5, 6, 0, 1], [6, 0, 1, 2, 3, 4, 5], [3, 4, 5, 6, 0, 1, 2]]\" }\n  refine ⟨Fin 7, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 7) := { op := finOpTable \"[[0, 1, 2, 3, 4, 5, 6], [4, 5, 6, 0, 1, 2, 3], [1, 2, 3, 4, 5, 6, 0], [5, 6, 0, 1, 2, 3, 4], [2, 3, 4, 5, 6, 0, 1], [6, 0, 1, 2, 3, 4, 5], [3, 4, 5, 6, 0, 1, 2]]\" }\n  refine ⟨Fin 7, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 10.98
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0021 eq1=907 eq2=221\n[eq1] x = y ◇ ((y ◇ x) ◇ (x ◇ y))\n[eq2] x = (y ◇ (x ◇ y)) ◇ x\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0023",
+    "eq1_id": 164,
+    "eq2_id": 3470,
+    "elapsed_seconds": 109.86,
+    "solved": false,
+    "verdict": null,
+    "code": null,
+    "llm_calls": 0,
+    "judge_calls": 0,
+    "log": [
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0023 eq1=164 eq2=3470\n[eq1] x = (x ◇ y) ◇ (z ◇ z)\n[eq2] x ◇ x = x ◇ ((y ◇ z) ◇ w)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n[stage] SAT false-model finder\n[stop] non-singleton residual: skipping low-yield LLM fallback\n",
+        "returncode": 0
+      }
+    ]
+  },
+  {
+    "id": "hard1_0030",
+    "eq1_id": 2301,
+    "eq2_id": 4303,
+    "elapsed_seconds": 11.89,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 7) := { op := finOpTable \"[[0, 6, 5, 4, 3, 2, 1], [2, 1, 0, 6, 5, 4, 3], [4, 3, 2, 1, 0, 6, 5], [6, 5, 4, 3, 2, 1, 0], [1, 0, 6, 5, 4, 3, 2], [3, 2, 1, 0, 6, 5, 4], [5, 4, 3, 2, 1, 0, 6]]\" }\n  refine ⟨Fin 7, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 7) := { op := finOpTable \"[[0, 6, 5, 4, 3, 2, 1], [2, 1, 0, 6, 5, 4, 3], [4, 3, 2, 1, 0, 6, 5], [6, 5, 4, 3, 2, 1, 0], [1, 0, 6, 5, 4, 3, 2], [3, 2, 1, 0, 6, 5, 4], [5, 4, 3, 2, 1, 0, 6]]\" }\n  refine ⟨Fin 7, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 11.76
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0030 eq1=2301 eq2=4303\n[eq1] x = (y ◇ (x ◇ (y ◇ x))) ◇ y\n[eq2] x ◇ (x ◇ y) = z ◇ (y ◇ x)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0033",
+    "eq1_id": 2994,
+    "eq2_id": 2623,
+    "elapsed_seconds": 27.68,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 6) := { op := finOpTable \"[[0, 1, 2, 3, 4, 5], [0, 1, 2, 3, 4, 5], [0, 0, 3, 3, 0, 3], [0, 4, 5, 4, 4, 0], [2, 0, 2, 1, 2, 0], [0, 1, 2, 3, 4, 5]]\" }\n  refine ⟨Fin 6, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 6) := { op := finOpTable \"[[0, 1, 2, 3, 4, 5], [0, 1, 2, 3, 4, 5], [0, 0, 3, 3, 0, 3], [0, 4, 5, 4, 4, 0], [2, 0, 2, 1, 2, 0], [0, 1, 2, 3, 4, 5]]\" }\n  refine ⟨Fin 6, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 9.67
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0033 eq1=2994 eq2=2623\n[eq1] x = ((y ◇ (z ◇ y)) ◇ y) ◇ x\n[eq2] x = (y ◇ ((z ◇ w) ◇ y)) ◇ x\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n[mf2] general Fin6\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0034",
+    "eq1_id": 386,
+    "eq2_id": 3639,
+    "elapsed_seconds": 268.96,
+    "solved": false,
+    "verdict": null,
+    "code": null,
+    "llm_calls": 0,
+    "judge_calls": 12,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z w : G\n⊢ (y ◇ x) ◇ ?z = z ◇ ((w ◇ y) ◇ y)\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z w : G\n⊢ G"
+        },
+        "elapsed": 1.53
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  rw [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z w : G\n⊢ x ◇ y = z ◇ (y ◇ w)"
+        },
+        "elapsed": 1.67
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  simp only [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.52
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  simp only [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z w : G\n⊢ x ◇ y = z ◇ (y ◇ w)"
+        },
+        "elapsed": 1.6
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  rw [← h, ← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:11: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (?y ◇ ?x) ◇ ?z\nin the target expression\n  x ◇ y = z ◇ (y ◇ w)\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z w : G\n⊢ x ◇ y = z ◇ (y ◇ w)"
+        },
+        "elapsed": 1.68
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  rw [h, h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z w : G\n⊢ (?y ◇ (y ◇ x)) ◇ ?z = z ◇ ((w ◇ y) ◇ y)\ncase y\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z w : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z w : G\n⊢ G"
+        },
+        "elapsed": 1.62
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  simp only [← h]; rfl\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:19: error: Tactic `rfl` failed: The left-hand side\n  x ◇ y\nis not definitionally equal to the right-hand side\n  z ◇ (y ◇ w)\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y z w : G\n⊢ x ◇ y = z ◇ (y ◇ w)"
+        },
+        "elapsed": 1.52
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  repeat rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+        },
+        "elapsed": 21.09
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  exact h x x x\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h x x x\nhas type\n  x ◇ x = (x ◇ x) ◇ x\nbut is expected to have type\n  x ◇ y = z ◇ ((w ◇ y) ◇ y)"
+        },
+        "elapsed": 1.7
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  exact (h x x x).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h x x x)\nhas type\n  (x ◇ x) ◇ x = x ◇ x\nbut is expected to have type\n  x ◇ y = z ◇ ((w ◇ y) ◇ y)"
+        },
+        "elapsed": 1.43
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  exact h y y y\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h y y y\nhas type\n  y ◇ y = (y ◇ y) ◇ y\nbut is expected to have type\n  x ◇ y = z ◇ ((w ◇ y) ◇ y)"
+        },
+        "elapsed": 1.51
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y z w\n  exact (h y y y).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h y y y)\nhas type\n  (y ◇ y) ◇ y = y ◇ y\nbut is expected to have type\n  x ◇ y = z ◇ ((w ◇ y) ◇ y)"
+        },
+        "elapsed": 1.67
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0034 eq1=386 eq2=3639\n[eq1] x ◇ y = (y ◇ x) ◇ z\n[eq2] x ◇ y = z ◇ ((w ◇ y) ◇ y)\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[stage] generic tactics\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n[stage] SAT false-model finder\n[stop] non-singleton residual: skipping low-yield LLM fallback\n",
+        "returncode": 0
+      }
+    ]
+  },
+  {
+    "id": "hard1_0046",
+    "eq1_id": 3550,
+    "eq2_id": 3282,
+    "elapsed_seconds": 135.4,
+    "solved": false,
+    "verdict": null,
+    "code": null,
+    "llm_calls": 0,
+    "judge_calls": 12,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ x ◇ ((x ◇ x) ◇ ?z) = y ◇ (y ◇ (y ◇ y))\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G"
+        },
+        "elapsed": 1.45
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?y ◇ ((?x ◇ ?y) ◇ ?z)\nin the target expression\n  x ◇ x = y ◇ (y ◇ (y ◇ y))\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ x ◇ x = y ◇ (y ◇ (y ◇ y))"
+        },
+        "elapsed": 1.7
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.66
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.52
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [← h, ← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?y ◇ ((?x ◇ ?y) ◇ ?z)\nin the target expression\n  x ◇ x = y ◇ (y ◇ (y ◇ y))\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ x ◇ x = y ◇ (y ◇ (y ◇ y))"
+        },
+        "elapsed": 1.56
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [h, h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ ((x ◇ x) ◇ ?z) ◇ ((x ◇ ((x ◇ x) ◇ ?z)) ◇ ?z) = y ◇ (y ◇ (y ◇ y))\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G"
+        },
+        "elapsed": 1.61
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [← h]; rfl\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.55
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  repeat rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+        },
+        "elapsed": 14.52
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact h x x x\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h x x x\nhas type\n  x ◇ x = x ◇ ((x ◇ x) ◇ x)\nbut is expected to have type\n  x ◇ x = y ◇ (y ◇ (y ◇ y))"
+        },
+        "elapsed": 1.67
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (h x x x).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h x x x)\nhas type\n  x ◇ ((x ◇ x) ◇ x) = x ◇ x\nbut is expected to have type\n  x ◇ x = y ◇ (y ◇ (y ◇ y))"
+        },
+        "elapsed": 1.7
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact h y y y\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h y y y\nhas type\n  y ◇ y = y ◇ ((y ◇ y) ◇ y)\nbut is expected to have type\n  x ◇ x = y ◇ (y ◇ (y ◇ y))"
+        },
+        "elapsed": 1.64
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (h y y y).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h y y y)\nhas type\n  y ◇ ((y ◇ y) ◇ y) = y ◇ y\nbut is expected to have type\n  x ◇ x = y ◇ (y ◇ (y ◇ y))"
+        },
+        "elapsed": 1.56
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0046 eq1=3550 eq2=3282\n[eq1] x ◇ y = y ◇ ((x ◇ y) ◇ z)\n[eq2] x ◇ x = y ◇ (y ◇ (y ◇ y))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[stage] generic tactics\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n[stage] SAT false-model finder\n[stop] non-singleton residual: skipping low-yield LLM fallback\n",
+        "returncode": 0
+      }
+    ]
+  },
+  {
+    "id": "hard1_0054",
+    "eq1_id": 4246,
+    "eq2_id": 4469,
+    "elapsed_seconds": 227.55,
+    "solved": false,
+    "verdict": null,
+    "code": null,
+    "llm_calls": 0,
+    "judge_calls": 12,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ ((?z ◇ ?w) ◇ x) ◇ ?u = (x ◇ x) ◇ x\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G\ncase w\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G\ncase u\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G"
+        },
+        "elapsed": 2.07
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ((?z ◇ ?w) ◇ ?x) ◇ ?u\nin the target expression\n  x ◇ (y ◇ y) = (x ◇ x) ◇ x\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ x ◇ (y ◇ y) = (x ◇ x) ◇ x"
+        },
+        "elapsed": 1.59
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.63
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.79
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [← h, ← h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ((?z ◇ ?w) ◇ ?x) ◇ ?u\nin the target expression\n  x ◇ (y ◇ y) = (x ◇ x) ◇ x\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ x ◇ (y ◇ y) = (x ◇ x) ◇ x"
+        },
+        "elapsed": 1.68
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  rw [h, h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: unsolved goals\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ ((?z ◇ ?w) ◇ ((?z ◇ ?w) ◇ x)) ◇ ?u = (x ◇ x) ◇ x\ncase y\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G\ncase w\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G\ncase u\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G\ncase z\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G\ncase w\nG : Type\ninst✝ : Magma G\nh : EquationLHS G\nx y : G\n⊢ G"
+        },
+        "elapsed": 1.6
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  simp only [← h]; rfl\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: `simp` made no progress"
+        },
+        "elapsed": 1.98
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  repeat rw [h]\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:3:25: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+        },
+        "elapsed": 14.89
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact h x x x x x\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h x x x x x\nhas type\n  x ◇ x = ((x ◇ x) ◇ x) ◇ x\nbut is expected to have type\n  x ◇ (y ◇ y) = (x ◇ x) ◇ x"
+        },
+        "elapsed": 1.7
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (h x x x x x).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h x x x x x)\nhas type\n  ((x ◇ x) ◇ x) ◇ x = x ◇ x\nbut is expected to have type\n  x ◇ (y ◇ y) = (x ◇ x) ◇ x"
+        },
+        "elapsed": 1.62
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact h y y y y y\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  h y y y y y\nhas type\n  y ◇ y = ((y ◇ y) ◇ y) ◇ y\nbut is expected to have type\n  x ◇ (y ◇ y) = (x ◇ x) ◇ x"
+        },
+        "elapsed": 1.71
+      },
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "true",
+          "code": "import JudgeProblem\n\ndef submission : Goal := by\n  intro G _ h\n  intro x y\n  exact (h y y y y y).symm\n"
+        },
+        "response": {
+          "status": "incorrect",
+          "message": "Submission.lean:6:2: error: Type mismatch\n  Eq.symm (h y y y y y)\nhas type\n  ((y ◇ y) ◇ y) ◇ y = y ◇ y\nbut is expected to have type\n  x ◇ (y ◇ y) = (x ◇ x) ◇ x"
+        },
+        "elapsed": 1.61
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0054 eq1=4246 eq2=4469\n[eq1] x ◇ y = ((z ◇ w) ◇ x) ◇ u\n[eq2] x ◇ (y ◇ y) = (x ◇ x) ◇ x\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[stage] generic tactics\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n[stage] SAT false-model finder\n[stop] non-singleton residual: skipping low-yield LLM fallback\n",
+        "returncode": 0
+      }
+    ]
+  },
+  {
+    "id": "hard1_0062",
+    "eq1_id": 2116,
+    "eq2_id": 2327,
+    "elapsed_seconds": 48.54,
+    "solved": true,
+    "verdict": "false",
+    "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 8) := { op := finOpTable \"[[0, 2, 7, 1, 3, 4, 5, 6], [6, 1, 4, 2, 5, 7, 3, 0], [5, 7, 2, 4, 6, 1, 0, 3], [7, 5, 0, 3, 1, 6, 2, 4], [2, 0, 5, 6, 4, 3, 7, 1], [1, 6, 3, 0, 7, 5, 4, 2], [3, 4, 1, 7, 0, 2, 6, 5], [4, 3, 6, 5, 2, 0, 1, 7]]\" }\n  refine ⟨Fin 8, m, ?_⟩\n  decideFin!\n",
+    "llm_calls": 0,
+    "judge_calls": 1,
+    "log": [
+      {
+        "type": "judge",
+        "request": {
+          "verdict": "false",
+          "code": "import JudgeProblem\nimport JudgeDecide.DecideBang\nimport JudgeFinOp.MemoFinOp\nopen MemoFinOp\n\nset_option maxRecDepth 100000\n\ndef submission : Goal := by\n  let m : Magma (Fin 8) := { op := finOpTable \"[[0, 2, 7, 1, 3, 4, 5, 6], [6, 1, 4, 2, 5, 7, 3, 0], [5, 7, 2, 4, 6, 1, 0, 3], [7, 5, 0, 3, 1, 6, 2, 4], [2, 0, 5, 6, 4, 3, 7, 1], [1, 6, 3, 0, 7, 5, 4, 2], [3, 4, 1, 7, 0, 2, 6, 5], [4, 3, 6, 5, 2, 0, 1, 7]]\" }\n  refine ⟨Fin 8, m, ?_⟩\n  decideFin!\n"
+        },
+        "response": {
+          "status": "accepted",
+          "message": "certificate accepted"
+        },
+        "elapsed": 14.92
+      },
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0062 eq1=2116 eq2=2327\n[eq1] x = ((y ◇ x) ◇ z) ◇ (z ◇ y)\n[eq2] x = (y ◇ (y ◇ (x ◇ x))) ◇ x\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n[mf2] idem Fin8\n",
+        "returncode": -15
+      }
+    ]
+  },
+  {
+    "id": "hard1_0067",
+    "eq1_id": 1927,
+    "eq2_id": 3409,
+    "elapsed_seconds": 180.1,
+    "solved": false,
+    "verdict": null,
+    "code": null,
+    "llm_calls": 0,
+    "judge_calls": 0,
+    "log": [
+      {
+        "type": "solver_stderr",
+        "tail": "[problem] hard1_0067 eq1=1927 eq2=3409\n[eq1] x = (y ◇ (y ◇ x)) ◇ (z ◇ x)\n[eq2] x ◇ y = z ◇ (y ◇ (w ◇ y))\n[stage] exhaustive Fin 2-3 counterexample search\n[stage] named witness tables\n[stage] affine model search\n[stage] perturbed witness tables\n[stage] structured Fin 4-7 counterexample search\n[stage] direct h application\n[stage] two-step h chain\n[stage] singleton small-model hint\n[singleton_hint] False\n[stage] bounded equality graph\n[skip] generic tactics: Eq1 has bare side\n[stage] trivial singleton template\n[stage] structural singleton pattern\n[stage] completion non-singleton\n[stage] backtracking model finder\n[stage] SAT false-model finder\n[stop] non-singleton residual: skipping low-yield LLM fallback\n",
+        "returncode": 0
+      }
+    ]
+  }
+]
