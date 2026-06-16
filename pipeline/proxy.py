@@ -788,6 +788,7 @@ def run_solver(
     solved = False
     final_verdict = None
     final_code = None
+    final_stage = None  # solver-reported stage that produced the accepted cert
     timed_out = False
 
     # Build a minimal environment for the solver — no secrets leak through.
@@ -998,6 +999,9 @@ def run_solver(
                     solved = True
                     final_verdict = verdict
                     final_code = code
+                    # Provenance: which solver stage produced the accepted
+                    # certificate (solver tags each judge call with its stage).
+                    final_stage = msg.get("stage")
 
                 elapsed = time.time() - t0
                 entry = {
@@ -1111,6 +1115,8 @@ def run_solver(
         "solved": solved,
         "verdict": final_verdict,
         "code": final_code,
+        "solved_by": final_stage,            # stage that produced the accepted cert
+        "used_llm": bool(solved and llm_calls > 0),  # LLM involved in the solve
         "llm_calls": llm_calls,
         "judge_calls": judge_calls,
         "log": log,
