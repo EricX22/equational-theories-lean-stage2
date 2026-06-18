@@ -48,6 +48,22 @@ For lemma_strategy mode:
 - Do not include `verdict`, `proof`, or `counterexample_table`.
 - Do not use markdown or prose.
 
+If solver mode is `waypoints`, DO NOT write Lean code.
+Return ONLY one JSON object with this shape:
+{"mode":"waypoints","chain":["<term1>","<term2>",...]}
+
+For waypoints mode:
+- The analysis gives the hypothesis h, a goal `LHS = RHS`, and the two distinct
+  normal forms ordered rewriting got stuck on.
+- The `chain` is a sequence of intermediate magma terms M1..Mk so that
+  LHS = M1 = M2 = ... = Mk = RHS. We verify each adjacent equality automatically
+  by short search using h, then compose — so pick terms where EACH step is a
+  small consequence of h (one or two h-rewrites), not a big leap.
+- Use ONLY the goal's variables and the operator ◇. No new variables.
+- Prefer terms shaped like h's left or right side with the goal variables
+  substituted in. Suggest 1 to 6 intermediate terms.
+- Do NOT include verdict, proof, or counterexample_table. No markdown, no prose.
+
 For TRUE: {"verdict": "true", "proof": "<tactic body — no `import`, no `theorem`>"}
 For FALSE: {"verdict": "false", "counterexample_table": [[0,1],[1,0]]}
 
@@ -81,6 +97,9 @@ MIN_SECONDS_FOR_LLM = 350
 MF2_PORTFOLIO_BUDGET = 240.0  # was 60.0; per-problem cap is 3600s and the
 # false-side finder was the scarce resource. Funds the extended large-Fin
 # schedule tier below. Only spent on cases the true-proof stages did not close.
+NARROW_BUDGET = 8.0  # goal-directed narrowing (true side). Bounded: it
+# exhausts the reachable space fast on cases it can't join, so the deep
+# direction-bound residual (LLM-waypoint territory) fails cheap.
 SAT_FINDER_BUDGET = 120.0  # complete CDCL false-finder; runs only on
 # non-singleton cases the mf2 portfolio missed. Cracks the hard general Fin 6
 # residual; bounded so it can't run away on a genuinely-true (unsat) case.
@@ -89,6 +108,18 @@ SAT_FINDER_BUDGET = 120.0  # complete CDCL false-finder; runs only on
 # case burned 337s on a single call). The deterministic stages (completion +
 # model finder) cover this residual. Flip to True to re-enable.
 ENABLE_NS_LLM_FALLBACK = False
+
+# Master switch for ALL LLM stages. On by default. Set False for a clean
+# deterministic-only run; the solved-set difference vs an ENABLE_LLM=True run
+# is the LLM system's measurable contribution (paper baseline). Per-row
+# attribution (`used_llm`, `solved_by`) lets you read that contribution off a
+# single full run without re-running, so this is mainly for ablations.
+ENABLE_LLM = True
+
+# Updated by trace() on every "[stage] X" line and attached to each judge call
+# so the harness can record `solved_by` (which stage produced the accepted
+# certificate). Pure provenance bookkeeping; does not affect solving.
+CURRENT_STAGE = None
 
 
 # ── Protocol ────────────────────────────────────────────────────
@@ -106,7 +137,8 @@ def send_message(msg):
 
 
 def call_judge(verdict, code):
-    send_message({"call": "judge", "verdict": verdict, "code": code})
+    send_message({"call": "judge", "verdict": verdict, "code": code,
+                  "stage": CURRENT_STAGE})
     return read_message()
 
 
@@ -120,6 +152,9 @@ def trace(msg):
     These show up in solver_stderr logs without interfering with the
     JSON stdin/stdout protocol used by the proxy.
     """
+    global CURRENT_STAGE
+    if msg.startswith("[stage] "):
+        CURRENT_STAGE = msg[len("[stage] "):]
     print(msg, file=sys.stderr, flush=True)
 
 
@@ -1985,6 +2020,287 @@ def try_completion_nonsingleton(problem, eq1_text, eq2_text, time_budget=20.0):
     return call_judge("true", make_true_code(body)).get("status") == "accepted"
 
 
+# ── Goal-directed narrowing stage (nz_ namespace) ───────────────
+# Proof-carrying bidirectional equational search for the TRUE residual that
+# ordered completion saturates on without joining the goal sides. Grounds the
+# goal variables (Eq1's vars are renamed into a '#' namespace so matching can
+# never conflate them), then expands BOTH goal sides by one-step Eq1 rewrites in
+# both orientations — keeping Eq1's surplus variables FRESH and meeting the two
+# frontiers by unification. The meeting unifier is applied to both proof chains,
+# leftover fresh vars are grounded to a goal variable, and the composed proof is
+# kc_ptype-CHECKED before rendering (identical proof format to Stage 2.8, so a
+# wrong proof can only be rejected, never accepted). Bounded by size/nodes/time;
+# only the shallow joins are in reach (the deep ones are direction-bound and
+# wait for the LLM-waypoint layer), but every join it finds is a free sound win.
+
+def nz_setup(eq1_text):
+    global kc_H_VARS, kc_H_LHS, kc_H_RHS
+    L, R = eq1_text.split('=', 1)
+    L, R = kc_parse(L), kc_parse(R)
+    vs = []
+    for v in re.findall(r"\b([a-z])\b", eq1_text):
+        if v not in vs:
+            vs.append(v)
+    kc_H_VARS = [v + '#' for v in vs]
+    kc_H_LHS = kc_rename(L, '#'); kc_H_RHS = kc_rename(R, '#')
+    return kc_H_LHS, kc_H_RHS
+
+
+def nz_canon(t, gset):
+    m = {}; ctr = [0]
+    def go(x):
+        if kc_is_v(x):
+            n = x[1]
+            if n in gset:
+                return n
+            if n not in m:
+                m[n] = '@%d' % ctr[0]; ctr[0] += 1
+            return m[n]
+        return '(' + go(x[2][0]) + '.' + go(x[2][1]) + ')'
+    return go(t)
+
+
+def nz_allvars(P):
+    acc = set()
+    def go(Q):
+        k = Q[0]
+        if k == 'H':
+            for a in Q[1]: acc.update(kc_vars_of(a))
+        elif k == 'SYM': go(Q[1])
+        elif k == 'TRANS': go(Q[1]); go(Q[2])
+        elif k in ('CL', 'CR'): acc.update(kc_vars_of(Q[1])); go(Q[2])
+        elif k == 'REFL': acc.update(kc_vars_of(Q[1]))
+    go(P)
+    return acc
+
+
+def nz_search_pair(eq1_text, gl, gr, gvars, tb=8.0, ceil=18, max_nodes=60000):
+    """Bidirectional narrowing between TERMS gl and gr. Returns a kc proof
+    object P with kc_ptype(P) == (gl, gr), or None. Sound: P is composed only
+    from Eq1 H-instances, so it always re-checks against kc_ptype."""
+    import heapq
+    Hl, Hr = nz_setup(eq1_text)
+    gset = set(gvars)
+    if gl == gr:
+        return ('REFL', gl)
+    Fc = {nz_canon(gl, gset): (gl, ('REFL', gl))}
+    Bc = {nz_canon(gr, gset): (gr, ('REFL', gr))}
+    ctr = [0]
+    pq = [(kc_size(gl), 0, gl, ('REFL', gl), 0), (kc_size(gr), 1, gr, ('REFL', gr), 1)]
+    heapq.heapify(pq)
+    nodes = 0; start = time.time()
+
+    def expand(u, P, side):
+        out = []
+        for path, sub in kc_nonvar_positions(u):
+            for (l0, r0, fwd) in ((Hl, Hr, True), (Hr, Hl, False)):
+                ctr[0] += 1
+                suf = ('@f%d' if side == 0 else '@b%d') % ctr[0]
+                l = kc_rename(l0, suf); r = kc_rename(r0, suf)
+                sig = kc_unify(l, sub, {})
+                if sig is None:
+                    continue
+                u2 = kc_appsub(kc_replace(u, path, r), sig)
+                if kc_sizecap(u2, ceil) > ceil:
+                    continue
+                args = tuple(kc_appsub(('V', v + suf), sig) for v in kc_H_VARS)
+                Hi = ('H', args)
+                inner = Hi if fwd else ('SYM', Hi)
+                step = kc_cong_wrap(kc_appsub(u, sig), path, inner)
+                out.append((u2, ('TRANS', kc_inst_proof(P, sig), step)))
+        return out
+
+    def compose(side, uf, Pf_, uo, Po_):
+        Pf, Pb = (Pf_, Po_) if side == 0 else (Po_, Pf_)
+        tf, tbb = (uf, uo) if side == 0 else (uo, uf)
+        tau = kc_unify(tf, tbb, {})
+        if tau is None:
+            return None
+        P = ('TRANS', kc_inst_proof(Pf, tau), ('SYM', kc_inst_proof(Pb, tau)))
+        fv = {v for v in nz_allvars(P) if '@' in v}
+        if fv:
+            g = gvars[0] if gvars else (next(iter(gset)) if gset else 'x')
+            P = kc_inst_proof(P, {v: ('V', g) for v in fv})
+        P = kc_simplify(P)
+        try:
+            if kc_ptype(P) == (gl, gr):
+                return P
+        except Exception:
+            return None
+        return None
+
+    while pq and nodes < max_nodes:
+        if (nodes & 255) == 0 and time.time() - start > tb:
+            return None
+        _, _, u, P, side = heapq.heappop(pq)
+        Dc, Oc = (Fc, Bc) if side == 0 else (Bc, Fc)
+        for u2, Pn in expand(u, P, side):
+            c = nz_canon(u2, gset)
+            if c in Dc:
+                continue
+            Dc[c] = (u2, Pn); nodes += 1
+            if c in Oc:
+                uo, Po = Oc[c]
+                full = compose(side, u2, Pn, uo, Po)
+                if full is not None:
+                    return full
+            ctr[0] += 1
+            heapq.heappush(pq, (kc_size(u2), ctr[0], u2, Pn, side))
+    return None
+
+
+def nz_narrow_prove(eq1_text, gl_s, gr_s, gvars, tb=8.0, ceil=18, max_nodes=60000):
+    P = nz_search_pair(eq1_text, kc_parse(gl_s), kc_parse(gr_s), gvars,
+                       tb=tb, ceil=ceil, max_nodes=max_nodes)
+    if P is None:
+        return None
+    intro = ("intro " + " ".join(gvars) + "\n") if gvars else ""
+    return intro + "exact " + kc_render(P)
+
+
+def nz_verify_chain(eq1_text, term_strs, gvars, tb=4.0, ceil=20):
+    """Prove goal_lhs = goal_rhs through LLM-proposed waypoints. term_strs =
+    [goal_lhs, M1, ..., goal_rhs]; each adjacent hop is discharged by narrowing
+    and the legs are TRANS-composed. The whole proof is kc_ptype-CHECKED, so a
+    bad waypoint either leaves a hop unprovable (→ None) or the chain genuinely
+    establishes the goal — it can never yield an invalid proof."""
+    try:
+        terms = [kc_parse(s) for s in term_strs]
+    except Exception:
+        return None
+    if len(terms) < 2:
+        return None
+    P = None
+    for i in range(len(terms) - 1):
+        Pi = nz_search_pair(eq1_text, terms[i], terms[i + 1], gvars, tb=tb, ceil=ceil)
+        if Pi is None:
+            return None
+        P = Pi if P is None else ('TRANS', P, Pi)
+    P = kc_simplify(P)
+    try:
+        if kc_ptype(P) != (terms[0], terms[-1]):
+            return None
+    except Exception:
+        return None
+    intro = ("intro " + " ".join(gvars) + "\n") if gvars else ""
+    return intro + "exact " + kc_render(P)
+
+
+def try_narrowing(problem, eq1_text, eq2_text, time_budget=8.0):
+    """True-side stage: goal-directed bidirectional narrowing. Catches the
+    shallow non-singleton implications completion saturates on. kc_ptype-checked
+    and judged, so it is sound regardless of search heuristics."""
+    gl, gr = eq2_text.split("=", 1)
+    try:
+        body = nz_narrow_prove(eq1_text, gl.strip(), gr.strip(),
+                               goal_vars(eq2_text), tb=time_budget)
+    except Exception as e:
+        trace(f"[narrowing] error: {e!r}")
+        return False
+    if not body:
+        return False
+    trace("[narrowing] candidate proof")
+    return call_judge("true", make_true_code(body)).get("status") == "accepted"
+
+
+def nz_stuck_nf(eq1_text, gl_s, gr_s, tb=3.0, maxp=120):
+    """Bounded ordered completion of Eq1, then normalize each goal side — the
+    two distinct normal forms are the 'where it got stuck' signal handed to the
+    LLM so it can aim its waypoints at the gap. Best-effort; never raises out."""
+    L, R = eq1_text.split('=', 1)
+    E = (kc_parse(L), kc_parse(R))
+    start = time.time(); processed = []; queue = [E]; seen = set()
+    while queue and time.time() - start < tb and len(processed) <= maxp:
+        queue.sort(key=lambda e: kc_size(e[0]) + kc_size(e[1]))
+        e = kc_norm_eq(queue.pop(0), processed)
+        if e[0] == e[1]:
+            continue
+        k = kc_canon(e)
+        if k in seen:
+            continue
+        seen.add(k)
+        rules = processed + [e]; news = []
+        for f in rules:
+            for cp in kc_crit_pairs(e, f, kc_CEIL) + kc_crit_pairs(f, e, kc_CEIL):
+                cp = kc_norm_eq(cp, rules)
+                if cp[0] == cp[1]:
+                    continue
+                if kc_sizecap(cp[0], kc_CEIL) > kc_CEIL or kc_sizecap(cp[1], kc_CEIL) > kc_CEIL:
+                    continue
+                if kc_canon(cp) in seen:
+                    continue
+                news.append(cp)
+        processed.append(e); queue.extend(news)
+    nl = kc_normalize(kc_parse(gl_s), processed)
+    nr = kc_normalize(kc_parse(gr_s), processed)
+    return kc_ts(nl), kc_ts(nr)
+
+
+def try_llm_waypoints(problem, eq1_text, eq2_text, start_time, budget_seconds,
+                      max_attempts=3):
+    """LLM-waypoint stage for the non-singleton TRUE residual: the model proposes
+    intermediate bridge terms, the narrowing engine verifies each adjacent hop,
+    and the legs are TRANS-composed into one kc_ptype-checked, judge-validated
+    proof. The LLM supplies search DIRECTION only; soundness is the engine's.
+    Attributed as `solved_by = "LLM waypoints"`, `used_llm = True`."""
+    remaining = budget_seconds - (time.monotonic() - start_time)
+    if remaining < 30:
+        trace("[waypoints] skip: not enough time")
+        return False
+    gl_s, gr_s = [x.strip() for x in eq2_text.split("=", 1)]
+    gv = goal_vars(eq2_text)
+    try:
+        nf_l, nf_r = nz_stuck_nf(eq1_text, gl_s, gr_s)
+    except Exception:
+        nf_l, nf_r = gl_s, gr_s
+    tried = []
+    for attempt in range(max_attempts):
+        prev = ""
+        if tried:
+            prev = ("These chains were tried and FAILED to verify (an adjacent hop "
+                    "was not a short consequence of h): " + " | ".join(tried) +
+                    ". Propose DIFFERENT bridge terms.")
+        analysis = (
+            f"Hypothesis h: {eq1_text}\n"
+            f"Goal to prove: {gl_s} = {gr_s}   (variables: {' '.join(gv)})\n"
+            f"Ordered rewriting STALLED: the goal's two sides reduce to distinct normal "
+            f"forms `{nf_l}` and `{nf_r}`, so no direct rewrite path was found.\n"
+            f"Propose intermediate WAYPOINT terms M1..Mk so that "
+            f"{gl_s} = M1 = ... = Mk = {gr_s}, where EACH adjacent equality is a SHORT "
+            f"consequence of h (one or two h-rewrites apart — small hops, not leaps). "
+            f"Use only the variables {' '.join(gv)} and the operator ◇. Prefer terms "
+            f"shaped like the two sides of h with these variables substituted in. " + prev
+        )
+        result = call_llm({"mode": "waypoints", "analysis": analysis,
+                           "attempt": str(attempt)})
+        if "error" in result:
+            trace(f"[waypoints] LLM error: {result.get('error')}")
+            return False
+        answer = extract_json(result.get("response", ""))
+        if not answer:
+            trace("[waypoints] unparseable response")
+            continue
+        chain = answer.get("chain") or answer.get("waypoints")
+        if not isinstance(chain, list) or not chain:
+            trace("[waypoints] no chain in response")
+            continue
+        chain = [str(t).replace("*", "◇").strip() for t in chain if str(t).strip()]
+        tried.append(" -> ".join(chain))
+        full = [gl_s] + chain + [gr_s]
+        try:
+            body = nz_verify_chain(eq1_text, full, gv, tb=4.0)
+        except Exception as e:
+            trace(f"[waypoints] verify error: {e!r}")
+            continue
+        if not body:
+            trace("[waypoints] chain failed verification")
+            continue
+        trace("[waypoints] verified chain; submitting")
+        if call_judge("true", make_true_code(body)).get("status") == "accepted":
+            return True
+    return False
+
+
 # ── Affine model stage (af_ namespace) ──────────────────────────
 # op(x,y) = (a*x + b*y + c) mod n. Eq1 holds identically iff per-variable
 # coefficients and the constant term match mod n — checked SYMBOLICALLY in
@@ -3312,6 +3628,15 @@ def main():
             trace("[accepted] completion non-singleton")
             return
 
+    # Stage 2.85: goal-directed narrowing. Catches shallow non-singleton TRUE
+    # implications that completion saturates on. Sound (kc_ptype + judge);
+    # bounded budget so a clearly-false/unreachable case can't run away.
+    if "try_narrowing" in globals():
+        trace("[stage] goal-directed narrowing")
+        if try_narrowing(problem, eq1, eq2, time_budget=NARROW_BUDGET):
+            trace("[accepted] goal-directed narrowing")
+            return
+
     # Stage 2.9: backtracking finite-model finder (false side).
     # Catches generic Fin 4-6 counterexamples the structured search misses.
     # Placed after the true-proof stages so true cases are mostly solved
@@ -3332,7 +3657,12 @@ def main():
             trace("[accepted] SAT false-model finder")
             return
 
-    # Stage 3: LLM fallback.
+    # Stage 3: LLM fallback. Master switch: when ENABLE_LLM is False every LLM
+    # stage is skipped, giving a clean deterministic-only run for ablations.
+    if not ENABLE_LLM:
+        trace("[stop] LLM disabled (ENABLE_LLM=False)")
+        return
+
     # Hard singleton cases are currently low-yield: the model often returns
     # false, wrong intros, or invalid h1.trans h2.symm proofs. Prefer failing
     # fast unless we later add a shape-specific prompt.
@@ -3350,6 +3680,16 @@ def main():
 
         trace("[stop] hard singleton reached fallback; strategist failed")
         return
+
+    # Stage 3b: LLM-waypoint search for the non-singleton TRUE residual — the
+    # saturating implications narrowing alone can't bridge. LLM proposes bridge
+    # terms; the narrowing engine verifies each hop (sound). solved_by = "LLM
+    # waypoints".
+    if "try_llm_waypoints" in globals():
+        trace("[stage] LLM waypoints")
+        if try_llm_waypoints(problem, eq1, eq2, start_time, budget_seconds):
+            trace("[accepted] LLM waypoints")
+            return
 
     # Fast-fail gate: the singleton path has already returned above, so only the
     # non-singleton residual reaches here. The LLM proof fallback does not help it,
