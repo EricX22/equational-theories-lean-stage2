@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """LLM-contribution report.
 
-Loops over LLM-enabled result files in a results directory (default
-``pipeline/results``, default glob ``*llm*.json``) and reports, per file and in
-total:
+Loops over result files in a results directory (default ``pipeline/results``,
+default glob ``*merged*.json``; pass --glob to target others) and reports, per
+file and in total:
 
   - solved / total
   - used_llm count          -> the agentic system's measurable contribution
@@ -52,16 +52,22 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="LLM-contribution report over result files")
     ap.add_argument("--results-dir", default="pipeline/results",
                     help="directory of result JSON files (default: pipeline/results)")
-    ap.add_argument("--glob", default="*llm*.json",
-                    help="filename glob to include (default: *llm*.json)")
+    ap.add_argument("--glob", nargs="+", default=["*merged*.json"],
+                    help="filename glob(s) to include (default: *merged*.json). "
+                         "Pass several to combine, e.g. "
+                         "--glob '*merged*.json' '*llm*.json'.")
     ap.add_argument("--show-ids", action="store_true",
                     help="list the problem IDs the LLM solved, per file")
     args = ap.parse_args()
 
     results_dir = Path(args.results_dir)
-    files = sorted(results_dir.glob(args.glob))
+    matched = {}
+    for pat in args.glob:
+        for p in results_dir.glob(pat):
+            matched[p.name] = p           # dedupe by name across patterns
+    files = sorted(matched.values())
     if not files:
-        print(f"No files matching {args.glob!r} in {results_dir}")
+        print(f"No files matching {args.glob} in {results_dir}")
         return
 
     grand_used_llm = 0
@@ -69,7 +75,7 @@ def main() -> None:
     grand_total = 0
     grand_stage = Counter()
 
-    print(f"=== LLM-contribution report — {results_dir}/{args.glob} ===\n")
+    print(f"=== LLM-contribution report — {results_dir}/ [{' '.join(args.glob)}] ===\n")
     for path in files:
         rows, err = load_rows(path)
         if err:
