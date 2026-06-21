@@ -84,6 +84,10 @@ def main() -> None:
         total = len(rows)
         solved = [r for r in rows if r.get("solved")]
         used_llm = [r for r in solved if r.get("used_llm")]
+        # Was the LLM actually invoked? Distinguishes "ran and lost" from
+        # "never ran" — both look like used_llm=0 otherwise.
+        llm_calls = sum(int(r.get("llm_calls") or 0) for r in rows)
+        llm_ran = sum(1 for r in rows if (r.get("llm_calls") or 0) > 0)
         # solved_by distribution over SOLVED rows (None -> untagged)
         stage_dist = Counter((r.get("solved_by") or "(untagged)") for r in solved)
 
@@ -95,7 +99,8 @@ def main() -> None:
         ds = dataset_of(rows)
         pct = (100.0 * len(solved) / total) if total else 0.0
         print(f"{path.name}  [{ds}]")
-        print(f"  solved {len(solved)}/{total} ({pct:.1f}%)  |  used_llm (LLM-solved): {len(used_llm)}")
+        print(f"  solved {len(solved)}/{total} ({pct:.1f}%)  |  used_llm (LLM-solved): {len(used_llm)}"
+              f"  |  LLM invoked on {llm_ran} problems ({llm_calls} calls)")
         print("  solved_by:")
         for stage, n in stage_dist.most_common():
             tag = "  <- LLM" if stage.startswith("LLM") else ""

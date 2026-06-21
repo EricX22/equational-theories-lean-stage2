@@ -524,13 +524,26 @@ def _bounded_arg_pool(candidates, arity, max_arg_combos=20000):
     return pool
 
 
-def _build_h_edge_graph(h_vars, h_lhs, h_rhs, candidates, max_arg_combos=20000):
-    """Instantiate h over a bounded candidate universe and return adjacency."""
+def _build_h_edge_graph(h_vars, h_lhs, h_rhs, candidates, max_arg_combos=20000,
+                        deadline=None):
+    """Instantiate h over a bounded candidate universe and return adjacency.
+    A wall-clock `deadline` caps the build (collapse-type laws blow the combo
+    count up) and a periodic heartbeat keeps the proxy's silence-watchdog from
+    SIGKILLing the whole solver mid-build."""
     arg_pool = _bounded_arg_pool(candidates, len(h_vars), max_arg_combos=max_arg_combos)
     adj = {}
     if not arg_pool:
         return adj
-    for combo in product(arg_pool, repeat=len(h_vars)):
+    _beat = time.time() + 6.0
+    for _i, combo in enumerate(product(arg_pool, repeat=len(h_vars))):
+        if (_i & 2047) == 0:
+            _now = time.time()
+            if deadline is not None and _now > deadline:
+                trace("[eqgraph] build deadline hit; using partial graph")
+                break
+            if _now > _beat:
+                trace("[eqgraph] building edge graph...")
+                _beat = _now + 6.0
         subst = dict(zip(h_vars, combo))
         lhs = apply_subst_tree(h_lhs, subst)
         rhs = apply_subst_tree(h_rhs, subst)
@@ -609,13 +622,22 @@ def add_congruence_edges(
 
     return added
 
-def _find_path(adj, start, target, max_depth=4):
+def _find_path(adj, start, target, max_depth=4, deadline=None):
     if start == target:
         return []
     q = [(start, [])]
     seen = {start}
     head = 0
+    _beat = time.time() + 6.0
     while head < len(q):
+        if (head & 2047) == 0:
+            _now = time.time()
+            if deadline is not None and _now > deadline:
+                trace("[eqgraph] path-search deadline hit; giving up")
+                return None
+            if _now > _beat:
+                trace("[eqgraph] searching path...")
+                _beat = _now + 6.0
         node, path = q[head]
         head += 1
         if len(path) >= max_depth:
@@ -642,8 +664,14 @@ def calc_from_path(path):
     return "\n".join(lines)
 
 
-def try_bounded_equality_graph(problem, eq1_text, eq2_text, max_path_depth=4):
-    """Search for a symbolic equality path from Eq2.lhs to Eq2.rhs."""
+def try_bounded_equality_graph(problem, eq1_text, eq2_text, max_path_depth=4,
+                               time_budget=15.0):
+    """Search for a symbolic equality path from Eq2.lhs to Eq2.rhs.
+    Hard-capped at `time_budget` (well under the proxy's ~30s silence watchdog):
+    on collapse-type laws (e.g. x = y◇x) the edge graph/path search explodes and
+    used to run silently long enough to get the whole solver SIGKILLed before
+    later stages (narrowing) ran. The cap + heartbeat make it fail fast instead."""
+    _deadline = time.time() + time_budget
     h_vars = []
     seen = set()
     for v in re.findall(r"\b([a-z])\b", eq1_text):
@@ -668,8 +696,9 @@ def try_bounded_equality_graph(problem, eq1_text, eq2_text, max_path_depth=4):
 
     seeds = subterms(g_lhs) + subterms(g_rhs)
     candidates = generate_candidate_terms(g_vars, seeds, max_depth=2, max_terms=34, max_size=9)
-    adj = _build_h_edge_graph(h_vars, h_lhs, h_rhs, candidates, max_arg_combos=22000)
-    path = _find_path(adj, g_lhs, g_rhs, max_depth=max_path_depth)
+    adj = _build_h_edge_graph(h_vars, h_lhs, h_rhs, candidates,
+                              max_arg_combos=22000, deadline=_deadline)
+    path = _find_path(adj, g_lhs, g_rhs, max_depth=max_path_depth, deadline=_deadline)
     if not path:
         return False
     intro = "intro " + " ".join(g_vars) if g_vars else ""
