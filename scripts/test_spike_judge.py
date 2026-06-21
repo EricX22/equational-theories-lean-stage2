@@ -27,6 +27,10 @@ probs = {
 }
 p = probs["hard2_0051"]
 problem = {k: p[k] for k in ("id", "eq1_id", "eq2_id", "equation1", "equation2")}
+# Use the REAL competition policy (what pipeline/proxy.py injects), not the bare
+# empty default — the empty default bans ALL axioms, which isn't what grading uses.
+from pipeline.proxy import DEFAULT_PROOF_POLICY  # noqa: E402
+problem["proof_policy"] = DEFAULT_PROOF_POLICY
 
 code = (ROOT / "docs/spike_0051_judge.lean").read_text(encoding="utf-8")
 raw_answer = json.dumps({"verdict": "false", "code": code})
