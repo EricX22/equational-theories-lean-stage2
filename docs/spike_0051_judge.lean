@@ -13,7 +13,7 @@ eq1 holds (RHS−x = p(α)(x−y) = 0); eq2 fails (witness (1,0,0) ⇒ 2α−α�
 import JudgeProblem
 -- minimal Mathlib modules (importing all of `Mathlib` was too slow to load):
 import Mathlib.Topology.Order.IntermediateValue   -- intermediate_value_Icc
-import Mathlib.Topology.Instances.Real            -- ℝ topology + continuity
+import Mathlib.Topology.Instances.Real.Lemmas     -- ℝ topology + continuity
 import Mathlib.Tactic.LinearCombination           -- linear_combination (+ ring)
 import Mathlib.Tactic.FunProp                     -- fun_prop (continuity)
 import Mathlib.Tactic.NormNum                     -- norm_num
