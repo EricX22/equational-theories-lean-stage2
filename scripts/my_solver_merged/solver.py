@@ -3586,18 +3586,31 @@ def try_narrowing(problem, eq1_text, eq2_text, time_budget=120.0, quick_slice=4.
 NRW_SEG_SIZES = (16, 20, 24, 28, 34)
 
 
-def nrw_bridge_chain(chain, gv, seg_tb=12.0, deadline=None, max_skip=2):
+def nrw_bridge_chain(chain, gv, seg_tb=12.0, deadline=None, max_skip=2,
+                     refine=None, max_refine=4):
     """Prove gl=gr by bridging consecutive waypoints in `chain` (a list of ground
     terms starting at gl, ending at gr) with narrowing. Each segment gets its own
     iterative-deepening search, so a single well-placed waypoint can split an
     otherwise-unreachable gl->gr into two reachable halves. A bad waypoint can be
-    skipped (up to `max_skip` in a row). Returns a composed proof term or None."""
+    skipped (up to `max_skip` in a row).
+
+    Adaptive refinement: when a segment can't be bridged and `refine` is supplied,
+    ask it for intermediate term(s) for THAT specific gap and splice them in (up to
+    `max_refine` total refinements), turning one too-wide hop into narrower ones.
+    `refine(a_term, b_term) -> list[term]` returns parsed ground terms meant to lie
+    strictly between a and b (or []). This stays sound: every accepted segment is
+    still PROVED by verified narrowing — refinement only proposes more nodes.
+
+    Returns a composed proof term or None."""
     filler_pool = set(gv)
+    chain = list(chain)                       # mutable local copy
     proofs = []
     i = 0
-    n = len(chain)
-    while i < n - 1:
+    refines_left = max_refine if refine is not None else 0
+    refined_pairs = set()                     # don't re-refine identical endpoints
+    while i < len(chain) - 1:
         progressed = False
+        n = len(chain)
         # Prefer the nearest next waypoint; on failure, skip ahead (drop a bad one).
         for j in range(i + 1, min(i + 1 + max_skip + 1, n)):
             if deadline is not None and _nrw_time.time() > deadline:
@@ -3618,8 +3631,28 @@ def nrw_bridge_chain(chain, gv, seg_tb=12.0, deadline=None, max_skip=2):
                     break
             if progressed:
                 break
-        if not progressed:
-            return None
+        if progressed:
+            continue
+        # Couldn't bridge from i. Refine the nearest gap (i, i+1): ask for
+        # intermediate waypoint(s) and splice them in, then retry from i.
+        if refines_left > 0 and i + 1 < len(chain):
+            ak, bk = nrw_key(chain[i]), nrw_key(chain[i + 1])
+            if (ak, bk) not in refined_pairs:
+                refined_pairs.add((ak, bk))
+                refines_left -= 1
+                if deadline is not None and _nrw_time.time() > deadline:
+                    return None
+                try:
+                    mids = refine(chain[i], chain[i + 1]) or []
+                except Exception:
+                    mids = []
+                fresh = [m for m in mids
+                         if m is not None and nrw_key(m) not in (ak, bk)]
+                if fresh:
+                    chain[i + 1:i + 1] = fresh        # insert between i and i+1
+                    trace(f"[waypoints] refined gap -> +{len(fresh)} intermediate(s)")
+                    continue                          # retry from i, denser chain
+        return None
     if not proofs:
         return None
     full = proofs[0]
@@ -3662,12 +3695,40 @@ def try_llm_waypoints(problem, eq1_text, eq2_text, start_time, budget_seconds,
         "Propose proof WAYPOINTS for an equational-logic proof that the hypothesis "
         "Eq1 implies the goal Eq2 over all magmas. Do NOT write Lean. Give an ordered "
         "list of intermediate magma terms the proof passes through, from the goal's "
-        "LEFT side to its RIGHT side, where each consecutive pair differs by only a "
-        "few applications of the hypothesis (rewriting a subterm using Eq1 in either "
-        "direction). Use ONLY the goal's variables and the operator ◇. Prefer 6-16 "
-        "small waypoints. The first waypoint should be reachable from the goal LHS in "
-        "one or two hypothesis steps, and the last reachable to the goal RHS likewise."
+        "LEFT side to its RIGHT side. CRITICAL: each consecutive pair must differ by "
+        "EXACTLY ONE application of the hypothesis Eq1 — i.e. rewriting a SINGLE "
+        "subterm using Eq1 (in either direction). Do not skip steps: it is far better "
+        "to give too many tiny steps than too few large ones, because a single hop "
+        "that bundles several rewrites cannot be verified and wastes the whole chain. "
+        "Prefer 12-20 waypoints. Use ONLY the goal's variables and the operator ◇. "
+        "The first waypoint should be reachable from the goal LHS in one hypothesis "
+        "step, and the last reachable to the goal RHS likewise."
     )
+
+    def refine_gap(a_term, b_term):
+        """LLM refinement callback for a single un-bridgeable gap A->B. Asks for
+        intermediate terms strictly between A and B; returns parsed ground terms
+        over the goal vars (or []). Bounded by the remaining budget."""
+        if budget_seconds - (time.monotonic() - start_time) < gate:
+            return []
+        a_s, b_s = nrw_show(a_term), nrw_show(b_term)
+        ra = (
+            "We are proving Eq1 ⟹ Eq2 by an equational chain of hypothesis rewrites. "
+            "The two terms A and B below could NOT be connected by a single Eq1 "
+            "rewrite. Give a SHORT ordered JSON list \"waypoints\" of intermediate "
+            "magma terms strictly between A and B such that each consecutive pair in "
+            "A, <your terms>, B differs by EXACTLY ONE application of Eq1. Use ONLY "
+            "the goal variables and ◇.\nA = " + a_s + "\nB = " + b_s
+        )
+        try:
+            res = call_llm({"mode": "waypoints", "analysis": ra, "attempt": "refine"})
+        except Exception:
+            return []
+        if not isinstance(res, dict) or "error" in res:
+            return []
+        ans = extract_json(res.get("response", "")) or {}
+        raw = ans.get("waypoints") or ans.get("path") or []
+        return [t for t in (_nrw_parse_goal_term(s, gv) for s in raw) if t is not None]
 
     seen_waypoint_sets = set()
     for rnd in range(max_rounds):
@@ -3699,7 +3760,8 @@ def try_llm_waypoints(problem, eq1_text, eq2_text, start_time, budget_seconds,
         # generous segment deadline scaled to remaining budget
         seg_deadline = time.monotonic() + min(300.0, budget_seconds - (time.monotonic() - start_time) - 30.0)
         proof = nrw_bridge_chain(chain, gv, seg_tb=seg_tb,
-                                 deadline=seg_deadline, max_skip=2)
+                                 deadline=seg_deadline, max_skip=2,
+                                 refine=refine_gap, max_refine=4)
         if proof is None:
             trace("[waypoints] could not bridge chain")
             continue
