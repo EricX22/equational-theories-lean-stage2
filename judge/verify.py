@@ -236,7 +236,12 @@ def _get_lake_lean_path(config: JudgeConfig) -> str:
             lean_path = proc.stdout.strip()
             _LAKE_LEAN_PATH_CACHE[key] = lean_path
             return lean_path
-    except FileNotFoundError:
+    except (FileNotFoundError, subprocess.TimeoutExpired, subprocess.SubprocessError):
+        # `lake env` can be missing (FileNotFoundError), slow to the point of
+        # timing out (TimeoutExpired), or otherwise fail. None of these should
+        # crash the whole judge run — fall through to the static .lake glob
+        # below, which works on the read-only mount. (A bare 30s TimeoutExpired
+        # here previously killed entire problem runs at their first judge call.)
         pass
 
     # Fall back to static globbing (works on ro mount)
