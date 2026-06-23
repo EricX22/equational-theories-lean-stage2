@@ -65,6 +65,7 @@ be a valid instance of `h` (optionally inside congrArg), with middle terms match
 import json
 import re
 import sys
+import textwrap
 import time
 from itertools import product
 
@@ -1230,7 +1231,9 @@ def make_false_code(n, table):
 
 
 def make_true_code(proof_body):
-    body = proof_body.strip()
+    # Dedent first so a uniformly-indented body re-indents cleanly; strip only the
+    # blank edge lines (NOT leading whitespace, which would desync line 1).
+    body = textwrap.dedent(proof_body).strip("\n")
     indented = "\n".join("  " + l if l.strip() else "" for l in body.splitlines())
     return (
         "import JudgeProblem\n\n"
@@ -1285,7 +1288,24 @@ def extract_json(text):
         try:
             return json.loads(m.group())
         except Exception:
-            return None
+            pass
+    # SALVAGE truncated/invalid JSON: recover a string-array field
+    # ("waypoints"/"path"/"seed_terms") by collecting the complete quoted strings
+    # after it. A response cut off mid-array (common on long nested terms) then
+    # yields FEWER waypoints instead of discarding the whole (expensive) response.
+    for field in ("waypoints", "path", "seed_terms"):
+        km = re.search(r'"%s"\s*:\s*\[' % field, text)
+        if not km:
+            continue
+        tail = text[km.end():]
+        end = tail.find("]")
+        scope = tail if end < 0 else tail[:end]
+        items = re.findall(r'"((?:[^"\\]|\\.)*)"', scope)
+        if items:
+            if field == "seed_terms":
+                return {"mode": "lemma_strategy", "skeleton": "singleton_path",
+                        "seed_terms": items}
+            return {"mode": "waypoints", "waypoints": items}
     return None
 
 
@@ -1311,7 +1331,11 @@ def clean_proof(p):
     # once make_true_code wraps the body.
     p = re.sub(r"^\s*by\s*\n", "", p)
     p = re.sub(r"^\s*by\s+", "", p)
-    return p.strip()
+    # Dedent the body UNIFORMLY rather than .strip(). The body came from inside a
+    # `by` block, so its lines share a base indent; a flat .strip() removes the
+    # FIRST line's indent only, breaking it relative to later lines and producing
+    # `unexpected token 'have'; expected command` once make_true_code re-indents.
+    return textwrap.dedent(p).strip("\n")
 
 
 def _goal_vars(eq_text):
