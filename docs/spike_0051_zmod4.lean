@@ -53,7 +53,7 @@ hard2_0027 the lone remaining holdout.
 import JudgeProblem
 
 def submission : Goal := by
-  refine ⟨ℤ × ℤ × ℤ × ℤ,
+  refine ⟨Int × Int × Int × Int,
     { op := fun x y =>
         ((Int.add (Int.sub x.2.2.2 y.2.2.2) y.1),
          (Int.add (Int.add (Int.sub (Int.sub x.1 y.1) x.2.2.2) y.2.2.2) y.2.1),
@@ -64,8 +64,7 @@ def submission : Goal := by
     intro x y
     obtain ⟨x0, x1, x2, x3⟩ := x
     obtain ⟨y0, y1, y2, y3⟩ := y
-    dsimp only [Magma.op]
-    simp only [Prod.mk.injEq]
+    simp only [Magma.op, Prod.mk.injEq]
     refine ⟨?_, ?_, ?_, ?_⟩ <;> omega
     -- Fallback if `omega` leaks a disallowed constant (e.g. HAdd.hAdd):
     --   replace `<;> omega` with
