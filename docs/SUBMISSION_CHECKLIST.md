@@ -21,10 +21,15 @@ EXCEPT the one flagged item.
 
 ## Already-verified compliant (no action)
 
-- Single file; submission dir contains only `solver.py`. Source 158 KB < 500 KB.
+- Single file; submission dir contains only `solver.py`. Source ~170 KB < 500 KB
+  (grew with the 2026-06-23 algebraic-linear stage; re-check the exact size on a
+  clean filesystem before submit).
 - `PROMPT` is a top-level string constant (AST-extractable by the proxy).
-- Pure stdlib imports (`json, re, sys, time, itertools`); no network, file I/O,
-  subprocess, `eval`/`exec`, or `random` (deterministic).
+- Pure stdlib imports (`json, re, sys, time, itertools`, plus `fractions` and
+  `math.gcd` used by the algebraic-linear stage for exact rational polynomial
+  arithmetic); no network, file I/O, subprocess, `eval`/`exec`, or `random` —
+  fully deterministic. (The algebraic-linear stage verifies eq1 by an EXACT
+  basis check, not random sampling, so no `random` import was introduced.)
 - Protocol matches the reference baseline (judge calls; proxy treats an accepted
   judge response as the final answer — no `submit` message needed).
 - Emitted certs within limits (false op-tables ≪ 20 KB; true proofs < 100 KB);
@@ -32,7 +37,13 @@ EXCEPT the one flagged item.
 
 ## Misc notes
 
-- `hard3_0001/0002/0003` in `merged_hard3.json` came from a stale 30s-timeout run
-  (killed at the wall deadline, not an algorithm miss). Re-run them at the full
-  3600s budget for clean numbers — `hard3_0001` solves (valid proof found in
-  0.0s); 0002/0003 stay unsolved (genuinely hard).
+- `hard3_0001/0002/0003` show unsolved in `merged_hard3.json`, but that was an
+  infrastructure death, not an algorithm miss: a slow/cold `lake env` raised an
+  uncaught `subprocess.TimeoutExpired` that killed the run before any stage ran.
+  Fixed in `judge/verify.py` (also catch `TimeoutExpired`/`SubprocessError` →
+  fall through to the static `.lake` glob); per `docs/SOLVER_STATUS.md` §0.3 all
+  three now solve deterministically. The merged file predates the fix — re-run
+  hard3 on the current code for clean numbers.
+- `hard2_0051` shows unsolved in `merged_hard2.json` (predates this session); it
+  is now solved by the algebraic-linear stage (judge-accepted). Re-run hard2 for
+  clean numbers. Lone remaining false miss: `hard2_0027` (no linear witness).

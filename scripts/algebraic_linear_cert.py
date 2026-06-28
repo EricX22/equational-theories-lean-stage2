@@ -25,7 +25,7 @@ missing one.  (Same discipline as the finite model-finder.)
 """
 from __future__ import annotations
 from fractions import Fraction as Fr
-import itertools, random, re
+import re
 
 
 # ─────────────────────────── equation parsing ───────────────────────────────
@@ -307,8 +307,9 @@ def submission : Goal := submission.impl
 
 # ─────────────────────────── the search driver ──────────────────────────────
 
-def find_linear_model(equation1, equation2, deg_min=2, deg_max=8, verify_samples=4000):
-    """Return (cert_str, info) or (None, reason). b = 1 - a ansatz."""
+def find_linear_model(equation1, equation2, deg_min=2, deg_max=8):
+    """Return (cert_str, info) or (None, reason). b = 1 - a ansatz. eq1 is
+    verified exactly (linear ⇒ basis check is a proof); deterministic, no random."""
     e1L, e1R = parse_equation(equation1)
     e2L, e2R = parse_equation(equation2)
 
@@ -337,14 +338,17 @@ def find_linear_model(equation1, equation2, deg_min=2, deg_max=8, verify_samples
     b_poly = [1, -1] + [0]*(d-2)
     op = make_int_op(coeffs, a_poly, b_poly)
 
-    # verify eq1 identity over random Int^d vectors
+    # verify eq1 EXACTLY: op is linear, so (LHS − RHS) is a linear map in the
+    # variable values; vanishing on a spanning set (each variable = each basis
+    # vector, rest zero) proves it vanishes everywhere. Deterministic, no random.
     e2vars = vars_of(e2L); [e2vars.append(v) for v in vars_of(e2R) if v not in e2vars]
     e1vars = vars_of(e1L); [e1vars.append(v) for v in vars_of(e1R) if v not in e1vars]
-    rng = random.Random(0)
-    for _ in range(verify_samples):
-        env = {v: [rng.randint(-7, 7) for _ in range(d)] for v in e1vars}
-        if eval_term(e1L, op, env) != eval_term(e1R, op, env):
-            return None, 'eq1 FAILED self-verification (symbolic/model mismatch)'
+    for active in e1vars:
+        for k in range(d):
+            env = {v: ([1 if i == k else 0 for i in range(d)] if v == active
+                       else [0] * d) for v in e1vars}
+            if eval_term(e1L, op, env) != eval_term(e1R, op, env):
+                return None, 'eq1 FAILED self-verification (symbolic/model mismatch)'
 
     # find an eq2 witness variable: set v*->e0, others->0; need LHS!=RHS
     witness_var = None

@@ -6,6 +6,18 @@ _Last updated: 2026-06-23. Canonical solver is now `scripts/my_solver_merged/sol
 
 **Headline.** The §0.2 conclusion that both false residuals were "genuinely unreachable" was **wrong for hard2_0051**, and it is now **judge-accepted**. The irrational coefficient does NOT force a non-integer carrier: work in the number ring **ℤ[α] = ℤ[X]/(p)**, a free ℤ-module of rank 4, carrier `Int × Int × Int × Int` in the power basis (1, α, α², α³), with α acting as the **companion matrix** of p = X⁴−X³−X²+X−1. Then `op(x,y) = α·(x−y)+y` is four explicit integer formulas (coeffs ±1, no multiplication). eq1 = per-coordinate linear identity (`omega`); ¬eq2 = ground inequality at a basis witness (`decide`). Cert: `docs/spike_0051_zmod4.lean`; runner: `scripts/test_spike_0051_zmod4.py`. Result: `status:accepted`, direct_declarations = [Goal, submission.impl], axioms = [propext, Quot.sound]. **Overall 1652 → 1653 / 1669 = 99.04%, still 0 wrong.**
 
+**Current coverage** (current best). The one clean measured run in `pipeline/results/merged_*.json` is **1649/1669 (98.8%)**; on top of it sit two confirmed-but-not-yet-remeasured increments — the 3 hard3 lake-env true recoveries (§0.3) and the hard2_0051 false cert (this session, judge-accepted) — giving the current best below. A fresh full re-run on the current `solver.py` would consolidate these into one number.
+
+| Dataset | Solved | True | False |
+|---|---|---|---|
+| Normal | 998/1000 (99.8%) | 498/500 | 500/500 |
+| Hard1  | 69/69 (100.0%)   | 24/24   | 45/45  |
+| Hard2  | 195/200 (97.5%)  | 96/100  | 99/100 |
+| Hard3  | 391/400 (97.8%)  | 186/195 | 205/205 |
+| **Total** | **1653/1669 (99.0%)** | 804/819 | **849/850** |
+
+Residual: **15 true** (mostly hard3 non-singleton implications) + **1 false** (`hard2_0027`). Zero wrong.
+
 **Two enforcement facts that made it pass** (both read off `judge/JudgeSupport/Inspect.lean`):
 1. The policy inspects ONLY `submission.getUsedConstantsAsSet` — **one level deep, non-transitive** (only `collectAxioms` recurses; our axioms are allowed).
 2. `omega`/`simp` bake `HAdd.hAdd`/`HSub.hSub`/`congr` (NOT on the prefix allowlist) **inline** into submission's value — that, not the lifted `_proof_N`, is the only obstacle.

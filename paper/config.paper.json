@@ -1,0 +1,31 @@
+{
+  "_comment": "PAPER-ONLY config. Routes the LLM stages to OpenAI o3 via OpenRouter so the competition pipeline/config.json stays untouched. Requires OPENROUTER_API_KEY in the environment. Swap llm.model to openai/o4-mini or openai/o3-mini-high for a cheaper run; lower reasoning_effort to control cost. Used by run_ours.py --config.",
+  "solver": {
+    "timeout_seconds": 3600
+  },
+  "sandbox": {
+    "mode": "none",
+    "image": "ee-solver:latest",
+    "memory_mb": 2048,
+    "cpus": 2,
+    "pids_limit": 64,
+    "tmpfs_size_mb": 64
+  },
+  "judge": {
+    "lean_timeout_seconds": 300,
+    "max_code_length": 100000,
+    "max_false_cert_bytes": 20000,
+    "max_solver_bytes": 500000
+  },
+  "llm": {
+    "model": "openai/o3",
+    "provider": "openai",
+    "api_key_env": "OPENROUTER_API_KEY",
+    "base_url": "https://openrouter.ai/api/v1",
+    "max_output_tokens": 65536,
+    "temperature": 1.0,
+    "reasoning_effort": "high",
+    "use_seed": false,
+    "http_timeout_seconds": 600
+  }
+}
