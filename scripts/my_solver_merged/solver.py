@@ -1,6 +1,12 @@
 """
 SAIR Equational Theories Stage 2 — minimal solver.
 (2026-06-10: added affine-model stage + domain-propagation finder portfolio.)
+(2026-06-23: added Stage 2.96 algebraic-linear infinite-model finder (`al_`
+ namespace, `try_algebraic_linear_model`) — encodes a linear witness with an
+ algebraic-number coefficient as a ℤ^d companion-matrix magma + alias-wrapped
+ cert; solves hard2_0051, the first false case with no finite counterexample.
+ The high-level "Three stages" note below is legacy; the live pipeline runs ~15
+ stages — see docs/SOLVER_STATUS.md for the current list and coverage.)
 
 Three stages, smallest viable implementation:
 
@@ -2337,10 +2343,11 @@ def al_emit_cert(coeffs, a_poly, b_poly, eq2_vars, witness_var, pid):
         "def submission : Goal := submission.impl\n"
     )
 
-def al_find_linear_model(eq1_text, eq2_text, deg_min=2, deg_max=8, samples=4000):
+def al_find_linear_model(eq1_text, eq2_text, deg_min=2, deg_max=8):
     """Return Lean cert string for an algebraic-linear infinite counterexample,
     or None. b = 1 - a ansatz (the idempotent weighted-average family). Every
-    returned cert is self-verified (eq1 identity + eq2 violation) in exact ℤ."""
+    returned cert is self-verified (eq1 identity + eq2 violation) in exact ℤ.
+    Deterministic: no randomness — eq1 is linear, so a basis check is a proof."""
     e1L, e1R = al_parse_equation(eq1_text)
     e2L, e2R = al_parse_equation(eq2_text)
     cs = al_constraints(e1L, e1R)
@@ -2358,12 +2365,16 @@ def al_find_linear_model(eq1_text, eq2_text, deg_min=2, deg_max=8, samples=4000)
     op = al_make_op(coeffs, a_poly, b_poly)
     e1vars = al_vars_of(e1L); [e1vars.append(v) for v in al_vars_of(e1R) if v not in e1vars]
     e2vars = al_vars_of(e2L); [e2vars.append(v) for v in al_vars_of(e2R) if v not in e2vars]
-    import random as _rnd
-    rng = _rnd.Random(0)
-    for _ in range(samples):
-        env = {v: [rng.randint(-7, 7) for _ in range(d)] for v in e1vars}
-        if al_eval_term(e1L, op, env) != al_eval_term(e1R, op, env):
-            return None  # model does not satisfy eq1
+    # op is linear, so eq1's (LHS − RHS) is a linear map in the variable values;
+    # checking it on a spanning set — each variable set to each basis vector,
+    # the rest zero — PROVES it vanishes for all inputs. Exact and deterministic,
+    # no sampling / no `random` import (keeps the solver reproducible).
+    for active in e1vars:
+        for k in range(d):
+            env = {v: ([1 if i == k else 0 for i in range(d)] if v == active
+                       else [0] * d) for v in e1vars}
+            if al_eval_term(e1L, op, env) != al_eval_term(e1R, op, env):
+                return None  # model does not satisfy eq1
     witness = None
     for cand in e2vars:
         env = {v: ([1] + [0] * (d - 1) if v == cand else [0] * d) for v in e2vars}
