@@ -82,6 +82,16 @@ Plan: controlled A/B — run the frozen solver design unchanged with o3 to measu
 the model effect, *then* loosen the waypoint granularity contract (coarse
 waypoints + verifier-fills-gaps) and measure that increment separately.
 
+**Residual-only o3 (cost):** `--runs both` first runs the deterministic no-LLM
+baseline (no o3 cost), then seeds the o3 run from it so the harness skips the
+~96% already solved and o3 only touches the residual (~26 on hard3). This is
+sound because the solver runs its deterministic stages before the LLM gate, so
+anything the no-LLM run solved is solved identically with `used_llm=False`.
+Crucially the baseline must come from the frozen `ef84234`, NOT the older
+`pipeline/results/*` runs (those predate deterministic-side gains and would
+misattribute them to the LLM). `--no-residual-seed` forces the full set through
+the o3 path.
+
 ## Still to do
 - A/B the o3 swap on hard3, then the granularity redesign (the gate).
 - Contamination control: held-out laws + recall probe (per EXPERIMENT_SPEC §1).

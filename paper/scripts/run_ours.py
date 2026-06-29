@@ -19,7 +19,7 @@ Usage:
       --solver-ref ef84234 --out-dir paper/results [--dry-run]
 """
 from __future__ import annotations
-import argparse, os, re, subprocess, sys, tempfile
+import argparse, os, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -58,10 +58,20 @@ def write_patched(src: str, dst_dir: Path, enable_llm: bool) -> str:
 
 
 def run_mode(src: str, problems: str, enable_llm: bool, out_dir: Path,
-             config: str | None, dry_run: bool) -> None:
+             config: str | None, dry_run: bool, seed_from: Path | None = None) -> Path:
     tag = "llm" if enable_llm else "nollm"
     out_path = out_dir / f"ours_{tag}_{Path(problems).stem}.json"
     out_dir.mkdir(parents=True, exist_ok=True)
+
+    # Residual-only optimization: seed this run's output with an earlier run's
+    # solved rows. The harness skips ids already marked solved (runner.py), so
+    # only the residual is re-run. Sound because the solver runs its
+    # deterministic stages BEFORE the LLM gate, so anything the no-LLM run
+    # solved is solved identically here (used_llm=False) -- copying those rows
+    # is equivalent to re-deriving them, at zero LLM cost.
+    if seed_from and seed_from.exists() and not dry_run:
+        shutil.copyfile(seed_from, out_path)
+        print(f"[{tag}] seeded from {seed_from.name} -> o3 runs only on the residual")
 
     with tempfile.TemporaryDirectory() as tmp:
         sub = Path(tmp) / f"solver_{tag}"
@@ -77,8 +87,9 @@ def run_mode(src: str, problems: str, enable_llm: bool, out_dir: Path,
         print("      " + " ".join(cmd))
         if dry_run:
             print("      (dry-run: frozen solver materialized + compiles, flag patched; judge not invoked)")
-            return
+            return out_path
         subprocess.run(cmd, cwd=str(REPO_ROOT), check=True)
+    return out_path
 
 
 def main():
@@ -90,14 +101,28 @@ def main():
     ap.add_argument("--out-dir", default=str(SCRIPT_DIR.parent / "results"))
     ap.add_argument("--config", default=DEFAULT_CONFIG,
                     help="defaults to paper/config.paper.json (OpenRouter->o3)")
+    ap.add_argument("--seed-from", default=None,
+                    help="for --runs llm: an existing no-LLM results json to seed "
+                         "the run so o3 only touches the residual")
+    ap.add_argument("--no-residual-seed", action="store_true",
+                    help="in --runs both, do NOT seed the llm run from no-LLM "
+                         "(run the full set through the llm path)")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
     src = materialize_baseline(args.solver_ref)
     print(f"frozen baseline: {args.solver_ref}  ({src.count(chr(10))+1} lines, compiles)")
-    modes = {"both": [False, True], "llm": [True], "nollm": [False]}[args.runs]
-    for enable in modes:
-        run_mode(src, args.problems, enable, Path(args.out_dir), args.config, args.dry_run)
+    out_dir = Path(args.out_dir)
+
+    if args.runs == "nollm":
+        run_mode(src, args.problems, False, out_dir, args.config, args.dry_run)
+    elif args.runs == "llm":
+        seed = Path(args.seed_from) if args.seed_from else None
+        run_mode(src, args.problems, True, out_dir, args.config, args.dry_run, seed_from=seed)
+    else:  # both: no-LLM baseline first, then o3 only on its residual
+        nollm_out = run_mode(src, args.problems, False, out_dir, args.config, args.dry_run)
+        seed = None if args.no_residual_seed else nollm_out
+        run_mode(src, args.problems, True, out_dir, args.config, args.dry_run, seed_from=seed)
 
 
 if __name__ == "__main__":
