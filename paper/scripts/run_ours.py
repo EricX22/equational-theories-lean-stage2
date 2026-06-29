@@ -48,6 +48,19 @@ def materialize_baseline(ref: str) -> str:
     return src
 
 
+def load_solver_file(path: str) -> str:
+    """Use a working-tree solver.py directly (fast iteration, pre-commit). Real
+    env has no mount truncation, so reading the live file is safe here."""
+    src = Path(path).read_text(encoding="utf-8")
+    if not FLAG_RE.search(src):
+        raise SystemExit(f"ENABLE_LLM assignment not found in {path}")
+    try:
+        compile(src, "<solver>", "exec")
+    except SyntaxError as e:
+        raise SystemExit(f"solver file does not compile: {e}")
+    return src
+
+
 def write_patched(src: str, dst_dir: Path, enable_llm: bool) -> str:
     patched = FLAG_RE.sub(lambda m: m.group(1) + ("True" if enable_llm else "False"),
                           src, count=1)
@@ -98,6 +111,9 @@ def main():
     ap.add_argument("--runs", choices=["both", "llm", "nollm"], default="both")
     ap.add_argument("--solver-ref", default=DEFAULT_REF,
                     help="git ref of the frozen baseline solver")
+    ap.add_argument("--solver-file", default=None,
+                    help="run this working-tree solver.py directly, skipping git "
+                         "materialization (fast iteration before committing)")
     ap.add_argument("--out-dir", default=str(SCRIPT_DIR.parent / "results"))
     ap.add_argument("--config", default=DEFAULT_CONFIG,
                     help="defaults to paper/config.paper.json (OpenRouter->o3)")
