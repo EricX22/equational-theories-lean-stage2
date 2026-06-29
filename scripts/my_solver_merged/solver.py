@@ -101,6 +101,21 @@ ENABLE_NS_LLM_FALLBACK = False
 # solved-set difference vs the ENABLE_LLM=True run is the LLM's contribution.
 ENABLE_LLM = True
 
+# ── Paper waypoint redesign (2026-06) ───────────────────────────────────────
+# Diagnosis (see paper/): the old waypoint stage demanded an exact single-Eq1-
+# rewrite chain (12-20 hops); ~97% failed verification, even with o3. The fix is
+# to use the LLM where it is strong (propose a FEW pivotal intermediate terms)
+# and the symbolic engine where it is strong (bridge the short gaps with verified
+# narrowing). Each lever is a flag so the A/B can attribute which change buys the
+# solves. Set WP_COARSE=False to recover the exact-rewrite behaviour.
+WP_COARSE = True            # coarse pivotal waypoints + verifier-fills-gaps
+WP_ALLOW_AUX_VARS = True    # keep waypoints that introduce non-goal variables
+WP_SEG_TB = 35.0            # per-segment narrowing wall budget (old default 12)
+WP_MAX_SKIP = 3             # consecutive waypoints droppable in a row (old 2)
+WP_MAX_REFINE = 8           # LLM gap-refinements per chain (old 4)
+WP_MAX_ROUNDS = 4           # LLM proposal rounds per problem (old 3)
+WP_LLM_RETRIES = 2          # retries on a transient LLM transport error (was 0)
+
 # Updated by trace() on every "[stage] X" line and attached to each judge call
 # so the harness records `solved_by` (which stage produced the accepted cert).
 CURRENT_STAGE = None
@@ -3897,6 +3912,8 @@ def nrw_bridge_chain(chain, gv, seg_tb=12.0, deadline=None, max_skip=2,
     Returns a composed proof term or None."""
     filler_pool = set(gv)
     chain = list(chain)                       # mutable local copy
+    for _t in chain:                          # include any auxiliary vars in waypoints
+        nrw_skolems(_t, filler_pool)
     proofs = []
     i = 0
     refines_left = max_refine if refine is not None else 0
@@ -3942,6 +3959,8 @@ def nrw_bridge_chain(chain, gv, seg_tb=12.0, deadline=None, max_skip=2,
                 fresh = [m for m in mids
                          if m is not None and nrw_key(m) not in (ak, bk)]
                 if fresh:
+                    for m in fresh:                   # keep aux vars in the filler pool
+                        nrw_skolems(m, filler_pool)
                     chain[i + 1:i + 1] = fresh        # insert between i and i+1
                     trace(f"[waypoints] refined gap -> +{len(fresh)} intermediate(s)")
                     continue                          # retry from i, denser chain
@@ -3967,7 +3986,14 @@ def _nrw_parse_goal_term(s, gv):
     except Exception:
         return None
     sk = set(); nrw_skolems(t, sk)
-    if sk and sk <= set(gv):
+    if not sk:
+        return None
+    # Old behaviour barred any waypoint using a variable outside the goal's vars,
+    # which forecloses proofs that pass through an auxiliary witness term. With
+    # WP_ALLOW_AUX_VARS we keep them; the extra vars are treated as fresh skolem
+    # constants and added to the bridge's filler_pool. Still sound — a bad
+    # waypoint merely fails to bridge.
+    if WP_ALLOW_AUX_VARS or sk <= set(gv):
         return t
     return None
 
@@ -3984,19 +4010,33 @@ def try_llm_waypoints(problem, eq1_text, eq2_text, start_time, budget_seconds,
     gl = nrw_parse(eq2_text.split('=', 1)[0], True)
     gr = nrw_parse(eq2_text.split('=', 1)[1], True)
 
-    analysis = (
-        "Propose proof WAYPOINTS for an equational-logic proof that the hypothesis "
-        "Eq1 implies the goal Eq2 over all magmas. Do NOT write Lean. Give an ordered "
-        "list of intermediate magma terms the proof passes through, from the goal's "
-        "LEFT side to its RIGHT side. CRITICAL: each consecutive pair must differ by "
-        "EXACTLY ONE application of the hypothesis Eq1 — i.e. rewriting a SINGLE "
-        "subterm using Eq1 (in either direction). Do not skip steps: it is far better "
-        "to give too many tiny steps than too few large ones, because a single hop "
-        "that bundles several rewrites cannot be verified and wastes the whole chain. "
-        "Prefer 12-20 waypoints. Use ONLY the goal's variables and the operator ◇. "
-        "The first waypoint should be reachable from the goal LHS in one hypothesis "
-        "step, and the last reachable to the goal RHS likewise."
-    )
+    if WP_COARSE:
+        analysis = (
+            "Propose proof WAYPOINTS for an equational-logic proof that the hypothesis "
+            "Eq1 implies the goal Eq2 over all magmas. Do NOT write Lean. Give an ordered "
+            "list of the KEY intermediate magma terms the proof passes through, from the "
+            "goal's LEFT side to its RIGHT side. You do NOT need single-rewrite "
+            "granularity: a verified narrowing engine fills the short gaps between "
+            "consecutive terms. So give only the PIVOTAL terms the proof must pass through "
+            "(usually 4-8) — structural 'milestones' that meaningfully restructure the "
+            "expression, not tiny edits. Consecutive milestones should be only a few Eq1 "
+            "rewrites apart. You MAY introduce auxiliary variables; use the operator ◇ and "
+            "keep each term small (size <= 15)."
+        )
+    else:
+        analysis = (
+            "Propose proof WAYPOINTS for an equational-logic proof that the hypothesis "
+            "Eq1 implies the goal Eq2 over all magmas. Do NOT write Lean. Give an ordered "
+            "list of intermediate magma terms the proof passes through, from the goal's "
+            "LEFT side to its RIGHT side. CRITICAL: each consecutive pair must differ by "
+            "EXACTLY ONE application of the hypothesis Eq1 — i.e. rewriting a SINGLE "
+            "subterm using Eq1 (in either direction). Do not skip steps: it is far better "
+            "to give too many tiny steps than too few large ones, because a single hop "
+            "that bundles several rewrites cannot be verified and wastes the whole chain. "
+            "Prefer 12-20 waypoints. Use ONLY the goal's variables and the operator ◇. "
+            "The first waypoint should be reachable from the goal LHS in one hypothesis "
+            "step, and the last reachable to the goal RHS likewise."
+        )
 
     def refine_gap(a_term, b_term):
         """LLM refinement callback for a single un-bridgeable gap A->B. Asks for
@@ -4005,14 +4045,25 @@ def try_llm_waypoints(problem, eq1_text, eq2_text, start_time, budget_seconds,
         if budget_seconds - (time.monotonic() - start_time) < gate:
             return []
         a_s, b_s = nrw_show(a_term), nrw_show(b_term)
-        ra = (
-            "We are proving Eq1 ⟹ Eq2 by an equational chain of hypothesis rewrites. "
-            "The two terms A and B below could NOT be connected by a single Eq1 "
-            "rewrite. Give a SHORT ordered JSON list \"waypoints\" of intermediate "
-            "magma terms strictly between A and B such that each consecutive pair in "
-            "A, <your terms>, B differs by EXACTLY ONE application of Eq1. Use ONLY "
-            "the goal variables and ◇.\nA = " + a_s + "\nB = " + b_s
-        )
+        if WP_COARSE:
+            ra = (
+                "We are proving Eq1 ⟹ Eq2 by a chain of hypothesis rewrites whose short "
+                "gaps are filled by a verified narrowing engine. The engine could not "
+                "connect the two terms A and B below. Give 1-3 intermediate magma terms "
+                "lying roughly BETWEEN A and B (ideally near the midpoint) that the proof "
+                "likely passes through, as a JSON list \"waypoints\". They need not be "
+                "exactly one rewrite apart — just closer stepping stones. You may use "
+                "auxiliary variables and ◇.\nA = " + a_s + "\nB = " + b_s
+            )
+        else:
+            ra = (
+                "We are proving Eq1 ⟹ Eq2 by an equational chain of hypothesis rewrites. "
+                "The two terms A and B below could NOT be connected by a single Eq1 "
+                "rewrite. Give a SHORT ordered JSON list \"waypoints\" of intermediate "
+                "magma terms strictly between A and B such that each consecutive pair in "
+                "A, <your terms>, B differs by EXACTLY ONE application of Eq1. Use ONLY "
+                "the goal variables and ◇.\nA = " + a_s + "\nB = " + b_s
+            )
         try:
             res = call_llm({"mode": "waypoints", "analysis": ra, "attempt": "refine"})
         except Exception:
@@ -4023,21 +4074,31 @@ def try_llm_waypoints(problem, eq1_text, eq2_text, start_time, budget_seconds,
         raw = ans.get("waypoints") or ans.get("path") or []
         return [t for t in (_nrw_parse_goal_term(s, gv) for s in raw) if t is not None]
 
+    eff_rounds = WP_MAX_ROUNDS if WP_COARSE else max_rounds
+    eff_seg_tb = WP_SEG_TB if WP_COARSE else seg_tb
+    eff_skip = WP_MAX_SKIP if WP_COARSE else 2
+    eff_refine = WP_MAX_REFINE if WP_COARSE else 4
     seen_waypoint_sets = set()
-    for rnd in range(max_rounds):
+    for rnd in range(eff_rounds):
         elapsed = time.monotonic() - start_time
         if budget_seconds - elapsed < gate:
             trace("[waypoints] not enough time left for LLM")
             return False
-        try:
-            result = call_llm({"mode": "waypoints", "analysis": analysis,
-                               "attempt": f"wp{rnd}"})
-        except Exception as e:
-            trace(f"[waypoints] llm call error: {e!r}")
-            return False
-        if "error" in result:
-            trace(f"[waypoints] llm error: {result.get('error')}")
-            return False
+        # Retry transient transport errors (long o3 responses sometimes come back
+        # as non-JSON from the gateway) instead of abandoning the whole stage.
+        result = None
+        for _try in range(WP_LLM_RETRIES + 1):
+            try:
+                result = call_llm({"mode": "waypoints", "analysis": analysis,
+                                   "attempt": f"wp{rnd}.{_try}"})
+            except Exception as e:  # noqa: BLE001
+                result = {"error": repr(e)}
+            if isinstance(result, dict) and "error" not in result:
+                break
+            trace(f"[waypoints] llm error (round {rnd} try {_try}): "
+                  f"{result.get('error') if isinstance(result, dict) else result}")
+        if not isinstance(result, dict) or "error" in result:
+            continue
         ans = extract_json(result.get("response", ""))
         if not ans:
             trace("[waypoints] unparseable response")
@@ -4052,9 +4113,9 @@ def try_llm_waypoints(problem, eq1_text, eq2_text, start_time, budget_seconds,
         trace(f"[waypoints] round={rnd} parsed {len(wps)} waypoints; bridging {len(chain)} nodes")
         # generous segment deadline scaled to remaining budget
         seg_deadline = time.monotonic() + min(300.0, budget_seconds - (time.monotonic() - start_time) - 30.0)
-        proof = nrw_bridge_chain(chain, gv, seg_tb=seg_tb,
-                                 deadline=seg_deadline, max_skip=2,
-                                 refine=refine_gap, max_refine=4)
+        proof = nrw_bridge_chain(chain, gv, seg_tb=eff_seg_tb,
+                                 deadline=seg_deadline, max_skip=eff_skip,
+                                 refine=refine_gap, max_refine=eff_refine)
         if proof is None:
             trace("[waypoints] could not bridge chain")
             continue
