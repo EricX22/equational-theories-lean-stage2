@@ -29,10 +29,12 @@ import etp_terms  # noqa: E402
 # --- per-tool adapters -----------------------------------------------------
 # Each: bin, side ("prove"|"model"), fmt ("tptp"|"ladr"),
 #       cmd(file, t) -> list[str], parse(out, err, rc) -> "true"|"false"|None
-def _vampire_casc(f, t):   return ["vampire", "--mode", "casc", "-t", str(t), f]
-def _vampire_fmb(f, t):    return ["vampire", "--mode", "fmb", "-t", str(t), f]
-def _eprover(f, t):        return ["eprover", "--auto", "--tptp3-format", "-s",
-                                   f"--soft-cpu-limit={t}", f]
+def _vampire_casc(f, t):   return ["vampire", "--mode", "casc", "-t", f"{t}s", f]
+# finite model builder (the ETP used `-sa fmb`; default SAT backend, no cadical
+# dependency). This is what actually searches for counterexample magmas.
+def _vampire_fmb(f, t):    return ["vampire", "-sa", "fmb", "-t", f"{t}s", f]
+def _eprover(f, t):        return ["eprover", "--auto-schedule", "--tptp3-format",
+                                   "-s", f"--soft-cpu-limit={t}", f]
 def _prover9(f, t):        return ["prover9", "-t", str(t), "-f", f]
 def _mace4(f, t):          return ["mace4", "-t", str(t), "-f", f]
 
