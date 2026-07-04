@@ -67,6 +67,13 @@ We need a magma (G, *) such that:
   EQ2 FAILS for at least one instance:   {eq2}
 (Variables x,y,z,w,u range over G; `a◇b` in the problem text means `a*b`.)
 
+A finite countermodel is EXPECTED to exist for this pair -- these are open
+order-5-and-up problems where a finite refutation is believed to exist but has
+not yet been found. "No model exists" / a trivial order-2 punt is therefore NOT
+an acceptable answer: you must always output a concrete, constructive candidate
+of order >= 4. Your job is to find the construction, not to judge whether one
+exists.
+
 {portfolio_summary}
 
 Respond with ONLY a JSON object (no markdown fences, no prose outside the
@@ -86,6 +93,10 @@ JSON) with these exact keys:
 # on the real cluster: every "high" call failed with
 # "'NoneType' object has no attribute 'strip'" because content was None).
 MAX_TOKENS_BY_EFFORT = {"low": 4000, "medium": 12000, "high": 65000}
+
+
+class EmptyContentError(RuntimeError):
+    """API returned content=None -- token ceiling too low or misconfigured."""
 
 
 def call_o3(prompt, api_key, reasoning_effort="low"):
@@ -110,7 +121,7 @@ def call_o3(prompt, api_key, reasoning_effort="low"):
     usage = dict(data.get("usage", {}))
     usage["finish_reason"] = choice.get("finish_reason")
     if content is None:
-        raise RuntimeError(
+        raise EmptyContentError(
             f"empty content from API (finish_reason={usage.get('finish_reason')}, "
             f"usage={usage}) -- likely hit max_tokens during reasoning; "
             f"increase MAX_TOKENS_BY_EFFORT for this effort level"
@@ -143,7 +154,7 @@ def self_verify(solver, eq1, eq2, n, table):
     return solver.equation_holds(v1, l1, r1, n, op) and not solver.equation_holds(v2, l2, r2, n, op)
 
 
-def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text):
+def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=None):
     prompt = PROMPT_TEMPLATE.format(eq1=eq1, eq2=eq2, portfolio_summary=PORTFOLIO_SUMMARY)
     feedback = feedback_text or ""
     entries = []
@@ -153,12 +164,27 @@ def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text):
         content = None
         try:
             content, usage = call_o3(prompt + feedback, api_key, reasoning_effort=args.reasoning_effort)
+            if stats is not None:
+                stats["ok"] = stats.get("ok", 0) + 1
+                stats["cost"] = stats.get("cost", 0.0) + float(usage.get("cost") or 0.0)
             entry["usage"] = usage
             proposal = extract_json(content)
             entry["family"] = proposal.get("family")
             entry["justification"] = proposal.get("justification")
             entry["python_code"] = proposal.get("python_code")
             entry["candidate_n"] = proposal.get("candidate_n")
+        except EmptyContentError as e:
+            entry["error"] = repr(e)
+            entry["raw"] = content
+            entries.append(entry)
+            print(pid + " round " + str(rnd) + ": EMPTY CONTENT: " + str(e), file=sys.stderr)
+            if stats is not None and stats.get("ok", 0) == 0:
+                print("*** ABORTING BATCH: first API call returned empty content with zero "
+                      "prior successes -- the token ceiling is misconfigured. Raise "
+                      "MAX_TOKENS_BY_EFFORT or drop --reasoning-effort before rerunning. "
+                      "Not spending further budget.", file=sys.stderr)
+                sys.exit(1)
+            continue
         except Exception as e:
             entry["error"] = repr(e)
             entry["raw"] = content
@@ -166,7 +192,12 @@ def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text):
             print(pid + " round " + str(rnd) + ": PARSE FAILED: " + str(e), file=sys.stderr)
             continue
 
-        print(pid + " round " + str(rnd) + ": family=" + repr(entry["family"]) + " n=" + repr(entry["candidate_n"]), file=sys.stderr)
+        _tok = (entry.get("usage") or {}).get("total_tokens")
+        _cost = (entry.get("usage") or {}).get("cost")
+        print(pid + " round " + str(rnd) + ": family=" + repr(entry["family"]) +
+              " n=" + repr(entry["candidate_n"]) +
+              " tok=" + repr(_tok) + " cost=$" + format(float(_cost or 0.0), ".4f"),
+              file=sys.stderr)
 
         hit = None
         errs = []
@@ -249,13 +280,17 @@ def main():
 
     log = []
     any_solved = False
+    stats = {"ok": 0, "cost": 0.0}
     for pid, eq_pair in pairs.items():
         eq1, eq2 = eq_pair
-        entries, solved = run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text)
+        entries, solved = run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats)
         log.extend(entries)
         any_solved = any_solved or solved
         if solved:
             print("*** " + pid + ": SOLVED ***", file=sys.stderr)
+
+    print("total API calls: " + str(stats["ok"]) +
+          "  total cost: $" + format(stats["cost"], ".4f"), file=sys.stderr)
 
     with open(args.out, "a" if args.append else "w") as f:
         for e in log:
