@@ -85,7 +85,7 @@ JSON) with these exact keys:
 # the response gets cut off mid-reasoning with content=None (seen 2026-07-03
 # on the real cluster: every "high" call failed with
 # "'NoneType' object has no attribute 'strip'" because content was None).
-MAX_TOKENS_BY_EFFORT = {"low": 4000, "medium": 12000, "high": 30000}
+MAX_TOKENS_BY_EFFORT = {"low": 4000, "medium": 12000, "high": 65000}
 
 
 def call_o3(prompt, api_key, reasoning_effort="low"):
