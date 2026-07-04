@@ -80,11 +80,20 @@ JSON) with these exact keys:
 """
 
 
+# reasoning:high burns far more tokens on the hidden reasoning trace before
+# ever writing the visible answer -- max_tokens must scale with effort or
+# the response gets cut off mid-reasoning with content=None (seen 2026-07-03
+# on the real cluster: every "high" call failed with
+# "'NoneType' object has no attribute 'strip'" because content was None).
+MAX_TOKENS_BY_EFFORT = {"low": 4000, "medium": 12000, "high": 30000}
+
+
 def call_o3(prompt, api_key, reasoning_effort="low"):
+    max_tokens = MAX_TOKENS_BY_EFFORT.get(reasoning_effort, 4000)
     body = json.dumps({
         "model": "openai/o3",
         "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 4000,
+        "max_tokens": max_tokens,
         "reasoning": {"effort": reasoning_effort},
     }).encode()
     req = urllib.request.Request(
@@ -92,9 +101,21 @@ def call_o3(prompt, api_key, reasoning_effort="low"):
         data=body,
         headers={"Authorization": "Bearer " + api_key, "Content-Type": "application/json"},
     )
-    with urllib.request.urlopen(req, timeout=120) as resp:
+    # high effort + a much bigger max_tokens can genuinely take a couple of
+    # minutes; give it real room rather than timing out or getting impatient.
+    with urllib.request.urlopen(req, timeout=300) as resp:
         data = json.loads(resp.read())
-    return data["choices"][0]["message"]["content"], data.get("usage", {})
+    choice = data["choices"][0]
+    content = choice["message"].get("content")
+    usage = dict(data.get("usage", {}))
+    usage["finish_reason"] = choice.get("finish_reason")
+    if content is None:
+        raise RuntimeError(
+            f"empty content from API (finish_reason={usage.get('finish_reason')}, "
+            f"usage={usage}) -- likely hit max_tokens during reasoning; "
+            f"increase MAX_TOKENS_BY_EFFORT for this effort level"
+        )
+    return content, usage
 
 
 def extract_json(text):
