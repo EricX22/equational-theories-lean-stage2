@@ -1,0 +1,4 @@
+% order5v2_0165  eq1=23843 eq2=50551  gold=None
+% FALSE-direction: find counterexample magma
+fof(hyp, axiom,             ! [U,W,X,Y,Z] : ( X = f(f(f(Y,Z),Z),f(W,f(U,Y))) )).
+fof(neg, negated_conjecture, ? [X,Y,Z] : ( f(X,Y) != f(f(X,f(f(Y,Y),X)),Z) )).

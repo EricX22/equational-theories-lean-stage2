@@ -1,3 +1,10 @@
+> ⚠ **SUPERSEDED (2026-06-30).** The TRUE-side thesis below — "instances no
+> classical autosolver closes" — is dead: Vampire proves our hard TRUE residual
+> pairwise in milliseconds (see `paper/results/baselines_*`). The current plan is
+> **`PAPER_PLAN.md`** (LLM-guided construction of verifiable *countermodels* on
+> the FALSE/construction side, on open order-5+ problems). This file is retained
+> only for the baseline-matrix / TPTP-encoding machinery, which is still reused.
+
 # Solved-by-Matrix Experiment Spec (AAAI paper)
 
 Goal: produce the central result of the paper — a per-problem matrix showing

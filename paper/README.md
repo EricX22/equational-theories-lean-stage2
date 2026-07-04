@@ -3,6 +3,12 @@
 This tree is the **paper** workstream. It is deliberately walled off from the
 competition submission so the two can evolve independently.
 
+> **Current plan: `PAPER_PLAN.md`** — LLM-guided construction of Lean-verifiable
+> *countermodels* on open order-5+ problems (the FALSE/construction side). The
+> earlier TRUE-side "uniquely-solved vs ATP portfolio" thesis in
+> `EXPERIMENT_SPEC.md` is superseded (Vampire proves the TRUE residual in ms);
+> that file is kept only for the reused baseline/TPTP machinery.
+
 ## The wall (why this is safe)
 - The competition submission is whatever directory `scripts/submit.py
   --submission <dir>` is pointed at (the solver folder). It never touches
@@ -17,9 +23,15 @@ competition submission so the two can evolve independently.
 ## Layout
 ```
 paper/
-  EXPERIMENT_SPEC.md       full experiment design (solved-by matrix, baselines)
-  solver_frozen/           README.md (git-ref freeze) + placeholder solver.py
-  problems/                hard1/2/3 + true_misses_18 (copied from examples/)
+  PAPER_PLAN.md                 current plan; see its Sequencing section for status
+  EXPERIMENT_SPEC.md            full experiment design (solved-by matrix, baselines)
+  STEELMAN_PORTFOLIO.md         C2: the fixed FALSE-side portfolio's exact spec
+  ORDER5_HARNESS_FEASIBILITY.md order-5 Lean harness validation (no new infra needed)
+  PROPOSER_LOOP_SPEC.md         C3/C4: proposer design + 4 validated hard order-5 targets
+  solver_frozen/                README.md (git-ref freeze) + placeholder solver.py
+  problems/                     hard1/2/3 + true_misses_18 (copied from examples/);
+                                 order5_probe.jsonl (250, uniform), order5_pool_v2.jsonl
+                                 (2,000, uniform), order5_stratified.jsonl (300, pre-filtered)
   scripts/
     etp_terms.py           shared term parser + TPTP/LADR emitters
     build_tptp.py          jsonl -> TPTP .p files (Vampire/E)
@@ -27,8 +39,16 @@ paper/
     run_ours.py            frozen solver, ENABLE_LLM off/on -> ours_<mode>_<set>.json
     build_matrix.py        join everything -> solved_by_matrix_<set>.csv
     analyze.py             coverage, VBS, uniquely-solved set, two-frontier view
-  tptp/                    generated {id}_true.p / {id}_false.p (+ index.jsonl)
-  results/                 baseline + ours runs, solved_by_matrix.csv
+    sample_order5.py       sample candidate pairs from eq_size5.txt (order-5, outside
+                            the resolved order-<=4 graph)
+    cheap_false_screen.py  pre-filter order-5 pairs with the portfolio's cheap
+                            pure-Python FALSE stages before spending ATP compute
+    order5_harness_smoketest.py  reference impl: judge/verify_answer call pattern
+                            (proof_policy attached) for arbitrary order-5 pairs
+  tptp/, tptp_order5/, tptp_order5_stratified/   generated {id}_true.p / {id}_false.p
+  results/                 baseline + ours runs, solved_by_matrix.csv;
+                            order5_probe_report.md, order5_stratified_rerun_report.md,
+                            residual_family_analysis.md, baselines_order5*.jsonl
 ```
 
 ## The frozen baseline (git ref, not a file copy)

@@ -1,0 +1,246 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+import argparse
+import json
+import math
+import os
+import re
+import sys
+import urllib.request
+
+DEFAULT_PROOF_POLICY = {
+    "allowed_axioms": ["propext", "Quot.sound", "Classical.choice"],
+    "allowed_declarations": ["letFun"],
+    "allowed_declaration_prefixes": [
+        "And.", "Bool.", "Classical.", "Decidable.", "Eq.",
+        "EquationLHS", "EquationRHS", "Goal",
+        "Exists.", "False.",
+        "Fin.", "Fintype.", "Function.", "HEq.", "Iff.", "Init.", "Int.", "Lean.",
+        "List.", "Magma.", "Mathlib.", "MemoFinOp.", "Nat.", "Nonempty.", "Not.",
+        "NthRewrites.", "OfNat.", "Option.", "Or.", "Prod.", "PUnit.",
+        "RewriteCombinations.", "RewriteGoal.", "RewriteHypothesis.",
+        "RewriteHypothesisAndGoal.", "SimpleRewrites.",
+        "Std.", "Subgraph.", "Subtype.", "Sum.",
+        "Trans.", "True.", "Unit.",
+        "JudgeDecide.", "JudgeFinOp.", "JudgeMagma.",
+        "inst", "of_decide_", "submission.",
+        "congrArg", "congr_arg", "eq_self", "of_eq_true", "id",
+        "eq_comm", "eq_mp", "eq_mpr", "rfl", "absurd",
+    ],
+}
+
+PORTFOLIO_SUMMARY = """The following have ALL already been tried on this pair and FAILED
+(do not propose anything equivalent to these):
+- Exhaustive brute force, Fin 2-3
+- ~30 structured table families (constant, projections, cyclic add/sub, max/min,
+  multiplication mod n, small linear a*i+b*j mod n, XOR, diagonal), Fin 4-7
+- 16 curated named witness magmas (Fin 2-4) and single-cell perturbations of them
+- Symbolic affine model x*y = a*x + b*y + c (mod n), for every modulus n in 2..40
+- A backtracking domain-propagation search over Fin 4-11, including modes
+  restricted to: idempotent quasigroups, general quasigroups (Latin squares),
+  row-Latin only, column-Latin only, goal-directed search, and unconstrained
+  general search (this covers EVERY group of order <=11, since every group
+  Cayley table is a Latin square)
+- A complete SAT-based search, Fin 5-6
+- An algebraic-linear infinite model x*y = a*x + (1-a)*y where a is a root of
+  an integer polynomial of degree 2-8 (ZZ[alpha] companion-matrix construction)
+- Vampire (both a saturation prover and a finite-model-builder), 40 seconds
+  each direction
+- Cyclic group Z/n (n=2..12) with twists: add, subtract, reverse-subtract,
+  negate-both, left-inverse-add, right-inverse-add, additive-with-constant
+- Dihedral groups D_2 through D_6 (order 4-12), both multiplication orders
+
+Propose something NOT equivalent to any of the above. Good directions: larger
+non-abelian groups (order >12, e.g. S4, A4, dicyclic groups) with a
+non-obvious operation (not just group multiplication -- try conjugation-like
+twists, semidirect-product-style combinations, or coordinatewise combinations
+of two groups); near-rings (an operation that is NOT globally associative and
+NOT commutative, only zero-symmetric); non-associative loops with two-sided
+inverses; or an algebraic-linear model with degree > 8."""
+
+PROMPT_TEMPLATE = """You are proposing a candidate countermodel for an equational-logic
+problem over magmas (a set G with one binary operation, written a*b below,
+NO other assumed structure -- not associative, no identity, nothing).
+
+We need a magma (G, *) such that:
+  EQ1 holds for all elements:   {eq1}
+  EQ2 FAILS for at least one instance:   {eq2}
+(Variables x,y,z,w,u range over G; `a◇b` in the problem text means `a*b`.)
+
+{portfolio_summary}
+
+Respond with ONLY a JSON object (no markdown fences, no prose outside the
+JSON) with these exact keys:
+{{
+  "family": "short name for the construction family",
+  "justification": "1-3 sentences tied to the shape of EQ1/EQ2",
+  "python_code": "a Python snippet defining def op(a, b, n): returning an int in range(n). Pure, deterministic, only uses math/n/a/b.",
+  "candidate_n": [list of 2 to 5 integers to try for n]
+}}
+"""
+
+
+def call_o3(prompt, api_key, reasoning_effort="low"):
+    body = json.dumps({
+        "model": "openai/o3",
+        "messages": [{"role": "user", "content": prompt}],
+        "max_tokens": 4000,
+        "reasoning": {"effort": reasoning_effort},
+    }).encode()
+    req = urllib.request.Request(
+        "https://openrouter.ai/api/v1/chat/completions",
+        data=body,
+        headers={"Authorization": "Bearer " + api_key, "Content-Type": "application/json"},
+    )
+    with urllib.request.urlopen(req, timeout=120) as resp:
+        data = json.loads(resp.read())
+    return data["choices"][0]["message"]["content"], data.get("usage", {})
+
+
+def extract_json(text):
+    text = text.strip()
+    if text.startswith("```"):
+        text = re.sub(r"^```[a-zA-Z]*\n?", "", text)
+        text = re.sub(r"\n?```$", "", text)
+    start = text.find("{")
+    end = text.rfind("}")
+    return json.loads(text[start:end + 1])
+
+
+def materialize(python_code, n):
+    ns = {"math": math}
+    exec(python_code, ns)
+    op_fn = ns["op"]
+    table = [[op_fn(a, b, n) % n for b in range(n)] for a in range(n)]
+    return table
+
+
+def self_verify(solver, eq1, eq2, n, table):
+    op = lambda a, b, t=table: t[a][b]
+    v1, l1, r1 = solver.parse_equation(eq1)
+    v2, l2, r2 = solver.parse_equation(eq2)
+    return solver.equation_holds(v1, l1, r1, n, op) and not solver.equation_holds(v2, l2, r2, n, op)
+
+
+def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text):
+    prompt = PROMPT_TEMPLATE.format(eq1=eq1, eq2=eq2, portfolio_summary=PORTFOLIO_SUMMARY)
+    feedback = feedback_text or ""
+    entries = []
+    solved = False
+    for rnd in range(1, args.rounds + 1):
+        entry = {"id": pid, "round": rnd}
+        content = None
+        try:
+            content, usage = call_o3(prompt + feedback, api_key, reasoning_effort=args.reasoning_effort)
+            entry["usage"] = usage
+            proposal = extract_json(content)
+            entry["family"] = proposal.get("family")
+            entry["justification"] = proposal.get("justification")
+            entry["python_code"] = proposal.get("python_code")
+            entry["candidate_n"] = proposal.get("candidate_n")
+        except Exception as e:
+            entry["error"] = repr(e)
+            entry["raw"] = content
+            entries.append(entry)
+            print(pid + " round " + str(rnd) + ": PARSE FAILED: " + str(e), file=sys.stderr)
+            continue
+
+        print(pid + " round " + str(rnd) + ": family=" + repr(entry["family"]) + " n=" + repr(entry["candidate_n"]), file=sys.stderr)
+
+        hit = None
+        errs = []
+        for n in (proposal.get("candidate_n") or []):
+            try:
+                n = int(n)
+                if n < 2 or n > 60:
+                    continue
+                table = materialize(proposal["python_code"], n)
+                if self_verify(solver, eq1, eq2, n, table):
+                    hit = (n, table)
+                    break
+            except Exception as e:
+                errs.append("n=" + str(n) + ": " + repr(e))
+        entry["materialize_errors"] = errs
+        entry["self_verified"] = hit is not None
+
+        if hit is None:
+            feedback = ("\n\nYour previous proposal (family: " + repr(entry["family"]) +
+                        ") did NOT satisfy EQ1-and-not-EQ2 for any of n=" +
+                        repr(proposal.get("candidate_n")) + ". Errors: " + repr(errs) +
+                        ". Propose a DIFFERENT family.")
+            entries.append(entry)
+            print(pid + " round " + str(rnd) + ": self-verify FAILED", file=sys.stderr)
+            continue
+
+        n, table = hit
+        entry["hit_n"] = n
+        entry["hit_table"] = table
+        print(pid + " round " + str(rnd) + ": SELF-VERIFIED at n=" + str(n) + "!", file=sys.stderr)
+
+        if verify is not None:
+            code = solver.make_false_code(n, table)
+            problem = {"id": pid, "eq1_id": 0, "eq2_id": 0,
+                       "equation1": eq1, "equation2": eq2,
+                       "proof_policy": DEFAULT_PROOF_POLICY}
+            result = verify.verify_answer(problem, json.dumps({"verdict": "false", "code": code}))
+            entry["judge_status"] = result.get("status")
+            entry["judge_message"] = result.get("message")
+            print(pid + " round " + str(rnd) + ": JUDGE " + str(result.get("status")), file=sys.stderr)
+            if result.get("status") == "accepted":
+                solved = True
+        entries.append(entry)
+        break
+    return entries, solved
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--pairs", required=True)
+    ap.add_argument("--rounds", type=int, default=1)
+    ap.add_argument("--solver-dir", required=True)
+    ap.add_argument("--judge-dir", default=None)
+    ap.add_argument("--out", required=True)
+    ap.add_argument("--reasoning-effort", default="low")
+    ap.add_argument("--pair-filter", default=None)
+    ap.add_argument("--feedback-file", default=None)
+    ap.add_argument("--append", action="store_true")
+    args = ap.parse_args()
+
+    api_key = os.environ.get("OPENROUTER_API_KEY")
+    if not api_key:
+        print("OPENROUTER_API_KEY not set", file=sys.stderr)
+        sys.exit(1)
+
+    sys.path.insert(0, args.solver_dir)
+    import solver
+
+    verify = None
+    if args.judge_dir:
+        sys.path.insert(0, args.judge_dir)
+        import verify as _verify
+        verify = _verify
+
+    pairs = json.load(open(args.pairs))
+    if args.pair_filter:
+        pairs = {args.pair_filter: pairs[args.pair_filter]}
+
+    feedback_text = open(args.feedback_file).read() if args.feedback_file else None
+
+    log = []
+    any_solved = False
+    for pid, eq_pair in pairs.items():
+        eq1, eq2 = eq_pair
+        entries, solved = run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text)
+        log.extend(entries)
+        any_solved = any_solved or solved
+        if solved:
+            print("*** " + pid + ": SOLVED ***", file=sys.stderr)
+
+    with open(args.out, "a" if args.append else "w") as f:
+        for e in log:
+            f.write(json.dumps(e, default=str) + "\n")
+    print("wrote " + str(len(log)) + " log entries -> " + args.out)
+
+
+if __name__ == "__main__":
+    main()

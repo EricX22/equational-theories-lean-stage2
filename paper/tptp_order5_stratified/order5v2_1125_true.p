@@ -1,0 +1,4 @@
+% order5v2_1125  eq1=7212 eq2=13507  gold=None
+% TRUE-direction: prove eq1 |= eq2
+fof(hyp,  axiom,      ! [W,X,Y,Z] : ( X = f(Y,f(Z,f(f(W,Y),f(X,Y)))) )).
+fof(goal, conjecture, ! [W,X,Y,Z] : ( X = f(X,f(f(X,f(f(Y,Z),Y)),W)) )).

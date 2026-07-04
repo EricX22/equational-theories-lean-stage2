@@ -1,0 +1,4 @@
+% order5_0071  eq1=35134 eq2=54782  gold=None
+% TRUE-direction: prove eq1 |= eq2
+fof(hyp,  axiom,      ! [X,Y,Z] : ( X = f(f(f(Y,Z),f(f(Y,Z),Y)),Y) )).
+fof(goal, conjecture, ! [W,X,Y,Z] : ( f(X,f(X,Y)) = f(Y,f(f(X,Z),W)) )).
