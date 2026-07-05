@@ -121,7 +121,7 @@ exhaustively search its (small) parameter space and verify. Use exactly these ke
   "model_type": "structured_finite",
   "family": "short name for the non-linear structure",
   "justification": "why this family can satisfy EQ1 yet break EQ2, and why it is NOT of the form a*x+b*y",
-  "op_code": "def op(x, y, n, P): ... return an int (we reduce mod n). P is a tuple of your free parameters; index P[0], P[1], ... . Pure/deterministic, may use math.",
+  "op_code": "a SINGLE-LINE python def with NO line breaks: 'def op(x, y, n, P): return <expression>' returning an int (we reduce mod n). Must be a valid one-line JSON string. P is a tuple of your free parameters; index P[0], P[1], .... May use math and Python conditional-expressions.",
   "params": "list, one entry per element of P: {{\\"perm\\": true}} for a permutation of range(n), or {{\\"int\\": [lo, hi]}} for an integer in range(lo,hi) (lo/hi may be the string \\"n\\"). Keep the space small: a permutation param is ~n! so keep n<=8 and few params.",
   "candidate_n": [list of 2 to 5 small integers to try for n]
 }}
@@ -176,8 +176,12 @@ def extract_json(text):
         text = re.sub(r"^```[a-zA-Z]*\n?", "", text)
         text = re.sub(r"\n?```$", "", text)
     start = text.find("{")
-    end = text.rfind("}")
-    return json.loads(text[start:end + 1])
+    if start < 0:
+        raise ValueError("no JSON object found")
+    # raw_decode parses the first complete object and ignores any trailing prose;
+    # more robust than rfind('}') when op_code contains braces.
+    obj, _ = json.JSONDecoder().raw_decode(text[start:])
+    return obj
 
 
 def materialize(python_code, n):
@@ -393,6 +397,11 @@ def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=N
             entry["error"] = repr(e)
             entry["raw"] = content
             entries.append(entry)
+            feedback = ("\n\nYour previous response could NOT be parsed as JSON (" + str(e) +
+                        "). Return ONLY one strict JSON object: double quotes, no trailing "
+                        "commas, no code fences, no comments. If you include op_code it MUST be "
+                        "a single line with no line breaks (write the whole function as "
+                        "'def op(x, y, n, P): return <expression>').")
             print(pid + " round " + str(rnd) + ": PARSE FAILED: " + str(e), file=sys.stderr)
             continue
 
