@@ -122,9 +122,13 @@ exhaustively search its (small) parameter space and verify. Use exactly these ke
   "family": "short name for the non-linear structure",
   "justification": "why this family can satisfy EQ1 yet break EQ2, and why it is NOT of the form a*x+b*y",
   "op_code": "a SINGLE-LINE python def with NO line breaks: 'def op(x, y, n, P): return <expression>' returning an int (we reduce mod n). Must be a valid one-line JSON string. P is a tuple of your free parameters; index P[0], P[1], .... May use math and Python conditional-expressions.",
-  "params": "list, one entry per element of P: {{\\"perm\\": true}} for a permutation of range(n), or {{\\"int\\": [lo, hi]}} for an integer in range(lo,hi) (lo/hi may be the string \\"n\\"). Keep the space small: a permutation param is ~n! so keep n<=8 and few params.",
-  "candidate_n": [list of 2 to 5 small integers to try for n]
+  "params": [{{"perm": true}}, {{"int": [0, "n"]}}],
+  "candidate_n": [4, 5, 6]
 }}
+params MUST be a JSON LIST (NOT a string), with one object per element of the tuple P:
+use {{"perm": true}} for a permutation of range(n), or {{"int": [lo, hi]}} for an integer in
+range(lo, hi) (lo/hi may be the string "n"). Keep the space small -- at most ONE permutation
+and n <= 8 (a permutation is ~n!) -- and make sure op_code actually uses every P index.
 """
 
 
@@ -488,8 +492,8 @@ def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=N
                             "make it break EQ2. Linear forms are proven impossible here, so stay "
                             "non-linear.")
                 entries.append(entry)
-                print(pid + " round " + str(rnd) + ": self-verify FAILED (structured_finite)",
-                      file=sys.stderr)
+                print(pid + " round " + str(rnd) + ": self-verify FAILED (structured_finite) -- "
+                      + str(reason), file=sys.stderr)
                 continue
             n_hit, table = hit
             entry["hit_n"] = n_hit

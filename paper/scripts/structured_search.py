@@ -56,6 +56,10 @@ def search_structured(solver, eq1, eq2, op_code, params, candidate_n,
     can't satisfy EQ1, a family that's too strong (also satisfies EQ2), a
     parameter space skipped as over-budget, and a buggy op_code. That diagnosis
     is fed back to the LLM so it corrects the right thing."""
+    if not isinstance(params, list) or any(not isinstance(p, dict) for p in params):
+        return None, ("params must be a JSON LIST of objects like {\"perm\": true} or "
+                      "{\"int\": [lo, hi]}, one per element of P -- you sent a "
+                      + type(params).__name__)
     v1, l1, r1 = solver.parse_equation(eq1)
     v2, l2, r2 = solver.parse_equation(eq2)
     ns = {"math": math}
