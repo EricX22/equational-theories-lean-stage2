@@ -9,6 +9,8 @@ import sys
 import urllib.request
 from itertools import product
 
+import structured_search
+
 DEFAULT_PROOF_POLICY = {
     "allowed_axioms": ["propext", "Quot.sound", "Classical.choice"],
     "allowed_declarations": ["letFun"],
@@ -110,6 +112,18 @@ For an INFINITE algebraic-linear model, use exactly these keys:
   "poly": "integer list [c0, c1, ..., c_(d-1)] of the MONIC minimal polynomial p(X) = X^d + c_(d-1) X^(d-1) + ... + c1 X + c0, so length d = degree, d >= 2",
   "a_poly": "integer list of length d: a = sum_k a_poly[k] * alpha^k",
   "b_poly": "integer list of length d: b = sum_k b_poly[k] * alpha^k"
+}}
+
+For a STRUCTURED NON-LINEAR ansatz (BEST for pairs proven to have no linear model):
+do NOT emit a full table -- instead name a parametric NON-LINEAR family and let us
+exhaustively search its (small) parameter space and verify. Use exactly these keys:
+{{
+  "model_type": "structured_finite",
+  "family": "short name for the non-linear structure",
+  "justification": "why this family can satisfy EQ1 yet break EQ2, and why it is NOT of the form a*x+b*y",
+  "op_code": "def op(x, y, n, P): ... return an int (we reduce mod n). P is a tuple of your free parameters; index P[0], P[1], ... . Pure/deterministic, may use math.",
+  "params": "list, one entry per element of P: {{\\"perm\\": true}} for a permutation of range(n), or {{\\"int\\": [lo, hi]}} for an integer in range(lo,hi) (lo/hi may be the string \\"n\\"). Keep the space small: a permutation param is ~n! so keep n<=8 and few params.",
+  "candidate_n": [list of 2 to 5 small integers to try for n]
 }}
 """
 
@@ -267,9 +281,9 @@ def analyze_linear(solver, eq1, eq2, maxn=13):
             "this pair (checked finite affine for n<=%d; the infinite ZZ[alpha] family is "
             "the SAME linear family, so it cannot help either)." % maxn + why + cons_clause +
             " Do NOT propose a linear or algebraic_linear model -- it provably cannot work. "
-            "You MUST propose a NON-LINEAR finite magma: an explicit non-associative "
-            "operation table with piecewise/conditional or lookup rules, NOT of the form "
-            "a*x+b*y.")
+            "Propose a STRUCTURED NON-LINEAR ansatz (model_type='structured_finite'): name a "
+            "parametric non-linear family op(x,y,n,P) and let us exhaustively search its "
+            "parameter space. Do NOT try to hand-write a full correct table.")
     return False, text
 
 
@@ -437,6 +451,54 @@ def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=N
             entries.append(entry)
             break
 
+        # ── STRUCTURED non-linear ansatz branch (LLM names family, we search) ──
+        if model_type == "structured_finite":
+            hit = None
+            reason = None
+            try:
+                out = structured_search.search_structured(
+                    solver, eq1, eq2, proposal["op_code"],
+                    proposal.get("params") or [], proposal.get("candidate_n") or [],
+                    budget=getattr(args, "struct_budget", 100000))
+                if out is not None:
+                    n_hit, table, P = out
+                    hit = (n_hit, table)
+                    entry["struct_params"] = repr(P)
+            except Exception as e:
+                reason = repr(e)
+                entry["struct_error"] = reason
+            entry["self_verified"] = hit is not None
+            if hit is None:
+                feedback = ("\n\nYour structured ansatz (family: " + repr(entry["family"]) +
+                            ") produced NO table satisfying EQ1-and-not-EQ2 anywhere in its "
+                            "parameter space" + ((" (error: " + reason + ")") if reason else "") +
+                            ". Propose a DIFFERENT non-linear ansatz (different structure) or "
+                            "adjust the parameter families/ranges. Linear forms are proven "
+                            "impossible here, so stay non-linear.")
+                entries.append(entry)
+                print(pid + " round " + str(rnd) + ": self-verify FAILED (structured_finite)",
+                      file=sys.stderr)
+                continue
+            n_hit, table = hit
+            entry["hit_n"] = n_hit
+            entry["hit_table"] = table
+            print(pid + " round " + str(rnd) + ": SELF-VERIFIED (structured_finite) at n=" +
+                  str(n_hit) + " params=" + str(entry.get("struct_params")), file=sys.stderr)
+            if verify is not None:
+                code = solver.make_false_code(n_hit, table)
+                problem = {"id": pid, "eq1_id": 0, "eq2_id": 0,
+                           "equation1": eq1, "equation2": eq2,
+                           "proof_policy": DEFAULT_PROOF_POLICY}
+                result = verify.verify_answer(problem, json.dumps({"verdict": "false", "code": code}))
+                entry["judge_status"] = result.get("status")
+                entry["judge_message"] = result.get("message")
+                print(pid + " round " + str(rnd) + ": JUDGE " + str(result.get("status")),
+                      file=sys.stderr)
+                if result.get("status") == "accepted":
+                    solved = True
+            entries.append(entry)
+            break
+
         hit = None
         errs = []
         diags = []
@@ -506,6 +568,8 @@ def main():
                     help="require o3 to propose an infinite algebraic_linear model (no finite)")
     ap.add_argument("--no-linear-gate", action="store_true",
                     help="disable the deterministic linear-model analysis injected into the prompt")
+    ap.add_argument("--struct-budget", type=int, default=100000,
+                    help="max parameter-space size searched per n for a structured_finite ansatz")
     ap.add_argument("--pair-filter", default=None)
     ap.add_argument("--feedback-file", default=None)
     ap.add_argument("--append", action="store_true")
