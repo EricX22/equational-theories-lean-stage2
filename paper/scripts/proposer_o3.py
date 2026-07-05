@@ -333,10 +333,16 @@ def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=N
         entry["self_verified"] = hit is not None
 
         if hit is None:
-            feedback = ("\n\nYour previous proposal (family: " + repr(entry["family"]) +
+            feedback = ("\n\nYour previous FINITE proposal (family: " + repr(entry["family"]) +
                         ") did NOT satisfy EQ1-and-not-EQ2 for any of n=" +
                         repr(proposal.get("candidate_n")) + ". Errors: " + repr(errs) +
-                        ". Propose a DIFFERENT family.")
+                        ". (If Errors are non-empty your python_code CRASHED -- fix it: "
+                        "def op(a,b,n) must return an int in range(n) for every listed n.) "
+                        "Finite constructions are struggling on this pair, which resists "
+                        "brute force, SAT, and affine/finite search. STRONGLY CONSIDER "
+                        "switching to model_type='algebraic_linear': a GENERAL infinite "
+                        "ZZ[alpha] model with b != 1 - a, built for pairs with no tractable "
+                        "finite model. Otherwise propose a DIFFERENT finite family.")
             entries.append(entry)
             print(pid + " round " + str(rnd) + ": self-verify FAILED", file=sys.stderr)
             continue
