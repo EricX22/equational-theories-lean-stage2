@@ -200,6 +200,79 @@ def diagnose_finite(solver, eq1, eq2, n, table):
             "both laws). You need an assignment where EQ2 FAILS.")
 
 
+def _render_ab_poly(poly):
+    """Render a constraint polynomial {(i,j): coeff} (monomial a^i b^j) as
+    'a^i*b^j + ... = 0'."""
+    terms = []
+    for (i, j), c in sorted(poly.items(), key=lambda kv: (-(kv[0][0] + kv[0][1]), -kv[0][0])):
+        c = int(c) if c == int(c) else c
+        mon = ""
+        if i:
+            mon += "a" if i == 1 else f"a^{i}"
+        if j:
+            mon += ("*" if mon else "") + ("b" if j == 1 else f"b^{j}")
+        if not mon:
+            terms.append(str(c))
+            continue
+        terms.append(mon if c == 1 else ("-" + mon if c == -1 else f"{c}*{mon}"))
+    return (" + ".join(terms).replace("+ -", "- ") or "0") + " = 0"
+
+
+def analyze_linear(solver, eq1, eq2, maxn=13):
+    """Deterministically decide whether a LINEAR op x*y = a*x + b*y (+c) can
+    refute this pair, and build prompt guidance. Returns (linear_can_work, text).
+
+    Uses the solver's al_constraints to derive EQ1's coefficient conditions, and
+    a short finite-affine search (short-circuits fast since EQ1 rarely holds).
+    The infinite algebraic-linear family is the SAME linear family, so if no
+    linear op works, neither a finite affine nor an infinite ZZ[alpha] model can."""
+    try:
+        L1, R1 = solver.al_parse_equation(eq1)
+        cons = solver.al_constraints(L1, R1)
+        cons_txt = "; ".join(_render_ab_poly(c) for c in cons) if cons else ""
+    except Exception:
+        cons_txt = ""
+    v1, l1, r1 = solver.parse_equation(eq1)
+    v2, l2, r2 = solver.parse_equation(eq2)
+    eq1_ok = False
+    example = None
+    for n in range(2, maxn + 1):
+        for a in range(n):
+            for b in range(n):
+                for c in range(n):
+                    tbl = [[(a * i + b * j + c) % n for j in range(n)] for i in range(n)]
+                    op = lambda x, y, t=tbl: t[x][y]
+                    if solver.equation_holds(v1, l1, r1, n, op):
+                        eq1_ok = True
+                        if not solver.equation_holds(v2, l2, r2, n, op):
+                            example = (n, a, b, c)
+                            break
+                if example:
+                    break
+            if example:
+                break
+        if example:
+            break
+    cons_clause = (" EQ1's linear-coefficient constraints are: " + cons_txt + ".") if cons_txt else ""
+    if example:
+        n, a, b, c = example
+        text = ("\n\nLINEAR-MODEL ANALYSIS: a LINEAR operation CAN refute this pair." +
+                cons_clause + f" A concrete finite solution is op(x,y)=({a}*x+{b}*y+{c}) mod {n}. "
+                "Submit it as a finite model, or generalize to an infinite ZZ[alpha] "
+                "algebraic_linear model satisfying the same constraints.")
+        return True, text
+    why = (" The only linear ops satisfying EQ1 ALSO satisfy EQ2 (too strong)."
+           if eq1_ok else " No linear op even satisfies EQ1.")
+    text = ("\n\nLINEAR-MODEL ANALYSIS: a LINEAR operation x*y=a*x+b*y is INSUFFICIENT for "
+            "this pair (checked finite affine for n<=%d; the infinite ZZ[alpha] family is "
+            "the SAME linear family, so it cannot help either)." % maxn + why + cons_clause +
+            " Do NOT propose a linear or algebraic_linear model -- it provably cannot work. "
+            "You MUST propose a NON-LINEAR finite magma: an explicit non-associative "
+            "operation table with piecewise/conditional or lookup rules, NOT of the form "
+            "a*x+b*y.")
+    return False, text
+
+
 def verify_algebraic_linear(solver, eq1, eq2, proposal, pid):
     """Self-verify an o3-proposed INFINITE algebraic-linear model over ZZ[alpha]
     and, if valid, emit a Lean certificate via the solver's competition-proven
@@ -262,6 +335,15 @@ FORCE_INFINITE_DIRECTIVE = (
 
 def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=None):
     prompt = PROMPT_TEMPLATE.format(eq1=eq1, eq2=eq2, portfolio_summary=PORTFOLIO_SUMMARY)
+    if not getattr(args, "no_linear_gate", False):
+        try:
+            _linok, _gate = analyze_linear(solver, eq1, eq2)
+            prompt += _gate
+            print(pid + ": linear-gate -> " +
+                  ("linear model available" if _linok else "NON-LINEAR required"),
+                  file=sys.stderr)
+        except Exception as e:
+            print(pid + ": linear-gate skipped (" + repr(e) + ")", file=sys.stderr)
     if getattr(args, "force_infinite", False):
         prompt += FORCE_INFINITE_DIRECTIVE
     feedback = feedback_text or ""
@@ -422,6 +504,8 @@ def main():
                     help="where to write emitted algebraic-linear .lean certificates")
     ap.add_argument("--force-infinite", action="store_true",
                     help="require o3 to propose an infinite algebraic_linear model (no finite)")
+    ap.add_argument("--no-linear-gate", action="store_true",
+                    help="disable the deterministic linear-model analysis injected into the prompt")
     ap.add_argument("--pair-filter", default=None)
     ap.add_argument("--feedback-file", default=None)
     ap.add_argument("--append", action="store_true")
