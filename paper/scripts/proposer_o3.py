@@ -7,6 +7,7 @@ import os
 import re
 import sys
 import urllib.request
+from itertools import product
 
 DEFAULT_PROOF_POLICY = {
     "allowed_axioms": ["propext", "Quot.sound", "Classical.choice"],
@@ -180,6 +181,25 @@ def self_verify(solver, eq1, eq2, n, table):
     return solver.equation_holds(v1, l1, r1, n, op) and not solver.equation_holds(v2, l2, r2, n, op)
 
 
+def diagnose_finite(solver, eq1, eq2, n, table):
+    """Explain WHY a finite model failed self-verify, concretely: the first
+    assignment where EQ1 breaks (with the actual LHS/RHS values), or that EQ2
+    holds everywhere (model too strong). This turns o3's next round from blind
+    guessing into targeted correction."""
+    op = lambda a, b, t=table: t[a][b]
+    v1, l1, r1 = solver.parse_equation(eq1)
+    v2, l2, r2 = solver.parse_equation(eq2)
+    for vals in product(range(n), repeat=len(v1)):
+        env = {"op": op}
+        env.update(dict(zip(v1, vals)))
+        lv, rv = l1(env), r1(env)
+        if lv != rv:
+            asg = ", ".join(f"{var}={val}" for var, val in zip(v1, vals))
+            return f"EQ1 FAILS at ({asg}): LHS={lv} but RHS={rv} (EQ1 must hold for ALL)."
+    return ("EQ1 holds everywhere but so does EQ2 -- the model is TOO STRONG (satisfies "
+            "both laws). You need an assignment where EQ2 FAILS.")
+
+
 def verify_algebraic_linear(solver, eq1, eq2, proposal, pid):
     """Self-verify an o3-proposed INFINITE algebraic-linear model over ZZ[alpha]
     and, if valid, emit a Lean certificate via the solver's competition-proven
@@ -192,7 +212,7 @@ def verify_algebraic_linear(solver, eq1, eq2, proposal, pid):
     coeffs = [int(c) for c in proposal["poly"]]
     d = len(coeffs)
     if d < 2:
-        return None
+        return None, "polynomial degree must be >= 2"
     a_poly = ([int(c) for c in proposal["a_poly"]] + [0] * d)[:d]
     b_poly = ([int(c) for c in proposal["b_poly"]] + [0] * d)[:d]
     L1, R1 = solver.al_parse_equation(eq1)
@@ -211,8 +231,12 @@ def verify_algebraic_linear(solver, eq1, eq2, proposal, pid):
         for k in range(d):
             env = {v: ([1 if i == k else 0 for i in range(d)] if v == active
                        else [0] * d) for v in e1vars}
-            if solver.al_eval_term(L1, op, env) != solver.al_eval_term(R1, op, env):
-                return None
+            lv = solver.al_eval_term(L1, op, env)
+            rv = solver.al_eval_term(R1, op, env)
+            if lv != rv:
+                return None, (f"EQ1 FAILS as a ZZ-module identity: setting {active}=alpha^{k} "
+                              f"(all other vars 0), LHS coords {lv} != RHS coords {rv}. EQ1 "
+                              f"must hold EXACTLY for every basis vector.")
     # EQ2: must fail at some basis witness
     witness = None
     for cand in e2vars:
@@ -221,13 +245,25 @@ def verify_algebraic_linear(solver, eq1, eq2, proposal, pid):
             witness = cand
             break
     if witness is None:
-        return None
+        return None, ("EQ1 holds but EQ2 also holds at every basis witness -- the model is "
+                      "TOO STRONG. Choose a, b (with b != 1 - a) so that EQ2 FAILS.")
     cert = solver.al_emit_cert(coeffs, a_poly, b_poly, e2vars, witness, pid)
     return cert, f"ZZ[alpha] deg {d}, a={a_poly}, b={b_poly}, witness={witness}"
 
 
+FORCE_INFINITE_DIRECTIVE = (
+    "\n\nHARD REQUIREMENT FOR THIS PAIR: finite search (brute force, SAT, affine, "
+    "and the idempotent b=1-a infinite slice) has ALREADY FAILED. You MUST propose "
+    "an INFINITE model with model_type='algebraic_linear' -- a GENERAL ZZ[alpha] "
+    "model with b != 1 - a. Do NOT propose a finite model. Return ONLY the "
+    "algebraic_linear JSON schema (model_type, family, justification, poly, a_poly, "
+    "b_poly).")
+
+
 def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=None):
     prompt = PROMPT_TEMPLATE.format(eq1=eq1, eq2=eq2, portfolio_summary=PORTFOLIO_SUMMARY)
+    if getattr(args, "force_infinite", False):
+        prompt += FORCE_INFINITE_DIRECTIVE
     feedback = feedback_text or ""
     entries = []
     solved = False
@@ -277,20 +313,23 @@ def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=N
         # ── INFINITE algebraic-linear model branch ──────────────────────────
         if model_type == "algebraic_linear":
             cert = None
+            reason = None
             try:
-                out = verify_algebraic_linear(solver, eq1, eq2, proposal, pid)
-                if out is not None:
-                    cert, detail = out
-                    entry["al_detail"] = detail
+                cert, info = verify_algebraic_linear(solver, eq1, eq2, proposal, pid)
+                if cert is not None:
+                    entry["al_detail"] = info
+                else:
+                    reason = info
+                    entry["al_reason"] = info
             except Exception as e:
-                entry["al_error"] = repr(e)
+                reason = repr(e)
+                entry["al_error"] = reason
             entry["self_verified"] = cert is not None
             if cert is None:
                 feedback = ("\n\nYour previous algebraic-linear proposal (family: " +
-                            repr(entry["family"]) + ") did NOT satisfy EQ1-as-identity "
-                            "and-not-EQ2 over ZZ[alpha] (error: " + repr(entry.get("al_error")) +
-                            "). Propose a DIFFERENT model -- recheck that EQ1 is a true "
-                            "ZZ-module identity and that b != 1 - a.")
+                            repr(entry["family"]) + ") FAILED self-verification. REASON: " +
+                            str(reason) + " Fix exactly that and resubmit a corrected "
+                            "algebraic_linear model (keep b != 1 - a).")
                 entries.append(entry)
                 print(pid + " round " + str(rnd) + ": self-verify FAILED (algebraic_linear)",
                       file=sys.stderr)
@@ -318,6 +357,7 @@ def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=N
 
         hit = None
         errs = []
+        diags = []
         for n in (proposal.get("candidate_n") or []):
             try:
                 n = int(n)
@@ -327,22 +367,24 @@ def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=N
                 if self_verify(solver, eq1, eq2, n, table):
                     hit = (n, table)
                     break
+                if len(diags) < 2:
+                    diags.append("n=" + str(n) + ": " + diagnose_finite(solver, eq1, eq2, n, table))
             except Exception as e:
                 errs.append("n=" + str(n) + ": " + repr(e))
         entry["materialize_errors"] = errs
+        entry["diagnostics"] = diags
         entry["self_verified"] = hit is not None
 
         if hit is None:
+            diag_txt = (" SPECIFIC FAILURES: " + " | ".join(diags)) if diags else ""
+            crash_txt = (" Your python_code CRASHED (fix it: def op(a,b,n) must return an int "
+                         "in range(n) for every listed n): " + repr(errs)) if errs else ""
             feedback = ("\n\nYour previous FINITE proposal (family: " + repr(entry["family"]) +
-                        ") did NOT satisfy EQ1-and-not-EQ2 for any of n=" +
-                        repr(proposal.get("candidate_n")) + ". Errors: " + repr(errs) +
-                        ". (If Errors are non-empty your python_code CRASHED -- fix it: "
-                        "def op(a,b,n) must return an int in range(n) for every listed n.) "
-                        "Finite constructions are struggling on this pair, which resists "
-                        "brute force, SAT, and affine/finite search. STRONGLY CONSIDER "
-                        "switching to model_type='algebraic_linear': a GENERAL infinite "
-                        "ZZ[alpha] model with b != 1 - a, built for pairs with no tractable "
-                        "finite model. Otherwise propose a DIFFERENT finite family.")
+                        ") did NOT satisfy EQ1-and-not-EQ2." + diag_txt + crash_txt +
+                        " Use the specific failure above to CORRECT your construction. "
+                        "This pair resists brute force, SAT, and affine/finite search, so also "
+                        "STRONGLY CONSIDER switching to model_type='algebraic_linear': a GENERAL "
+                        "infinite ZZ[alpha] model with b != 1 - a.")
             entries.append(entry)
             print(pid + " round " + str(rnd) + ": self-verify FAILED", file=sys.stderr)
             continue
@@ -378,6 +420,8 @@ def main():
     ap.add_argument("--reasoning-effort", default="low")
     ap.add_argument("--cert-dir", default="paper/certs",
                     help="where to write emitted algebraic-linear .lean certificates")
+    ap.add_argument("--force-infinite", action="store_true",
+                    help="require o3 to propose an infinite algebraic_linear model (no finite)")
     ap.add_argument("--pair-filter", default=None)
     ap.add_argument("--feedback-file", default=None)
     ap.add_argument("--append", action="store_true")
