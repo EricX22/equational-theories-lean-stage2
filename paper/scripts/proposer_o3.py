@@ -67,22 +67,48 @@ We need a magma (G, *) such that:
   EQ2 FAILS for at least one instance:   {eq2}
 (Variables x,y,z,w,u range over G; `a◇b` in the problem text means `a*b`.)
 
-A finite countermodel is EXPECTED to exist for this pair -- these are open
-order-5-and-up problems where a finite refutation is believed to exist but has
-not yet been found. "No model exists" / a trivial order-2 punt is therefore NOT
-an acceptable answer: you must always output a concrete, constructive candidate
-of order >= 4. Your job is to find the construction, not to judge whether one
-exists.
+A countermodel is EXPECTED to exist for this pair. "No model exists" / a
+trivial order-2 punt is NOT an acceptable answer: you must always output a
+concrete, constructive candidate. Your job is to find the construction, not to
+judge whether one exists.
 
 {portfolio_summary}
 
-Respond with ONLY a JSON object (no markdown fences, no prose outside the
-JSON) with these exact keys:
+You may propose EITHER of two model types:
+
+(A) A FINITE magma of order n (n >= 4), given as Python code.
+
+(B) An INFINITE algebraic-linear model. This family refutes pairs that have NO
+tractable finite model -- it is how previously-unsolved cases were cracked.
+Carrier: the number ring ZZ[alpha] = ZZ[X]/(p(X)) for a MONIC integer
+polynomial p of degree d >= 2, represented as ZZ^d in the power basis
+{{1, alpha, ..., alpha^(d-1)}} with alpha acting as the companion matrix of p.
+Operation: x * y = a*x + b*y, where a, b are elements of ZZ[alpha] given as
+integer coefficient vectors of length d in that basis. EQ1 must hold as a
+ZZ-module identity (it is linear, so it either holds identically or not); EQ2
+must fail at a basis witness. IMPORTANT: the deterministic solver already
+searches ONLY the idempotent slice b = 1 - a, so to add anything propose a
+GENERAL model with b != 1 - a.
+
+Respond with ONLY a JSON object (no markdown fences, no prose outside the JSON).
+
+For a FINITE model, use exactly these keys:
 {{
+  "model_type": "finite",
   "family": "short name for the construction family",
   "justification": "1-3 sentences tied to the shape of EQ1/EQ2",
   "python_code": "a Python snippet defining def op(a, b, n): returning an int in range(n). Pure, deterministic, only uses math/n/a/b.",
   "candidate_n": [list of 2 to 5 integers to try for n]
+}}
+
+For an INFINITE algebraic-linear model, use exactly these keys:
+{{
+  "model_type": "algebraic_linear",
+  "family": "short name for the construction family",
+  "justification": "1-3 sentences tied to EQ1/EQ2, including why b != 1 - a",
+  "poly": "integer list [c0, c1, ..., c_(d-1)] of the MONIC minimal polynomial p(X) = X^d + c_(d-1) X^(d-1) + ... + c1 X + c0, so length d = degree, d >= 2",
+  "a_poly": "integer list of length d: a = sum_k a_poly[k] * alpha^k",
+  "b_poly": "integer list of length d: b = sum_k b_poly[k] * alpha^k"
 }}
 """
 
@@ -154,6 +180,52 @@ def self_verify(solver, eq1, eq2, n, table):
     return solver.equation_holds(v1, l1, r1, n, op) and not solver.equation_holds(v2, l2, r2, n, op)
 
 
+def verify_algebraic_linear(solver, eq1, eq2, proposal, pid):
+    """Self-verify an o3-proposed INFINITE algebraic-linear model over ZZ[alpha]
+    and, if valid, emit a Lean certificate via the solver's competition-proven
+    al_ machinery. Returns (cert_str, detail) or None.
+
+    Soundness: EQ1 is linear, so checking it on the spanning set (each variable
+    set to each power-basis vector, the rest zero) PROVES it holds for all
+    inputs -- exact integer arithmetic, no sampling. A model that fails is
+    rejected here, so a wrong proposal can never reach the certificate."""
+    coeffs = [int(c) for c in proposal["poly"]]
+    d = len(coeffs)
+    if d < 2:
+        return None
+    a_poly = ([int(c) for c in proposal["a_poly"]] + [0] * d)[:d]
+    b_poly = ([int(c) for c in proposal["b_poly"]] + [0] * d)[:d]
+    L1, R1 = solver.al_parse_equation(eq1)
+    L2, R2 = solver.al_parse_equation(eq2)
+    op = solver.al_make_op(coeffs, a_poly, b_poly)
+    e1vars = solver.al_vars_of(L1)
+    for v in solver.al_vars_of(R1):
+        if v not in e1vars:
+            e1vars.append(v)
+    e2vars = solver.al_vars_of(L2)
+    for v in solver.al_vars_of(R2):
+        if v not in e2vars:
+            e2vars.append(v)
+    # EQ1: must hold on the whole spanning set (basis check = proof for linear op)
+    for active in e1vars:
+        for k in range(d):
+            env = {v: ([1 if i == k else 0 for i in range(d)] if v == active
+                       else [0] * d) for v in e1vars}
+            if solver.al_eval_term(L1, op, env) != solver.al_eval_term(R1, op, env):
+                return None
+    # EQ2: must fail at some basis witness
+    witness = None
+    for cand in e2vars:
+        env = {v: ([1] + [0] * (d - 1) if v == cand else [0] * d) for v in e2vars}
+        if solver.al_eval_term(L2, op, env) != solver.al_eval_term(R2, op, env):
+            witness = cand
+            break
+    if witness is None:
+        return None
+    cert = solver.al_emit_cert(coeffs, a_poly, b_poly, e2vars, witness, pid)
+    return cert, f"ZZ[alpha] deg {d}, a={a_poly}, b={b_poly}, witness={witness}"
+
+
 def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=None):
     prompt = PROMPT_TEMPLATE.format(eq1=eq1, eq2=eq2, portfolio_summary=PORTFOLIO_SUMMARY)
     feedback = feedback_text or ""
@@ -194,10 +266,55 @@ def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=N
 
         _tok = (entry.get("usage") or {}).get("total_tokens")
         _cost = (entry.get("usage") or {}).get("cost")
-        print(pid + " round " + str(rnd) + ": family=" + repr(entry["family"]) +
+        model_type = proposal.get("model_type", "finite")
+        entry["model_type"] = model_type
+        print(pid + " round " + str(rnd) + ": type=" + model_type +
+              " family=" + repr(entry["family"]) +
               " n=" + repr(entry["candidate_n"]) +
               " tok=" + repr(_tok) + " cost=$" + format(float(_cost or 0.0), ".4f"),
               file=sys.stderr)
+
+        # ── INFINITE algebraic-linear model branch ──────────────────────────
+        if model_type == "algebraic_linear":
+            cert = None
+            try:
+                out = verify_algebraic_linear(solver, eq1, eq2, proposal, pid)
+                if out is not None:
+                    cert, detail = out
+                    entry["al_detail"] = detail
+            except Exception as e:
+                entry["al_error"] = repr(e)
+            entry["self_verified"] = cert is not None
+            if cert is None:
+                feedback = ("\n\nYour previous algebraic-linear proposal (family: " +
+                            repr(entry["family"]) + ") did NOT satisfy EQ1-as-identity "
+                            "and-not-EQ2 over ZZ[alpha] (error: " + repr(entry.get("al_error")) +
+                            "). Propose a DIFFERENT model -- recheck that EQ1 is a true "
+                            "ZZ-module identity and that b != 1 - a.")
+                entries.append(entry)
+                print(pid + " round " + str(rnd) + ": self-verify FAILED (algebraic_linear)",
+                      file=sys.stderr)
+                continue
+            cert_path = os.path.join(args.cert_dir, pid + "_al.lean")
+            os.makedirs(args.cert_dir, exist_ok=True)
+            with open(cert_path, "w") as cf:
+                cf.write(cert)
+            entry["cert_path"] = cert_path
+            print(pid + " round " + str(rnd) + ": SELF-VERIFIED (algebraic_linear) -> " +
+                  cert_path, file=sys.stderr)
+            if verify is not None:
+                problem = {"id": pid, "eq1_id": 0, "eq2_id": 0,
+                           "equation1": eq1, "equation2": eq2,
+                           "proof_policy": DEFAULT_PROOF_POLICY}
+                result = verify.verify_answer(problem, json.dumps({"verdict": "false", "code": cert}))
+                entry["judge_status"] = result.get("status")
+                entry["judge_message"] = result.get("message")
+                print(pid + " round " + str(rnd) + ": JUDGE " + str(result.get("status")),
+                      file=sys.stderr)
+                if result.get("status") == "accepted":
+                    solved = True
+            entries.append(entry)
+            break
 
         hit = None
         errs = []
@@ -253,6 +370,8 @@ def main():
     ap.add_argument("--judge-dir", default=None)
     ap.add_argument("--out", required=True)
     ap.add_argument("--reasoning-effort", default="low")
+    ap.add_argument("--cert-dir", default="paper/certs",
+                    help="where to write emitted algebraic-linear .lean certificates")
     ap.add_argument("--pair-filter", default=None)
     ap.add_argument("--feedback-file", default=None)
     ap.add_argument("--append", action="store_true")
