@@ -49,10 +49,13 @@ def _space_size(params, n):
 
 def search_structured(solver, eq1, eq2, op_code, params, candidate_n,
                       budget=300_000, deadline=None):
-    """Search the ansatz's parameter space. Returns (n, table, P) or None.
-    `info` about skipped sizes is available via the returned tuple's absence +
-    the `skipped` list this function attaches to itself is avoided; callers that
-    want detail should pass a small budget and inspect return value."""
+    """Search the ansatz's parameter space.
+
+    Returns (hit, reason) where hit is (n, table, P) or None, and reason is a
+    human-readable diagnosis when hit is None -- distinguishing a family that
+    can't satisfy EQ1, a family that's too strong (also satisfies EQ2), a
+    parameter space skipped as over-budget, and a buggy op_code. That diagnosis
+    is fed back to the LLM so it corrects the right thing."""
     v1, l1, r1 = solver.parse_equation(eq1)
     v2, l2, r2 = solver.parse_equation(eq2)
     ns = {"math": math}
@@ -61,23 +64,47 @@ def search_structured(solver, eq1, eq2, op_code, params, candidate_n,
         raise ValueError("op_code did not define op(x, y, n, P)")
     op_fn = ns["op"]
 
+    eq1_ever = False       # some parameter made EQ1 hold
+    searched_any = False   # at least one n was actually searched (under budget)
+    skipped = []           # (n, space_size) skipped as over-budget
+    op_errors = 0
     for n in candidate_n:
         n = int(n)
         if n < 2 or n > 40:
             continue
-        if _space_size(params, n) > budget:
-            continue  # parameter space too large at this n; caller should tighten
+        size = _space_size(params, n)
+        if size > budget:
+            skipped.append((n, size))
+            continue
+        searched_any = True
         doms = [_domain(p, n) for p in params]
         for combo in product(*doms) if doms else [()]:
             if deadline is not None and time.time() > deadline:
-                return None
+                return None, "search timed out before covering the parameter space"
             P = tuple(combo)
             try:
                 table = [[op_fn(x, y, n, P) % n for y in range(n)] for x in range(n)]
             except Exception:
+                op_errors += 1
                 break  # op_code errors at this n; skip to next n
             op = lambda a, b, t=table: t[a][b]
-            if (solver.equation_holds(v1, l1, r1, n, op)
-                    and not solver.equation_holds(v2, l2, r2, n, op)):
-                return n, table, P
-    return None
+            if solver.equation_holds(v1, l1, r1, n, op):
+                eq1_ever = True
+                if not solver.equation_holds(v2, l2, r2, n, op):
+                    return (n, table, P), "ok"
+
+    if op_errors and not searched_any:
+        reason = "op_code crashed for every candidate n; fix op(x,y,n,P) to return an int"
+    elif not searched_any and skipped:
+        reason = ("parameter space too large at EVERY n (skipped %s); it was NOT searched. "
+                  "Shrink the params (fewer/smaller ranges, at most one permutation) or use "
+                  "smaller n." % [s[0] for s in skipped])
+    elif not eq1_ever:
+        reason = ("searched, but NO parameter made EQ1 hold -- this family structurally cannot "
+                  "satisfy EQ1. Propose a different family.")
+    else:
+        reason = ("searched, but every parameter that satisfied EQ1 ALSO satisfied EQ2 (family "
+                  "too strong). Adjust the family so it can break EQ2.")
+    if skipped and searched_any:
+        reason += " (note: sizes %s were skipped as over-budget)" % [s[0] for s in skipped]
+    return None, reason

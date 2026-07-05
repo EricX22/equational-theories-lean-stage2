@@ -465,7 +465,7 @@ def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=N
             hit = None
             reason = None
             try:
-                out = structured_search.search_structured(
+                out, srch_reason = structured_search.search_structured(
                     solver, eq1, eq2, proposal["op_code"],
                     proposal.get("params") or [], proposal.get("candidate_n") or [],
                     budget=getattr(args, "struct_budget", 100000))
@@ -473,17 +473,20 @@ def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=N
                     n_hit, table, P = out
                     hit = (n_hit, table)
                     entry["struct_params"] = repr(P)
+                else:
+                    reason = srch_reason
+                    entry["struct_reason"] = srch_reason
             except Exception as e:
                 reason = repr(e)
                 entry["struct_error"] = reason
             entry["self_verified"] = hit is not None
             if hit is None:
                 feedback = ("\n\nYour structured ansatz (family: " + repr(entry["family"]) +
-                            ") produced NO table satisfying EQ1-and-not-EQ2 anywhere in its "
-                            "parameter space" + ((" (error: " + reason + ")") if reason else "") +
-                            ". Propose a DIFFERENT non-linear ansatz (different structure) or "
-                            "adjust the parameter families/ranges. Linear forms are proven "
-                            "impossible here, so stay non-linear.")
+                            ") produced NO counterexample. DIAGNOSIS: " + str(reason) +
+                            " Use this to fix the RIGHT thing: if the space was skipped, shrink "
+                            "the params; if EQ1 never held, change the family; if too strong, "
+                            "make it break EQ2. Linear forms are proven impossible here, so stay "
+                            "non-linear.")
                 entries.append(entry)
                 print(pid + " round " + str(rnd) + ": self-verify FAILED (structured_finite)",
                       file=sys.stderr)
