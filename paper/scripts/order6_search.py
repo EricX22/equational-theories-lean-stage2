@@ -36,7 +36,7 @@ Usage:
       --out paper/results/order6_candidates.jsonl --shard 0/8
 """
 from __future__ import annotations
-import argparse, itertools, json, os, random, subprocess, tempfile
+import argparse, itertools, json, os, random, subprocess, sys, tempfile, time
 
 VARS = ["x", "y", "z", "w"]
 
@@ -124,6 +124,28 @@ def fmb(T, timeout, vbin):
     return "NO_MODEL_IN_BUDGET", None                  # incl. Vampire "Time limit"
 
 
+# ---- stage 2: fast finite-model finder (reuse the solver's mf2/SAT) ------
+# A nontrivial finite model of law L == a magma satisfying L that BREAKS "x = y"
+# (breaking the all-collapse law just means the carrier has >=2 elements). So the
+# solver's false-side finders (satisfy eq1, break eq2) with eq2="x = y" find exactly
+# a nontrivial finite model of L -- Fin<=11, far cheaper than long Vampire fmb.
+def solver_has_finite_model(solver, law, mf2_budget, sat_sizes):
+    eq2 = "x = y"
+    try:
+        if solver.mf2_find_portfolio(law, eq2, mf2_budget):
+            return True
+    except Exception:
+        pass
+    per = max(1.0, mf2_budget) / max(1, len(sat_sizes))
+    for n in sat_sizes:
+        try:
+            if solver.sat_find_model(law, eq2, n, time.time() + per):
+                return True
+        except Exception:
+            pass
+    return False
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--n", type=int, default=5000, help="laws to generate")
@@ -135,7 +157,20 @@ def main():
     ap.add_argument("--cheap-max-n", type=int, default=3, help="brute small-model screen up to n")
     ap.add_argument("--fmb-timeout", type=int, default=120)
     ap.add_argument("--vampire", default="vampire")
+    ap.add_argument("--solver-dir", default=None,
+                    help="if set, run the solver mf2/SAT finite finder (Fin<=11) "
+                         "as a fast stage-2 to drop laws with moderate models before fmb")
+    ap.add_argument("--mf2-budget", type=float, default=30.0)
+    ap.add_argument("--sat-sizes", default="4,5,6,7,8,9,10,11")
     args = ap.parse_args()
+
+    solver = None
+    if args.solver_dir and not args.cheap_only:
+        sys.path.insert(0, args.solver_dir)
+        import solver as _solver
+        _solver.trace = lambda *a, **k: None
+        solver = _solver
+    sat_sizes = [int(s) for s in args.sat_sizes.split(",") if s.strip()]
 
     rng = random.Random(args.seed)
     laws = generate(rng, args.n, args.leaves)
@@ -150,13 +185,19 @@ def main():
         cheap_pass.append(T)
     print(f"generated {len(laws)} order-6 laws; {len(cheap_pass)} pass cheap n<= {args.cheap_max_n} screen")
 
-    rows, cands = [], 0
+    rows, cands, dropped_solver = [], 0, 0
     with open(args.out, "w") as f:
         for T in cheap_pass:
             law = "x = " + to_str(T)
             if args.cheap_only:
                 rec = {"law": law, "canon": canon(T), "stage": "cheap_pass"}
             else:
+                # stage 2: fast solver finder (Fin<=11) drops moderate-model laws
+                if solver is not None and solver_has_finite_model(
+                        solver, law, args.mf2_budget, sat_sizes):
+                    dropped_solver += 1
+                    continue
+                # stage 3: long Vampire fmb for the hard tail
                 verdict, order = fmb(T, args.fmb_timeout, args.vampire)
                 if verdict == "MODEL_FOUND":
                     continue  # has a finite model -> not Austin
@@ -164,6 +205,8 @@ def main():
                        "fmb": verdict, "fmb_timeout": args.fmb_timeout}
                 cands += 1
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    if not args.cheap_only and solver is not None:
+        print(f"stage-2 solver finder dropped {dropped_solver} (found Fin<=11 models)")
     print(("cheap-only: wrote %d pool laws" % len(cheap_pass)) if args.cheap_only
           else ("Austin candidates (no finite model in %ds fmb): %d" % (args.fmb_timeout, cands)))
     print(f"-> {args.out}   (next: run the validated greedy builder to split easy/hard)")
