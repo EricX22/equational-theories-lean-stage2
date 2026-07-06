@@ -10,6 +10,7 @@ import urllib.request
 from itertools import product
 
 import structured_search
+import families
 
 DEFAULT_PROOF_POLICY = {
     "allowed_axioms": ["propext", "Quot.sound", "Classical.choice"],
@@ -361,8 +362,10 @@ def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=N
         try:
             _linok, _gate = analyze_linear(solver, eq1, eq2)
             prompt += _gate
+            if not _linok and not getattr(args, "no_fewshot", False):
+                prompt += "\n\n" + families.render_fewshot()
             print(pid + ": linear-gate -> " +
-                  ("linear model available" if _linok else "NON-LINEAR required"),
+                  ("linear model available" if _linok else "NON-LINEAR required (+few-shot)"),
                   file=sys.stderr)
         except Exception as e:
             print(pid + ": linear-gate skipped (" + repr(e) + ")", file=sys.stderr)
@@ -586,6 +589,8 @@ def main():
                     help="require o3 to propose an infinite algebraic_linear model (no finite)")
     ap.add_argument("--no-linear-gate", action="store_true",
                     help="disable the deterministic linear-model analysis injected into the prompt")
+    ap.add_argument("--no-fewshot", action="store_true",
+                    help="do not inject the families.py non-linear vocabulary into the prompt")
     ap.add_argument("--struct-budget", type=int, default=100000,
                     help="max parameter-space size searched per n for a structured_finite ansatz")
     ap.add_argument("--pair-filter", default=None)
