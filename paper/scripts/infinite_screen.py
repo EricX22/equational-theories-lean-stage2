@@ -58,31 +58,46 @@ from types import SimpleNamespace
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import baseline      # noqa: E402  finite stages + al_ stage + solver loader
 import etp_terms     # noqa: E402  TPTP encoders
+import al_general    # noqa: E402  COMPLETE commutative-linear decision (Groebner)
 
 
 # ---- input loading -------------------------------------------------------
 def load_targets(args):
     if args.pairs:
         obj = json.load(open(args.pairs))
-        return [(pid, e[0], e[1]) for pid, e in obj.items()]
-    paths = []
-    for g in args.harvest:
-        paths.extend(sorted(glob.glob(g)))
-    seen, out = set(), []
-    for p in paths:
-        for line in open(p):
+        out = [(pid, e[0], e[1]) for pid, e in obj.items()]
+    elif args.pool:
+        # raw sampled pool: JSONL rows {id, equation1, equation2}, no tiering
+        out = []
+        for line in open(args.pool):
             line = line.strip()
-            if not line:
-                continue
-            r = json.loads(line)
-            if args.tier and r.get("tier") != args.tier:
-                continue
-            pid = r["id"]
-            if pid in seen:
-                continue
-            seen.add(pid)
-            out.append((pid, r.get("equation1") or r.get("eq1"),
-                        r.get("equation2") or r.get("eq2")))
+            if line:
+                r = json.loads(line)
+                out.append((r["id"], r.get("equation1") or r.get("eq1"),
+                            r.get("equation2") or r.get("eq2")))
+    else:
+        paths = []
+        for g in args.harvest:
+            paths.extend(sorted(glob.glob(g)))
+        seen, out = set(), []
+        for p in paths:
+            for line in open(p):
+                line = line.strip()
+                if not line:
+                    continue
+                r = json.loads(line)
+                if args.tier and args.tier != "ALL" and r.get("tier") != args.tier:
+                    continue
+                pid = r["id"]
+                if pid in seen:
+                    continue
+                seen.add(pid)
+                out.append((pid, r.get("equation1") or r.get("eq1"),
+                            r.get("equation2") or r.get("eq2")))
+    # deterministic sharding: keep only indices == shard_i (mod shard_n)
+    if args.shard:
+        i, n = (int(x) for x in args.shard.split("/"))
+        out = [row for k, row in enumerate(out) if k % n == i]
     return out
 
 
@@ -139,10 +154,16 @@ def screen_pair(solver, fin_args, pid, eq1, eq2, args):
         rec.update(tier="FINITE_MODEL_LARGE", secs=round(time.time()-t0, 1))
         return rec
 
-    # 4) deterministic infinite (idempotent-linear ZZ[alpha]) -- solved, but NOT the LLM
+    # 4) deterministic infinite linear -- COMPLETE commutative-linear decision
+    # (Groebner ideal membership, no caps), not the weak idempotent b=1-a slice.
+    # A pair with any commutative char-0 linear model is deterministically solved
+    # and is NOT an LLM target. This is the subtraction that closes the ~44%
+    # Level-1 redundancy leak the idempotent-only stage_al used to pass through.
     try:
-        if baseline.stage_al(solver, eq1, eq2, fin_args):
-            rec.update(tier="INFINITE_DETERMINISTIC", secs=round(time.time()-t0, 1))
+        d = al_general.decide_linear(solver, eq1, eq2)
+        if d.get("exists"):
+            rec.update(tier="INFINITE_DETERMINISTIC", secs=round(time.time()-t0, 1),
+                       linear_witness=d.get("witness_q"))
             return rec
     except Exception:
         pass
@@ -157,8 +178,12 @@ def main():
     src = ap.add_mutually_exclusive_group(required=True)
     src.add_argument("--harvest", nargs="+", help="harvest shard(s); globs ok")
     src.add_argument("--pairs", help="explicit {id:[eq1,eq2]} json")
+    src.add_argument("--pool", help="raw sampled pool JSONL (id/equation1/equation2); "
+                                    "screens the whole pool from scratch")
     ap.add_argument("--tier", default="HARD_NONLINEAR",
-                    help="harvest tier to pull when using --harvest")
+                    help="harvest tier to pull when using --harvest ('ALL' = every tier)")
+    ap.add_argument("--shard", default=None,
+                    help="process only shard i of n, e.g. '0/8' (deterministic by index)")
     ap.add_argument("--solver-dir", required=True)
     ap.add_argument("--vampire", default="vampire")
     ap.add_argument("--out-report", required=True)
