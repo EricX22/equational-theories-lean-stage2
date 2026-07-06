@@ -384,6 +384,8 @@ def run_one(pid, eq1, eq2, solver, verify, args, api_key, feedback_text, stats=N
             entry["family"] = proposal.get("family")
             entry["justification"] = proposal.get("justification")
             entry["python_code"] = proposal.get("python_code")
+            entry["op_code"] = proposal.get("op_code")
+            entry["params"] = proposal.get("params")
             entry["candidate_n"] = proposal.get("candidate_n")
         except EmptyContentError as e:
             entry["error"] = repr(e)
