@@ -130,6 +130,12 @@ def main():
     ap.add_argument("--selftest", action="store_true")
     args = ap.parse_args()
 
+    try:
+        import sympy  # noqa: F401  -- the complete decision needs it
+    except ImportError:
+        sys.exit("al_general requires sympy (the Groebner decision). Install it into "
+                 "the Python running the solver:  pip install sympy")
+
     sys.path.insert(0, args.solver_dir)
     import solver
     solver.trace = lambda *a, **k: None
