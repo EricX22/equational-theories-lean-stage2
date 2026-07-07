@@ -71,7 +71,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--in", dest="inp", nargs="+", required=True)
     ap.add_argument("--out", required=True)
-    ap.add_argument("--solver-dir", required=True)
+    ap.add_argument("--solver-dir", default=None,
+                    help="optional Fin<=11 solver pre-filter; omit for pure fmb "
+                         "(the fmb pass upstream already ruled out small models)")
     ap.add_argument("--vampire", default="vampire")
     ap.add_argument("--mf2-budget", type=float, default=30.0)
     ap.add_argument("--sat-sizes", default="4,5,6,7,8,9,10,11")
@@ -79,9 +81,11 @@ def main():
     ap.add_argument("--shard", default=None)
     args = ap.parse_args()
 
-    sys.path.insert(0, args.solver_dir)
-    import solver
-    solver.trace = lambda *a, **k: None
+    solver = None
+    if args.solver_dir:
+        sys.path.insert(0, args.solver_dir)
+        import solver
+        solver.trace = lambda *a, **k: None
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import etp_terms as et
     sat_sizes = [int(x) for x in args.sat_sizes.split(",") if x.strip()]
@@ -97,7 +101,8 @@ def main():
         for j, law in enumerate(laws, 1):
             if j % 25 == 0:
                 print(f"  {j}/{len(laws)} | {confirmed} confirmed", flush=True)
-            if solver_has_finite_model(solver, law, args.mf2_budget, sat_sizes):
+            if solver is not None and solver_has_finite_model(
+                    solver, law, args.mf2_budget, sat_sizes):
                 continue
             if fmb_from_law(et, law, args.fmb_timeout, args.vampire) == "MODEL_FOUND":
                 continue
