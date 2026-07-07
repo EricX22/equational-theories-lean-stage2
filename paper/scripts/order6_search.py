@@ -185,9 +185,15 @@ def main():
         cheap_pass.append(T)
     print(f"generated {len(laws)} order-6 laws; {len(cheap_pass)} pass cheap n<= {args.cheap_max_n} screen")
 
-    rows, cands, dropped_solver = [], 0, 0
+    rows, cands, dropped_solver, processed = [], 0, 0, 0
+    total = len(cheap_pass)
     with open(args.out, "w") as f:
         for T in cheap_pass:
+            processed += 1
+            if not args.cheap_only and processed % 50 == 0:
+                print(f"  progress: {processed}/{total} processed | "
+                      f"{dropped_solver} solver-dropped | {cands} candidates so far",
+                      flush=True)
             law = "x = " + to_str(T)
             if args.cheap_only:
                 rec = {"law": law, "canon": canon(T), "stage": "cheap_pass"}
@@ -197,7 +203,7 @@ def main():
                         solver, law, args.mf2_budget, sat_sizes):
                     dropped_solver += 1
                     continue
-                # stage 3: long Vampire fmb for the hard tail
+                # stage 3: Vampire fmb for the hard tail
                 verdict, order = fmb(T, args.fmb_timeout, args.vampire)
                 if verdict == "MODEL_FOUND":
                     continue  # has a finite model -> not Austin
@@ -205,6 +211,7 @@ def main():
                        "fmb": verdict, "fmb_timeout": args.fmb_timeout}
                 cands += 1
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+            f.flush()  # candidates visible immediately, not buffered
     if not args.cheap_only and solver is not None:
         print(f"stage-2 solver finder dropped {dropped_solver} (found Fin<=11 models)")
     print(("cheap-only: wrote %d pool laws" % len(cheap_pass)) if args.cheap_only
