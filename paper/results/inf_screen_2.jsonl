@@ -483,3 +483,6 @@
 {"id": "order5inf_3859", "eq1": "x = y ◇ (z ◇ (((y ◇ z) ◇ y) ◇ z))", "eq2": "x = ((y ◇ z) ◇ z) ◇ ((x ◇ z) ◇ y)", "tier": "THEOREM", "secs": 44.8}
 {"id": "order5inf_3867", "eq1": "x = ((y ◇ (z ◇ w)) ◇ z) ◇ (w ◇ u)", "eq2": "(x ◇ y) ◇ z = z ◇ ((x ◇ y) ◇ z)", "tier": "THEOREM", "secs": 242.7}
 {"id": "order5inf_3875", "eq1": "x ◇ y = z ◇ (w ◇ (u ◇ (y ◇ u)))", "eq2": "x = (y ◇ (x ◇ (x ◇ z))) ◇ (y ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3883", "eq1": "x = ((y ◇ z) ◇ ((x ◇ w) ◇ w)) ◇ w", "eq2": "x = ((y ◇ z) ◇ z) ◇ (w ◇ (u ◇ x))", "tier": "THEOREM", "secs": 314.5}
+{"id": "order5inf_3891", "eq1": "x = (y ◇ (z ◇ (w ◇ u))) ◇ (u ◇ y)", "eq2": "x = y ◇ ((x ◇ (y ◇ x)) ◇ (z ◇ x))", "tier": "THEOREM", "secs": 151.6}
+{"id": "order5inf_3899", "eq1": "x = y ◇ ((z ◇ x) ◇ (y ◇ x))", "eq2": "x = y ◇ (((z ◇ x) ◇ w) ◇ (u ◇ v))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
