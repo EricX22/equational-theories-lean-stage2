@@ -1,0 +1,485 @@
+{"id": "order5inf_0003", "eq1": "x ◇ (x ◇ y) = z ◇ (y ◇ (w ◇ y))", "eq2": "x ◇ y = (y ◇ ((z ◇ y) ◇ x)) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0011", "eq1": "(x ◇ y) ◇ z = w ◇ (y ◇ (u ◇ z))", "eq2": "x = ((y ◇ z) ◇ (y ◇ w)) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0019", "eq1": "x = (y ◇ ((z ◇ w) ◇ (u ◇ u))) ◇ v", "eq2": "x = ((y ◇ ((z ◇ x) ◇ w)) ◇ z) ◇ z", "tier": "THEOREM", "secs": 3927.7}
+{"id": "order5inf_0027", "eq1": "x ◇ x = y ◇ ((x ◇ (x ◇ z)) ◇ w)", "eq2": "x ◇ (y ◇ z) = ((w ◇ x) ◇ z) ◇ w", "tier": "FINITE_MODEL", "by": "mf2", "secs": 0.1}
+{"id": "order5inf_0035", "eq1": "x = (((y ◇ (z ◇ z)) ◇ w) ◇ w) ◇ w", "eq2": "x ◇ x = ((y ◇ (y ◇ z)) ◇ x) ◇ z", "tier": "THEOREM", "secs": 59.7}
+{"id": "order5inf_0043", "eq1": "x ◇ y = ((x ◇ (z ◇ w)) ◇ x) ◇ w", "eq2": "x = ((y ◇ z) ◇ ((z ◇ z) ◇ z)) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0051", "eq1": "(x ◇ y) ◇ z = y ◇ (w ◇ (y ◇ z))", "eq2": "x ◇ (y ◇ z) = ((z ◇ y) ◇ w) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0059", "eq1": "x = ((y ◇ x) ◇ z) ◇ (y ◇ (y ◇ x))", "eq2": "x ◇ y = (x ◇ z) ◇ (y ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0067", "eq1": "x = (y ◇ (((z ◇ w) ◇ y) ◇ y)) ◇ u", "eq2": "x = y ◇ (z ◇ ((w ◇ u) ◇ (w ◇ u)))", "tier": "THEOREM", "secs": 678.9}
+{"id": "order5inf_0075", "eq1": "x = y ◇ ((y ◇ x) ◇ ((y ◇ x) ◇ x))", "eq2": "x = ((y ◇ (z ◇ y)) ◇ w) ◇ (y ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0083", "eq1": "x = y ◇ (((z ◇ (y ◇ x)) ◇ w) ◇ x)", "eq2": "x ◇ (y ◇ x) = (z ◇ (y ◇ y)) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0091", "eq1": "x = (x ◇ (y ◇ ((z ◇ x) ◇ w))) ◇ u", "eq2": "x = ((y ◇ z) ◇ ((y ◇ z) ◇ x)) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0099", "eq1": "x = ((y ◇ (x ◇ z)) ◇ (z ◇ y)) ◇ x", "eq2": "x = y ◇ ((y ◇ (x ◇ z)) ◇ (z ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0107", "eq1": "x ◇ y = z ◇ (z ◇ (w ◇ (u ◇ w)))", "eq2": "x = x ◇ (((y ◇ (z ◇ x)) ◇ w) ◇ u)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0115", "eq1": "x = y ◇ (y ◇ (((z ◇ x) ◇ y) ◇ z))", "eq2": "x = (y ◇ z) ◇ (((z ◇ w) ◇ x) ◇ u)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0123", "eq1": "x = y ◇ (z ◇ (((z ◇ x) ◇ z) ◇ z))", "eq2": "(x ◇ y) ◇ y = (z ◇ y) ◇ (y ◇ w)", "tier": "THEOREM", "secs": 70.5}
+{"id": "order5inf_0131", "eq1": "x ◇ y = (y ◇ (z ◇ (z ◇ z))) ◇ y", "eq2": "x = (x ◇ y) ◇ ((z ◇ (z ◇ w)) ◇ u)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0139", "eq1": "x = ((y ◇ (z ◇ z)) ◇ (w ◇ z)) ◇ y", "eq2": "x = y ◇ (((x ◇ z) ◇ (w ◇ x)) ◇ u)", "tier": "THEOREM", "secs": 357.6}
+{"id": "order5inf_0147", "eq1": "x = (y ◇ (z ◇ (z ◇ w))) ◇ (z ◇ x)", "eq2": "x ◇ (y ◇ z) = (y ◇ (w ◇ w)) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0155", "eq1": "x = (y ◇ x) ◇ (((x ◇ x) ◇ y) ◇ y)", "eq2": "x = (x ◇ ((x ◇ x) ◇ (y ◇ z))) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0163", "eq1": "x = (x ◇ y) ◇ ((z ◇ y) ◇ (z ◇ y))", "eq2": "x ◇ (y ◇ x) = (z ◇ w) ◇ (u ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0171", "eq1": "x ◇ x = (y ◇ (y ◇ (z ◇ x))) ◇ z", "eq2": "x = (y ◇ x) ◇ (z ◇ ((y ◇ w) ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0179", "eq1": "(x ◇ y) ◇ x = ((x ◇ y) ◇ y) ◇ z", "eq2": "x = ((y ◇ (z ◇ w)) ◇ z) ◇ (u ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0187", "eq1": "x = ((y ◇ (x ◇ z)) ◇ w) ◇ (z ◇ w)", "eq2": "x = y ◇ (z ◇ (y ◇ (y ◇ (x ◇ x))))", "tier": "THEOREM", "secs": 69.7}
+{"id": "order5inf_0195", "eq1": "x ◇ y = y ◇ ((x ◇ y) ◇ (z ◇ w))", "eq2": "x = (y ◇ x) ◇ (z ◇ (w ◇ (u ◇ x)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0203", "eq1": "x ◇ x = y ◇ ((x ◇ z) ◇ w)", "eq2": "x = (y ◇ x) ◇ (((z ◇ z) ◇ w) ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0211", "eq1": "x = ((x ◇ y) ◇ ((x ◇ z) ◇ x)) ◇ x", "eq2": "x = y ◇ ((x ◇ (z ◇ z)) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0219", "eq1": "x = ((y ◇ y) ◇ ((z ◇ y) ◇ x)) ◇ w", "eq2": "x ◇ (y ◇ y) = y ◇ (y ◇ (y ◇ z))", "tier": "THEOREM", "secs": 109.3}
+{"id": "order5inf_0227", "eq1": "x = (x ◇ y) ◇ (z ◇ ((z ◇ w) ◇ z))", "eq2": "x = y ◇ ((z ◇ w) ◇ (y ◇ (y ◇ w)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0235", "eq1": "x ◇ y = z ◇ (((y ◇ z) ◇ y) ◇ z)", "eq2": "x ◇ y = ((x ◇ z) ◇ y) ◇ (y ◇ x)", "tier": "THEOREM", "secs": 38.9}
+{"id": "order5inf_0243", "eq1": "x ◇ y = ((z ◇ y) ◇ x) ◇ x", "eq2": "x = (x ◇ (y ◇ (z ◇ (y ◇ w)))) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0251", "eq1": "x ◇ y = (z ◇ (w ◇ (w ◇ x))) ◇ z", "eq2": "x = (((y ◇ z) ◇ w) ◇ (w ◇ y)) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0259", "eq1": "x = x ◇ (y ◇ (y ◇ (z ◇ (w ◇ u))))", "eq2": "x ◇ (x ◇ x) = y ◇ ((y ◇ x) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0267", "eq1": "(x ◇ x) ◇ y = (z ◇ w) ◇ (z ◇ y)", "eq2": "x = (y ◇ (x ◇ x)) ◇ (y ◇ (x ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0275", "eq1": "x = ((x ◇ x) ◇ (y ◇ z)) ◇ (x ◇ w)", "eq2": "x = (((y ◇ z) ◇ z) ◇ w) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0283", "eq1": "x ◇ y = (x ◇ ((z ◇ x) ◇ w)) ◇ w", "eq2": "x ◇ x = (x ◇ (x ◇ (y ◇ z))) ◇ w", "tier": "THEOREM", "secs": 2970.3}
+{"id": "order5inf_0291", "eq1": "x = (((x ◇ x) ◇ y) ◇ z) ◇ (w ◇ x)", "eq2": "x ◇ y = ((y ◇ y) ◇ y) ◇ (z ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0299", "eq1": "x = (y ◇ x) ◇ ((z ◇ w) ◇ (x ◇ y))", "eq2": "(x ◇ x) ◇ y = (x ◇ z) ◇ (y ◇ z)", "tier": "THEOREM", "secs": 98.6}
+{"id": "order5inf_0307", "eq1": "x ◇ y = (((x ◇ z) ◇ w) ◇ y) ◇ z", "eq2": "(x ◇ x) ◇ y = ((y ◇ z) ◇ y) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0315", "eq1": "x ◇ y = ((y ◇ x) ◇ x) ◇ z", "eq2": "x = y ◇ (z ◇ ((z ◇ (x ◇ z)) ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0323", "eq1": "x ◇ y = (z ◇ w) ◇ (u ◇ (z ◇ z))", "eq2": "x = x ◇ (y ◇ (x ◇ ((y ◇ x) ◇ x)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0331", "eq1": "x ◇ y = (z ◇ (z ◇ (w ◇ w))) ◇ w", "eq2": "x ◇ (y ◇ y) = z ◇ (w ◇ (x ◇ x))", "tier": "THEOREM", "secs": 55.9}
+{"id": "order5inf_0339", "eq1": "x ◇ y = ((z ◇ z) ◇ w) ◇ (u ◇ w)", "eq2": "x ◇ y = (y ◇ x) ◇ ((z ◇ y) ◇ x)", "tier": "THEOREM", "secs": 253.5}
+{"id": "order5inf_0347", "eq1": "x = x ◇ ((y ◇ z) ◇ (w ◇ (x ◇ y)))", "eq2": "x = ((y ◇ z) ◇ y) ◇ (y ◇ (x ◇ y))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0355", "eq1": "x ◇ (x ◇ y) = (y ◇ (y ◇ y)) ◇ x", "eq2": "x ◇ y = ((x ◇ x) ◇ x) ◇ (x ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0363", "eq1": "x ◇ y = x ◇ ((x ◇ y) ◇ y)", "eq2": "x = ((y ◇ y) ◇ ((y ◇ y) ◇ z)) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0371", "eq1": "x ◇ y = z ◇ (z ◇ (z ◇ (w ◇ y)))", "eq2": "x ◇ y = ((x ◇ (y ◇ z)) ◇ y) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0379", "eq1": "x = (((x ◇ y) ◇ y) ◇ z) ◇ (y ◇ z)", "eq2": "x = y ◇ ((y ◇ (z ◇ x)) ◇ (y ◇ w))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0387", "eq1": "x = (((y ◇ y) ◇ z) ◇ x) ◇ (z ◇ z)", "eq2": "x ◇ y = z ◇ ((y ◇ y) ◇ y)", "tier": "THEOREM", "secs": 55.5}
+{"id": "order5inf_0395", "eq1": "x = ((x ◇ y) ◇ z) ◇ (y ◇ (w ◇ y))", "eq2": "x ◇ y = (y ◇ y) ◇ (y ◇ (x ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0403", "eq1": "x = ((y ◇ z) ◇ y) ◇ ((x ◇ z) ◇ x)", "eq2": "x ◇ y = ((z ◇ y) ◇ w) ◇ (y ◇ u)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0411", "eq1": "x = (x ◇ x) ◇ ((x ◇ y) ◇ (x ◇ z))", "eq2": "x = ((y ◇ (x ◇ (y ◇ z))) ◇ x) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0419", "eq1": "x = (y ◇ y) ◇ ((y ◇ y) ◇ (x ◇ y))", "eq2": "x = x ◇ (y ◇ ((x ◇ (z ◇ y)) ◇ y))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0427", "eq1": "x = (y ◇ (z ◇ ((z ◇ w) ◇ z))) ◇ w", "eq2": "x = (y ◇ ((z ◇ (w ◇ y)) ◇ x)) ◇ y", "tier": "THEOREM", "secs": 78.7}
+{"id": "order5inf_0435", "eq1": "x = y ◇ (z ◇ ((w ◇ (y ◇ w)) ◇ w))", "eq2": "x = y ◇ ((z ◇ (y ◇ x)) ◇ (z ◇ z))", "tier": "THEOREM", "secs": 51.8}
+{"id": "order5inf_0443", "eq1": "x = (((y ◇ y) ◇ (z ◇ y)) ◇ x) ◇ w", "eq2": "x = (((y ◇ (z ◇ z)) ◇ y) ◇ y) ◇ x", "tier": "THEOREM", "secs": 106.1}
+{"id": "order5inf_0451", "eq1": "x = x ◇ ((((y ◇ z) ◇ w) ◇ w) ◇ u)", "eq2": "x = y ◇ (z ◇ ((x ◇ z) ◇ y))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0459", "eq1": "x = y ◇ (z ◇ (x ◇ ((x ◇ w) ◇ u)))", "eq2": "x = (((y ◇ z) ◇ (w ◇ z)) ◇ z) ◇ z", "tier": "THEOREM", "secs": 334.9}
+{"id": "order5inf_0467", "eq1": "x ◇ y = (x ◇ z) ◇ ((y ◇ x) ◇ z)", "eq2": "x = y ◇ (((z ◇ (w ◇ w)) ◇ w) ◇ u)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0475", "eq1": "x = ((y ◇ y) ◇ (z ◇ (w ◇ y))) ◇ x", "eq2": "x = y ◇ ((x ◇ z) ◇ (x ◇ x))", "tier": "THEOREM", "secs": 108.4}
+{"id": "order5inf_0483", "eq1": "x ◇ y = y ◇ ((z ◇ w) ◇ (z ◇ x))", "eq2": "x = ((y ◇ ((z ◇ w) ◇ y)) ◇ y) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0491", "eq1": "x ◇ y = (x ◇ (x ◇ x)) ◇ (y ◇ z)", "eq2": "x = (y ◇ (y ◇ y)) ◇ (x ◇ (z ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0499", "eq1": "x = ((y ◇ (z ◇ z)) ◇ x) ◇ z", "eq2": "x ◇ y = ((z ◇ (w ◇ u)) ◇ v) ◇ z", "tier": "THEOREM", "secs": 1365.7}
+{"id": "order5inf_0507", "eq1": "x ◇ y = ((z ◇ w) ◇ u) ◇ (u ◇ u)", "eq2": "x ◇ x = y ◇ (((z ◇ x) ◇ y) ◇ y)", "tier": "THEOREM", "secs": 287.0}
+{"id": "order5inf_0515", "eq1": "x = ((x ◇ x) ◇ (y ◇ y)) ◇ (y ◇ y)", "eq2": "x = (x ◇ y) ◇ ((y ◇ (x ◇ z)) ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0523", "eq1": "x = (x ◇ (y ◇ y)) ◇ ((x ◇ x) ◇ x)", "eq2": "x ◇ (y ◇ y) = z ◇ (z ◇ (w ◇ u))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0531", "eq1": "x = x ◇ ((x ◇ x) ◇ ((y ◇ y) ◇ z))", "eq2": "x ◇ y = (y ◇ x) ◇ ((y ◇ y) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0539", "eq1": "x ◇ x = ((x ◇ (y ◇ z)) ◇ x) ◇ x", "eq2": "x ◇ y = (z ◇ (w ◇ (z ◇ y))) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0547", "eq1": "x = ((y ◇ y) ◇ ((y ◇ x) ◇ y)) ◇ x", "eq2": "x = y ◇ (((z ◇ (y ◇ z)) ◇ x) ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0555", "eq1": "x = x ◇ ((y ◇ x) ◇ ((x ◇ z) ◇ y))", "eq2": "x = (y ◇ (z ◇ (y ◇ (z ◇ y)))) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0563", "eq1": "x = x ◇ (y ◇ (x ◇ ((y ◇ z) ◇ y)))", "eq2": "x = y ◇ (z ◇ (z ◇ ((z ◇ w) ◇ z)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0571", "eq1": "x = x ◇ ((y ◇ (z ◇ (w ◇ w))) ◇ x)", "eq2": "x ◇ (y ◇ z) = ((x ◇ w) ◇ y) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0579", "eq1": "x = x ◇ (x ◇ (y ◇ (z ◇ (x ◇ z))))", "eq2": "x ◇ y = z ◇ (x ◇ (x ◇ (w ◇ x)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0587", "eq1": "x = ((y ◇ z) ◇ ((y ◇ w) ◇ w)) ◇ u", "eq2": "x = ((y ◇ ((y ◇ x) ◇ z)) ◇ y) ◇ x", "tier": "THEOREM", "secs": 242.7}
+{"id": "order5inf_0595", "eq1": "x = y ◇ (((x ◇ (z ◇ w)) ◇ u) ◇ v)", "eq2": "x = y ◇ ((z ◇ x) ◇ ((w ◇ x) ◇ y))", "tier": "THEOREM", "secs": 2142.8}
+{"id": "order5inf_0603", "eq1": "x = (y ◇ z) ◇ (w ◇ (y ◇ (u ◇ v)))", "eq2": "x = (y ◇ ((z ◇ y) ◇ z)) ◇ (w ◇ x)", "tier": "THEOREM", "secs": 3526.1}
+{"id": "order5inf_0611", "eq1": "x ◇ x = y ◇ (y ◇ ((z ◇ z) ◇ x))", "eq2": "x = ((y ◇ (z ◇ y)) ◇ z) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0619", "eq1": "x = (y ◇ (x ◇ (x ◇ (z ◇ w)))) ◇ z", "eq2": "x = (((y ◇ (y ◇ z)) ◇ x) ◇ z) ◇ z", "tier": "THEOREM", "secs": 68.7}
+{"id": "order5inf_0627", "eq1": "x = ((y ◇ (x ◇ z)) ◇ (w ◇ u)) ◇ y", "eq2": "x = y ◇ ((z ◇ (w ◇ z)) ◇ (w ◇ x))", "tier": "THEOREM", "secs": 530.2}
+{"id": "order5inf_0635", "eq1": "x ◇ (x ◇ y) = z ◇ (y ◇ (y ◇ x))", "eq2": "(x ◇ y) ◇ z = ((w ◇ w) ◇ w) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0643", "eq1": "x = (y ◇ ((z ◇ x) ◇ y)) ◇ (y ◇ x)", "eq2": "x = (((y ◇ (y ◇ y)) ◇ x) ◇ y) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0651", "eq1": "x = (y ◇ z) ◇ ((w ◇ y) ◇ (z ◇ z))", "eq2": "x = (y ◇ z) ◇ ((x ◇ w) ◇ u)", "tier": "THEOREM", "secs": 159.9}
+{"id": "order5inf_0659", "eq1": "(x ◇ y) ◇ x = (x ◇ z) ◇ (y ◇ w)", "eq2": "x = ((y ◇ (x ◇ z)) ◇ (w ◇ x)) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0667", "eq1": "x ◇ x = y ◇ (((y ◇ y) ◇ x) ◇ z)", "eq2": "x = y ◇ (z ◇ (w ◇ ((u ◇ x) ◇ v)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0675", "eq1": "x = (y ◇ z) ◇ ((w ◇ z) ◇ (u ◇ x))", "eq2": "(x ◇ y) ◇ y = (z ◇ w) ◇ (w ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0683", "eq1": "x ◇ y = (x ◇ (y ◇ (y ◇ x))) ◇ z", "eq2": "x = ((y ◇ x) ◇ (x ◇ z)) ◇ (x ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0691", "eq1": "x ◇ y = y ◇ ((y ◇ (x ◇ y)) ◇ y)", "eq2": "x = (y ◇ z) ◇ (y ◇ (y ◇ (x ◇ w)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0699", "eq1": "(x ◇ y) ◇ z = ((w ◇ u) ◇ v) ◇ u", "eq2": "x = ((((y ◇ z) ◇ w) ◇ x) ◇ y) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0707", "eq1": "x = (y ◇ ((z ◇ w) ◇ (y ◇ x))) ◇ y", "eq2": "x ◇ y = (((x ◇ y) ◇ y) ◇ z) ◇ w", "tier": "THEOREM", "secs": 117.8}
+{"id": "order5inf_0715", "eq1": "x = x ◇ (y ◇ ((y ◇ (z ◇ y)) ◇ x))", "eq2": "x = (x ◇ (y ◇ x)) ◇ ((z ◇ w) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0723", "eq1": "x ◇ y = z ◇ (w ◇ ((y ◇ u) ◇ z))", "eq2": "x = (y ◇ (x ◇ (y ◇ z))) ◇ (z ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0731", "eq1": "x = (x ◇ (x ◇ (y ◇ (x ◇ z)))) ◇ y", "eq2": "x = (y ◇ z) ◇ (z ◇ ((x ◇ z) ◇ y))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0739", "eq1": "x = ((y ◇ x) ◇ (y ◇ x)) ◇ y", "eq2": "x ◇ y = z ◇ (y ◇ (w ◇ (x ◇ x)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0747", "eq1": "x = (x ◇ (y ◇ z)) ◇ (z ◇ (z ◇ x))", "eq2": "x = y ◇ ((z ◇ y) ◇ (w ◇ (x ◇ x)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0755", "eq1": "x ◇ (x ◇ y) = (z ◇ (z ◇ x)) ◇ x", "eq2": "x ◇ x = x ◇ ((y ◇ y) ◇ (y ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0763", "eq1": "x = ((x ◇ (y ◇ y)) ◇ z) ◇ y", "eq2": "x = y ◇ (((z ◇ z) ◇ (x ◇ x)) ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0771", "eq1": "x ◇ y = z ◇ ((x ◇ (x ◇ z)) ◇ x)", "eq2": "x = ((y ◇ y) ◇ (y ◇ (z ◇ z))) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0779", "eq1": "x ◇ y = (y ◇ ((y ◇ z) ◇ w)) ◇ u", "eq2": "x ◇ y = z ◇ ((z ◇ y) ◇ (z ◇ w))", "tier": "THEOREM", "secs": 435.0}
+{"id": "order5inf_0787", "eq1": "x ◇ y = (y ◇ (x ◇ x)) ◇ (y ◇ z)", "eq2": "x = y ◇ (z ◇ (((w ◇ w) ◇ u) ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0795", "eq1": "x = y ◇ (z ◇ (((w ◇ u) ◇ y) ◇ v))", "eq2": "x = y ◇ ((y ◇ z) ◇ ((w ◇ u) ◇ u))", "tier": "THEOREM", "secs": 1221.8}
+{"id": "order5inf_0803", "eq1": "x = ((y ◇ z) ◇ (y ◇ x)) ◇ (z ◇ x)", "eq2": "x = x ◇ ((y ◇ (x ◇ z)) ◇ (w ◇ y))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0811", "eq1": "x = (y ◇ (y ◇ (z ◇ (w ◇ u)))) ◇ y", "eq2": "x = ((y ◇ y) ◇ (z ◇ (w ◇ w))) ◇ x", "tier": "THEOREM", "secs": 85.2}
+{"id": "order5inf_0819", "eq1": "x = y ◇ (x ◇ (y ◇ ((y ◇ z) ◇ w)))", "eq2": "(x ◇ y) ◇ y = (z ◇ (y ◇ w)) ◇ u", "tier": "THEOREM", "secs": 243.3}
+{"id": "order5inf_0827", "eq1": "x ◇ y = y ◇ (((y ◇ x) ◇ y) ◇ z)", "eq2": "x = (((y ◇ y) ◇ z) ◇ x) ◇ (y ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0835", "eq1": "x = ((x ◇ y) ◇ (z ◇ (z ◇ w))) ◇ u", "eq2": "x = y ◇ ((z ◇ (x ◇ (w ◇ x))) ◇ u)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0843", "eq1": "x = (y ◇ (z ◇ (x ◇ (z ◇ w)))) ◇ z", "eq2": "x = (y ◇ y) ◇ (y ◇ (x ◇ (z ◇ x)))", "tier": "THEOREM", "secs": 56.2}
+{"id": "order5inf_0851", "eq1": "(x ◇ y) ◇ z = w ◇ (x ◇ (w ◇ z))", "eq2": "x = (y ◇ y) ◇ ((z ◇ (z ◇ y)) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0859", "eq1": "x ◇ y = (y ◇ y) ◇ (y ◇ (z ◇ z))", "eq2": "x = ((y ◇ z) ◇ y) ◇ ((y ◇ z) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0867", "eq1": "x = (y ◇ ((z ◇ z) ◇ w)) ◇ (x ◇ u)", "eq2": "x ◇ y = ((z ◇ x) ◇ (z ◇ z)) ◇ y", "tier": "THEOREM", "secs": 459.5}
+{"id": "order5inf_0875", "eq1": "(x ◇ y) ◇ x = (z ◇ y) ◇ (w ◇ z)", "eq2": "x = y ◇ ((z ◇ ((w ◇ y) ◇ w)) ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0883", "eq1": "x = y ◇ (z ◇ (((y ◇ z) ◇ z) ◇ z))", "eq2": "x ◇ (x ◇ y) = (z ◇ (x ◇ y)) ◇ z", "tier": "THEOREM", "secs": 22.5}
+{"id": "order5inf_0891", "eq1": "x = ((((y ◇ z) ◇ y) ◇ w) ◇ y) ◇ w", "eq2": "x = (y ◇ ((x ◇ y) ◇ y)) ◇ (x ◇ x)", "tier": "THEOREM", "secs": 50.7}
+{"id": "order5inf_0899", "eq1": "x = y ◇ (((z ◇ z) ◇ w) ◇ (y ◇ u))", "eq2": "x = ((((y ◇ z) ◇ y) ◇ y) ◇ y) ◇ y", "tier": "THEOREM", "secs": 408.2}
+{"id": "order5inf_0907", "eq1": "x = y ◇ (((x ◇ (x ◇ y)) ◇ x) ◇ z)", "eq2": "x = (y ◇ z) ◇ (((y ◇ z) ◇ y) ◇ y)", "tier": "THEOREM", "secs": 53.1}
+{"id": "order5inf_0915", "eq1": "x = (y ◇ y) ◇ (z ◇ (w ◇ (z ◇ x)))", "eq2": "x = (x ◇ (y ◇ (z ◇ z))) ◇ (w ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0923", "eq1": "x = y ◇ (z ◇ (((w ◇ u) ◇ y) ◇ x))", "eq2": "x = (((y ◇ z) ◇ y) ◇ x) ◇ (w ◇ u)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0931", "eq1": "x = y ◇ ((x ◇ ((z ◇ x) ◇ z)) ◇ z)", "eq2": "x = (y ◇ y) ◇ ((x ◇ y) ◇ y)", "tier": "THEOREM", "secs": 46.5}
+{"id": "order5inf_0939", "eq1": "x = (y ◇ z) ◇ ((w ◇ (u ◇ u)) ◇ w)", "eq2": "x = x ◇ ((((y ◇ x) ◇ x) ◇ y) ◇ z)", "tier": "THEOREM", "secs": 320.4}
+{"id": "order5inf_0947", "eq1": "x = (((x ◇ (x ◇ y)) ◇ z) ◇ x) ◇ y", "eq2": "x ◇ (y ◇ z) = w ◇ ((y ◇ y) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0955", "eq1": "x ◇ y = (((y ◇ x) ◇ x) ◇ z) ◇ y", "eq2": "x = y ◇ ((x ◇ (z ◇ (y ◇ w))) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0963", "eq1": "x = ((y ◇ (y ◇ (y ◇ z))) ◇ w) ◇ x", "eq2": "x ◇ y = (z ◇ ((y ◇ y) ◇ y)) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0971", "eq1": "x = (y ◇ (y ◇ (z ◇ y))) ◇ (z ◇ z)", "eq2": "x = x ◇ (x ◇ (((y ◇ y) ◇ y) ◇ x))", "tier": "THEOREM", "secs": 9.0}
+{"id": "order5inf_0979", "eq1": "x = (((y ◇ x) ◇ y) ◇ (y ◇ x)) ◇ z", "eq2": "x = ((y ◇ (z ◇ x)) ◇ (x ◇ z)) ◇ y", "tier": "THEOREM", "secs": 46.3}
+{"id": "order5inf_0987", "eq1": "x = y ◇ ((z ◇ y) ◇ (y ◇ (y ◇ x)))", "eq2": "x = y ◇ (x ◇ ((y ◇ (z ◇ w)) ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_0995", "eq1": "x = (y ◇ (z ◇ ((w ◇ u) ◇ z))) ◇ x", "eq2": "x = (y ◇ z) ◇ (x ◇ (w ◇ (w ◇ x)))", "tier": "FINITE_MODEL", "by": "mf2", "secs": 0.2}
+{"id": "order5inf_1003", "eq1": "x = (y ◇ ((x ◇ z) ◇ (y ◇ w))) ◇ z", "eq2": "x ◇ (y ◇ y) = ((y ◇ z) ◇ x) ◇ x", "tier": "THEOREM", "secs": 84.5}
+{"id": "order5inf_1011", "eq1": "x = ((y ◇ (y ◇ z)) ◇ (y ◇ x)) ◇ w", "eq2": "x = (x ◇ ((x ◇ y) ◇ x)) ◇ (z ◇ w)", "tier": "THEOREM", "secs": 89.1}
+{"id": "order5inf_1019", "eq1": "x = y ◇ (z ◇ (y ◇ (w ◇ (w ◇ x))))", "eq2": "x ◇ x = (y ◇ z) ◇ ((z ◇ z) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1027", "eq1": "x = ((y ◇ (z ◇ y)) ◇ y) ◇ (x ◇ w)", "eq2": "x = (y ◇ y) ◇ (z ◇ ((w ◇ x) ◇ w))", "tier": "THEOREM", "secs": 120.4}
+{"id": "order5inf_1035", "eq1": "x ◇ (y ◇ y) = (z ◇ w) ◇ (x ◇ w)", "eq2": "x = (x ◇ y) ◇ (x ◇ ((z ◇ z) ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1043", "eq1": "x ◇ y = ((z ◇ w) ◇ (x ◇ u)) ◇ u", "eq2": "x = (((y ◇ z) ◇ (z ◇ z)) ◇ w) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1051", "eq1": "x = (y ◇ x) ◇ (x ◇ (y ◇ (x ◇ x)))", "eq2": "x = (y ◇ (z ◇ x)) ◇ ((w ◇ x) ◇ u)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1059", "eq1": "(x ◇ y) ◇ y = z ◇ (x ◇ (x ◇ y))", "eq2": "x ◇ y = ((z ◇ y) ◇ z) ◇ (y ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1067", "eq1": "x = (((y ◇ y) ◇ x) ◇ (z ◇ w)) ◇ y", "eq2": "x = x ◇ ((x ◇ y) ◇ ((z ◇ x) ◇ y))", "tier": "THEOREM", "secs": 74.6}
+{"id": "order5inf_1075", "eq1": "x = y ◇ (((z ◇ (z ◇ z)) ◇ w) ◇ y)", "eq2": "x ◇ x = y ◇ ((x ◇ (y ◇ z)) ◇ w)", "tier": "THEOREM", "secs": 98.0}
+{"id": "order5inf_1083", "eq1": "x = (x ◇ ((y ◇ (z ◇ w)) ◇ z)) ◇ y", "eq2": "x = (y ◇ (z ◇ ((w ◇ u) ◇ v))) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1091", "eq1": "x = ((x ◇ x) ◇ y) ◇ z", "eq2": "x = (y ◇ (z ◇ (w ◇ z))) ◇ (y ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1099", "eq1": "x = (y ◇ y) ◇ ((x ◇ (y ◇ z)) ◇ w)", "eq2": "x = ((y ◇ ((y ◇ y) ◇ x)) ◇ z) ◇ y", "tier": "THEOREM", "secs": 97.7}
+{"id": "order5inf_1107", "eq1": "x = y ◇ (x ◇ ((z ◇ (y ◇ w)) ◇ w))", "eq2": "x = (y ◇ ((z ◇ y) ◇ (w ◇ w))) ◇ z", "tier": "THEOREM", "secs": 70.3}
+{"id": "order5inf_1115", "eq1": "x ◇ y = (y ◇ y) ◇ (z ◇ w)", "eq2": "x ◇ (y ◇ y) = (x ◇ z) ◇ (w ◇ z)", "tier": "THEOREM", "secs": 761.1}
+{"id": "order5inf_1123", "eq1": "x = x ◇ ((y ◇ (z ◇ w)) ◇ (w ◇ y))", "eq2": "x = (y ◇ x) ◇ (y ◇ (z ◇ (w ◇ w)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1131", "eq1": "x = (y ◇ z) ◇ (((y ◇ x) ◇ z) ◇ x)", "eq2": "x = ((y ◇ ((z ◇ x) ◇ w)) ◇ u) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1139", "eq1": "x ◇ y = y ◇ ((z ◇ x) ◇ (z ◇ z))", "eq2": "x ◇ y = ((y ◇ x) ◇ x) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1147", "eq1": "x ◇ y = z ◇ ((w ◇ x) ◇ (w ◇ u))", "eq2": "x = x ◇ ((x ◇ ((y ◇ y) ◇ z)) ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1155", "eq1": "x = ((y ◇ (x ◇ y)) ◇ x) ◇ (z ◇ y)", "eq2": "x ◇ y = (z ◇ w) ◇ ((z ◇ x) ◇ u)", "tier": "THEOREM", "secs": 257.6}
+{"id": "order5inf_1163", "eq1": "(x ◇ y) ◇ z = w ◇ (y ◇ (u ◇ z))", "eq2": "x ◇ (y ◇ z) = (w ◇ (w ◇ x)) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1171", "eq1": "x = ((x ◇ (x ◇ (y ◇ y))) ◇ y) ◇ x", "eq2": "x = ((x ◇ ((y ◇ x) ◇ z)) ◇ w) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1179", "eq1": "x = y ◇ (x ◇ ((z ◇ w) ◇ (u ◇ x)))", "eq2": "x = x ◇ (((y ◇ z) ◇ w) ◇ (x ◇ w))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1187", "eq1": "x = (y ◇ ((x ◇ (z ◇ z)) ◇ z)) ◇ y", "eq2": "x = y ◇ ((((y ◇ z) ◇ w) ◇ y) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1195", "eq1": "x = y ◇ (z ◇ ((w ◇ (u ◇ x)) ◇ v))", "eq2": "x ◇ y = y ◇ ((z ◇ (w ◇ z)) ◇ y)", "tier": "THEOREM", "secs": 697.7}
+{"id": "order5inf_1203", "eq1": "x ◇ (y ◇ z) = y ◇ (w ◇ (z ◇ x))", "eq2": "x ◇ y = (x ◇ (y ◇ x)) ◇ (z ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1211", "eq1": "x = ((y ◇ (x ◇ x)) ◇ (x ◇ x)) ◇ x", "eq2": "x = y ◇ (((z ◇ (y ◇ x)) ◇ w) ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1219", "eq1": "x = ((y ◇ z) ◇ (z ◇ y)) ◇ (w ◇ u)", "eq2": "x = x ◇ (y ◇ ((z ◇ x) ◇ (w ◇ u)))", "tier": "THEOREM", "secs": 272.6}
+{"id": "order5inf_1227", "eq1": "x ◇ (y ◇ z) = ((x ◇ w) ◇ x) ◇ z", "eq2": "x ◇ x = (y ◇ ((y ◇ x) ◇ y)) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1235", "eq1": "x ◇ y = (z ◇ w) ◇ (x ◇ (z ◇ y))", "eq2": "x ◇ y = ((z ◇ z) ◇ (w ◇ u)) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1243", "eq1": "x ◇ y = ((z ◇ z) ◇ (w ◇ w)) ◇ y", "eq2": "x = ((y ◇ x) ◇ z) ◇ ((y ◇ x) ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1251", "eq1": "x ◇ x = (y ◇ ((z ◇ w) ◇ z)) ◇ w", "eq2": "x = (y ◇ z) ◇ (((w ◇ u) ◇ x) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1259", "eq1": "x = ((y ◇ (z ◇ (w ◇ x))) ◇ w) ◇ x", "eq2": "x = y ◇ (((y ◇ y) ◇ z) ◇ (z ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1267", "eq1": "x = (y ◇ x) ◇ ((z ◇ x) ◇ (z ◇ x))", "eq2": "x ◇ (x ◇ y) = (y ◇ z) ◇ (z ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1275", "eq1": "x = x ◇ (x ◇ (x ◇ (x ◇ (y ◇ z))))", "eq2": "x ◇ (y ◇ z) = w ◇ ((z ◇ w) ◇ u)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1283", "eq1": "x = y ◇ ((z ◇ (x ◇ z)) ◇ (y ◇ x))", "eq2": "x ◇ y = x ◇ (y ◇ ((z ◇ w) ◇ y))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1291", "eq1": "x = y ◇ ((y ◇ ((z ◇ x) ◇ w)) ◇ z)", "eq2": "x ◇ y = x ◇ ((z ◇ x) ◇ (w ◇ x))", "tier": "THEOREM", "secs": 81.0}
+{"id": "order5inf_1299", "eq1": "x = ((y ◇ z) ◇ ((x ◇ z) ◇ y)) ◇ z", "eq2": "x ◇ (y ◇ x) = ((z ◇ x) ◇ w) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1307", "eq1": "x ◇ y = x ◇ (((x ◇ x) ◇ z) ◇ z)", "eq2": "x = ((y ◇ z) ◇ (y ◇ x)) ◇ (z ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1315", "eq1": "x = y ◇ ((z ◇ (y ◇ (w ◇ x))) ◇ u)", "eq2": "x ◇ y = (z ◇ (w ◇ x)) ◇ z", "tier": "THEOREM", "secs": 353.1}
+{"id": "order5inf_1323", "eq1": "x = (x ◇ (x ◇ (x ◇ (x ◇ y)))) ◇ x", "eq2": "x = ((y ◇ z) ◇ (w ◇ (u ◇ z))) ◇ u", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1331", "eq1": "x ◇ y = z ◇ ((x ◇ y) ◇ (x ◇ y))", "eq2": "x = ((y ◇ z) ◇ ((y ◇ y) ◇ y)) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1339", "eq1": "x ◇ y = (x ◇ x) ◇ (y ◇ z)", "eq2": "x = y ◇ (y ◇ (z ◇ (z ◇ (y ◇ x))))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1347", "eq1": "x = y ◇ (((z ◇ w) ◇ (w ◇ w)) ◇ x)", "eq2": "x = (((y ◇ x) ◇ y) ◇ z) ◇ (z ◇ x)", "tier": "THEOREM", "secs": 128.3}
+{"id": "order5inf_1355", "eq1": "x ◇ (y ◇ z) = w ◇ ((u ◇ w) ◇ y)", "eq2": "(x ◇ y) ◇ z = w ◇ (u ◇ (w ◇ u))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1363", "eq1": "x ◇ y = ((y ◇ x) ◇ (z ◇ w)) ◇ z", "eq2": "x = (x ◇ ((y ◇ z) ◇ w)) ◇ (z ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1371", "eq1": "x = ((y ◇ x) ◇ x) ◇ (x ◇ (x ◇ y))", "eq2": "x ◇ y = z ◇ ((y ◇ y) ◇ (x ◇ w))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1379", "eq1": "x = ((y ◇ (y ◇ z)) ◇ y) ◇ (y ◇ z)", "eq2": "x = ((y ◇ x) ◇ ((z ◇ y) ◇ y)) ◇ z", "tier": "THEOREM", "secs": 28.9}
+{"id": "order5inf_1387", "eq1": "x = (x ◇ (y ◇ (y ◇ (x ◇ y)))) ◇ x", "eq2": "(x ◇ y) ◇ z = (w ◇ x) ◇ (y ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1395", "eq1": "x = y ◇ (z ◇ ((w ◇ w) ◇ x))", "eq2": "x ◇ y = ((z ◇ (w ◇ y)) ◇ z) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1403", "eq1": "x = x ◇ (((y ◇ z) ◇ (y ◇ w)) ◇ w)", "eq2": "x = ((y ◇ (z ◇ w)) ◇ w) ◇ u", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1411", "eq1": "x = ((y ◇ z) ◇ x) ◇ (z ◇ (w ◇ z))", "eq2": "x = (x ◇ ((y ◇ (y ◇ z)) ◇ z)) ◇ x", "tier": "THEOREM", "secs": 93.3}
+{"id": "order5inf_1419", "eq1": "x = ((x ◇ x) ◇ (x ◇ y)) ◇ (y ◇ y)", "eq2": "(x ◇ y) ◇ x = (y ◇ z) ◇ (y ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1427", "eq1": "x = y ◇ ((z ◇ w) ◇ (u ◇ (y ◇ w)))", "eq2": "x ◇ y = (z ◇ y) ◇ ((y ◇ z) ◇ z)", "tier": "THEOREM", "secs": 228.3}
+{"id": "order5inf_1435", "eq1": "x = (y ◇ x) ◇ ((y ◇ z) ◇ (x ◇ w))", "eq2": "x = (y ◇ y) ◇ (z ◇ ((w ◇ y) ◇ y))", "tier": "THEOREM", "secs": 119.1}
+{"id": "order5inf_1443", "eq1": "x ◇ x = (y ◇ z) ◇ (y ◇ (y ◇ x))", "eq2": "x = (y ◇ y) ◇ (y ◇ ((z ◇ z) ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1451", "eq1": "x = ((y ◇ (y ◇ x)) ◇ z) ◇ (z ◇ x)", "eq2": "(x ◇ y) ◇ z = (y ◇ y) ◇ (z ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1459", "eq1": "x ◇ (y ◇ z) = (y ◇ (y ◇ w)) ◇ x", "eq2": "x = y ◇ (z ◇ (((w ◇ y) ◇ x) ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1467", "eq1": "x ◇ y = (z ◇ ((x ◇ y) ◇ z)) ◇ w", "eq2": "x = (y ◇ y) ◇ ((y ◇ (y ◇ y)) ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1475", "eq1": "x = (((y ◇ y) ◇ z) ◇ (x ◇ x)) ◇ z", "eq2": "x ◇ y = (((x ◇ y) ◇ y) ◇ z) ◇ x", "tier": "THEOREM", "secs": 61.7}
+{"id": "order5inf_1483", "eq1": "x ◇ y = y ◇ ((x ◇ (z ◇ x)) ◇ z)", "eq2": "x = x ◇ ((y ◇ (x ◇ (x ◇ z))) ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1491", "eq1": "x ◇ (y ◇ z) = (w ◇ (x ◇ y)) ◇ u", "eq2": "x = ((y ◇ (x ◇ (y ◇ y))) ◇ x) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1499", "eq1": "x = ((y ◇ y) ◇ ((x ◇ y) ◇ y)) ◇ y", "eq2": "x ◇ y = z ◇ ((y ◇ x) ◇ (w ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1507", "eq1": "(x ◇ y) ◇ x = ((x ◇ y) ◇ z) ◇ w", "eq2": "x = (x ◇ (y ◇ x)) ◇ ((y ◇ x) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1515", "eq1": "x ◇ y = z ◇ (y ◇ (z ◇ (y ◇ z)))", "eq2": "x = (((y ◇ (z ◇ z)) ◇ w) ◇ z) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1523", "eq1": "x = (((y ◇ x) ◇ (x ◇ y)) ◇ z) ◇ x", "eq2": "x ◇ (y ◇ z) = ((w ◇ y) ◇ u) ◇ u", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1531", "eq1": "x ◇ (y ◇ z) = ((z ◇ w) ◇ y) ◇ z", "eq2": "(x ◇ y) ◇ z = (x ◇ z) ◇ (w ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1539", "eq1": "x ◇ y = ((x ◇ z) ◇ z) ◇ (x ◇ z)", "eq2": "x = ((y ◇ z) ◇ x) ◇ ((x ◇ x) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1547", "eq1": "x ◇ (y ◇ x) = z ◇ (w ◇ (x ◇ z))", "eq2": "(x ◇ y) ◇ y = y ◇ (z ◇ (w ◇ w))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1555", "eq1": "x = (y ◇ ((z ◇ (w ◇ z)) ◇ z)) ◇ z", "eq2": "x = y ◇ ((((y ◇ x) ◇ x) ◇ z) ◇ z)", "tier": "THEOREM", "secs": 76.3}
+{"id": "order5inf_1563", "eq1": "x ◇ y = (((z ◇ w) ◇ y) ◇ z) ◇ u", "eq2": "x ◇ (y ◇ y) = ((z ◇ w) ◇ x) ◇ z", "tier": "THEOREM", "secs": 268.4}
+{"id": "order5inf_1571", "eq1": "x = (x ◇ ((y ◇ z) ◇ (y ◇ w))) ◇ z", "eq2": "(x ◇ y) ◇ x = z ◇ ((x ◇ x) ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1579", "eq1": "x ◇ y = ((z ◇ w) ◇ (u ◇ u)) ◇ x", "eq2": "x = ((y ◇ z) ◇ ((x ◇ w) ◇ u)) ◇ u", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1587", "eq1": "x ◇ y = ((z ◇ (w ◇ z)) ◇ z) ◇ u", "eq2": "x ◇ (x ◇ y) = x ◇ ((x ◇ x) ◇ y)", "tier": "THEOREM", "secs": 239.3}
+{"id": "order5inf_1595", "eq1": "x ◇ y = x ◇ (z ◇ ((z ◇ x) ◇ w))", "eq2": "x ◇ (y ◇ z) = (w ◇ u) ◇ (x ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1603", "eq1": "x = y ◇ ((z ◇ (x ◇ w)) ◇ (z ◇ z))", "eq2": "x ◇ (y ◇ z) = y ◇ ((x ◇ z) ◇ x)", "tier": "THEOREM", "secs": 74.8}
+{"id": "order5inf_1611", "eq1": "x = ((y ◇ ((z ◇ z) ◇ z)) ◇ x) ◇ w", "eq2": "x = (y ◇ (y ◇ y)) ◇ (y ◇ (x ◇ y))", "tier": "THEOREM", "secs": 77.9}
+{"id": "order5inf_1619", "eq1": "x = y ◇ (((z ◇ w) ◇ (x ◇ u)) ◇ u)", "eq2": "x ◇ (x ◇ y) = (y ◇ y) ◇ (z ◇ z)", "tier": "THEOREM", "secs": 474.6}
+{"id": "order5inf_1627", "eq1": "x = (((y ◇ (z ◇ w)) ◇ u) ◇ x) ◇ w", "eq2": "x = ((y ◇ (y ◇ x)) ◇ (z ◇ z)) ◇ y", "tier": "THEOREM", "secs": 361.2}
+{"id": "order5inf_1635", "eq1": "(x ◇ y) ◇ z = w ◇ (y ◇ (y ◇ u))", "eq2": "x = y ◇ ((x ◇ z) ◇ ((w ◇ w) ◇ y))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1643", "eq1": "x = (y ◇ z) ◇ ((w ◇ (y ◇ w)) ◇ u)", "eq2": "x = (y ◇ y) ◇ (x ◇ (y ◇ (y ◇ z)))", "tier": "THEOREM", "secs": 282.7}
+{"id": "order5inf_1651", "eq1": "x ◇ y = x ◇ (z ◇ (w ◇ (u ◇ y)))", "eq2": "x = y ◇ (((y ◇ y) ◇ (z ◇ w)) ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1659", "eq1": "x = (y ◇ z) ◇ ((x ◇ y) ◇ (y ◇ z))", "eq2": "x = (y ◇ x) ◇ (z ◇ (z ◇ (x ◇ w)))", "tier": "THEOREM", "secs": 85.0}
+{"id": "order5inf_1667", "eq1": "x = x ◇ ((y ◇ (z ◇ (y ◇ w))) ◇ y)", "eq2": "x = x ◇ ((y ◇ ((y ◇ z) ◇ z)) ◇ y)", "tier": "THEOREM", "secs": 449.2}
+{"id": "order5inf_1675", "eq1": "(x ◇ y) ◇ y = (z ◇ (w ◇ u)) ◇ w", "eq2": "x = ((y ◇ (y ◇ (z ◇ x))) ◇ z) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1683", "eq1": "x ◇ (y ◇ z) = ((w ◇ u) ◇ z) ◇ x", "eq2": "x = (y ◇ (z ◇ y)) ◇ ((z ◇ z) ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1691", "eq1": "x = ((y ◇ (z ◇ w)) ◇ y) ◇ (u ◇ v)", "eq2": "x ◇ x = (y ◇ x) ◇ ((y ◇ z) ◇ y)", "tier": "THEOREM", "secs": 2217.3}
+{"id": "order5inf_1699", "eq1": "x = y ◇ (((z ◇ y) ◇ (z ◇ z)) ◇ y)", "eq2": "x = y ◇ (x ◇ ((z ◇ (w ◇ y)) ◇ x))", "tier": "THEOREM", "secs": 42.5}
+{"id": "order5inf_1707", "eq1": "x = y ◇ ((((z ◇ z) ◇ w) ◇ y) ◇ y)", "eq2": "x = y ◇ ((y ◇ z) ◇ ((w ◇ u) ◇ w))", "tier": "THEOREM", "secs": 290.3}
+{"id": "order5inf_1715", "eq1": "x = ((x ◇ y) ◇ (y ◇ z)) ◇ (z ◇ y)", "eq2": "x ◇ (y ◇ z) = w ◇ (z ◇ (x ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1723", "eq1": "(x ◇ y) ◇ z = z ◇ (y ◇ (w ◇ w))", "eq2": "x ◇ y = ((z ◇ (x ◇ w)) ◇ z) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1731", "eq1": "x ◇ y = z ◇ (w ◇ (y ◇ (y ◇ u)))", "eq2": "x ◇ (y ◇ x) = ((x ◇ y) ◇ z) ◇ y", "tier": "THEOREM", "secs": 256.2}
+{"id": "order5inf_1739", "eq1": "x ◇ (y ◇ z) = (z ◇ y) ◇ (x ◇ z)", "eq2": "x = y ◇ (((z ◇ x) ◇ x) ◇ (w ◇ y))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1747", "eq1": "x = y ◇ ((((x ◇ y) ◇ x) ◇ y) ◇ x)", "eq2": "x = ((y ◇ y) ◇ (y ◇ (x ◇ y))) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1755", "eq1": "x = (y ◇ ((x ◇ x) ◇ (z ◇ x))) ◇ z", "eq2": "x = ((x ◇ y) ◇ ((x ◇ z) ◇ z)) ◇ x", "tier": "THEOREM", "secs": 54.4}
+{"id": "order5inf_1763", "eq1": "x = ((((y ◇ z) ◇ y) ◇ w) ◇ y) ◇ y", "eq2": "x = x ◇ (((y ◇ (x ◇ z)) ◇ w) ◇ u)", "tier": "THEOREM", "secs": 189.3}
+{"id": "order5inf_1771", "eq1": "x = x ◇ ((x ◇ ((y ◇ x) ◇ x)) ◇ y)", "eq2": "x = y ◇ ((((z ◇ z) ◇ w) ◇ x) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1779", "eq1": "x ◇ (y ◇ x) = (z ◇ x) ◇ (w ◇ y)", "eq2": "x = ((x ◇ ((y ◇ y) ◇ z)) ◇ y) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1787", "eq1": "x = y ◇ (((x ◇ (z ◇ w)) ◇ y) ◇ y)", "eq2": "x ◇ y = z ◇ (z ◇ ((z ◇ w) ◇ x))", "tier": "THEOREM", "secs": 99.3}
+{"id": "order5inf_1795", "eq1": "x ◇ y = (x ◇ y) ◇ ((y ◇ x) ◇ z)", "eq2": "x = x ◇ ((y ◇ z) ◇ (x ◇ (w ◇ y)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1803", "eq1": "x = (((y ◇ y) ◇ (z ◇ w)) ◇ x) ◇ y", "eq2": "x ◇ y = y ◇ (z ◇ (y ◇ (z ◇ x)))", "tier": "THEOREM", "secs": 87.2}
+{"id": "order5inf_1811", "eq1": "x = (x ◇ (y ◇ y)) ◇ ((z ◇ x) ◇ y)", "eq2": "x ◇ y = (y ◇ (z ◇ (x ◇ w))) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1819", "eq1": "x = ((x ◇ y) ◇ x) ◇ (z ◇ (z ◇ x))", "eq2": "x = y ◇ (x ◇ (z ◇ (y ◇ (y ◇ z))))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1827", "eq1": "x ◇ y = z ◇ (y ◇ ((w ◇ x) ◇ y))", "eq2": "x = ((y ◇ z) ◇ w) ◇ ((y ◇ u) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1835", "eq1": "x = y ◇ ((z ◇ (w ◇ z)) ◇ w)", "eq2": "x = x ◇ ((x ◇ y) ◇ (z ◇ (x ◇ x)))", "tier": "THEOREM", "secs": 43.4}
+{"id": "order5inf_1843", "eq1": "x = x ◇ (x ◇ (y ◇ (y ◇ (y ◇ z))))", "eq2": "x = y ◇ (x ◇ (y ◇ (z ◇ (x ◇ z))))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1851", "eq1": "x = (((y ◇ z) ◇ y) ◇ (x ◇ x)) ◇ z", "eq2": "x = y ◇ ((x ◇ ((y ◇ z) ◇ z)) ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1859", "eq1": "x = y ◇ (((z ◇ (x ◇ z)) ◇ y) ◇ w)", "eq2": "x = x ◇ (y ◇ ((x ◇ (z ◇ w)) ◇ x))", "tier": "THEOREM", "secs": 114.5}
+{"id": "order5inf_1867", "eq1": "x ◇ (y ◇ z) = ((w ◇ z) ◇ x) ◇ w", "eq2": "x = ((y ◇ x) ◇ z) ◇ (w ◇ (z ◇ y))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1875", "eq1": "x = y ◇ ((((x ◇ z) ◇ w) ◇ w) ◇ u)", "eq2": "x ◇ y = (z ◇ y) ◇ (y ◇ (z ◇ y))", "tier": "THEOREM", "secs": 74.0}
+{"id": "order5inf_1883", "eq1": "x ◇ (y ◇ z) = (w ◇ z) ◇ z", "eq2": "x = (y ◇ z) ◇ ((w ◇ (y ◇ w)) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1891", "eq1": "x = (y ◇ ((y ◇ x) ◇ z)) ◇ (w ◇ y)", "eq2": "x = ((y ◇ (z ◇ x)) ◇ x) ◇ (w ◇ z)", "tier": "THEOREM", "secs": 117.8}
+{"id": "order5inf_1899", "eq1": "(x ◇ y) ◇ y = x ◇ (z ◇ (z ◇ y))", "eq2": "x = (x ◇ (y ◇ (x ◇ (z ◇ w)))) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1907", "eq1": "x ◇ y = x ◇ (y ◇ (z ◇ (w ◇ x)))", "eq2": "x = ((y ◇ z) ◇ ((y ◇ z) ◇ z)) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1915", "eq1": "x = y ◇ ((y ◇ (z ◇ y)) ◇ (x ◇ w))", "eq2": "x = y ◇ ((x ◇ x) ◇ (z ◇ (y ◇ z)))", "tier": "THEOREM", "secs": 73.6}
+{"id": "order5inf_1923", "eq1": "x = y ◇ ((((z ◇ w) ◇ z) ◇ z) ◇ z)", "eq2": "x = (((x ◇ x) ◇ y) ◇ z) ◇ (x ◇ w)", "tier": "THEOREM", "secs": 102.0}
+{"id": "order5inf_1931", "eq1": "x = (y ◇ (y ◇ z)) ◇ (z ◇ (y ◇ z))", "eq2": "x = y ◇ ((z ◇ y) ◇ ((z ◇ x) ◇ x))", "tier": "THEOREM", "secs": 5.3}
+{"id": "order5inf_1939", "eq1": "x = ((y ◇ y) ◇ ((x ◇ x) ◇ z)) ◇ y", "eq2": "x ◇ x = (x ◇ ((y ◇ z) ◇ z)) ◇ w", "tier": "THEOREM", "secs": 71.0}
+{"id": "order5inf_1947", "eq1": "x = (y ◇ y) ◇ (z ◇ ((w ◇ w) ◇ z))", "eq2": "x ◇ y = (z ◇ x) ◇ (y ◇ y)", "tier": "THEOREM", "secs": 59.5}
+{"id": "order5inf_1955", "eq1": "x = (x ◇ y) ◇ (z ◇ (w ◇ (y ◇ y)))", "eq2": "x = (((y ◇ x) ◇ z) ◇ (w ◇ x)) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1963", "eq1": "x ◇ y = y ◇ (z ◇ (x ◇ (w ◇ x)))", "eq2": "x ◇ y = z ◇ ((y ◇ (z ◇ x)) ◇ y)", "tier": "THEOREM", "secs": 80.8}
+{"id": "order5inf_1971", "eq1": "x ◇ (y ◇ z) = ((w ◇ u) ◇ z) ◇ w", "eq2": "x = (x ◇ ((y ◇ y) ◇ y)) ◇ (x ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1979", "eq1": "x ◇ y = (((z ◇ z) ◇ z) ◇ w) ◇ z", "eq2": "x = y ◇ (z ◇ (((z ◇ y) ◇ w) ◇ y))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_1987", "eq1": "x = (y ◇ z) ◇ (z ◇ (x ◇ w))", "eq2": "x = y ◇ (((z ◇ (z ◇ w)) ◇ u) ◇ w)", "tier": "THEOREM", "secs": 252.9}
+{"id": "order5inf_1995", "eq1": "x = (x ◇ (((y ◇ z) ◇ w) ◇ u)) ◇ y", "eq2": "x = y ◇ (z ◇ (w ◇ (z ◇ (z ◇ u))))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2003", "eq1": "x ◇ y = y ◇ (z ◇ w)", "eq2": "x = ((y ◇ z) ◇ w) ◇ (x ◇ (z ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2011", "eq1": "x ◇ y = (((z ◇ w) ◇ w) ◇ x) ◇ y", "eq2": "x = ((y ◇ y) ◇ y) ◇ ((y ◇ x) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2019", "eq1": "x = ((y ◇ x) ◇ ((z ◇ w) ◇ x)) ◇ x", "eq2": "x = (((y ◇ x) ◇ (y ◇ y)) ◇ z) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2027", "eq1": "x = y ◇ ((z ◇ z) ◇ (w ◇ (z ◇ x)))", "eq2": "x ◇ y = (x ◇ ((x ◇ z) ◇ y)) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2035", "eq1": "x = (((x ◇ y) ◇ y) ◇ y) ◇ (y ◇ y)", "eq2": "x = (y ◇ z) ◇ (((z ◇ x) ◇ w) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2043", "eq1": "x = x ◇ (y ◇ (z ◇ (y ◇ (w ◇ z))))", "eq2": "x = (y ◇ z) ◇ (((x ◇ w) ◇ u) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2051", "eq1": "x = (x ◇ ((y ◇ z) ◇ (x ◇ w))) ◇ u", "eq2": "x ◇ x = ((y ◇ x) ◇ x) ◇ (z ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2059", "eq1": "x ◇ y = z ◇ (x ◇ ((z ◇ z) ◇ x))", "eq2": "x = ((y ◇ (z ◇ z)) ◇ w) ◇ (x ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2067", "eq1": "x = ((y ◇ z) ◇ x) ◇ (z ◇ (w ◇ z))", "eq2": "x = x ◇ (y ◇ ((z ◇ x) ◇ x))", "tier": "THEOREM", "secs": 89.6}
+{"id": "order5inf_2075", "eq1": "x = (((x ◇ x) ◇ y) ◇ y) ◇ (z ◇ z)", "eq2": "x = ((y ◇ z) ◇ (x ◇ (w ◇ z))) ◇ u", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2083", "eq1": "(x ◇ x) ◇ y = z ◇ (w ◇ (u ◇ x))", "eq2": "x = (y ◇ (y ◇ (x ◇ (z ◇ z)))) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2091", "eq1": "x = (y ◇ z) ◇ (w ◇ (x ◇ (u ◇ w)))", "eq2": "x = y ◇ ((z ◇ ((x ◇ z) ◇ y)) ◇ w)", "tier": "THEOREM", "secs": 299.9}
+{"id": "order5inf_2099", "eq1": "x ◇ (y ◇ z) = z ◇ ((y ◇ y) ◇ y)", "eq2": "x = (y ◇ z) ◇ (z ◇ ((x ◇ x) ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2107", "eq1": "x ◇ y = x ◇ (((z ◇ y) ◇ w) ◇ w)", "eq2": "x = ((x ◇ y) ◇ x) ◇ (z ◇ (z ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2115", "eq1": "x = (x ◇ y) ◇ (z ◇ (x ◇ (z ◇ y)))", "eq2": "(x ◇ y) ◇ y = (y ◇ y) ◇ (x ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2123", "eq1": "x = y ◇ (x ◇ ((x ◇ (z ◇ w)) ◇ y))", "eq2": "x ◇ y = z ◇ ((y ◇ z) ◇ (y ◇ z))", "tier": "THEOREM", "secs": 81.2}
+{"id": "order5inf_2131", "eq1": "x = (y ◇ (z ◇ (z ◇ (z ◇ y)))) ◇ z", "eq2": "x ◇ y = (x ◇ (z ◇ z)) ◇ z", "tier": "THEOREM", "secs": 5.3}
+{"id": "order5inf_2139", "eq1": "x = x ◇ ((((x ◇ x) ◇ y) ◇ y) ◇ y)", "eq2": "x = (((y ◇ x) ◇ x) ◇ (x ◇ z)) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2147", "eq1": "x ◇ (y ◇ z) = ((w ◇ x) ◇ u) ◇ z", "eq2": "(x ◇ y) ◇ z = w ◇ ((x ◇ u) ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2155", "eq1": "x = y ◇ ((y ◇ y) ◇ (z ◇ (y ◇ w)))", "eq2": "x ◇ y = (z ◇ z) ◇ (z ◇ (y ◇ w))", "tier": "THEOREM", "secs": 87.2}
+{"id": "order5inf_2163", "eq1": "x ◇ y = z ◇ ((y ◇ z) ◇ (y ◇ z))", "eq2": "x ◇ (y ◇ z) = x ◇ ((z ◇ y) ◇ z)", "tier": "THEOREM", "secs": 30.7}
+{"id": "order5inf_2171", "eq1": "x = (x ◇ y) ◇ (x ◇ (x ◇ (z ◇ w)))", "eq2": "x ◇ x = (y ◇ (z ◇ y)) ◇ (z ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2179", "eq1": "x ◇ y = z ◇ (y ◇ (y ◇ (x ◇ y)))", "eq2": "x ◇ x = ((y ◇ z) ◇ (w ◇ w)) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2187", "eq1": "x = y ◇ (((z ◇ (w ◇ u)) ◇ y) ◇ y)", "eq2": "x = y ◇ ((z ◇ y) ◇ (x ◇ (y ◇ y)))", "tier": "THEOREM", "secs": 223.8}
+{"id": "order5inf_2195", "eq1": "x ◇ y = ((y ◇ y) ◇ z) ◇ (x ◇ x)", "eq2": "x = y ◇ (((x ◇ x) ◇ (z ◇ x)) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2203", "eq1": "x = ((((y ◇ x) ◇ z) ◇ y) ◇ x) ◇ y", "eq2": "x = (((y ◇ z) ◇ (w ◇ u)) ◇ u) ◇ w", "tier": "THEOREM", "secs": 344.2}
+{"id": "order5inf_2211", "eq1": "x = (x ◇ ((y ◇ (x ◇ y)) ◇ x)) ◇ y", "eq2": "x = (x ◇ (x ◇ (y ◇ z))) ◇ (x ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2219", "eq1": "x = ((((y ◇ z) ◇ w) ◇ w) ◇ x) ◇ w", "eq2": "x ◇ y = ((z ◇ z) ◇ w) ◇ u", "tier": "THEOREM", "secs": 167.8}
+{"id": "order5inf_2227", "eq1": "(x ◇ y) ◇ z = (z ◇ (x ◇ w)) ◇ x", "eq2": "x ◇ x = ((y ◇ x) ◇ z) ◇ (z ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2235", "eq1": "x ◇ y = x ◇ ((x ◇ z) ◇ x)", "eq2": "x = y ◇ ((z ◇ (w ◇ w)) ◇ (x ◇ u))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2243", "eq1": "x = y ◇ ((x ◇ z) ◇ (w ◇ (z ◇ y)))", "eq2": "(x ◇ y) ◇ z = z ◇ (x ◇ (x ◇ x))", "tier": "THEOREM", "secs": 74.6}
+{"id": "order5inf_2251", "eq1": "x = ((y ◇ x) ◇ z) ◇ z", "eq2": "(x ◇ y) ◇ z = y ◇ ((y ◇ z) ◇ x)", "tier": "THEOREM", "secs": 12.4}
+{"id": "order5inf_2259", "eq1": "x ◇ (y ◇ x) = z ◇ ((z ◇ y) ◇ y)", "eq2": "(x ◇ y) ◇ z = (y ◇ z) ◇ (w ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2267", "eq1": "x = y ◇ ((z ◇ (w ◇ w)) ◇ (u ◇ y))", "eq2": "x ◇ y = (y ◇ ((y ◇ x) ◇ x)) ◇ z", "tier": "THEOREM", "secs": 183.8}
+{"id": "order5inf_2275", "eq1": "x = (y ◇ z) ◇ ((w ◇ (z ◇ u)) ◇ x)", "eq2": "x = (y ◇ ((z ◇ w) ◇ (u ◇ v))) ◇ v", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2283", "eq1": "x = (x ◇ ((y ◇ z) ◇ (z ◇ z))) ◇ w", "eq2": "x = ((x ◇ y) ◇ ((y ◇ z) ◇ y)) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2291", "eq1": "x = ((((x ◇ y) ◇ z) ◇ w) ◇ x) ◇ u", "eq2": "x = ((y ◇ (z ◇ z)) ◇ (x ◇ x)) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2299", "eq1": "x = ((y ◇ y) ◇ (z ◇ w)) ◇ (w ◇ z)", "eq2": "x ◇ x = (y ◇ ((x ◇ y) ◇ z)) ◇ x", "tier": "THEOREM", "secs": 51.4}
+{"id": "order5inf_2307", "eq1": "x = y ◇ (((z ◇ (z ◇ x)) ◇ w) ◇ w)", "eq2": "x = y ◇ (y ◇ (((z ◇ x) ◇ x) ◇ w))", "tier": "THEOREM", "secs": 65.7}
+{"id": "order5inf_2315", "eq1": "x ◇ y = z ◇ (w ◇ ((x ◇ w) ◇ w))", "eq2": "x = ((y ◇ z) ◇ (x ◇ (w ◇ y))) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2323", "eq1": "x = (x ◇ y) ◇ (((y ◇ x) ◇ z) ◇ w)", "eq2": "x ◇ y = ((z ◇ (z ◇ x)) ◇ x) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2331", "eq1": "x ◇ x = (y ◇ ((x ◇ x) ◇ z)) ◇ z", "eq2": "x ◇ y = ((z ◇ w) ◇ u) ◇ (v ◇ w)", "tier": "FINITE_MODEL", "by": "mf2", "secs": 1.0}
+{"id": "order5inf_2339", "eq1": "x = (y ◇ ((y ◇ z) ◇ z)) ◇ (z ◇ z)", "eq2": "x = (((y ◇ z) ◇ (z ◇ y)) ◇ z) ◇ y", "tier": "THEOREM", "secs": 35.8}
+{"id": "order5inf_2347", "eq1": "x = (y ◇ (z ◇ (x ◇ (w ◇ y)))) ◇ y", "eq2": "x ◇ y = (x ◇ (y ◇ (x ◇ y))) ◇ z", "tier": "THEOREM", "secs": 71.5}
+{"id": "order5inf_2355", "eq1": "x = x ◇ (x ◇ ((y ◇ (z ◇ w)) ◇ z))", "eq2": "x = ((y ◇ z) ◇ (y ◇ y)) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2363", "eq1": "x = (x ◇ (y ◇ y)) ◇ (z ◇ (w ◇ x))", "eq2": "x = x ◇ ((x ◇ y) ◇ (z ◇ (y ◇ x)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2371", "eq1": "x = ((y ◇ ((x ◇ x) ◇ y)) ◇ z) ◇ z", "eq2": "x ◇ y = (x ◇ (y ◇ (y ◇ y))) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2379", "eq1": "(x ◇ y) ◇ y = x ◇ (z ◇ (z ◇ w))", "eq2": "x ◇ y = z ◇ (w ◇ ((u ◇ v) ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2387", "eq1": "x = (y ◇ x) ◇ ((x ◇ z) ◇ (z ◇ y))", "eq2": "x = (((y ◇ (z ◇ y)) ◇ x) ◇ z) ◇ x", "tier": "FINITE_MODEL_LARGE", "secs": 127.0}
+{"id": "order5inf_2395", "eq1": "x = y ◇ (z ◇ (w ◇ ((y ◇ y) ◇ u)))", "eq2": "x = y ◇ ((y ◇ x) ◇ ((x ◇ z) ◇ y))", "tier": "THEOREM", "secs": 282.2}
+{"id": "order5inf_2403", "eq1": "x ◇ y = z ◇ (x ◇ (y ◇ (w ◇ w)))", "eq2": "x = ((y ◇ (z ◇ x)) ◇ x) ◇ (z ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2411", "eq1": "x = y ◇ ((y ◇ ((z ◇ x) ◇ x)) ◇ z)", "eq2": "x = ((y ◇ z) ◇ (z ◇ (x ◇ z))) ◇ z", "tier": "FINITE_MODEL", "by": "mf2", "secs": 0.0}
+{"id": "order5inf_2419", "eq1": "x = (y ◇ (x ◇ z)) ◇ ((w ◇ w) ◇ y)", "eq2": "x = x ◇ ((((x ◇ x) ◇ x) ◇ y) ◇ z)", "tier": "THEOREM", "secs": 84.1}
+{"id": "order5inf_2427", "eq1": "x = (y ◇ (z ◇ ((x ◇ y) ◇ x))) ◇ y", "eq2": "x = x ◇ ((((y ◇ z) ◇ w) ◇ u) ◇ v)", "tier": "THEOREM", "secs": 2175.4}
+{"id": "order5inf_2435", "eq1": "(x ◇ y) ◇ x = ((x ◇ z) ◇ x) ◇ w", "eq2": "(x ◇ y) ◇ x = z ◇ (x ◇ (x ◇ y))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2443", "eq1": "x = (((x ◇ y) ◇ (x ◇ z)) ◇ w) ◇ u", "eq2": "x = (y ◇ ((z ◇ z) ◇ (z ◇ w))) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2451", "eq1": "x = (y ◇ ((y ◇ y) ◇ y)) ◇ (z ◇ y)", "eq2": "x = ((x ◇ y) ◇ z) ◇ (x ◇ (z ◇ z))", "tier": "THEOREM", "secs": 46.4}
+{"id": "order5inf_2459", "eq1": "x = ((y ◇ z) ◇ y) ◇ (w ◇ (u ◇ y))", "eq2": "x = ((y ◇ z) ◇ (z ◇ x)) ◇ (w ◇ w)", "tier": "THEOREM", "secs": 518.7}
+{"id": "order5inf_2467", "eq1": "x = ((x ◇ (y ◇ x)) ◇ x) ◇ (x ◇ z)", "eq2": "x = x ◇ (x ◇ (((y ◇ y) ◇ x) ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2475", "eq1": "x = (((x ◇ y) ◇ y) ◇ (x ◇ z)) ◇ y", "eq2": "(x ◇ x) ◇ y = x ◇ ((z ◇ x) ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2483", "eq1": "x = x ◇ (((x ◇ x) ◇ (y ◇ x)) ◇ z)", "eq2": "x = ((x ◇ (y ◇ z)) ◇ w) ◇ (y ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2491", "eq1": "x ◇ x = (y ◇ (z ◇ z)) ◇ (y ◇ z)", "eq2": "x = y ◇ (((z ◇ x) ◇ z) ◇ (x ◇ y))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2499", "eq1": "x = (y ◇ (z ◇ (w ◇ (w ◇ x)))) ◇ w", "eq2": "x = (y ◇ (x ◇ z)) ◇ (y ◇ (z ◇ w))", "tier": "THEOREM", "secs": 68.5}
+{"id": "order5inf_2507", "eq1": "(x ◇ x) ◇ y = (y ◇ z) ◇ y", "eq2": "(x ◇ x) ◇ x = (x ◇ x) ◇ (x ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2515", "eq1": "x ◇ x = ((y ◇ z) ◇ x) ◇ (z ◇ z)", "eq2": "x = (y ◇ (((y ◇ z) ◇ y) ◇ w)) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2523", "eq1": "(x ◇ y) ◇ y = (z ◇ (x ◇ x)) ◇ w", "eq2": "x ◇ (y ◇ z) = w ◇ (u ◇ (v ◇ r))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2531", "eq1": "x = y ◇ (((x ◇ y) ◇ y) ◇ (z ◇ y))", "eq2": "x ◇ y = ((y ◇ (z ◇ x)) ◇ y) ◇ x", "tier": "THEOREM", "secs": 55.2}
+{"id": "order5inf_2539", "eq1": "x = ((y ◇ z) ◇ ((w ◇ u) ◇ x)) ◇ y", "eq2": "x = (y ◇ x) ◇ ((x ◇ z) ◇ (w ◇ y))", "tier": "THEOREM", "secs": 542.7}
+{"id": "order5inf_2547", "eq1": "x = (((y ◇ (z ◇ w)) ◇ x) ◇ w) ◇ u", "eq2": "x ◇ y = z ◇ (x ◇ ((w ◇ w) ◇ z))", "tier": "THEOREM", "secs": 372.0}
+{"id": "order5inf_2555", "eq1": "x ◇ y = (z ◇ z) ◇ ((w ◇ w) ◇ z)", "eq2": "x = y ◇ (z ◇ ((w ◇ z) ◇ (y ◇ z)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2563", "eq1": "x ◇ y = (z ◇ ((w ◇ w) ◇ x)) ◇ w", "eq2": "x ◇ y = (((y ◇ z) ◇ y) ◇ z) ◇ y", "tier": "THEOREM", "secs": 77.0}
+{"id": "order5inf_2571", "eq1": "x = ((((y ◇ z) ◇ x) ◇ x) ◇ z) ◇ x", "eq2": "x ◇ x = (y ◇ y) ◇ x", "tier": "FINITE_MODEL", "by": "mf2", "secs": 1.0}
+{"id": "order5inf_2579", "eq1": "x = (y ◇ ((y ◇ z) ◇ z)) ◇ (w ◇ u)", "eq2": "x = (((y ◇ z) ◇ x) ◇ y) ◇ (z ◇ z)", "tier": "THEOREM", "secs": 441.9}
+{"id": "order5inf_2587", "eq1": "x = (x ◇ (x ◇ (y ◇ (y ◇ y)))) ◇ x", "eq2": "x ◇ y = z ◇ (((y ◇ x) ◇ w) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2595", "eq1": "x = ((y ◇ (y ◇ (z ◇ w))) ◇ z) ◇ z", "eq2": "x ◇ (y ◇ y) = (z ◇ w) ◇ (z ◇ w)", "tier": "THEOREM", "secs": 69.9}
+{"id": "order5inf_2603", "eq1": "(x ◇ y) ◇ z = (z ◇ (x ◇ x)) ◇ y", "eq2": "x = (x ◇ y) ◇ ((z ◇ z) ◇ (y ◇ w))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2611", "eq1": "x = y ◇ ((x ◇ y) ◇ ((x ◇ z) ◇ x))", "eq2": "x = (y ◇ (y ◇ y)) ◇ ((z ◇ w) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2619", "eq1": "x ◇ y = z ◇ (((z ◇ z) ◇ x) ◇ x)", "eq2": "x = (y ◇ x) ◇ ((z ◇ (z ◇ x)) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2627", "eq1": "x ◇ x = ((y ◇ (x ◇ y)) ◇ z) ◇ z", "eq2": "x ◇ x = (y ◇ ((z ◇ y) ◇ z)) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2635", "eq1": "x = y ◇ ((z ◇ (w ◇ z)) ◇ (y ◇ x))", "eq2": "x = (y ◇ y) ◇ (y ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2643", "eq1": "x = y ◇ (z ◇ (w ◇ (w ◇ (z ◇ w))))", "eq2": "x = y ◇ (x ◇ (x ◇ (y ◇ (z ◇ z))))", "tier": "THEOREM", "secs": 31.6}
+{"id": "order5inf_2651", "eq1": "x = ((y ◇ x) ◇ z) ◇ ((w ◇ x) ◇ z)", "eq2": "x ◇ (y ◇ x) = (z ◇ y) ◇ (x ◇ x)", "tier": "THEOREM", "secs": 80.7}
+{"id": "order5inf_2659", "eq1": "x = y ◇ (z ◇ (y ◇ ((w ◇ w) ◇ y)))", "eq2": "x ◇ x = (x ◇ x) ◇ (x ◇ (y ◇ y))", "tier": "THEOREM", "secs": 57.5}
+{"id": "order5inf_2667", "eq1": "x ◇ (x ◇ y) = ((x ◇ x) ◇ x) ◇ y", "eq2": "x = y ◇ (((z ◇ (z ◇ z)) ◇ x) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2675", "eq1": "x = (y ◇ y) ◇ (x ◇ (y ◇ (x ◇ z)))", "eq2": "x ◇ x = ((y ◇ z) ◇ (w ◇ z)) ◇ z", "tier": "THEOREM", "secs": 62.0}
+{"id": "order5inf_2683", "eq1": "(x ◇ y) ◇ z = y ◇ (z ◇ (z ◇ w))", "eq2": "x ◇ y = (((y ◇ z) ◇ z) ◇ x) ◇ x", "tier": "FINITE_MODEL", "by": "mf2", "secs": 0.0}
+{"id": "order5inf_2691", "eq1": "x = (y ◇ z) ◇ (w ◇ (y ◇ (z ◇ x)))", "eq2": "x = y ◇ ((z ◇ (w ◇ y)) ◇ (y ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2699", "eq1": "x = (x ◇ x) ◇ ((y ◇ y) ◇ (z ◇ y))", "eq2": "x ◇ y = x ◇ ((z ◇ w) ◇ (y ◇ z))", "tier": "THEOREM", "secs": 256.3}
+{"id": "order5inf_2707", "eq1": "x ◇ x = ((x ◇ y) ◇ (y ◇ z)) ◇ x", "eq2": "x = (y ◇ z) ◇ (w ◇ ((w ◇ u) ◇ w))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2715", "eq1": "x ◇ x = y ◇ ((x ◇ x) ◇ (x ◇ y))", "eq2": "x = x ◇ ((((y ◇ z) ◇ z) ◇ y) ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2723", "eq1": "x = ((y ◇ (y ◇ x)) ◇ (x ◇ y)) ◇ x", "eq2": "x ◇ (y ◇ z) = w ◇ (y ◇ (u ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2731", "eq1": "x = ((x ◇ (x ◇ (y ◇ z))) ◇ z) ◇ x", "eq2": "x ◇ y = ((y ◇ (z ◇ y)) ◇ z) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2739", "eq1": "x ◇ y = (z ◇ w) ◇ (u ◇ (x ◇ v))", "eq2": "x = (y ◇ y) ◇ (z ◇ (y ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2747", "eq1": "x ◇ y = (y ◇ (y ◇ z)) ◇ (x ◇ y)", "eq2": "x = y ◇ (z ◇ (y ◇ ((w ◇ w) ◇ x)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2755", "eq1": "x = (x ◇ y) ◇ ((z ◇ (z ◇ w)) ◇ z)", "eq2": "x = ((((y ◇ z) ◇ z) ◇ w) ◇ x) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2763", "eq1": "x = (x ◇ (y ◇ y)) ◇ (z ◇ (w ◇ x))", "eq2": "x ◇ y = ((y ◇ (z ◇ w)) ◇ u) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2771", "eq1": "x ◇ x = (y ◇ (x ◇ z)) ◇ x", "eq2": "x = y ◇ (((z ◇ w) ◇ y) ◇ (w ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2779", "eq1": "x ◇ y = y ◇ (z ◇ ((w ◇ y) ◇ u))", "eq2": "x = (y ◇ ((z ◇ x) ◇ z)) ◇ (x ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2787", "eq1": "x ◇ (y ◇ z) = z ◇ ((z ◇ w) ◇ z)", "eq2": "x = (y ◇ ((z ◇ (y ◇ x)) ◇ z)) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2795", "eq1": "x = (x ◇ (((y ◇ y) ◇ z) ◇ y)) ◇ w", "eq2": "(x ◇ y) ◇ y = z ◇ (x ◇ (z ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2803", "eq1": "x = x ◇ ((y ◇ z) ◇ (y ◇ (w ◇ z)))", "eq2": "x ◇ x = (((y ◇ x) ◇ z) ◇ w) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2811", "eq1": "x = (y ◇ (((z ◇ x) ◇ z) ◇ y)) ◇ x", "eq2": "x = x ◇ (((y ◇ y) ◇ (y ◇ x)) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2819", "eq1": "x = (x ◇ (x ◇ y)) ◇ ((z ◇ w) ◇ z)", "eq2": "x ◇ y = y ◇ ((z ◇ (z ◇ y)) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2827", "eq1": "x ◇ y = y ◇ ((z ◇ x) ◇ w)", "eq2": "x ◇ x = (((x ◇ y) ◇ x) ◇ y) ◇ z", "tier": "THEOREM", "secs": 85.4}
+{"id": "order5inf_2835", "eq1": "x = (y ◇ z) ◇ ((w ◇ u) ◇ (z ◇ z))", "eq2": "(x ◇ y) ◇ x = ((z ◇ x) ◇ w) ◇ u", "tier": "THEOREM", "secs": 419.2}
+{"id": "order5inf_2843", "eq1": "x = (y ◇ z) ◇ ((x ◇ z) ◇ (z ◇ y))", "eq2": "x = (x ◇ (((y ◇ z) ◇ w) ◇ w)) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2851", "eq1": "x = ((x ◇ y) ◇ ((z ◇ x) ◇ y)) ◇ z", "eq2": "x = ((y ◇ (z ◇ x)) ◇ x) ◇ (y ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2859", "eq1": "x ◇ y = z ◇ ((y ◇ w) ◇ z)", "eq2": "x = ((y ◇ x) ◇ z) ◇ ((y ◇ w) ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2867", "eq1": "x = y ◇ (((x ◇ y) ◇ (z ◇ y)) ◇ w)", "eq2": "x = y ◇ (z ◇ ((y ◇ (y ◇ x)) ◇ z))", "tier": "THEOREM", "secs": 96.1}
+{"id": "order5inf_2875", "eq1": "x ◇ y = ((x ◇ z) ◇ (y ◇ y)) ◇ w", "eq2": "x = (y ◇ z) ◇ ((w ◇ x) ◇ (u ◇ u))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2883", "eq1": "(x ◇ y) ◇ z = ((x ◇ w) ◇ u) ◇ x", "eq2": "x ◇ y = y ◇ (z ◇ (y ◇ y))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2891", "eq1": "x = y ◇ (z ◇ ((y ◇ (w ◇ u)) ◇ z))", "eq2": "x ◇ y = (y ◇ z) ◇ (z ◇ (y ◇ z))", "tier": "THEOREM", "secs": 312.0}
+{"id": "order5inf_2899", "eq1": "x = y ◇ (z ◇ ((x ◇ (w ◇ u)) ◇ y))", "eq2": "x = (((y ◇ (x ◇ y)) ◇ x) ◇ x) ◇ z", "tier": "THEOREM", "secs": 326.9}
+{"id": "order5inf_2907", "eq1": "x = ((x ◇ x) ◇ (x ◇ (y ◇ y))) ◇ y", "eq2": "x = x ◇ (((y ◇ (y ◇ x)) ◇ z) ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2915", "eq1": "x = y ◇ (z ◇ (x ◇ (y ◇ (z ◇ w))))", "eq2": "(x ◇ y) ◇ z = w ◇ ((w ◇ u) ◇ y)", "tier": "THEOREM", "secs": 218.2}
+{"id": "order5inf_2923", "eq1": "x ◇ (y ◇ z) = ((x ◇ z) ◇ x) ◇ z", "eq2": "x = ((x ◇ (y ◇ y)) ◇ z) ◇ (y ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2931", "eq1": "x = (x ◇ (y ◇ (z ◇ z))) ◇ (w ◇ z)", "eq2": "x = y ◇ (((z ◇ z) ◇ w) ◇ (u ◇ y))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2939", "eq1": "x = (y ◇ (z ◇ x)) ◇ (z ◇ (x ◇ y))", "eq2": "x = x ◇ ((y ◇ z) ◇ ((w ◇ w) ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2947", "eq1": "x = y ◇ (x ◇ (y ◇ ((z ◇ x) ◇ w)))", "eq2": "x = (((y ◇ y) ◇ z) ◇ (y ◇ w)) ◇ x", "tier": "THEOREM", "secs": 94.7}
+{"id": "order5inf_2955", "eq1": "x = y ◇ ((x ◇ (y ◇ x)) ◇ (z ◇ y))", "eq2": "x = (((y ◇ z) ◇ z) ◇ w) ◇ w", "tier": "INFINITE_CANDIDATE", "secs": 202.6}
+{"id": "order5inf_2963", "eq1": "x ◇ y = (y ◇ (z ◇ (x ◇ w))) ◇ w", "eq2": "x ◇ y = (((z ◇ y) ◇ y) ◇ w) ◇ x", "tier": "THEOREM", "secs": 168.4}
+{"id": "order5inf_2971", "eq1": "x = (((x ◇ (y ◇ x)) ◇ x) ◇ z) ◇ z", "eq2": "x = (((y ◇ x) ◇ y) ◇ y) ◇ (x ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2979", "eq1": "x ◇ y = (z ◇ (y ◇ y)) ◇ (y ◇ y)", "eq2": "x = y ◇ ((z ◇ (y ◇ (x ◇ z))) ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_2987", "eq1": "x = y ◇ ((z ◇ z) ◇ (w ◇ (x ◇ w)))", "eq2": "x = y ◇ (((z ◇ (w ◇ u)) ◇ y) ◇ y)", "tier": "THEOREM", "secs": 253.1}
+{"id": "order5inf_2995", "eq1": "x = (x ◇ (y ◇ ((x ◇ z) ◇ z))) ◇ w", "eq2": "x = (((y ◇ x) ◇ x) ◇ x) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3003", "eq1": "x = y ◇ (((z ◇ y) ◇ x) ◇ (x ◇ w))", "eq2": "x ◇ y = (x ◇ ((z ◇ z) ◇ y)) ◇ x", "tier": "THEOREM", "secs": 103.5}
+{"id": "order5inf_3011", "eq1": "x ◇ (y ◇ z) = z ◇ (w ◇ y)", "eq2": "x = (y ◇ z) ◇ (w ◇ (u ◇ (u ◇ u)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3019", "eq1": "x = (x ◇ (x ◇ (y ◇ z))) ◇ (x ◇ z)", "eq2": "x = (x ◇ y) ◇ (y ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3027", "eq1": "x = ((x ◇ y) ◇ y) ◇ (y ◇ (z ◇ y))", "eq2": "x ◇ y = z ◇ ((w ◇ w) ◇ (u ◇ w))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3035", "eq1": "x = ((y ◇ z) ◇ z) ◇ (z ◇ (z ◇ y))", "eq2": "x = (y ◇ ((z ◇ w) ◇ (u ◇ x))) ◇ v", "tier": "THEOREM", "secs": 1481.0}
+{"id": "order5inf_3043", "eq1": "x ◇ y = ((z ◇ (z ◇ y)) ◇ x) ◇ z", "eq2": "x = ((x ◇ (y ◇ x)) ◇ z) ◇ (w ◇ u)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3051", "eq1": "x ◇ y = z ◇ (((x ◇ z) ◇ y) ◇ z)", "eq2": "x = y ◇ (y ◇ (z ◇ (y ◇ (y ◇ w))))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3059", "eq1": "x = y ◇ (y ◇ (((z ◇ w) ◇ x) ◇ u))", "eq2": "x ◇ y = (z ◇ z) ◇ ((x ◇ z) ◇ y)", "tier": "THEOREM", "secs": 157.1}
+{"id": "order5inf_3067", "eq1": "x = y ◇ (((z ◇ (x ◇ w)) ◇ u) ◇ u)", "eq2": "x ◇ y = (((z ◇ y) ◇ x) ◇ x) ◇ z", "tier": "THEOREM", "secs": 165.2}
+{"id": "order5inf_3075", "eq1": "x ◇ y = (((z ◇ y) ◇ w) ◇ z) ◇ z", "eq2": "(x ◇ y) ◇ z = ((x ◇ y) ◇ y) ◇ x", "tier": "THEOREM", "secs": 75.5}
+{"id": "order5inf_3083", "eq1": "x = (y ◇ (z ◇ (w ◇ z))) ◇ (z ◇ w)", "eq2": "x ◇ y = z ◇ (((z ◇ z) ◇ z) ◇ w)", "tier": "THEOREM", "secs": 72.0}
+{"id": "order5inf_3091", "eq1": "x = ((y ◇ z) ◇ (w ◇ (w ◇ u))) ◇ w", "eq2": "x ◇ y = ((y ◇ x) ◇ y) ◇ (x ◇ x)", "tier": "THEOREM", "secs": 538.2}
+{"id": "order5inf_3099", "eq1": "x ◇ y = z ◇ (((w ◇ w) ◇ y) ◇ x)", "eq2": "x ◇ y = (y ◇ z) ◇ (z ◇ y)", "tier": "THEOREM", "secs": 134.8}
+{"id": "order5inf_3107", "eq1": "x = (y ◇ z) ◇ (z ◇ ((x ◇ z) ◇ z))", "eq2": "x ◇ x = ((y ◇ (z ◇ x)) ◇ x) ◇ x", "tier": "THEOREM", "secs": 59.6}
+{"id": "order5inf_3115", "eq1": "x = ((y ◇ z) ◇ w) ◇ (y ◇ (z ◇ x))", "eq2": "x = (x ◇ y) ◇ (y ◇ (x ◇ (z ◇ z)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3123", "eq1": "x = (y ◇ z) ◇ ((y ◇ (x ◇ z)) ◇ x)", "eq2": "x = ((y ◇ (z ◇ y)) ◇ x) ◇ (z ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3131", "eq1": "x = ((x ◇ x) ◇ (y ◇ (x ◇ x))) ◇ z", "eq2": "x = ((y ◇ x) ◇ (y ◇ x)) ◇ (z ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3139", "eq1": "x = ((y ◇ (z ◇ w)) ◇ (y ◇ z)) ◇ z", "eq2": "(x ◇ y) ◇ z = (w ◇ (y ◇ y)) ◇ u", "tier": "THEOREM", "secs": 266.2}
+{"id": "order5inf_3147", "eq1": "x ◇ y = (x ◇ ((z ◇ w) ◇ y)) ◇ u", "eq2": "x ◇ x = x ◇ (y ◇ (z ◇ (z ◇ y)))", "tier": "THEOREM", "secs": 3516.2}
+{"id": "order5inf_3155", "eq1": "x ◇ (y ◇ z) = (x ◇ w) ◇ z", "eq2": "x = ((y ◇ x) ◇ y) ◇ ((y ◇ y) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3163", "eq1": "x ◇ (y ◇ x) = ((y ◇ x) ◇ y) ◇ z", "eq2": "x ◇ y = y ◇ ((x ◇ z) ◇ (w ◇ x))", "tier": "FINITE_MODEL", "by": "mf2", "secs": 0.1}
+{"id": "order5inf_3171", "eq1": "x = y ◇ (z ◇ (w ◇ ((w ◇ u) ◇ y)))", "eq2": "x = (x ◇ y) ◇ ((z ◇ (y ◇ y)) ◇ z)", "tier": "THEOREM", "secs": 479.6}
+{"id": "order5inf_3179", "eq1": "x = (y ◇ ((z ◇ y) ◇ (w ◇ w))) ◇ z", "eq2": "x ◇ x = (x ◇ x) ◇ (y ◇ z)", "tier": "THEOREM", "secs": 80.5}
+{"id": "order5inf_3187", "eq1": "x = (x ◇ (y ◇ z)) ◇ (x ◇ (x ◇ x))", "eq2": "x = y ◇ (((x ◇ z) ◇ x) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3195", "eq1": "x = y ◇ (y ◇ (z ◇ ((z ◇ x) ◇ y)))", "eq2": "x ◇ (y ◇ z) = ((y ◇ w) ◇ z) ◇ w", "tier": "FINITE_MODEL", "by": "mf2", "secs": 0.0}
+{"id": "order5inf_3203", "eq1": "x = ((y ◇ (z ◇ (x ◇ w))) ◇ w) ◇ z", "eq2": "x = x ◇ (y ◇ (((z ◇ y) ◇ w) ◇ y))", "tier": "THEOREM", "secs": 125.0}
+{"id": "order5inf_3211", "eq1": "x ◇ (y ◇ z) = w ◇ ((u ◇ z) ◇ w)", "eq2": "x ◇ y = z ◇ ((x ◇ y) ◇ (w ◇ u))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3219", "eq1": "x = (y ◇ x) ◇ (((y ◇ z) ◇ z) ◇ x)", "eq2": "x = y ◇ (x ◇ ((z ◇ z) ◇ (z ◇ z)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3227", "eq1": "x = x ◇ (y ◇ (y ◇ (z ◇ (w ◇ z))))", "eq2": "x = x ◇ (((x ◇ (y ◇ z)) ◇ z) ◇ x)", "tier": "THEOREM", "secs": 71.0}
+{"id": "order5inf_3235", "eq1": "x = ((x ◇ y) ◇ ((x ◇ z) ◇ x)) ◇ x", "eq2": "x = y ◇ ((y ◇ (z ◇ (z ◇ w))) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3243", "eq1": "x = y ◇ ((z ◇ (x ◇ (w ◇ u))) ◇ v)", "eq2": "x = x ◇ ((y ◇ (y ◇ z)) ◇ (y ◇ x))", "tier": "THEOREM", "secs": 787.7}
+{"id": "order5inf_3251", "eq1": "x = ((y ◇ y) ◇ (x ◇ z)) ◇ (x ◇ z)", "eq2": "x ◇ y = z ◇ (w ◇ ((z ◇ u) ◇ v))", "tier": "THEOREM", "secs": 2756.1}
+{"id": "order5inf_3259", "eq1": "x = ((y ◇ y) ◇ (z ◇ x)) ◇ (z ◇ y)", "eq2": "x ◇ y = z ◇ ((x ◇ y) ◇ (y ◇ w))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3267", "eq1": "x = ((y ◇ z) ◇ ((w ◇ y) ◇ z)) ◇ y", "eq2": "x = (y ◇ x) ◇ (((z ◇ w) ◇ u) ◇ u)", "tier": "THEOREM", "secs": 195.6}
+{"id": "order5inf_3275", "eq1": "x = y ◇ (((x ◇ y) ◇ (x ◇ y)) ◇ x)", "eq2": "x ◇ y = (z ◇ ((y ◇ y) ◇ x)) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3283", "eq1": "x ◇ y = (z ◇ x) ◇ (w ◇ (u ◇ x))", "eq2": "x ◇ y = (x ◇ (y ◇ (z ◇ w))) ◇ u", "tier": "THEOREM", "secs": 449.2}
+{"id": "order5inf_3291", "eq1": "x = (y ◇ z) ◇ ((y ◇ (w ◇ x)) ◇ x)", "eq2": "x = y ◇ ((z ◇ x) ◇ ((z ◇ w) ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3299", "eq1": "x ◇ (x ◇ y) = y ◇ ((x ◇ z) ◇ y)", "eq2": "x = y ◇ (((z ◇ (x ◇ x)) ◇ z) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3307", "eq1": "x = (y ◇ (z ◇ (z ◇ w))) ◇ (z ◇ w)", "eq2": "x = ((y ◇ x) ◇ (z ◇ (x ◇ x))) ◇ x", "tier": "THEOREM", "secs": 49.2}
+{"id": "order5inf_3315", "eq1": "x ◇ (y ◇ x) = (x ◇ (x ◇ z)) ◇ x", "eq2": "x = y ◇ ((((z ◇ w) ◇ z) ◇ x) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3323", "eq1": "x ◇ (y ◇ z) = (y ◇ y) ◇ (w ◇ u)", "eq2": "(x ◇ y) ◇ y = ((y ◇ x) ◇ z) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3331", "eq1": "x = y ◇ ((x ◇ x) ◇ (y ◇ z))", "eq2": "x = (y ◇ (((z ◇ y) ◇ w) ◇ u)) ◇ u", "tier": "THEOREM", "secs": 252.2}
+{"id": "order5inf_3339", "eq1": "(x ◇ y) ◇ z = z ◇ (y ◇ (z ◇ y))", "eq2": "x = (y ◇ y) ◇ ((z ◇ z) ◇ (x ◇ w))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3347", "eq1": "x = (y ◇ (y ◇ x)) ◇ (z ◇ (w ◇ y))", "eq2": "x ◇ y = (y ◇ ((z ◇ x) ◇ x)) ◇ z", "tier": "THEOREM", "secs": 94.5}
+{"id": "order5inf_3355", "eq1": "x = y ◇ ((z ◇ ((w ◇ z) ◇ x)) ◇ u)", "eq2": "x = (y ◇ ((y ◇ (y ◇ x)) ◇ y)) ◇ z", "tier": "THEOREM", "secs": 437.3}
+{"id": "order5inf_3363", "eq1": "x = (y ◇ (x ◇ (z ◇ x))) ◇ (w ◇ y)", "eq2": "x ◇ y = z ◇ ((x ◇ (w ◇ u)) ◇ u)", "tier": "THEOREM", "secs": 404.6}
+{"id": "order5inf_3371", "eq1": "x = (y ◇ ((z ◇ w) ◇ (x ◇ z))) ◇ u", "eq2": "(x ◇ x) ◇ x = (y ◇ z) ◇ (w ◇ z)", "tier": "THEOREM", "secs": 444.5}
+{"id": "order5inf_3379", "eq1": "x = ((y ◇ z) ◇ ((w ◇ z) ◇ u)) ◇ w", "eq2": "x = ((y ◇ (x ◇ z)) ◇ (w ◇ w)) ◇ y", "tier": "THEOREM", "secs": 507.1}
+{"id": "order5inf_3387", "eq1": "x = (y ◇ ((z ◇ y) ◇ (w ◇ w))) ◇ y", "eq2": "x ◇ (x ◇ y) = (y ◇ z) ◇ x", "tier": "THEOREM", "secs": 94.1}
+{"id": "order5inf_3395", "eq1": "x = (((y ◇ z) ◇ x) ◇ w) ◇ (y ◇ y)", "eq2": "x = (((y ◇ y) ◇ y) ◇ (z ◇ y)) ◇ y", "tier": "THEOREM", "secs": 90.6}
+{"id": "order5inf_3403", "eq1": "x ◇ y = ((z ◇ x) ◇ (w ◇ w)) ◇ w", "eq2": "x ◇ x = ((y ◇ x) ◇ (y ◇ z)) ◇ w", "tier": "THEOREM", "secs": 109.9}
+{"id": "order5inf_3411", "eq1": "x ◇ y = ((z ◇ (w ◇ y)) ◇ y) ◇ x", "eq2": "x = y ◇ ((x ◇ x) ◇ (x ◇ (z ◇ x)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3419", "eq1": "x = ((y ◇ ((z ◇ w) ◇ u)) ◇ x) ◇ z", "eq2": "x ◇ y = ((z ◇ w) ◇ (u ◇ v)) ◇ v", "tier": "THEOREM", "secs": 2307.0}
+{"id": "order5inf_3427", "eq1": "x = x ◇ (x ◇ ((y ◇ z) ◇ (z ◇ z)))", "eq2": "x = y ◇ (x ◇ ((z ◇ x) ◇ (z ◇ x)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3435", "eq1": "x = (y ◇ (x ◇ z)) ◇ ((w ◇ w) ◇ z)", "eq2": "x ◇ x = y ◇ ((z ◇ w) ◇ (w ◇ x))", "tier": "THEOREM", "secs": 116.0}
+{"id": "order5inf_3443", "eq1": "x ◇ (y ◇ y) = y ◇ ((x ◇ y) ◇ z)", "eq2": "x = y ◇ ((y ◇ z) ◇ ((w ◇ u) ◇ w))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3451", "eq1": "x = (x ◇ ((y ◇ z) ◇ y)) ◇ (w ◇ w)", "eq2": "x ◇ y = z ◇ (((y ◇ w) ◇ z) ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3459", "eq1": "x = (y ◇ (x ◇ z)) ◇ (z ◇ (y ◇ w))", "eq2": "x = x ◇ ((y ◇ z) ◇ (x ◇ w))", "tier": "THEOREM", "secs": 111.4}
+{"id": "order5inf_3467", "eq1": "x = y ◇ ((z ◇ z) ◇ (y ◇ (w ◇ u)))", "eq2": "x = y ◇ (z ◇ (x ◇ ((z ◇ x) ◇ z)))", "tier": "THEOREM", "secs": 342.5}
+{"id": "order5inf_3475", "eq1": "x = ((y ◇ x) ◇ z) ◇ (y ◇ (x ◇ x))", "eq2": "x = (y ◇ ((x ◇ x) ◇ (y ◇ z))) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3483", "eq1": "x = y ◇ ((y ◇ x) ◇ (z ◇ (z ◇ z)))", "eq2": "x = ((y ◇ (z ◇ z)) ◇ y) ◇ (z ◇ z)", "tier": "THEOREM", "secs": 45.4}
+{"id": "order5inf_3491", "eq1": "x = (x ◇ y) ◇ ((x ◇ (x ◇ y)) ◇ y)", "eq2": "x ◇ x = x ◇ (y ◇ ((y ◇ z) ◇ w))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3499", "eq1": "x ◇ y = ((y ◇ z) ◇ w) ◇ (w ◇ w)", "eq2": "x = ((y ◇ y) ◇ ((z ◇ w) ◇ w)) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3507", "eq1": "x = x ◇ ((y ◇ x) ◇ (y ◇ (z ◇ w)))", "eq2": "x ◇ y = z ◇ (((z ◇ y) ◇ y) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3515", "eq1": "x = (y ◇ (z ◇ ((y ◇ w) ◇ u))) ◇ v", "eq2": "x ◇ y = y ◇ ((z ◇ (z ◇ x)) ◇ w)", "tier": "THEOREM", "secs": 2525.6}
+{"id": "order5inf_3523", "eq1": "x = y ◇ (y ◇ ((y ◇ (z ◇ z)) ◇ w))", "eq2": "x = ((((y ◇ x) ◇ y) ◇ x) ◇ x) ◇ x", "tier": "THEOREM", "secs": 50.6}
+{"id": "order5inf_3531", "eq1": "(x ◇ y) ◇ z = (w ◇ z) ◇ (z ◇ x)", "eq2": "x ◇ (y ◇ z) = ((y ◇ y) ◇ w) ◇ u", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3539", "eq1": "x = ((y ◇ ((z ◇ w) ◇ w)) ◇ u) ◇ z", "eq2": "x = (y ◇ z) ◇ (((x ◇ x) ◇ w) ◇ x)", "tier": "THEOREM", "secs": 289.6}
+{"id": "order5inf_3547", "eq1": "x ◇ y = z ◇ (x ◇ ((x ◇ x) ◇ y))", "eq2": "x = (((y ◇ z) ◇ y) ◇ (y ◇ x)) ◇ z", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3555", "eq1": "x = ((y ◇ (z ◇ w)) ◇ (z ◇ u)) ◇ z", "eq2": "x = y ◇ ((y ◇ (z ◇ (y ◇ y))) ◇ z)", "tier": "THEOREM", "secs": 450.8}
+{"id": "order5inf_3563", "eq1": "x = ((y ◇ (z ◇ w)) ◇ u) ◇ (w ◇ x)", "eq2": "x ◇ (y ◇ y) = (z ◇ x) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3571", "eq1": "x = y ◇ (((z ◇ z) ◇ w) ◇ (y ◇ z))", "eq2": "x ◇ x = ((x ◇ (y ◇ y)) ◇ y) ◇ x", "tier": "THEOREM", "secs": 70.1}
+{"id": "order5inf_3579", "eq1": "x = ((x ◇ (y ◇ z)) ◇ (w ◇ u)) ◇ x", "eq2": "x ◇ (y ◇ y) = z ◇ (z ◇ (x ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3587", "eq1": "x = (y ◇ (z ◇ ((w ◇ u) ◇ z))) ◇ v", "eq2": "x = (y ◇ ((z ◇ w) ◇ w)) ◇ y", "tier": "THEOREM", "secs": 2329.8}
+{"id": "order5inf_3595", "eq1": "x = (((y ◇ z) ◇ (w ◇ y)) ◇ z) ◇ z", "eq2": "(x ◇ y) ◇ x = y ◇ ((z ◇ z) ◇ w)", "tier": "THEOREM", "secs": 101.4}
+{"id": "order5inf_3603", "eq1": "x = (y ◇ ((z ◇ (w ◇ z)) ◇ w)) ◇ x", "eq2": "x = ((x ◇ y) ◇ ((z ◇ x) ◇ x)) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3611", "eq1": "x = ((y ◇ ((z ◇ z) ◇ w)) ◇ y) ◇ x", "eq2": "x = (y ◇ y) ◇ (((y ◇ z) ◇ y) ◇ y)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3619", "eq1": "x = ((y ◇ z) ◇ (x ◇ w)) ◇ (u ◇ v)", "eq2": "x ◇ y = z ◇ (w ◇ ((y ◇ u) ◇ v))", "tier": "THEOREM", "secs": 1834.6}
+{"id": "order5inf_3627", "eq1": "x = ((((y ◇ y) ◇ x) ◇ x) ◇ x) ◇ y", "eq2": "x = y ◇ (((z ◇ (w ◇ w)) ◇ u) ◇ z)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3635", "eq1": "x = (x ◇ (((x ◇ x) ◇ y) ◇ z)) ◇ y", "eq2": "x ◇ y = y ◇ (z ◇ ((z ◇ y) ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3643", "eq1": "x ◇ y = z ◇ ((x ◇ (x ◇ x)) ◇ y)", "eq2": "x = (y ◇ y) ◇ ((y ◇ z) ◇ (y ◇ z))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3651", "eq1": "x = ((y ◇ (z ◇ w)) ◇ u) ◇ (w ◇ u)", "eq2": "x = (x ◇ y) ◇ (((x ◇ z) ◇ y) ◇ y)", "tier": "THEOREM", "secs": 570.1}
+{"id": "order5inf_3659", "eq1": "x ◇ y = z ◇ (w ◇ x)", "eq2": "x = (((y ◇ z) ◇ w) ◇ x) ◇ (w ◇ u)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3667", "eq1": "x ◇ y = (x ◇ y) ◇ (y ◇ (z ◇ w))", "eq2": "x ◇ (x ◇ x) = y ◇ ((z ◇ w) ◇ u)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3675", "eq1": "x = (y ◇ (z ◇ x)) ◇ (z ◇ w)", "eq2": "x = y ◇ ((x ◇ z) ◇ (x ◇ (w ◇ x)))", "tier": "THEOREM", "secs": 48.1}
+{"id": "order5inf_3683", "eq1": "x ◇ y = y ◇ (z ◇ (y ◇ (y ◇ z)))", "eq2": "x ◇ (y ◇ z) = w ◇ (u ◇ (z ◇ w))", "tier": "THEOREM", "secs": 439.3}
+{"id": "order5inf_3691", "eq1": "x = (((y ◇ (z ◇ y)) ◇ y) ◇ x) ◇ z", "eq2": "x = (y ◇ (z ◇ (w ◇ (z ◇ w)))) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3699", "eq1": "x = (y ◇ x) ◇ (z ◇ (w ◇ (u ◇ w)))", "eq2": "x = ((y ◇ (z ◇ y)) ◇ z) ◇ (x ◇ w)", "tier": "THEOREM", "secs": 461.0}
+{"id": "order5inf_3707", "eq1": "(x ◇ x) ◇ y = (y ◇ z) ◇ (z ◇ z)", "eq2": "x = ((x ◇ (y ◇ (y ◇ x))) ◇ x) ◇ y", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3715", "eq1": "x = ((y ◇ z) ◇ (y ◇ w)) ◇ (y ◇ z)", "eq2": "x ◇ y = x ◇ (x ◇ (z ◇ (w ◇ y)))", "tier": "THEOREM", "secs": 56.2}
+{"id": "order5inf_3723", "eq1": "x = ((y ◇ x) ◇ y) ◇ ((z ◇ z) ◇ w)", "eq2": "x ◇ y = z ◇ (y ◇ (y ◇ (w ◇ z)))", "tier": "THEOREM", "secs": 64.5}
+{"id": "order5inf_3731", "eq1": "x = y ◇ (x ◇ (z ◇ (w ◇ (z ◇ y))))", "eq2": "(x ◇ y) ◇ z = ((w ◇ x) ◇ y) ◇ w", "tier": "THEOREM", "secs": 86.2}
+{"id": "order5inf_3739", "eq1": "x = y ◇ ((z ◇ y) ◇ (w ◇ y))", "eq2": "x = (((y ◇ (z ◇ y)) ◇ w) ◇ w) ◇ z", "tier": "THEOREM", "secs": 47.8}
+{"id": "order5inf_3747", "eq1": "x ◇ y = ((y ◇ (z ◇ x)) ◇ w) ◇ y", "eq2": "x = (y ◇ z) ◇ (y ◇ (z ◇ (x ◇ y)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3755", "eq1": "x = y ◇ ((y ◇ z) ◇ (z ◇ (z ◇ x)))", "eq2": "x = (x ◇ y) ◇ (z ◇ ((y ◇ w) ◇ x))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3763", "eq1": "(x ◇ y) ◇ z = (w ◇ u) ◇ (v ◇ y)", "eq2": "x = (y ◇ (x ◇ (z ◇ x))) ◇ (x ◇ x)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3771", "eq1": "x = y ◇ ((y ◇ (x ◇ (z ◇ x))) ◇ x)", "eq2": "x = y ◇ ((z ◇ w) ◇ (x ◇ (y ◇ u)))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3779", "eq1": "x = (x ◇ (((x ◇ x) ◇ x) ◇ y)) ◇ y", "eq2": "x = ((y ◇ x) ◇ (x ◇ (z ◇ w))) ◇ w", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3787", "eq1": "x = y ◇ (y ◇ ((x ◇ (y ◇ y)) ◇ y))", "eq2": "x = (y ◇ (z ◇ z)) ◇ (w ◇ (u ◇ u))", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3795", "eq1": "x = (x ◇ (((y ◇ x) ◇ z) ◇ x)) ◇ z", "eq2": "(x ◇ y) ◇ y = ((z ◇ w) ◇ u) ◇ u", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3803", "eq1": "x = y ◇ ((x ◇ z) ◇ (x ◇ (x ◇ w)))", "eq2": "x ◇ y = (x ◇ ((y ◇ z) ◇ y)) ◇ y", "tier": "THEOREM", "secs": 61.4}
+{"id": "order5inf_3811", "eq1": "x ◇ y = ((z ◇ (z ◇ w)) ◇ x) ◇ u", "eq2": "(x ◇ y) ◇ y = ((x ◇ x) ◇ z) ◇ x", "tier": "THEOREM", "secs": 572.3}
+{"id": "order5inf_3819", "eq1": "x ◇ y = (z ◇ x) ◇ ((w ◇ y) ◇ x)", "eq2": "x ◇ y = (z ◇ (x ◇ (w ◇ y))) ◇ u", "tier": "THEOREM", "secs": 402.1}
+{"id": "order5inf_3827", "eq1": "x = (y ◇ (z ◇ (x ◇ w))) ◇ (u ◇ w)", "eq2": "x ◇ y = ((z ◇ w) ◇ (z ◇ y)) ◇ z", "tier": "THEOREM", "secs": 453.5}
+{"id": "order5inf_3835", "eq1": "(x ◇ x) ◇ y = (z ◇ y) ◇ (y ◇ y)", "eq2": "x = (((y ◇ z) ◇ y) ◇ (z ◇ y)) ◇ x", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
+{"id": "order5inf_3843", "eq1": "x ◇ y = ((z ◇ w) ◇ x) ◇ (y ◇ z)", "eq2": "(x ◇ y) ◇ y = x ◇ (x ◇ (z ◇ z))", "tier": "THEOREM", "secs": 100.4}
+{"id": "order5inf_3851", "eq1": "x = (y ◇ y) ◇ (y ◇ (z ◇ (x ◇ y)))", "eq2": "x ◇ (x ◇ y) = (y ◇ x) ◇ (x ◇ z)", "tier": "THEOREM", "secs": 49.4}
+{"id": "order5inf_3859", "eq1": "x = y ◇ (z ◇ (((y ◇ z) ◇ y) ◇ z))", "eq2": "x = ((y ◇ z) ◇ z) ◇ ((x ◇ z) ◇ y)", "tier": "THEOREM", "secs": 44.8}
+{"id": "order5inf_3867", "eq1": "x = ((y ◇ (z ◇ w)) ◇ z) ◇ (w ◇ u)", "eq2": "(x ◇ y) ◇ z = z ◇ ((x ◇ y) ◇ z)", "tier": "THEOREM", "secs": 242.7}
+{"id": "order5inf_3875", "eq1": "x ◇ y = z ◇ (w ◇ (u ◇ (y ◇ u)))", "eq2": "x = (y ◇ (x ◇ (x ◇ z))) ◇ (y ◇ w)", "tier": "FINITE_MODEL", "by": "affine", "secs": 0.0}
