@@ -183,3 +183,14 @@
 {"law": "x = ((z ◇ (z ◇ (z ◇ x))) ◇ ((w ◇ y) ◇ w))", "canon": "((a*(a*(a*b)))*((c*d)*c))", "stage": "fmb_candidate", "fmb": "NO_MODEL_IN_BUDGET", "fmb_timeout": 30}
 {"law": "x = (((y ◇ (w ◇ w)) ◇ (w ◇ (z ◇ x))) ◇ y)", "canon": "(((a*(b*b))*(b*(c*d)))*a)", "stage": "fmb_candidate", "fmb": "NO_MODEL_IN_BUDGET", "fmb_timeout": 30}
 {"law": "x = ((z ◇ ((((w ◇ w) ◇ x) ◇ x) ◇ w)) ◇ y)", "canon": "((a*((((b*b)*c)*c)*b))*d)", "stage": "fmb_candidate", "fmb": "NO_MODEL_IN_BUDGET", "fmb_timeout": 30}
+{"law": "x = (z ◇ ((x ◇ (z ◇ (z ◇ x))) ◇ (z ◇ y)))", "canon": "(a*((b*(a*(a*b)))*(a*c)))", "stage": "fmb_candidate", "fmb": "NO_MODEL_IN_BUDGET", "fmb_timeout": 30}
+{"law": "x = ((w ◇ (x ◇ (z ◇ z))) ◇ ((y ◇ x) ◇ w))", "canon": "((a*(b*(c*c)))*((d*b)*a))", "stage": "fmb_candidate", "fmb": "NO_MODEL_IN_BUDGET", "fmb_timeout": 30}
+{"law": "x = (((y ◇ w) ◇ z) ◇ (w ◇ ((x ◇ y) ◇ w)))", "canon": "(((a*b)*c)*(b*((d*a)*b)))", "stage": "fmb_candidate", "fmb": "NO_MODEL_IN_BUDGET", "fmb_timeout": 30}
+{"law": "x = (((z ◇ w) ◇ y) ◇ ((x ◇ y) ◇ (w ◇ w)))", "canon": "(((a*b)*c)*((d*c)*(b*b)))", "stage": "fmb_candidate", "fmb": "NO_MODEL_IN_BUDGET", "fmb_timeout": 30}
+{"law": "x = ((((y ◇ z) ◇ (w ◇ (y ◇ x))) ◇ y) ◇ w)", "canon": "((((a*b)*(c*(a*d)))*a)*c)", "stage": "fmb_candidate", "fmb": "NO_MODEL_IN_BUDGET", "fmb_timeout": 30}
+{"law": "x = ((y ◇ ((w ◇ (z ◇ x)) ◇ (x ◇ z))) ◇ y)", "canon": "((a*((b*(c*d))*(d*c)))*a)", "stage": "fmb_candidate", "fmb": "NO_MODEL_IN_BUDGET", "fmb_timeout": 30}
+{"law": "x = ((z ◇ (y ◇ w)) ◇ (z ◇ (x ◇ (x ◇ z))))", "canon": "((a*(b*c))*(a*(d*(d*a))))", "stage": "fmb_candidate", "fmb": "NO_MODEL_IN_BUDGET", "fmb_timeout": 30}
+{"law": "x = ((z ◇ w) ◇ (w ◇ (((z ◇ x) ◇ w) ◇ y)))", "canon": "((a*b)*(b*(((a*c)*b)*d)))", "stage": "fmb_candidate", "fmb": "NO_MODEL_IN_BUDGET", "fmb_timeout": 30}
+{"law": "x = ((y ◇ (w ◇ x)) ◇ ((x ◇ x) ◇ (z ◇ y)))", "canon": "((a*(b*c))*((c*c)*(d*a)))", "stage": "fmb_candidate", "fmb": "NO_MODEL_IN_BUDGET", "fmb_timeout": 30}
+{"law": "x = ((w ◇ ((x ◇ ((y ◇ x) ◇ z)) ◇ x)) ◇ z)", "canon": "((a*((b*((c*b)*d))*b))*d)", "stage": "fmb_candidate", "fmb": "NO_MODEL_IN_BUDGET", "fmb_timeout": 30}
+{"law": "x = (((w ◇ (w ◇ x)) ◇ ((y ◇ w) ◇ w)) ◇ w)", "canon": "(((a*(a*b))*((c*a)*a))*a)", "stage": "fmb_candidate", "fmb": "NO_MODEL_IN_BUDGET", "fmb_timeout": 30}
