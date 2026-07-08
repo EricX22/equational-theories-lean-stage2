@@ -21,7 +21,7 @@ Usage:
       --out paper/problems/order6_targeted_pool.jsonl [--seeds-in ...] [--shard 0/8]
 """
 from __future__ import annotations
-import argparse, itertools, json, re, sys
+import argparse, itertools, json, os, re, sys
 
 
 VARS = ["x", "y", "z", "w"]
@@ -112,11 +112,11 @@ def has_small_model(T, maxn=3):
 
 
 def load_seeds(args):
-    if args.seeds_in:
-        return [json.loads(l)["law"] for l in open(args.seeds_in) if l.strip()]
-    tex = open(args.order5_tex).read()
-    return ["x = " + re.sub(r"\s+", " ", b.replace("\\op", "◇").replace("\\", "").strip()).split("=", 1)[1]
-            for b, _ in re.findall(r"\$(x =[^$]+)\$ \((\d+)\)", tex)]
+    src = args.seeds_in
+    if not src:  # default: the committed order-5 seed list (no reference-repo dependency)
+        src = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "..", "problems", "order5_seeds.jsonl")
+    return [json.loads(l)["law"] for l in open(src) if l.strip()]
 
 
 def main():
