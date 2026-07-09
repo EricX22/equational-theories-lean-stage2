@@ -1,0 +1,10 @@
+{"law": "x = ((y ◇ (x ◇ x)) ◇ ((x ◇ z) ◇ (x ◇ z)))", "no_finite_model": false, "witness": null, "status": "HAS_FINITE_MODEL", "proved": true, "secs": 0.3, "baseline": "open_to_us"}
+{"law": "x = (((((y ◇ y) ◇ z) ◇ (z ◇ x)) ◇ x) ◇ z)", "no_finite_model": false, "witness": null, "cert": "8114491d2c99", "nontrivial_model": false, "status": "OPEN", "proved": false, "secs": 516.4, "baseline": "greedy_verified"}
+{"law": "x = ((y ◇ y) ◇ (((z ◇ x) ◇ (y ◇ x)) ◇ z))", "no_finite_model": false, "witness": null, "status": "HAS_FINITE_MODEL", "proved": true, "secs": 720.1, "baseline": "open_to_us"}
+{"law": "x = (((y ◇ x) ◇ ((y ◇ y) ◇ (x ◇ z))) ◇ y)", "no_finite_model": true, "witness": "((y*x)*((y*y)*(x*z)))", "cert": "ba32b9798e3f", "nontrivial_model": false, "status": "NO_FINITE_MODEL", "proved": false, "secs": 268.9, "baseline": "greedy_verified"}
+{"law": "x = ((((w ◇ y) ◇ x) ◇ x) ◇ ((x ◇ y) ◇ z))", "no_finite_model": false, "witness": null, "cert": "97ce9366334a", "nontrivial_model": false, "status": "OPEN", "proved": false, "secs": 960.2, "baseline": "error:'w'"}
+{"law": "x = (((((y ◇ z) ◇ y) ◇ (y ◇ x)) ◇ y) ◇ y)", "no_finite_model": true, "witness": "(y*x)", "cert": "77383748b78b", "nontrivial_model": false, "status": "NO_FINITE_MODEL", "proved": false, "secs": 242.8, "baseline": "greedy_verified"}
+{"law": "x = (((y ◇ x) ◇ (z ◇ x)) ◇ (x ◇ (x ◇ y)))", "no_finite_model": false, "witness": null, "cert": "ca21376b61d7", "nontrivial_model": false, "status": "OPEN", "proved": false, "secs": 1081.3, "baseline": "greedy_verified"}
+{"law": "x = ((y ◇ (y ◇ x)) ◇ ((x ◇ x) ◇ (x ◇ z)))", "no_finite_model": false, "witness": null, "status": "HAS_FINITE_MODEL", "proved": true, "secs": 840.0, "baseline": "greedy_verified"}
+{"law": "x = (y ◇ (x ◇ (((z ◇ x) ◇ (y ◇ z)) ◇ y)))", "no_finite_model": false, "witness": null, "status": "HAS_FINITE_MODEL", "proved": true, "secs": 719.9, "baseline": "greedy_verified"}
+{"law": "x = ((y ◇ (x ◇ x)) ◇ (z ◇ (z ◇ (x ◇ z))))", "no_finite_model": false, "witness": null, "cert": "191f67c878d2", "nontrivial_model": false, "status": "OPEN", "proved": false, "secs": 1082.0, "baseline": "greedy_verified"}

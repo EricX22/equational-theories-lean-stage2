@@ -1,0 +1,4 @@
+{"law": "x =  (y ◇ ((y ◇ (y ◇ x)) ◇ z)) ◇ y", "no_finite_model": true, "witness": "(y*x)", "cert": "a18c024f830c", "nontrivial_model": false, "status": "NO_FINITE_MODEL", "proved": false, "secs": 244.6, "baseline": "greedy_verified"}
+{"law": "x =  ((y ◇ (y ◇ x)) ◇ y) ◇ (x ◇ z)", "no_finite_model": false, "witness": null, "cert": "7a8e9f8f0f75", "nontrivial_model": false, "status": "OPEN", "proved": false, "secs": 842.0, "baseline": "greedy_verified"}
+{"law": "x =  (y ◇ (((z ◇ x) ◇ x) ◇ z)) ◇ y", "no_finite_model": false, "witness": null, "cert": "99581f383d3c", "nontrivial_model": false, "status": "OPEN", "proved": false, "secs": 840.3, "baseline": "greedy_verified"}
+{"law": "x =  (((y ◇ y) ◇ x) ◇ y) ◇ (x ◇ z)", "no_finite_model": false, "witness": null, "cert": "352777347102", "nontrivial_model": true, "status": "SATISFIABLE_ONLY", "proved": false, "secs": 0.1, "baseline": "greedy_verified"}

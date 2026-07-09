@@ -1,0 +1,10 @@
+{"law": "x = (((y ◇ x) ◇ (y ◇ (x ◇ (z ◇ x)))) ◇ y)", "no_finite_model": true, "witness": "((y*x)*(y*(x*(z*x))))", "cert": "bc6cdd04a017", "nontrivial_model": false, "status": "NO_FINITE_MODEL", "proved": false, "secs": 241.3, "baseline": "greedy_verified"}
+{"law": "x = (((y ◇ (y ◇ (x ◇ y))) ◇ x) ◇ (z ◇ z))", "no_finite_model": false, "witness": null, "status": "HAS_FINITE_MODEL", "proved": true, "secs": 724.1, "baseline": "greedy_verified"}
+{"law": "x = (((y ◇ (z ◇ y)) ◇ ((x ◇ z) ◇ x)) ◇ y)", "no_finite_model": false, "witness": null, "status": "HAS_FINITE_MODEL", "proved": true, "secs": 600.0, "baseline": "greedy_verified"}
+{"law": "x = ((y ◇ y) ◇ (((z ◇ (x ◇ y)) ◇ x) ◇ z))", "no_finite_model": false, "witness": null, "cert": "c91059d12fb9", "nontrivial_model": false, "status": "OPEN", "proved": false, "secs": 961.2, "baseline": "greedy_verified"}
+{"law": "x = (((z ◇ y) ◇ y) ◇ ((x ◇ (x ◇ z)) ◇ z))", "no_finite_model": false, "witness": null, "status": "HAS_FINITE_MODEL", "proved": true, "secs": 373.0, "baseline": "greedy_verified"}
+{"law": "x = (y ◇ ((x ◇ y) ◇ ((x ◇ (z ◇ x)) ◇ y)))", "no_finite_model": true, "witness": "((x*y)*((x*(z*x))*y))", "cert": "bd6a1e1155c5", "nontrivial_model": false, "status": "NO_FINITE_MODEL", "proved": false, "secs": 263.9, "baseline": "greedy_verified"}
+{"law": "x = ((y ◇ (x ◇ ((x ◇ z) ◇ y))) ◇ (z ◇ z))", "no_finite_model": false, "witness": null, "status": "HAS_FINITE_MODEL", "proved": true, "secs": 720.0, "baseline": "greedy_verified"}
+{"law": "x = (y ◇ (((x ◇ z) ◇ (z ◇ x)) ◇ (y ◇ y)))", "no_finite_model": false, "witness": null, "status": "HAS_FINITE_MODEL", "proved": true, "secs": 719.9, "baseline": "greedy_verified"}
+{"law": "x = ((((y ◇ (x ◇ z)) ◇ x) ◇ (y ◇ z)) ◇ y)", "no_finite_model": false, "witness": null, "status": "HAS_FINITE_MODEL", "proved": true, "secs": 720.0, "baseline": "greedy_verified"}
+{"law": "x = (((((y ◇ w) ◇ y) ◇ x) ◇ y) ◇ (x ◇ z))", "no_finite_model": false, "witness": null, "cert": "ca0dce43dc19", "nontrivial_model": false, "status": "OPEN", "proved": false, "secs": 840.4, "baseline": "error:'w'"}

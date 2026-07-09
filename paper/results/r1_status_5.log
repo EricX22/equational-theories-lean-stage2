@@ -1,0 +1,39 @@
+classifying 326 laws
+  10/326 | {'NO_FINITE_MODEL': 3, 'TRIVIAL': 7}
+  20/326 | {'HAS_FINITE_MODEL': 2, 'NO_FINITE_MODEL': 5, 'OPEN': 2, 'TRIVIAL': 11}
+  30/326 | {'HAS_FINITE_MODEL': 4, 'NO_FINITE_MODEL': 8, 'OPEN': 4, 'TRIVIAL': 14}
+  40/326 | {'HAS_FINITE_MODEL': 6, 'NO_FINITE_MODEL': 10, 'OPEN': 7, 'TRIVIAL': 17}
+  50/326 | {'HAS_FINITE_MODEL': 7, 'NO_FINITE_MODEL': 15, 'OPEN': 7, 'TRIVIAL': 21}
+  60/326 | {'AUSTIN_PROVEN': 1, 'HAS_FINITE_MODEL': 7, 'NO_FINITE_MODEL': 20, 'OPEN': 8, 'TRIVIAL': 24}
+  70/326 | {'AUSTIN_PROVEN': 1, 'HAS_FINITE_MODEL': 9, 'NO_FINITE_MODEL': 22, 'OPEN': 9, 'TRIVIAL': 29}
+  80/326 | {'AUSTIN_PROVEN': 1, 'HAS_FINITE_MODEL': 9, 'NO_FINITE_MODEL': 27, 'OPEN': 11, 'TRIVIAL': 32}
+  90/326 | {'AUSTIN_PROVEN': 1, 'HAS_FINITE_MODEL': 10, 'NO_FINITE_MODEL': 34, 'OPEN': 11, 'TRIVIAL': 34}
+  100/326 | {'AUSTIN_PROVEN': 1, 'HAS_FINITE_MODEL': 11, 'NO_FINITE_MODEL': 38, 'OPEN': 14, 'TRIVIAL': 36}
+Traceback (most recent call last):
+  File "/u/jrg4wx/projects/equational-theories-lean-stage2/paper/scripts/prove_status.py", line 370, in <module>
+    main()
+  File "/u/jrg4wx/projects/equational-theories-lean-stage2/paper/scripts/prove_status.py", line 331, in main
+    rec = classify(et, law, a.vampire, a)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/jrg4wx/projects/equational-theories-lean-stage2/paper/scripts/prove_status.py", line 250, in classify
+    wit = prove_no_finite_model(et, law, vbin, a.i_timeout, tier2=not a.no_tier2)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/jrg4wx/projects/equational-theories-lean-stage2/paper/scripts/prove_status.py", line 203, in prove_no_finite_model
+    if _proved(_run(vbin, ["--mode", "casc"], body, timeout)):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/jrg4wx/projects/equational-theories-lean-stage2/paper/scripts/prove_status.py", line 81, in _run
+    r = subprocess.run([vbin] + args + ["-t", f"{timeout}s", p],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/jrg4wx/miniconda3/envs/lean/lib/python3.11/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/jrg4wx/miniconda3/envs/lean/lib/python3.11/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/jrg4wx/miniconda3/envs/lean/lib/python3.11/subprocess.py", line 2153, in _communicate
+    stdout = self._translate_newlines(stdout,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/u/jrg4wx/miniconda3/envs/lean/lib/python3.11/subprocess.py", line 1086, in _translate_newlines
+    data = data.decode(encoding, errors)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xf0 in position 128441: invalid continuation byte

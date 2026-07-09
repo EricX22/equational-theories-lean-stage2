@@ -1,0 +1,141 @@
+2026-07-09 03:26:27 — preflight: SHARDS=32 TMO_FAST=20 TMO_SLOW=120 TMO_HARD=300 ROUNDS=2
+  negative control 'x = x ◇ (x ◇ x)': witness=None
+  negative control 'x = (x ◇ y) ◇ x': witness=None
+  positive control 4916: witness=(x*(x*(y*(z*z)))) satisfiable=True
+SELFTEST OK
+2026-07-09 03:26:28 — preflight OK
+2026-07-09 03:26:28 — classify -> o5_status_*.jsonl  (tmo=120s fmb=0s wall=3600s)
+2026-07-09 03:26:44 — o5_status: 5 laws done
+2026-07-09 03:36:44 — o5_status: 56 laws done
+2026-07-09 03:46:44 — o5_status: 109 laws done
+2026-07-09 03:56:44 — o5_status: 116 laws done
+2026-07-09 04:06:44 — o5_status: 121 laws done
+2026-07-09 04:16:44 — o5_status: 124 laws done
+2026-07-09 04:26:44 — o5_status done:
+115 laws (deduped; strongest verdict per law)
+
+      11  AUSTIN_PROVEN      no finite + exists   FALSE, infinite (proved)
+      83  NO_FINITE_MODEL    no finite model      existence open
+       1  SATISFIABLE_ONLY   model exists         finiteness open
+      20  OPEN               nothing proved
+
+  settled (theorem):      11/115
+  open questions left:    104/115
+  proven Austin:          11
+  proven no finite model: 94
+
+baseline (orthogonal axis - a fact about us, not the law):
+      98  greedy_verified
+      17  open_to_us
+
+BENCHMARK GOLD: 2  (proved Austin, no construction from our suite)
+  x =  y ◇ (x ◇ (x ◇ (y ◇ (z ◇ z))))
+  x =  ((((y ◇ y) ◇ z) ◇ x) ◇ x) ◇ z
+2026-07-09 04:26:45 — classify -> tgt_status_*.jsonl  (tmo=120s fmb=120s wall=7200s)
+2026-07-09 04:27:00 — tgt_status: 2 laws done
+2026-07-09 04:37:00 — tgt_status: 31 laws done
+2026-07-09 04:47:00 — tgt_status: 63 laws done
+2026-07-09 04:57:00 — tgt_status: 100 laws done
+2026-07-09 05:07:00 — tgt_status: 142 laws done
+2026-07-09 05:17:00 — tgt_status: 172 laws done
+2026-07-09 05:27:00 — tgt_status: 211 laws done
+2026-07-09 05:37:00 — tgt_status: 241 laws done
+2026-07-09 05:47:00 — tgt_status: 278 laws done
+2026-07-09 05:57:00 — tgt_status: 312 laws done
+2026-07-09 06:07:01 — tgt_status: 342 laws done
+2026-07-09 06:17:01 — tgt_status: 389 laws done
+2026-07-09 06:27:01 — tgt_status done:
+420 laws (deduped; strongest verdict per law)
+
+       1  TRIVIAL            L |= x=y            implication TRUE (proved)
+      86  HAS_FINITE_MODEL   finite countermodel  FALSE, finite (proved)
+      15  AUSTIN_PROVEN      no finite + exists   FALSE, infinite (proved)
+     196  NO_FINITE_MODEL    no finite model      existence open
+       8  SATISFIABLE_ONLY   model exists         finiteness open
+     114  OPEN               nothing proved
+
+  settled (theorem):      102/420
+  open questions left:    318/420
+  proven Austin:          15
+  proven no finite model: 211
+
+baseline (orthogonal axis - a fact about us, not the law):
+     344  greedy_verified
+      42  open_to_us
+      34  error:'w'
+
+BENCHMARK GOLD: 3  (proved Austin, no construction from our suite)
+  x = (((z ◇ y) ◇ z) ◇ (x ◇ (z ◇ (z ◇ z))))
+  x = ((y ◇ y) ◇ (x ◇ (x ◇ (y ◇ (z ◇ z)))))
+  x = (((((y ◇ y) ◇ z) ◇ x) ◇ x) ◇ (z ◇ z))
+2026-07-09 06:27:01 — ROUND 1: selecting seeds (proved no-finite-model laws)
+305 laws with status in ['AUSTIN_PROVEN', 'NO_FINITE_MODEL'] -> paper/results/seeds_r1.jsonl
+2026-07-09 06:27:01 — ROUND 1: generating one-op extensions + cheap n<=3 screen
+2026-07-09 06:27:16 — round 1 generation: 5103 laws done
+2026-07-09 06:37:16 — ROUND 1: 10689 candidates survived the cheap screen
+2026-07-09 06:37:16 — classify -> r1_status_*.jsonl  (tmo=20s fmb=60s wall=10800s)
+2026-07-09 06:37:31 — r1_status: 32 laws done
+2026-07-09 06:47:31 — r1_status: 330 laws done
+2026-07-09 06:57:32 — r1_status: 600 laws done
+2026-07-09 07:07:32 — r1_status: 888 laws done
+2026-07-09 07:17:32 — r1_status: 1178 laws done
+2026-07-09 07:27:32 — r1_status: 1448 laws done
+2026-07-09 07:37:32 — r1_status: 1756 laws done
+2026-07-09 07:47:32 — r1_status: 2054 laws done
+2026-07-09 07:57:32 — r1_status: 2332 laws done
+2026-07-09 08:07:32 — r1_status: 2613 laws done
+2026-07-09 08:17:32 — r1_status: 2890 laws done
+2026-07-09 08:27:32 — r1_status: 3161 laws done
+2026-07-09 08:37:32 — r1_status: 3440 laws done
+2026-07-09 08:47:32 — r1_status: 3714 laws done
+2026-07-09 08:57:33 — r1_status: 3981 laws done
+2026-07-09 09:07:33 — r1_status: 4276 laws done
+2026-07-09 09:17:33 — r1_status: 4574 laws done
+2026-07-09 09:27:33 — r1_status: 4858 laws done
+2026-07-09 09:37:33 — r1_status done:
+5143 laws (deduped; strongest verdict per law)
+
+    1837  TRIVIAL            L |= x=y            implication TRUE (proved)
+     604  HAS_FINITE_MODEL   finite countermodel  FALSE, finite (proved)
+     121  AUSTIN_PROVEN      no finite + exists   FALSE, infinite (proved)
+    1665  NO_FINITE_MODEL    no finite model      existence open
+      14  SATISFIABLE_ONLY   model exists         finiteness open
+     902  OPEN               nothing proved
+
+  settled (theorem):      2562/5143
+  open questions left:    2581/5143
+  proven Austin:          121
+  proven no finite model: 1786
+
+baseline (orthogonal axis - a fact about us, not the law):
+    2864  greedy_verified
+    1901  error:'w'
+     358  open_to_us
+      20  translation_invariant
+
+BENCHMARK GOLD: 4  (proved Austin, no construction from our suite)
+  x = ((y ◇ (z ◇ z)) ◇ (x ◇ (z ◇ (z ◇ z))))
+  x = ((((y ◇ y) ◇ y) ◇ x) ◇ ((y ◇ y) ◇ z))
+  x = ((y ◇ (z ◇ z)) ◇ (x ◇ (z ◇ ((z ◇ z) ◇ z))))
+  x = (((z ◇ (z ◇ y)) ◇ z) ◇ (x ◇ (z ◇ (z ◇ z))))
+2026-07-09 09:37:33 — ROUND 2: selecting seeds (proved no-finite-model laws)
+400 laws with status in ['AUSTIN_PROVEN', 'NO_FINITE_MODEL'] -> paper/results/seeds_r2.jsonl
+2026-07-09 09:37:33 — ROUND 2: generating one-op extensions + cheap n<=3 screen
+2026-07-09 09:37:48 — round 2 generation: 4819 laws done
+2026-07-09 09:47:48 — ROUND 2: 15906 candidates survived the cheap screen
+2026-07-09 09:47:48 — classify -> r2_status_*.jsonl  (tmo=20s fmb=60s wall=10800s)
+2026-07-09 09:48:03 — r2_status: 7 laws done
+2026-07-09 09:58:03 — r2_status: 275 laws done
+2026-07-09 10:08:03 — r2_status: 503 laws done
+2026-07-09 10:18:03 — r2_status: 787 laws done
+2026-07-09 10:28:04 — r2_status: 1050 laws done
+2026-07-09 10:38:04 — r2_status: 1339 laws done
+2026-07-09 10:48:04 — r2_status: 1614 laws done
+2026-07-09 10:58:04 — r2_status: 1861 laws done
+2026-07-09 11:08:04 — r2_status: 2144 laws done
+2026-07-09 11:18:04 — r2_status: 2403 laws done
+2026-07-09 11:28:04 — r2_status: 2681 laws done
+2026-07-09 11:38:04 — r2_status: 2934 laws done
+2026-07-09 11:48:04 — r2_status: 3227 laws done
+2026-07-09 11:58:04 — r2_status: 3502 laws done
+2026-07-09 12:08:04 — r2_status: 3783 laws done
