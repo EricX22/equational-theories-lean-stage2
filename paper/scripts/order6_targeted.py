@@ -159,3 +159,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Seeds default to the committed order-5 Austin list; pass --seeds-in to extend any
+# corpus (e.g. the proved-Austin laws from prove_status.py, for the next order up).
