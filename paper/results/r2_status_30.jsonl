@@ -120,3 +120,4 @@
 {"law": "x = (y ◇ ((y ◇ x) ◇ ((x ◇ (y ◇ y)) ◇ (x ◇ (z ◇ y)))))", "no_finite_model": true, "witness": "((y*x)*((x*(y*y))*(x*(z*y))))", "cert": "a9de207564e4", "nontrivial_model": false, "status": "NO_FINITE_MODEL", "proved": false, "secs": 40.4, "baseline": "greedy_verified"}
 {"law": "x = (((y ◇ ((z ◇ w) ◇ y)) ◇ ((y ◇ x) ◇ (y ◇ x))) ◇ y)", "status": "TRIVIAL", "proved": true, "secs": 0.0, "baseline": "error:'w'"}
 {"law": "x = ((y ◇ y) ◇ ((x ◇ ((z ◇ w) ◇ x)) ◇ (y ◇ y)))", "status": "TRIVIAL", "proved": true, "secs": 0.0, "baseline": "error:'w'"}
+{"law": "x = (((y ◇ (x ◇ (x ◇ z))) ◇ (y ◇ (y ◇ x))) ◇ (y ◇ y))", "no_finite_model": false, "witness": null, "cert": "78587f81020f", "nontrivial_model": false, "status": "OPEN", "proved": false, "secs": 240.2, "baseline": "greedy_verified"}

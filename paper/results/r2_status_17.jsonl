@@ -129,3 +129,4 @@
 {"law": "x = ((((y ◇ (y ◇ (z ◇ (x ◇ x)))) ◇ x) ◇ y) ◇ (y ◇ y))", "no_finite_model": true, "witness": "((y*(y*(z*(x*x))))*x)", "cert": "646184bb7db9", "nontrivial_model": false, "status": "NO_FINITE_MODEL", "proved": false, "secs": 40.5, "baseline": "greedy_verified"}
 {"law": "x = (y ◇ ((x ◇ z) ◇ ((y ◇ (x ◇ w)) ◇ (z ◇ z))))", "status": "TRIVIAL", "proved": true, "secs": 0.0, "baseline": "error:'w'"}
 {"law": "x = (y ◇ (((y ◇ y) ◇ z) ◇ ((x ◇ (z ◇ x)) ◇ (y ◇ y))))", "no_finite_model": false, "witness": null, "cert": "e979b68bf046", "nontrivial_model": false, "status": "OPEN", "proved": false, "secs": 200.5, "baseline": "greedy_verified"}
+{"law": "x = ((((y ◇ ((y ◇ w) ◇ (z ◇ w))) ◇ (x ◇ y)) ◇ x) ◇ y)", "no_finite_model": true, "witness": "(((y*((y*w)*(z*w)))*(x*y))*x)", "cert": "85fb2b93c94c", "nontrivial_model": false, "status": "NO_FINITE_MODEL", "proved": false, "secs": 40.3, "baseline": "error:'w'"}

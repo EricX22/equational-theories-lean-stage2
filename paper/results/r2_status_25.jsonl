@@ -142,3 +142,5 @@
 {"law": "x = (y ◇ (x ◇ (y ◇ ((((y ◇ w) ◇ z) ◇ (y ◇ x)) ◇ y))))", "no_finite_model": true, "witness": "(x*(y*((((y*w)*z)*(y*x))*y)))", "cert": "71a2e5c7bed2", "nontrivial_model": false, "status": "NO_FINITE_MODEL", "proved": false, "secs": 41.0, "baseline": "error:'w'"}
 {"law": "x = (y ◇ ((((z ◇ w) ◇ w) ◇ x) ◇ (y ◇ (x ◇ (w ◇ y)))))", "no_finite_model": false, "witness": null, "cert": "9124ee4503e7", "nontrivial_model": false, "status": "OPEN", "proved": false, "secs": 200.1, "baseline": "error:'w'"}
 {"law": "x = (((y ◇ (((x ◇ ((x ◇ z) ◇ z)) ◇ z) ◇ x)) ◇ y) ◇ y)", "no_finite_model": false, "witness": null, "status": "HAS_FINITE_MODEL", "proved": true, "secs": 179.9, "baseline": "greedy_verified"}
+{"law": "x = (((((y ◇ (y ◇ z)) ◇ x) ◇ ((y ◇ z) ◇ w)) ◇ y) ◇ y)", "no_finite_model": true, "witness": "((y*(y*z))*x)", "cert": "cf7f1c87d1de", "nontrivial_model": false, "status": "NO_FINITE_MODEL", "proved": false, "secs": 40.5, "baseline": "error:'w'"}
+{"law": "x = (y ◇ ((y ◇ (((y ◇ z) ◇ z) ◇ y)) ◇ (x ◇ y)))", "no_finite_model": false, "witness": null, "status": "HAS_FINITE_MODEL", "proved": true, "secs": 46.9, "baseline": "greedy_verified"}
