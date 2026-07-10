@@ -1,0 +1,17 @@
+Here is the input problem:
+  Axiom 1 (hyp): X = f(Y, f(X, f(X, f(Y, f(Z, Z))))).
+  Goal 1 (goal): x = y.
+
+1. f(X, f(Y, f(Y, f(X, f(Z, Z))))) -> Y
+2. f(f(X, X), f(X, X)) -> f(X, X)
+3. f(f(X, f(Y, Y)), f(X, f(X, f(Y, Y)))) -> X
+4. f(f(X, X), f(Y, f(Y, f(X, X)))) -> Y
+
+Ran out of critical pairs. This means the conjecture is not true.
+Here is the final rewrite system:
+  f(f(X, X), f(X, X)) -> f(X, X)
+  f(X, f(Y, f(Y, f(X, f(Z, Z))))) -> Y
+  f(f(X, X), f(Y, f(Y, f(X, X)))) -> Y
+  f(f(X, f(Y, Y)), f(X, f(X, f(Y, Y)))) -> X
+
+RESULT: CounterSatisfiable (the conjecture is false).

@@ -1,0 +1,1027 @@
+{
+ "n": 262,
+ "classes": 195,
+ "merged": [
+  [
+   "x = ((((y \u25c7 y) \u25c7 z) \u25c7 (y \u25c7 ((y \u25c7 y) \u25c7 x))) \u25c7 y)",
+   "x = ((((y \u25c7 y) \u25c7 (z \u25c7 w)) \u25c7 (y \u25c7 ((y \u25c7 y) \u25c7 x))) \u25c7 y)"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 (((y \u25c7 y) \u25c7 (z \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 (((y \u25c7 y) \u25c7 z) \u25c7 y))"
+  ],
+  [
+   "x =  (((y \u25c7 y) \u25c7 y) \u25c7 x) \u25c7 (y \u25c7 z)",
+   "x = ((((y \u25c7 y) \u25c7 y) \u25c7 x) \u25c7 (y \u25c7 (z \u25c7 w)))"
+  ],
+  [
+   "x =  (((y \u25c7 y) \u25c7 y) \u25c7 x) \u25c7 (y \u25c7 z)",
+   "x = ((((y \u25c7 y) \u25c7 y) \u25c7 x) \u25c7 (y \u25c7 (z \u25c7 y)))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (y \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = (((z \u25c7 (z \u25c7 y)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((((w \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((z \u25c7 (z \u25c7 y)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((w \u25c7 (z \u25c7 x)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((z \u25c7 (z \u25c7 y)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((z \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((z \u25c7 (z \u25c7 y)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((z \u25c7 w) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((z \u25c7 (z \u25c7 y)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((w \u25c7 (w \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((z \u25c7 (z \u25c7 y)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((w \u25c7 (x \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((z \u25c7 (z \u25c7 y)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((z \u25c7 (z \u25c7 y)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x =  (y \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z)))"
+  ],
+  [
+   "x = (((z \u25c7 (z \u25c7 y)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((z \u25c7 (y \u25c7 w)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((z \u25c7 (z \u25c7 y)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((((z \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((((w \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((w \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((((w \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((w \u25c7 (z \u25c7 x)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((((w \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((z \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((((w \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((z \u25c7 w) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((((w \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((w \u25c7 (w \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((((w \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((w \u25c7 (x \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((((w \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((((w \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x =  (y \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z)))"
+  ],
+  [
+   "x = (((((w \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((z \u25c7 (y \u25c7 w)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((((w \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((((z \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((y \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((z \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 x) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((x \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((x \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((z \u25c7 (z \u25c7 w)) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((w \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((y \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((z \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((y \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 x) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((y \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((x \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((y \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((x \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((y \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((z \u25c7 (z \u25c7 w)) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((y \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((w \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((y \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (((((y \u25c7 y) \u25c7 y) \u25c7 y) \u25c7 x) \u25c7 (y \u25c7 (z \u25c7 y)))",
+   "x = (((((y \u25c7 y) \u25c7 y) \u25c7 y) \u25c7 x) \u25c7 (y \u25c7 ((w \u25c7 y) \u25c7 z)))"
+  ],
+  [
+   "x = (((((y \u25c7 y) \u25c7 y) \u25c7 y) \u25c7 x) \u25c7 (y \u25c7 (z \u25c7 y)))",
+   "x = (((((y \u25c7 y) \u25c7 y) \u25c7 y) \u25c7 x) \u25c7 (y \u25c7 z))"
+  ],
+  [
+   "x = (y \u25c7 (((x \u25c7 x) \u25c7 y) \u25c7 ((x \u25c7 z) \u25c7 (y \u25c7 y))))",
+   "x = (y \u25c7 (((x \u25c7 x) \u25c7 y) \u25c7 ((x \u25c7 (z \u25c7 w)) \u25c7 (y \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((z \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 x) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((z \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((x \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((z \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((x \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((z \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((z \u25c7 (z \u25c7 w)) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((z \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((w \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((z \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (((((y \u25c7 y) \u25c7 y) \u25c7 y) \u25c7 x) \u25c7 (y \u25c7 ((w \u25c7 y) \u25c7 z)))",
+   "x = (((((y \u25c7 y) \u25c7 y) \u25c7 y) \u25c7 x) \u25c7 (y \u25c7 z))"
+  ],
+  [
+   "x = (y \u25c7 ((x \u25c7 (((x \u25c7 (y \u25c7 z)) \u25c7 (y \u25c7 y)) \u25c7 y)) \u25c7 y))",
+   "x = (y \u25c7 ((x \u25c7 (((x \u25c7 (z \u25c7 w)) \u25c7 (y \u25c7 y)) \u25c7 y)) \u25c7 y))"
+  ],
+  [
+   "x = (y \u25c7 ((x \u25c7 (((x \u25c7 (y \u25c7 z)) \u25c7 (y \u25c7 y)) \u25c7 y)) \u25c7 y))",
+   "x = (y \u25c7 ((x \u25c7 (((x \u25c7 z) \u25c7 (y \u25c7 y)) \u25c7 y)) \u25c7 y))"
+  ],
+  [
+   "x = ((((y \u25c7 y) \u25c7 y) \u25c7 x) \u25c7 (y \u25c7 (z \u25c7 w)))",
+   "x = ((((y \u25c7 y) \u25c7 y) \u25c7 x) \u25c7 (y \u25c7 (z \u25c7 y)))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 x) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((x \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 x) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((x \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 x) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((z \u25c7 (z \u25c7 w)) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 x) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((w \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 x) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (y \u25c7 ((((y \u25c7 z) \u25c7 (y \u25c7 y)) \u25c7 (x \u25c7 x)) \u25c7 y)))",
+   "x = (y \u25c7 (y \u25c7 ((((z \u25c7 w) \u25c7 (y \u25c7 y)) \u25c7 (x \u25c7 x)) \u25c7 y)))"
+  ],
+  [
+   "x = (y \u25c7 (y \u25c7 ((((y \u25c7 z) \u25c7 (y \u25c7 y)) \u25c7 (x \u25c7 x)) \u25c7 y)))",
+   "x = (y \u25c7 (y \u25c7 (((z \u25c7 (y \u25c7 y)) \u25c7 (x \u25c7 x)) \u25c7 y)))"
+  ],
+  [
+   "x = (y \u25c7 (y \u25c7 ((((y \u25c7 z) \u25c7 (y \u25c7 y)) \u25c7 (x \u25c7 x)) \u25c7 y)))",
+   "x = (y \u25c7 (y \u25c7 ((((x \u25c7 z) \u25c7 (y \u25c7 y)) \u25c7 (x \u25c7 x)) \u25c7 y)))"
+  ],
+  [
+   "x = (y \u25c7 (y \u25c7 ((((z \u25c7 w) \u25c7 (y \u25c7 y)) \u25c7 (x \u25c7 x)) \u25c7 y)))",
+   "x = (y \u25c7 (y \u25c7 (((z \u25c7 (y \u25c7 y)) \u25c7 (x \u25c7 x)) \u25c7 y)))"
+  ],
+  [
+   "x = (y \u25c7 (y \u25c7 ((((z \u25c7 w) \u25c7 (y \u25c7 y)) \u25c7 (x \u25c7 x)) \u25c7 y)))",
+   "x = (y \u25c7 (y \u25c7 ((((x \u25c7 z) \u25c7 (y \u25c7 y)) \u25c7 (x \u25c7 x)) \u25c7 y)))"
+  ],
+  [
+   "x = (y \u25c7 (y \u25c7 ((x \u25c7 ((z \u25c7 (x \u25c7 x)) \u25c7 x)) \u25c7 y)))",
+   "x = (y \u25c7 (y \u25c7 ((x \u25c7 (((z \u25c7 w) \u25c7 (x \u25c7 x)) \u25c7 x)) \u25c7 y)))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 (x \u25c7 x))) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 (x \u25c7 x))) \u25c7 ((y \u25c7 z) \u25c7 y))"
+  ],
+  [
+   "x = (y \u25c7 ((x \u25c7 ((((x \u25c7 x) \u25c7 z) \u25c7 (y \u25c7 y)) \u25c7 y)) \u25c7 y))",
+   "x = (y \u25c7 ((x \u25c7 ((z \u25c7 (y \u25c7 y)) \u25c7 y)) \u25c7 y))"
+  ],
+  [
+   "x = (y \u25c7 ((x \u25c7 ((((x \u25c7 x) \u25c7 z) \u25c7 (y \u25c7 y)) \u25c7 y)) \u25c7 y))",
+   "x = (y \u25c7 ((x \u25c7 (((x \u25c7 z) \u25c7 (y \u25c7 y)) \u25c7 y)) \u25c7 y))"
+  ],
+  [
+   "x = ((((y \u25c7 ((y \u25c7 y) \u25c7 (z \u25c7 x))) \u25c7 x) \u25c7 y) \u25c7 y)",
+   "x = ((((y \u25c7 ((y \u25c7 y) \u25c7 z)) \u25c7 x) \u25c7 y) \u25c7 y)"
+  ],
+  [
+   "x = ((((y \u25c7 ((y \u25c7 y) \u25c7 (z \u25c7 x))) \u25c7 x) \u25c7 y) \u25c7 y)",
+   "x = ((((y \u25c7 ((y \u25c7 y) \u25c7 (z \u25c7 (x \u25c7 x)))) \u25c7 x) \u25c7 y) \u25c7 y)"
+  ],
+  [
+   "x = ((y \u25c7 ((y \u25c7 (y \u25c7 ((y \u25c7 y) \u25c7 (z \u25c7 x)))) \u25c7 x)) \u25c7 y)",
+   "x = ((y \u25c7 ((y \u25c7 (y \u25c7 ((y \u25c7 y) \u25c7 z))) \u25c7 x)) \u25c7 y)"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 (x \u25c7 x))) \u25c7 y)))",
+   "x = (y \u25c7 (x \u25c7 ((y \u25c7 ((y \u25c7 z) \u25c7 (x \u25c7 x))) \u25c7 y)))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 (x \u25c7 x))) \u25c7 y)))",
+   "x = (y \u25c7 (x \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (x \u25c7 x))) \u25c7 y)))"
+  ],
+  [
+   "x = ((((w \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((((z \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (y \u25c7 (y \u25c7 (((z \u25c7 (y \u25c7 y)) \u25c7 (x \u25c7 x)) \u25c7 y)))",
+   "x = (y \u25c7 (y \u25c7 ((((x \u25c7 z) \u25c7 (y \u25c7 y)) \u25c7 (x \u25c7 x)) \u25c7 y)))"
+  ],
+  [
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))"
+  ],
+  [
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))"
+  ],
+  [
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))"
+  ],
+  [
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))"
+  ],
+  [
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x =  (y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 z) \u25c7 y)",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((((y \u25c7 y) \u25c7 ((z \u25c7 w) \u25c7 y)) \u25c7 (y \u25c7 (x \u25c7 x))) \u25c7 y)",
+   "x = ((((y \u25c7 y) \u25c7 z) \u25c7 (y \u25c7 (x \u25c7 x))) \u25c7 y)"
+  ],
+  [
+   "x = ((((y \u25c7 ((y \u25c7 y) \u25c7 z)) \u25c7 x) \u25c7 y) \u25c7 y)",
+   "x = ((((y \u25c7 ((y \u25c7 y) \u25c7 (z \u25c7 (x \u25c7 x)))) \u25c7 x) \u25c7 y) \u25c7 y)"
+  ],
+  [
+   "x = (((y \u25c7 (((x \u25c7 (x \u25c7 x)) \u25c7 (z \u25c7 x)) \u25c7 x)) \u25c7 y) \u25c7 y)",
+   "x = (((y \u25c7 (((x \u25c7 (x \u25c7 x)) \u25c7 z) \u25c7 x)) \u25c7 y) \u25c7 y)"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((y \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = (((((y \u25c7 y) \u25c7 (z \u25c7 x)) \u25c7 y) \u25c7 (y \u25c7 (x \u25c7 x))) \u25c7 y)",
+   "x = (((((y \u25c7 y) \u25c7 z) \u25c7 y) \u25c7 (y \u25c7 (x \u25c7 x))) \u25c7 y)"
+  ],
+  [
+   "x = ((((w \u25c7 (z \u25c7 x)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((z \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((w \u25c7 (z \u25c7 x)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((z \u25c7 w) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((w \u25c7 (z \u25c7 x)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((w \u25c7 (w \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((w \u25c7 (z \u25c7 x)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((w \u25c7 (x \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((w \u25c7 (z \u25c7 x)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((w \u25c7 (z \u25c7 x)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x =  (y \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z)))"
+  ],
+  [
+   "x = ((((w \u25c7 (z \u25c7 x)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((z \u25c7 (y \u25c7 w)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((w \u25c7 (z \u25c7 x)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((((z \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((w \u25c7 z) \u25c7 (x \u25c7 w))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = (((z \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((z \u25c7 w) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((z \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((w \u25c7 (w \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((z \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((w \u25c7 (x \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((z \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((z \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x =  (y \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z)))"
+  ],
+  [
+   "x = (((z \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((z \u25c7 (y \u25c7 w)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((z \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((((z \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((((y \u25c7 y) \u25c7 (z \u25c7 w)) \u25c7 x) \u25c7 y) \u25c7 y) \u25c7 y)",
+   "x = ((((((y \u25c7 y) \u25c7 (z \u25c7 x)) \u25c7 x) \u25c7 y) \u25c7 y) \u25c7 y)"
+  ],
+  [
+   "x = ((((((y \u25c7 y) \u25c7 (z \u25c7 w)) \u25c7 x) \u25c7 y) \u25c7 y) \u25c7 y)",
+   "x = ((((((y \u25c7 y) \u25c7 z) \u25c7 x) \u25c7 y) \u25c7 y) \u25c7 y)"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((x \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((x \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((x \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((z \u25c7 (z \u25c7 w)) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((x \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((w \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((x \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 y) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((((y \u25c7 ((y \u25c7 y) \u25c7 (z \u25c7 (x \u25c7 w)))) \u25c7 x) \u25c7 y) \u25c7 y)",
+   "x = ((((y \u25c7 ((y \u25c7 y) \u25c7 (z \u25c7 (x \u25c7 x)))) \u25c7 x) \u25c7 y) \u25c7 y)"
+  ],
+  [
+   "x = ((((y \u25c7 ((x \u25c7 x) \u25c7 z)) \u25c7 (y \u25c7 y)) \u25c7 x) \u25c7 y)",
+   "x = ((((y \u25c7 ((x \u25c7 x) \u25c7 (z \u25c7 x))) \u25c7 (y \u25c7 y)) \u25c7 x) \u25c7 y)"
+  ],
+  [
+   "x = ((((((y \u25c7 y) \u25c7 (z \u25c7 x)) \u25c7 x) \u25c7 y) \u25c7 y) \u25c7 y)",
+   "x = ((((((y \u25c7 y) \u25c7 z) \u25c7 x) \u25c7 y) \u25c7 y) \u25c7 y)"
+  ],
+  [
+   "x =  (y \u25c7 (((z \u25c7 z) \u25c7 y) \u25c7 x)) \u25c7 y",
+   "x = ((y \u25c7 ((((z \u25c7 x) \u25c7 (z \u25c7 x)) \u25c7 y) \u25c7 x)) \u25c7 y)"
+  ],
+  [
+   "x = ((((z \u25c7 w) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((w \u25c7 (w \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((z \u25c7 w) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((w \u25c7 (x \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((z \u25c7 w) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((z \u25c7 w) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x =  (y \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z)))"
+  ],
+  [
+   "x = ((((z \u25c7 w) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((z \u25c7 (y \u25c7 w)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((z \u25c7 w) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((((z \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 w) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((y \u25c7 w) \u25c7 z)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (y \u25c7 ((x \u25c7 (y \u25c7 z)) \u25c7 (y \u25c7 y))))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (y \u25c7 ((x \u25c7 z) \u25c7 (y \u25c7 y))))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 ((y \u25c7 ((y \u25c7 z) \u25c7 (x \u25c7 x))) \u25c7 y)))",
+   "x = (y \u25c7 (x \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 (x \u25c7 x))) \u25c7 y)))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 x))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 (z \u25c7 z)))))",
+   "x = (((z \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 (z \u25c7 z)))))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 (w \u25c7 y))) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = (y \u25c7 ((x \u25c7 ((((z \u25c7 w) \u25c7 (y \u25c7 y)) \u25c7 y) \u25c7 y)) \u25c7 y))",
+   "x = (y \u25c7 ((x \u25c7 (((z \u25c7 (y \u25c7 y)) \u25c7 y) \u25c7 y)) \u25c7 y))"
+  ],
+  [
+   "x = (y \u25c7 ((x \u25c7 ((z \u25c7 (y \u25c7 y)) \u25c7 y)) \u25c7 y))",
+   "x = (y \u25c7 ((x \u25c7 (((x \u25c7 z) \u25c7 (y \u25c7 y)) \u25c7 y)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((z \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((x \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((z \u25c7 (z \u25c7 w)) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((x \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((w \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((x \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (z \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((((w \u25c7 (w \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = ((((w \u25c7 (x \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((w \u25c7 (w \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((w \u25c7 (w \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x =  (y \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z)))"
+  ],
+  [
+   "x = ((((w \u25c7 (w \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((z \u25c7 (y \u25c7 w)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((w \u25c7 (w \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((((z \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((z \u25c7 (z \u25c7 w)) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((w \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 (((z \u25c7 (z \u25c7 w)) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = ((((y \u25c7 ((x \u25c7 x) \u25c7 z)) \u25c7 y) \u25c7 x) \u25c7 y)",
+   "x = ((((y \u25c7 ((x \u25c7 x) \u25c7 (z \u25c7 y))) \u25c7 y) \u25c7 x) \u25c7 y)"
+  ],
+  [
+   "x = ((((w \u25c7 (x \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((w \u25c7 (x \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x =  (y \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z)))"
+  ],
+  [
+   "x = ((((w \u25c7 (x \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((z \u25c7 (y \u25c7 w)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((((w \u25c7 (x \u25c7 z)) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((((z \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((w \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))",
+   "x = (y \u25c7 (x \u25c7 (y \u25c7 ((((y \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 x)) \u25c7 y))))"
+  ],
+  [
+   "x = (((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x =  (y \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z)))"
+  ],
+  [
+   "x = (((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((z \u25c7 (y \u25c7 w)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((y \u25c7 w) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((((z \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x =  (y \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z)))",
+   "x = (((z \u25c7 (y \u25c7 w)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x =  (y \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z)))",
+   "x = (((((z \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = (((z \u25c7 (y \u25c7 w)) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))",
+   "x = (((((z \u25c7 w) \u25c7 z) \u25c7 y) \u25c7 z) \u25c7 (x \u25c7 (z \u25c7 (z \u25c7 z))))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 ((x \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ],
+  [
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 x) \u25c7 z) \u25c7 w)) \u25c7 y))",
+   "x = ((y \u25c7 (x \u25c7 x)) \u25c7 ((y \u25c7 (((x \u25c7 z) \u25c7 z) \u25c7 w)) \u25c7 y))"
+  ]
+ ],
+ "budget": 30
+}
