@@ -47,18 +47,35 @@ Then fix `_verdict` before trusting a single number from the Twee column.
 
 ---
 
-## 1. Install the portfolio
+## 1. Install the portfolio — **no root, no cabal**
+
+`cabal install twee` needs `apt install cabal-install`, i.e. an administrator. Don't.
+Twee publishes a **prebuilt Linux amd64 binary** with each release, and E builds from
+source into your home directory.
 
 ```bash
-# E
-git clone https://github.com/eprover/eprover && cd eprover && ./configure && make
-# Twee (needs GHC; this is the long compile)
-cabal update && cabal install twee
-# Infinox — proves "no nontrivial finite model"; the ADMISSION ticket, not a resolver
-git clone https://github.com/nick8325/infinox
-# JRS-modified Vampire/E, which print the rewrite system on saturation
-#   see arXiv:2602.16324 §5 and people.ciirc.cvut.cz/~janotmik/stamp
+mkdir -p ~/bin && export PATH=$HOME/bin:$PATH   # add to ~/.bashrc
+
+# Twee — latest release is 2.6.1 (the CASC-30 version, Jan 2026).
+#   https://github.com/nick8325/twee/releases/tag/2.6.1   <- grab the Linux amd64 asset
+#   (repo archived May 2026; upstream moved to Codeberg)
+mv twee-* ~/bin/twee && chmod +x ~/bin/twee
+
+# E — source build, installs wherever you point it, no root
+git clone https://github.com/eprover/eprover && cd eprover
+./configure --bindir=$HOME/bin && make && make install
+
+# Infinox — Haskell, needs GHC. DEFER: it is the admission ticket (PAPER_PLAN §5A),
+# not a baseline resolver, so it blocks nothing here. If you do want it without root,
+# install GHC via ghcup, which installs entirely under $HOME.
+
+# JRS-modified Vampire/E, which print the rewrite system on saturation:
+#   arXiv:2602.16324 §5 and people.ciirc.cvut.cz/~janotmik/stamp
+#   NOT required — ordered_model.py already reads a stock Vampire saturation.
 ```
+
+Sanity: `twee --version && eprover --version`, then re-run `run_all.sh`. The baseline
+stage unblocks itself automatically once both are on `PATH`.
 
 CSI / TTT2 / CeTA are **optional**: they certify plain TRSs, and ~36% of our order-5
 saturations are not plain TRSs. `answer_spec.py` makes Lean the arbiter, so CeTA was
