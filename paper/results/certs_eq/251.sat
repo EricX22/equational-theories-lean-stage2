@@ -1,0 +1,1458 @@
+% law: x =  y ◇ ((x ◇ (y ◇ (z ◇ z))) ◇ y)
+% saturated-with: -sa otter --show_active on (default -to kbo)
+
+fof(law,axiom,![X,Y,Z]:(X=f(Y,f(f(X,f(Y,f(Z,Z))),Y)))).
+fof(nt,axiom,?[U,V]: U != V).
+
+% Running in auto input_syntax mode. Trying TPTP
+[SA] active: 6. sK0 != sK1 [cnf transformation 4]
+[SA] active: 5. f(X1,f(f(X0,f(X1,f(X2,X2))),X1)) = X0 [cnf transformation 1]
+[SA] active: 7. f(X1,X1) = f(f(X0,f(f(X1,X1),f(X2,X2))),f(X0,f(X0,f(f(X1,X1),f(X2,X2))))) [superposition 5,5]
+[SA] active: 10. f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))) = f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(f(X0,X0),f(X1,X1)))) [superposition 5,7]
+[SA] active: 12. f(X1,X1) = f(f(f(X0,X0),f(f(X1,X1),f(X1,X1))),f(f(X0,X0),f(f(X1,X1),f(X1,X1)))) [superposition 7,10]
+[SA] active: 21. f(f(X1,X1),f(f(X0,X0),f(X0,X0))) = f(f(X1,X1),f(f(X0,X0),f(X1,X1))) [superposition 5,12]
+[SA] active: 38. f(f(X0,X0),f(f(X2,f(f(X0,X0),f(f(X1,X1),f(X0,X0)))),f(X0,X0))) = X2 [superposition 5,21]
+[SA] active: 19. f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))) = f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0)))) [superposition 7,12]
+[SA] active: 80. f(X2,f(f(X3,f(X2,f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))),X2)) = X3 [superposition 5,19]
+[SA] active: 17. f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))) = f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))) [superposition 12,12]
+[SA] active: 33. f(X1,X1) = f(f(f(X0,X0),f(f(X1,X1),f(X0,X0))),f(f(X0,X0),f(f(X1,X1),f(X0,X0)))) [superposition 12,21]
+[SA] active: 22. f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,f(X0,X0)),f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))))) = X1 [superposition 5,12]
+[SA] active: 62. f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))) = f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))) [superposition 19,19]
+[SA] active: 78. f(f(X1,X1),f(X1,X1)) = f(f(X1,X1),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X1,X1))) [superposition 5,19]
+[SA] active: 141. f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))) = f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))) [superposition 19,17]
+[SA] active: 28. f(f(X1,X1),f(X0,X0)) = f(f(X1,X1),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(X1,X1))) [superposition 21,12]
+[SA] active: 392. f(f(X2,X2),f(X1,X1)) = f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))) [superposition 5,141]
+[SA] active: 71. f(X1,X1) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))) [superposition 12,19]
+[SA] active: 128. f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))) = f(f(f(X2,X2),f(X1,X1)),f(f(X2,X2),f(X1,X1))) [superposition 17,17]
+[SA] active: 150. f(f(X1,X1),f(X1,X1)) = f(f(X1,X1),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(X1,X1))) [superposition 5,17]
+[SA] active: 472. f(f(X2,X2),f(X1,X1)) = f(f(X2,X2),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(X2,X2))) [superposition 28,17]
+[SA] active: 35. f(X0,X0) = f(f(X2,f(f(X0,X0),f(f(X1,X1),f(X0,X0)))),f(X2,f(X2,f(f(X0,X0),f(f(X1,X1),f(X0,X0)))))) [superposition 7,21]
+[SA] active: 75. f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(X2,X2))) = f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))) [superposition 21,19]
+[SA] active: 79. f(f(f(X1,X1),f(X1,X1)),f(f(X2,f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))),f(f(X1,X1),f(X1,X1)))) = X2 [superposition 5,19]
+[SA] active: 97. f(X1,X1) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))) [forward demodulation 77,88]
+[SA] active: 31. f(f(f(X1,X1),f(X1,X1)),f(f(X0,X0),f(X0,X0))) = f(f(f(X1,X1),f(X1,X1)),f(f(X0,X0),f(f(X1,X1),f(X0,X0)))) [superposition 21,21]
+[SA] active: 1470. f(X1,X1) = f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))) [superposition 97,141]
+[SA] active: 142. f(X1,X1) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))) [superposition 12,17]
+[SA] active: 90. f(f(X2,X2),f(f(X3,f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))),f(X2,X2))) = X3 [superposition 38,19]
+[SA] active: 147. f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(X2,X2))) = f(f(X2,X2),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))) [superposition 21,17]
+[SA] active: 1259. f(X0,X0) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0))))) [superposition 22,75]
+[SA] active: 153. f(f(f(X1,X1),f(X1,X1)),f(f(X2,f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))),f(f(X1,X1),f(X1,X1)))) = X2 [superposition 5,17]
+[SA] active: 1469. f(X1,X1) = f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))) [superposition 97,128]
+[SA] active: 185. f(X1,X1) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))) [forward demodulation 149,21]
+[SA] active: 1652. f(X1,X1) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1))))) [superposition 1470,10]
+[SA] active: 242. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,f(X1,X1)),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = X2 [superposition 22,19]
+[SA] active: 1183. f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))) = f(f(X0,X0),f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2))))) [superposition 75,75]
+[SA] active: 241. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,f(X1,X1)),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))) = X2 [superposition 22,17]
+[SA] active: 2178. f(X0,X0) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0)))) [superposition 22,147]
+[SA] active: 74. f(f(X1,X1),f(X1,X1)) = f(f(X2,f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))),f(X2,f(X2,f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))) [superposition 7,19]
+[SA] active: 2587. f(X1,X1) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X2,X2),f(X1,X1)),f(f(X2,X2),f(X1,X1)))) [superposition 1469,10]
+[SA] active: 76. f(f(X1,X1),f(X1,X1)) = f(f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) [superposition 12,19]
+[SA] active: 1236. f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))) = f(f(X0,X0),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2)))) [superposition 21,75]
+[SA] active: 81. f(X2,X2) = f(f(X3,f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))),f(X3,f(X3,f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))))) [superposition 7,19]
+[SA] active: 2141. f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))) = f(f(X0,X0),f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2))))) [superposition 75,147]
+[SA] active: 145. f(f(X1,X1),f(X1,X1)) = f(f(X2,f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))),f(X2,f(X2,f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))))) [superposition 7,17]
+[SA] active: 2077. f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))) = f(f(X0,X0),f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2)))) [superposition 147,147]
+[SA] active: 85. f(X2,X2) = f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(X2,X2))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(X2,X2)))) [superposition 12,19]
+[SA] active: 1354. f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))) = f(f(X2,X2),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))) [forward demodulation 1328,28]
+[SA] active: 148. f(f(X1,X1),f(X1,X1)) = f(f(f(X2,X2),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))),f(f(X2,X2),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))) [superposition 12,17]
+[SA] active: 3348. f(X0,X0) = f(f(f(X2,f(X0,X0)),f(X2,f(X2,f(X0,X0)))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0)))))) [superposition 242,1183]
+[SA] active: 132. f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))) = f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))) [superposition 17,19]
+[SA] active: 184. f(X2,f(f(X3,f(X2,f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))))),X2)) = X3 [forward demodulation 151,21]
+[SA] active: 87. f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))) [superposition 21,19]
+[SA] active: 1276. f(X0,X0) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0)))))) [superposition 7,75]
+[SA] active: 88. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(X2,X2))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) [superposition 21,19]
+[SA] active: 5372. f(X0,X0) = f(f(f(f(X2,X2),f(X0,X0)),f(f(X2,X2),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0)))))) [superposition 241,2141]
+[SA] active: 82. f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))) = f(f(X2,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3))),f(X2,f(X2,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3))))) [superposition 7,19]
+[SA] active: 5548. f(X0,X0) = f(f(f(X2,f(X0,X0)),f(X2,f(X2,f(X0,X0)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))))) [superposition 242,2141]
+[SA] active: 84. f(f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))),f(f(X2,X2),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))) [superposition 10,19]
+[SA] active: 2202. f(X0,X0) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))))) [superposition 7,147]
+[SA] active: 86. f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))) = f(f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))),f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))) [superposition 12,19]
+[SA] active: 6534. f(X0,X0) = f(f(f(f(X2,X2),f(X0,X0)),f(f(X2,X2),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))))) [superposition 241,2077]
+[SA] active: 83. f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))) = f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) [superposition 10,19]
+[SA] active: 1167. f(f(f(X1,X1),f(X1,X1)),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))) = f(f(f(X1,X1),f(X1,X1)),f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1))))) [superposition 75,128]
+[SA] active: 1282. f(X2,f(f(X3,f(X2,f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0)))))))),X2)) = X3 [superposition 80,75]
+[SA] active: 342. f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))) = f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3))) [superposition 141,141]
+[SA] active: 2210. f(X2,f(f(X3,f(X2,f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))))))),X2)) = X3 [superposition 80,147]
+[SA] active: 692. f(f(f(X2,X2),f(X3,X3)),f(f(X2,X2),f(X3,X3))) = f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3))) [superposition 128,141]
+[SA] active: 892. f(f(X2,X2),f(X2,X2)) = f(f(X2,X2),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X2,X2))) [superposition 150,141]
+[SA] active: 1540. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(X2,X2))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(X2,X2)))) [superposition 31,141]
+[SA] active: 1626. f(f(f(X2,X2),f(X2,X2)),f(X1,X1)) = f(f(f(X2,X2),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))) [forward demodulation 1557,1470]
+[SA] active: 936. f(f(X2,X2),f(X3,X3)) = f(f(X2,X2),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3))),f(X2,X2))) [superposition 472,141]
+[SA] active: 1539. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(X2,X2))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(X2,X2)))) [superposition 31,128]
+[SA] active: 17971. f(f(f(X0,X0),f(X0,X0)),f(X2,X2)) = f(f(f(X0,X0),f(X0,X0)),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))) [superposition 1626,1183]
+[SA] active: 2101. f(f(X2,X2),f(f(f(X3,X3),f(X3,X3)),f(X2,X2))) = f(f(X2,X2),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)))) [superposition 147,141]
+[SA] active: 2604. f(X2,X2) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) [superposition 1469,141]
+[SA] active: 2474. f(f(f(X2,X2),f(X2,X2)),f(f(X3,f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))),f(f(X2,X2),f(X2,X2)))) = X3 [superposition 153,141]
+[SA] active: 4969. f(f(f(X0,X0),f(X0,X0)),f(X2,X2)) = f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))) [forward demodulation 4603,12]
+[SA] active: 2747. f(X2,X2) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2)))) [superposition 185,141]
+[SA] active: 5739. f(f(f(X0,X0),f(X0,X0)),f(X2,X2)) = f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))) [forward demodulation 5332,142]
+[SA] active: 195. f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))) = f(f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) [superposition 33,19]
+[SA] active: 11267. f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(X0,X0))) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) [superposition 88,1183]
+[SA] active: 1579. f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(X0,X0))) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) [superposition 31,75]
+[SA] active: 17968. f(f(f(X0,X0),f(X0,X0)),f(X2,X2)) = f(f(f(X0,X0),f(X0,X0)),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))) [superposition 1626,2141]
+[SA] active: 2142. f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(X0,X0))) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) [superposition 31,147]
+[SA] active: 17969. f(f(f(X0,X0),f(X0,X0)),f(X1,X1)) = f(f(f(X0,X0),f(X0,X0)),f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))))) [superposition 1626,1236]
+[SA] active: 479. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(X3,X3),f(X3,X3)),f(f(X3,X3),f(X3,X3))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) [superposition 28,141]
+[SA] active: 2983. f(X2,X2) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2))))) [superposition 1652,141]
+[SA] active: 89. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X3,X3),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = X2 [superposition 38,19]
+[SA] active: 19611. f(f(X1,X1),f(X3,X3)) = f(f(X1,X1),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3))))))) [forward demodulation 19412,1470]
+[SA] active: 1193. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,X3),f(X3,X3)),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3))))) [superposition 75,141]
+[SA] active: 3281. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X5,f(X4,X4)),f(X5,f(X5,f(X4,X4))))) [superposition 1183,141]
+[SA] active: 4295. f(f(X2,X2),f(X2,X2)) = f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2))))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))))) [superposition 76,141]
+[SA] active: 3606. f(X2,X2) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) [superposition 2178,141]
+[SA] active: 2090. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,X3),f(X3,X3)),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3)))) [superposition 147,141]
+[SA] active: 6898. f(f(f(X0,X0),f(X0,X0)),f(X2,X2)) = f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))) [forward demodulation 6492,142]
+[SA] active: 200. f(X2,X2) = f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))) [superposition 33,19]
+[SA] active: 11264. f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(X0,X0))) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) [superposition 88,2141]
+[SA] active: 7363. f(f(X1,X1),f(X1,X1)) = f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))) [superposition 85,128]
+[SA] active: 11265. f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(X0,X0))) = f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))) [superposition 88,1236]
+[SA] active: 9605. f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))) = f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))) [superposition 132,132]
+[SA] active: 3950. f(X2,X2) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2)))) [superposition 2587,141]
+[SA] active: 115. f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))) = f(f(X0,f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))))),f(X0,f(X0,f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))))))) [superposition 80,80]
+[SA] active: 3992. f(X2,X2) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) [superposition 2587,141]
+[SA] active: 1807. f(X2,X2) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) [superposition 142,141]
+[SA] active: 19321. f(f(X0,X0),f(X2,X2)) = f(f(X0,X0),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2))))))) [superposition 17971,2587]
+[SA] active: 2209. f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X2,f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0)))))),f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))))) = X2 [superposition 79,147]
+[SA] active: 19322. f(f(X0,X0),f(X1,X1)) = f(f(X0,X0),f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1))))))) [superposition 17971,12]
+[SA] active: 3452. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3))),f(f(X4,f(X3,X3)),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3))))) = X4 [superposition 241,141]
+[SA] active: 25728. f(f(X1,X1),f(X3,X3)) = f(f(X1,X1),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3)))))) [forward demodulation 25485,1470]
+[SA] active: 1107. f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))) = f(f(X3,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X4,X4),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))),f(X3,f(X3,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X4,X4),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))))) [superposition 35,141]
+[SA] active: 1284. f(f(X2,X2),f(f(X0,X0),f(X0,X0))) = f(f(X2,X2),f(f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0)))))),f(X2,X2))) [superposition 392,75]
+[SA] active: 1280. f(f(X0,X0),f(X0,X0)) = f(f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0)))))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0))))))) [superposition 71,75]
+[SA] active: 4513. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X4,X4),f(X4,X4)),f(f(X4,X4),f(X4,X4)))) [superposition 1236,141]
+[SA] active: 5880. f(f(X2,X2),f(X2,X2)) = f(f(X3,f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))),f(X3,f(X3,f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))))) [superposition 145,141]
+[SA] active: 5179. f(f(X2,X2),f(f(X5,f(X4,X4)),f(X5,f(X5,f(X4,X4))))) = f(f(X2,X2),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X4,X4)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X4,X4)))) [superposition 2141,141]
+[SA] active: 11141. f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) = f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(X2,X2),f(X2,X2)),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))))) [superposition 88,132]
+[SA] active: 5246. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X5,f(X4,X4)),f(X5,f(X5,f(X4,X4))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,X3),f(X4,X4)),f(f(X3,X3),f(X4,X4)))) [superposition 2141,141]
+[SA] active: 2206. f(f(X0,X0),f(X0,X0)) = f(f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0)))))) [superposition 71,147]
+[SA] active: 5331. f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(X0,X0))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) [superposition 21,2141]
+[SA] active: 8620. f(f(X2,X2),f(X2,X2)) = f(f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) [superposition 148,141]
+[SA] active: 25384. f(f(X0,X0),f(X2,X2)) = f(f(X0,X0),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2)))))) [superposition 17968,2587]
+[SA] active: 9798. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(X3,X3))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X2,X2),f(X2,X2)),f(X3,X3)))) [superposition 31,132]
+[SA] active: 25385. f(f(X0,X0),f(X1,X1)) = f(f(X0,X0),f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1)))))) [superposition 17968,12]
+[SA] active: 9801. f(f(X2,X2),f(X2,X2)) = f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) [superposition 85,132]
+[SA] active: 593. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) [superposition 392,141]
+[SA] active: 2214. f(f(X2,X2),f(f(X0,X0),f(X0,X0))) = f(f(X2,X2),f(f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))))),f(X2,X2))) [superposition 392,147]
+[SA] active: 6133. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,X3),f(X4,X4)),f(f(X3,X3),f(X4,X4)))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4)))) [superposition 2077,141]
+[SA] active: 6152. f(f(X2,X2),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X4,X4)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X4,X4)))) = f(f(X2,X2),f(f(f(X3,X3),f(X4,X4)),f(f(X3,X3),f(X4,X4)))) [superposition 2077,141]
+[SA] active: 6491. f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(X0,X0))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) [superposition 21,2077]
+[SA] active: 971. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) [superposition 472,141]
+[SA] active: 24237. f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X1,X1)) = f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))))) [forward demodulation 23870,1470]
+[SA] active: 10872. f(X2,X2) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X2,X2),f(X2,X2)),f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))))) [superposition 1276,132]
+[SA] active: 12160. f(X2,X2) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X2,X2),f(X2,X2)),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) [superposition 5548,132]
+[SA] active: 5035. f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(X2,X2)) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))))) [forward demodulation 4938,392]
+[SA] active: 23769. f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)) = f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))))) [superposition 11267,2587]
+[SA] active: 5837. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(X3,X3)) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(X4,f(X1,X1)),f(X4,f(X4,f(X1,X1)))))) [forward demodulation 5706,392]
+[SA] active: 23770. f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)) = f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))))) [superposition 11267,12]
+[SA] active: 12651. f(X2,X2) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X2,X2),f(X2,X2)),f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))))) [superposition 2202,132]
+[SA] active: 35834. f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X1,X1)) = f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3))))) [forward demodulation 35377,1470]
+[SA] active: 12691. f(X2,X2) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X2,X2),f(X2,X2)),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) [superposition 2202,141]
+[SA] active: 27926. f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(X0,X0)) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) [superposition 479,2141]
+[SA] active: 27927. f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(X0,X0)) = f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))) [superposition 479,1236]
+[SA] active: 13776. f(X2,X2) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X2,X2),f(X2,X2)),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) [superposition 6534,132]
+[SA] active: 4677. f(f(f(f(X3,X3),f(X3,X3)),f(f(X3,X3),f(X3,X3))),f(X1,X1)) = f(f(f(f(X3,X3),f(X3,X3)),f(f(X3,X3),f(X3,X3))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))))) [superposition 472,1236]
+[SA] active: 23765. f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))) = f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X1,X1),f(X1,X1)),f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))))) [superposition 11267,141]
+[SA] active: 4973. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,X3),f(X3,X3)),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))) [forward demodulation 4577,4295]
+[SA] active: 23779. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X4,f(X1,X1)),f(X4,f(X4,f(X1,X1)))))) [superposition 11267,11267]
+[SA] active: 5408. f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(X1,X1)) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))))) [superposition 472,2141]
+[SA] active: 87874. f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(X0,X0)))) = f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))) [superposition 23779,75]
+[SA] active: 5563. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,X3),f(X3,X3)),f(f(f(X4,X4),f(X1,X1)),f(f(X4,X4),f(X1,X1))))) [forward demodulation 5550,4295]
+[SA] active: 90385. f(f(f(X2,X2),f(X2,X2)),f(f(X4,X4),f(f(X2,X2),f(X2,X2)))) = f(f(f(X2,X2),f(X2,X2)),f(f(X4,X4),f(f(X2,X2),f(X4,X4)))) [forward demodulation 90072,5880]
+[SA] active: 7189. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(X3,X3)) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X4,X4),f(X1,X1)),f(f(X4,X4),f(X1,X1))))) [forward demodulation 6863,392]
+[SA] active: 23997. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))) [superposition 88,11267]
+[SA] active: 28543. f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X4,f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))),f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))))) = X4 [superposition 89,2141]
+[SA] active: 24020. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X4,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1))))))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = X4 [superposition 5,11267]
+[SA] active: 28544. f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X3,f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))))),f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))))) = X3 [superposition 89,1236]
+[SA] active: 35260. f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)) = f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))))) [superposition 11264,2587]
+[SA] active: 28684. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))) [forward demodulation 28671,200]
+[SA] active: 89970. f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(f(X2,X2),f(X2,X2)),f(X0,X0)))) [superposition 87874,2141]
+[SA] active: 28685. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))) [forward demodulation 28670,200]
+[SA] active: 89971. f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))) = f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(X0,X0)))) [superposition 87874,1236]
+[SA] active: 4676. f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0))))) [superposition 75,1236]
+[SA] active: 23764. f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))) = f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X1,X1),f(X1,X1)),f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))))) [superposition 11267,128]
+[SA] active: 5407. f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0))))) [superposition 75,2141]
+[SA] active: 35539. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X4,f(X1,X1)),f(X4,f(X4,f(X1,X1)))))) [superposition 11267,11264]
+[SA] active: 6572. f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(X1,X1)) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X2,X2),f(X3,X3)),f(f(X2,X2),f(X3,X3))))) [superposition 472,2077]
+[SA] active: 89734. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(X2,X2)))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))) [superposition 87874,10]
+[SA] active: 17659. f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X1,X1)) = f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,X3),f(X3,X3)),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))) [forward demodulation 17551,1470]
+[SA] active: 24479. f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(X2,f(X0,X0)),f(X2,f(X2,f(X0,X0)))))) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))))) [superposition 1579,1579]
+[SA] active: 33165. f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0)))) [superposition 2090,2141]
+[SA] active: 33166. f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))) = f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0)))) [superposition 2090,1236]
+[SA] active: 4606. f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X3,f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))))) = X3 [superposition 38,1236]
+[SA] active: 19317. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X1,X1),f(X1,X1)),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2))))))) [superposition 17971,141]
+[SA] active: 4675. f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0)))) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) [superposition 147,1236]
+[SA] active: 23998. f(X2,X2) = f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1))))))) [superposition 85,11267]
+[SA] active: 4939. f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))))) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(X2,f(X0,X0)),f(X2,f(X2,f(X0,X0)))))) [forward demodulation 4637,33]
+[SA] active: 35271. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X4,X4),f(X1,X1)),f(f(X4,X4),f(X1,X1))))) [superposition 11264,11264]
+[SA] active: 5335. f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X4,f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))),f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))))) = X4 [superposition 38,2141]
+[SA] active: 53174. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(X4,f(X1,X1)),f(X4,f(X4,f(X1,X1)))))) [superposition 5331,5331]
+[SA] active: 5406. f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0)))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) [superposition 147,2141]
+[SA] active: 90433. f(f(f(f(X2,X2),f(X0,X0)),f(f(X2,X2),f(X0,X0))),f(f(X3,X3),f(f(f(X0,X0),f(X0,X0)),f(X3,X3)))) = f(f(f(f(X2,X2),f(X0,X0)),f(f(X2,X2),f(X0,X0))),f(f(X3,X3),f(f(f(X2,X2),f(X0,X0)),f(f(X2,X2),f(X0,X0))))) [forward demodulation 90125,7]
+[SA] active: 5707. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))) [forward demodulation 5367,33]
+[SA] active: 100745. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(X2,X2)))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))) [superposition 89970,10]
+[SA] active: 6571. f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0))))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) [superposition 75,2077]
+[SA] active: 17630. f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(X2,X2)) = f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))) [forward demodulation 17585,12]
+[SA] active: 17633. f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(X2,X2)) = f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))) [forward demodulation 17582,142]
+[SA] active: 26211. f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(f(X2,X2),f(X0,X0)),f(f(X2,X2),f(X0,X0))))) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))))) [superposition 1579,2142]
+[SA] active: 4604. f(X0,X0) = f(f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))),f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))) [superposition 33,1236]
+[SA] active: 25380. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X1,X1),f(X1,X1)),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2)))))) [superposition 17968,141]
+[SA] active: 5333. f(X0,X0) = f(f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))),f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))) [superposition 33,2141]
+[SA] active: 66289. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(X4,f(X1,X1)),f(X4,f(X4,f(X1,X1)))))) [superposition 5331,6491]
+[SA] active: 6495. f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X4,f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))),f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))))) = X4 [superposition 38,2077]
+[SA] active: 6570. f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0)))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) [superposition 147,2077]
+[SA] active: 6864. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))) [forward demodulation 6529,33]
+[SA] active: 17634. f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(X2,X2)) = f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))) [forward demodulation 17581,142]
+[SA] active: 17831. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(X2,X2)) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X1,X1),f(X1,X1)),f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2))))))) [superposition 1626,128]
+[SA] active: 25976. f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(f(X2,X2),f(X0,X0)),f(f(X2,X2),f(X0,X0))))) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))))) [superposition 2142,2142]
+[SA] active: 34949. f(X0,X0) = f(f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))) [superposition 200,2141]
+[SA] active: 34950. f(X0,X0) = f(f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))),f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))))) [superposition 200,1236]
+[SA] active: 19162. f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(X2,X2)) = f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))) [forward demodulation 19024,12]
+[SA] active: 17631. f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(X2,X2)) = f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))) [forward demodulation 17584,12]
+[SA] active: 19165. f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(X2,X2)) = f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))) [forward demodulation 19021,142]
+[SA] active: 19316. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(X2,X2)) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X1,X1),f(X1,X1)),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2))))))) [superposition 17971,128]
+[SA] active: 6493. f(X0,X0) = f(f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))),f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))) [superposition 33,2077]
+[SA] active: 65905. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X4,X4),f(X1,X1)),f(f(X4,X4),f(X1,X1))))) [superposition 6491,6491]
+[SA] active: 19166. f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(X2,X2)) = f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))) [forward demodulation 19020,142]
+[SA] active: 19388. f(f(f(X3,X3),f(X3,X3)),f(X2,X2)) = f(f(f(X3,X3),f(X3,X3)),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2))))))) [superposition 17971,83]
+[SA] active: 20103. f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(X0,X0))) = f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) [superposition 1540,2101]
+[SA] active: 19510. f(f(f(X3,X3),f(X3,X3)),f(X2,X2)) = f(f(f(X3,X3),f(X3,X3)),f(f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))))) [superposition 17971,83]
+[SA] active: 19924. f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))) = f(f(X0,X0),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)))) [superposition 2101,2101]
+[SA] active: 25379. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(X2,X2)) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X1,X1),f(X1,X1)),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2)))))) [superposition 17968,128]
+[SA] active: 20102. f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(X0,X0))) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) [superposition 1539,2101]
+[SA] active: 19163. f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(X2,X2)) = f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))) [forward demodulation 19023,12]
+[SA] active: 50451. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4)))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)))) [superposition 2090,11141]
+[SA] active: 19787. f(f(f(X3,X3),f(X3,X3)),f(X2,X2)) = f(f(f(X3,X3),f(X3,X3)),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2)))))) [forward demodulation 19691,1807]
+[SA] active: 3349. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))) [superposition 5,1183]
+[SA] active: 20991. f(X2,X2) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)))) [superposition 2604,83]
+[SA] active: 4576. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))) [superposition 5,1236]
+[SA] active: 21936. f(f(f(X3,X3),f(X3,X3)),f(X2,X2)) = f(f(f(X3,X3),f(X3,X3)),f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))))) [superposition 4969,83]
+[SA] active: 5549. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))) [superposition 5,2141]
+[SA] active: 22920. f(f(f(X3,X3),f(X3,X3)),f(X2,X2)) = f(f(f(X3,X3),f(X3,X3)),f(f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))))) [superposition 5739,83]
+[SA] active: 4605. f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))) = f(f(X3,f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))),f(X3,f(X3,f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))))) [superposition 35,1236]
+[SA] active: 25459. f(f(f(X3,X3),f(X3,X3)),f(X2,X2)) = f(f(f(X3,X3),f(X3,X3)),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2)))))) [superposition 17968,83]
+[SA] active: 5334. f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))) = f(f(X4,f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))),f(X4,f(X4,f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))))) [superposition 35,2141]
+[SA] active: 28841. f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X5,f(X2,X2)),f(X5,f(X5,f(X2,X2))))))) [superposition 19611,83]
+[SA] active: 19894. f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0)))) [superposition 2101,2141]
+[SA] active: 28948. f(f(X2,X2),f(X3,X3)) = f(f(X2,X2),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3))))))) [superposition 19611,83]
+[SA] active: 19897. f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)))) [superposition 2101,1236]
+[SA] active: 29055. f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))),f(f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))))) [superposition 19611,83]
+[SA] active: 19893. f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0)))) [superposition 2101,2077]
+[SA] active: 30401. f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) = f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(X5,f(X2,X2)),f(X5,f(X5,f(X2,X2))))) [superposition 3281,83]
+[SA] active: 6494. f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))) = f(f(X4,f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))),f(X4,f(X4,f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))))) [superposition 35,2077]
+[SA] active: 40754. f(f(X0,X0),f(X3,X3)) = f(f(X0,X0),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0))),f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3)))))) [superposition 17968,1807]
+[SA] active: 26014. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(X3,X3))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))))) [superposition 2142,692]
+[SA] active: 40755. f(f(X0,X0),f(X3,X3)) = f(f(X0,X0),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0))),f(f(f(X3,X3),f(X3,X3)),f(f(X3,X3),f(X3,X3)))))) [superposition 17969,1807]
+[SA] active: 50302. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)))) [superposition 11141,11141]
+[SA] active: 29460. f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2)))))) [forward demodulation 29311,1807]
+[SA] active: 3350. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3))))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))))),f(f(X4,f(X1,X1)),f(X4,f(X4,f(X1,X1)))))) [superposition 80,1183]
+[SA] active: 41420. f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X5,f(X2,X2)),f(X5,f(X5,f(X2,X2))))))) [superposition 19321,83]
+[SA] active: 17829. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X3,X3)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X2,X2),f(X2,X2)),f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3))))))) [superposition 1626,692]
+[SA] active: 41681. f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))),f(f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))))) [superposition 19321,83]
+[SA] active: 57307. f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(X0,X0))) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) [superposition 9798,2101]
+[SA] active: 44064. f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X5,X5),f(X2,X2)),f(f(X5,X5),f(X2,X2)))))) [superposition 25728,83]
+[SA] active: 18755. f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X3,X3),f(X3,X3))) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) [forward demodulation 18532,19]
+[SA] active: 30055. f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2)))) = f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) [forward demodulation 29919,479]
+[SA] active: 18260. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) [superposition 936,86]
+[SA] active: 42120. f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3))),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2)))))) [forward demodulation 41964,1807]
+[SA] active: 40753. f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)) = f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(f(X5,f(X2,X2)),f(X5,f(X5,f(X2,X2)))))) [superposition 11267,1807]
+[SA] active: 56077. f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X5,X5),f(X2,X2)),f(f(X5,X5),f(X2,X2)))))) [superposition 25384,83]
+[SA] active: 23999. f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))) = f(f(X4,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1))))))),f(X4,f(X4,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1))))))))) [superposition 82,11267]
+[SA] active: 69146. f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(X4,X4)) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X5,f(X4,X4)),f(X5,f(X5,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) [superposition 24237,83]
+[SA] active: 24009. f(f(X4,X4),f(f(X2,X2),f(X2,X2))) = f(f(X4,X4),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1))))))),f(X4,X4))) [superposition 936,11267]
+[SA] active: 40750. f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)) = f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(f(f(X5,X5),f(X2,X2)),f(f(X5,X5),f(X2,X2))))) [superposition 11264,1807]
+[SA] active: 40751. f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)) = f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))))) [superposition 11265,1807]
+[SA] active: 48533. f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(X0,X0)) = f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) [superposition 479,5179]
+[SA] active: 68528. f(f(f(X5,f(X4,X4)),f(X5,f(X5,f(X4,X4)))),f(X1,X1)) = f(f(f(X5,f(X4,X4)),f(X5,f(X5,f(X4,X4)))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4))))) [superposition 971,5179]
+[SA] active: 89969. f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(X3,X3),f(X3,X3)),f(X0,X0)))) = f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) [superposition 87874,5179]
+[SA] active: 18276. f(f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4))),f(X2,X2)) = f(f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))))) [superposition 936,2141]
+[SA] active: 18279. f(f(f(f(X4,X4),f(X4,X4)),f(f(X4,X4),f(X4,X4))),f(X2,X2)) = f(f(f(f(X4,X4),f(X4,X4)),f(f(X4,X4),f(X4,X4))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))))) [superposition 936,1236]
+[SA] active: 23762. f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) = f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(X2,X2),f(X2,X2)),f(f(X5,f(X4,X4)),f(X5,f(X5,f(X4,X4)))))) [superposition 11267,692]
+[SA] active: 48500. f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X5,f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))),f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))))) = X5 [superposition 89,5179]
+[SA] active: 48529. f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X5,f(X0,X0)),f(X5,f(X5,f(X0,X0))))) [superposition 1193,5179]
+[SA] active: 49499. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1))))) [forward demodulation 48513,200]
+[SA] active: 18275. f(f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4))),f(X2,X2)) = f(f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X3,X3),f(X4,X4)),f(f(X3,X3),f(X4,X4))))) [superposition 936,2077]
+[SA] active: 29169. f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(X3,X3)) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0))))) [forward demodulation 28915,24237]
+[SA] active: 18278. f(f(f(f(X4,X4),f(X4,X4)),f(f(X4,X4),f(X4,X4))),f(X2,X2)) = f(f(f(f(X4,X4),f(X4,X4)),f(f(X4,X4),f(X4,X4))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X3,X3),f(X4,X4)),f(f(X3,X3),f(X4,X4))))) [superposition 936,1354]
+[SA] active: 64316. f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(X5,X5)) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X6,f(X5,X5)),f(X6,f(X6,f(X5,X5)))),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) [forward demodulation 63521,35834]
+[SA] active: 34196. f(f(f(f(X4,X4),f(X4,X4)),f(f(X4,X4),f(X4,X4))),f(X1,X1)) = f(f(f(f(X4,X4),f(X4,X4)),f(f(X4,X4),f(X4,X4))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4))))) [superposition 6898,2101]
+[SA] active: 87869. f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))))) = f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) [superposition 23779,5179]
+[SA] active: 35253. f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) = f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(X2,X2),f(X2,X2)),f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4))))) [superposition 11264,692]
+[SA] active: 35543. f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))) = f(f(X4,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1)))))),f(X4,f(X4,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1)))))))) [superposition 82,11264]
+[SA] active: 48528. f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X5,X5),f(X0,X0)),f(f(X5,X5),f(X0,X0)))) = f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) [superposition 2090,5179]
+[SA] active: 63391. f(f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4))),f(X1,X1)) = f(f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4))))) [superposition 472,6152]
+[SA] active: 95979. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X1,X1)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X1,X1))))) [forward demodulation 95948,34949]
+[SA] active: 112865. f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(X3,X3),f(X3,X3)),f(X0,X0)))) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) [superposition 89734,5179]
+[SA] active: 49377. f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(X2,X2)) = f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))) [forward demodulation 48676,1807]
+[SA] active: 63390. f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X5,f(X0,X0)),f(X5,f(X5,f(X0,X0))))) [superposition 75,6152]
+[SA] active: 114555. f(f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0)))),f(X3,X3)) = f(f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0)))),f(f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))) [superposition 17659,5179]
+[SA] active: 112465. f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))))) [superposition 89734,2101]
+[SA] active: 19896. f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)))) [superposition 2101,1354]
+[SA] active: 63142. f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X5,f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))),f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))))) = X5 [superposition 38,6152]
+[SA] active: 63389. f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X5,X5),f(X0,X0)),f(f(X5,X5),f(X0,X0)))) [superposition 147,6152]
+[SA] active: 64387. f(f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0)))),f(X3,X3)) = f(f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0)))),f(f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))) [forward demodulation 63388,142]
+[SA] active: 64478. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1))))) [forward demodulation 63263,33]
+[SA] active: 64951. f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(X2,X2)) = f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))) [forward demodulation 62696,1807]
+[SA] active: 49378. f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(X2,X2)) = f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))) [forward demodulation 48675,1807]
+[SA] active: 141899. f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3))))) [superposition 100745,2101]
+[SA] active: 177682. f(f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0))),f(X3,X3)) = f(f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0))),f(f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))) [superposition 17831,5179]
+[SA] active: 64388. f(f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0))),f(X3,X3)) = f(f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0))),f(f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))) [forward demodulation 63387,142]
+[SA] active: 64952. f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(X2,X2)) = f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))) [forward demodulation 62695,1807]
+[SA] active: 204888. f(f(f(X0,X0),f(X0,X0)),f(X3,X3)) = f(f(f(X0,X0),f(X0,X0)),f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))) [superposition 19388,5179]
+[SA] active: 23844. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(X3,X3))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))))) [superposition 11267,83]
+[SA] active: 24011. f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X4,f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))))),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))))) = X4 [superposition 2474,11267]
+[SA] active: 24334. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X4,X4),f(X4,X4))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X4,X4),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))))) [forward demodulation 24186,7]
+[SA] active: 48515. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1))))) [superposition 5,5179]
+[SA] active: 49780. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X4,X4)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(X5,f(X2,X2)),f(X5,f(X5,f(X2,X2)))))) [forward demodulation 49383,392]
+[SA] active: 205697. f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)) = f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2))))) [superposition 20103,1807]
+[SA] active: 48679. f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(X1,X1)) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))))) [superposition 472,5179]
+[SA] active: 64881. f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(X5,X5)) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X6,f(X5,X5)),f(X6,f(X6,f(X5,X5)))),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) [forward demodulation 62825,35834]
+[SA] active: 48678. f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X5,f(X0,X0)),f(X5,f(X5,f(X0,X0))))) [superposition 75,5179]
+[SA] active: 89743. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X2,X2),f(X2,X2)),f(X3,X3)))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))))) [superposition 87874,83]
+[SA] active: 50295. f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)))) [superposition 11141,5179]
+[SA] active: 62699. f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(X1,X1)) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X2,X2),f(X3,X3)),f(f(X2,X2),f(X3,X3))))) [superposition 472,6152]
+[SA] active: 63393. f(f(f(f(X6,X6),f(X5,X5)),f(f(X6,X6),f(X5,X5))),f(X2,X2)) = f(f(f(f(X6,X6),f(X5,X5)),f(f(X6,X6),f(X5,X5))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X5,X5)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X5,X5))))) [superposition 936,6152]
+[SA] active: 205713. f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X1,X1)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X1,X1))))) [superposition 20103,20103]
+[SA] active: 48677. f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X5,X5),f(X0,X0)),f(f(X5,X5),f(X0,X0)))) [superposition 147,5179]
+[SA] active: 87642. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X5,f(X2,X2)),f(X5,f(X5,f(X2,X2)))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))))) [superposition 23779,83]
+[SA] active: 62698. f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X5,f(X0,X0)),f(X5,f(X5,f(X0,X0))))) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) [superposition 75,6152]
+[SA] active: 100754. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X2,X2),f(X2,X2)),f(X3,X3)))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))))) [superposition 89970,83]
+[SA] active: 19314. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X3,X3)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X2,X2),f(X2,X2)),f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3))))))) [superposition 17971,692]
+[SA] active: 108223. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X5,f(X2,X2)),f(X5,f(X5,f(X2,X2)))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))))) [superposition 35539,83]
+[SA] active: 48501. f(X0,X0) = f(f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))) [superposition 200,5179]
+[SA] active: 48553. f(X0,X0) = f(f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))),f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))) [superposition 33,5179]
+[SA] active: 62697. f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X5,X5),f(X0,X0)),f(f(X5,X5),f(X0,X0)))) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) [superposition 147,6152]
+[SA] active: 63386. f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)))) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) [superposition 2101,6152]
+[SA] active: 217207. f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1))))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X1,X1)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X1,X1))))) [superposition 20102,20102]
+[SA] active: 129688. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X5,X5),f(X2,X2)),f(f(X5,X5),f(X2,X2))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))))) [superposition 35271,83]
+[SA] active: 21761. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X3,X3)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X3,X3),f(X3,X3)),f(f(X3,X3),f(X3,X3))),f(f(f(X2,X2),f(X2,X2)),f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3))))))) [superposition 4969,692]
+[SA] active: 212595. f(f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0)))),f(X3,X3)) = f(f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0)))),f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X3,X3)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))) [forward demodulation 211145,40751]
+[SA] active: 22701. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X3,X3)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X2,X2),f(X2,X2)),f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3))))))) [superposition 5739,692]
+[SA] active: 25377. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X3,X3)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X2,X2),f(X2,X2)),f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3)))))) [superposition 17968,692]
+[SA] active: 33871. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X3,X3)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X2,X2),f(X2,X2)),f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3)))))) [superposition 6898,692]
+[SA] active: 62557. f(X0,X0) = f(f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))),f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))) [superposition 33,6152]
+[SA] active: 63140. f(X0,X0) = f(f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))),f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))) [superposition 33,6152]
+[SA] active: 212593. f(f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0))),f(X3,X3)) = f(f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0))),f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X3,X3)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))) [forward demodulation 211147,18275]
+[SA] active: 48681. f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4))),f(X2,X2)) = f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))))) [superposition 936,5179]
+[SA] active: 212453. f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(X6,X6)) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(X7,f(X6,X6)),f(X7,f(X7,f(X6,X6)))),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) [forward demodulation 211354,35834]
+[SA] active: 48502. f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))) = f(f(X5,f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))),f(X5,f(X5,f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))))) [superposition 1107,5179]
+[SA] active: 62701. f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4))),f(X2,X2)) = f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X3,X3),f(X4,X4)),f(f(X3,X3),f(X4,X4))))) [superposition 936,6152]
+[SA] active: 211148. f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4))),f(X1,X1)) = f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4))))) [superposition 472,19924]
+[SA] active: 90431. f(f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X0,X0)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X0,X0))),f(f(X4,X4),f(f(f(X0,X0),f(X0,X0)),f(X4,X4)))) = f(f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X0,X0)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X0,X0))),f(f(X4,X4),f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X0,X0)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X0,X0))))) [forward demodulation 90123,7]
+[SA] active: 48555. f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X5,f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))))) = X5 [superposition 38,5179]
+[SA] active: 321748. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X2,X2),f(X2,X2)),f(X3,X3)))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2))))) [superposition 89969,83]
+[SA] active: 48674. f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)))) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) [superposition 2101,5179]
+[SA] active: 49384. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))))) [forward demodulation 48661,33]
+[SA] active: 211136. f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X6,f(X0,X0)),f(X6,f(X6,f(X0,X0))))) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) [superposition 75,19924]
+[SA] active: 347548. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2))))) [superposition 87869,83]
+[SA] active: 62559. f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X5,f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))))) = X5 [superposition 38,6152]
+[SA] active: 62694. f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)))) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) [superposition 2101,6152]
+[SA] active: 64959. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))))) [forward demodulation 62680,33]
+[SA] active: 211137. f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(X6,X6),f(X0,X0)),f(f(X6,X6),f(X0,X0)))) [superposition 147,19924]
+[SA] active: 215257. f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X5,X5),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X5,X5),f(f(f(X6,X6),f(X2,X2)),f(f(X6,X6),f(X2,X2))))) [forward demodulation 214261,20991]
+[SA] active: 57364. f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(X2,X2)) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))) [forward demodulation 57279,1807]
+[SA] active: 63141. f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))) = f(f(X5,f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))),f(X5,f(X5,f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))))) [superposition 35,6152]
+[SA] active: 207696. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X3,X3)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X2,X2),f(X2,X2)),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X3,X3)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X3,X3)))))) [superposition 19510,692]
+[SA] active: 64389. f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0))),f(X3,X3)) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0))),f(f(f(f(X6,X6),f(X3,X3)),f(f(X6,X6),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))) [forward demodulation 63385,142]
+[SA] active: 64953. f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(X2,X2)) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))) [forward demodulation 62693,1807]
+[SA] active: 211150. f(f(f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X5,X5)),f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X5,X5))),f(X2,X2)) = f(f(f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X5,X5)),f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X5,X5))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X5,X5)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X5,X5))))) [superposition 936,19924]
+[SA] active: 48554. f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))) = f(f(X5,f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))),f(X5,f(X5,f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))))) [superposition 35,5179]
+[SA] active: 210860. f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X6,f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))))) = X6 [superposition 38,19924]
+[SA] active: 211140. f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X0,X0)),f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X0,X0)))) [superposition 2101,19924]
+[SA] active: 212608. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2))))) [forward demodulation 211120,33]
+[SA] active: 283587. f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X2,X2)),f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X2,X2))))) [superposition 57307,57307]
+[SA] active: 62558. f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))) = f(f(X5,f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))),f(X5,f(X5,f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))))) [superposition 35,6152]
+[SA] active: 210858. f(X0,X0) = f(f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))),f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))) [superposition 33,19924]
+[SA] active: 212599. f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0))),f(X3,X3)) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0))),f(f(f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X3,X3)),f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))) [forward demodulation 211141,1807]
+[SA] active: 210859. f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))) = f(f(X6,f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))),f(X6,f(X6,f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))))) [superposition 35,19924]
+% SZS status Satisfiable for p
+% SZS output start Saturation.
+cnf(u64951,axiom,
+    f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(X2,X2)) = f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))))).
+
+cnf(u30401,axiom,
+    f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) = f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(X5,f(X2,X2)),f(X5,f(X5,f(X2,X2)))))).
+
+cnf(u3606,axiom,
+    f(X2,X2) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))).
+
+cnf(u26211,axiom,
+    f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(f(X2,X2),f(X0,X0)),f(f(X2,X2),f(X0,X0))))) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0))))))).
+
+cnf(u4676,axiom,
+    f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))))).
+
+cnf(u18278,axiom,
+    f(f(f(f(X4,X4),f(X4,X4)),f(f(X4,X4),f(X4,X4))),f(X2,X2)) = f(f(f(f(X4,X4),f(X4,X4)),f(f(X4,X4),f(X4,X4))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X3,X3),f(X4,X4)),f(f(X3,X3),f(X4,X4)))))).
+
+cnf(u4973,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,X3),f(X3,X3)),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))))).
+
+cnf(u49378,axiom,
+    f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(X2,X2)) = f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))).
+
+cnf(u63390,axiom,
+    f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X5,f(X0,X0)),f(X5,f(X5,f(X0,X0)))))).
+
+cnf(u68528,axiom,
+    f(f(f(X5,f(X4,X4)),f(X5,f(X5,f(X4,X4)))),f(X1,X1)) = f(f(f(X5,f(X4,X4)),f(X5,f(X5,f(X4,X4)))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)))))).
+
+cnf(u128,axiom,
+    f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))) = f(f(f(X2,X2),f(X1,X1)),f(f(X2,X2),f(X1,X1)))).
+
+cnf(u33165,axiom,
+    f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0))))).
+
+cnf(u17968,axiom,
+    f(f(f(X0,X0),f(X0,X0)),f(X2,X2)) = f(f(f(X0,X0),f(X0,X0)),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))))).
+
+cnf(u7,axiom,
+    f(X1,X1) = f(f(X0,f(f(X1,X1),f(X2,X2))),f(X0,f(X0,f(f(X1,X1),f(X2,X2)))))).
+
+cnf(u27927,axiom,
+    f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(X0,X0)) = f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))))).
+
+cnf(u242,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,f(X1,X1)),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = X2).
+
+cnf(u1652,axiom,
+    f(X1,X1) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))))).
+
+cnf(u971,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))).
+
+cnf(u48554,axiom,
+    f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))) = f(f(X5,f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))),f(X5,f(X5,f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))))).
+
+cnf(u57364,axiom,
+    f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(X2,X2)) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))).
+
+cnf(u1282,axiom,
+    f(X2,f(f(X3,f(X2,f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0)))))))),X2)) = X3).
+
+cnf(u212595,axiom,
+    f(f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0)))),f(X3,X3)) = f(f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0)))),f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X3,X3)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))).
+
+cnf(u41420,axiom,
+    f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X5,f(X2,X2)),f(X5,f(X5,f(X2,X2)))))))).
+
+cnf(u1236,axiom,
+    f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))) = f(f(X0,X0),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))))).
+
+cnf(u90431,axiom,
+    f(f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X0,X0)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X0,X0))),f(f(X4,X4),f(f(f(X0,X0),f(X0,X0)),f(X4,X4)))) = f(f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X0,X0)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X0,X0))),f(f(X4,X4),f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X0,X0)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X0,X0)))))).
+
+cnf(u62701,axiom,
+    f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4))),f(X2,X2)) = f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X3,X3),f(X4,X4)),f(f(X3,X3),f(X4,X4)))))).
+
+cnf(u11267,axiom,
+    f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(X0,X0))) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))).
+
+cnf(u48515,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1)))))).
+
+cnf(u112465,axiom,
+    f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3))))))).
+
+cnf(u17630,axiom,
+    f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(X2,X2)) = f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))).
+
+cnf(u6898,axiom,
+    f(f(f(X0,X0),f(X0,X0)),f(X2,X2)) = f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))))).
+
+cnf(u1276,axiom,
+    f(X0,X0) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0))))))).
+
+cnf(u5707,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1))))))).
+
+cnf(u64316,axiom,
+    f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(X5,X5)) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X6,f(X5,X5)),f(X6,f(X6,f(X5,X5)))),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))).
+
+cnf(u25380,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X1,X1),f(X1,X1)),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))))))).
+
+cnf(u148,axiom,
+    f(f(X1,X1),f(X1,X1)) = f(f(f(X2,X2),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))),f(f(X2,X2),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))))).
+
+cnf(u2587,axiom,
+    f(X1,X1) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X2,X2),f(X1,X1)),f(f(X2,X2),f(X1,X1))))).
+
+cnf(u1469,axiom,
+    f(X1,X1) = f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))).
+
+cnf(u1470,axiom,
+    f(X1,X1) = f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))).
+
+cnf(u78,axiom,
+    f(f(X1,X1),f(X1,X1)) = f(f(X1,X1),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X1,X1)))).
+
+cnf(u11141,axiom,
+    f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) = f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(X2,X2),f(X2,X2)),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4))))))).
+
+cnf(u6152,axiom,
+    f(f(X2,X2),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X4,X4)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X4,X4)))) = f(f(X2,X2),f(f(f(X3,X3),f(X4,X4)),f(f(X3,X3),f(X4,X4))))).
+
+cnf(u5331,axiom,
+    f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(X0,X0))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))).
+
+cnf(u347548,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2)))))).
+
+cnf(u24011,axiom,
+    f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X4,f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))))),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))))) = X4).
+
+cnf(u74,axiom,
+    f(f(X1,X1),f(X1,X1)) = f(f(X2,f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))),f(X2,f(X2,f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))))).
+
+cnf(u8620,axiom,
+    f(f(X2,X2),f(X2,X2)) = f(f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))))).
+
+cnf(u184,axiom,
+    f(X2,f(f(X3,f(X2,f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))))),X2)) = X3).
+
+cnf(u48674,axiom,
+    f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)))) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))).
+
+cnf(u25459,axiom,
+    f(f(f(X3,X3),f(X3,X3)),f(X2,X2)) = f(f(f(X3,X3),f(X3,X3)),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))))))).
+
+cnf(u212453,axiom,
+    f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(X6,X6)) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(X7,f(X6,X6)),f(X7,f(X7,f(X6,X6)))),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))).
+
+cnf(u18755,axiom,
+    f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X3,X3),f(X3,X3))) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))))).
+
+cnf(u63140,axiom,
+    f(X0,X0) = f(f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))),f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))).
+
+cnf(u5246,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X5,f(X4,X4)),f(X5,f(X5,f(X4,X4))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,X3),f(X4,X4)),f(f(X3,X3),f(X4,X4))))).
+
+cnf(u5335,axiom,
+    f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X4,f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))),f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))))) = X4).
+
+cnf(u62698,axiom,
+    f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X5,f(X0,X0)),f(X5,f(X5,f(X0,X0))))) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))).
+
+cnf(u141899,axiom,
+    f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3)))))).
+
+cnf(u86,axiom,
+    f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))) = f(f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))),f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))))).
+
+cnf(u19611,axiom,
+    f(f(X1,X1),f(X3,X3)) = f(f(X1,X1),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))))))).
+
+cnf(u42120,axiom,
+    f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3))),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))))))).
+
+cnf(u19163,axiom,
+    f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(X2,X2)) = f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))))).
+
+cnf(u5549,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1)))))).
+
+cnf(u48501,axiom,
+    f(X0,X0) = f(f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))).
+
+cnf(u108223,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X5,f(X2,X2)),f(X5,f(X5,f(X2,X2)))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2)))))).
+
+cnf(u936,axiom,
+    f(f(X2,X2),f(X3,X3)) = f(f(X2,X2),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3))),f(X2,X2)))).
+
+cnf(u63393,axiom,
+    f(f(f(f(X6,X6),f(X5,X5)),f(f(X6,X6),f(X5,X5))),f(X2,X2)) = f(f(f(f(X6,X6),f(X5,X5)),f(f(X6,X6),f(X5,X5))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X5,X5)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X5,X5)))))).
+
+cnf(u593,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))).
+
+cnf(u24334,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X4,X4),f(X4,X4))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X4,X4),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2)))))).
+
+cnf(u29055,axiom,
+    f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))),f(f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))))).
+
+cnf(u82,axiom,
+    f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))) = f(f(X2,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3))),f(X2,f(X2,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)))))).
+
+cnf(u20991,axiom,
+    f(X2,X2) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))))).
+
+cnf(u5563,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,X3),f(X3,X3)),f(f(f(X4,X4),f(X1,X1)),f(f(X4,X4),f(X1,X1)))))).
+
+cnf(u64387,axiom,
+    f(f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0)))),f(X3,X3)) = f(f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0)))),f(f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))).
+
+cnf(u18279,axiom,
+    f(f(f(f(X4,X4),f(X4,X4)),f(f(X4,X4),f(X4,X4))),f(X2,X2)) = f(f(f(f(X4,X4),f(X4,X4)),f(f(X4,X4),f(X4,X4))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4))))))).
+
+cnf(u1284,axiom,
+    f(f(X2,X2),f(f(X0,X0),f(X0,X0))) = f(f(X2,X2),f(f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0)))))),f(X2,X2)))).
+
+cnf(u89969,axiom,
+    f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(X3,X3),f(X3,X3)),f(X0,X0)))) = f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))).
+
+cnf(u1193,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,X3),f(X3,X3)),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))))).
+
+cnf(u2178,axiom,
+    f(X0,X0) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))))).
+
+cnf(u1183,axiom,
+    f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))) = f(f(X0,X0),f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))))).
+
+cnf(u4969,axiom,
+    f(f(f(X0,X0),f(X0,X0)),f(X2,X2)) = f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))).
+
+cnf(u25379,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(X2,X2)) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X1,X1),f(X1,X1)),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))))))).
+
+cnf(u6493,axiom,
+    f(X0,X0) = f(f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))),f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))))).
+
+cnf(u40750,axiom,
+    f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)) = f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(f(f(X5,X5),f(X2,X2)),f(f(X5,X5),f(X2,X2)))))).
+
+cnf(u18260,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))).
+
+cnf(u3992,axiom,
+    f(X2,X2) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))).
+
+cnf(u19510,axiom,
+    f(f(f(X3,X3),f(X3,X3)),f(X2,X2)) = f(f(f(X3,X3),f(X3,X3)),f(f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))))).
+
+cnf(u28948,axiom,
+    f(f(X2,X2),f(X3,X3)) = f(f(X2,X2),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))))))).
+
+cnf(u26014,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(X3,X3))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2)))))).
+
+cnf(u241,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,f(X1,X1)),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))) = X2).
+
+cnf(u6,axiom,
+    sK0 != sK1).
+
+cnf(u472,axiom,
+    f(f(X2,X2),f(X1,X1)) = f(f(X2,X2),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(X2,X2)))).
+
+cnf(u34950,axiom,
+    f(X0,X0) = f(f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))),f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))))).
+
+cnf(u6534,axiom,
+    f(X0,X0) = f(f(f(f(X2,X2),f(X0,X0)),f(f(X2,X2),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0)))))).
+
+cnf(u17634,axiom,
+    f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(X2,X2)) = f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))))).
+
+cnf(u17969,axiom,
+    f(f(f(X0,X0),f(X0,X0)),f(X1,X1)) = f(f(f(X0,X0),f(X0,X0)),f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))))).
+
+cnf(u2604,axiom,
+    f(X2,X2) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))).
+
+cnf(u153,axiom,
+    f(f(f(X1,X1),f(X1,X1)),f(f(X2,f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))),f(f(X1,X1),f(X1,X1)))) = X2).
+
+cnf(u692,axiom,
+    f(f(f(X2,X2),f(X3,X3)),f(f(X2,X2),f(X3,X3))) = f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)))).
+
+cnf(u5179,axiom,
+    f(f(X2,X2),f(f(X5,f(X4,X4)),f(X5,f(X5,f(X4,X4))))) = f(f(X2,X2),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X4,X4)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X4,X4))))).
+
+cnf(u28,axiom,
+    f(f(X1,X1),f(X0,X0)) = f(f(X1,X1),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(X1,X1)))).
+
+cnf(u2101,axiom,
+    f(f(X2,X2),f(f(f(X3,X3),f(X3,X3)),f(X2,X2))) = f(f(X2,X2),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3))))).
+
+cnf(u19165,axiom,
+    f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(X2,X2)) = f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))).
+
+cnf(u2142,axiom,
+    f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(X0,X0))) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))).
+
+cnf(u22701,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X3,X3)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X2,X2),f(X2,X2)),f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))))))).
+
+cnf(u2077,axiom,
+    f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))) = f(f(X0,X0),f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))))).
+
+cnf(u13776,axiom,
+    f(X2,X2) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X2,X2),f(X2,X2)),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))))).
+
+cnf(u25385,axiom,
+    f(f(X0,X0),f(X1,X1)) = f(f(X0,X0),f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))))).
+
+cnf(u6570,axiom,
+    f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0)))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))).
+
+cnf(u2202,axiom,
+    f(X0,X0) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0)))))).
+
+cnf(u204888,axiom,
+    f(f(f(X0,X0),f(X0,X0)),f(X3,X3)) = f(f(f(X0,X0),f(X0,X0)),f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))).
+
+cnf(u392,axiom,
+    f(f(X2,X2),f(X1,X1)) = f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))).
+
+cnf(u210860,axiom,
+    f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X6,f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))))) = X6).
+
+cnf(u33166,axiom,
+    f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))) = f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))))).
+
+cnf(u5334,axiom,
+    f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))) = f(f(X4,f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))),f(X4,f(X4,f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))))).
+
+cnf(u5333,axiom,
+    f(X0,X0) = f(f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))),f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))).
+
+cnf(u2214,axiom,
+    f(f(X2,X2),f(f(X0,X0),f(X0,X0))) = f(f(X2,X2),f(f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))))),f(X2,X2)))).
+
+cnf(u19166,axiom,
+    f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(X2,X2)) = f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))))).
+
+cnf(u62558,axiom,
+    f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))) = f(f(X5,f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))),f(X5,f(X5,f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))))))).
+
+cnf(u34196,axiom,
+    f(f(f(f(X4,X4),f(X4,X4)),f(f(X4,X4),f(X4,X4))),f(X1,X1)) = f(f(f(f(X4,X4),f(X4,X4)),f(f(X4,X4),f(X4,X4))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)))))).
+
+cnf(u3281,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X5,f(X4,X4)),f(X5,f(X5,f(X4,X4)))))).
+
+cnf(u85,axiom,
+    f(X2,X2) = f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(X2,X2))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(X2,X2))))).
+
+cnf(u48678,axiom,
+    f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X5,f(X0,X0)),f(X5,f(X5,f(X0,X0)))))).
+
+cnf(u4604,axiom,
+    f(X0,X0) = f(f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))),f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))).
+
+cnf(u49780,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X4,X4)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(X5,f(X2,X2)),f(X5,f(X5,f(X2,X2))))))).
+
+cnf(u24020,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X4,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1))))))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = X4).
+
+cnf(u5880,axiom,
+    f(f(X2,X2),f(X2,X2)) = f(f(X3,f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))),f(X3,f(X3,f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))))).
+
+cnf(u3348,axiom,
+    f(X0,X0) = f(f(f(X2,f(X0,X0)),f(X2,f(X2,f(X0,X0)))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0))))))).
+
+cnf(u64953,axiom,
+    f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(X2,X2)) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))))).
+
+cnf(u7189,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(X3,X3)) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X4,X4),f(X1,X1)),f(f(X4,X4),f(X1,X1)))))).
+
+cnf(u81,axiom,
+    f(X2,X2) = f(f(X3,f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))),f(X3,f(X3,f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))))).
+
+cnf(u3452,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3))),f(f(X4,f(X3,X3)),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3))))) = X4).
+
+cnf(u4295,axiom,
+    f(f(X2,X2),f(X2,X2)) = f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2))))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2))))))).
+
+cnf(u211150,axiom,
+    f(f(f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X5,X5)),f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X5,X5))),f(X2,X2)) = f(f(f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X5,X5)),f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X5,X5))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X5,X5)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X5,X5)))))).
+
+cnf(u62694,axiom,
+    f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)))) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))).
+
+cnf(u62559,axiom,
+    f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X5,f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))))) = X5).
+
+cnf(u19162,axiom,
+    f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(X2,X2)) = f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))).
+
+cnf(u211137,axiom,
+    f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(X6,X6),f(X0,X0)),f(f(X6,X6),f(X0,X0))))).
+
+cnf(u63389,axiom,
+    f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X5,X5),f(X0,X0)),f(f(X5,X5),f(X0,X0))))).
+
+cnf(u29460,axiom,
+    f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))))))).
+
+cnf(u66289,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(X4,f(X1,X1)),f(X4,f(X4,f(X1,X1))))))).
+
+cnf(u342,axiom,
+    f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))) = f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)))).
+
+cnf(u90385,axiom,
+    f(f(f(X2,X2),f(X2,X2)),f(f(X4,X4),f(f(X2,X2),f(X2,X2)))) = f(f(f(X2,X2),f(X2,X2)),f(f(X4,X4),f(f(X2,X2),f(X4,X4))))).
+
+cnf(u4677,axiom,
+    f(f(f(f(X3,X3),f(X3,X3)),f(f(X3,X3),f(X3,X3))),f(X1,X1)) = f(f(f(f(X3,X3),f(X3,X3)),f(f(X3,X3),f(X3,X3))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3))))))).
+
+cnf(u23764,axiom,
+    f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))) = f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X1,X1),f(X1,X1)),f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3))))))).
+
+cnf(u33,axiom,
+    f(X1,X1) = f(f(f(X0,X0),f(f(X1,X1),f(X0,X0))),f(f(X0,X0),f(f(X1,X1),f(X0,X0))))).
+
+cnf(u12160,axiom,
+    f(X2,X2) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X2,X2),f(X2,X2)),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))))).
+
+cnf(u1107,axiom,
+    f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))) = f(f(X3,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X4,X4),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))),f(X3,f(X3,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X4,X4),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))))))).
+
+cnf(u11265,axiom,
+    f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(X0,X0))) = f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))))).
+
+cnf(u5,axiom,
+    f(X1,f(f(X0,f(X1,f(X2,X2))),X1)) = X0).
+
+cnf(u3350,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3))))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))))),f(f(X4,f(X1,X1)),f(X4,f(X4,f(X1,X1))))))).
+
+cnf(u28841,axiom,
+    f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X5,f(X2,X2)),f(X5,f(X5,f(X2,X2)))))))).
+
+cnf(u57307,axiom,
+    f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(X0,X0))) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))).
+
+cnf(u7363,axiom,
+    f(f(X1,X1),f(X1,X1)) = f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))))).
+
+cnf(u89971,axiom,
+    f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))) = f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(X0,X0))))).
+
+cnf(u89970,axiom,
+    f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(f(X2,X2),f(X2,X2)),f(X0,X0))))).
+
+cnf(u1540,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(X2,X2))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(X2,X2))))).
+
+cnf(u19,axiom,
+    f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))) = f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0))))).
+
+cnf(u23765,axiom,
+    f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))) = f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X1,X1),f(X1,X1)),f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3))))))).
+
+cnf(u19896,axiom,
+    f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))))).
+
+cnf(u48555,axiom,
+    f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X5,f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))))) = X5).
+
+cnf(u23844,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(X3,X3))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2))))))).
+
+cnf(u48529,axiom,
+    f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X5,f(X0,X0)),f(X5,f(X5,f(X0,X0)))))).
+
+cnf(u31,axiom,
+    f(f(f(X1,X1),f(X1,X1)),f(f(X0,X0),f(X0,X0))) = f(f(f(X1,X1),f(X1,X1)),f(f(X0,X0),f(f(X1,X1),f(X0,X0))))).
+
+cnf(u112865,axiom,
+    f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(X3,X3),f(X3,X3)),f(X0,X0)))) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))).
+
+cnf(u19321,axiom,
+    f(f(X0,X0),f(X2,X2)) = f(f(X0,X0),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))))))).
+
+cnf(u19897,axiom,
+    f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))))).
+
+cnf(u87874,axiom,
+    f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(X0,X0)))) = f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1))))))).
+
+cnf(u114555,axiom,
+    f(f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0)))),f(X3,X3)) = f(f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0)))),f(f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))).
+
+cnf(u76,axiom,
+    f(f(X1,X1),f(X1,X1)) = f(f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))).
+
+cnf(u2090,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,X3),f(X3,X3)),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))))).
+
+cnf(u23762,axiom,
+    f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) = f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(X2,X2),f(X2,X2)),f(f(X5,f(X4,X4)),f(X5,f(X5,f(X4,X4))))))).
+
+cnf(u4939,axiom,
+    f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))))) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(X2,f(X0,X0)),f(X2,f(X2,f(X0,X0))))))).
+
+cnf(u24237,axiom,
+    f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X1,X1)) = f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3))))))).
+
+cnf(u40755,axiom,
+    f(f(X0,X0),f(X3,X3)) = f(f(X0,X0),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0))),f(f(f(X3,X3),f(X3,X3)),f(f(X3,X3),f(X3,X3))))))).
+
+cnf(u4675,axiom,
+    f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0)))) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))).
+
+cnf(u90,axiom,
+    f(f(X2,X2),f(f(X3,f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))),f(X2,X2))) = X3).
+
+cnf(u20102,axiom,
+    f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(X0,X0))) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))).
+
+cnf(u25384,axiom,
+    f(f(X0,X0),f(X2,X2)) = f(f(X0,X0),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))))))).
+
+cnf(u2209,axiom,
+    f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X2,f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0)))))),f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))))) = X2).
+
+cnf(u25377,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X3,X3)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X2,X2),f(X2,X2)),f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3))))))).
+
+cnf(u48528,axiom,
+    f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X5,X5),f(X0,X0)),f(f(X5,X5),f(X0,X0)))) = f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))).
+
+cnf(u5372,axiom,
+    f(X0,X0) = f(f(f(f(X2,X2),f(X0,X0)),f(f(X2,X2),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0))))))).
+
+cnf(u63391,axiom,
+    f(f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4))),f(X1,X1)) = f(f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)))))).
+
+cnf(u19322,axiom,
+    f(f(X0,X0),f(X1,X1)) = f(f(X0,X0),f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))))).
+
+cnf(u29169,axiom,
+    f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(X3,X3)) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)))))).
+
+cnf(u19893,axiom,
+    f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0))))).
+
+cnf(u40754,axiom,
+    f(f(X0,X0),f(X3,X3)) = f(f(X0,X0),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0))),f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3))))))).
+
+cnf(u321748,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X2,X2),f(X2,X2)),f(X3,X3)))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)))))).
+
+cnf(u24479,axiom,
+    f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(X2,f(X0,X0)),f(X2,f(X2,f(X0,X0)))))) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0))))))).
+
+cnf(u90433,axiom,
+    f(f(f(f(X2,X2),f(X0,X0)),f(f(X2,X2),f(X0,X0))),f(f(X3,X3),f(f(f(X0,X0),f(X0,X0)),f(X3,X3)))) = f(f(f(f(X2,X2),f(X0,X0)),f(f(X2,X2),f(X0,X0))),f(f(X3,X3),f(f(f(X2,X2),f(X0,X0)),f(f(X2,X2),f(X0,X0)))))).
+
+cnf(u10,axiom,
+    f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))) = f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(f(X0,X0),f(X1,X1))))).
+
+cnf(u21936,axiom,
+    f(f(f(X3,X3),f(X3,X3)),f(X2,X2)) = f(f(f(X3,X3),f(X3,X3)),f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))))).
+
+cnf(u27926,axiom,
+    f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(X0,X0)) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))).
+
+cnf(u64881,axiom,
+    f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(X5,X5)) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X6,f(X5,X5)),f(X6,f(X6,f(X5,X5)))),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))).
+
+cnf(u41681,axiom,
+    f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))),f(f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))))).
+
+cnf(u207696,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X3,X3)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X2,X2),f(X2,X2)),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X3,X3)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X3,X3))))))).
+
+cnf(u23997,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1))))))).
+
+cnf(u9801,axiom,
+    f(f(X2,X2),f(X2,X2)) = f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))))).
+
+cnf(u147,axiom,
+    f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(X2,X2))) = f(f(X2,X2),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))).
+
+cnf(u89734,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(X2,X2)))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1))))))).
+
+cnf(u22,axiom,
+    f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,f(X0,X0)),f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))))) = X1).
+
+cnf(u212608,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)))))).
+
+cnf(u62697,axiom,
+    f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X5,X5),f(X0,X0)),f(f(X5,X5),f(X0,X0)))) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))).
+
+cnf(u87642,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X5,f(X2,X2)),f(X5,f(X5,f(X2,X2)))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2))))))).
+
+cnf(u18276,axiom,
+    f(f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4))),f(X2,X2)) = f(f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4))))))).
+
+cnf(u19894,axiom,
+    f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0))))).
+
+cnf(u28543,axiom,
+    f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X4,f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))),f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))))) = X4).
+
+cnf(u62,axiom,
+    f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))) = f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1))))).
+
+cnf(u211148,axiom,
+    f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4))),f(X1,X1)) = f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)))))).
+
+cnf(u63141,axiom,
+    f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))) = f(f(X5,f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))),f(X5,f(X5,f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))))).
+
+cnf(u64959,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2)))))).
+
+cnf(u177682,axiom,
+    f(f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0))),f(X3,X3)) = f(f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0))),f(f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))).
+
+cnf(u71,axiom,
+    f(X1,X1) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))).
+
+cnf(u44064,axiom,
+    f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X5,X5),f(X2,X2)),f(f(X5,X5),f(X2,X2))))))).
+
+cnf(u64478,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1)))))).
+
+cnf(u6133,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,X3),f(X4,X4)),f(f(X3,X3),f(X4,X4)))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4))))).
+
+cnf(u17971,axiom,
+    f(f(f(X0,X0),f(X0,X0)),f(X2,X2)) = f(f(f(X0,X0),f(X0,X0)),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))).
+
+cnf(u17659,axiom,
+    f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X1,X1)) = f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,X3),f(X3,X3)),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))))).
+
+cnf(u18275,axiom,
+    f(f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4))),f(X2,X2)) = f(f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X3,X3),f(X4,X4)),f(f(X3,X3),f(X4,X4)))))).
+
+cnf(u50302,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4))))).
+
+cnf(u1579,axiom,
+    f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(X0,X0))) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))).
+
+cnf(u49384,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2))))))).
+
+cnf(u19388,axiom,
+    f(f(f(X3,X3),f(X3,X3)),f(X2,X2)) = f(f(f(X3,X3),f(X3,X3)),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))))))).
+
+cnf(u48500,axiom,
+    f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X5,f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))),f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))))) = X5).
+
+cnf(u19787,axiom,
+    f(f(f(X3,X3),f(X3,X3)),f(X2,X2)) = f(f(f(X3,X3),f(X3,X3)),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))))))).
+
+cnf(u200,axiom,
+    f(X2,X2) = f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))))).
+
+cnf(u89,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X3,X3),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = X2).
+
+cnf(u5407,axiom,
+    f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0)))))).
+
+cnf(u79,axiom,
+    f(f(f(X1,X1),f(X1,X1)),f(f(X2,f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))),f(f(X1,X1),f(X1,X1)))) = X2).
+
+cnf(u1626,axiom,
+    f(f(f(X2,X2),f(X2,X2)),f(X1,X1)) = f(f(f(X2,X2),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))))).
+
+cnf(u48679,axiom,
+    f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(X1,X1)) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3))))))).
+
+cnf(u205697,axiom,
+    f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)) = f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X2,X2)))))).
+
+cnf(u1280,axiom,
+    f(f(X0,X0),f(X0,X0)) = f(f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0)))))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0)))))))).
+
+cnf(u87869,axiom,
+    f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))))) = f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))).
+
+cnf(u142,axiom,
+    f(X1,X1) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))).
+
+cnf(u62699,axiom,
+    f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(X1,X1)) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X2,X2),f(X3,X3)),f(f(X2,X2),f(X3,X3)))))).
+
+cnf(u20103,axiom,
+    f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(X0,X0))) = f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))).
+
+cnf(u115,axiom,
+    f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))) = f(f(X0,f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))))),f(X0,f(X0,f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4))))))))).
+
+cnf(u283587,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X2,X2)),f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X2,X2)))))).
+
+cnf(u97,axiom,
+    f(X1,X1) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))).
+
+cnf(u21761,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X3,X3)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X3,X3),f(X3,X3)),f(f(X3,X3),f(X3,X3))),f(f(f(X2,X2),f(X2,X2)),f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))))))).
+
+cnf(u205713,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X1,X1)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X1,X1)))))).
+
+cnf(u6491,axiom,
+    f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(X0,X0))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))).
+
+cnf(u28544,axiom,
+    f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X3,f(f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))),f(f(X0,X0),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))))),f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))))) = X3).
+
+cnf(u3349,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1))))))).
+
+cnf(u17631,axiom,
+    f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(X2,X2)) = f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))))).
+
+cnf(u100754,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X2,X2),f(X2,X2)),f(X3,X3)))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2)))))).
+
+cnf(u210858,axiom,
+    f(X0,X0) = f(f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))),f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))).
+
+cnf(u23770,axiom,
+    f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)) = f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2))))))).
+
+cnf(u64389,axiom,
+    f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0))),f(X3,X3)) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0))),f(f(f(f(X6,X6),f(X3,X3)),f(f(X6,X6),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))).
+
+cnf(u19316,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(X2,X2)) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X1,X1),f(X1,X1)),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))))))).
+
+cnf(u35539,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X4,f(X1,X1)),f(X4,f(X4,f(X1,X1))))))).
+
+cnf(u211136,axiom,
+    f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X6,f(X0,X0)),f(X6,f(X6,f(X0,X0))))) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))).
+
+cnf(u100745,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(X2,X2)))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1)))))).
+
+cnf(u35271,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X4,X4),f(X1,X1)),f(f(X4,X4),f(X1,X1)))))).
+
+cnf(u35543,axiom,
+    f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))) = f(f(X4,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1)))))),f(X4,f(X4,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))))))).
+
+cnf(u150,axiom,
+    f(f(X1,X1),f(X1,X1)) = f(f(X1,X1),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(X1,X1)))).
+
+cnf(u132,axiom,
+    f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))) = f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2)))).
+
+cnf(u21,axiom,
+    f(f(X1,X1),f(f(X0,X0),f(X0,X0))) = f(f(X1,X1),f(f(X0,X0),f(X1,X1)))).
+
+cnf(u48533,axiom,
+    f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(X0,X0)) = f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))).
+
+cnf(u48681,axiom,
+    f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4))),f(X2,X2)) = f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X4,X4))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4))))))).
+
+cnf(u212599,axiom,
+    f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0))),f(X3,X3)) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X0,X0))),f(f(f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X3,X3)),f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))).
+
+cnf(u49499,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1)))))).
+
+cnf(u17829,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X3,X3)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X2,X2),f(X2,X2)),f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))))))).
+
+cnf(u19924,axiom,
+    f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))) = f(f(X0,X0),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))))).
+
+cnf(u19317,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X1,X1),f(X1,X1)),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))))))).
+
+cnf(u65905,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X4,X4),f(X1,X1)),f(f(X4,X4),f(X1,X1)))))).
+
+cnf(u6572,axiom,
+    f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(X1,X1)) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X2,X2),f(X3,X3)),f(f(X2,X2),f(X3,X3)))))).
+
+cnf(u35,axiom,
+    f(X0,X0) = f(f(X2,f(f(X0,X0),f(f(X1,X1),f(X0,X0)))),f(X2,f(X2,f(f(X0,X0),f(f(X1,X1),f(X0,X0))))))).
+
+cnf(u30055,axiom,
+    f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2)))) = f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))).
+
+cnf(u17,axiom,
+    f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))) = f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0)))).
+
+cnf(u5035,axiom,
+    f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(X2,X2)) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0))))))).
+
+cnf(u12691,axiom,
+    f(X2,X2) = f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(f(X2,X2),f(X2,X2)),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))))).
+
+cnf(u84,axiom,
+    f(f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))),f(f(X2,X2),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))))).
+
+cnf(u48502,axiom,
+    f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))) = f(f(X5,f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))),f(X5,f(X5,f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))))).
+
+cnf(u129688,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X5,X5),f(X2,X2)),f(f(X5,X5),f(X2,X2))))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2)))))).
+
+cnf(u64952,axiom,
+    f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(X2,X2)) = f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))))).
+
+cnf(u19314,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X3,X3)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X2,X2),f(X2,X2)),f(f(X5,f(X3,X3)),f(X5,f(X5,f(X3,X3)))))))).
+
+cnf(u49377,axiom,
+    f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(X2,X2)) = f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))).
+
+cnf(u23779,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X4,f(X1,X1)),f(X4,f(X4,f(X1,X1))))))).
+
+cnf(u3950,axiom,
+    f(X2,X2) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))))).
+
+cnf(u6494,axiom,
+    f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))) = f(f(X4,f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))),f(X4,f(X4,f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))))))).
+
+cnf(u17633,axiom,
+    f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(X2,X2)) = f(f(f(X3,f(X0,X0)),f(X3,f(X3,f(X0,X0)))),f(f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))).
+
+cnf(u23998,axiom,
+    f(X2,X2) = f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))))).
+
+cnf(u195,axiom,
+    f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))) = f(f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))).
+
+cnf(u80,axiom,
+    f(X2,f(f(X3,f(X2,f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))),X2)) = X3).
+
+cnf(u5739,axiom,
+    f(f(f(X0,X0),f(X0,X0)),f(X2,X2)) = f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))).
+
+cnf(u23999,axiom,
+    f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))) = f(f(X4,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1))))))),f(X4,f(X4,f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))))))).
+
+cnf(u53174,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(X4,f(X1,X1)),f(X4,f(X4,f(X1,X1))))))).
+
+cnf(u6571,axiom,
+    f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X4,f(X0,X0)),f(X4,f(X4,f(X0,X0))))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))).
+
+cnf(u5408,axiom,
+    f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(X1,X1)) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3))))))).
+
+cnf(u95979,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X1,X1)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X1,X1)))))).
+
+cnf(u5406,axiom,
+    f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0)))) = f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))).
+
+cnf(u22920,axiom,
+    f(f(f(X3,X3),f(X3,X3)),f(X2,X2)) = f(f(f(X3,X3),f(X3,X3)),f(f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2))),f(f(X3,X3),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))))).
+
+cnf(u5837,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(X3,X3)) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(X4,f(X1,X1)),f(X4,f(X4,f(X1,X1))))))).
+
+cnf(u217207,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X1,X1))))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X1,X1)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X1,X1)))))).
+
+cnf(u64388,axiom,
+    f(f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0))),f(X3,X3)) = f(f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0))),f(f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))).
+
+cnf(u62557,axiom,
+    f(X0,X0) = f(f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))),f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))))).
+
+cnf(u35253,axiom,
+    f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))) = f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(f(f(X2,X2),f(X2,X2)),f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4)))))).
+
+cnf(u2206,axiom,
+    f(f(X0,X0),f(X0,X0)) = f(f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))))),f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))))))).
+
+cnf(u11264,axiom,
+    f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(X0,X0))) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))).
+
+cnf(u2141,axiom,
+    f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))) = f(f(X0,X0),f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))))).
+
+cnf(u6495,axiom,
+    f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X4,f(f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2)))))),f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2))))) = X4).
+
+cnf(u1167,axiom,
+    f(f(f(X1,X1),f(X1,X1)),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))) = f(f(f(X1,X1),f(X1,X1)),f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1)))))).
+
+cnf(u88,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(X2,X2))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))).
+
+cnf(u2474,axiom,
+    f(f(f(X2,X2),f(X2,X2)),f(f(X3,f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))),f(f(X2,X2),f(X2,X2)))) = X3).
+
+cnf(u12651,axiom,
+    f(X2,X2) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X2,X2),f(X2,X2)),f(f(f(X3,X3),f(X2,X2)),f(f(X3,X3),f(X2,X2)))))).
+
+cnf(u25728,axiom,
+    f(f(X1,X1),f(X3,X3)) = f(f(X1,X1),f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3))))))).
+
+cnf(u141,axiom,
+    f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))) = f(f(X2,f(X1,X1)),f(X2,f(X2,f(X1,X1))))).
+
+cnf(u25976,axiom,
+    f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(f(X2,X2),f(X0,X0)),f(f(X2,X2),f(X0,X0))))) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,X1),f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0)))))).
+
+cnf(u9798,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(X3,X3))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X2,X2),f(X2,X2)),f(X3,X3))))).
+
+cnf(u4605,axiom,
+    f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))) = f(f(X3,f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))),f(X3,f(X3,f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))))).
+
+cnf(u4606,axiom,
+    f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X3,f(f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2))))))),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))))) = X3).
+
+cnf(u63386,axiom,
+    f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)))) = f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))).
+
+cnf(u50451,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X5,X5),f(X4,X4)),f(f(X5,X5),f(X4,X4)))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4)),f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X4,X4))))).
+
+cnf(u1539,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(X2,X2))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(X2,X2))))).
+
+cnf(u40751,axiom,
+    f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)) = f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2)))))).
+
+cnf(u48677,axiom,
+    f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X0,X0),f(X0,X0)),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(f(X5,X5),f(X0,X0)),f(f(X5,X5),f(X0,X0))))).
+
+cnf(u12,axiom,
+    f(X1,X1) = f(f(f(X0,X0),f(f(X1,X1),f(X1,X1))),f(f(X0,X0),f(f(X1,X1),f(X1,X1))))).
+
+cnf(u9605,axiom,
+    f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))) = f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)))).
+
+cnf(u48553,axiom,
+    f(X0,X0) = f(f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))),f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X0,X0),f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))))))).
+
+cnf(u24009,axiom,
+    f(f(X4,X4),f(f(X2,X2),f(X2,X2))) = f(f(X4,X4),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1)))))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X3,f(X1,X1)),f(X3,f(X3,f(X1,X1))))))),f(X4,X4)))).
+
+cnf(u1807,axiom,
+    f(X2,X2) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))).
+
+cnf(u4513,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X4,X4),f(X4,X4)),f(f(X4,X4),f(X4,X4))))).
+
+cnf(u2983,axiom,
+    f(X2,X2) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2)))))).
+
+cnf(u2210,axiom,
+    f(X2,f(f(X3,f(X2,f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0))))))),X2)) = X3).
+
+cnf(u33871,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X3,X3)) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X2,X2),f(X2,X2)),f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3))))))).
+
+cnf(u215257,axiom,
+    f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X5,X5),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))) = f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X2,X2))),f(f(X5,X5),f(f(f(X6,X6),f(X2,X2)),f(f(X6,X6),f(X2,X2)))))).
+
+cnf(u212593,axiom,
+    f(f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0))),f(X3,X3)) = f(f(f(f(X4,X4),f(X0,X0)),f(f(X4,X4),f(X0,X0))),f(f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X3,X3)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))).
+
+cnf(u89743,axiom,
+    f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(f(X2,X2),f(X2,X2)),f(X3,X3)))) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(X3,X3),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2))))))).
+
+cnf(u892,axiom,
+    f(f(X2,X2),f(X2,X2)) = f(f(X2,X2),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(X2,X2)))).
+
+cnf(u6864,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1)))))).
+
+cnf(u35260,axiom,
+    f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)) = f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(f(X4,X4),f(X2,X2)),f(f(X4,X4),f(X2,X2)))))).
+
+cnf(u63142,axiom,
+    f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X5,f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))),f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))))) = X5).
+
+cnf(u145,axiom,
+    f(f(X1,X1),f(X1,X1)) = f(f(X2,f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1)))),f(X2,f(X2,f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))))).
+
+cnf(u38,axiom,
+    f(f(X0,X0),f(f(X2,f(f(X0,X0),f(f(X1,X1),f(X0,X0)))),f(X0,X0))) = X2).
+
+cnf(u69146,axiom,
+    f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(X4,X4)) = f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X5,f(X4,X4)),f(X5,f(X5,f(X4,X4)))),f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))))).
+
+cnf(u4576,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))))).
+
+cnf(u34949,axiom,
+    f(X0,X0) = f(f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(X0,X0),f(f(f(X1,X1),f(X2,X2)),f(f(X1,X1),f(X2,X2))))))).
+
+cnf(u10872,axiom,
+    f(X2,X2) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X2,X2),f(X2,X2)),f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2))))))).
+
+cnf(u75,axiom,
+    f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(X2,X2))) = f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))).
+
+cnf(u28685,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X3,X3),f(X1,X1)),f(f(X3,X3),f(X1,X1)))))).
+
+cnf(u185,axiom,
+    f(X1,X1) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1))))).
+
+cnf(u5548,axiom,
+    f(X0,X0) = f(f(f(X2,f(X0,X0)),f(X2,f(X2,f(X0,X0)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(X1,X1),f(X0,X0)),f(f(X1,X1),f(X0,X0)))))).
+
+cnf(u1259,axiom,
+    f(X0,X0) = f(f(f(f(X0,X0),f(X0,X0)),f(f(X0,X0),f(X0,X0))),f(f(X1,f(X0,X0)),f(X1,f(X1,f(X0,X0)))))).
+
+cnf(u23769,axiom,
+    f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)) = f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(f(f(X3,X3),f(X0,X0)),f(f(X3,X3),f(X0,X0))),f(f(X4,f(X2,X2)),f(X4,f(X4,f(X2,X2))))))).
+
+cnf(u1354,axiom,
+    f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))) = f(f(X2,X2),f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))))).
+
+cnf(u479,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X3,X3)) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(f(X3,X3),f(X3,X3)),f(f(X3,X3),f(X3,X3))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1))))))).
+
+cnf(u56077,axiom,
+    f(f(X3,X3),f(X2,X2)) = f(f(X3,X3),f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(f(X4,X4),f(X3,X3)),f(f(X4,X4),f(X3,X3))),f(f(f(X5,X5),f(X2,X2)),f(f(X5,X5),f(X2,X2))))))).
+
+cnf(u40753,axiom,
+    f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X0,X0)) = f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(f(f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0)),f(f(f(X3,f(X4,X4)),f(X3,f(X3,f(X4,X4)))),f(X0,X0))),f(f(X5,f(X2,X2)),f(X5,f(X5,f(X2,X2))))))).
+
+cnf(u87,axiom,
+    f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(X2,X2),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)))).
+
+cnf(u17831,axiom,
+    f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(X2,X2)) = f(f(f(f(X0,X0),f(X1,X1)),f(f(X0,X0),f(X1,X1))),f(f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))),f(f(f(X1,X1),f(X1,X1)),f(f(X3,f(X2,X2)),f(X3,f(X3,f(X2,X2)))))))).
+
+cnf(u2747,axiom,
+    f(X2,X2) = f(f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))),f(f(f(X2,X2),f(X2,X2)),f(f(X2,X2),f(X2,X2))))).
+
+cnf(u28684,axiom,
+    f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))))) = f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(X2,X2),f(f(f(X1,X1),f(X1,X1)),f(f(X1,X1),f(X1,X1)))))).
+
+cnf(u50295,axiom,
+    f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(X4,f(X3,X3)),f(X4,f(X4,f(X3,X3)))),f(f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0)),f(f(f(X5,f(X6,X6)),f(X5,f(X5,f(X6,X6)))),f(X0,X0))))).
+
+cnf(u83,axiom,
+    f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))) = f(f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2)),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(X2,X2))))).
+
+cnf(u210859,axiom,
+    f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))) = f(f(X6,f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)))))),f(X6,f(X6,f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(X0,X0),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))))))).
+
+cnf(u35834,axiom,
+    f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(X1,X1)) = f(f(f(X2,f(X3,X3)),f(X2,f(X2,f(X3,X3)))),f(f(f(X0,f(X1,X1)),f(X0,f(X0,f(X1,X1)))),f(f(f(X5,X5),f(X3,X3)),f(f(X5,X5),f(X3,X3)))))).
+
+cnf(u211140,axiom,
+    f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(X0,X0),f(X0,X0)),f(f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3)),f(f(f(X1,f(X2,X2)),f(X1,f(X1,f(X2,X2)))),f(X3,X3))))) = f(f(f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3)),f(f(f(X4,f(X5,X5)),f(X4,f(X4,f(X5,X5)))),f(X3,X3))),f(f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X0,X0)),f(f(f(X6,f(X7,X7)),f(X6,f(X6,f(X7,X7)))),f(X0,X0))))).
+
+% SZS output end Saturation.
+% SZS output start Definitions and Model Updates.
+% SZS output end Definitions and Model Updates.
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Satisfiable
+% Time elapsed: 8.868 s
+% Peak memory usage: 127 MB
+% Instructions burned: 73115 (million)
+% ------------------------------
+% ------------------------------
