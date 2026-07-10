@@ -140,9 +140,16 @@ def _verdict(prover, direction, out):
             # Satisfiable from an incomplete strategy is not a theorem.
             return "" if "incomplete strategy" in out else "AUSTIN"
         return ""                                # GaveUp, Timeout, ResourceOut, Error
-    # No SZS line. Fall back to the prover-specific prose we have actually verified.
+    # No SZS line. Fall back only to prose we have SEEN, from a real run (2026-07-10,
+    # twee 2.6.1 on law 4916):
+    #     "Ran out of critical pairs. This means the conjecture is not true."
+    #     "RESULT: CounterSatisfiable (the conjecture is false)."
     if prover == "twee":
-        return ""                                # never guess; Gate 2 must approve first
+        if "RESULT: CounterSatisfiable" in out or "conjecture is not true" in out:
+            return "AUSTIN"
+        if "RESULT: Unsatisfiable" in out or "RESULT: Theorem" in out:
+            return "TRIVIAL"
+        return ""
     if direction == "triv":
         return "TRIVIAL" if _proved(out) else ""
     return "AUSTIN" if _satisfiable(out) else ""
@@ -158,9 +165,13 @@ def run_config(law, cfg, bins, budget, certs=None):
     elif prover == "eprover":
         out, secs = _sh([exe] + argv + [f"--cpu-limit={budget}"],
                         _body(law, direction), budget)
-    else:                                        # twee: needs the goal in the file
-        out, secs = _sh([exe, "--quiet", f"--max-cpu-time={budget}"],
-                        et.tptp_true(law, "x = y"), budget)
+    else:
+        # `--tstp` (off by default) makes Twee emit the SZS ontology; without it the
+        # only signal is the prose line `RESULT: CounterSatisfiable`. No other flags:
+        # every twee flag in this file used to be invented, and `--quiet` /
+        # `--max-cpu-time` do not exist. The wall clock is enforced by `_sh`.
+        # Bonus: twee prints its final rewrite system, so the cert is a JRS-style model.
+        out, secs = _sh([exe, "--tstp"], et.tptp_true(law, "x = y"), budget)
     v = _verdict(prover, direction, out)
     if v and certs:
         os.makedirs(certs, exist_ok=True)

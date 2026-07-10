@@ -101,6 +101,12 @@ runnable "$EPROVER" eprover || EPROVER=""
 runnable "$TWEE"    twee    || TWEE=""
 [[ -z "$EPROVER" || -z "$TWEE" ]] && say "WARNING: portfolio incomplete — any hard-tier claim from this run is PROVISIONAL"
 
+# Stage markers are keyed by stage NAME, so a `baseline_selftest` marked on a
+# Vampire-only run would skip the selftest after E and Twee arrive — and their columns
+# would never be exercised. Key the portfolio-dependent stages by the portfolio itself.
+SIG=$(printf '%s|%s|%s|%s' "$VAMPIRE" "$EPROVER" "$TWEE" "$BUDGETS" | md5sum | cut -c1-8)
+say "portfolio signature: $SIG"
+
 wait_for_pipeline
 heartbeat >/dev/null 2>&1 & HB=$!
 trap 'kill $HB 2>/dev/null; echo idle > $R/.current' EXIT
@@ -133,15 +139,16 @@ import sys; sys.path.insert(0,"paper/scripts")
 import etp_terms as et
 print(et.tptp_true("x = y ◇ (x ◇ (x ◇ (y ◇ (z ◇ z))))", "x = y"))
 PY
-    "$TWEE" /tmp/4916.p > $R/twee_4916.out 2>&1
+    # Invoke exactly as baseline_probe does, or the gate certifies a different command
+    # than the one that runs. `--tstp` turns on the SZS ontology (off by default).
+    "$TWEE" --tstp /tmp/4916.p > $R/twee_4916.out 2>&1
     say "twee output saved to $R/twee_4916.out — READ IT BY EYE"
     # 4916 is Austin: it does NOT entail x=y, so a complete run must report
-    # CounterSatisfiable (SZS), or say so in prose. Anything else and _verdict is blind.
+    # CounterSatisfiable. Anything else and _verdict is blind.
     if grep -qE "SZS status (CounterSatisfiable|Satisfiable)" $R/twee_4916.out; then
         mark twee_strings; say "twee emits SZS status — _verdict reads it directly"
-    elif grep -qE "Ran out of critical pairs|conjecture is (true|false)|Goal is true" \
-             $R/twee_4916.out; then
-        mark twee_strings; say "twee prose recognised (no SZS line; consider --tstp)"
+    elif grep -qE "RESULT: CounterSatisfiable|conjecture is not true" $R/twee_4916.out; then
+        mark twee_strings; say "twee prose recognised (verified strings; no SZS line)"
     else
         say "GATE 2 FAILED: none of the expected strings appear. Fix _verdict before"
         say "  trusting the twee column. Continuing WITHOUT twee."
@@ -157,18 +164,18 @@ if ! have retry_curve; then
 fi
 
 # --- the baseline: the gate for the hard tier --------------------------------
-if ! have baseline_selftest; then
+if ! have "baseline_selftest_$SIG"; then
     stage baseline_selftest
     if python3 paper/scripts/baseline_probe.py --selftest --vampire "$VAMPIRE" \
          ${EPROVER:+--eprover "$EPROVER"} ${TWEE:+--twee "$TWEE"} 2>&1 | tee -a "$LOG" \
          | grep -q "SELFTEST OK"; then
-        mark baseline_selftest
+        mark "baseline_selftest_$SIG"
     else
         say "baseline selftest FAILED — refusing to run the portfolio"; exit 1
     fi
 fi
 
-if ! have baseline; then
+if ! have "baseline_$SIG"; then
     if [[ -z "$EPROVER" || -z "$TWEE" ]] && [[ "$ALLOW_PROVISIONAL" != "1" ]]; then
         say "SKIPPING baseline. The portfolio is not usable, so the hard tier it"
         say "  produces cannot be published. Missing or disqualified:"
@@ -197,7 +204,7 @@ if ! have baseline; then
     if [[ "$rows" -eq 0 ]]; then
         say "baseline produced 0 rows — NOT marking done; see $R/baseline_*.log"
     else
-        mark baseline
+        mark "baseline_$SIG"
         say "baseline done: $rows rows"
         python3 paper/scripts/baseline_probe.py --curve $R/baseline_v1.jsonl 2>&1 | tee -a "$LOG"
     fi
@@ -232,4 +239,4 @@ say "ALL DONE. gates: answer_spec=$(have answer_spec && echo ok || echo skipped/
 for f in retry_curve.json baseline_v1.jsonl classes.json lean_model.log; do
     [[ -s "$R/$f" ]] && say "  $R/$f  ($(wc -l < "$R/$f") lines)"
 done
-have baseline || say "  baseline: NOT RUN (portfolio incomplete; see RUNBOOK §1)"
+have "baseline_$SIG" || say "  baseline: NOT RUN for portfolio $SIG (see RUNBOOK §1)"
