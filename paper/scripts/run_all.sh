@@ -163,6 +163,19 @@ if ! have retry_curve; then
     mark retry_curve
 fi
 
+# --- corpus hygiene ----------------------------------------------------------
+# BEFORE the baseline, deliberately. This costs ~1 core-hour and produces the number
+# that goes in the abstract (equivalence classes). The baseline costs hundreds. An
+# overnight run that dies at 3am should still have delivered this.
+if ! have equiv_sample; then
+    stage equiv_sample
+    python3 paper/scripts/equiv_sample.py --in "$IN" \
+        --status AUSTIN_PROVEN --n "$SAMPLE_N" --vampire "$VAMPIRE" \
+        --sat-timeout 20 --prove-timeout 30 --certs "$R/certs_eq" \
+        --out $R/classes.json 2>&1 | tee -a "$LOG"
+    mark equiv_sample
+fi
+
 # --- the baseline: the gate for the hard tier --------------------------------
 if ! have "baseline_selftest_$SIG"; then
     stage baseline_selftest
@@ -209,16 +222,6 @@ if ! have "baseline_$SIG"; then
         python3 paper/scripts/baseline_probe.py --curve $R/baseline_v1.jsonl 2>&1 | tee -a "$LOG"
     fi
     fi   # end: portfolio-complete guard
-fi
-
-# --- corpus hygiene ----------------------------------------------------------
-if ! have equiv_sample; then
-    stage equiv_sample
-    python3 paper/scripts/equiv_sample.py --in "$IN" \
-        --status AUSTIN_PROVEN --n "$SAMPLE_N" --vampire "$VAMPIRE" \
-        --sat-timeout 20 --prove-timeout 30 --certs /tmp/eqcerts \
-        --out $R/classes.json 2>&1 | tee -a "$LOG"
-    mark equiv_sample
 fi
 
 # --- the contribution --------------------------------------------------------
