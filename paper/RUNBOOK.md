@@ -1,5 +1,20 @@
 # RUNBOOK — what to run on the cluster, in order
 
+**All of it, automatically:**
+
+```bash
+nohup bash paper/scripts/run_all.sh > /dev/null 2>&1 &
+tail -f paper/results/run_all.log         # hourly heartbeat: stage, rows, load
+bash paper/scripts/run_all.sh --status    # read-only, safe any time
+```
+
+It waits for any live `overnight.sh` stage, skips stages already done (markers in
+`results/.done` — delete one to force a redo), and stops at the two gates below if they
+fail. Smoke-test into a scratch dir first, same convention as `overnight.sh`:
+`R=/tmp/rt IN=/tmp/rt/tiny.jsonl SHARDS=1 BUDGETS=1 bash paper/scripts/run_all.sh`.
+
+The sections below explain *why* each stage is there and in that order.
+
 Nothing here collides with `overnight.sh`'s `wait_for` (its `pgrep` patterns are
 stage-specific: `prove_status.py .*retry_status_` etc.). The only cost of running
 alongside a live pipeline is CPU. Do not launch a second `prove_status.py` writing to a
