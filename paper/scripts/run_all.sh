@@ -44,6 +44,19 @@ say () { echo "$(date '+%F %T') — $*" | tee -a "$LOG"; }
 have () { [[ -f "$D/$1" ]]; }
 mark () { touch "$D/$1"; }
 
+# A path on PATH is not a working prover. `curl -o twee <wrong-url>` leaves an HTML page
+# that is executable and dies with "Exec format error"; a macOS build does the same. An
+# unrunnable binary produces no output, which downstream looks exactly like "this prover
+# resolved nothing" — a failure in the flattering direction. Check before trusting.
+runnable () {   # $1 = path, $2 = name
+    [[ -n "$1" ]] || return 1
+    if ! "$1" --version >/dev/null 2>&1 && ! "$1" -h >/dev/null 2>&1; then
+        say "  $2 at $1 is NOT RUNNABLE ($(file -b "$1" 2>/dev/null | cut -c1-60))"
+        return 1
+    fi
+    return 0
+}
+
 if [[ "${1:-}" == "--status" ]]; then
     echo "stages done: $(ls "$D" 2>/dev/null | tr '\n' ' ')"
     echo "running    : $(cat $R/.current 2>/dev/null || echo none)"
@@ -83,6 +96,9 @@ stage () { echo "$1" > $R/.current; say "STAGE $1"; }
 # =============================================================================
 say "run_all starting. shards=$SHARDS budgets=$BUDGETS heartbeat=${HEARTBEAT}s"
 say "provers: vampire=$VAMPIRE eprover=${EPROVER:-MISSING} twee=${TWEE:-MISSING} lean=$LEAN_OK"
+runnable "$VAMPIRE" vampire || { say "vampire is unusable — stopping"; exit 1; }
+runnable "$EPROVER" eprover || EPROVER=""
+runnable "$TWEE"    twee    || TWEE=""
 [[ -z "$EPROVER" || -z "$TWEE" ]] && say "WARNING: portfolio incomplete — any hard-tier claim from this run is PROVISIONAL"
 
 wait_for_pipeline
