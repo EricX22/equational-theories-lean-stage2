@@ -1,254 +1,455 @@
-# Paper Plan — LLM-guided construction of verifiable countermodels
+# PAPER_PLAN — benchmark design
 
-Status: active plan as of 2026-06-30. Supersedes the TRUE-side "uniquely-solved
-vs virtual-best-solver" framing in `EXPERIMENT_SPEC.md` (kept for the baseline
-matrix machinery, but its thesis is dead — see "Why this plan" below).
+Supersedes the pivot plan in `attic/`. Read `HANDOFF.md` for state, `HISTORY.md` for
+the wrong turns. This file answers one question: **what must an instance do, and what
+must we build, for the measurement to mean what the abstract will say it means.**
 
-## Thesis (one line)
-Language models are useful in formal math as **constructors of verifiable
-countermodels** in open-ended algebraic search spaces — proposing candidate
-*worlds* where an implication fails (finite magmas, modular/affine models,
-algebraic extensions, companion-matrix / ℤ-module constructions, quasigroups,
-twisting semigroups, …) — while a symbolic verifier + Lean eliminate every
-hallucinated result. The LLM never writes the proof; it proposes the structure,
-and correctness comes entirely from checking.
+Written 2026-07-09.
 
-## Why this plan (the reasoning, so we don't relitigate it)
-- **The TRUE side is owned by ATPs.** Vampire proves our "hard" TRUE residual
-  pairwise in milliseconds — 18/18 of `true_misses_18` and 6/6 of
-  `dev_true_easy`, most < 0.1s (see `paper/results/baselines_*`). Our solver's
-  "true misses" are misses relative to *our* narrowing engine, not to the field.
-  So there is no TRUE-side "uniquely solved" story, and the LLM-waypoint work is
-  not the paper's center (the "LLM proposes, verifier checks" philosophy carries
-  over to the false side).
-- **ETP order-≤4 is resolved and contaminated.** Our `hard1/2/3` use law IDs
-  ≤4694 — the published ETP order-≤4 laws. The whole 22M-edge graph is resolved
-  and Lean-formalized (Tao et al., 2025), and the project *already automated
-  infinite-model construction* via greedy table-filling. Results only on this
-  data are engineering evidence, not novelty.
-- **Prior art is close but not on top of us.** FunSearch/AlphaEvolve own the
-  "LLM proposes construction + evaluator checks" *paradigm*; "Learning to
-  Disprove" (2026) does general Lean-verified counterexample generation (olympiad
-  / formal-math statements), *not* infinite/algebraic model construction; the ETP
-  greedy method automated much infinite construction *on order-≤4 magmas*. The
-  surviving gap is narrow and specific: **agentic navigation of an open algebraic
-  construction space, with Lean-verifiable certificates, on problems outside the
-  resolved graph.**
+---
 
-## Differentiator vs prior work
-- **vs direct LLM proof generation (DSP-style and successors):** we do not trust
-  model-written proofs. The LLM only proposes structures; Lean/model-checking is
-  the sole source of correctness.
-- **vs ATPs / completion (Twee-style):** great for *true* implications and
-  symbolic saturation; *false* ones need a *witness object*, and the hard ones
-  need choosing the right model family, not saturating equations.
-- **vs finite model finders (Mace4, Vampire `-sa fmb`):** finite search refutes
-  many false implications but is structurally blind to witnesses that are large,
-  structured, algebraic, or infinite.
-- **vs FunSearch/AlphaEvolve:** the loop is not new. What we add is a
-  *formal-math* instance where the evaluator is a Lean-verifiable certificate
-  (not a score) and the target is constructive disproof over algebraic theories.
+## 0. Freshness check (done, 2026-07-09)
 
-## The four claims (each an experiment)
-**C1 — The benchmark is genuinely open.** Build an order-5+ (or otherwise
-held-out) candidate set outside the resolved order-≤4 graph. Filter: drop
-trivial/small-finite-refutable pairs and ATP-proved trues; what remains is the
-hard construction set. Report: sampled / filtered-trivial / ATP-true / entering
-hard set / verified countermodels found.
+Before investing in Phase B. Our `reference/equational_theories` snapshot is at
+upstream `d612bc0`, **2026-06-14** (Kothari, #1448). The *live* blueprint at
+`teorth.github.io/.../order-5-austin-laws.html` still reports:
 
-**C2 — The fixed portfolio is strong (steelman).** Assemble the strongest
-*reasonable* fixed portfolio: exhaustive Fin 2–3, structured finite tables,
-affine/modular models, SAT/domain-propagation finite search, quasigroup/Latin/
-idempotent modes, algebraic-linear ℤ-module/companion-matrix, and (for evaluation
-only) Vampire/Mace finite model finding. Publish its exact search-space spec
-(families × parameter ranges). Report: solved per rung, residual, cost,
-certificate validity. Defines the hard residual.
+- 106 laws with only trivial finite models; **10 Austin (Table 20.1)**; **96 unknown
+  (Table 20.2)**; 24 unknown-finite (Table 20.3).
+- **12857 and 33436 are both in Table 20.2**, the open set. Confirmed against the
+  rendered table, not our snapshot.
+- 22818 is in Table 20.1 — so its absence from `o5_status` is our shard bug, not an
+  upstream change.
 
-**C3 — The proposer adds coverage beyond the portfolio.** Arms: fixed portfolio
-only; direct LLM proof/witness; LLM selects a family from the fixed list; LLM
-proposes *parameterized construction hypotheses* + verifier loop; (if available)
-an oracle/human-designed upper bound. The decisive comparison is **proposer vs
-strong fixed portfolio**, and the LLM only gets credit when the witness is
-Lean-verified *and* not already found by the portfolio. Report: additional
-verified countermodels, judge/Lean acceptance, failed-proposal types, attempts/
-cost per solve.
+JRS (arXiv:2602.16324) study ETP proper, order ≤ 4. No order-5 saturation campaign is
+published. Berlioz–Melliès (arXiv:2601.20759) embed ETP theories in a latent space —
+statistical, not constructive, and not a competitor for this task.
 
-**C4 — The wins are structurally diverse / out-of-portfolio.** Tag every
-proposer-only solve by construction class *and* by "was this parameterization
-class in the steelman portfolio's spec, yes/no." The money number is the count
-and spread of the **no**s. Diversity across families the portfolio already had is
-weak; a scatter of out-of-span encoding classes is the paper.
+**Not verified:** `vlad902/equational_theories@order5`, the branch the blueprint says
+holds the working results, could not be fetched. Check it by hand before publishing
+any claim about 12857/33436. The Zulip thread linked from the chapter is the other
+place a closure would surface first.
 
-### Target main table
-| Method | Verified solves | Portfolio-residual solves | Distinct out-of-span classes | Wrong/unverified |
-|---|---|---|---|---|
-| Small finite search | high (easy) | 0 | 1 | 0 |
-| Strong fixed portfolio | higher | 0 (baseline) | several | 0 |
-| Direct LLM proof/witness | low | low | unclear | many rejected |
-| LLM proposer + verifier | highest | +N (meaningful) | diverse | 0 accepted wrong |
+Conclusion: the headline is live. Re-run this check immediately before submission.
 
-## Methodological guardrails (hard-won)
-- **Claim empirically, not theoretically.** Not "no finite portfolio is
-  complete" (unprovable, invites a proof demand) but "under realistic compute a
-  *strong* portfolio leaves a meaningful residual the proposer solves."
-- **Commit to coverage, not efficiency.** If the LLM only picks faster among
-  families the portfolio already has, that's a speed claim that evaporates with
-  more baseline compute. Design so the proposer can go *outside* the portfolio's
-  enumerated classes, and measure how often its wins do.
-- **"Out-of-portfolio" = not enumerated by the fixed search**, not "alien math."
-  A specific algebraic-extension / companion-matrix encoding the fixed sweep
-  doesn't parameterize counts, even if it's "linear in spirit." Make this
-  auditable via the published portfolio spec.
-- **Budget-relative boundary → scaling check.** State the portfolio's enumeration
-  budget; show out-of-span wins survive a substantially larger budget (bigger n,
-  wider coefficient sweep). Kills "you under-budgeted the baseline."
-- **Steelman the portfolio** — strongest reasonable sweep, or beating it proves
-  nothing (weak-baseline trap; same lesson as the ATP baselines).
-- **Unlabeled order-5 → fuzzy denominator.** After filtering ATP-proved trues,
-  the residual is {false} ∪ {trues ATPs missed}, indistinguishable on a failed
-  construction. Lead with the **absolute** count + diversity of verified
-  constructions; treat the residual as an upper bound, not a clean success rate.
-- **The construction side is self-certifying.** A Lean-checked magma satisfying
-  eq1 and violating eq2 *is* the disproof — no pre-existing label needed. This is
-  what lets us leave the labeled ETP graph for open order-5 problems.
-- **Contamination.** Order-5 mitigates it (outside the resolved corpus). Preempt
-  the softer objection — o3's *ability to propose the right family* is partly
-  ETP-derived — by stating plainly that using learned mathematical intuition to
-  propose is the point; the problems and witnesses are new.
+---
 
-## Sequencing (de-risk before building)
-0. **Population scale-up (2026-07-03).** Repeated the stratified screen on
-   a 10x bigger draw (8,050 of 20,000 sampled pairs) and a fresh 300-pair
-   Vampire subsample: cheap-filter survivor rate held steady (39.49% vs
-   40.75%), and the confirmed-hard rate held steady too (5/300 = 1.67% vs
-   4/300 = 1.33%) — 4 of those 5 are genuinely new hard pairs, bringing the
-   total validated hard-pair pool to **8** (double the prior 4). Extrapolating
-   the ~1.5% average rate to the full 3,179-survivor pool from this one
-   draw alone predicts ~48 more confirmed-hard pairs sitting there
-   unvalidated — this is not a thin population, every scale-up so far finds
-   proportionally *more*, not fewer. See
-   `paper/results/order5_scaled_population_report.md`.
-1. **Order-5 yield probe (cheap, do first). DONE 2026-07-01 — GATE PASSES.**
-   Sampled 250 uniform-random order-5 pairs (outside the resolved order-≤4
-   graph); ran Vampire (casc + fmb) both sides. 1/250 (0.4%) stayed genuinely
-   unresolved at 40s both directions — >100x the order-≤4 hard-set's curated
-   rate (~0.003% of all ordered pairs). See `paper/results/order5_probe_report.md`.
-   **Follow-up (also done):** a stratified rerun that pre-filters candidates
-   with the real portfolio's cheap deterministic FALSE stages before spending
-   Vampire compute raised this to 4/300 (1.33%), a ~3.3x density improvement —
-   see `paper/results/order5_stratified_rerun_report.md`.
-2. **Residual-by-family analysis. DONE 2026-07-01.** Tagged every FALSE-side
-   solve in the existing merged results by witness family; confirmed a real,
-   moderately diverse above-floor construction population (9.1% of all
-   order-≤4 problems), concentrated in the curated hard1/hard2 sets (37-41%)
-   vs uniform sampling (0.9%) — this is *why* step 1's stratified rerun beat
-   uniform sampling. See `paper/results/residual_family_analysis.md`.
-3. **Build the order-5 Lean harness, the steelman portfolio spec, and the
-   proposer loop; run C1–C4. Substantially done 2026-07-01:**
-   - **Steelman portfolio spec (C2):** written as `paper/STEELMAN_PORTFOLIO.md`
-     — all 9 deterministic FALSE-side families already exist in
-     `scripts/my_solver_merged/solver.py` with exact parameter ranges
-     documented; all 7 categories this plan names are covered.
-   - **Order-5 Lean harness:** turned out to need *no new infrastructure*.
-     `judge/verify.py` is equation-text-driven, not tied to the 4694
-     registered order-≤4 law IDs, and none of the judge/submission Lean
-     sources import Mathlib. Verified end-to-end (7/7 real order-5 pairs
-     accepted by the actual judge, both verdicts) in
-     `paper/ORDER5_HARNESS_FEASIBILITY.md`. This resolves the "heavy infra"
-     risk below.
-   - **Proposer loop (C3/C4):** design + a real validated case study in
-     `paper/PROPOSER_LOOP_SPEC.md`. Four order-5 pairs are now confirmed
-     resistant to *all 9* portfolio families (not just the cheap 3-family
-     screen from step 1) plus TRUE-side deterministic stages plus Vampire at
-     40s — genuine, ready-to-use C3 targets. A manual (human-stand-in)
-     proposer attempt on two out-of-portfolio families (cyclic-group twists,
-     dihedral groups) was negative on all four — logged as real
-     failed-proposal data, not yet a positive result.
-   - **Real o3 proposer run: DONE 2026-07-01, extended 2026-07-03 (live
-     data across all 8 validated pairs, negative so far).** Wired
-     `openai/o3` via OpenRouter (`paper/scripts/proposer_o3.py`) and ran it
-     on the original 4 targets (6 attempts), then extended to the 4 new
-     pairs from the population scale-up (4 more attempts): **10 real
-     attempts total, ~$0.16 cost, ~16,800 reasoning tokens, all
-     `self_verify_failed`, 0 reached the judge.** Proposals were genuinely
-     distinct across all 10 (quadratic-twist modular, quaternion
-     conjugation rack, upper-triangular affine, coordinate-swap semidirect
-     square, quadratic-bilinear mod-n, high-degree modular polynomial,
-     quadratic-right mod-n, parity-switch left permutation, GF(3)²
-     quadratic-twist, quadratic-left affine mod-n) and mostly bug-free —
-     confirms the full C3 pipeline (prompt → parse → materialize →
-     self-verify → judge) works end-to-end for real, but no positive
-     result yet. This sandbox's 45s command cap forced `reasoning: low`
-     throughout; a `reasoning: high` rerun with more rounds on the real
-     machine (via `run.sh`, no time cap) is the natural next step. See
-     `paper/results/proposer_o3_first_run.md` and
-     `paper/results/proposer_o3_extended_run.md`.
-   - **Also done 2026-07-03:** pushed the fixed portfolio's `mf2` finder
-     past its Fin≤11 cap to Fin 12-14 on all 8 pairs (idem+qg + general
-     modes) — all 8 still miss, ruling out "just needed a bigger domain"
-     as the cheap explanation before crediting these to the proposer. See
-     `paper/results/order5_finite_extension_report.md`.
-   - **Not yet done:** a `reasoning: high` rerun off-sandbox; running
-     C1–C4 as a full study once a positive proposer result exists.
+## 1. What an instance must do
 
-## Case studies (planned)
-1. Structured finite countermodel where naive finite search fails but SAT/
-   domain-propagation finds the table.
-2. **hard2_0051-style algebraic-linear witness** (ℤ[α] ≅ ℤ⁴ companion matrix) —
-   the boundary case: "linear in spirit" yet unreachable by any finite ℤ/n-affine
-   sweep. Must explain crisply *why* (infinite carrier, algebraic-integer
-   eigenvalue) so the boundary reads as forced by the math, not gerrymandered.
-3. A structurally different order-5+ witness found only by proposer-guided search.
+Five properties. Each is a filter with a mechanical test; an instance that fails any
+of them is not shipped.
 
-## Abstract-level claim (target)
-On a new set of order-5 equational-theory problems, our LLM-guided constructor
-finds Lean-verified countermodels beyond a strong fixed portfolio, with gains
-spread across multiple construction families — evidence that language models can
-contribute to formal discovery as hypothesis generators while formal verification
-eliminates hallucinated results.
+**(1) Answerable, provably, before it ships.** The dichotomy — either `L ⊨ x = y`, or
+`L` has a nontrivial model and every such model is infinite — holds only once "no
+nontrivial finite model" is a *theorem* about `L`. The (i)-certificate is therefore
+the **admission ticket**, not a result. No certificate, no instance. Otherwise we
+score models on questions that may have no answer.
 
-## Risks / kill criteria
-- **Thin/absent order-5 construction population** (C1 fails) → no AI paper here;
-  fall back to a systems/benchmark paper on formally-verified equational solving.
-  **Status: did not fire.** See sequencing step 1 — gate passed, and the
-  stratified rerun shows the population is findable more efficiently than
-  uniform sampling suggested.
-- **Proposer wins are all one obvious missing family** (C4 fails) → efficiency
-  story only; weaker; consider whether the framing survives. **Status: open**
-  — a real o3 proposer ran 6 attempts on the four validated targets
-  (2026-07-01, low reasoning effort, sandbox-capped) and found zero
-  self-verified wins, so C4 remains unevaluated. Not yet a bad sign (this
-  was a low-effort, few-round, sandbox-limited run) — needs the
-  high-effort/more-rounds rerun in `paper/PROPOSER_LOOP_SPEC.md` §9 before
-  this risk can be judged either way.
-- ~~**Lean harness for arbitrary order-5 laws is heavy infra** — budget it; the
-  ETP generated defs/checkers were built for the 4694 order-≤4 laws.~~
-  **Resolved 2026-07-01, false alarm:** the judge needs no new infra at all —
-  see `paper/ORDER5_HARNESS_FEASIBILITY.md`.
+**(2) Method-bound, not compute-bound.** A compute-bound instance yields to a bigger
+timeout. A method-bound one does not, because the answer is not in the method's search
+space: finite model search on an Austin law is *provably* empty, and completion may
+diverge. This is measurable, not assertable — run the portfolio at
+`30 / 60 / 120 / 300 / 600 s` and record resolution per law.
 
-## What already exists (assets)
-- Merged solver ~99.04% (1653/1669) on public sets, zero wrong; false-side stages
-  include affine, SAT/domain-propagation, quasigroup/Latin, and algebraic-linear
-  infinite-model construction (`scripts/my_solver_merged/solver.py`).
-- Frozen baseline pinned (`ef84234`); paper harness (`run_ours.py`,
-  `run_baselines.py`, `build_matrix.py`, `analyze.py`); o3 config
-  (`config.paper.json`); Vampire installed on the cluster (`setup_atps.sh`).
-- **Order-5 track (added 2026-07-01):** `paper/STEELMAN_PORTFOLIO.md` (C2
-  spec), `paper/ORDER5_HARNESS_FEASIBILITY.md` (harness validation),
-  `paper/PROPOSER_LOOP_SPEC.md` (C3/C4 design + 8 validated hard targets);
-  scripts `sample_order5.py`, `cheap_false_screen.py`,
-  `order5_harness_smoketest.py`, `single_side_vampire.py` (runs one Vampire
-  direction at a time — needed once timeout×2-sides exceeds the sandbox cap);
-  data `problems/order5_probe.jsonl`, `problems/order5_pool_v2.jsonl`
-  (2,000 pairs), `problems/order5_stratified.jsonl`,
-  `problems/order5_pool_big.jsonl` (20,000 pairs, 8,050 screened),
-  `problems/order5_big_survivors.jsonl` (3,179), `order5_big_subsample300.jsonl`;
-  results `results/order5_probe_report.md`,
-  `results/order5_stratified_rerun_report.md`, `results/residual_family_analysis.md`,
-  `results/order5_scaled_population_report.md` (population scale-up,
-  8 validated hard pairs total, ~48 more predicted in the survivor pool alone).
-- **Real o3 proposer (added 2026-07-01):** `paper/scripts/proposer_o3.py`
-  (live OpenRouter call + self-verify + judge loop); results
-  `paper/results/proposer_o3_first_run.md`,
-  `paper/results/proposer_o3_log.jsonl` (6 real attempts, $0.12, all
-  self-verify-failed — first live C3 data, negative so far).
+> **Tier definition (the one that type-checks).** A *law* is resolved or not; flatness
+> is a property of the *corpus*. So: hard tier = **unresolved at `B_max` under every
+> portfolio configuration**. Separately publish the corpus-level budget curve, to argue
+> that `B_max` lies past the knee. Do not write "flat in log-budget" of a single law.
+
+**(3) The answer is an object, not a bit.** A yes/no answer gives a coin 50%. The
+submission is a model or a rewrite system, and the verifier checks it. This is what
+makes the task construction rather than classification.
+
+**(4) Non-retrievable.** Order ≤ 4 is public in full. Order 5's 106 are a published
+table. Ship order ≥ 6, generated post-cutoff, seeds and dates recorded. Note that
+**our own publication contaminates the tier the day it ships** — see §5E.
+
+**(5) Synthesis-loaded: near the literature, not beyond it.** A law whose model needs
+a structure nobody has conceived measures nothing — everyone scores zero. The
+instances with signal are those where a *published* construction, generalised or
+composed, works, but no single one supplies it off the shelf. Selection should
+therefore prefer laws at **small distance** from the covered families, not maximal
+distance. Measuring that distance requires the construction suite of §5B½ to exist.
+
+## 2. What looks relevant and is not
+
+- **Solvability.** An instance nobody solves discriminates nothing. An instance
+  provably unsolvable is a bug: everything Lean-checkable is findable by proof
+  enumeration. Hardness is relative to methods — normal, and sufficient. Corollary:
+  the hard tier *needs* instances the best model solves, or we report 0 vs 0.
+- **Undecidability of the family.** Buys "for any solver, some instance defeats it."
+  Buys nothing about a finite release, which is always exhaustible.
+- **Corpus size.** 9,725 is a count of law strings. Classes are the unit. And *rate*
+  matters more than size: a generator with nonzero hard-rate is durable at any rate.
+- **The novelty of our (i)-prover.** It is a specialisation of Infinox's method
+  (Claessen & Lillieström, JAR 2011): enumerate candidate functions with a property,
+  ATP as sub-procedure — i.e. our surjectivity encoding. Our `x = C[S(x)]` observation
+  (left inverse is syntactic, so injectivity needs neither search nor an ATP call) is a
+  real optimisation on this fragment and *not a contribution until measured against
+  Infinox*. If Infinox dominates it, the benchmark is unchanged. Admission machinery.
+- **Beating the SOTA prover.** The portfolio is a measuring stick. A stronger baseline
+  yields a smaller, more defensible tier. **Keeping the baseline weak to inflate the
+  tier is this project's main integrity risk**, and it has a twin: keeping the
+  *construction* suite weak. See §5B½.
+- **Whether the model "understands."** The certificate is the claim.
+
+## 3. The asymmetry to state up front
+
+`TRIVIAL`, `HAS_FINITE_MODEL`, `AUSTIN_PROVEN` are machine-checked facts. Hard-tier
+membership — "no completion prover terminated" — is an **absence**. There is no
+certificate for it and in general there cannot be. The one set the paper is built on
+is the only set defined by effort rather than by proof.
+
+That sentence goes in the paper, not in a footnote. It is precisely *why* the baseline
+portfolio must be strong, named, versioned and published, and why durability rests on
+shipping the generator rather than on any impossibility claim.
+
+## 4. Two baselines, both of which must be strong
+
+| | measures | current state |
+|---|---|---|
+| **prover portfolio** | can existence be decided by automation? | one prover, one ordering — indefensible |
+| **construction suite** | can a model be *built* by a known recipe? | two builders — indefensible |
+
+The second is the one we have been ignoring. `order6_grade.py` implements
+translation-invariant and greedy. **Neither is prior art — both are ours.** So
+`BENCHMARK GOLD: 4` currently means "our two builders failed," which is the same class
+of claim as "Vampire didn't finish in 20s." An LLM win against that shows the model
+beat our code, not the literature.
+
+Before any LLM number means what the abstract will say: implement every construction
+family in the literature (Kisielewicz; ETP's chapter 7 — translation-invariant,
+greedy, Asterix/Obelix/Dupont, the ad hoc models; linear ℤ[α]; quotients). Expect the
+honest cost: **a stronger construction suite shrinks the hard tier.** Do it anyway.
+
+## 5. Phases and gates
+
+### A — Admission
+Install Infinox. Benchmark against our (i)-prover on the order-5 corpus; keep the
+union, cite the loser. Point the union at the **1,726 `OPEN` laws where `x` recurs in
+the RHS** and the 42 `SATISFIABLE_ONLY` (which need only (i)). Every promotion is a
+free instance.
+
+> Measured 2026-07-09 on the local corpus: `x` occurs more than once in the RHS for
+> **98.2%** of `OPEN` vs **85.1%** of `NO_FINITE_MODEL`. The root-straddle special case
+> is 16.1% of `OPEN` vs 0.8% of `NO_FINITE_MODEL` — a ~20× enrichment, so the mechanism
+> is right, but it covers only 282 of 1,757 laws. The general blocker is that no single
+> subterm carries `x` uniquely, so the syntactic left inverse does not exist and
+> injectivity must be proved by search.
+>
+> **1,726 is an upper bound, and probably a loose one.** A law lands in `OPEN` for two
+> different reasons: (a) no tier-1 witness exists, so injectivity needs a real proof —
+> this is the Infinox-shaped case; or (b) a witness exists but Vampire could not close
+> the query in budget — this needs *compute*, not Infinox. The `x`-recurrence statistic
+> does not separate them. Split the class before quoting a yield.
+
+**Gate:** every shipped law carries an (i)-certificate.
+
+### B — Verification
+
+> **Pilot 2026-07-09, and the correction that followed.**
+> `bin/vampire -sa otter --show_active on`. Both laws **saturate** (9.4 s, ~8 s) under a
+> complete strategy ⇒ a nontrivial model exists. `Definitions and Model Updates` is
+> **empty** — no `f₀, f₁` — so the signature-reduct trap does not bite; the only added
+> symbols are `sK0, sK1` from the nontriviality axiom.
+>
+> The active set is **not a plain TRS**: 12857 has 70 of 357 equations with a variable on
+> each side absent from the other (33436: 69/351; control 4916: 0/3; unchanged under
+> `-to lpo`). **We first read this as a wall. It is not one.** JRS's pre-orderedness
+> requirement is on their *printer*, not on the construction. Their Def. 1 rewrites when
+> the **ground instance** decreases, `t[σ(l)] → t[σ(r)]` whenever `σ(l) ≻ σ(r)`, and
+> unbound variables on the far side "can be mapped to any ground term such that
+> `σ(l) ≻ σ(r)`, in practice the smallest constant."
+>
+> So every equation is usable, in whichever direction decreases the instance.
+> Termination is free (`≻` well-founded on ground terms); ground confluence is inherited
+> from saturation under unfailing completion. **The models for 12857 and 33436 are
+> computable today.** `scripts/ordered_model.py` implements Defs 1–2; measured:
+>
+> | law | equations | law holds on ground instances | `x = y` refuted |
+> |---|---|---|---|
+> | 4916 | 3 | 27/27 (rules fired in 27) | yes |
+> | 12857 | 357 | 27/27 (rules fired in 27) | yes |
+> | 33436 | 351 | 27/27 | yes |
+>
+> Non-vacuity is checked, not assumed (`HISTORY.md` records us confirming a rule that
+> never fired). `x = y` refuted ⇒ the model is nontrivial ⇒ the law is Austin.
+>
+> **The ordering trap.** Ground confluence transfers only with respect to *the ordering
+> the prover saturated under*. Evaluating a KBO saturation with LPO gives normal forms
+> that need not be canonical. Certs now carry `% saturated-with:` and `ordered_model.py`
+> refuses to evaluate on a mismatch. The table above is KBO-on-KBO.
+>
+> **What is actually missing** is only an off-the-shelf *certifier*: CSI/TTT2 check plain
+> TRSs. And since `answer_spec.py` makes **Lean the arbiter**, CeTA was never on the
+> critical path. Hence the sharpened contribution: formalise **ordered rewriting with
+> unorientable equations** — JRS's open 43, our ~36% — not the pre-ordered case that
+> already has certificates. B¾'s census is now an *argument for* the contribution rather
+> than a wall in front of it, and Twee is demoted to a baseline component (§5C).
+
+Pilot **12857 and 33436** end to end before anything scales:
+`--show_active on` → orient → CSI → TTT2 → CeTA → **check the two constants normalise
+apart** (nontriviality is a separate check; confluence + termination give you *a*
+model, not a nontrivial one).
+
+Two traps:
+- **Signature.** JRS note Vampire introduces definitions `f₀, f₁, …` to saturate, which
+  "cannot easily be read off the saturated set, but are not necessary to define the
+  model." The extracted system lives over the *extended* signature. The magma we claim
+  is the **reduct to the original operation**. Get this wrong and CSI happily certifies
+  a rewrite system for a structure that is not the one in the paper.
+- **Completeness.** Verify the saturation came from a complete strategy before trusting
+  it. We have this check; keep it.
+
+Then the contribution: **generic Lean formalisation** — Herbrand domain, normalisation
+function, well-foundedness of the ordering, confluence ⇒ model. JRS lay out these four
+steps and decline them ("quite involved"). ETP is a Lean project. This turns *any*
+CeTA-certified system, theirs or ours, into a Lean theorem, and it does not depend on
+any of the three gates below.
+
+**Gate:** two laws certified end to end before scaling.
+
+### B¾ — Orientability census (run 2026-07-09), and what it says about the corpus
+
+How many of the 247 `AUSTIN_PROVEN` saturate into a *rewrite system*, i.e. into
+something CSI/TTT2/CeTA can certify? Sampled with `bin/vampire -sa otter
+--show_active on` at 6–8 s:
+
+| population | n | clean (0 unorientable) | dirty |
+|---|---|---|---|
+| harvested order-6+ (one-op extensions) | 20 | **20** | 0 |
+| order-5 (ETP Tables 1–2) | 11 | 7 | **4** |
+
+The harvested laws are not merely clean — their active sets are **1 to 5 clauses**, and
+the modal case is a single clause: the law itself, with **zero critical pairs**. Nothing
+to complete, confluence immediate, model free.
+
+The order-5 laws split. 15535 (175 clauses, 52 unorientable) and 30591 (181 / 52) are as
+pathological as 12857 (358 / 70) and 33436 (352 / 69). Note the two dirtiest — our
+headline laws — did not saturate inside **this census's 6–7 s** budget and are recorded
+as `null` here; §B saturated them at 9.4 s and ~8 s with a 35 s budget. No contradiction,
+but it means **the dirty fraction is undercounted, not over**.
+
+Also: every law in this table is `AUSTIN_PROVEN`, i.e. its saturation *closed* under a
+complete strategy, so `L ∧ sK0 ≠ sK1` is consistent. **A dirty law cannot secretly be
+`TRIVIAL`** — a trivial law makes that set inconsistent and can never saturate. The
+"dirty ⇒ near-trivial ⇒ contaminated tier" worry therefore cannot apply to 12857, 33436,
+15535, 30591. It applies to the laws that *never saturated*: `NO_FINITE_MODEL`. Those are
+the hard tier, dirtiness is unmeasurable for them, and the retry's conversion rate is
+exactly the measurement of whether they skew trivial.
+
+**SELECTION BIAS — read this before using the table above.** `AUSTIN_PROVEN` means
+*saturation finished inside the classifier's budget* (20 s harvest, 120 s curated). A
+law whose completion is long and dirty does not get that label; it lands in
+`NO_FINITE_MODEL` or `OPEN`. So the harvested population is **selected for clean, fast
+saturation**, and "20/20 clean" partly measures the classifier, not the generator.
+Follow-up run the same day:
+
+- 4 randomly chosen `NO_FINITE_MODEL` laws: **none** saturate at 18 s. The hard tier
+  really is where the slow/dirty completions must be, if they exist.
+- One-op extensions of **clean** seed 4916: of 6 sampled, one saturates dirty (95
+  clauses, 1 unorientable), one clean, 4 unresolved at 6 s. **Dirtiness is generated,
+  not merely inherited from ETP's order-5 laws.** That is the good news for renewability.
+- One-op extensions of **dirty** seed 15535: 4 of 6 are provably TRIVIAL at 5 s — the
+  trivial-strip lesson from `HISTORY.md`, again.
+
+So the honest version of the census: among laws that saturate *quickly*, dirty is rare.
+The fraction of dirty laws among those that saturate **given a real budget** is the
+number that matters and is **not yet measured** — it needs the retry-length runs on the
+cluster. Do not conclude "the generator only produces the floor" from the table above;
+conclude that the classifier's budget hides the interesting cases inside
+`NO_FINITE_MODEL`.
+
+Three consequences, and the first one is uncomfortable:
+
+1. **The fallback paper's N is large but cheap.** ~200 certified infinite models sounds
+   good until you see that most are zero-critical-pair laws whose model was never in
+   doubt. The certifications worth having are exactly the ones we cannot currently do.
+   Size the fallback by *dirty* laws certified, not by laws certified.
+2. **The generator does produce dirty laws — at an unknown rate.** One-op extension
+   inherits the no-finite-model argument, and the *labelled* Austin population is almost
+   all zero-critical-pair. But a 6-law sample of 4916's extensions already contains a
+   95-clause dirty saturation, so dirtiness is generated. The renewability question is
+   therefore quantitative — *what fraction of extensions, given a real budget, saturate
+   dirty?* — and it is answerable only with the cluster's long runs.
+3. **Evidence for the §5D collapse worry.** 9,725 laws descend from 130 seeds, and their
+   saturations look like the seeds'. Structural near-duplication at the level of the
+   completion behaviour is what equivalence-class collapse looks like from the outside.
+
+The ~86% prior from JRS (261/304, order ≤ 4, arbitrary `L → E`) does not transfer. On
+the population that actually matters — real order-5 laws — it is **~64% clean, 36%
+dirty**, and worse at the top.
+
+### B½ — The construction suite
+§4. Implement the published families faithfully. Rename `order6_grade.py`.
+
+### C — The prover baseline
+E, Twee, Vampire (ground joinability), × KBO weightings × LPO precedences × the budget
+ladder. Docker image, exact flags, version number. Hard tier = unresolved at `B_max`
+under all configurations, **stated as relative to portfolio v1.0**.
+
+Timeouts as they actually stand today (a referee will check this sentence):
+`TMO_FAST=20` applies **only** to the `r1`/`r2` harvest; `o5_status` and `tgt_status`
+ran at `TMO_SLOW=120`; the retry runs at `TMO_HARD=300`. The tier is indefensible
+because of prover-and-ordering monoculture, **not** because of budget.
+
+**Gate:** the 20s → 300s conversion rate. The running retry is already a 300s sample
+over ~350 laws — read the curve off it, no portfolio needed. If most of
+`NO_FINITE_MODEL` falls at 300s, the frontier was under-budgeted and everything
+downstream is rebuilt before it is written.
+
+### D — The unit of counting (run this **before** C)
+Not cheap as stated: 3,428 laws is ~5.9M pairs, ~12M prover calls; at 1 s/call on 32
+cores that is days.
+
+> **Result, 2026-07-09 — `AUSTIN_PROVEN` does not collapse.** 50-law sample (all 11
+> order-5, 39 harvested); 48 saturated inside 4 s. Cross-evaluating each law in every
+> other law's model (`scripts/equiv_sample.py`, prover-free) **certified 1,123 of the
+> 1,128 pairs inequivalent**. The 5 survivors went to Vampire and *all 5 are genuinely
+> equivalent*, both directions proved at 8 s.
+>
+> **48 laws → 44 classes.** No collapse. So the fallback paper's N is ~92% of nominal,
+> not ~15%.
+>
+> But look at *what* merged: every one of the 5 is a **seed ↔ its own one-op extension**,
+> e.g. `x = (((y◇y)◇y)◇x)◇(y◇z)` (28770) ≡ `x = ((((y◇y)◇y)◇x)◇(y◇(z◇y)))`. One-op
+> extension sometimes produces a law that is *logically equivalent* to its seed. The
+> generator must dedupe extensions against their seed, and the corpus count must be
+> stated after that dedupe.
+>
+> Method note: separations are **sound** (a failing ground instance is a counterexample);
+> merges were only candidates until the prover proved both directions. We therefore never
+> wrongly merge, and 44 is an **upper bound** at an 8 s budget. Sanity: every model
+> satisfies its own law (48/48), and no cell hit the step cap.
+>
+> **This does not settle the hard tier.** `NO_FINITE_MODEL` laws have no saturation,
+> hence no model, hence no cheap separations — run `equiv_sample.py --no-models` there
+> and pay the prover for every pair. That is still the gate.
+
+**SAMPLE FIRST. The fingerprint is a premature optimisation.** You do not need all 3,428
+laws to answer "does the hard tier collapse." Take **250 at random** and run *incremental
+union-find against class representatives*: for each new law, try to prove it equivalent
+to each existing representative (two calls per pair). Cost is `O(n·k)`, and it
+self-terminates — 250 laws giving 240 classes means no collapse, stop; 250 giving 30
+means the paper changes, and you knew by lunchtime. A few thousand prover calls, not 12
+million. Do this **before** §5C.
+
+Only then, if a full census is wanted:
+
+1. **Fingerprint.** For each law, which of a fixed probe set of ~100 equations does it
+   entail (1 s each)? ~343k calls, one pass.
+2. **Pairwise only within matching buckets.** Then union-find.
+
+`scripts/fingerprint.py` implements step 1–2. **Its coordinates are Y-only, so it can
+only ever over-split** — two equivalent laws land in different buckets whenever one
+entailment missed the budget — and over-splitting inflates the class count, the direction
+that corrects against us later. With `ordered_model.py` in hand, the probe vector gains
+sound **N** coordinates on the hard tier (normalise the probe in the law's own model),
+and the fingerprint becomes correct rather than merely fast. Until then it is a
+scheduling heuristic, not a measurement. Two further findings from building it:
+
+**The cheap exact invariants are empirically dead.** Sampled finite magmas and affine-ℤ
+magmas are exact equivalence invariants and cost no prover time — and measured over 247
+`AUSTIN_PROVEN` + 400 `NO_FINITE_MODEL` + 400 `HAS_FINITE_MODEL` laws they are
+**all-zero for every law**: one bucket, zero separation. A sampled structure satisfying
+a specific 4-variable order-5+ law is astronomically unlikely, and Austin laws have no
+nontrivial finite models at all. Sampled-structure fingerprints do not work here. Do
+not rebuild them.
+
+**Refutation is the bottleneck, and it is the same bottleneck as §B.** A probe
+coordinate can read Y (prover proved `L ⊨ p`) but never a certified N unless we hold a
+model of `L` in which `p` fails. On the hard tier every model of `L` is infinite, so the
+only such object is the saturation-derived rewrite system — and reading distinct normal
+forms as distinct elements is valid exactly when that system is **convergent**, which is
+what CSI/TTT2/CeTA certify. So **the equivalence-class count and the countermodel
+certification are the same problem.** Without N, buckets can only split classes, and the
+class count stays an upper bound that shrinks with compute.
+
+Demonstrated on 4916 (3 oriented rules, 0 unorientable): normalising with fresh
+constants refutes `x = y`, `x ◇ y = y ◇ x`, `x ◇ x = x`, associativity and left
+projection, and correctly does *not* refute `x = x`. That first refutation is the Austin
+property of 4916, prover-free and hand-checkable — modulo convergence. On 12857/33436
+the channel is unavailable (287/70 and 282/69 oriented/unorientable).
+
+**Action item for `prove_status.py`:** it never persists finite models — `witness` holds
+the (i)-prover's injective subterm, not a magma. Persisting the FMB model for
+`HAS_FINITE_MODEL` laws buys the N-channel for free on the easy tiers, where no
+certification is needed.
+
+**Direction of error.** Equivalence is semi-decidable in the positive direction only:
+if `L ≡ L'` we eventually prove it; if they are inequivalent we may never know. So
+unproved equivalences leave classes **split**, and the class count is an **upper
+bound** that shrinks with compute. That is the wrong direction for a number in an
+abstract — we would be over-claiming corpus size, and the error corrects against us
+later. Report it as an upper bound, with the budget attached, and say so in the paper.
+
+**Gate:** if the hard tier collapses to a few dozen classes, this is not a smaller
+paper — it is a different one. See §6.
+
+### E — Generator as artifact
+Publish `order6_targeted.py` + seeds + dates + the cheap screen. The durability number
+is **not** "fraction of one-op extensions surviving portfolio v1.0" — survivors may be
+duplicates. It is:
+
+> **equivalence classes per thousand extensions surviving portfolio v1.0**
+
+which composes D with E and is the only version of the rate that means what we want.
+Rolling held-out mint, dated after evaluated models' cutoffs; scores reported on the
+fresh mint.
+
+### F — The eval
+
+**Tool access is pre-registered, or the measurement is void.** If the model may call
+Twee or Vampire, then on a hard-tier law it can run the portfolio at 10× our budget and
+win. That is a verified solve that measures nothing — the same instance falling to the
+same method with more compute.
+
+| resource | allowed? |
+|---|---|
+| construction suite (§B½) | **yes** |
+| Lean / CeTA / CSI / TTT2 as *checkers* | **yes** |
+| saturation provers (Vampire, E, Twee) | **no** |
+| self-verification loop against the checkers | **yes**, report compute |
+
+**And the flip side:** after any LLM solve, re-run the portfolio at 10× on that law. If
+it falls, say so. That is the honest analogue of what happened to the finite band
+(`attic/finite_regime/`), and a reviewer will ask.
+
+**Answer-channel parity.** The baseline and the model must emit the *same* certificate,
+or "portfolio scores 0" is a category error rather than a zero. The greedy builder
+emits a domain-verified partial magma — it cannot certify a solve on the two-sided
+task, so it cannot score. Every baseline component either outputs a Lean model, a
+CeTA-certified rewrite system, or a proof of `L ⊨ x = y`, **or it is excluded from
+scoring and reported as a heuristic**.
+
+Report both cells: `M \ N` (model solves, portfolio doesn't) and `N \ M`. If the model
+only wins where the portfolio wins, there is no synthesis, and that is a finding.
+Pre-register the metric before the first LLM call so the tier cannot be tuned to
+flatter the result.
+
+## 6. Three gates can each end the benchmark framing
+
+- **D collapse** — 3,428 → forty classes.
+- **C's budget curve** — the frontier was under-budgeted.
+- **Property (5)'s wall** — the hard tier is hard because it is *far* from every known
+  family, so nothing scores.
+
+That is good design: each gate is a cheap experiment that can kill an expensive build.
+It also means **P(all three pass) is not high**, and both cheap diagnostics (D, and the
+budget curve from C's gate) are available this week.
+
+**If (5) walls:** minting instances one generalisation-step outside our suite changes
+the claim from "beyond all known automated methods" to "one step beyond the suite we
+wrote" — interpolation over our own recipe, not synthesis. Weaker, still publishable.
+**Pre-register it as a fallback now**, so it is not discovered as a rationalisation
+after the wall shows up.
+
+**The fallback paper**, which depends on none of the three:
+
+> A generic Lean formalisation of saturation-derived infinite models — Herbrand domain,
+> normalisation, well-foundedness, confluence ⇒ model — turning CeTA-certified rewrite
+> systems into Lean theorems, plus N closed cases from ETP's open Table 2.
+
+It is real, it is the thing JRS explicitly left on the table, ETP is a Lean project,
+and it is Phase B, which we were going to build anyway. Decide now that this is the
+floor, and the benchmark is upside.

@@ -55,11 +55,28 @@ def main():
     ap.add_argument("patterns", nargs="+")
     ap.add_argument("--merge-out", default=None)
     ap.add_argument("--gold-out", default=None)
+    ap.add_argument("--baselines", nargs="*", default=[],
+                    help="jsonl of {law,baseline} from rescore_baselines.py; overrides "
+                         "the baseline column (statuses are never touched)")
     a = ap.parse_args()
 
     rows = merge(a.patterns)
     if not rows:
         print("no rows"); return
+    if a.baselines:
+        fix = {}
+        for pat in a.baselines:
+            for f in sorted(glob.glob(pat)):
+                for line in open(f):
+                    if line.strip():
+                        r = json.loads(line); fix[r["law"]] = r["baseline"]
+        for r in rows:
+            if r["law"] in fix:
+                r["baseline"] = fix[r["law"]]
+        print(f"(baseline column overridden for {len(fix)} laws)\n")
+    broken = sum(1 for r in rows if str(r.get("baseline", "")).startswith("error"))
+    if broken:
+        print(f"WARNING: {broken} laws have a broken baseline — run rescore_baselines.py\n")
     n = len(rows)
     st = collections.Counter(r["status"] for r in rows)
     print(f"{n} laws (deduped; strongest verdict per law)\n")

@@ -78,7 +78,10 @@ def ti_solve(et, rhs, R=4, budget=6000):
 
 
 # ---- Rung 2: greedy magma builder + full-domain verification ----
-def greedy_build(rhs, budget=4000, K=5, cap=40, step_cap=6000):
+# NOTE: vars must be the law's actual variables, x first. Hardcoding x,y,z here
+# silently raised KeyError('w') on every 4-variable law -- i.e. on most one-op
+# extensions -- and the caller swallowed it as baseline="error:'w'".
+def greedy_build(rhs, vs, budget=4000, K=5, cap=40, step_cap=6000):
     op = {}; nov = [10**7]; carrier = [1, 2, 3]
     def values(node, env, steps):
         if node[0] == 'var': yield env[node[1]]; return
@@ -104,7 +107,7 @@ def greedy_build(rhs, budget=4000, K=5, cap=40, step_cap=6000):
         return False
     carrset = set(carrier); done = set(); pr = 0
     while pr < budget:
-        nt = [t for t in itertools.product(carrier, repeat=3) if t not in done]
+        nt = [t for t in itertools.product(carrier, repeat=len(vs)) if t not in done]
         if not nt:
             add = sorted(e for e in (set(op.values()) | {a for k in op for a in k}) if e not in carrset)
             if not add or len(carrier) >= cap: break
@@ -114,27 +117,36 @@ def greedy_build(rhs, budget=4000, K=5, cap=40, step_cap=6000):
         for t in nt:
             if pr >= budget: break
             done.add(t); pr += 1
-            if not satisfy({'x': t[0], 'y': t[1], 'z': t[2]}, t[0]): return None
+            env = dict(zip(vs, t))
+            if not satisfy(env, env['x']): return None
     return op, sorted(carrset)
 
 
-def verify_domain(op, carrier, rhs):
+def verify_domain(op, carrier, rhs, vs):
     def ev(node, env):
         if node[0] == 'var': return env[node[1]]
         a = ev(node[1], env); b = ev(node[2], env)
         if a is None or b is None: return None
         return op.get((a, b))
-    for t in itertools.product(carrier, repeat=3):
-        env = {'x': t[0], 'y': t[1], 'z': t[2]}; val = ev(rhs, env)
+    for t in itertools.product(carrier, repeat=len(vs)):
+        env = dict(zip(vs, t)); val = ev(rhs, env)
         if val is not None and val != env['x']: return False
     return True
+
+
+def law_vars(et, l, r):
+    """x first, then the rest -- greedy_build wants env['x'] as the target."""
+    vs = et.variables(l) + et.variables(r)
+    rest = sorted(set(vs) - {'x'})
+    return ['x'] + rest
 
 
 def grade(et, law):
     l, r = et.parse_equation(law)
     if ti_solve(et, r): return 1, "translation_invariant"
-    res = greedy_build(r)
-    if res is not None and verify_domain(res[0], res[1], r): return 2, "greedy_verified"
+    vs = law_vars(et, l, r)
+    res = greedy_build(r, vs)
+    if res is not None and verify_domain(res[0], res[1], r, vs): return 2, "greedy_verified"
     return 4, "open_to_us"
 
 

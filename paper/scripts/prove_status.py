@@ -214,7 +214,11 @@ def prove_nontrivial_model(et, law, vbin, timeout, certdir=None, tag=None):
     """
     ax, _ = _lawax(et, law)
     body = ax + "\nfof(nt,axiom,?[U,V]: U != V).\n"
-    out = _run(vbin, ["-sa", "otter"], body, timeout)
+    # `--show_active on` is REQUIRED: the `SZS output Saturation` block prints only a
+    # subset of the final clause set (for 4916 it shows 2 clauses; the saturation
+    # actually closed with 5, three of them derived by superposition). Without this
+    # the archived certificate is not the saturated set and cannot be replayed.
+    out = _run(vbin, ["-sa", "otter", "--show_active", "on"], body, timeout)
     ok = _satisfiable(out)
     if ok and certdir:
         os.makedirs(certdir, exist_ok=True)
