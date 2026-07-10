@@ -130,23 +130,31 @@ _SZS_AUSTIN = {"CounterSatisfiable", "Satisfiable"}
 
 
 def _verdict(prover, direction, out):
-    """Map prover output to a THEOREM, never to a guess."""
+    """Map prover output to a THEOREM, never to a guess.
+
+    DIRECTION IS LOAD-BEARING. A `triv` config encodes the conjecture `L |= x=y`; its
+    only sound positive verdict is TRIVIAL. If it fails and the prover happens to
+    saturate, that saturation came from a proving strategy (`--mode casc`) that may be
+    INCOMPLETE, so its CounterSatisfiable is NOT a trustworthy AUSTIN — return "".
+    AUSTIN may be claimed only by a `sat` config (a dedicated complete saturation) or
+    by twee (complete by construction). Conflating the two is how the selftest's
+    'austin not trivial' check failed: a proving run reported AUSTIN off an untrusted
+    saturation."""
+    incomplete = "incomplete strategy" in out
     m = _SZS.search(out)
     if m:
         st = m.group(1)
         if st in _SZS_TRIV:
-            return "TRIVIAL"
+            return "TRIVIAL"                      # L |= x=y proved; sound in any encoding
         if st in _SZS_AUSTIN:
-            # Satisfiable from an incomplete strategy is not a theorem.
-            return "" if "incomplete strategy" in out else "AUSTIN"
+            if direction == "triv":
+                return ""                         # untrusted: proving-mode saturation
+            return "" if incomplete else "AUSTIN"
         return ""                                # GaveUp, Timeout, ResourceOut, Error
-    # No SZS line. Fall back only to prose we have SEEN, from a real run (2026-07-10,
-    # twee 2.6.1 on law 4916):
-    #     "Ran out of critical pairs. This means the conjecture is not true."
-    #     "RESULT: CounterSatisfiable (the conjecture is false)."
+    # No SZS line. Fall back only to prose we have SEEN (twee 2.6.1, law 4916, 2026-07-10).
     if prover == "twee":
         if "RESULT: CounterSatisfiable" in out or "conjecture is not true" in out:
-            return "AUSTIN"
+            return "AUSTIN"                        # twee completion is complete
         if "RESULT: Unsatisfiable" in out or "RESULT: Theorem" in out:
             return "TRIVIAL"
         return ""
