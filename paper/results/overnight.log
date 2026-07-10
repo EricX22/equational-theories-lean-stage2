@@ -139,3 +139,90 @@ BENCHMARK GOLD: 4  (proved Austin, no construction from our suite)
 2026-07-09 11:48:04 — r2_status: 3227 laws done
 2026-07-09 11:58:04 — r2_status: 3502 laws done
 2026-07-09 12:08:04 — r2_status: 3783 laws done
+2026-07-09 12:18:04 — r2_status: 4053 laws done
+2026-07-09 12:28:04 — r2_status: 4286 laws done
+2026-07-09 12:38:04 — r2_status: 4550 laws done
+2026-07-09 12:48:04 — r2_status done:
+4796 laws (deduped; strongest verdict per law)
+
+    1238  TRIVIAL            L |= x=y            implication TRUE (proved)
+     351  HAS_FINITE_MODEL   finite countermodel  FALSE, finite (proved)
+     114  AUSTIN_PROVEN      no finite + exists   FALSE, infinite (proved)
+    2196  NO_FINITE_MODEL    no finite model      existence open
+      21  SATISFIABLE_ONLY   model exists         finiteness open
+     876  OPEN               nothing proved
+
+  settled (theorem):      1703/4796
+  open questions left:    3093/4796
+  proven Austin:          114
+  proven no finite model: 2310
+
+baseline (orthogonal axis - a fact about us, not the law):
+    2492  error:'w'
+    2140  greedy_verified
+     137  open_to_us
+      27  translation_invariant
+
+BENCHMARK GOLD: 3  (proved Austin, no construction from our suite)
+  x = (y ◇ (x ◇ (z ◇ (z ◇ (y ◇ (x ◇ (z ◇ (z ◇ z))))))))
+  x = ((((y ◇ (y ◇ y)) ◇ y) ◇ x) ◇ ((y ◇ y) ◇ z))
+  x = ((y ◇ (z ◇ z)) ◇ (x ◇ (z ◇ (z ◇ (z ◇ z)))))
+2026-07-09 12:48:05 — RETRY: collecting everything still unsettled
+6096 laws with status in ['NO_FINITE_MODEL', 'OPEN', 'SATISFIABLE_ONLY'] -> paper/results/unsettled.jsonl
+2026-07-09 12:48:05 — RETRY -> retry_status_*.jsonl (tmo=300s fmb=300s)
+2026-07-09 12:48:20 — retry: 0 laws done
+2026-07-09 12:58:20 — retry: 21 laws done
+2026-07-09 13:08:20 — retry: 42 laws done
+2026-07-09 13:18:20 — retry: 56 laws done
+2026-07-09 13:28:20 — retry: 79 laws done
+2026-07-09 13:38:21 — retry: 96 laws done
+2026-07-09 13:48:21 — retry: 113 laws done
+2026-07-09 13:58:21 — retry: 126 laws done
+2026-07-09 14:08:21 — retry: 142 laws done
+2026-07-09 14:18:21 — retry: 161 laws done
+2026-07-09 14:28:21 — retry: 174 laws done
+2026-07-09 14:38:21 — retry: 185 laws done
+2026-07-09 14:48:21 — retry: 196 laws done
+2026-07-09 14:58:21 — retry: 210 laws done
+2026-07-09 15:08:22 — retry: 224 laws done
+2026-07-09 15:18:23 — retry: 244 laws done
+2026-07-09 15:28:24 — retry: 262 laws done
+2026-07-09 15:38:24 — retry: 278 laws done
+2026-07-09 15:48:24 — FINAL REPORT (merged; strongest verdict per law wins)
+10474 laws (deduped; strongest verdict per law)
+
+    3080  TRIVIAL            L |= x=y            implication TRUE (proved)
+    1042  HAS_FINITE_MODEL   finite countermodel  FALSE, finite (proved)
+     262  AUSTIN_PROVEN      no finite + exists   FALSE, infinite (proved)
+    4141  NO_FINITE_MODEL    no finite model      existence open
+      43  SATISFIABLE_ONLY   model exists         finiteness open
+    1906  OPEN               nothing proved
+
+  settled (theorem):      4384/10474
+  open questions left:    6090/10474
+  proven Austin:          262
+  proven no finite model: 4403
+
+baseline (orthogonal axis - a fact about us, not the law):
+    5446  greedy_verified
+    4427  error:'w'
+     554  open_to_us
+      47  translation_invariant
+
+BENCHMARK GOLD: 12  (proved Austin, no construction from our suite)
+  x =  y ◇ (x ◇ (x ◇ (y ◇ (z ◇ z))))
+  x =  ((((y ◇ y) ◇ z) ◇ x) ◇ x) ◇ z
+  x = ((y ◇ (z ◇ z)) ◇ (x ◇ (z ◇ (z ◇ z))))
+  x = ((((y ◇ y) ◇ y) ◇ x) ◇ ((y ◇ y) ◇ z))
+  x = ((y ◇ (z ◇ z)) ◇ (x ◇ (z ◇ ((z ◇ z) ◇ z))))
+  x = (((z ◇ (z ◇ y)) ◇ z) ◇ (x ◇ (z ◇ (z ◇ z))))
+  x = (y ◇ (x ◇ (z ◇ (z ◇ (y ◇ (x ◇ (z ◇ (z ◇ z))))))))
+  x = ((((y ◇ (y ◇ y)) ◇ y) ◇ x) ◇ ((y ◇ y) ◇ z))
+  x = ((y ◇ (z ◇ z)) ◇ (x ◇ (z ◇ (z ◇ (z ◇ z)))))
+  x = (((z ◇ y) ◇ z) ◇ (x ◇ (z ◇ (z ◇ z))))
+  x = ((y ◇ y) ◇ (x ◇ (x ◇ (y ◇ (z ◇ z)))))
+  x = (((((y ◇ y) ◇ z) ◇ x) ◇ x) ◇ (z ◇ z))
+
+merged corpus -> paper/results/final_status.jsonl
+gold set      -> paper/results/gold.jsonl
+2026-07-09 15:48:26 — ALL DONE. corpus: paper/results/final_status.jsonl | gold: paper/results/gold.jsonl | certs: paper/certs/saturation
