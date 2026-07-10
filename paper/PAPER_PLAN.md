@@ -325,14 +325,31 @@ prover-only, one-directional, and expensive. Do not budget for it as if it were 
 Not cheap as stated: 3,428 laws is ~5.9M pairs, ~12M prover calls; at 1 s/call on 32
 cores that is days.
 
-> **Result, 2026-07-09 — `AUSTIN_PROVEN` does not collapse.** 50-law sample (all 11
-> order-5, 39 harvested); 48 saturated inside 4 s. Cross-evaluating each law in every
-> other law's model (`scripts/equiv_sample.py`, prover-free) **certified 1,123 of the
-> 1,128 pairs inequivalent**. The 5 survivors went to Vampire and *all 5 are genuinely
-> equivalent*, both directions proved at 8 s.
+> **Result, 2026-07-10 — `AUSTIN_PROVEN` collapses by a quarter.** 250-law sample on the
+> cluster: **250 laws → ≤188 classes**, 213 proved equivalences. And 188 is an *upper
+> bound* (we can only over-split), so the true collapse is ≥25%.
 >
-> **48 laws → 44 classes.** No collapse. So the fallback paper's N is ~92% of nominal,
-> not ~15%.
+> A 48-law pilot the day before gave 48 → 44 (8%) and I read it as "no collapse". That
+> was a sampling artifact: the pilot drew 11 order-5 seeds (pairwise inequivalent by
+> ETP's own check) plus 39 harvested laws scattered across many seeds, so it contained
+> almost no *siblings*. The 250-law draw is dense in siblings — many extensions of the
+> same seed — and siblings are exactly what merge. **Collapse scales with sibling
+> density, so extrapolating 25% to the full 9,725-law corpus is optimistic, not
+> conservative.**
+>
+> Structure of the merges: mostly a seed and its extensions, all in one class — e.g.
+> 22455 `x = (y ◇ (x◇x)) ◇ ((y◇z) ◇ y)` heads a large family, and **33436 itself is
+> equivalent to one of its own extensions**. Many merges replace a once-occurring
+> variable by a term containing a fresh one (`y ◇ z` ⇝ `y ◇ (z ◇ w)`), which is a
+> *syntactic* pattern worth using as a free pre-filter before any prover call.
+>
+> Consequences: the abstract quotes **classes**, never laws. `seed_dedupe.py` must run at
+> generation time — it would have stopped most of these entering the corpus. And the
+> fallback paper's N is ~0.75× nominal at best.
+>
+> Method: cross-evaluating each law in every other law's model (`scripts/equiv_sample.py`,
+> prover-free) certified **1,123 of 1,128** pairs inequivalent on the pilot; only the
+> survivors cost a prover call. Separations are sound; merges are prover-proved.
 >
 > But look at *what* merged: every one of the 5 is a **seed ↔ its own one-op extension**,
 > e.g. `x = (((y◇y)◇y)◇x)◇(y◇z)` (28770) ≡ `x = ((((y◇y)◇y)◇x)◇(y◇(z◇y)))`. One-op
@@ -427,6 +444,13 @@ Rolling held-out mint, dated after evaluated models' cutoffs; scores reported on
 fresh mint.
 
 ### F — The eval
+
+> **VERIFICATION IS CLOSED (2026-07-10).** `answer_spec.py --selftest --lean-dir .`
+> passes on the cluster: Lean compiles the reference proof against the *generated*
+> statement, the shadow/`sorry`/`axiom`/`native_decide` gates reject, and the axiom
+> footprint is inside `{propext, Quot.sound, Classical.choice}`. The judge is real, and
+> minimum-acceptable item 1 is done. What remains is *coverage* — how many model shapes
+> a submitter can push through Lean — which is what §5B's formalisation widens.
 
 **Tool access is pre-registered, or the measurement is void.** If the model may call
 Twee or Vampire, then on a hard-tier law it can run the portfolio at 10× our budget and

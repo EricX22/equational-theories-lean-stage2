@@ -119,8 +119,13 @@ print(et.tptp_true("x = y ◇ (x ◇ (x ◇ (y ◇ (z ◇ z))))", "x = y"))
 PY
     "$TWEE" /tmp/4916.p > $R/twee_4916.out 2>&1
     say "twee output saved to $R/twee_4916.out — READ IT BY EYE"
-    if grep -qE "Ran out of critical pairs|conjecture is true|Goal is true" $R/twee_4916.out; then
-        mark twee_strings; say "twee verdict strings match baseline_probe::_verdict"
+    # 4916 is Austin: it does NOT entail x=y, so a complete run must report
+    # CounterSatisfiable (SZS), or say so in prose. Anything else and _verdict is blind.
+    if grep -qE "SZS status (CounterSatisfiable|Satisfiable)" $R/twee_4916.out; then
+        mark twee_strings; say "twee emits SZS status — _verdict reads it directly"
+    elif grep -qE "Ran out of critical pairs|conjecture is (true|false)|Goal is true" \
+             $R/twee_4916.out; then
+        mark twee_strings; say "twee prose recognised (no SZS line; consider --tstp)"
     else
         say "GATE 2 FAILED: none of the expected strings appear. Fix _verdict before"
         say "  trusting the twee column. Continuing WITHOUT twee."
@@ -149,9 +154,13 @@ fi
 
 if ! have baseline; then
     if [[ -z "$EPROVER" || -z "$TWEE" ]] && [[ "$ALLOW_PROVISIONAL" != "1" ]]; then
-        say "SKIPPING baseline: E and/or Twee missing, so the hard tier it produces"
-        say "  cannot be published. Install them (see RUNBOOK §1), or re-run with"
-        say "  ALLOW_PROVISIONAL=1 to get a Vampire-only curve anyway."
+        say "SKIPPING baseline. The portfolio is not usable, so the hard tier it"
+        say "  produces cannot be published. Missing or disqualified:"
+        [[ -z "$EPROVER" ]] && say "    eprover — not on PATH (RUNBOOK §1)"
+        [[ -z "$TWEE"    ]] && say "    twee — either not on PATH, or INSTALLED BUT"
+        [[ -z "$TWEE"    ]] && say "      DISQUALIFIED by Gate 2 (its output strings do"
+        [[ -z "$TWEE"    ]] && say "      not match _verdict; see $R/twee_4916.out)"
+        say "  Re-run with ALLOW_PROVISIONAL=1 for a Vampire-only curve, knowingly."
     else
     stage baseline
     say "baseline: sampling ${BASELINE_N:-all} laws (the curve is a rate, not a census)"
@@ -204,4 +213,7 @@ fi
 
 stage done
 say "ALL DONE. gates: answer_spec=$(have answer_spec && echo ok || echo skipped/failed)"
-say "  curve: $R/retry_curve.json | baseline: $R/baseline_v1.jsonl | classes: $R/classes.json"
+for f in retry_curve.json baseline_v1.jsonl classes.json lean_model.log; do
+    [[ -s "$R/$f" ]] && say "  $R/$f  ($(wc -l < "$R/$f") lines)"
+done
+have baseline || say "  baseline: NOT RUN (portfolio incomplete; see RUNBOOK §1)"

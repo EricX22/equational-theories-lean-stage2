@@ -116,20 +116,36 @@ def _body(law, direction):
     return ax + "\nfof(nt,axiom,?[U,V]: U != V).\n"
 
 
+import re as _re
+
+# The SZS ontology is the standard every one of these provers emits. Matching prose is
+# how the twee column silently read zero in the first place; Gate 2 in run_all.sh caught
+# it. Parse the status line, and only fall back to prose when there is none.
+_SZS = _re.compile(r"SZS status\s+(\w+)")
+
+# What each status means for OUR two questions. `L |= x=y` is the conjecture in the
+# triv/both encodings; the sat encoding has no conjecture, only `L ∧ sK0 != sK1`.
+_SZS_TRIV = {"Theorem", "Unsatisfiable", "ContradictoryAxioms"}
+_SZS_AUSTIN = {"CounterSatisfiable", "Satisfiable"}
+
+
 def _verdict(prover, direction, out):
     """Map prover output to a THEOREM, never to a guess."""
-    if prover == "twee":
-        # Twee proves the goal, or completes the system (=> consistent, model exists).
-        if "The conjecture is true" in out or "Goal is true" in out:
+    m = _SZS.search(out)
+    if m:
+        st = m.group(1)
+        if st in _SZS_TRIV:
             return "TRIVIAL"
-        if "Ran out of critical pairs" in out or "The conjecture is false" in out:
-            return "AUSTIN"
-        return ""
+        if st in _SZS_AUSTIN:
+            # Satisfiable from an incomplete strategy is not a theorem.
+            return "" if "incomplete strategy" in out else "AUSTIN"
+        return ""                                # GaveUp, Timeout, ResourceOut, Error
+    # No SZS line. Fall back to the prover-specific prose we have actually verified.
+    if prover == "twee":
+        return ""                                # never guess; Gate 2 must approve first
     if direction == "triv":
         return "TRIVIAL" if _proved(out) else ""
-    if _satisfiable(out):                       # rejects incomplete strategies
-        return "AUSTIN"
-    return ""
+    return "AUSTIN" if _satisfiable(out) else ""
 
 
 def run_config(law, cfg, bins, budget, certs=None):

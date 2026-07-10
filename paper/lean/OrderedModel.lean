@@ -136,9 +136,10 @@ theorem nontrivial_of_invariant {E : Eqs C} {β} (I : Invariant E β) {c₀ c₁
 section Normalisation
 variable (E : Eqs C) (gt : Tm C → Tm C → Prop) (hwf : WellFounded gt)
 
-/-- One step of ordered rewriting. `rw s t` iff `t` is obtained from `s` by applying an
-    axiom in the decreasing direction at some position. (Stated abstractly here; the
-    concrete generator is `ordered_model.py`.) -/
+-- One step of ordered rewriting: `rw s t` iff `t` is obtained from `s` by applying an
+-- axiom in the decreasing direction at some position. Stated abstractly here; the
+-- concrete generator is `ordered_model.py`.
+-- (NB: a `/-- … -/` doc comment cannot precede `variable` — it expects a declaration.)
 variable (rw : Tm C → Tm C → Prop)
 
 /-- Ordered rewriting only ever decreases, so it terminates. -/
