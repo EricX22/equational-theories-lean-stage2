@@ -29,6 +29,12 @@ SHARDS=${SHARDS:-$(nproc)}
 BUDGETS=${BUDGETS:-30,60,120,300,600}
 HEARTBEAT=${HEARTBEAT:-3600}
 SAMPLE_N=${SAMPLE_N:-250}
+# The budget curve is a RATE. A few hundred hard-tier laws measure it as well as 3,428,
+# and the full sweep costs ~5550 core-seconds PER LAW (nothing resolves, so every law
+# walks the whole ladder): ~5,300 core-hours, ~7 days on 32 cores. BASELINE_N=0 for all.
+BASELINE_N=${BASELINE_N:-300}
+# A portfolio missing E/Twee cannot produce a publishable hard tier. Refuse by default.
+ALLOW_PROVISIONAL=${ALLOW_PROVISIONAL:-0}
 VAMPIRE=${VAMPIRE:-paper/bin/vampire}
 EPROVER=$(command -v eprover || true)
 TWEE=$(command -v twee || true)
@@ -142,7 +148,13 @@ if ! have baseline_selftest; then
 fi
 
 if ! have baseline; then
+    if [[ -z "$EPROVER" || -z "$TWEE" ]] && [[ "$ALLOW_PROVISIONAL" != "1" ]]; then
+        say "SKIPPING baseline: E and/or Twee missing, so the hard tier it produces"
+        say "  cannot be published. Install them (see RUNBOOK §1), or re-run with"
+        say "  ALLOW_PROVISIONAL=1 to get a Vampire-only curve anyway."
+    else
     stage baseline
+    say "baseline: sampling ${BASELINE_N:-all} laws (the curve is a rate, not a census)"
     # Collect shard PIDs and wait on THOSE. A bare `wait` also waits for the heartbeat
     # child, which never exits — the stage would hang forever.
     pids=()
@@ -150,7 +162,7 @@ if ! have baseline; then
         python3 paper/scripts/baseline_probe.py \
             --in "$IN" --status NO_FINITE_MODEL \
             --vampire "$VAMPIRE" ${EPROVER:+--eprover "$EPROVER"} ${TWEE:+--twee "$TWEE"} \
-            --budgets "$BUDGETS" --shard "$i/$SHARDS" \
+            --budgets "$BUDGETS" --n "$BASELINE_N" --shard "$i/$SHARDS" \
             --out $R/baseline_v1.jsonl --certs paper/certs/baseline \
             >> $R/baseline_$i.log 2>&1 &
         pids+=($!)
@@ -164,6 +176,7 @@ if ! have baseline; then
         say "baseline done: $rows rows"
         python3 paper/scripts/baseline_probe.py --curve $R/baseline_v1.jsonl 2>&1 | tee -a "$LOG"
     fi
+    fi   # end: portfolio-complete guard
 fi
 
 # --- corpus hygiene ----------------------------------------------------------

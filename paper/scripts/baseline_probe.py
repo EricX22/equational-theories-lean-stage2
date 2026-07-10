@@ -219,6 +219,12 @@ def main():
     ap.add_argument("--eprover")
     ap.add_argument("--twee")
     ap.add_argument("--budgets", default="30,60,120,300,600")
+    ap.add_argument("--n", type=int, default=0,
+                    help="sample N laws (0 = all). THE CURVE IS A RATE: a few hundred "
+                         "laws measure it as well as thousands, and the full sweep on "
+                         "the hard tier costs ~5550 core-seconds PER LAW because "
+                         "nothing resolves and every law walks the whole ladder.")
+    ap.add_argument("--sample-seed", type=int, default=20260709)
     ap.add_argument("--shard", default="0/1")
     ap.add_argument("--selftest", action="store_true")
     ap.add_argument("--curve")
@@ -245,9 +251,17 @@ def main():
                 continue
             laws.append(r["law"])
     laws = sorted(set(laws))
+    if a.n and a.n < len(laws):
+        import random
+        random.Random(a.sample_seed).shuffle(laws)
+        laws = sorted(laws[:a.n])
     mine = [lw for k, lw in enumerate(laws) if k % n == i]
-    print(f"{len(mine)} laws, budgets {budgets}, "
-          f"{len([c for c in CONFIGS if bins.get(c[1])])} live configs", file=sys.stderr)
+
+    live = [c for c in CONFIGS if bins.get(c[1])]
+    worst = len(mine) * len(live) * sum(budgets)
+    print(f"{len(mine)} laws, budgets {budgets}, {len(live)} live configs", file=sys.stderr)
+    print(f"WORST CASE for this shard: {worst} core-seconds = {worst/3600:.1f} core-hours "
+          f"(nothing resolves => every law walks the whole ladder)", file=sys.stderr)
 
     with open(a.out, "a") as fh:                 # append: siblings resume off this
         for lw in mine:
