@@ -293,10 +293,33 @@ Timeouts as they actually stand today (a referee will check this sentence):
 ran at `TMO_SLOW=120`; the retry runs at `TMO_HARD=300`. The tier is indefensible
 because of prover-and-ordering monoculture, **not** because of budget.
 
-**Gate:** the 20s → 300s conversion rate. The running retry is already a 300s sample
-over ~350 laws — read the curve off it, no portfolio needed. If most of
-`NO_FINITE_MODEL` falls at 300s, the frontier was under-budgeted and everything
-downstream is rebuilt before it is written.
+**Gate:** the 20s → 300s conversion rate. **RUN 2026-07-09, retry complete
+(`scripts/retry_curve.py`).** 294 laws re-classified at 300 s/prover after 20 s:
+
+```
+conversion rate                    11/294 = 3.7%
+of 216 NO_FINITE_MODEL laws:
+    -> TRIVIAL     4  (1.9%)   hard-tier contamination, removed
+    -> AUSTIN      0  (0.0%)   hard-tier under-budgeting
+unconverted: median 606 s, max 3014 s — they burn the budget, they are not "almost done"
+```
+
+**Zero saturations closed at 15× the budget.** The four trivial conversions all landed
+by 160 s, well inside the cap: past the knee for *that* direction. So the gate passes —
+the hard tier is not merely under-budgeted — with one caveat that must be printed in the
+paper: this is **one prover and one term ordering**. "Method-bound" here means bound
+relative to `vampire -sa otter` under KBO. That is exactly what the portfolio exists to
+upgrade, and it is why the tier must be re-derived against v1.0 before the number ships.
+
+The 1.9% trivial rate is the **hard-tier contamination estimate**, and it is a real
+number to quote: the two-sided task (§2) is what makes those laws harmless rather than
+unanswerable.
+
+**And a claim of mine this refutes.** I argued the retry "pays twice" — that laws
+converting to `AUSTIN_PROVEN` would gain saturations, hence models, hence the cheap
+prover-free separations of §5D. Zero converted. The hard tier gains **no models**, so
+model-based separation stays unavailable there, and its equivalence census remains
+prover-only, one-directional, and expensive. Do not budget for it as if it were cheap.
 
 ### D — The unit of counting (run this **before** C)
 Not cheap as stated: 3,428 laws is ~5.9M pairs, ~12M prover calls; at 1 s/call on 32
@@ -387,9 +410,15 @@ later. Report it as an upper bound, with the budget attached, and say so in the 
 paper — it is a different one. See §6.
 
 ### E — Generator as artifact
-Publish `order6_targeted.py` + seeds + dates + the cheap screen. The durability number
-is **not** "fraction of one-op extensions surviving portfolio v1.0" — survivors may be
-duplicates. It is:
+Publish `order6_targeted.py` + seeds + dates + the cheap screen. **Dedupe extensions
+against their seed at generation time** (`scripts/seed_dedupe.py`): measured on the 48
+one-op extensions of 28770, **3 are logically equivalent to the seed** (6.3%), and the
+seed's own saturation model separated 40 of the other 45 prover-free. The three dropped
+all replace a once-occurring variable with a term containing a fresh one. Left in, this
+inflates the corpus systematically and scales with the harvest.
+
+The durability number is **not** "fraction of one-op extensions surviving portfolio
+v1.0" — survivors may be duplicates. It is:
 
 > **equivalence classes per thousand extensions surviving portfolio v1.0**
 

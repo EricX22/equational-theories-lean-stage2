@@ -329,8 +329,13 @@ Knobs: `SHARDS TMO_FAST TMO_SLOW TMO_HARD ROUNDS SEED_CAP S1_MAX..S4_MAX`, and
   (i)-prover (already a theorem) and burns 300s on the trivial-prover *then* 300s on
   saturation, sequentially. Those two are mutually exclusive; run them in parallel
   and take whichever returns first. ~3× throughput.
-- **Do not run a manual stage concurrently with `overnight.sh`** — `wait_for` detects
-  stages by `pgrep`.
+- **`overnight.sh`'s `pgrep` patterns are stage-specific**, not "any prover":
+  `prove_status.py .*retry_status_`, `prove_status.py .*${OUT}_`,
+  `order6_targeted.py .*r${r}_pool_`. So a manual job that runs `vampire` directly, or
+  imports `prove_status` as a module (`equiv_sample.py`, `baseline_probe.py`,
+  `ordered_model.py`), does **not** collide with `wait_for`. The real cost of running
+  alongside is CPU contention. Do not launch a second `prove_status.py` writing to a
+  matching `--out` prefix.
 - Order-5 fmb-confirm is essentially free-passing (these laws are pre-established
   no-finite-model), so `--fmb-timeout 0` there. Order-6 needs the real check.
 - **`BENCHMARK GOLD` does not mean what it says.** `order6_grade.py` implements
