@@ -298,7 +298,10 @@ def main():
     print(f"WORST CASE for this shard: {worst} core-seconds = {worst/3600:.1f} core-hours "
           f"(nothing resolves => every law walks the whole ladder)", file=sys.stderr)
 
-    with open(a.out, "a") as fh:                 # append: siblings resume off this
+    # Append so the concurrent shards of ONE run share a file. There is NO resume: the
+    # file is not read back, so a stale file from an earlier run would be silently mixed
+    # in. run_all.sh truncates once before the fleet; a standalone caller must too.
+    with open(a.out, "a") as fh:
         for lw in mine:
             for b in budgets:                    # ladder, early exit on resolution
                 done = False

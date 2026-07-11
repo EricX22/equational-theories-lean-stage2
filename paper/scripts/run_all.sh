@@ -200,6 +200,12 @@ if ! have "baseline_$SIG"; then
     else
     stage baseline
     say "baseline: sampling ${BASELINE_N:-all} laws (the curve is a rate, not a census)"
+    # Truncate ONCE, here, before the fleet. baseline_probe appends (so the 32 shards of
+    # THIS run share one file), but it has no resume logic, so a leftover file from an
+    # earlier run silently contaminates the curve — that is how 120s showed 142 laws
+    # while other budgets showed 117. The stage is marker-gated per SIG, so a completed
+    # run is never re-truncated; only a fresh or killed-and-restarted run is.
+    : > "$R/baseline_v1.jsonl"
     # Collect shard PIDs and wait on THOSE. A bare `wait` also waits for the heartbeat
     # child, which never exits — the stage would hang forever.
     pids=()

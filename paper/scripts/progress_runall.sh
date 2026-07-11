@@ -37,9 +37,28 @@ laws = {r["law"] for r in rows}
 print(f"  {len(rows)} prover-calls / {len(laws)} laws")
 byc = collections.Counter(r["config"] for r in rows if r["verdict"])
 if byc:
-    print("  resolutions by config (a nonzero TWEE row => hard tier may be Vampire-bound):")
+    print("  resolutions by config:")
     for c, n in byc.most_common():
         print(f"    {c:26s} {n}")
+    # A law resolved ONLY by a completion prover (twee/eprover-sat) and by NO other
+    # family is the reshaping result. Compare against ALL other provers, not just
+    # Vampire (an earlier hand-check missed eprover and produced a false positive).
+    prover = lambda cfg: cfg.split("/")[0]
+    bylaw = collections.defaultdict(lambda: collections.defaultdict(set))
+    for r in rows:
+        if r["verdict"]:
+            bylaw[r["law"]][r["verdict"]].add(prover(r["config"]))
+    for law, verds in bylaw.items():
+        for verd, provers in verds.items():
+            if provers == {"twee"}:
+                print(f"  TWEE-ONLY [{verd}]: {law[:60]}")
+            elif provers <= {"twee", "eprover"} and "vampire" not in provers:
+                print(f"  COMPLETION-ONLY [{verd}] ({','.join(sorted(provers))}): {law[:52]}")
+    # AUSTIN resolutions are the ones that matter: a NEW nontrivial model on the hard
+    # tier. TRIVIAL resolutions are just contamination the portfolio sheds.
+    na = sum(1 for r in rows if r["verdict"] == "AUSTIN")
+    nt = sum(1 for r in rows if r["verdict"] == "TRIVIAL")
+    print(f"  verdicts: {na} AUSTIN (new models), {nt} TRIVIAL (contamination shed)")
 else:
     print("  no resolutions yet (expected on the hard tier)")
 seen, res = collections.defaultdict(set), collections.defaultdict(set)
