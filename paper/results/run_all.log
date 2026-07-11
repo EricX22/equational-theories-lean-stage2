@@ -1068,3 +1068,20 @@ non-singleton classes: 25
   austin not trivial       -> AUSTIN   want -        FAIL
 SELFTEST FAILED
 2026-07-10 02:10:35 — baseline selftest FAILED — refusing to run the portfolio
+2026-07-10 12:20:18 — run_all starting. shards=32 budgets=30,60,120,300,600 heartbeat=3600s
+2026-07-10 12:20:18 — provers: vampire=paper/bin/vampire eprover=/u/jrg4wx/bin/eprover twee=/u/jrg4wx/bin/twee lean=1
+2026-07-10 12:20:18 — portfolio signature: d4ee2fb7
+2026-07-10 12:20:19 — STAGE baseline_selftest
+  vampire/sat/otter+kbo    -> AUSTIN   want AUSTIN   OK  (0.04s)
+  vampire/triv/casc        -> TRIVIAL  want TRIVIAL  OK  (1.27s)
+  austin not trivial       -> -        want -        OK
+SELFTEST OK
+2026-07-10 12:20:20 — STAGE baseline
+2026-07-10 12:20:20 — baseline: sampling 120 laws (the curve is a rate, not a census)
+2026-07-10 13:20:19 — heartbeat: stage=baseline baseline_rows=1045 load=36.82 40.34 45.01
+2026-07-10 14:20:19 — heartbeat: stage=baseline baseline_rows=1364 load=36.36 39.94 50.09
+2026-07-10 15:20:19 — heartbeat: stage=baseline baseline_rows=2293 load=35.71 38.58 39.69
+2026-07-10 16:20:19 — heartbeat: stage=baseline baseline_rows=2570 load=47.78 48.54 47.89
+2026-07-10 17:20:19 — heartbeat: stage=baseline baseline_rows=3503 load=35.27 35.84 36.28
+2026-07-10 18:20:19 — heartbeat: stage=baseline baseline_rows=3771 load=93.22 57.78 49.35
+2026-07-10 19:20:19 — heartbeat: stage=baseline baseline_rows=4449 load=26.51 26.53 27.48
