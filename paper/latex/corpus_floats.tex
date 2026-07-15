@@ -1,0 +1,109 @@
+%==============================================================================
+% CORPUS CONSTRUCTION (§3.3) — tables + pruning flowchart.
+%
+% PREAMBLE: needs \usepackage{booktabs} (already loaded) and, for the figure,
+%   \usepackage{tikz}
+%   \usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+%
+% ALL COUNTS ARE THE 2026-07-09 BY-LAW SNAPSHOT — RECOUNT from final_status.jsonl
+% before submission, and reconcile the Austin count (247 by-law vs 262 in the
+% equivalence census).
+%==============================================================================
+
+
+%------------------------------------------------------------------------------
+% Table: corpus composition. Single column.
+%------------------------------------------------------------------------------
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lr}
+\toprule
+Outcome of the construction pipeline & Laws \\
+\midrule
+\multicolumn{2}{l}{\emph{Admissible --- the benchmark}} \\
+\quad Hard tier (no finite model, unresolved) & 3{,}798 \\
+\quad Austin (nontrivial model found)          & 247 \\
+\quad Trivial ($L \models x{=}y$)              & 2{,}895 \\
+\addlinespace
+\multicolumn{2}{l}{\emph{Discarded}} \\
+\quad Has a nontrivial finite model            & 990 \\
+\quad Uncertified (no admissibility proof)     & 1{,}795 \\
+\midrule
+Total generated                                & 9{,}725 \\
+\bottomrule
+\end{tabular}
+\caption{Composition of the corpus. Admission requires a machine-checked proof of no
+nontrivial finite model; the \emph{hard tier} is the admissible subset the baseline
+leaves unresolved. Discarded candidates either have a finite model or fail to earn the
+admissibility certificate. Counts are by distinct law string.
+% RECOUNT from final_status.jsonl; reconcile 247 vs 262 Austin.
+}
+\label{tab:corpus-composition}
+\end{table}
+
+
+%------------------------------------------------------------------------------
+% Table: distinctness / class collapse. Single column.
+%------------------------------------------------------------------------------
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Sample & Laws & Classes \\
+\midrule
+Austin-proven laws & 262 & $\leq 195$ \\
+\bottomrule
+\end{tabular}
+\caption{Distinctness on the Austin-proven laws, whose models make the equivalence check
+prover-free. Exhaustive pairwise comparison collapses 262 laws to at most 195 classes---a
+reduction of roughly a quarter---so we report the corpus size in classes, not laws. The
+count is an upper bound: unresolved pairs are counted as distinct, and it is anchored from
+below by the separation certificates. % refresh once the full census runs.
+}
+\label{tab:distinctness}
+\end{table}
+
+
+%------------------------------------------------------------------------------
+% Figure: construction + pruning flowchart (placeholder — refine as needed).
+% Needs \usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+%------------------------------------------------------------------------------
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  >={Stealth[width=1.8mm,length=2.2mm]},
+  font=\small,
+  proc/.style={draw, rounded corners, align=center, inner sep=4pt,
+               minimum height=8mm, text width=34mm},
+  dec/.style={draw, diamond, aspect=2, align=center, inner sep=1pt,
+              text width=26mm},
+  term/.style={draw, dashed, rounded corners, align=center, inner sep=4pt,
+               minimum height=7mm, text width=20mm},
+  node distance=7mm and 12mm
+]
+  \node[proc]                     (seed)   {Seed Austin laws};
+  \node[proc, below=of seed]      (ext)    {Extend by one operation};
+  \node[dec,  below=of ext]       (triv)   {Provably trivial?};
+  \node[term, right=18mm of triv] (prune)  {Prune};
+  \node[dec,  below=of triv]      (adm)    {No nontrivial finite model, certified?};
+  \node[term, right=18mm of adm]  (disc)   {Discard};
+  \node[proc, below=of adm]       (dedup)  {Deduplicate against seeds};
+  \node[proc, below=of dedup]     (corpus) {Corpus (hard tier $+$ resolved)};
+
+  \draw[->] (seed) -- (ext);
+  \draw[->] (ext)  -- (triv);
+  \draw[->] (triv) -- node[above,font=\footnotesize]{yes} (prune);
+  \draw[->] (triv) -- node[right,font=\footnotesize]{no}  (adm);
+  \draw[->] (adm)  -- node[above,font=\footnotesize]{no}  (disc);
+  \draw[->] (adm)  -- node[right,font=\footnotesize]{yes} (dedup);
+  \draw[->] (dedup) -- (corpus);
+\end{tikzpicture}
+\caption{The construction and pruning pipeline. Candidates are grown by one-operation
+extension, then screened cheap-to-expensive: laws a fast proof search settles as trivial
+are pruned, and the rest are admitted only on a machine-checked proof that they have no
+nontrivial finite model---any law that fails to earn this certificate is discarded.
+Admitted laws are deduplicated against their seeds before entering the corpus.}
+\label{fig:construction}
+\end{figure}

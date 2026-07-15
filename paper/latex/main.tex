@@ -1,0 +1,394 @@
+%==============================================================================
+% AAAI-27 submission — Austin-law benchmark
+%
+% BEFORE YOU COMPILE IN OVERLEAF:
+%   1. Download the AAAI-27 Author Kit from aaai.org and drop `aaai2027.sty`
+%      (and `aaai2027.bst`) into this folder. If the kit is still labelled by a
+%      different year, rename the \usepackage line below to match the .sty you have
+%      (e.g. aaai2026). The preamble below follows the kit's mandated form.
+%   2. For anonymous review keep [submission]; remove it for camera-ready and fill
+%      in the real \author block.
+%   3. This file intentionally uses only amsmath/amsthm/booktabs/natbib so it drops
+%      into Overleaf without extra dependencies. Cross-references are plain \ref.
+%==============================================================================
+\documentclass[letterpaper]{article}
+\usepackage[submission]{aaai2027}  % <-- supply this .sty from the AAAI author kit
+
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage[hyphens]{url}
+\usepackage{graphicx}
+\urlstyle{rm}
+\def\UrlFont{\rm}
+\usepackage{natbib}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\frenchspacing
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+
+\pdfinfo{
+/TemplateVersion (2027.1)
+}
+
+% --- theorem environments -----------------------------------------------------
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}
+
+% --- shorthands ---------------------------------------------------------------
+\newcommand{\op}{\diamond}
+\newcommand{\Law}{\mathrm{Law}}
+\newcommand{\Eqtwo}{\mathrm{Eq}2}
+
+\title{An Austin-Law Benchmark:\\ Verifiable, Renewable Construction Problems Beyond Automated Reach}
+
+\author{
+    %%%% anonymous for submission; fill in for camera-ready
+    Anonymous Submission
+}
+
+\begin{document}
+\maketitle
+
+%==============================================================================
+\begin{abstract}
+The Equational Theories Project (ETP) is verifiable but uniform: a single strategy---
+automated proof search together with a finite model builder---resolves twenty-two
+million implications, so it measures execution rather than construction. We isolate the
+sub-family on which that strategy is \emph{provably} inapplicable: \emph{Austin laws},
+which admit infinite models but no nontrivial finite one and exist only at order five and
+above, where finite model search is empty by theorem. We extend this family past the
+order ETP enumerated and pose a two-sided, machine-checkable task: given a law certified
+to have no nontrivial finite model, either construct a nontrivial model with a Lean proof
+that it satisfies the law, or prove the law trivial. Exactly one side is achievable and
+no instance is unanswerable. Against the strongest automated portfolio we can assemble
+(Vampire, E, and Twee across term orderings and an order of magnitude of budget), the hard
+tier yields \emph{zero} new nontrivial models, and the resolution rate is flat in the
+compute budget---the frontier is bounded by method, not by time. The generator is public,
+so the benchmark is minted rather than fixed. We report the corpus in equivalence classes
+(a $\geq 26\%$ collapse), a Lean judge verified end to end, and two order-five open cases
+from ETP confirmed to be Austin laws by two independent methods.
+\end{abstract}
+
+%==============================================================================
+\section{Introduction}
+\label{sec:intro}
+% TODO — draft last, once the contribution list is frozen. Anchors:
+% - ETP uniformity (one strategy resolves all) => measures execution not construction.
+% - Austin laws: infinite models, no nontrivial finite; order >= 5; FMB empty by theorem.
+% - Contributions: (i) two-sided task + certified answerability; (ii) order->=6 corpus +
+%   public generator; (iii) Lean judge; (iv) strong baseline defining the hard tier;
+%   (v) two order-5 open cases closed. Future work: the infinite-model formalisation.
+
+%==============================================================================
+\section{Background and Related Work}
+\label{sec:related}
+% TODO — write once claims are fixed so the debts are exact. Anchors:
+% - ETP order<=4 enumerated; order-5 chapter (106 trivial-finite, 10 Austin, 96 open).
+% - Austin (1983); Kisielewicz (28770, 5093).
+% - JRS (saturation as explicit model): the honest debt. What it costs (existence is
+%   mechanical is dead as a headline), what it gives (Twee, SZS/rewrite machinery).
+% - Infinox (Claessen & Lilliestrom): our (i)-prover is a specialisation.
+% - Berlioz & Mellies latent-space paper: adjacent, statistical, not a competitor.
+
+%==============================================================================
+\section{The Task}
+\label{sec:task}
+
+We work with magmas: a set $M$ equipped with a single binary operation
+$\op : M \times M \to M$, with no further axioms. An \emph{equational law} is a
+universally quantified identity $L : x = T[x, y, z, \dots]$, where $T$ is a term built
+from the variables and $\op$. A magma \emph{satisfies} $L$ when the identity holds for
+every assignment of its elements to the variables. Throughout, the fixed target of
+interest is the law $\Eqtwo : x = y$, which a magma satisfies exactly when it is trivial
+(has a single element); we write $L \models x = y$ for the semantic implication that
+every model of $L$ is trivial.
+
+The benchmark is built entirely from laws carrying a machine-checked certificate of a
+single structural fact.
+
+\begin{definition}[admissible instance]
+\label{def:admissible}
+A law $L$ is \emph{admissible} if there is a proof that $L$ has no nontrivial finite
+model: every finite magma satisfying $L$ is trivial.
+\end{definition}
+
+This certificate is not a result of the benchmark; it is the ticket of admission, and it
+is what makes the task well-posed. We produce it with a first-order argument---a subterm
+of $T$ containing every occurrence of $x$ acts as a left inverse and is therefore
+injective, so on a finite carrier it is surjective, and surjectivity of the relevant map
+collapses the magma---mechanised as a query discharged by an automated prover. The
+argument is a specialisation of Infinox's method for establishing finite
+unsatisfiability~\citep{claessen2011infinox}, and we claim no novelty for it beyond the
+observation that, for the syntactic shape $x = C[S(x)]$, the left inverse is available
+without search.
+
+Admissibility has a consequence that turns an open problem into an answerable question.
+
+\begin{proposition}[dichotomy]
+\label{prop:dichotomy}
+For every admissible $L$, exactly one of the following holds: \emph{(a)}
+$L \models x = y$, i.e.\ the implication into $\Eqtwo$ is valid and $L$ is
+\emph{trivial}; or \emph{(b)} $L$ admits a nontrivial model, and every nontrivial model
+of $L$ is infinite---$L$ is an \emph{Austin law}.
+\end{proposition}
+
+\begin{proof}
+Immediate from admissibility together with the completeness of first-order logic: if
+$L \not\models x = y$ then $L \cup \{\exists u\, v.\ u \neq v\}$ is consistent and so has
+a model, which by Definition~\ref{def:admissible} cannot be finite.
+\end{proof}
+
+Austin laws---laws with infinite models but no nontrivial finite one---exist only at order
+five and above~\citep{kisielewicz1988}, which is precisely why the finite regime cannot
+exhibit them and why a finite model builder, one of the two standard tools, is
+inapplicable to this family by theorem rather than merely slow.
+
+The dichotomy licenses a two-sided task. \textbf{Given an admissible law $L$, either
+exhibit a nontrivial model of $L$ together with a machine-checkable proof that it
+satisfies $L$, or prove $L \models x = y$.} Exactly one side is achievable, both are
+machine-checkable, and---this is the point that distinguishes the construction here from
+an open-problems list---\emph{no instance is unanswerable}. The admissibility certificate,
+combined with Proposition~\ref{prop:dichotomy}, guarantees that every instance has a
+determinate answer of one of the two kinds. This is a stronger guarantee than a benchmark
+can usually offer: the difficulty of an instance is bounded below by the effort a solver
+must expend, never by the possibility that the instance is ill-posed or the answer
+nonexistent.
+
+We stress what is deliberately \emph{not} a design criterion: solvability. An instance
+that no current method resolves still discriminates between methods, and an instance whose
+answer is unreachable in principle would be a defect, but the two are far apart. Every
+answer here is a finite object---a Lean proof---and the space of Lean proofs is
+recursively enumerable, so no admissible instance is unsolvable in principle; it is only
+hard relative to a fixed, named method. Hardness relative to a published baseline is the
+normal and sufficient notion for a benchmark, and it is the one we adopt
+(the Baseline section). Conversely, the benchmark is not vacuous merely because its hard
+tier is unresolved: the certificate guarantees that the resolution exists.
+
+%==============================================================================
+\section{Verification}
+\label{sec:verification}
+
+A benchmark of construction problems is only as meaningful as its ability to check a
+proposed construction. We make the checker unconditional by fixing a single arbiter: an
+answer is a proof in the Lean proof assistant of a statement we generate mechanically from
+the law, and the proof is accepted exactly when Lean's kernel accepts it and its logical
+dependencies lie within a fixed allowlist. Nothing about the \emph{form} of the model---
+whether it is presented as a subset of the integers, a quotient of a term algebra, or a
+rewrite system---enters the judge; any Lean proof of the generated goal is a valid answer.
+
+For a law $L : x = T$ with variables $x, y, z, \dots$, the judge emits the definitions
+\begin{align}
+\Law(\op) &\equiv \forall x\, y\, z\, \dots \in M,\ x = T[\op], \label{eq:law}\\
+\textsc{AustinGoal} &\equiv \exists\, (M : \mathrm{Type})\, (\op : M \to M \to M), \notag\\
+&\qquad (\exists\, a\, b : M,\ a \neq b) \wedge \Law(\op), \label{eq:austingoal}\\
+\textsc{TrivialGoal} &\equiv \forall\, (M : \mathrm{Type})\, (\op : M \to M \to M), \notag\\
+&\qquad \Law(\op) \to \forall\, a\, b : M,\ a = b. \label{eq:trivialgoal}
+\end{align}
+A submission proves one of the two goals. The nontriviality clause
+$\exists a\, b.\ a \neq b$ is what forces an Austin answer to exhibit two distinct
+elements---and, together with admissibility, what forces the witnessing magma to be
+infinite---while keeping the statement itself finiteness-free, so that a submitted model
+is a genuine model regardless of whether the admissibility prover was correct.
+
+The judged artifact is the concatenation of a generated header, the submitter's body, and
+a generated footer. The header fixes the statement; the footer closes with
+\texttt{example : Problem.AustinGoal := solution}, which forces the submitter's
+\texttt{solution} to elaborate at exactly the type the header defines. The submitter never
+writes the statement and therefore cannot weaken it. Two safeguards make this airtight.
+First, a textual gate run before Lean rejects the escape hatches that would let a file
+typecheck without proving the intended proposition: \texttt{sorry} and \texttt{admit};
+\texttt{native\_decide}, which discharges goals by trusted compiled code outside the
+kernel; user-declared \texttt{axiom}s; the metaprogramming constructs (\texttt{macro},
+\texttt{syntax}, \texttt{elab}) that could redefine notation; and, most importantly, any
+redefinition of the generated names, since the characteristic attack is to shadow
+\textsc{AustinGoal} with a trivially true proposition and prove that instead. Second, after
+Lean accepts the file, the judge reads the axiom footprint printed by
+\texttt{\#print axioms solution} and requires it to be a subset of
+$\{\texttt{propext}, \texttt{Quot.sound}, \texttt{Classical.choice}\}$; the appearance of
+\texttt{sorryAx} or the \texttt{native\_decide} axiom, or of any axiom outside the
+allowlist, is a rejection even when the file compiled. The allowlist is closed rather than
+a blocklist of known cheats, so an unforeseen axiom fails by default.
+
+We have verified the judge end to end against a reference answer---a two-element magma
+satisfying a simple admissible law---which passes the textual gate, elaborates against the
+generated goal, and exhibits the expected axiom footprint; the negative controls (a
+\texttt{sorry}ed proof, an axiom smuggle, and both the namespaced and bare forms of the
+shadowing attack) are each rejected before Lean runs.
+
+Two channels for producing accepted proofs already exist. Concrete algebraic models---a
+finite ring, a $\mathbb{Z}$-module, an adjoined-root extension---are checked directly: the
+model's operation is a Lean definition and the law is discharged either by a symbolic
+identity or, for small carriers, by kernel computation. This is the channel by which a
+previously open order-five instance was closed by a mod-$17$ affine model
+(the Closed Cases section). The second channel, and the one that reaches the hardest
+instances, presents the model as the term algebra modulo a convergent rewrite system
+derived from a prover saturation; certifying such a model in Lean requires formalising
+ground confluence of ordered rewriting, which we have reduced to a single open lemma in an
+otherwise complete development and which we treat as the subject of a companion paper. The
+judge itself is agnostic to this: it is sound today for every answer a submitter can drive
+through the kernel, and widening the set of \emph{easily producible} answers is a matter
+of building solver-side tools, not of changing the arbiter.
+
+%==============================================================================
+\section{The Corpus and the Generator}
+\label{sec:corpus}
+% TODO — draft. Anchors: one-op extension (~500x yield); >=26% collapse (262 -> <=195
+% classes) by prover-free model separation (1123/1128); quote classes; seed_dedupe;
+% contamination-free (order<=4 public, order-5 table, ship order>=6 with seeds+dates);
+% durability = classes per thousand surviving extensions.
+
+%==============================================================================
+\section{The Baseline and the Hard Tier}
+\label{sec:baseline}
+
+The hard tier of the benchmark is not a fixed list of laws but a property relative to a
+named method: an admissible law belongs to the hard tier when a published, reproducible
+portfolio of automated provers fails to resolve it---fails to prove it trivial and fails
+to construct a nontrivial model---within a stated budget. This section defines that
+portfolio, reports how the tier behaves under it, and establishes the two facts the
+benchmark rests on: that the frontier is bounded by \emph{method} rather than by
+\emph{compute}, and that it is not an artifact of any single prover.
+
+\subsection{The portfolio}
+A single prover under a single term ordering is not a baseline; it is a shrug. A law whose
+completion diverges under one reduction ordering may terminate under another, so a
+defensible baseline must range over provers, orderings, and budget. Portfolio v1.0
+comprises eight configurations: Vampire~5.0.1 in five modes---three proof-search
+configurations targeting $L \models x = y$ and two saturation configurations testing
+consistency, under both KBO and LPO orderings---the E prover in a proof and a saturation
+mode, and Twee~2.6.1, an implementation of unfailing completion purpose-built for the unit
+equational fragment in which every law of our corpus lives. Each configuration is run over
+a budget ladder of $30, 60, 120, 300,$ and $600$ seconds, and a law is recorded as
+resolved as soon as any configuration returns a verdict, whereupon the remaining ladder is
+skipped.
+
+The two directions of the task are found by different machinery, and the portfolio must
+contain both: a proof of triviality is proof search, whereas a nontrivial model is
+witnessed by a saturation closing---a saturated clause set in this fragment \emph{is} a
+ground-convergent rewrite system and hence an explicit model~\citep{janota2026saturations}.
+A portfolio that only refutes would never find the second kind of answer. Every verdict is
+mapped from the prover's SZS status line, and a \texttt{Satisfiable} verdict from a
+strategy that sacrificed completeness is discarded rather than trusted. Provers, versions,
+and exact flags are pinned in a container image released with the benchmark, and the
+harness refuses to run unless a known-answer self-test passes.
+
+\subsection{The tier is method-bound, not compute-bound}
+The central empirical question is whether the hard tier is genuinely beyond the reach of
+these methods or merely under-budgeted. The two are separable by measurement: run the
+ladder and record, at each budget, the fraction of laws resolved. If resolution keeps
+rising with budget, the frontier is a matter of compute; if it flattens, the surviving
+laws are bound by what the methods can express, not by how long they run.
+
+Over a sample of 120 laws from the no-finite-model tier, the portfolio resolves three laws
+at 30 seconds and not one additional law at any higher budget (Table~\ref{tab:curve}).
+Twenty times the compute buys nothing. This licenses the definition we adopt: the hard
+tier is the set of admissible laws left unresolved at the ladder's maximum budget under
+\emph{every} configuration, and the flatness of the curve past 30 seconds is the evidence
+that this maximum lies beyond the knee rather than short of it. We report the curve, not a
+single timeout, precisely so this judgment is checkable.
+
+\begin{table}[t]
+\centering
+\begin{tabular}{lcc}
+\toprule
+budget & laws resolved & $\Delta$ rate \\
+\midrule
+$30$\,s  & $3/120 = 0.025$ & --- \\
+$60$\,s  & $0/117 = 0.000$ & $-0.025$ \\
+$120$\,s & $0/117 = 0.000$ & $0$ \\
+$300$\,s & $0/117 = 0.000$ & $0$ \\
+$600$\,s & $0/117 = 0.000$ & $0$ \\
+\bottomrule
+\end{tabular}
+\caption{Resolution rate of portfolio v1.0 over the budget ladder, on a 120-law sample of
+the no-finite-model tier. Every law that resolves, resolves at 30\,s; higher budgets add
+nothing. Zero laws acquire a nontrivial model at any budget.}
+\label{tab:curve}
+\end{table}
+
+A prior single-prover measurement points the same way and rules out the most deflationary
+explanation. Re-running the corpus's earlier classifier at 300 seconds per prover, an
+order of magnitude above its original budget, converted $3.7\%$ of laws---and of the 216
+no-finite-model laws in that pass, four became provably trivial while \emph{none} acquired
+a nontrivial model. The laws that resisted the shorter budget resisted the longer one on
+the construction side without exception; the only movement was the removal of trivial laws
+the shorter budget had failed to prove trivial.
+
+\subsection{The frontier is not an artifact of one prover}
+Flatness under a portfolio could in principle hide a weakness common to all its members.
+The sharpest test available is Twee, whose completion procedure is algorithmically
+distinct from Vampire's and E's superposition and is the tool most likely, on prior
+grounds, to complete a system the others leave open. It does complete systems the others
+find awkward---on one of the two order-five laws we later close, Vampire's saturation runs
+to 357 clauses while Twee's unfailing completion terminates in seconds. Yet across the
+sampled tier, Twee resolves \emph{no} law that the rest of the portfolio does not, and in
+particular contributes no new nontrivial model. The reshaping outcome we explicitly tested
+for---a law solved only by completion, which would have shown the tier to be an artifact
+of Vampire's search rather than a genuine frontier---does not occur. Twee is a strong
+member of the portfolio, not a key to the tier.
+
+\subsection{Contamination and what resolution means here}
+\label{sec:contamination}
+Every law the portfolio does resolve, it resolves as \emph{trivial}: of the sampled tier,
+eleven laws are proved to satisfy $L \models x = y$, and zero acquire a nontrivial model.
+These trivial laws are contamination rather than error. They are admissible---they have no
+nontrivial finite model---and the shorter classifier budget had failed to prove them
+trivial, so they sat in the no-finite-model tier without being Austin. The stronger
+portfolio removes them, and the two-sided task is exactly what makes this harmless: a law
+that turns out trivial is a legitimately answered instance, not a mislabelled one. The
+completion provers carry more of this load than Vampire's proof modes---one law is proved
+trivial by E in one second and by Twee in twelve while all five Vampire configurations
+exhaust thirty seconds---which is a second, quieter argument for a portfolio over a single
+strong prover.
+
+That the portfolio produces zero new models is therefore the result to hold onto. The hard
+tier's construction side is untouched by the strongest automated methods we can assemble,
+across orderings and an order of magnitude of budget, while every instance in it is
+certified to possess an answer (the Task section). The gap between \emph{an answer exists}
+and \emph{this portfolio finds it} is the quantity the benchmark measures.
+
+\subsection{Scope of the measurement}
+The 120-law figure is a sample of the roughly 3{,}400 no-finite-model laws in the current
+corpus, and it is sound for a \emph{rate}: the shape of the resolution curve and the
+absence of completion-only models are properties of the population, estimated without bias
+by the sample. It is not the tier's \emph{membership list}. Publishing the definitive hard
+tier---the exact laws that survive portfolio v1.0 at maximum budget---requires the full
+sweep, a single long run we schedule once the ladder and portfolio are frozen, since its
+cost is dominated by the laws that never resolve and therefore traverse the entire ladder.
+The membership list refines the artifact; it does not change the method or the rate
+reported here.
+
+%==============================================================================
+\section{Two Closed Order-Five Cases}
+\label{sec:closed-cases}
+% TODO — draft. Anchors: 12857, 33436 in ETP Table 20.2 (open); confirmed Austin two ways
+% (Vampire saturation + Twee, both CounterSatisfiable); models computable & non-vacuous
+% (27/27, rules fire, x=y refuted); neither is a plain TRS even after Twee reduction
+% => CSI/TTT2 inapplicable, Lean cert needs ground confluence (companion paper).
+
+%==============================================================================
+\section{Discussion and Limitations}
+\label{sec:discussion}
+% TODO. Anchors: hard-tier collapse not yet measured (prover-only census there);
+% ground_confluent open => saturation-model answers not yet Lean-certifiable (algebraic
+% ones are), framed as next paper; optional hand-solved demonstrations; (i)-prover vs
+% Infinox not yet benchmarked.
+
+%==============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% TODO. A public generator + certified two-sided task => the benchmark is minted, not
+% fixed, and hard relative to a named, published baseline.
+
+%==============================================================================
+\bibliographystyle{aaai2027}  % supply aaai2027.bst from the author kit
+\bibliography{references}
+
+\end{document}

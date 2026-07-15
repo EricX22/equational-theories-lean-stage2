@@ -13,8 +13,17 @@ echo "  now : $(cat $R/.current 2>/dev/null || echo idle)"
 if pgrep -f run_all.sh >/dev/null; then echo "  driver: alive"; else echo "  driver: not running (done or died)"; fi
 nb=$(pgrep -fc baseline_probe.py 2>/dev/null); echo "  baseline shards: ${nb:-0}   load: $(cut -d' ' -f1-3 /proc/loadavg)"
 last=$(stat -c %Y "$R/run_all.log" 2>/dev/null)
-[[ -n "$last" ]] && age=$(( ($(date +%s) - last) / 60 )) && \
-    echo "  log age: ${age} min$( [[ $age -gt 90 ]] && echo '   <- STALE, check for a wedge' )"
+now_stage=$(cat "$R/.current" 2>/dev/null || echo idle)
+# Staleness only means a WEDGE if a stage is still active. A finished run is idle by
+# design and its log is legitimately old — don't cry stale on `done`/`idle`.
+if [[ -n "$last" ]]; then
+    age=$(( ($(date +%s) - last) / 60 ))
+    if [[ "$now_stage" == "idle" || "$now_stage" == "done" ]]; then
+        echo "  log age: ${age} min (run finished — not stale)"
+    else
+        echo "  log age: ${age} min$( [[ $age -gt 90 ]] && echo '   <- STALE, check for a wedge' )"
+    fi
+fi
 
 echo; echo "=== equivalence census (the abstract's number) ==="
 if [[ -s "$R/classes.json" ]]; then

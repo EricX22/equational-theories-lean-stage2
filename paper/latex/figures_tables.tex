@@ -1,0 +1,128 @@
+%==============================================================================
+% FIGURES & TABLES — paste into AnonymousSubmission2027.tex where referenced.
+%
+% PREAMBLE ADDITIONS NEEDED (add once, near the other \usepackage lines):
+%   \usepackage{tikz}
+%   \usetikzlibrary{arrows.meta,positioning}
+%   % booktabs is already loaded in the template.
+%   % TikZ is NOT on the AAAI forbidden-package list; it is fine.
+%
+% NUMBERS FLAGGED "RECOUNT" are from the 2026-07-09 by-law snapshot and must be
+% refreshed from the final corpus (final_status.jsonl) before submission. In
+% particular reconcile the AUSTIN_PROVEN count (247 by-law snapshot vs. 262 in the
+% equivalence census) and pick ONE final figure used consistently paper-wide.
+%==============================================================================
+
+
+%------------------------------------------------------------------------------
+% T1 — Corpus composition. Single-column width; use \begin{table} (not table*).
+%------------------------------------------------------------------------------
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lr}
+\toprule
+Classification of generated law & Count \\
+\midrule
+\multicolumn{2}{l}{\emph{Admissible, unresolved --- the hard tier}} \\
+\quad No nontrivial finite model (Austin/trivial undecided) & 3{,}798 \\
+\midrule
+\multicolumn{2}{l}{\emph{Admissible, resolved --- floor \& demonstrations}} \\
+\quad Trivial ($L \models x{=}y$)            & 2{,}895 \\
+\quad Austin (nontrivial model constructed)  & 247 \\
+\quad Satisfiable only (model exists, (i) open) & 42 \\
+\midrule
+\multicolumn{2}{l}{\emph{Excluded (not admissible / uncertified)}} \\
+\quad Has nontrivial finite model            & 990 \\
+\quad Unclassified (no certificate yet)      & 1{,}753 \\
+\midrule
+Total generated                              & 9{,}725 \\
+\bottomrule
+\end{tabular}
+\caption{Composition of the corpus. Benchmark instances are the \emph{admissible}
+laws---those with a machine-checked proof of no nontrivial finite model; the
+\emph{hard tier} is the admissible subset that the baseline leaves unresolved
+(top row). Counts are by distinct law string. Modulo the equivalence relation of
+\Cref{sec:corpus} the counts fall further: an equivalence census of the Austin tier
+shows a $\geq 26\%$ collapse, so the benchmark is quoted in classes, not laws.
+% RECOUNT all numbers from final_status.jsonl; reconcile 247 vs 262 Austin.
+}
+\label{tab:corpus}
+\end{table}
+
+
+%------------------------------------------------------------------------------
+% T2 — Baseline resolution over the budget ladder. Single-column; \begin{table}.
+% Numbers are FINAL (baseline_v1.jsonl, portfolio d4ee2fb7, 2026-07-10).
+%------------------------------------------------------------------------------
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+Per-prover budget & Laws resolved & $\Delta$ rate \\
+\midrule
+$30$\,s  & $3/120 = 0.025$ & --- \\
+$60$\,s  & $0/117 = 0.000$ & $-0.025$ \\
+$120$\,s & $0/117 = 0.000$ & $\phantom{-}0.000$ \\
+$300$\,s & $0/117 = 0.000$ & $\phantom{-}0.000$ \\
+$600$\,s & $0/117 = 0.000$ & $\phantom{-}0.000$ \\
+\bottomrule
+\end{tabular}
+\caption{Portfolio v1.0 (Vampire, E, Twee; eight configurations) on a 120-law
+sample of the hard tier. Every law that resolves does so at $30$\,s; twenty times the
+budget yields nothing further. All three resolved laws are proved \emph{trivial}
+(zero acquire a nontrivial model); contributing configurations are E and Twee (three
+each) and Vampire (five verdicts across three modes), and one law is proved trivial
+only by the completion provers. The flat curve is the evidence that the tier is bound
+by method, not compute.}
+\label{tab:baseline}
+\end{table}
+
+
+%------------------------------------------------------------------------------
+% F1 — Task / pipeline schematic. Two-column span; \begin{figure*} at top.
+% Needs: \usepackage{tikz} \usetikzlibrary{arrows.meta,positioning}
+%------------------------------------------------------------------------------
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}[
+  >={Stealth[width=2mm,length=2.4mm]},
+  every node/.style={font=\small},
+  box/.style={draw, rounded corners, align=center, inner sep=5pt,
+              minimum height=10mm, text width=26mm},
+  data/.style={draw, align=center, inner sep=5pt, minimum height=10mm,
+               text width=18mm},
+  node distance=9mm and 12mm
+]
+  \node[data]                         (law)    {Law $L:\ x=T$};
+  \node[box, right=of law]            (adm)    {Admissibility prover\\[-1pt]
+                                                {\footnotesize no nontrivial\\[-2pt]
+                                                 finite model}};
+  \node[box, right=of adm]            (task)   {Two-sided task\\[-1pt]
+                                                {\footnotesize (exactly one holds)}};
+  \node[box, above right=of task]     (aust)   {Construct model\\[-1pt]
+                                                $\Rightarrow$ \textsc{AustinGoal}};
+  \node[box, below right=of task]     (triv)   {Prove $L\models x{=}y$\\[-1pt]
+                                                $\Rightarrow$ \textsc{TrivialGoal}};
+  \node[box, right=34mm of task]      (judge)  {Lean judge\\[-1pt]
+                                                {\footnotesize kernel $+$\\[-2pt]
+                                                 axiom allowlist}};
+  \node[data, right=of judge]         (out)    {Accept /\\ Reject};
+
+  \draw[->] (law)  -- (adm);
+  \draw[->] (adm)  -- (task);
+  \draw[->] (task) -- (aust);
+  \draw[->] (task) -- (triv);
+  \draw[->] (aust) -- (judge);
+  \draw[->] (triv) -- (judge);
+  \draw[->] (judge) -- (out);
+\end{tikzpicture}
+\caption{The benchmark pipeline. Each generated law carries a machine-checked
+certificate of no nontrivial finite model (admissibility); by the dichotomy of
+\Cref{sec:task} exactly one of the two branches is achievable. A submitted answer is
+a Lean proof of the corresponding goal, accepted only if the kernel checks it and its
+axiom footprint lies within a fixed allowlist. The judge is agnostic to the model's
+form.}
+\label{fig:pipeline}
+\end{figure*}

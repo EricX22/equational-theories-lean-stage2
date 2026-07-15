@@ -363,19 +363,23 @@ Knobs: `SHARDS TMO_FAST TMO_SLOW TMO_HARD ROUNDS SEED_CAP S1_MAX..S4_MAX`, and
 
 ## 7. What to do next, in order
 
-Full reasoning in `PAPER_PLAN.md` §5. Summary: **two cheap diagnostics first**, because
-each can end the benchmark framing before an expensive build.
+**STATUS as of 2026-07-10 — most of the diagnostics below are DONE. Details in
+`PAPER_PLAN.md` §5; live cluster run monitored by `scripts/progress_runall.sh`.**
 
-- **Certify 12857 / 33436** end to end (§4). Ten minutes of prover time, and it is the
-  only mathematical result in the pile.
-- **Equivalence classes, fingerprint-first** (§6). If the hard tier collapses to a few
-  dozen classes this is not a smaller paper, it is a different one — know that before
-  Phase E.
-- **The 20s → 300s conversion rate.** The running retry is already a 300s sample over
-  ~350 laws. Read the curve off it; no portfolio needed. If most of `NO_FINITE_MODEL`
-  falls at 300s, the frontier was under-budgeted and everything downstream is rebuilt.
+| item | state |
+|---|---|
+| Verification / answer format | **DONE.** `answer_spec.py --selftest --lean-dir .` passes: Lean checks the reference proof, axiom footprint enforced. Minimum-acceptable item 1 closed. |
+| 12857 / 33436 Austin | **CONFIRMED, two ways.** Vampire saturation + Twee unfailing completion both return `CounterSatisfiable`. Models computable via `ordered_model.py` (27/27, non-vacuous). Neither is a plain TRS — even Twee's *reduced* system has unorientable/extra-variable rules → the ordered-rewriting Lean formalisation is the contribution, not optional. |
+| Equivalence collapse | **MEASURED, ≥26%.** 262-law `AUSTIN_PROVEN` census → ≤195 classes (`classes.json`). Abstract quotes classes, never laws. Hard-tier collapse still needs `equiv_sample.py --no-models` (no saturations there). |
+| 20s→300s retry curve | **DONE.** 3.7% convert, 0/216 → AUSTIN. §5C. |
+| Portfolio v1.0 baseline | **RUNNING (fill-in pending).** 8 configs × ladder on 120 `NO_FINITE_MODEL` laws. Curve flat, 0 new AUSTIN, ~3% TRIVIAL contamination, **no Twee-only model** (reshaping ruled out). `PAPER_PLAN.md` §5C has the write-up with `<FILL>` stubs — drop in final N, 30s rate, TRIVIAL count when the run marks `done`. |
+| Lean `ground_confluent` | **OPEN — this is the paper.** `OrderedModel.lean` elaborates with 3/4 steps proved; the one real `sorry` is ground confluence of ordered rewriting on a saturated set. JRS leave it open; ETP is a Lean project. |
+| Generator seed-dedupe | built (`seed_dedupe.py`); wire into `order6_targeted.py` at generation. |
+| Full hard-tier sweep | not started — every `NO_FINITE_MODEL` law × portfolio v1.0; survivors = the published tier. Long run, do after ladder/portfolio frozen. |
+| (i)-prover vs Infinox | not started (admission ticket, §5A). |
 
-Then the below. Nothing here depends on proving anything is impossible.
+Below is the original ordering, kept for the reasoning. Nothing here depends on proving
+anything is impossible.
 
 **Durability — build the real baseline (this is the gate).**
 

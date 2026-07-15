@@ -1,0 +1,332 @@
+\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+\usepackage[submission]{aaai2027}  % DO NOT CHANGE THIS
+% The serif, sans-serif, and monospaced fonts are loaded automatically by
+% aaai2027.sty (newtxtext, helvet, courier). DO NOT add \usepackage{times},
+% \usepackage{helvet}, \usepackage{courier}, or any other font package.
+\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+\usepackage{graphicx} % DO NOT CHANGE THIS
+\urlstyle{rm} % DO NOT CHANGE THIS
+\def\UrlFont{\rm}  % DO NOT CHANGE THIS
+\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing  % DO NOT CHANGE THIS
+%
+% These are recommended to typeset algorithms but not required. See the subsubsection on algorithms. Remove them if you don't have algorithms in your paper.
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+%
+% These are recommended to typeset listings but not required. See the subsubsection on listing. Remove this block if you don't have listings in your paper.
+\usepackage{newfloat}
+\usepackage{listings}
+\DeclareCaptionStyle{ruled}{labelfont=normalfont,labelsep=colon,strut=off} % DO NOT CHANGE THIS
+\lstset{%
+	basicstyle={\footnotesize\ttfamily},% footnotesize acceptable for monospace
+	numbers=left,numberstyle=\footnotesize,xleftmargin=2em,% show line numbers, remove this entire line if you don't want the numbers.
+	aboveskip=0pt,belowskip=0pt,%
+	showstringspaces=false,tabsize=2,breaklines=true}
+\floatstyle{ruled}
+\newfloat{listing}{tb}{lst}{}
+\floatname{listing}{Listing}
+
+%
+% Recommended for better-looking tables
+\usepackage{booktabs}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\newcommand{\op}{\diamond}
+
+\usepackage{amsmath}
+
+%
+% Keep the \pdfinfo as shown here. There's no need
+% for you to add the /Title and /Author tags.
+\pdfinfo{
+/TemplateVersion (2027.1)
+}
+
+% DISALLOWED PACKAGES
+% \usepackage{authblk} -- This package is specifically forbidden
+% \usepackage{balance} -- This package is specifically forbidden
+% \usepackage{CJK} -- This package is specifically forbidden
+% \usepackage{float} -- This package is specifically forbidden
+% \usepackage{flushend} -- This package is specifically forbidden
+% \usepackage{fullpage} -- This package is specifically forbidden
+% \usepackage{geometry} -- This package is specifically forbidden
+% \usepackage{hyperref} -- This package is specifically forbidden
+% \usepackage{navigator} -- This package is specifically forbidden
+% (or any other package that embeds links such as navigator or hyperref)
+% \usepackage{indentfirst} -- This package is specifically forbidden
+% \usepackage{layout} -- This package is specifically forbidden
+% \usepackage{multicol} -- This package is specifically forbidden
+% \usepackage{nameref} -- This package is specifically forbidden
+% \usepackage{savetrees} -- This package is specifically forbidden
+% \usepackage{setspace} -- This package is specifically forbidden
+% \usepackage{stfloats} -- This package is specifically forbidden
+% \usepackage{tabu} -- This package is specifically forbidden
+% \usepackage{titlesec} -- This package is specifically forbidden
+% \usepackage{tocbibind} -- This package is specifically forbidden
+% \usepackage{ulem} -- This package is specifically forbidden
+% \usepackage{wrapfig} -- This package is specifically forbidden
+% DISALLOWED COMMANDS
+% \nocopyright -- Your paper will not be published if you use this command
+% \addtolength -- This command may not be used
+% \balance -- This command may not be used
+% \baselinestretch -- Your paper will not be published if you use this command
+% \clearpage -- No page breaks of any kind may be used for the final version of your paper
+% \columnsep -- This command may not be used
+% \newpage -- No page breaks of any kind may be used for the final version of your paper
+% \pagebreak -- No page breaks of any kind may be used for the final version of your paper
+% \pagestyle -- This command may not be used
+% \tiny -- This is not an acceptable font size.
+% \vspace{- -- No negative value may be used in proximity of a caption, figure, table, section, subsection, subsubsection, or reference
+% \vskip{- -- No negative value may be used to alter spacing above or below a caption, figure, table, section, subsection, subsubsection, or reference
+
+\setcounter{secnumdepth}{0} %May be changed to 1 or 2 if section numbers are desired.
+
+% The file aaai2027.sty is the style file for AAAI Press
+% proceedings, working notes, and technical reports.
+%
+
+% Title
+
+% Your title must be in mixed case, not sentence case.
+% That means all verbs (including short verbs like be, is, using,and go),
+% nouns, adverbs, adjectives should be capitalized, including both words in hyphenated terms, while
+% articles, conjunctions, and prepositions are lower case unless they
+% directly follow a colon or long dash
+\title{ALPS: A Renewable, Verifiable Benchmark for \\ Mathematical Construction Beyond Automated Reach}
+\author{
+    %Authors
+    % All authors must be in the same font size and format.
+    Written by AAAI Press Staff\textsuperscript{\rm 1}\thanks{With help from the AAAI Publications Committee.}\\
+    AAAI Style Contributions by Peter Patel Schneider,
+    Sunil Issar,\\
+    J. Scott Penberthy,
+    George Ferguson,
+    Hans Guesgen,
+    Francisco Cruz\equalcontrib\corresponding,
+    Marc Pujol-Gonzalez\equalcontrib\corresponding
+}
+\affiliations{
+    %Afiliations
+    \textsuperscript{\rm 1}Association for the Advancement of Artificial Intelligence\\
+    % If you have multiple authors and multiple affiliations
+    % use superscripts in text and roman font to identify them.
+    % For example,
+
+    % Sunil Issar\textsuperscript{\rm 2},
+    % J. Scott Penberthy\textsuperscript{\rm 3},
+    % George Ferguson\textsuperscript{\rm 4}\corresponding,
+    % Hans Guesgen\textsuperscript{\rm 5}
+    % Note that the comma should be placed after the superscript
+
+    1101 Pennsylvania Ave, NW Suite 300\\
+    Washington, DC 20004 USA\\
+    % email address must be in roman text type, not monospace or sans serif
+    proceedings-questions@aaai.org
+%
+% See more examples next
+}
+
+%Example, Single Author, ->> remove \iffalse,\fi and place them surrounding AAAI title to use it
+\iffalse
+\title{My Publication Title --- Single Author}
+\author {
+    Author Name
+}
+\affiliations{
+    Affiliation\\
+    Affiliation Line 2\\
+    name@example.com
+}
+\fi
+
+\iffalse
+%Example, Multiple Authors, ->> remove \iffalse,\fi and place them surrounding AAAI title to use it
+\title{My Publication Title --- Multiple Authors}
+\author {
+    % Authors
+    First Author Name\textsuperscript{\rm 1,\rm 2}\equalcontrib,
+    Second Author Name\textsuperscript{\rm 2}\equalcontrib,
+    Third Author Name\textsuperscript{\rm 1}\corresponding
+}
+\affiliations {
+    % Affiliations
+    \textsuperscript{\rm 1}Affiliation 1\\
+    \textsuperscript{\rm 2}Affiliation 2\\
+    firstAuthor@affiliation1.com, secondAuthor@affilation2.com, thirdAuthor@affiliation1.com
+}
+\fi
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+% Uncomment the following to link to your code, datasets, an extended version or similar.
+% You must keep this block between (not within) the abstract and the main body of the paper.
+% Make sure that you do not de-anonymize yourself with these links.
+% \begin{links}
+%     \link{Code}{https://aaai.org/example/code}
+%     \link{Datasets}{https://aaai.org/example/datasets}
+%     \link{Extended version}{https://aaai.org/example/extended-version}
+% \end{links}
+
+\section{Introduction}
+% Why is this benchmark useful? - AI for science benchmarks should be verifiable, non-vacuous, contamination-free, and method-bound
+Machine learning is increasingly used to attempt the creative side of scientific work: proposing research hypotheses \cite{...}, designing chemical molecules \cite{...}, and finding mathematical proofs \cite{...}. The goal of this line of work, AI for Science, is to investigate whether large language models (LLMs) can produce something new, rather than reproduce what is already known. However, judging whether an LLM does so or not is challenging, as genuine novelty means there is no known answer for the LLM to compare against. Solutions that appear new may already sit in the LLM's training data, or human-evaluated answers that look superior to one expert may not to another. Therefore, measuring an LLM's ability to create new and verifiable knowledge requires problems whose solutions are not already available, but can be checked exactly, a pairing that most benchmarks do not offer.
+
+The most common method of evaluating AI for Science inherits this difficulty. An LLM proposes a hypothesis, a molecule, or an experiment, and the proposal's utility is evaluated either by human experts or by running the experiment, both of which are slow, costly, and often subjective \cite{...}. The usual alternative gives up novelty for exact, automatic scoring. Benchmarks that score an LLM against reference answers, such as the majority of mathematical and scientific question sets, measure correctness but not novelty. Their answers are fixed, and as they circulate, they contaminate the LLM's training data, so strong performance may reflect recall rather than discovery \cite{...}. The field of mathematics is distinct in allowing both at once. A new mathematical construction can be verified exactly by machine and without any prior answer key, so a problem can be truly open to the solver, yet still graded without appeal to human judgment. 
+
+Verifiability alone is not sufficient for a strong AI-for-Science benchmark. A problem can have a machine-checkable answer but may still be solvable using a standard automated method, in which case, no novelty would have been necessary in the first place. Measuring novel construction therefore requires problems that lie beyond routine automated procedures. Solving them means building something new rather than searching for it. Austin laws are such problems: equational laws that admit infinite models but no nontrivial finite one \citep{...}. Every finite model they admit is trivial, consisting of a single element. When no nontrivial finite model exists, the standard way to find such a model, searching structures of increasing size, is futile. Any model of the law must be an infinite object, constructed rather than found. Our benchmark, ALPS (Austin Law Proof-Synthesis), is built from these laws: given one, a solver must either construct such a model, with a machine-checked proof that it satisfies the law, or prove that the law collapses, forcing every model to be trivial. 
+
+ALPS converts these laws from a list of open problems into a well-posed benchmark. Every instance is verifiable: an answer is a Lean proof that is checked mechanically, so acceptance requires no human in the loop. Every instance is also answerable, as every law in the benchmark is either trivial or Austin, so exactly one of the two tasks succeeds. The instances are contamination-free and renewable, as our generator continually produces fresh laws that no LLM has seen, so the benchmark can always be replenished. Lastly, the difficulty of these problems is method-bound, stemming from the gap between construction and deductive search, not from a shortage of compute. The trivial side is a first-order consequence that proof search will find, while a model on the Austin side has no such guarantee and must be built.
+
+To evaluate the difficulty of our benchmark, we run a suite of leading automated theorem provers on each problem. They solve easier instances, including some with nontrivial models, but a large fraction of the corpus resists them, yielding no new model however much compute they are given. This resistant hard tier is the benchmark's target. Our contributions are:
+\begin{itemize}
+\item A two-sided construction task on equational laws: given a law with no nontrivial finite model, either build an infinite model of it or prove it forces triviality. Every instance is certified answerable, so the task is well-posed for every input.
+\item A corpus of such laws that reaches beyond the range of prior work, with a public generator that mints fresh, previously unseen instances on demand.
+\item A judge that checks any submitted answer mechanically, with no human evaluation.
+\item A strong automated baseline that maps the hard tier and shows its difficulty is method-bound rather than compute-bound.
+\item The resolution of two problems left open by the Equational Theories Project.
+\end{itemize}
+
+\section{Related Works}
+
+\subsection{AI-for-Science Benchmarks}
+Shift towards verifiable results, formal math or coding benchmarks are contaminated, none offer the combination of certified answerability, renewability, etc
+
+
+\subsection{Lean and Interactive Theorem Proving}
+What is lean, how have people made automated proofs with them?
+
+\subsection{Automated Equational Reasoning}
+Equational theories project, automated equational provers, etc. 
+
+
+\section{The Austin-Law Proof-Synthesis Benchmark}
+
+\subsection{Problem Formulation}
+% Problem Formulation
+% Definitions
+% Certificate
+% Dichotomy
+% Asymmetry and non-vacuity
+% Two-sided task
+
+
+A magma is a set $M$, called the carrier, together with a single binary operation ${\op}\colon M \times M \to M$. An equational law is a universally quantified identity between two terms built from variables and $\op$, such as the commutative law $x \op y = y \op x$ or the associative law $(x \op y) \op z = x \op (y \op z)$. The order of a law is the number of times the operation appears in it. A magma satisfies a law when the identity holds under all possible assignments of carrier elements to the variables (addition and multiplication, for example, satisfy both the commutative and associative laws). The object of interest for any law is the set of magmas in which it holds. Our benchmark is built from laws of the form $L\colon x = T[x, y, z, \dots]$, a single variable equated with a term $T$ of order five or more over the operation. A magma with a carrier of size $1$ satisfies every law automatically: with only one element to assign, the identity $x = y$ can never fail, and such a magma is called trivial. The question the benchmark poses for each $L$ is whether $L$ entails $x = y$, forcing every magma that satisfies it to be trivial, or whether $L$ admits a nontrivial model, one whose carrier holds at least two distinct elements.
+
+
+A nontrivial model, when one exists, may be finite or infinite. A finite model can always be found by searching through all magmas of increasing size until it reaches a satisfying assignment, requiring none of the creative, law-specific construction the benchmark aims to measure. We therefore admit a law into the benchmark only if it carries a machine-checked certificate that it has no nontrivial finite model; we call such a law admissible. For these laws, any nontrivial model that exists must be infinite, forcing a clean dichotomy: the law either entails $x = y$ and is trivial, or it is satisfied by an infinite, nontrivial magma. Laws that possess infinite models but no nontrivial finite one are known as Austin Laws \citep{...}. Every law either entails $x = y$ or it does not, so each instance has a determinate answer. Admissibility guarantees that the two possibilities are exactly the trivial and the Austin case. No instance is therefore unanswerable, and its difficulty lies in finding the answer, not in whether one exists.
+
+The two sides of the task are not symmetric, and this asymmetry is essential to what the benchmark measures. Whether $L$ entails $x = y$ is a first-order consequence, and a complete proof search will confirm it whenever it holds. The trivial case is, in principle, settled by deduction. The Austin case admits no such guarantee. A proof search that fails to derive $x = y$, however long it runs, does not show that $L$ is Austin, since the absence of a derivation is not a model, and since equational entailment is undecidable in general \citep{...}, no uniform procedure can be expected to solve all Austin laws. Establishing that a law is Austin ultimately means constructing an infinite magma and proving that it satisfies the law. Such a magma is not simply selected; it must be invented: an infinite carrier and operation must be posited and then shown to obey the identity. This is the capability the benchmark is designed to isolate: the synthesis of a new mathematical structure, tailored to the individual law, that deductive search does not supply. 
+
+\subsection{Answer Verification}
+% Answer Verification
+% lean, generated goals, safeguards
+
+Given an admissible law $L$, a solver must produce an answer that resolves the dichotomy and that a machine can check. This submission takes one of two forms: a model of $L$, a carrier and an operation on it, together with a proof that the model satisfies the law and is nontrivial, or a proof that $L$ entails $x = y$. Both can be checked automatically by the proof assistant Lean~\citep{...}, and a submission is accepted only when that check succeeds. A solved instance is therefore a verified fact
+rather than a predicted label, and scoring the benchmark requires no human in the loop.
+
+To make the solution for each law $L$ checkable, we generate two
+propositions a solver may prove. Constructing a model means proving
+\[
+  \begin{aligned}
+    \textsc{AustinGoal} \;\equiv\;{}& \exists\, M\; \exists\, {\op}\colon M \times M \to M,\\
+    & \bigl(\exists\, a, b : M,\ a \neq b\bigr) \wedge \mathrm{Law}(\op).
+  \end{aligned}
+\]
+ an existential over a carrier $M$, an operation on it, and a witness that two of its elements differ, where $\mathrm{Law}(\op)$ represents the assertion that an operation $\op$ satisfies $L$. Proving the law trivial means proving
+\[
+\begin{aligned}
+      \textsc{TrivialGoal} \;\equiv\; \forall\, M\; \forall\, {\op}\colon M \times M \to M,\; \\
+  \mathrm{Law}(\op) \rightarrow \forall\, a, b : M,\ a = b.
+\end{aligned}
+\]
+The nontriviality clause $\exists a, b.\ a \neq b$ is what separates a genuine model from the one-element magma. Together with the admissibility certificate, it forces that
+model to be infinite. Notably, a nontrivial model need not be infinite, whereas Austin laws are defined by their infinite models. However, admissibility has already excluded every nontrivial finite model, so any magma that satisfies $\mathrm{Law}(\op)$ with two distinct elements is necessarily infinite, and a proof of $\textsc{AustinGoal}$ therefore establishes that $L$ is an Austin law. Requiring only nontriviality keeps the goal tractable, since the solver never has to prove infinitude inside Lean.
+
+
+\subsection{Corpus Construction}
+% Construction
+% Generation, distinctness, contamination free
+Our construction produces admissible laws in bulk while making the corpus hard to resolve, internally distinct, and novel. We build the corpus by extension, growing it outward from laws already known to be Austin: each seed is extended by a single operation to yield laws of the next order, which are then screened for quality. This makes hard laws practical to produce at scale and the corpus renewable, since the same construction applies recursively at every order, keeping it beyond the frontier of previously enumerated laws, where no model could have encountered it during training. Random sampling, the obvious alternative, is ineffective: admissible laws are too rare to appear in quantity, and the few that do are often redundant or already enumerated.
+
+Concretely, we generate new candidates by extending a seed Austin law $x = T$ by selecting some variable $v$ within $T$ and replacing it with $v \op w$ or $w \op v$, where $w$ is some other variable. Because the extended law inherits most of the seed's term structure, it often inherits the mechanism that denies the seed any nontrivial finite model, which is why extension yields admissible laws far more often than sampling at random. 
+
+Next, each candidate passes through a sequence of screens ordered from cheap to expensive. First, a fast proof search prunes the candidates it can prove trivial. The rest are passed to the admissibility prover, a first-order query whose success is a proof that the law has no nontrivial finite model: when some subterm of $T$ contains every occurrence of $x$, that subterm acts as a left inverse and makes the map $x \mapsto T$ injective. On a finite carrier, an injective map is also surjective, and asserting that surjectivity lets the prover derive $x = y$, so every finite model is trivial. This is essential, as it means admission requires an actual proof that no nontrivial finite model exists. No such proof can exist for a law that has one, so it is impossible for a finite-model law to enter the corpus. The cost is that the query is sound but incomplete. When the occurrences of $x$ are split across the operation at the root, it certifies nothing. These candidates are conservatively discarded even though some are genuinely admissible. What remains are the admissible laws, certified to have no nontrivial finite model, and therefore either trivial or Austin.
+
+%Need to change this part with final numbers
+
+Because every law originates from a small set of seeds, the corpus risks redundancy, as extensions may be logically equivalent to its seed or to a sibling. We therefore measure distinctness across each law. Two laws can be determined to be equivalent when each entails the other, which in general demands a prover for every pair. For the laws already shown to be Austin, the model found in the process provides a shortcut: if a second law fails in that model, the first cannot entail it, and the pair is separated with no prover call at all. On a sample of 262 such laws, this settles all but a handful of pairs mechanically,
+leaving at most 195 distinct classes, a collapse of roughly a quarter. Each separation is a certificate that proves distinctness: a magma in which one law holds and the other fails proves the two laws distinct. Only the few pairs we can neither separate nor prove equal remain uncertain; we count them as distinct, which makes the class count a slight overestimate at worst, though the vast majority are proven separations. Two deduplication passes suffice: we drop each extension its seed entails, and we confirm no two seed families overlap. We report the corpus size in classes, not laws.
+
+From our observations, extension keeps producing new distinct classes. Across the orders we have only a minority of extensions are redundant, so each round yields many laws that no earlier one is equivalent to. We quantify this as the number of distinct classes, measured after admissibility and deduplication. Because this yield stays high and extension has no ceiling on order, the corpus grows without repeating itself. This makes the benchmark renewable and, in turn, contamination-free. Evaluation can always draw on instances minted after the model under test was trained, something a fixed benchmark cannot offer, since once released, it is eventually absorbed into training data. 
+
+
+
+\input{Figures/table_counts}
+
+\input{Figures/table_distinctness}
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=1.0\linewidth]{Figures/fig_corpus_construction.png}
+    \caption{This is a placeholder draft figure for explaining how the dataset was made.}
+    \label{fig:placeholder}
+\end{figure*}
+\section{Experiments}
+
+\subsection{Baseline Portfolio}
+%Baseline - 8 configs
+% Reproducibility
+We establish the difficulty of the benchmark against a strong portfolio of automated off-the-shelf provers. Because the task is two-sided, the portfolio must be as well. Proving a law trivial requires a proof search, while finding a nontrivial model is completed through saturation. The portfolio spans eight configurations: Vampire~5.0.1 in five modes (proof search and saturation, under both KBO and LPO term orderings) \citep{...}, the E prover in a proof and a saturation mode \citep{...}, and Twee~2.6.1, an implementation of unfailing completion built for equational reasoning \citep{...}. Each configuration is run over a ladder of per-prover time budgets, $30$, $60$, $120$, $300$, and $600$ seconds, and a law counts as resolved as soon as any configuration returns a verdict. Provers, versions, and exact flags are pinned in a released container image. A claimed model or triviality proof is one the tool itself reports rather than one we infer.
+
+
+% Method-bounded frontier
+In our measurements, laws the portfolio leaves unresolved are not easily resolved with increased compute. These questions appear to be bound by method rather than budget. To show this, we run the portfolio over the budget ladder and record, at each budget, the fraction of laws it resolves, the results of which are shown in Table \ref{tab:baseline}. If the limiting factor were the amount of compute, we would expect a consistent trend in the number of solved problems as the budget increases. Instead, on a sample of $120$ laws, the portfolio resolves three at the shortest budget, and no further solves with even twenty times the compute. We therefore define those left unresolved at the longest budget under every configuration as a ``hard" tier of laws.
+
+Those that are resolved are in one direction only. The three laws settled are all proved trivial, or shown to entail $x = y$. These are contamination rather than failures of the benchmark: they are admissible laws whose triviality the corpus classifier had not established at its short budget. The construction side of the hard tier is untouched by the strongest automated methods.
+
+Our solver portfolio is built to contain provers that reason in different ways. Vampire and E are superposition provers: they search by deriving logical consequences of the law until either a contradiction proves it trivial or the consequences close into a model. Twee instead runs unfailing completion, the equational method behind Knuth--Bendix rewriting \citep{...}. Twee turns the law's equations into rewrite rules and completes them into a convergent system. These are two major, distinct paradigms for equational reasoning, each exploring the space differently enough that a problem one diverges on, the other may finish. Twee is also purpose-built for the unit-equational setting our laws fall in. In our experiments, Twee resolves an order-five law in seconds whose saturation runs Vampire to hundreds of clauses. However, across the hard tier, Twee resolves nothing the rest of the portfolio does not, and produces no model of its own. Consistent failures across both automated proof paradigms suggests that the hard frontier's difficulty is shared across automated provers as a class, not particular to any one. 
+
+\input{Figures/table_compute}
+
+\subsection{LLM Baseline}
+%LLM Baseline
+Todo: Discuss LLM evaluation protocol, show these problems are hard for LLMs too, eval is fair by consrtuction: all LLMs get the same "jumping-off" point to reason from. 
+
+\subsection{Case Study}
+Todo:
+Our pipeline solves a few open problems mentioned in the ETP paper. We can discuss these two problems, showing that they are confirmed Austin, and how they are solved to give a better understanding of the types of problems we provide. 
+
+% Case Study
+
+
+
+
+\section{Discussion and Limitations}
+% TODO. Anchors: hard-tier collapse not yet measured (prover-only census there);
+% ground confluence open => saturation-model answers not yet Lean-certifiable (algebraic
+% ones are), framed as next paper; optional hand-solved demonstrations; (i)-prover vs
+% Infinox not yet benchmarked.
+
+\section{Conclusion}
+% TODO. A public generator + certified two-sided task => the benchmark is minted, not
+% fixed, and hard relative to a named, published baseline.
+
+
+\bibliography{aaai2027}
+
+% Check whether the conference requires a reproducibility checklist to be included in the paper.
+% If so, you can uncomment the following line and ajust the path to include it.
+% \input{ReproducibilityChecklist.tex}
+
+\end{document}

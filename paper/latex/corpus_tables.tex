@@ -1,0 +1,95 @@
+%==============================================================================
+% CORPUS CONSTRUCTION tables (§3.3). Paste where referenced.
+% booktabs is loaded in the AAAI template.
+%
+% COUNTS FINAL: recounted from results/final_status.jsonl (10,474 records, 2026-07-14).
+% Status map -> AUSTIN_PROVEN 262, NO_FINITE_MODEL 4141, TRIVIAL 3080,
+% HAS_FINITE_MODEL 1042, SATISFIABLE_ONLY 43, OPEN 1906.
+%==============================================================================
+
+
+%------------------------------------------------------------------------------
+% Table C1 — corpus composition. Single column; \begin{table}.
+% Grouped by what the pipeline does with each candidate.
+%------------------------------------------------------------------------------
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lr}
+\toprule
+Candidate outcome & Count \\
+\midrule
+\multicolumn{2}{l}{\emph{Admitted (certified no nontrivial finite model)}} \\
+\quad Austin, model exhibited          & 262 \\
+\quad Admissible, unresolved (hard tier) & 4{,}141 \\
+\quad Trivial ($L \models x{=}y$)      & 3{,}080 \\
+\midrule
+\multicolumn{2}{l}{\emph{Discarded / uncertified}} \\
+\quad Has a nontrivial finite model    & 1{,}042 \\
+\quad Nontrivial model, admissibility uncertified & 43 \\
+\quad Not certified admissible         & 1{,}906 \\
+\midrule
+Total candidates                       & 10{,}474 \\
+\bottomrule
+\end{tabular}
+\caption{Composition of the generated pool. A candidate is \emph{admitted} only on a
+proof that it has no nontrivial finite model; admitted laws are each trivial or Austin,
+and the \emph{hard tier} is the admissible subset the baseline leaves unresolved.
+Counts are by distinct law string; modulo equivalence the corpus is smaller
+(Table~\ref{tab:classes}).}
+\label{tab:corpus}
+\end{table}
+
+
+%------------------------------------------------------------------------------
+% Table C2 — distinctness / class collapse. Single column; \begin{table}.
+% From equiv_sample on the Austin-proven laws.
+%------------------------------------------------------------------------------
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lr}
+\toprule
+Distinctness (Austin-proven sample) & \\
+\midrule
+Laws compared                        & 262 \\
+Confirmed-equivalent pairs           & 255 \\
+Net class merges                     & 67 \\
+\midrule
+Distinct classes (upper bound)       & $\leq 195$ \\
+Collapse                             & $\approx 26\%$ \\
+\bottomrule
+\end{tabular}
+\caption{Distinctness on the Austin-proven laws. Pairs are \emph{separated} by an
+explicit model in which one law holds and the other fails---a certificate that they are
+distinct---so the class count is anchored from below; unresolved pairs are counted as
+distinct, making $195$ an upper bound. The $262$ laws collapse to $\leq 195$ classes
+($67$ net merges from $255$ confirmed-equivalent pairs). As an illustration of how sharply
+the separator distinguishes laws, a $48$-law pilot separated $1{,}123$ of its $1{,}128$
+pairs. The corpus is reported in classes, not laws.}
+\label{tab:classes}
+\end{table}
+
+
+%------------------------------------------------------------------------------
+% Table C3 (OPTIONAL) — yield of extension vs random sampling.
+% Include only if you have the numbers; it makes the "extension, not sampling"
+% claim quantitative. Single column.
+%------------------------------------------------------------------------------
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+Generation method & Admissible rate & Rel. yield \\
+\midrule
+Random order-$\geq 6$ sampling & $\sim\!0.?\%$    & $1\times$ \\
+One-operation extension        & $\sim\!??\%$     & $\sim\!500\times$ \\
+\bottomrule
+\end{tabular}
+\caption{Yield of admissible laws under random sampling versus one-operation extension
+from Austin seeds; extension raises the admissible rate by about two orders of
+magnitude, which is what makes bulk generation practical.
+% FILL both rates from the generation logs; the ~500x figure is from the harvest notes.}
+\label{tab:yield}
+\end{table}

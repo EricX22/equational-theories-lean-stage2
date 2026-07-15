@@ -1,0 +1,54 @@
+%==============================================================================
+% EXPERIMENTS tables (§4). Paste where referenced.
+% booktabs loaded in the AAAI template. Numbers FINAL (baseline_v1.jsonl,
+% portfolio d4ee2fb7, 2026-07-10) unless marked.
+%==============================================================================
+
+
+%------------------------------------------------------------------------------
+% Table: baseline resolution over the budget ladder (§4.2). Single column.
+%------------------------------------------------------------------------------
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+Per-prover budget & Laws resolved & $\Delta$ rate \\
+\midrule
+$30$\,s  & $3/120 = 0.025$ & --- \\
+$60$\,s  & $0/117 = 0.000$ & $-0.025$ \\
+$120$\,s & $0/117 = 0.000$ & $\phantom{-}0.000$ \\
+$300$\,s & $0/117 = 0.000$ & $\phantom{-}0.000$ \\
+$600$\,s & $0/117 = 0.000$ & $\phantom{-}0.000$ \\
+\bottomrule
+\end{tabular}
+\caption{Portfolio on a 120-law sample of the hard tier. Every law that resolves does so
+at the shortest budget; twenty times the budget yields nothing further. All three resolved
+laws are proved \emph{trivial}---zero acquire a nontrivial model.}
+\label{tab:baseline}
+\end{table}
+
+
+%------------------------------------------------------------------------------
+% OPTIONAL companion: verdict / contamination breakdown (§4.2, second paragraph).
+% Use if you want the "0 Austin, 11 trivial + retry" numbers in a table rather
+% than prose. Single column.
+%------------------------------------------------------------------------------
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+ & Hard-tier sample & Retry (300\,s) \\
+\midrule
+Laws                       & 120 & 216 \\
+Resolved as trivial        & 3   & 4 \\
+Resolved as Austin (new model) & 0 & 0 \\
+\bottomrule
+\end{tabular}
+\caption{Every resolution is a \emph{trivial} law the portfolio proves entails $x=y$
+(contamination shed), and no law in the hard tier acquires a nontrivial model, under
+either the ladder or a separate $300$\,s-per-prover retry. % retry_curve.py, 2026-07-09
+}
+\label{tab:verdicts}
+\end{table}

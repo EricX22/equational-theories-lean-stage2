@@ -315,6 +315,59 @@ The 1.9% trivial rate is the **hard-tier contamination estimate**, and it is a r
 number to quote: the two-sided task (§2) is what makes those laws harmless rather than
 unanswerable.
 
+**PORTFOLIO v1.0 RESULT — 2026-07-10 (`scripts/baseline_probe.py`, portfolio d4ee2fb7).**
+The retry above is one prover under one ordering; this is the real portfolio the paper
+stands on. Eight configurations — Vampire (`triv/casc`, `triv/casc+lpo`, `triv/discount`,
+`sat/otter+kbo`, `sat/otter+lpo`), E (`triv/auto`, `sat/satauto`), and **Twee** (unfailing
+completion) — over the budget ladder `30/60/120/300/600 s`, on a 120-law sample of the
+`NO_FINITE_MODEL` tier. Provers pinned: Vampire 5.0.1, E, Twee 2.6.1; exact flags in the
+script; Gate-2-verified SZS parsing; selftest gates the run. Completed 2026-07-10,
+120-law sample, 4704 prover-calls:
+
+```
+rate by budget (distinct laws resolved / laws reaching that budget):
+    30s    3/120 = 0.025
+    60s    0/117 = 0.000  d=-0.025
+   120s    0.000  d= 0
+   300s    0.000  d= 0
+   600s    0.000  d= 0
+verdicts:  0 AUSTIN (new nontrivial models)   ·   11 TRIVIAL (contamination shed)
+```
+
+Three findings, and each answers a question the retry left open:
+
+1. **The curve is FLAT under the full portfolio, not just under one prover.** Everything
+   that resolves, resolves at 30 s; fifteen times the budget across a portfolio built to
+   diverge under different orderings adds **nothing**. This is the defensible form of
+   "method-bound": unresolved at `B_max` under *every* configuration, with the corpus
+   curve published to show `B_max` is past the knee. It upgrades the retry's
+   single-prover result to the claim the abstract can make.
+
+2. **Zero new `AUSTIN`.** No hard-tier law saturates to a nontrivial model under any
+   portfolio member, including Twee — which *completes* on 12857 in seconds where Vampire
+   needs 357 clauses, so this is not for lack of a strong completion engine. The Austin
+   side of the tier is stable; the frontier is real.
+
+3. **Every resolution is contamination the portfolio sheds — and E/Twee shed more than
+   Vampire.** ~3% of the sampled tier proves `TRIVIAL`, and the completion provers catch
+   laws Vampire's proving modes miss at 30 s (one law was `COMPLETION-ONLY [TRIVIAL]`,
+   proved by E in 1 s and Twee in 12 s while all five Vampire configs timed out). This is
+   the portfolio doing exactly its job: a stronger baseline shrinks the tier by removing
+   trivial-but-hard-to-prove laws, which is the honest direction for that number to move.
+
+**What did NOT happen, stated because it was the live alternative.** Twee completing hard
+laws Vampire cannot *could* have shown the tier was Vampire-bound rather than method-bound
+— which would have rebuilt the tier around Twee before publication. The check for it
+(`TWEE-ONLY [AUSTIN]` / `COMPLETION-ONLY [AUSTIN]`, `scripts/progress_runall.sh`) is live
+and fires correctly on the trivial case, and it found **no** Twee-only *model*. Twee is a
+strong portfolio member, not a tier-breaker. The reshaping result is ruled out, not
+merely absent.
+
+Caveat that ships with the number: 120 laws is a *sample* of ~3,428, sound for a *rate*
+but not for the hard tier's *membership list*. The full sweep — every `NO_FINITE_MODEL`
+law against portfolio v1.0 — is a separate, much longer run, and only its survivors are
+the published hard tier. Budget it after the ladder and portfolio are frozen.
+
 **And a claim of mine this refutes.** I argued the retry "pays twice" — that laws
 converting to `AUSTIN_PROVEN` would gain saturations, hence models, hence the cheap
 prover-free separations of §5D. Zero converted. The hard tier gains **no models**, so
