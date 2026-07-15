@@ -1,0 +1,36 @@
+% law: x =  (y ◇ (y ◇ x)) ◇ ((z ◇ z) ◇ z)
+% config: twee/complete @ 30s
+
+Here is the input problem:
+  Axiom 1 (hyp): X = f(f(Y, f(Y, X)), f(f(Z, Z), Z)).
+  Goal 1 (goal): x = y.
+
+1. f(f(X, f(X, Y)), f(f(Z, Z), Z)) -> Y
+2. f(f(f(X, f(X, Y)), Y), f(f(Z, Z), Z)) -> f(f(?, ?), ?)
+3. f(f(X, X), X) ~> f(f(?, ?), ?)
+4. f(f(f(X, X), f(f(?, ?), ?)), f(f(?, ?), ?)) -> X
+5. f(f(f(?, ?), ?), f(f(?, ?), ?)) -> f(f(?, ?), ?)
+6. f(f(f(f(X, X), f(f(?, ?), ?)), X), f(f(?, ?), ?)) -> f(f(?, ?), ?)
+
+% SZS status CounterSatisfiable
+
+% SZS output start Saturation
+cnf(c1, axiom, X=f(f(Y, f(Y, X)), f(f(Z, Z), Z)), file('/tmp/tmpeq7jf4j4/p.p', hyp)).
+cnf(c2, plain, f(f(X3, f(X3, X4)), f(f(X2, X2), X2))=X4).
+cnf(c3, plain, f(f(f(X2, f(X2, X3)), X3), f(f(X4, X4), X4))=f(f(constant, constant), constant)).
+cnf(c4, plain, f(f(X2, X2), X2)=f(f(constant, constant), constant)).
+cnf(c5, plain, f(f(f(X2, X2), f(f(constant, constant), constant)), f(f(constant, constant), constant))=X2).
+cnf(c6, plain, f(f(f(constant, constant), constant), f(f(constant, constant), constant))=f(f(constant, constant), constant)).
+cnf(c7, plain, f(f(f(f(X2, X2), f(f(constant, constant), constant)), X2), f(f(constant, constant), constant))=f(f(constant, constant), constant)).
+% SZS output end Saturation
+
+Ran out of critical pairs. This means the conjecture is not true.
+Here is the final rewrite system:
+  f(f(X, X), X) ~> f(f(?, ?), ?)
+  f(f(X, f(X, Y)), f(f(?, ?), ?)) -> Y
+  f(f(f(?, ?), ?), f(f(?, ?), ?)) -> f(f(?, ?), ?)
+  f(f(f(X, f(X, Y)), Y), f(f(?, ?), ?)) -> f(f(?, ?), ?)
+  f(f(f(X, X), f(f(?, ?), ?)), f(f(?, ?), ?)) -> X
+  f(f(f(f(X, X), f(f(?, ?), ?)), X), f(f(?, ?), ?)) -> f(f(?, ?), ?)
+
+RESULT: CounterSatisfiable (the conjecture is false).

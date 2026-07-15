@@ -1,0 +1,24 @@
+2026-07-10 20:22:40 — run_all starting. shards=32 budgets=30,60,120,300,600 heartbeat=600s
+2026-07-10 20:22:40 — provers: vampire=paper/bin/vampire eprover=/u/jrg4wx/bin/eprover twee=/u/jrg4wx/bin/twee lean=1
+2026-07-10 20:22:40 — portfolio signature: d4ee2fb7
+2026-07-10 20:22:40 — STAGE baseline
+2026-07-10 20:22:40 — baseline: sampling 120 laws (the curve is a rate, not a census)
+2026-07-11 05:06:16 — baseline done: 4704 rows
+portfolio v1.0-draft
+
+  budget    laws  resolved     rate   delta
+      30     120         3    0.025   
+      60     117         0    0.000   -0.025
+     120     117         0    0.000   +0.000
+     300     117         0    0.000   +0.000
+     600     117         0    0.000   +0.000
+
+If the delta is not flattening, B_max is before the knee and the hard tier is under-budgeted, not method-bound. See PAPER_PLAN.md 5C.
+2026-07-11 05:06:17 — STAGE lean_model
+2026-07-11 05:08:32 — OrderedModel.lean elaborates. Remaining sorry: ground_confluent = the paper.
+2026-07-11 05:08:32 — STAGE done
+2026-07-11 05:08:32 — ALL DONE. gates: answer_spec=ok
+2026-07-11 05:08:32 —   paper/results/retry_curve.json  (7 lines)
+2026-07-11 05:08:32 —   paper/results/baseline_v1.jsonl  (4704 lines)
+2026-07-11 05:08:32 —   paper/results/classes.json  (1026 lines)
+2026-07-11 05:08:32 —   paper/results/lean_model.log  (3 lines)
