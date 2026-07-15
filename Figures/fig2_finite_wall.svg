@@ -1,0 +1,62 @@
+<svg viewBox="0 0 720 452" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Helvetica, Arial, sans-serif">
+<title>ALPS mechanism: no finite model, an infinite one must be constructed</title>
+<desc>An injective term forces every finite magma to collapse to one element; only an infinite carrier, where the map misses an element, holds a nontrivial model, which a solver must build and Lean verifies.</desc>
+<defs>
+  <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0.5 L6,3 L0,5.5" fill="none" stroke="#666666" stroke-width="1.2"/></marker>
+</defs>
+
+<text x="30" y="26" font-size="15.5" font-weight="700" fill="#1a1a1a">No finite magma satisfies it. A model exists only at infinity &#8212; and must be built.</text>
+
+<!-- anchor law -->
+<rect x="150" y="42" width="420" height="42" rx="8" fill="#f4f4f5" stroke="#d4d4d8" stroke-width="1.2"/>
+<text x="360" y="63" font-size="14.5" fill="#1a1a1a" text-anchor="middle">L:  x = (y &#9671; <tspan fill="#b5471f" font-weight="700">(x &#9671; x)</tspan>) &#9671; ((y &#9671; z) &#9671; y)</text>
+<text x="360" y="79" font-size="10.5" fill="#b5471f" text-anchor="middle">the highlighted term makes  x &#8614; L  injective</text>
+
+<!-- divider -->
+<line x1="360" y1="108" x2="360" y2="366" stroke="#e2e2e2" stroke-width="1" stroke-dasharray="3 4"/>
+
+<!-- LEFT: finite -->
+<text x="180" y="128" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">On any finite carrier</text>
+<text x="180" y="146" font-size="11" fill="#666666" text-anchor="middle">injective &#8658; onto</text>
+<g>
+<circle cx="70" cy="200" r="9" fill="#1a1a1a"/>
+<circle cx="140" cy="200" r="9" fill="#1a1a1a"/>
+<circle cx="210" cy="200" r="9" fill="#1a1a1a"/>
+<circle cx="280" cy="200" r="9" fill="#1a1a1a"/>
+<path d="M79,192 q35,-26 61,0" fill="none" stroke="#666666" stroke-width="1.3" marker-end="url(#a)"/>
+<path d="M149,192 q35,-26 61,0" fill="none" stroke="#666666" stroke-width="1.3" marker-end="url(#a)"/>
+<path d="M219,192 q35,-26 61,0" fill="none" stroke="#666666" stroke-width="1.3" marker-end="url(#a)"/>
+<path d="M280,209 q-105,52 -210,0" fill="none" stroke="#666666" stroke-width="1.3" marker-end="url(#a)"/>
+</g>
+<text x="180" y="245" font-size="10.5" fill="#666666" text-anchor="middle">every element is an output</text>
+<text x="180" y="292" font-size="13" font-weight="700" fill="#b5471f" text-anchor="middle">&#8658;  the law forces  x = y</text>
+<rect x="96" y="308" width="168" height="34" rx="17" fill="none" stroke="#b5471f" stroke-width="1.4"/>
+<text x="180" y="330" font-size="11.5" font-weight="600" fill="#b5471f" text-anchor="middle">&#10007; collapses (certified)</text>
+
+<!-- RIGHT: infinite -->
+<text x="540" y="128" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">On an infinite carrier</text>
+<text x="540" y="146" font-size="11" fill="#666666" text-anchor="middle">injective, but not onto</text>
+<g>
+<circle cx="410" cy="200" r="9" fill="none" stroke="#b5471f" stroke-width="2" stroke-dasharray="3 3"/>
+<text x="410" y="182" font-size="10" fill="#b5471f" text-anchor="middle">never hit</text>
+<circle cx="472" cy="200" r="9" fill="#1a1a1a"/>
+<circle cx="534" cy="200" r="9" fill="#1a1a1a"/>
+<circle cx="596" cy="200" r="9" fill="#1a1a1a"/>
+<text x="410" y="228" font-size="10" fill="#666666" text-anchor="middle">0</text>
+<text x="472" y="228" font-size="10" fill="#666666" text-anchor="middle">1</text>
+<text x="534" y="228" font-size="10" fill="#666666" text-anchor="middle">2</text>
+<text x="596" y="228" font-size="10" fill="#666666" text-anchor="middle">3</text>
+<path d="M419,200 h44" fill="none" stroke="#666666" stroke-width="1.3" marker-end="url(#a)"/>
+<path d="M481,200 h44" fill="none" stroke="#666666" stroke-width="1.3" marker-end="url(#a)"/>
+<path d="M543,200 h44" fill="none" stroke="#666666" stroke-width="1.3" marker-end="url(#a)"/>
+<text x="632" y="204" font-size="15" fill="#666666">&#8230;</text>
+</g>
+<text x="540" y="245" font-size="10.5" fill="#666666" text-anchor="middle">one element is missed &#8212; no collapse</text>
+<text x="540" y="292" font-size="13" font-weight="700" fill="#2f7d4f" text-anchor="middle">&#8658;  distinct elements survive</text>
+<rect x="452" y="308" width="176" height="34" rx="17" fill="none" stroke="#2f7d4f" stroke-width="1.4"/>
+<text x="540" y="330" font-size="11.5" font-weight="600" fill="#2f7d4f" text-anchor="middle">&#10003; a nontrivial model, built</text>
+
+<line x1="30" y1="380" x2="690" y2="380" stroke="#e2e2e2" stroke-width="1"/>
+<text x="30" y="406" font-size="11.5" fill="#666666">Search enumerates finite structures and finds only collapse. The model is an infinite object a solver must</text>
+<text x="30" y="424" font-size="11.5" fill="#666666">construct &#8212; then a Lean proof checks it, with no human and no answer key. Automated provers stall on the hard laws.</text>
+</svg>

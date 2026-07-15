@@ -66,7 +66,7 @@ def extract_lean(text: str) -> str:
     return (m.group(1) if m else text).strip()
 
 
-_SIDE = re.compile(r"\bsolution\b[^\n:=]*:\s*(?:Problem\.)?(AustinGoal|TrivialGoal)")
+_SIDE = re.compile(r"\bsolution\b[^:=]*:\s*(?:Problem\.)?(AustinGoal|TrivialGoal)")
 def detect_side(body: str) -> str | None:
     """Which goal does the submission's `solution` target?"""
     m = _SIDE.search(body)
