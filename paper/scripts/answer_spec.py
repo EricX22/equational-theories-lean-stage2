@@ -209,13 +209,17 @@ def check_axioms(out: str) -> list[str]:
 
 
 def judge(law: str, side: str, submission: str, lean_dir: str = ".",
-          timeout: int = 600) -> tuple[bool, list[str]]:
+          timeout: int = 600, preamble: str = "") -> tuple[bool, list[str]]:
     src = open(submission, encoding="utf-8").read()
     problems = scan_submission(src)
     if problems:
         return False, problems
 
-    full = problem_header(law) + "\n" + src + problem_footer(side)
+    # An optional preamble (e.g. "import Mathlib") is prepended ABOVE the header so the
+    # submission can use library lemmas; imports must precede all commands, so this is the
+    # only place they can go. Default "" keeps the core-Lean behaviour and the selftest.
+    head = (preamble.rstrip() + "\n\n") if preamble.strip() else ""
+    full = head + problem_header(law) + "\n" + src + problem_footer(side)
     with tempfile.TemporaryDirectory() as wd:
         p = os.path.join(wd, "Answer.lean")
         with open(p, "w", encoding="utf-8") as fh:

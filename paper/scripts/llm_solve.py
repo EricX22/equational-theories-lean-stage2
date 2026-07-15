@@ -1,41 +1,40 @@
 #!/usr/bin/env python3
-"""llm_solve.py — the ALPS LLM baseline: propose a Lean model, judge it, loop on feedback.
+"""llm_solve.py — the ALPS LLM baseline harness: two-sided, propose -> judge -> revise.
 
-Unlike attic/finite_regime/proposer_o3.py (finite tables + a `solver` import for the old
-pairs pipeline), this targets the ALPS task directly and has NO solver dependency. It
-reuses the OFFICIAL judge in answer_spec.py, so a PASS is a genuine ALPS solve: the goal
-is pinned to the law and the axiom footprint is checked against {propext, Quot.sound,
-Classical.choice}. The propose -> judge -> read-error -> revise loop is the same
-self-verification a mathematician does, and is pre-registered as allowed
-(LLM_EXPERIMENT_PLAN.md).
+The task is two-sided and so is this: given a law, the model must DECIDE whether the law
+forces triviality or admits a nontrivial model, and prove the matching goal
+(`Problem.TrivialGoal` or `Problem.AustinGoal`). We detect which goal its `solution`
+targets and run the OFFICIAL answer_spec judge on that side, so a PASS is a genuine solve
+(goal pinned to the law, axiom footprint checked). No `solver` dependency.
 
-CHANNEL / LIMITATION. The judge compiles [our header] ++ [LLM body] ++ [our footer], so
-the submission is a *body* and cannot contain `import` lines (they would land mid-file).
-That means CORE Lean 4 only — no Mathlib. Models over Nat/Int provable with
-rfl/decide/simp/omega/induction go through; anything needing Mathlib's algebra does not
-yet, and is the job of the generic infinite-model formalisation (PAPER_PLAN.md §5B) /
-the L2 autoformalizer. Use the lean_oracle standalone channel for Mathlib certs meanwhile
-(see run_remaining.sh handsolve).
+EVAL DESIGN. Run on the SOLVABLE tier (paper/results/eval/eval_solvable.jsonl: known Austin
++ trivial, fresh orders) where a partial solve rate discriminates systems; the hard tier
+(eval_frontier.jsonl) floors everyone and is an optional bonus. The gold label, when
+present, is used only for reporting (did the model pick the right side?) --- grading is by
+Lean regardless.
+
+CHANNEL NOTE. The judge compiles [header] ++ [body] ++ [footer] with no import line, so
+today submissions are CORE Lean 4 only (no Mathlib). Trivial-side proofs and Nat/Int
+models go through; most Austin models need Mathlib, which is unlocked by prepending an
+import in the judge (a one-line change to answer_spec, to be tested on a machine with
+Lean). Until then expect the Austin side to be limited.
 
 USAGE
   export OPENROUTER_API_KEY=...
-  # one law, one round (do this first — cost caution):
-  python3 paper/scripts/llm_solve.py --law 'x = ((((y ◇ x) ◇ y) ◇ y) ◇ z) ◇ y' \
-      --lean-dir . --rounds 1 --out paper/results/llm_solve.jsonl
-  # a batch over the hard tier (sharded), a few rounds each:
-  python3 paper/scripts/llm_solve.py --laws-file paper/results/final_status.jsonl \
-      --status NO_FINITE_MODEL --n 50 --shard 0/1 --rounds 3 \
-      --lean-dir . --cert-dir paper/certs/llm --out paper/results/llm_hardtier.jsonl
+  # smoke: one law, one round
+  python3 paper/scripts/llm_solve.py --law 'x = ...' --lean-dir . --rounds 1 \
+      --out paper/results/llm_solve.jsonl
+  # the eval:
+  python3 paper/scripts/llm_solve.py --laws-file paper/results/eval/eval_solvable.jsonl \
+      --rounds 3 --lean-dir . --cert-dir paper/certs/llm --out paper/results/llm_eval.jsonl
 """
 from __future__ import annotations
-import argparse, glob, hashlib, json, os, re, sys, time, urllib.request
+import argparse, glob, hashlib, json, os, re, sys, tempfile, time, urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import answer_spec as asp   # problem_header(law); judge(law, side, path, lean_dir, timeout)
 
-# reasoning:high spends most tokens on the hidden trace before the visible answer;
-# max_tokens must scale with effort or content comes back None (see proposer_o3 note).
 MAX_TOKENS_BY_EFFORT = {"low": 6000, "medium": 16000, "high": 65000}
 ENDPOINT = "https://openrouter.ai/api/v1/chat/completions"
 
@@ -67,56 +66,73 @@ def extract_lean(text: str) -> str:
     return (m.group(1) if m else text).strip()
 
 
+_SIDE = re.compile(r"\bsolution\b[^\n:=]*:\s*(?:Problem\.)?(AustinGoal|TrivialGoal)")
+def detect_side(body: str) -> str | None:
+    """Which goal does the submission's `solution` target?"""
+    m = _SIDE.search(body)
+    if m:
+        return "austin" if m.group(1) == "AustinGoal" else "trivial"
+    has_a, has_t = "AustinGoal" in body, "TrivialGoal" in body
+    if has_a and not has_t:
+        return "austin"
+    if has_t and not has_a:
+        return "trivial"
+    return None
+
+
 REFERENCE = (
     "theorem solution : Problem.AustinGoal :=\n"
     "  ⟨Bool, fun a _ => a, ⟨true, false, by decide⟩, fun _ => rfl⟩"
 )
 
 RULES = """RULES (the judge enforces these):
-- Declare exactly one `theorem solution : Problem.AustinGoal := ...` (or a `def`/`lemma`).
-- Do NOT write any `import` line, and do NOT use Mathlib. Only CORE Lean 4 is available
-  (Nat, Int, Bool, custom inductive/structure types; tactics rfl, decide, simp, omega,
-  induction, cases, constructor, exact, refine). Imports are impossible: your text is
-  pasted between a fixed header and footer.
+- Declare exactly one `theorem solution` (or `def`/`lemma`) whose type is
+  `Problem.AustinGoal` OR `Problem.TrivialGoal` --- prove whichever one holds for this law.
+- Mathlib is imported for you; do NOT write any `import` line yourself (your text is
+  pasted between a fixed header and footer). You may use Mathlib (e.g. `ZMod`, `ring`,
+  `linarith`, `omega`, `decide`, `simp`, `induction`) and all of core Lean 4.
 - Do NOT use: sorry, admit, native_decide, unsafe, implemented_by, axiom, macro, syntax,
   elab. Do NOT redefine `Problem`, `AustinGoal`, `TrivialGoal`, or `Law` (you may only
-  reference `Problem.AustinGoal` as the type of `solution`).
+  reference them as the type of `solution`).
 - The final axiom footprint of `solution` must be a subset of
-  {propext, Quot.sound, Classical.choice}. (`decide`/`omega`/`rfl` are fine.)
+  {propext, Quot.sound, Classical.choice}.
 
-SHAPE. `Problem.AustinGoal` unfolds to
-  `∃ (M : Type) (op : M → M → M), (∃ a b : M, a ≠ b) ∧ Law op`,
-so `solution` is an anonymous constructor
-  `⟨M, op, ⟨a, b, proof a ≠ b⟩, proof that Law op holds⟩`,
+SHAPES.
+- `Problem.AustinGoal` unfolds to `∃ (M : Type) (op : M → M → M), (∃ a b : M, a ≠ b) ∧ Law op`,
+  so an Austin `solution` is `⟨M, op, ⟨a, b, proof a ≠ b⟩, proof Law op⟩` with M INFINITE
+  (e.g. Int/Nat), since the law has no nontrivial finite model.
+- `Problem.TrivialGoal` unfolds to `∀ (M) (op), Law op → ∀ a b : M, a = b`, so a trivial
+  `solution` assumes `Law op` and derives `a = b` for arbitrary elements.
 where `Law op` is `∀ <binders> : M, <the law with ◇ written as op>`.
 
-REFERENCE ANSWER (for the easy law `x = x ◇ x`, which DOES have a finite model):
+REFERENCE (Austin form, for the easy law `x = x ◇ x`):
 """ + REFERENCE
 
 
 def build_prompt(law: str, header: str, feedback: str | None) -> str:
-    p = f"""You are proving, in Lean 4, that a magma law admits a NONTRIVIAL model.
+    p = f"""You are solving a two-sided problem about a magma law in Lean 4.
 
 The law is:  {law}
 (◇ is the binary magma operation.)
 
-This law has been machine-certified to have NO nontrivial FINITE model. Therefore any
-nontrivial model is necessarily INFINITE: your carrier `M` must be an infinite type
-(e.g. `Nat`, `Int`, or a custom recursive type), NOT a finite one. Pick an operation
-`op : M → M → M` and prove it satisfies the law while having two distinct elements.
-Good first attempts: affine-style ops on `Int`/`Nat` (`fun x y => a*x + b*y + c`) proved
-with `omega`/`ring_nf`-free `simp`/`induction`; or structured recursive ops proved by
-induction. Keep proofs within core Lean.
+Exactly ONE of these is true; decide which and prove it:
+  - AUSTIN: the law admits a NONTRIVIAL model (two distinct elements, an operation
+    satisfying the law). Such a model is necessarily INFINITE, since the law is certified
+    to have no nontrivial finite model --- use an infinite carrier (Int, Nat, or a custom
+    type). Prove `Problem.AustinGoal`.
+  - TRIVIAL: the law forces every model to a single element (it entails x = y). Prove
+    `Problem.TrivialGoal`.
 
-Here is the EXACT problem statement your `solution` must inhabit (generated from the law;
-do not restate or edit it — it is prepended for you):
+Here is the EXACT problem statement, with both goals defined (generated from the law; do
+not restate or edit it --- it is prepended for you):
 
 {header}
 
 {RULES}
 
-Return ONLY a single Lean code block (```lean ... ```) containing your `solution` body
-and any helper defs/lemmas it needs. No prose outside the code block."""
+Return ONLY a single Lean code block (```lean ... ```) with your `solution` (typed
+`Problem.AustinGoal` or `Problem.TrivialGoal`) and any helpers it needs. No prose outside
+the code block."""
     if feedback:
         p += f"""
 
@@ -127,30 +143,29 @@ Return a corrected single Lean code block."""
     return p
 
 
-def attempt(law: str, side: str, lean_dir: str, rounds: int, api_key: str,
-            model: str, effort: str, timeout: int, cert_dir: str | None):
+def attempt(law: str, side_mode: str, lean_dir: str, rounds: int, api_key: str,
+            model: str, effort: str, timeout: int, cert_dir: str | None,
+            preamble: str = ""):
     header = asp.problem_header(law)
     feedback = None
+    jside = None
     total_usage = {"prompt_tokens": 0, "completion_tokens": 0}
     for rnd in range(1, rounds + 1):
         prompt = build_prompt(law, header, feedback)
         try:
             content, usage = call_llm(prompt, api_key, model, effort, timeout)
         except Exception as e:                       # noqa: BLE001
-            return {"solved": False, "rounds_used": rnd, "error": f"api: {e}",
-                    "usage": total_usage}
+            return {"solved": False, "rounds_used": rnd, "attempted_side": jside,
+                    "error": f"api: {e}", "usage": total_usage}
         for k in ("prompt_tokens", "completion_tokens"):
             total_usage[k] = total_usage.get(k, 0) + (usage.get(k) or 0)
         body = extract_lean(content)
+        jside = (detect_side(body) or "austin") if side_mode == "auto" else side_mode
 
-        import tempfile
         with tempfile.NamedTemporaryFile("w", suffix=".lean", delete=False,
                                          encoding="utf-8") as fh:
             fh.write(body); sub_path = fh.name
-        try:
-            passed, why = asp.judge(law, side, sub_path, lean_dir, timeout)
-        finally:
-            pass
+        passed, why = asp.judge(law, jside, sub_path, lean_dir, timeout, preamble)
         if passed:
             saved = None
             if cert_dir:
@@ -160,50 +175,57 @@ def attempt(law: str, side: str, lean_dir: str, rounds: int, api_key: str,
                 with open(saved, "w", encoding="utf-8") as fh:
                     fh.write(body)
             os.unlink(sub_path)
-            return {"solved": True, "rounds_used": rnd, "cert": saved,
-                    "usage": total_usage}
+            return {"solved": True, "rounds_used": rnd, "attempted_side": jside,
+                    "cert": saved, "usage": total_usage}
         os.unlink(sub_path)
         feedback = "\n".join(why[:12])
-    return {"solved": False, "rounds_used": rounds, "last_reject": feedback,
-            "usage": total_usage}
+    return {"solved": False, "rounds_used": rounds, "attempted_side": jside,
+            "last_reject": feedback, "usage": total_usage}
 
 
-def load_laws(a) -> list[str]:
+def load_laws(a) -> list[dict]:
     if a.law:
-        return [a.law]
-    laws: list[str] = []
+        return [{"law": a.law}]
+    rows: list[dict] = []
     for fn in glob.glob(a.laws_file):
         for line in open(fn, encoding="utf-8"):
             if not line.strip():
                 continue
             r = json.loads(line)
-            if a.status and r.get("status") != a.status:
+            if a.status and r.get("status") and r.get("status") != a.status:
                 continue
-            laws.append(r["law"])
-    laws = sorted(set(laws))
-    if a.n and a.n < len(laws):
+            rows.append(r)
+    # dedup by law, keep first
+    seen, out = set(), []
+    for r in rows:
+        if r["law"] not in seen:
+            seen.add(r["law"]); out.append(r)
+    if a.n and a.n < len(out):
         import random
-        random.Random(a.sample_seed).shuffle(laws)
-        laws = sorted(laws[:a.n])
+        random.Random(a.sample_seed).shuffle(out)
+        out = out[:a.n]
     i, n = (int(x) for x in a.shard.split("/"))
-    return [lw for k, lw in enumerate(laws) if k % n == i]
+    return [r for k, r in enumerate(out) if k % n == i]
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--law", help="a single law string (overrides --laws-file)")
-    ap.add_argument("--laws-file", help="jsonl with a 'law' field per line")
-    ap.add_argument("--status", help="filter laws-file by this status (e.g. NO_FINITE_MODEL)")
+    ap.add_argument("--laws-file", help="jsonl with a 'law' field (and optional 'gold')")
+    ap.add_argument("--status", help="filter laws-file by this status if present")
     ap.add_argument("--n", type=int, default=0, help="sample N laws (0 = all)")
-    ap.add_argument("--sample-seed", type=int, default=20260714)
+    ap.add_argument("--sample-seed", type=int, default=20260715)
     ap.add_argument("--shard", default="0/1")
-    ap.add_argument("--side", choices=("austin", "trivial"), default="austin")
+    ap.add_argument("--side", default="auto", choices=("auto", "austin", "trivial"),
+                    help="auto = model decides the side (the real two-sided task)")
     ap.add_argument("--rounds", type=int, default=1, help="self-verify attempts per law")
     ap.add_argument("--model", default="openai/o3")
     ap.add_argument("--reasoning-effort", default="high")
     ap.add_argument("--lean-dir", default=".")
     ap.add_argument("--timeout", type=int, default=600, help="per-judge Lean compile (s)")
     ap.add_argument("--cert-dir", default=None, help="save passing certs here")
+    ap.add_argument("--lean-import", default="import Mathlib",
+                    help="preamble prepended above the header (empty for core Lean only)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
 
@@ -215,21 +237,29 @@ def main():
 
     laws = load_laws(a)
     print(f"{len(laws)} law(s); model={a.model} effort={a.reasoning_effort} "
-          f"rounds={a.rounds}", file=sys.stderr)
-    solved = 0
+          f"rounds={a.rounds} side={a.side}", file=sys.stderr)
+    solved = right_side = 0
     with open(a.out, "a", encoding="utf-8") as out:
-        for idx, law in enumerate(laws, 1):
+        for idx, row in enumerate(laws, 1):
+            law, gold = row["law"], row.get("gold")
             t0 = time.time()
             res = attempt(law, a.side, a.lean_dir, a.rounds, api_key,
-                          a.model, a.reasoning_effort, a.timeout, a.cert_dir)
-            res.update({"law": law, "side": a.side, "model": a.model,
+                          a.model, a.reasoning_effort, a.timeout, a.cert_dir,
+                          a.lean_import)
+            res.update({"law": law, "gold": gold, "model": a.model,
                         "secs": round(time.time() - t0, 1)})
             out.write(json.dumps(res, ensure_ascii=False) + "\n"); out.flush()
             solved += res["solved"]
+            if gold and res.get("attempted_side") == gold:
+                right_side += 1
             tag = "SOLVED" if res["solved"] else "----"
-            print(f"[{idx}/{len(laws)}] {tag} r{res['rounds_used']} "
-                  f"{res['secs']}s  {law[:60]}", file=sys.stderr)
-    print(f"done: {solved}/{len(laws)} solved -> {a.out}", file=sys.stderr)
+            g = f" gold={gold}" if gold else ""
+            print(f"[{idx}/{len(laws)}] {tag} side={res.get('attempted_side')}{g} "
+                  f"r{res['rounds_used']} {res['secs']}s  {law[:52]}", file=sys.stderr)
+    msg = f"done: {solved}/{len(laws)} solved -> {a.out}"
+    if any(r.get("gold") for r in laws):
+        msg += f"; picked correct side {right_side}/{len(laws)}"
+    print(msg, file=sys.stderr)
 
 
 if __name__ == "__main__":

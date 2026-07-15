@@ -73,6 +73,42 @@ Superseded placeholders: 247→262, 3,798/3,400→4,141, 2,895→3,080, 990→1,
 - Recommendation: drop C3 and state the point in one prose sentence, OR settle the
   extension denominator first.
 
+## Construction transfer (reviewer #1) — paper/scripts/construction_transfer.py
+Does a law's model satisfy OTHER laws? (prover-free; reuses equiv_sample.holds_in +
+certs/saturation models.) DEFINITIVE, full 262 (results/transfer.json):
+- construction classes = logical classes = **195** (coincide EXACTLY)
+- mutual transfer pairs = **255** = exactly the 255 proven-equivalent dedup pairs
+  (mutual model-satisfaction IS logical equivalence — perfect cross-check)
+- cross-class directional transfer: **173 / 68,382 = 0.25%** (one-directional; matches the
+  n=55 sample's 0.24%, so the rate is stable)
+- typical model covers only its own law (coverage median 1, mean 3.67, max 19); 0 undecided;
+  self-consistency OK (every law holds in its own model)
+- READING: the 195 classes are CONSTRUCTION-distinct, not just logically distinct; models
+  do not collapse to a shared construction. Full #1 rebuttal.
+
+## Renewability — new Austin classes per order (backs "grows without repeating itself")
+From final_status.jsonl (order = # of the op symbol) + classes_full.json union-find.
+Distinct Austin classes FIRST appearing at each order:
+- order 5: +11  (cum 11)
+- order 6: +24  (cum 35)
+- order 7: +93  (cum 128)
+- order 8: +67  (cum 195)
+Every order adds substantial new classes; nothing re-collapses onto low-order seeds =>
+extension sustains yield, higher orders keep minting fresh (contamination-free) instances.
+(Refinement: normalize by generation volume -> "classes per thousand surviving extensions"
+for a rate; raw counts already show no saturation.)
+
+## Hard-tier sweep (baseline_full.jsonl) — PARTIAL, ~6% done (259/4,141), STILL RUNNING
+SURPRISE that corrects current prose:
+- Found **4 AUSTIN (models) + 4 TRIVIAL** already — the 120-sample's "0 models" was an artifact.
+- All 4 AUSTIN resolved by **twee/complete at 30s** => TWEE-ONLY models. The classifier ran
+  Vampire saturation only (never Twee), so these are laws Vampire diverges on but Twee completes.
+- CONTRADICTS: "zero models on the hard tier" AND "no Twee-only model / reshaping ruled out"
+  (§4 not-an-artifact paragraph). FIX both once the sweep finishes.
+- Reframe: define the hard tier as the residual of the FULL portfolio (Vampire+E+Twee), not
+  the Vampire-only classifier; contamination is two-sided (trivial AND Austin the classifier missed).
+- Rates provisional until the sweep completes (~1.5% Austin, ~3% total contamination so far).
+
 ## Still needs the real machine (not runnable in the sandbox)
 - Hand-solve 2–3 hard-tier laws (Lean-verified algebraic models) — climbable-gradient evidence.
 - LLM baseline run (per LLM_EXPERIMENT_PLAN.md).
