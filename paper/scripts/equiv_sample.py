@@ -115,6 +115,8 @@ def main():
 
     os.makedirs(a.certs, exist_ok=True)
     models, pairs = {}, []
+    sep = capped = 0
+    total_pairs = len(laws) * (len(laws) - 1) // 2
 
     if not a.no_models:
         with cf.ThreadPoolExecutor() as ex:
@@ -127,7 +129,6 @@ def main():
                 models[i] = (eqs, om.smallest_const(eqs))
         print(f"{len(models)} saturations ({len(laws) - len(models)} timed out)", file=sys.stderr)
 
-        sep = capped = 0
         for i, j in itertools.combinations(range(len(laws)), 2):
             if i not in models or j not in models:
                 pairs.append((i, j))                      # no model: prover must decide
@@ -168,13 +169,19 @@ def main():
     print(f"\nlaws {len(laws)}  ->  classes <= {len(classes)}   "
           f"(UPPER BOUND at {a.prove_timeout}s/direction)")
     print(f"non-singleton classes: {sum(1 for v in classes.values() if len(v) > 1)}")
+    print(f"pair accounting: total {total_pairs}  separated {sep}  "
+          f"proven-equiv {len(merged)}  INCONCLUSIVE {len(pairs) - len(merged)}")
     for x, y in merged:
         print(f"  EQUIVALENT  {x}\n              {y}")
 
     if a.out:
         with open(a.out, "w") as fh:
             json.dump({"n": len(laws), "classes": len(classes),
-                       "merged": merged, "budget": a.prove_timeout}, fh, indent=1)
+                       "merged": merged, "budget": a.prove_timeout,
+                       "total_pairs": total_pairs,
+                       "separated_prover_free": sep, "step_capped": capped,
+                       "to_prover": len(pairs), "proven_equivalent": len(merged),
+                       "inconclusive": len(pairs) - len(merged)}, fh, indent=1)
 
 
 if __name__ == "__main__":
