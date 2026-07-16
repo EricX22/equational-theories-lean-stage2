@@ -35,7 +35,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import answer_spec as asp   # problem_header(law); judge(law, side, path, lean_dir, timeout)
 
-MAX_TOKENS_BY_EFFORT = {"low": 6000, "medium": 16000, "high": 65000}
+# o3's reasoning trace counts against max_tokens; on hard construction prompts it easily
+# exceeds 16k and starves the visible answer (finish_reason=length, empty content). Give
+# it real room. o3's ceiling is 100k output tokens.
+MAX_TOKENS_BY_EFFORT = {"low": 16000, "medium": 48000, "high": 100000}
 ENDPOINT = "https://openrouter.ai/api/v1/chat/completions"
 
 
