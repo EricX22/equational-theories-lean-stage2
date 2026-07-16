@@ -47,13 +47,19 @@ The law is:  {law}
 (◇ is the binary magma operation; the law must hold for all values.)
 
 This law has NO nontrivial finite model, so a model must live on an INFINITE carrier — use
-the integers. Propose a binary operation op(x, y), written as an integer-arithmetic formula,
-so that (a) the law holds for all inputs and (b) at least two elements are distinct.
+the integers. Propose a binary operation op(x, y) as an integer-arithmetic formula so the
+law holds for all inputs and the carrier has two distinct elements.
+
+The form that works for these laws is almost always AFFINE:
+    op(x, y) = a*x + b*y + c      for integer constants a, b, c.
+Solve for a, b, c so that substituting op makes the law a true identity (a purely linear
+constraint). Prefer affine; only if no affine op works should you try a higher-degree
+polynomial in x and y.
 
 Return ONLY a JSON object, nothing else:
   {{"carrier": "Int", "op": "<expression in x and y>"}}
-The op expression may use only: the variables x and y, integer constants, and + - * and
-parentheses. Examples: "2*x + 3*y - 1", "x - y", "x + y*y - x*y", "-x + 2*y".
+Use only x, y, integer constants, + - *, and parentheses. Examples: "2*x - y + 3",
+"-x + 2*y", "x + y - 1".
 Do NOT write Lean, tactics, or a proof — only the arithmetic formula for op. We generate and
 verify the Lean ourselves."""
     if feedback:
