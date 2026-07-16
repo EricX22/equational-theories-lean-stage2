@@ -94,6 +94,9 @@ RULES = """RULES (the judge enforces these):
 - Mathlib is imported for you; do NOT write any `import` line yourself (your text is
   pasted between a fixed header and footer). You may use Mathlib (e.g. `ZMod`, `ring`,
   `linarith`, `omega`, `decide`, `simp`, `induction`) and all of core Lean 4.
+- Use LEAN 4 syntax ONLY. Do NOT use Lean 3: no `begin ... end` blocks and no
+  comma-separated tactics. Write tactic proofs with `by` and Lean 4 tactics
+  (`intro`, `exact`, `rw`, `simp`, `omega`, `decide`, `ring`, `constructor`, ...).
 - Do NOT use: sorry, admit, native_decide, unsafe, implemented_by, axiom, macro, syntax,
   elab. Do NOT redefine `Problem`, `AustinGoal`, `TrivialGoal`, or `Law` (you may only
   reference them as the type of `solution`).
