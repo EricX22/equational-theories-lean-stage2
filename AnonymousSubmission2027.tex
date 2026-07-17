@@ -180,33 +180,50 @@
 
 \section{Introduction}
 % Why is this benchmark useful? - AI for science benchmarks should be verifiable, non-vacuous, contamination-free, and method-bound
-AI for Science asks whether large language models (LLMs) can synthesize information to create genuinely new knowledge, yet current benchmarks fail to sufficiently measure this capability. Judging LLM outputs using human experts or through physical experiment is slow, costly, and subjective. Scoring against reference answers provides objective measurements, but such answers often contaminate LLM training data. This makes it  difficult to discern whether a high score reflects recall rather than discovery. What is missing is a benchmark that scores novel work objectively, on problems no LLM could have seen before. 
 
-The Austin-Law Proof Synthesis (ALPS) benchmark closes this gap. Its answers are objectively scored: each solution is a proof, checked by machine, so grading is human-free and provably correct. Its problems are renewable: a generator can continuously mint fresh, unseen instances without limit, making the benchmark contamination-resistant. Lastly, solving each problem requires genuine creativity, where each answer must be a construction invented for its specific problem.
+
+%Need to introduce a lot more for the background, just write everything and then trim (we need to fully explain austin law before mentioning the benchmark title, The description of the benchmark problems could come before it, and then we talk about how we shape it into a benchmark)
+
+Large language models (LLMs) are increasingly used throughout mathematics and the sciences, formalizing and proving theorems, proposing conjectures, and designing molecules and materials \citep{...}. As their capabilities grow, attention in AI for Science is shifting from whether they can solve known problems to whether they can create genuinely new knowledge, rather than reproduce what they have seen. However, current benchmarks fail to sufficiently measure this capability. Judging LLM outputs using human experts or through physical experiment is slow, costly, and subjective. Scoring against reference answers provides an objective measurement, but such answers often contaminate LLM training data. This makes it difficult to discern whether a high score reflects recall rather than discovery. What is missing is a benchmark that scores novel work objectively, on problems no LLM could have seen before. 
+
+
+Problems of this kind exist within equational theory. This area of mathematics studies magmas: sets with a single binary operation $\op$ that combines two elements into a third. Its laws are universally quantified equations that an operation may or may not obey, such as commutativity $x \op y = y \op x$. A magma is a model of a law when the equation holds under every assignment of its elements. The one-element magma satisfies every law and is always a model, since if there only exists one element, all variables must always be equivalent to each other. Therefore, this model is never informative, and is therefore named the trivial magma. What carries content is whether a law has a nontrivial model, one with at least two elements. On a finite carrier, such a model can simply be found by search, since only finitely many operations exist to test. However, some laws have no nontrivial finite model at all. Their only nontrivial models are infinite, and no search through finite candidates can reach an infinite structure. Here, the questions stop being a matter of computation and become a matter of reasoning about the magma's structure as a whole.
+
+We construct the benchmark using the laws that force this reasoning. A law is only admitted once it is proven to have no nontrivial finite model, leaving just two cases: either it forces every model to be trivial, entailing $x = y$, or it admits an infinite nontrivial model. The latter are titled Austin laws \citep{...}. This benchmark, Austin-Law Proof-Synthesis (ALPS), proves a two-sided task: construct an infinite model and prove it satisfies the law, or prove no such model exists, meaning the law must entail $x = y$. 
+
+Three properties set ALPS apart, shown as the three overlapping ovals in Figure \ref{fig:benchmark_gap}, where each benchmark family lies within the region matching the properties it has. ALPS is verifiable: each solution is a proof a machine can check, so grading is human-free and provably correct. It is renewable: fresh instances can be produced without limit, so evaluation always has problems no model has seen. And it demands creative construction: a nontrivial model exists only among infinite structures and cannot be reached with a general procedure, so solutions must be invented for each law. Every prior benchmark family has at most two such properties. Synthetic puzzles such as random SAT \citep{...} and the Equational Theories Project \citep{...} are verifiable and renewable, but their problems are solved by a general procedure given enough compute, not by construction. Static corpora such as MATH, coding benchmarks, and miniF2F ask for constructed, checkable solutions, but come from fixed sets that eventually contaminate without a clear way of generating high-quality new problems. Open scientific discovery demands construction and never exhausts its supply, but its answers are judged subjectively. ALPS alone lies where all three meet. 
+
+
+% The Austin-Law Proof Synthesis (ALPS) benchmark closes this gap. Its answers are \textit{objectively scored}: each solution is a proof that can be checked automatically by machine, so grading is human-free and provably correct. Its problems are \textit{renewable}: a generator can continuously mint fresh, unseen instances without limit, making the benchmark contamination-resistant. Lastly, solving each problem requires \textit{creative construction}, where each answer must be invented for its specific problem.
 
 
 \begin{figure*}[h!]
     \centering
     \includegraphics[width=0.75\linewidth]{Figures/ALPS_gap.pdf}
-    \caption{Caption}
-    \label{fig:placeholder}
+    \caption{The three properties ALPS combines - objective scoring, renewability, and creative construction - shown as three overlapping regions. Existing families achieve at most two: reference-answer and synthetic sets are objectively scored but test algorithm execution, not construction; formal proof sets require construction but contaminate; open scientific discovery requires construction but is judged subjectively. Only ALPS lies in the intersection of all three.}
+    \label{fig:benchmark_gap}
 \end{figure*}
 
-ALPS constructs new problems from a mathematical family of laws named Austin laws. An Austin law is an equational identity whose only finite solution is a trivial one-element solution, so any genuine solution must be an infinite structure. For each problem, a solver must either construct such a solution and prove it satisfies the law, or prove that the law forces every solution to be trivial. Every law is certified in advance to fall into exactly one case, so each problem has a single, determinate answer. To be marked correct, a solution must be certified by Lean 4, a proof assistant that mechanically verifies mathematical proofs. Evaluation is therefore objective and human-free, with solutions accepted only when proven correct. 
 
 
-Verifiability alone is not sufficient for a strong AI-for-Science benchmark. A problem can have a machine-checkable answer but may still be solvable using a standard automated method, in which case, no novelty would have been necessary in the first place. Measuring novel construction therefore requires problems that lie beyond routine automated procedures. Solving them means building something new rather than searching for it. Austin laws are such problems: equational laws that admit infinite models but no nontrivial finite one \citep{...}. Every finite model they admit is trivial, consisting of a single element. When no nontrivial finite model exists, the standard way to find such a model, searching structures of increasing size, is futile. Any model of the law must be an infinite object, constructed rather than found. Our benchmark, ALPS (Austin Law Proof-Synthesis), is built from these laws: given one, a solver must either construct such a model, with a machine-checked proof that it satisfies the law, or prove that the law collapses, forcing every model to be trivial. 
+% ALPS constructs new problems from a mathematical family of laws named Austin laws. An Austin law is an equational identity whose only finite solution is a trivial one-element solution, so any genuine solution must be an infinite structure. For each problem, a solver must either construct such a solution and prove it satisfies the law, or prove that the law forces every solution to be trivial. Every law is certified in advance to fall into exactly one case, so each problem has a single, determinate answer. To be marked correct, a solution must be confirmed by Lean 4 \citep{...}, a proof assistant that automatically checks whether the submitted proof is valid - whether the constructed model provably satisfies the law on every input, or the law forces every solution to be trivial. A system's score is the fraction of laws it resolves, constructing a model or proving triviality, with each verdict counted only when Lean confirms it.
 
-ALPS converts these laws from a list of open problems into a well-posed benchmark. Every instance is verifiable: an answer is a Lean proof that is checked mechanically, so acceptance requires no human in the loop. Every instance is also answerable, as every law in the benchmark is either trivial or Austin, so exactly one of the two tasks succeeds. The instances are contamination-free and renewable, as our generator continually produces fresh laws that no LLM has seen, so the benchmark can always be replenished. Lastly, the difficulty of these problems is method-bound, stemming from the gap between construction and deductive search, not from a shortage of compute. The trivial side is a first-order consequence that proof search will find, while a model on the Austin side has no such guarantee and must be built.
+% ALPS measures an LLM's ability to invent. Because an Austin law has no finite model, its solution is an infinite structure that must be constructed for that specific law. The creative work lies in proposing such a structure. Given only the law, the language model must design a mathematical set and an operation on it under which the law holds under all of its infinitely many inputs. Because it cannot check those inputs one by one, it must instead reason about the logical implications given by the law, and recognize the algebraic patterns that will make it hold on an infinite structure.  
 
-To evaluate the difficulty of our benchmark, we run a suite of leading automated theorem provers on each problem. They solve easier instances, including some with nontrivial models, but a large fraction of the corpus resists them, yielding no new model however much compute they are given. This resistant hard tier is the benchmark's target. Our contributions are:
+%need to make it clearer why does performing well on this benchmark lead to broader good performance
+What ALPS requires of the solver is a capability that reaches well beyond equational theory. Resolving a law requires proposing a completely novel structure, then arguing from the law alone that it satisfies a specification over infinitely many cases it can never check directly. This mirrors mathematical discovery and the building of scientific theories: the answer can never be searched for or recalled, only hypothesized and then justified. What sets ALPS apart is that here the justification is a formal proof, so the creative leap is isolated and made objectively measurable. These problems are exceedingly difficult, but that is the intent: progress on them is direct evidence of the ability to construct and verify genuinely new structure - the capability that separates discovery from recall, and the one current benchmarks cannot measure.
+
+% No prior benchmark demands this kind of invention while also scoring objectively on unseen problems. Figure \ref{fig:benchmark_gap} depicts these properties as a set of overlapping regions, placing each family of benchmarks in the region matching the properties it has. Benchmarks that score objectively but require no construction measure execution rather than creation: reference-answer sets such as standard mathematical and coding benchmarks \citep{...} and synthetic puzzle benchmarks such as random SAT or synthetic math problems \citep{...} both test whether an LLM can apply a known procedure to reach the answer. Formal proof sets such as miniF2F \citep{...} require constructing a solution to the problem, but draw from a fixed corpus that eventually contaminates. Open scientific discovery also provides a strong test of LLM creativity, but is often judged subjectively. ALPS alone combines all three. 
+
+
+To evaluate the true difficulty of this benchmark, we construct a portfolio of the strongest automated provers, finding that it resolves only a small part of ALPS. A large and growing set of problems resists it entirely, and on these it constructs no model at all, at any compute budget, even though every instance is certified to have a determinate answer. This difficulty is bound by method, not computational budget. In full, our contributions are:
 \begin{itemize}
-\item A two-sided construction task on equational laws: given a law with no nontrivial finite model, either build an infinite model of it or prove it forces triviality. Every instance is certified answerable, so the task is well-posed for every input.
-\item A corpus of such laws that reaches beyond the range of prior work, with a public generator that mints fresh, previously unseen instances on demand.
-\item A judge that checks any submitted answer mechanically, with no human evaluation.
-\item A strong automated baseline that maps the hard tier and shows its difficulty is method-bound rather than compute-bound.
-\item The resolution of two problems left open by the Equational Theories Project.
+\item a two-sided construction task on Austin laws, with every instance certified to have a determinate answer;
+\item a corpus of such laws and a public generator that mints fresh instances without limit;
+\item a Lean-based judge that grades any submission objectively, with no human in the loop; and
+\item a strong automated baseline that establishes the method-bound hard tier and, along the way, settles an order-5 case left open by the Equational Theories Project (ETP) \citep{...}.
 \end{itemize}
+
 
 \section{Related Works}
 
@@ -322,15 +339,11 @@ Our pipeline solves a few open problems mentioned in the ETP paper. We can discu
 
 
 
-\section{Discussion and Limitations}
+\section{Discussion}
 % TODO. Anchors: hard-tier collapse not yet measured (prover-only census there);
 % ground confluence open => saturation-model answers not yet Lean-certifiable (algebraic
 % ones are), framed as next paper; optional hand-solved demonstrations; (i)-prover vs
 % Infinox not yet benchmarked.
-
-\section{Conclusion}
-% TODO. A public generator + certified two-sided task => the benchmark is minted, not
-% fixed, and hard relative to a named, published baseline.
 
 
 \bibliography{aaai2027}
