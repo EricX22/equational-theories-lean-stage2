@@ -110,21 +110,39 @@ def assemble(law, chain):
 
 
 def build_prompt(law, feedback=None):
-    p = f"""You are proving a magma law forces triviality — but you will NOT write Lean. You only
-give the collapse chain; we formalize and check it.
+    p = f"""You are proving a magma law forces triviality. You will NOT write Lean — you give only a
+sequence of terms, and a theorem prover checks each step.
 
-Law:  {law}   (write the operation as ◇; the law holds for all inputs)
-Goal: for arbitrary elements a and b, show a = b.
+Law:  {law}
+Read it as a rewrite rule. Write the law as  L = R, where L is the single variable on the left and
+R is the big right-hand term. ONE step does exactly one of:
+  • pick any subterm `e` of the current term and replace that ONE occurrence with R, taking L := e
+    (so `e` becomes R with the law's left variable set to `e`); OR
+  • the reverse — replace a subterm that exactly matches an instance of R by the corresponding `e`.
+Everything OUTSIDE that one chosen subterm stays byte-for-byte identical.
 
-The law lets you rewrite one occurrence in a term: replace a subterm `e1` (anywhere) by the law's
-RHS instantiated at `e1` (or the reverse), keeping the rest of the term fixed. Give the sequence of
-terms from `a` to `b` where EACH adjacent pair differs by ONE such application at a SINGLE position.
+Goal: build  a = t1 = t2 = ... = b  where each adjacent pair differs by exactly ONE such step.
 
-Return ONLY JSON:  {{"chain": ["a", "<term>", "<term>", ..., "b"]}}
-Use only a, b, ◇, and parentheses. First element must be "a", last must be "b".
-Example (for the toy law x = y ◇ y):  {{"chain": ["a", "(a ◇ a)", "b"]}}"""
+HARD RULES — a step breaking any of these is rejected, so self-check each one before writing it:
+  • You may NOT write "a = b" or otherwise relate a and b directly. They are opaque atoms; the only
+    way to connect them is through the law. (A step like `a → b`, or a subterm `a → b`, is illegal.)
+  • Exactly ONE subterm changes per step; the rest is identical.
+  • The changed subterm must be a REAL instance: is it `e → R[L:=e]` (or its reverse) for some choice
+    of the law's other variables? If you can't name that instance, the step is invalid.
+
+STRATEGY: rewrite FORWARD from `a` (each rewrite grows the term via the law) toward a term the law
+forces to collapse — these laws let you derive `op(_, _) = (any element)`; once both `a` and `b`
+reduce to a common term, the chain closes.
+
+Return ONLY JSON:  {{"chain": ["a", "<term>", ..., "b"]}}   first "a", last "b"; use only a, b, ◇, ().
+Example (toy law  x = y ◇ y):  {{"chain": ["a", "(a ◇ a)", "b"]}}
+  step 1: `a` → `(a ◇ a)` — the law with x:=a, y:=a gives  a = a◇a. ✓
+  step 2: `(a ◇ a)` → `b` — reverse: the law with x:=b, y:=a gives  b = a◇a, so  a◇a = b. ✓
+Only write steps you can justify this way."""
     if feedback:
-        p += f"\n\nYour previous chain failed: {feedback}\nRe-route so every step is a whole-term step."
+        p += (f"\n\nYour previous chain was REJECTED: {feedback}\n"
+              "That step was not a single valid law application. Re-route so EVERY step rewrites one "
+              "subterm as a real instance of the law, and never jump between a and b directly.")
     return p
 
 
