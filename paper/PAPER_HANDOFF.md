@@ -1,9 +1,16 @@
 # PAPER HANDOFF — Austin-law benchmark (AAAI-27)
 
-Consolidated state for continuing the paper. Companions: `PAPER_PLAN.md` (design +
-reasoning), `OUTLINE.md` (section-by-section skeleton), `HANDOFF.md`/`HISTORY.md`
-(experimental history), `figures_tables.tex` (T1/T2/F1 drafts). This file is the single
-place to resume from.
+Consolidated state for continuing the paper. Companions: `TASK_AND_JUDGING.md` (**canonical
+task + multi-channel judging definition — read this for how answers are checked**),
+`PAPER_PLAN.md` (design + reasoning), `OUTLINE.md` (section-by-section skeleton),
+`HANDOFF.md`/`HISTORY.md` (experimental history), `figures_tables.tex` (T1/T2/F1 drafts).
+This file is the single place to resume from.
+
+> **2026-07-17 pivot:** judging is no longer Lean-only. TRIVIAL side = Lean proof;
+> AUSTIN side = the solver proposes a *model* (a first-order presentation `E`) and
+> **Vampire** certifies it (`E ⊢ law` + `E ∪ {a≠b}` saturates). Lean can't check Austin
+> constructions (confluence `sorry`) and no Austin model is arithmetic (descent theorem),
+> so the affine autoformalizer is retired. Full detail in `TASK_AND_JUDGING.md`.
 
 Written end of the 2026-07 writing session.
 
@@ -16,12 +23,16 @@ proof search + finite model builder) resolves ~22M implications, so it measures
 execution, not construction. We isolate **Austin laws** (infinite models, no nontrivial
 finite one; order ≥5, where finite search is empty by theorem), extend past the order ETP
 enumerated, and pose a **two-sided, machine-checkable task**: given an admissible law $L$
-(certified to have no nontrivial finite model), either construct a nontrivial model with a
-Lean proof it satisfies $L$, or prove $L \models x=y$ (trivial). It is an **AAAI-27
-main-track benchmark paper.**
+(certified to have no nontrivial finite model), either construct a nontrivial model (the
+solver proposes a presentation $E$; an ATP certifies $E \vdash L$ and $E$ is nontrivially
+satisfiable), or prove $L \models x=y$ (a Lean proof). It is an **AAAI-27 main-track
+benchmark paper.**
 
 The four selling points, threaded through the paper as **V / N / C / M**:
-- **V — Verifiable:** answers are Lean proofs, kernel-checked; no human in the loop.
+- **V — Verifiable:** every answer carries a machine certificate — a **Lean proof** (trivial
+  side, kernel-checked) or an **ATP certificate** (construction side: the proposed model `E`
+  is checked by Vampire, cross-checkable by Twee). No human in the loop. A certificate from
+  any trusted checker counts; see `TASK_AND_JUDGING.md`.
 - **N — Non-vacuous:** every instance is certified answerable (the dichotomy), so it is a
   set of well-posed questions, not an open-problems list or a wall.
 - **C — Contamination-free & renewable:** a public generator mints fresh order-≥6

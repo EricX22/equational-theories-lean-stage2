@@ -1,10 +1,19 @@
 # LLM EXPERIMENT PLAN — the solver-facing harness and the eval
 
+> **STALE in parts — see `TASK_AND_JUDGING.md` (2026-07-17 pivot).** This doc predates the
+> multi-channel judging. Corrections: (1) the Austin/construction side is NOT Lean-verified —
+> no Lean construction path exists (confluence `sorry`) and no Austin model is arithmetic
+> (descent theorem), so `lean_oracle.py`/L2-affine are retired for Austin. Construction is now
+> ATP-certified via `llm_construct.py` (solver proposes a presentation `E`; Vampire checks).
+> (2) The "solvable tier" Austin laws (262 AUSTIN_PROVEN) are already bare-certified by
+> saturation — no LLM value there; the real construction niche is the 4,141 NO_FINITE_MODEL
+> laws. (3) The Lean-verified rung is now the TRIVIAL side only (`llm_trivial.py`), which is
+> where the first real LLM solves come from. Read below for the eval *intent*, but take the
+> harness/judging specifics from `TASK_AND_JUDGING.md`.
+
 How to run the LLM part of §4, and — the harder design question — what standard
 "stepping stone" to ship so that LLM-based solvers built on the benchmark get a *fair,
-supported* entry point rather than a bare wall. Reuses `answer_spec.py` (judge),
-`lean_oracle.py` (algebraic-model verifier), and `attic/finite_regime/proposer_o3.py`
-(OpenRouter call + self-verify loop).
+supported* entry point rather than a bare wall.
 
 ---
 

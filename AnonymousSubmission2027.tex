@@ -221,21 +221,31 @@ To evaluate the true difficulty of this benchmark, we construct a portfolio of t
 \item a two-sided construction task on Austin laws, with every instance certified to have a determinate answer;
 \item a corpus of such laws and a public generator that mints fresh instances without limit;
 \item a Lean-based judge that grades any submission objectively, with no human in the loop; and
-\item a strong automated baseline that establishes the method-bound hard tier and, along the way, settles an order-5 case left open by the Equational Theories Project (ETP) \citep{...}.
+\item a strong automated baseline that establishes the method-bound hard tier and, along the way, settles an order-5 case left open by the Equational Theories Project (ETP) \citep{bolan2025equational}.
 \end{itemize}
 
 
 \section{Related Works}
 
 \subsection{AI-for-Science Benchmarks}
-Shift towards verifiable results, formal math or coding benchmarks are contaminated, none offer the combination of certified answerability, renewability, etc
+
+Existing benchmark families each hold two of the three properties ALPS targets and fall short on the third. Static problem sets are fixed collections spanning grade-school and competition mathematics \citep{cobbe2021training, hendrycks2021measuring}, graduate science \citep{rein2023gpqa}, coding \citep{chen2021evaluating}, and formal proof construction \citep{zheng2021minif2f, azerbayev2023proofnet, tsoukalas2024putnambench}. They are scored objectively and demand a genuine solution or proof. However, because their problems are fixed, these benchmarks inevitably suffer from contamination, as their evaluation set will eventually enter the training data of the language models they are meant to test, rendering further evaluation on this benchmark unreliable \citep{xu2024benchmark, chen2025recent}. Some benchmarks attempt to delay contamination by holding problems secret \citep{glazer2024frontiermath} or releasing new problems over time \citep{white2025livebench, jain2025livecodebench}, but will always be limited by the rate at which humans can author new problems.
+
+Synthetic puzzles avoid this limit by generating problems from a fixed pattern or rule so that fresh instances can be produced without end, such as random SAT formulas \citep{selman1996generating}, graph-generated reasoning tasks \citep{zhu2024dyval}, Sudoku puzzles \citep{seely2025sudoku}, or the equational laws of the Equational Theories Project \citep{bolan2025equational}. However, the same regularity that makes these problems generable also makes them solvable by a known procedure. Therefore, these benchmarks often test the LLM's ability to execute a known method rather than to truly construct a creative solution. 
+
+Open scientific discovery benchmarks evaluate an LLM's ability to construct novel, useful scientific advancements such as hypotheses, conjectures, designs, and mathematical structures \citep{lu2024ai, gottweis2026accelerating, alkan2025survey, romera2024mathematical, merchant2023scaling, jumper2021highly}. These pose a challenging task, requiring the LLM to invent a new solution rather than retrieve or execute a known procedure. However, their results are validated by human expertise or physical experiment, making evaluation subjective and slow. ALPS uniquely combines the strengths of each benchmark family: objective scoring, endless renewal, and a demand for genuine construction.
 
 
-\subsection{Lean and Interactive Theorem Proving}
-What is lean, how have people made automated proofs with them?
+\subsection{Theorem Proving and Verification}
+ALPS scores answers using machine verification, without a human in the loop, made possible by theorem provers. Lean \citep{moura2021lean} is a functional programming language equipped with a proof assistant whose kernel can automatically check the validity of proofs, such that a certificate is guaranteed to be correct. Each proposition, including the statement that a magma satisfies a law, is encoded as a type within the language, and a proof of it is a term inhabiting that type, exactly as a value inhabits a type in an ordinary programming language. Checking a proof is resolved using type checking: the kernel confirms that submitted terms have the claimed type, similar to a compiler checking that a function's body matches its signature. A statement quantified over infinitely many inputs, such as a law holding under every assignment, becomes a function type. Within Lean, its proof is a function returning a proof for an arbitrary argument, and the kernel type-checks that function once, symbolically. A certificate that type-checks successfully is therefore correct by construction and automatically validated. 
 
-\subsection{Automated Equational Reasoning}
-Equational theories project, automated equational provers, etc. 
+Unlike checking them, finding proofs is difficult. Many works investigate automating this search. Classical automated theorem provers such as Vampire and E \citep{kovacs2013first, schulz2019faster} search for first-order proofs by superposition calculus \citep{bachmair1994rewrite}, a strategy that repeatedly derives logical consequences of the input until it reaches a contradiction or no new consequences remain. More recently, language models have been trained to construct proofs in systems like Lean \citep{yang2023leandojo, xin2024deepseek, hubert2026olympiad}, measured on formal proof benchmarks \citep{zheng2021minif2f}. 
+
+
+\subsection{Equational Reasoning}
+Equational theory studies the foundation of algebra - the identities that operations satisfy and the entailments among them. The Equational Theories Project \citep{bolan2025equational} studies this at scale, enumerating the implications among thousands of small laws and settling them automatically using a pipeline of automated provers and finite-model finders. This work singles out the laws whose only nontrivial models are infinite, the Austin laws \citep{kisielewicz1997austin}, as the hardest to resolve, since neither a searchable finite model nor a short derivation settles them. 
+
+Several automated methods are tailored to equational laws. Paradox and Mace4 \citep{claessen2003new, mccune2003mace4} are designed to find finite models when they exist, while Infinox \citep{claessen2011automated} instead proves that no finite model exists. Twee \citep{smallbone2021twee} implements unfailing Knuth-Bendix completion \citep{knuth1970simple, bachmair1989completion}, orienting equations into rewrite systems to solve equational problems. When a saturation from Twee or a superposition prover halts without reaching a contradiction, the clauses it has accumulated already describe a model. \citet{janota2026case} recently studied this for equational theories, extracting an explicit model from the saturation in a case study. 
 
 
 \section{The Austin-Law Proof-Synthesis Benchmark}

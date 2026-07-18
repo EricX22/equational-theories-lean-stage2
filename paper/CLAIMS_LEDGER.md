@@ -16,6 +16,12 @@ Status key: **[THM]** proven/theorem · **[EMP]** measured, scoped to what we te
   goal, axiom footprint ⊆ {propext, Quot.sound, Classical.choice}. Sound autochecker.
 
 ## General consequences (proven)
+- **[THM] No Austin solution is an arithmetic formula (descent).** If `op` is polynomial/
+  affine over ℤ (or ℤ^k, or ℤ/n), the law holds as an identity that survives reduction
+  mod 2 ⇒ a nontrivial FINITE model ⇒ contradicts admissibility. So an Austin model cannot
+  be a memorized/pattern-matched formula — provable backing for the creativity claim. Also
+  ⇒ the affine autoformalizer is empty for Austin (its 0/60 is an artifact, NOT an LLM
+  number); and 1593/hard2_0051 (ZMod/ℤ-module) are NOT Austin. See TASK_AND_JUDGING.md.
 - **[THM] Finite-model finders provably fail.** Mace4/Paradox cannot succeed on admitted
   laws (no finite model exists). This is WHY excluding them is principled, not a gap.
 - **[THM] Trivial side is semi-decidable.** L ⊨ x=y is a first-order consequence; a
@@ -59,6 +65,16 @@ Status key: **[THM]** proven/theorem · **[EMP]** measured, scoped to what we te
   hard-tier.
 - **Lean cert of these particular rewrite-models is PENDING** ground confluence (companion
   paper); algebraic models (affine, etc.) are Lean-checkable today.
+
+## Judging (multi-channel, 2026-07-17)
+- **Verification is not Lean-only.** TRIVIAL side = Lean proof (kernel + axiom allowlist).
+  AUSTIN side = solver proposes a presentation `E`; Vampire certifies `E ⊢ law` + `E ∪ {a≠b}`
+  saturates. A certificate from any trusted checker (Lean/Vampire/Twee) counts. Say "machine
+  certificate," not "Lean proof," when speaking of the construction side. Canonical:
+  TASK_AND_JUDGING.md.
+- **[EMP-scope] No verified LLM solve exists yet.** All recorded "solves" were the automated
+  engine (used_llm=False), trivial side, old implication format. Do NOT claim an LLM
+  construction result until llm_trivial.py / llm_construct.py produce one on the real machine.
 
 ## Overclaims to AVOID
 - **[AVOID]** "no automated method solves the hard tier" → "the strongest automated provers
