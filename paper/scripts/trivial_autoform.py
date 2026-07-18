@@ -8,9 +8,9 @@ The harness finds the law instance for each step by first-order matching and ass
 `calc` — the model never writes Lean. This isolates reasoning (find the path) from
 formalization (handled here), so a model that is formalization-bound can still register a solve.
 
-SCOPE (v1): whole-term steps only. If a correct proof needs a rewrite inside a subterm
-(congruence), that step won't match and we report which step failed — the model can re-route
-through whole-term steps. A congruence-aware assembler is future work.
+Each step is ONE application of the law at a single position — whole-term OR inside a subterm
+(congruence-aware: the harness emits `congrArg` down to the differing position). A step that
+changes two positions at once is rejected with a message so the model splits it.
 
 Soundness is unchanged: we emit `h <args>` / `(h <args>).symm` and the Lean KERNEL checks the
 assembled calc via answer_spec. A wrong chain simply fails to assemble or fails Lean.
@@ -49,9 +49,8 @@ def _law(law):
     return T, list(vs)
 
 
-def justify_step(T, vs, s, t):
-    """A Lean proof term for `s = t` as one whole-term law application, or None."""
-    # forward: h with x:=s ;  T[x:=s] must equal t
+def _wholeterm(T, vs, s, t):
+    """Lean term for `s = t` as one WHOLE-TERM law application, or None."""
     for direction in ("fwd", "rev"):
         src, dst = (s, t) if direction == "fwd" else (t, s)
         subst = {"x": src}
@@ -59,6 +58,30 @@ def justify_step(T, vs, s, t):
             args = [_render(subst.get(v, ("var", "a"))) for v in vs]   # unbound var: any element
             term = f"h {' '.join(args)}"
             return term if direction == "fwd" else f"({term}).symm"
+    return None
+
+
+def justify_step(T, vs, s, t):
+    """Lean term for `s = t` as one law application at ANY position (congruence-aware).
+
+    Whole-term first; else descend into the single differing child, wrapping the sub-proof in
+    `congrArg (fun z => op z R)` / `congrArg (fun z => op L z)`. Exactly one child may differ
+    (a single law application rewrites one position)."""
+    if s == t:
+        return None
+    wt = _wholeterm(T, vs, s, t)
+    if wt:
+        return wt
+    if s[0] == "op" and t[0] == "op":
+        ld, rd = s[1] != t[1], s[2] != t[2]
+        if ld and not rd:
+            sub = justify_step(T, vs, s[1], t[1])
+            if sub:
+                return f"congrArg (fun z => op z {_render(s[2])}) ({sub})"
+        elif rd and not ld:
+            sub = justify_step(T, vs, s[2], t[2])
+            if sub:
+                return f"congrArg (fun z => op {_render(s[1])} z) ({sub})"
     return None
 
 
@@ -93,9 +116,9 @@ give the collapse chain; we formalize and check it.
 Law:  {law}   (write the operation as ◇; the law holds for all inputs)
 Goal: for arbitrary elements a and b, show a = b.
 
-The law lets you rewrite ANY whole term in one step: `h e1 e2 ... : e1 = <law RHS with those args>`
-(and its reverse). Give the sequence of terms from `a` to `b` where EACH adjacent pair differs by
-ONE whole-term application of the law (rewrite the entire current term, not a piece of it).
+The law lets you rewrite one occurrence in a term: replace a subterm `e1` (anywhere) by the law's
+RHS instantiated at `e1` (or the reverse), keeping the rest of the term fixed. Give the sequence of
+terms from `a` to `b` where EACH adjacent pair differs by ONE such application at a SINGLE position.
 
 Return ONLY JSON:  {{"chain": ["a", "<term>", "<term>", ..., "b"]}}
 Use only a, b, ◇, and parentheses. First element must be "a", last must be "b".
@@ -150,12 +173,16 @@ def attempt(law, lean_dir, rounds, api_key, model, effort, timeout):
 
 def selftest():
     law = "x = y ◇ y"
-    _, vs = _law(law)
+    T, vs = _law(law)
     print("law vars (binder order):", vs)
     body, err = assemble(law, ["a", "(a ◇ a)", "b"])
-    print("assemble err:", err, "\n---- assembled Lean body ----\n" + (body or ""))
-    bad, berr = assemble(law, ["a", "(a ◇ b)", "b"])
-    print("bad-chain (congruence) correctly rejected:", bad is None, "|", berr)
+    print("whole-term assemble err:", err, "\n---- assembled Lean body ----\n" + (body or ""))
+    # congruence: rewrite the LEFT child  a -> (a ◇ a)  inside (a ◇ c), keeping c fixed
+    s = et.parse_term("(a ◇ c)"); t = et.parse_term("((a ◇ a) ◇ c)")
+    print("congruence step ->", justify_step(T, vs, s, t))
+    # two positions changed at once -> rejected
+    bad = justify_step(T, vs, et.parse_term("(a ◇ a)"), et.parse_term("((a ◇ a) ◇ (a ◇ a))"))
+    print("two-position step rejected:", bad is None)
 
 
 def main():
