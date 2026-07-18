@@ -1,34 +1,33 @@
 #!/usr/bin/env python3
-"""llm_trivial_ladder.py — the SUPPORT-THRESHOLD eval for the trivial side.
+"""llm_trivial_ladder.py — the SUPPORT-THRESHOLD eval for the trivial side (cost-efficient).
 
 Naked runs read ~0 on the order-≥5 corpus (min ~10-step collapses), which is expected but
 does not discriminate. The informative measurement is: HOW MUCH SUPPORT does a model need
-before it makes progress? We climb a support ladder per law and record the lowest rung the
-model solves — a gradient that works even when the naked run is 0, and that says how far a
-model is from solving unaided.
+before it makes progress? We record the lowest rung the model solves — a gradient that works
+even when the naked run is 0, and disentangles search-bound (needs the path) from
+formalization-bound (has the path, can't write the Lean).
 
 The support dial is Vampire's own proof: the derived equalities the collapse passes through
-(trivial_hints.lemmas) are revealed one at a time as waypoints.
+(trivial_hints.lemmas) are revealed as waypoints. Rungs are COARSE (≤6 regardless of proof
+length) so the ladder is cheap:
 
-    L0  naked           law only (format + worked example)
-    L1  +strategy       the verbal collapse mechanism (superpose law w/ itself -> op(x,y)=z -> x=y)
-    L2  +waypoint 1     reveal the first derived lemma
-    L3  +waypoints 1-2  reveal two
-    ... up to ...
-    Lk  +all waypoints  the full path is given; the model only has to formalize it
+    naked | strategy | +25% waypoints | +50% | +75% | +100%
 
-Report: per law, the threshold rung (or "none"); aggregate = the support profile of the model.
-All hints are SOUND — they are consequences of the law the model still has to prove in Lean;
-they guide the search, they are not injected as axioms.
+COST: we test the TOP rung first. If it fails, the model is formalization-bound → record
+"none" and stop (1 call, not ~45). Only if the top solves do we BINARY-SEARCH down for the
+threshold — O(log rungs) calls. One call per rung (no per-rung revision).
+
+All hints are SOUND — consequences of the law the model still proves in Lean; they guide the
+search, they are not axioms.
 
 USAGE
-  python3 paper/scripts/llm_trivial_ladder.py --dry-run                 # inspect the ladder
+  python3 paper/scripts/llm_trivial_ladder.py --dry-run
   export OPENROUTER_API_KEY=...
   python3 paper/scripts/llm_trivial_ladder.py --laws-file paper/results/final_status.jsonl \
       --model openai/o4-mini --lean-dir . --out paper/results/llm_ladder.jsonl --n 15
 """
 from __future__ import annotations
-import argparse, glob, json, os, sys, tempfile, time
+import argparse, glob, json, math, os, sys, tempfile, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -43,70 +42,86 @@ until you reach one of the form `op(x, y) = z` (the operation returns any elemen
 there every two elements are equal, giving `a = b`. Work toward that collapse."""
 
 
-def build_prompt(law, header, level, waypoints, feedback=None):
+def rungs_for(n_wp):
+    """Coarse support rungs: (label, add_strategy, n_waypoints_shown). ≤6, deduped."""
+    specs = [("L0 naked", False, 0), ("L1 strategy", True, 0)]
+    seen = {(False, 0), (True, 0)}
+    for f in (0.25, 0.5, 0.75, 1.0):
+        k = math.ceil(f * n_wp)
+        if k > 0 and (True, k) not in seen:
+            seen.add((True, k)); specs.append((f"+{int(f*100)}% wp", True, k))
+    return specs
+
+
+def build_prompt(law, header, add_strategy, k_wp, waypoints, feedback=None):
     base = T.build_prompt(law, header, feedback)          # naked (format + worked example)
-    if level == 0:
+    if not add_strategy:
         return base
     add = "\n\n" + STRATEGY
-    if level >= 2:
-        shown = waypoints[: level - 1]
-        lines = "\n".join(f"    ({i+1})  {w}" for i, w in enumerate(shown))
+    if k_wp > 0:
+        lines = "\n".join(f"    ({i+1})  {w}" for i, w in enumerate(waypoints[:k_wp]))
         add += ("\n\nKNOWN CONSEQUENCES OF THE LAW (each is derivable from it; you must still "
                 "prove them in Lean, but they are the waypoints your proof should pass through, "
                 "in order):\n" + lines)
     return base + add
 
 
-def attempt_ladder(law, lean_dir, rounds, api_key, model, effort, timeout):
+def attempt_ladder(law, lean_dir, api_key, model, effort, timeout):
     header = asp.problem_header(law)
     waypoints = H.lemmas(law)
-    max_level = 1 + len(waypoints)                        # 0=naked,1=strategy,2..=+k waypoints
+    rungs = rungs_for(len(waypoints))
     usage = {"prompt_tokens": 0, "completion_tokens": 0}
-    per_level = []
-    for level in range(0, max_level + 1):
-        feedback = None
-        solved = False
-        for rnd in range(1, rounds + 1):
-            try:
-                content, u = L.call_llm(build_prompt(law, header, level, waypoints, feedback),
-                                        api_key, model, effort, timeout)
-            except Exception as e:                        # noqa: BLE001
-                per_level.append({"level": level, "error": f"api: {e}"}); break
-            for k in usage:
-                usage[k] += (u.get(k) or 0)
-            body = L.extract_lean(content)
-            if L.detect_side(body) != "trivial":
-                feedback = "Your `solution` must target `Problem.TrivialGoal`."
-                continue
-            with tempfile.NamedTemporaryFile("w", suffix=".lean", delete=False, encoding="utf-8") as fh:
-                fh.write(body); path = fh.name
-            passed, rej = asp.judge(law, "trivial", path, lean_dir, timeout)
-            os.unlink(path)
-            per_level.append({"level": level, "solved": passed, "rounds": rnd})
-            if passed:
-                solved = True; break
-            feedback = "\n".join(rej[:6])
-        if solved:
-            return {"threshold": level, "n_waypoints": len(waypoints),
-                    "per_level": per_level, "usage": usage}
-    return {"threshold": None, "n_waypoints": len(waypoints),
-            "per_level": per_level, "usage": usage}
+    tried = {}                                            # idx -> solved(bool)
+
+    def run(idx):
+        if idx in tried:
+            return tried[idx]
+        _, add_strat, k = rungs[idx]
+        try:
+            content, u = L.call_llm(build_prompt(law, header, add_strat, k, waypoints),
+                                    api_key, model, effort, timeout)
+        except Exception as e:                            # noqa: BLE001
+            tried[idx] = False; return False
+        for kk in usage:
+            usage[kk] += (u.get(kk) or 0)
+        body = L.extract_lean(content)
+        if L.detect_side(body) != "trivial":
+            tried[idx] = False; return False
+        with tempfile.NamedTemporaryFile("w", suffix=".lean", delete=False, encoding="utf-8") as fh:
+            fh.write(body); path = fh.name
+        passed, _ = asp.judge(law, "trivial", path, lean_dir, timeout)
+        os.unlink(path)
+        tried[idx] = bool(passed); return tried[idx]
+
+    top = len(rungs) - 1
+    result = {"n_waypoints": len(waypoints), "rungs": [r[0] for r in rungs]}
+    if not run(top):                                      # top fails → formalization-bound
+        result.update({"threshold": None, "threshold_rung": None,
+                       "tried": {rungs[i][0]: tried[i] for i in tried}, "usage": usage})
+        return result
+    lo, hi = 0, top                                       # binary-search lowest solving rung
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if run(mid):
+            hi = mid
+        else:
+            lo = mid + 1
+    result.update({"threshold": lo, "threshold_rung": rungs[lo][0],
+                   "tried": {rungs[i][0]: tried[i] for i in tried}, "usage": usage})
+    return result
 
 
 def dry_run():
     law = "x = ((((y ◇ w) ◇ z) ◇ ((y ◇ x) ◇ y)) ◇ y)"
     header = asp.problem_header(law)
     wp = H.lemmas(law)
-    print(f"LAW: {law}\nwaypoints ({len(wp)}):")
-    for w in wp:
-        print("   ", w)
-    for level in range(0, 2 + len(wp)):
-        p = build_prompt(law, header, level, wp)
-        tag = {0: "L0 naked", 1: "L1 +strategy"}.get(level, f"L{level} +{level-1} waypoint(s)")
-        print(f"\n{'='*70}\n{tag}  (prompt {len(p)} chars) — support tail:")
-        # show only the appended support section
-        cut = p.find("STRATEGY (how these")
-        print(p[cut:] if cut > -1 else "(naked — no support appended)")
+    rungs = rungs_for(len(wp))
+    print(f"LAW: {law}\nwaypoints: {len(wp)}  ->  {len(rungs)} rungs (coarse): "
+          f"{[r[0] for r in rungs]}")
+    print("Cost: 1 call if top fails; else 1 + ~log2(rungs) calls (was ~rungs×rounds).")
+    for lbl, strat, k in rungs:
+        p = build_prompt(law, header, strat, k, wp)
+        print(f"  {lbl:14} strategy={strat} waypoints_shown={k}  prompt={len(p)} chars")
 
 
 def main():
@@ -114,7 +129,6 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--laws-file")
     ap.add_argument("--n", type=int, default=0)
-    ap.add_argument("--rounds", type=int, default=2)
     ap.add_argument("--model", default="openai/o4-mini")
     ap.add_argument("--reasoning-effort", default="medium")
     ap.add_argument("--lean-dir", default=".")
@@ -132,22 +146,22 @@ def main():
     laws = T.load_trivial(a.laws_file)
     if a.n:
         laws = laws[:a.n]
-    print(f"{len(laws)} trivial law(s); model={a.model} [support-threshold ladder]", file=sys.stderr)
-    thresholds = []
+    print(f"{len(laws)} trivial law(s); model={a.model} [support-threshold ladder, cost-efficient]",
+          file=sys.stderr)
+    ths = []
     with open(a.out, "a", encoding="utf-8") as out:
         for i, law in enumerate(laws, 1):
             t0 = time.time()
-            res = attempt_ladder(law, a.lean_dir, a.rounds, api_key, a.model,
-                                 a.reasoning_effort, a.timeout)
+            res = attempt_ladder(law, a.lean_dir, api_key, a.model, a.reasoning_effort, a.timeout)
             res.update({"law": law, "model": a.model, "secs": round(time.time() - t0, 1)})
             out.write(json.dumps(res, ensure_ascii=False) + "\n"); out.flush()
-            th = res["threshold"]
-            thresholds.append(th)
-            print(f"[{i}/{len(laws)}] threshold={'none' if th is None else 'L'+str(th)} "
-                  f"(of L{1+res['n_waypoints']})  {res['secs']}s  {law[:44]}", file=sys.stderr)
-    solved = [t for t in thresholds if t is not None]
-    print(f"done: {len(solved)}/{len(thresholds)} reached some support level; "
-          f"thresholds={sorted(solved)} -> {a.out}", file=sys.stderr)
+            th = res["threshold_rung"]; ths.append(th)
+            calls = len(res["tried"])
+            print(f"[{i}/{len(laws)}] threshold={th or 'none':12} ({calls} call(s), {res['secs']}s)  "
+                  f"{law[:42]}", file=sys.stderr)
+    solved = [t for t in ths if t]
+    print(f"done: {len(solved)}/{len(ths)} solved at some rung; thresholds={solved} -> {a.out}",
+          file=sys.stderr)
 
 
 if __name__ == "__main__":
