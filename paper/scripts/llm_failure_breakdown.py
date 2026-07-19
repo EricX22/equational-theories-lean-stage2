@@ -31,7 +31,10 @@ def classify(r):
         return "api_error"
     if not blob.strip() and (r.get("secs") or 0) < 5:
         return "api_error"                       # instant no-op row = rate-limit/starvation
-    if "no json" in low or "bad json" in low or "chain must" in low or "degenerate" in low:
+    # "unparsable term" = the model emitted a syntactically invalid term (e.g. unbalanced
+    # parens) -> a FORMAT failure, not a separate phenomenon. Keep it out of "other".
+    if ("no json" in low or "bad json" in low or "chain must" in low or "degenerate" in low
+            or "unparsable" in low or "trailing tokens" in low or "index out of range" in low):
         return "malformed"
     if "must target" in low or "wrong side" in low:
         return "wrong_side"

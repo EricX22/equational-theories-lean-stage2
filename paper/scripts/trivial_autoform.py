@@ -114,7 +114,31 @@ def _reduce_neighbors(u, T):
                 out.append(nu)
     return out
 
-def _find_path(a, b, T, k):
+def _tsize(n):
+    return 1 if n[0] == "var" else 1 + _tsize(n[1]) + _tsize(n[2])
+
+def _instantiate(node, subst):
+    if node[0] == "var":
+        return subst.get(node[1], node)
+    return ("op", _instantiate(node[1], subst), _instantiate(node[2], subst))
+
+def _forward_neighbors(u, T, vs, maxsize):
+    """One FORWARD law application at any position: subterm e -> T[x:=e, others from {a,b}].
+    Forward GROWS the term, so it is bounded by `maxsize` (derived from the gap endpoints)."""
+    from itertools import product
+    others = [v for v in vs if v != "x"]
+    pool = [("var", "a"), ("var", "b")]
+    out = []
+    for pos, sub in _subterms(u):
+        for assign in product(pool, repeat=len(others)):
+            subst = {"x": sub}
+            subst.update(dict(zip(others, assign)))
+            new = _replace(u, pos, _instantiate(T, subst))
+            if new != u and _tsize(new) <= maxsize and new not in out:
+                out.append(new)
+    return out
+
+def _find_path(a, b, T, vs, k, maxsize):
     from collections import deque
     if a == b:
         return [a]
@@ -123,7 +147,10 @@ def _find_path(a, b, T, k):
         path = q.popleft()
         if len(path) - 1 >= k:
             continue
-        for nb in _reduce_neighbors(path[-1], T):
+        u = path[-1]
+        # reverse (shrink) AND forward (grow): a gap may go up before it comes down, and
+        # reverse-only bridging silently broke the "1-3 steps apart" promise in the prompt.
+        for nb in _reduce_neighbors(u, T) + _forward_neighbors(u, T, vs, maxsize):
             if nb in seen:
                 continue
             np = path + [nb]
@@ -132,12 +159,13 @@ def _find_path(a, b, T, k):
             seen.add(nb); q.append(np)
     return None
 
-def _bridge(s, t, T, k):
-    """A path s -> ... -> t of ≤k single law applications (reductions, either direction)."""
-    p = _find_path(s, t, T, k)
+def _bridge(s, t, T, vs, k):
+    """A path s -> ... -> t of ≤k single law applications, forward or reverse, either direction."""
+    maxsize = max(_tsize(s), _tsize(t)) + 4          # headroom for an up-then-down gap
+    p = _find_path(s, t, T, vs, k, maxsize)
     if p:
         return p
-    p = _find_path(t, s, T, k)
+    p = _find_path(t, s, T, vs, k, maxsize)
     return p[::-1] if p else None
 
 
@@ -160,7 +188,7 @@ def assemble(law, chain):
             continue
         if justify_step(T, vs, s, t) is not None:
             expanded.append(t); continue
-        path = _bridge(s, t, T, GAP_K)
+        path = _bridge(s, t, T, vs, GAP_K)
         if path is None:
             return None, (f"step {i+1} ({chain[i]} = {chain[i+1]}) is not a law application and "
                           f"could not be bridged within {GAP_K} steps")
@@ -199,21 +227,26 @@ R is the big right-hand term. ONE step does exactly one of:
   • the reverse — replace a subterm that exactly matches an instance of R by the corresponding `e`.
 Everything OUTSIDE that one chosen subterm stays byte-for-byte identical.
 
-Goal: build  a = t1 = t2 = ... = b. Adjacent terms should be only a FEW (1–3) such steps apart —
-you may skip intermediate terms and the checker will fill short gaps automatically, so give
-WAYPOINTS, not necessarily every atomic step. Prefer smaller jumps.
+Goal: build  a = t1 = t2 = ... = b  where EACH adjacent pair differs by EXACTLY ONE application.
+List EVERY intermediate term — do not skip any. (The checker can only reconstruct a skipped step
+in rare cases: real solutions pass through terms LARGER than both endpoints, so an omitted step
+generally cannot be recovered and the chain will be rejected.) Expect the middle terms to be big.
 
 HARD RULES — a jump breaking any of these is rejected, so self-check each one before writing it:
   • You may NOT write "a = b" or otherwise relate a and b directly. They are opaque atoms; the only
     way to connect them is through the law. (A jump like `a → b`, or a subterm `a → b`, is illegal.)
-  • Each jump must be a GENUINE short derivation — at most ~3 single law applications apart. A leap
-    between unrelated terms cannot be bridged and is rejected.
+  • Each adjacent pair must be EXACTLY ONE law application — not two, not "a few". A jump of more
+    than one step is rejected, because it generally cannot be reconstructed.
   • Every application is a REAL instance: a subterm `e → R[L:=e]` (or its reverse) for some choice of
     the law's other variables. If you can't name that instance, the step is invalid.
 
 STRATEGY: rewrite FORWARD from `a` (each rewrite grows the term via the law) toward a term the law
 forces to collapse — these laws let you derive `op(_, _) = (any element)`; once both `a` and `b`
 reduce to a common term, the chain closes.{hint_block}
+
+EVERY TERM MUST BE GROUND: built ONLY from the two elements `a`, `b` and the operator ◇. Never
+write a law variable (x, y, z, w) or a primed name (y') inside a chain term — instantiate it to
+`a` or `b`. Check your parentheses balance before answering.
 
 Return ONLY JSON:  {{"chain": ["a", "<term>", ..., "b"]}}   first "a", last "b"; use only a, b, ◇, ().
 Example (toy law  x = y ◇ y):  {{"chain": ["a", "(a ◇ a)", "b"]}}
@@ -225,6 +258,32 @@ Only write steps you can justify this way."""
               "That step was not a single valid law application. Re-route so EVERY step rewrites one "
               "subterm as a real instance of the law, and never jump between a and b directly.")
     return p
+
+
+_LEGAL_ATOMS = {"a", "b"}
+
+def validate_chain(chain):
+    """Precise, CORRECTABLE feedback before parsing.
+
+    Illegal symbols (`z`, `w`, `p`, primed `y'`) and unbalanced parens previously surfaced as
+    "not a law application" or "unparsable term", which the model cannot act on — it looks like a
+    math error when it is a format error. Name the actual problem instead.
+    """
+    import re as _re
+    for i, s in enumerate(chain, 1):
+        if s.count("(") != s.count(")"):
+            return (f"term {i} has unbalanced parentheses ({s.count('(')} '(' vs "
+                    f"{s.count(')')} ')'): {s!r}")
+        atoms = _re.findall(r"[A-Za-z][A-Za-z0-9_]*'*", s)
+        bad = sorted({t for t in atoms if t not in _LEGAL_ATOMS})
+        if bad:
+            return (f"term {i} uses illegal symbol(s): {', '.join(bad)}. Every term must be GROUND "
+                    f"— built ONLY from the two elements `a` and `b` and the operator ◇. Law "
+                    f"variables (x, y, z, w) and primed names (y') are NOT allowed; you must "
+                    f"instantiate them to `a` or `b`. Term was: {s!r}")
+    if chain[0].strip() != "a" or chain[-1].strip() != "b":
+        return "the chain must start at exactly `a` and end at exactly `b`"
+    return None
 
 
 def parse_chain(content):
@@ -239,6 +298,9 @@ def parse_chain(content):
     ch = obj.get("chain")
     if not isinstance(ch, list) or len(ch) < 2 or not all(isinstance(s, str) for s in ch):
         return None, "chain must be a list of term strings"
+    bad = validate_chain(ch)
+    if bad:
+        return None, bad
     return ch, None
 
 
