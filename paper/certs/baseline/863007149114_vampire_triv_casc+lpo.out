@@ -1,0 +1,3240 @@
+% law: x = ((((y ◇ z) ◇ (x ◇ (z ◇ (y ◇ w)))) ◇ (y ◇ x)) ◇ y)
+% config: vampire/triv/casc+lpo @ 30s
+
+% Running in auto input_syntax mode. Trying TPTP
+% Detected formulas, will run a generic FOF schedule.
+% lrs+1011_32_to=lpo:sil=2000:tgt=full:alpa=true:random_seed=2420457292:st=5:i=107:sd=1:ss=included:er=filter_300 on p for (300ds/107Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.017 s
+% Peak memory usage: 13 MB
+% Instructions burned: 112 (million)
+% lrs+10_2:3_to=lpo:sil=16000:sp=arity:random_seed=2612477893:i=114:bd=all:ss=axioms:sgt=4_299 on p for (299ds/114Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.017 s
+% Peak memory usage: 13 MB
+% Instructions burned: 119 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(arity) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% ott+1011_2_to=lpo:sil=4000:lsd=20:rnwc=on:rp=on:sac=on:newcnf=on:random_seed=1264022317:i=132:kws=arity:er=filter_299 on p for (299ds/132Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.020 s
+% Peak memory usage: 14 MB
+% Instructions burned: 138 (million)
+% WARNING Broken Constraint: if kbo_max_zero(on) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% dis+1011_1_slsqr=8,1:to=lpo:sil=2000:spb=units:fd=off:kmz=on:flr=on:sac=on:slsq=on:random_seed=729210943:st=2:i=121:sd=30:aac=none:ep=RS:ss=axioms:sgt=10_299 on p for (299ds/121Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% Aborted by signal SIGSEGV on /tmp/tmpf0kor9jp/p.p
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% lrs+10_1_to=lpo:sil=2000:sos=on:random_seed=9720569:i=135:sd=2:gtg=position:ss=axioms_299 on p for (299ds/135Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1011_1_to=lpo:sil=16000:random_seed=2253789862:i=269:sd=10:ss=axioms:sgt=16_299 on p for (299ds/269Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.040 s
+% Peak memory usage: 16 MB
+% Instructions burned: 275 (million)
+% dis+1010_4_to=lpo:sil=2000:sos=on:sac=on:random_seed=3250928109:i=140:sd=1:ss=axioms_298 on p for (298ds/140Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% ott+11_4:1_slsqr=8,1:to=kbo:sil=4000:spb=goal:bsr=on:slsq=on:random_seed=610525446:s2pl=on:st=3:s2a=on:i=124:gtgl=4:sd=1:kws=inv_arity:ep=RST:gtg=position:ss=axioms:fsd=on_298 on p for (298ds/124Mi)
+% Aborted by signal SIGSEGV on /tmp/tmpf0kor9jp/p.p
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Unknown
+% Termination phase: Saturation
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% Instructions burned: 1 (million)
+% ott+1010_1_to=lpo:sil=32000:fde=none:sos=on:spb=goal_then_units:urr=on:random_seed=1933637532:st=2.5:cts=off:i=297:sd=4:ins=10:gsp=on:ss=axioms_298 on p for (298ds/297Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs-1002_1_to=lpo:sil=2000:random_seed=2329408624:i=641:sd=20:ss=axioms:sgt=8_298 on p for (298ds/641Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.096 s
+% Peak memory usage: 22 MB
+% Instructions burned: 648 (million)
+% lrs+1011_1_to=lpo:sil=4000:plsq=on:plsqr=32,1:sp=occurrence:sos=all:erd=off:random_seed=4065368840:st=5:i=160:sup=off:ss=included_297 on p for (297ds/160Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_frequency) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs+10_16:1_to=lpo:sil=2000:sp=reverse_frequency:lcm=predicate:bsr=unit_only:random_seed=2731969153:avsq=on:i=433:kws=inv_frequency:bs=unit_only:gtg=exists_sym_297 on p for (297ds/433Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.064 s
+% Peak memory usage: 16 MB
+% Instructions burned: 440 (million)
+% lrs+1011_32_sfv=off:to=lpo:sil=128000:sos=all:newcnf=on:random_seed=286306601:cond=fast:i=114:nm=2:fsr=off:gtg=all:ss=axioms_296 on p for (296ds/114Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.017 s
+% Peak memory usage: 13 MB
+% Instructions burned: 117 (million)
+% lrs+10_64_to=lpo:sil=16000:sos=on:urr=on:br=off:random_seed=1164034583:st=2.2:i=120:sd=1:nm=2:gtg=all:ss=axioms_296 on p for (296ds/120Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.019 s
+% Peak memory usage: 13 MB
+% Instructions burned: 123 (million)
+% lrs+21_1_slsqr=16,1:to=lpo:sil=4000:fs=off:acc=on:alpa=true:slsq=on:random_seed=1843874541:i=126:sd=3:aac=none:doe=on:fsr=off:sup=off:ss=included:er=filter:sgt=10_296 on p for (296ds/126Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis-1011_1_to=lpo:sil=64000:sp=occurrence:nwc=2:sac=on:random_seed=3777439708:i=161:gtgl=2:gtg=exists_sym_296 on p for (296ds/161Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.023 s
+% Peak memory usage: 12 MB
+% Instructions burned: 167 (million)
+% lrs+11_1024_to=lpo:sil=2000:drc=off:gs=on:flr=on:random_seed=3813644649:s2a=on:i=137:sd=2:fgj=on:av=off:ss=axioms:sgt=4_296 on p for (296ds/137Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.020 s
+% Peak memory usage: 14 MB
+% Instructions burned: 138 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(arity) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% dis-1010_1_anc=none:to=lpo:sil=2000:sims=off:etr=on:sos=on:spb=units:nwc=2:random_seed=1951853877:i=698:sd=2:kws=arity:aac=none:ss=axioms:sgt=10_295 on p for (295ds/698Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis+10_1_to=lpo:sil=32000:s2agt=32:random_seed=1570433051:st=3:s2a=on:i=183:sd=1:gtg=position:ss=axioms_295 on p for (295ds/183Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.026 s
+% Peak memory usage: 12 MB
+% Instructions burned: 184 (million)
+% dis+1010_2_to=lpo:sil=8000:plsq=on:plsqr=1,2:fd=off:random_seed=1848944425:st=1.5:s2a=on:i=119:sd=2:sup=off:ss=axioms_295 on p for (295ds/119Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis+1010_3_to=lpo:sil=2000:tgt=full:plsq=on:drc=off:fde=unused:sp=arity:acc=on:nwc=20:flr=on:sac=on:avsqc=2:random_seed=1851769543:s2pl=on:st=3:avsq=on:i=285:s2at=5:avsqr=52993,1048576:sd=10:gtg=exists_sym:ss=axioms_295 on p for (295ds/285Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.041 s
+% Peak memory usage: 14 MB
+% Instructions burned: 286 (million)
+% lrs+1011_1_to=lpo:sil=32000:sp=arity:spb=goal:urr=on:bsr=on:fd=preordered:nwc=0.968:br=off:newcnf=on:random_seed=2006592987:s2a=on:i=130:s2at=11:bd=preordered:nm=20:ins=10:gtg=position:gsp=on_295 on p for (295ds/130Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.019 s
+% Peak memory usage: 13 MB
+% Instructions burned: 136 (million)
+% lrs+11_128_to=lpo:sil=2000:spb=units:lcm=predicate:nwc=20:slsqc=4:slsq=on:random_seed=4156169541:cts=off:i=178:slsql=off:nm=2:av=off:fsr=off_294 on p for (294ds/178Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.033 s
+% Peak memory usage: 14 MB
+% Instructions burned: 179 (million)
+% lrs-10_3:2_anc=all:to=lpo:sil=8000:plsq=on:plsqc=1:plsqr=1,1:erd=off:urr=on:rp=on:br=off:sac=on:avsqc=3:random_seed=1160972384:avsq=on:s2a=on:i=270:s2at=2:nicw=on:ss=axioms_294 on p for (294ds/270Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(precedence) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% dis-1011_1_to=lpo:sil=16000:tgt=full:prc=on:bsd=on:avsql=on:sp=unary_first:spb=intro:acc=on:fd=preordered:avsqc=1:random_seed=149805629:st=4:avsq=on:i=960:avsqr=1,16:kws=precedence:bd=all:ins=10:ss=axioms_294 on p for (294ds/960Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.142 s
+% Peak memory usage: 24 MB
+% Instructions burned: 968 (million)
+% lrs+4_1_sfv=off:to=lpo:sil=16000:sos=all:random_seed=3119999920:i=183:av=off_293 on p for (293ds/183Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% ------------------------------
+% ------------------------------
+% lrs+11_8_slsqr=4,1:to=lpo:sil=2000:erd=off:spb=goal:lsd=50:s2agt=8:slsqc=3:slsq=on:random_seed=3980424191:s2pl=on:i=137:sd=2:ep=R:nm=6:av=off:ss=axioms:sgt=8_293 on p for (293ds/137Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(arity_squared) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs+1010_14_to=lpo:sil=4000:tgt=full:plsq=on:plsqc=3:plsqr=1,64:erd=off:spb=goal_then_units:plsql=on:slsqc=3:slsq=on:random_seed=1874987990:i=274:s2at=3:sd=1:kws=arity_squared:gtg=exists_all:ss=axioms:fsd=on:sgt=16_292 on p for (292ds/274Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.047 s
+% Peak memory usage: 14 MB
+% Instructions burned: 277 (million)
+% lrs+34_16:1_anc=all_dependent:to=lpo:sil=2000:sp=unary_first:sos=on:urr=full:fd=off:sac=on:random_seed=666490195:i=259:aac=none:bd=preordered:ss=axioms_292 on p for (292ds/259Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% ott+10_1_to=lpo:sil=8000:drc=ordering:urr=on:br=off:random_seed=4219128535:s2a=on:cond=on:i=1197:gtg=position:ss=axioms:sgt=8_292 on p for (292ds/1197Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.191 s
+% Peak memory usage: 32 MB
+% Instructions burned: 1203 (million)
+% lrs+22_32_to=lpo:sil=4000:plsq=on:rp=on:newcnf=on:random_seed=365282697:st=2.5:s2a=on:i=132:sd=5:ss=included_290 on p for (290ds/132Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.021 s
+% Peak memory usage: 14 MB
+% Instructions burned: 132 (million)
+% dis-1011_1_anc=none:to=lpo:sil=4000:plsq=on:prc=on:plsqc=3:plsqr=2804223,1048576:fdtod=off:sp=reverse_frequency:sos=on:lsd=20:nwc=1:flr=on:random_seed=3979314321:st=3:cond=fast:prac=on:i=179:gtgl=2:bs=unit_only:ep=RS:nm=10:ins=25:amm=off:gtg=all:ss=included_290 on p for (290ds/179Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1002_16:1_to=lpo:sil=2000:sos=on:acc=on:urr=full:fd=off:newcnf=on:random_seed=2820953968:i=1517:sd=1:sup=off:ss=included_290 on p for (290ds/1517Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% ott+11_1_slsqr=12,1:to=lpo:sil=4000:erd=off:spb=goal:urr=on:br=off:slsq=on:random_seed=1731073942:cts=off:i=159:slsql=off:nm=6:gsp=on_290 on p for (290ds/159Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.024 s
+% Peak memory usage: 14 MB
+% Instructions burned: 160 (million)
+% lrs-1011_1_to=lpo:sil=2000:random_seed=3016783706:st=5:avsq=on:i=175:avsqr=1,16:ep=R:ss=included_289 on p for (289ds/175Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(frequency) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs-1010_8_to=lpo:sil=4000:tgt=ground:drc=off:br=off:slsq=on:random_seed=1494936837:i=176:kws=frequency:ss=axioms_289 on p for (289ds/176Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1011_3:1_to=lpo:sil=2000:plsq=on:plsqc=1:plsqr=64,1:sp=reverse_frequency:sos=on:fd=preordered:rp=on:random_seed=3346605566:i=574:aac=none:bd=all:ins=1_289 on p for (289ds/574Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis+1010_7_anc=all_dependent:to=lpo:sil=64000:plsq=on:plsqr=8,1:sp=occurrence:sos=on:urr=ec_only:bsr=on:alpa=true:flr=on:slsq=on:random_seed=320457082:avsq=on:cond=on:i=116:gtgl=5:avsqr=1,32:aac=none:amm=off:gtg=all:rawr=on_289 on p for (289ds/116Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.017 s
+% Peak memory usage: 12 MB
+% Instructions burned: 118 (million)
+% lrs+10_1_to=lpo:sil=4000:plsq=on:s2agt=16:slsqc=1:slsq=on:random_seed=791946996:st=5:s2a=on:i=879:sd=3:av=off:gtg=exists_top:ss=axioms_289 on p for (289ds/879Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.141 s
+% Peak memory usage: 27 MB
+% Instructions burned: 879 (million)
+% dis+10_3:10_to=lpo:sil=32000:flr=on:sac=on:random_seed=379842674:i=382:ep=RST_288 on p for (288ds/382Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.058 s
+% Peak memory usage: 19 MB
+% Instructions burned: 387 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(precedence) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs+1011_8:1_to=lpo:sil=4000:plsq=on:plsqc=3:plsqr=32,1:sp=reverse_arity:erd=off:lcm=reverse:acc=on:flr=on:slsq=on:random_seed=4010988902:s2a=on:i=178:kws=precedence:ep=RS:nm=32_287 on p for (287ds/178Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% Aborted by signal SIGSEGV on /tmp/tmpf0kor9jp/p.p
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% dis-1004_1024_slsqr=1,4:to=lpo:sil=128000:tgt=ground:irw=on:erd=off:spb=goal:bsr=on:rnwc=on:nwc=0.5:slsq=on:random_seed=2577576721:st=1.5:i=120:doe=on:bs=unit_only:ins=7:av=off:ss=axioms_287 on p for (287ds/120Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_max_zero(on) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs-1011_12_anc=all:to=lpo:sil=16000:plsq=on:fde=none:plsqc=2:plsqr=1,32:sp=unary_frequency:fs=off:spb=goal:bsr=unit_only:plsql=on:gs=on:nwc=2:kmz=on:sac=on:slsq=on:random_seed=802160776:st=5:avsq=on:i=141:sd=1:fsr=off:gtg=exists_sym:ss=axioms:fsd=on_287 on p for (287ds/141Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.022 s
+% Peak memory usage: 14 MB
+% Instructions burned: 141 (million)
+% lrs-1010_128_to=lpo:sil=4000:rp=on:nwc=0.6:alpa=false:random_seed=2114110268:i=625:aac=none:nm=2:gsp=on_287 on p for (287ds/625Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.097 s
+% Peak memory usage: 22 MB
+% Instructions burned: 626 (million)
+% dis+1010_1024_to=lpo:sil=4000:tgt=ground:sp=reverse_frequency:random_seed=3673141983:i=292:nm=16:av=off:ss=axioms_286 on p for (286ds/292Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% ------------------------------
+% ------------------------------
+% lrs-1010_4_to=lpo:sil=4000:fde=unused:sp=reverse_frequency:sos=on:erd=off:fs=off:fd=off:sac=on:random_seed=2378061061:i=324:aac=none:fsr=off_286 on p for (286ds/324Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis+1011_32_anc=all:to=lpo:sil=16000:drc=off:sp=reverse_frequency:fs=off:fd=preordered:sac=on:random_seed=718571556:avsq=on:i=168:add=on:nicw=on:bd=preordered:fsr=off_286 on p for (286ds/168Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.025 s
+% Peak memory usage: 13 MB
+% Instructions burned: 171 (million)
+% dis-1011_10_to=lpo:sil=2000:tgt=ground:plsq=on:lsd=10:nwc=5:s2agt=64:random_seed=2328267402:s2a=on:i=123:av=off:ss=axioms:sgt=20_285 on p for (285ds/123Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.019 s
+% Peak memory usage: 12 MB
+% Instructions burned: 128 (million)
+% dis-1011_1_to=lpo:sil=2000:plsq=on:drc=off:fde=none:bsd=on:plsqr=1,2:sp=weighted_frequency:lma=off:bce=on:rp=on:nwc=20:random_seed=3551355466:st=10:i=123:doe=on:bs=unit_only:av=off:ss=included:er=filter:sgt=88_285 on p for (285ds/123Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.019 s
+% Peak memory usage: 12 MB
+% Instructions burned: 129 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(arity_squared) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% dis+11_4_to=lpo:sil=4000:prc=on:fd=preordered:random_seed=2304392449:i=1091:kws=arity_squared:av=off_285 on p for (285ds/1091Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.169 s
+% Peak memory usage: 25 MB
+% Instructions burned: 1095 (million)
+% lrs+1002_1_to=lpo:sil=2000:sos=on:random_seed=1346351198:i=1674:sd=3:ss=axioms:sgt=16_283 on p for (283ds/1674Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis+10_1_to=lpo:sil=4000:lcm=reverse:urr=ec_only:gs=on:br=off:random_seed=1127147014:cts=off:i=340:nm=0:av=off:fsr=off_283 on p for (283ds/340Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.046 s
+% Peak memory usage: 14 MB
+% Instructions burned: 343 (million)
+% lrs+1002_5:4_to=lpo:sil=4000:plsq=on:sims=off:plsqr=256,1:sp=const_frequency:sos=on:fs=off:acc=on:fd=off:s2agt=32:random_seed=4132544382:s2a=on:i=124:aac=none:fsr=off_283 on p for (283ds/124Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs-1004_1024_to=lpo:sil=2000:tgt=ground:sos=on:newcnf=on:random_seed=976288753:i=125:sd=1:aac=none:fsr=off:gtg=position:ss=axioms_283 on p for (283ds/125Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+11_1_to=lpo:sil=2000:random_seed=443087072:i=328:sd=2:ep=RS:nm=0:av=off:ss=included_283 on p for (283ds/328Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% ------------------------------
+% ------------------------------
+% lrs+1010_1_to=lpo:sil=4000:fde=unused:sos=on:urr=ec_only:sac=on:random_seed=2807372484:i=2032:gtgl=3:sd=2:gtg=exists_all:ss=axioms_283 on p for (283ds/2032Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.311 s
+% Peak memory usage: 45 MB
+% Instructions burned: 2035 (million)
+% dis-1010_2:3_sfv=off:to=lpo:sil=2000:fde=unused:sp=reverse_frequency:flr=on:random_seed=917484964:st=9:i=237:av=off:ss=axioms_279 on p for (279ds/237Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.034 s
+% Peak memory usage: 13 MB
+% Instructions burned: 239 (million)
+% dis+10_1_to=lpo:sil=4000:plsq=on:plsqc=1:plsqr=32,1:random_seed=2932010271:st=2:i=185:sd=1:bd=all:sup=off:ss=axioms_279 on p for (279ds/185Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis-1011_128_to=lpo:sil=16000:urr=on:bce=on:fd=off:random_seed=3173006430:i=187:av=off:fsr=off_279 on p for (279ds/187Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.030 s
+% Peak memory usage: 13 MB
+% Instructions burned: 193 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_precedence) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% dis+1011_93_to=lpo:sil=16000:tgt=ground:spb=goal_then_units:lsd=100:nwc=1.2:lftc=20:random_seed=2947265852:i=1283:kws=inv_precedence:bs=on:av=off_279 on p for (279ds/1283Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.185 s
+% Peak memory usage: 19 MB
+% Instructions burned: 1289 (million)
+% dis+1010_16_to=lpo:sil=4000:fde=none:sos=on:spb=non_intro:random_seed=3790530273:st=1.8:i=311:sd=1:aac=none:gtg=exists_top:ss=axioms_277 on p for (277ds/311Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis+10_1_sfv=off:to=lpo:sil=4000:plsq=on:fde=none:plsqc=1:avsql=on:plsqr=10,1:sos=all:lma=off:acc=on:avsqc=3:random_seed=1697507288:avsq=on:i=161:aac=none_277 on p for (277ds/161Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(frequency) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs+11_1024_to=lpo:sil=4000:plsq=on:plsqc=1:plsqr=64,1:fs=off:lsd=100:alpa=true:random_seed=2459088753:i=192:kws=frequency:nm=7:fsr=off_277 on p for (277ds/192Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.028 s
+% Peak memory usage: 13 MB
+% Instructions burned: 192 (million)
+% dis-1010_4096_to=lpo:sil=64000:sp=occurrence:erd=off:newcnf=on:random_seed=3312057192:st=-1:i=2238:gtgl=4:sd=1:av=off:gtg=exists_sym:ss=included_276 on p for (276ds/2238Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.310 s
+% Peak memory usage: 23 MB
+% Instructions burned: 2242 (million)
+% dis+10_4_sfv=off:to=lpo:sil=4000:random_seed=662856567:s2pl=no:i=224:sd=1:nm=16:ss=axioms:er=filter:sgt=4_273 on p for (273ds/224Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.032 s
+% Peak memory usage: 12 MB
+% Instructions burned: 225 (million)
+% lrs+1011_8:1_to=lpo:sil=2000:plsq=on:plsqc=1:plsqr=10,1:sos=on:lsd=1:urr=on:bsr=unit_only:rp=on:alpa=false:updr=off:sac=on:newcnf=on:slsq=on:random_seed=1271529731:cts=off:avsq=on:s2a=on:i=292:avsqr=1,16:sd=3:slsql=off:bd=preordered:nm=4:gsp=on:sup=off:ss=included:sgt=8:rawr=on_273 on p for (273ds/292Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% lrs+2_64_to=lpo:sil=4000:sas=cadical:sos=on:spb=goal:sac=on:random_seed=3052235086:st=1.5:i=165:aac=none:ss=included_273 on p for (273ds/165Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% dis+1011_12:1_to=lpo:sil=32000:plsq=on:plsqc=2:plsqr=32,1:sos=on:fs=off:lsd=20:bsr=unit_only:fd=off:random_seed=3613245918:s2a=on:i=167:nm=16:fsr=off:amm=off_273 on p for (273ds/167Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1010_2:1_to=lpo:sil=16000:spb=goal:slsq=on:random_seed=3920184057:i=170:ins=10:av=off:fsd=on_273 on p for (273ds/170Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.026 s
+% Peak memory usage: 14 MB
+% Instructions burned: 175 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_arity) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% ott+1002_10_sfv=off:to=lpo:sil=4000:tgt=full:nwc=1:newcnf=on:random_seed=1628352955:i=178:kws=inv_arity:bd=preordered:fsd=on_272 on p for (272ds/178Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.025 s
+% Peak memory usage: 14 MB
+% Instructions burned: 180 (million)
+% lrs+1004_1_to=lpo:sil=2000:sp=occurrence:sos=all:erd=off:random_seed=2166018962:i=218:aac=none:ep=RS_272 on p for (272ds/218Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs-1011_1_to=lpo:sil=2000:sos=on:random_seed=1554903212:i=2073:sd=1:ss=axioms:sgt=64_272 on p for (272ds/2073Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis+1011_1_to=lpo:sil=4000:plsq=on:plsqc=2:plsqr=64,1:sos=on:lsd=1:alpa=false:random_seed=655815556:avsq=on:i=140:avsqr=1,16:aac=none:ep=RS:nm=4:gsp=on_272 on p for (272ds/140Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+11_1_sfv=off:to=lpo:sil=2000:plsq=on:plsqc=1:bsd=on:plsqr=128,1:sos=all:newcnf=on:random_seed=1175702223:s2pl=on:i=142:sd=1:ss=axioms:fsd=on:sgt=32_272 on p for (272ds/142Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% dis-1010_1_to=lpo:sil=4000:random_seed=687125966:i=184:sd=1:ep=RS:nm=2:av=off:ss=axioms_272 on p for (272ds/184Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% ------------------------------
+% ------------------------------
+% lrs+3_11:1_to=lpo:sil=4000:plsq=on:erd=off:urr=on:br=off:random_seed=1305456452:s2a=on:i=142:s2at=7:sd=1:ep=RS:ss=axioms:sgt=16_272 on p for (272ds/142Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs-1010_1_to=lpo:sil=4000:fde=none:sos=on:erd=off:random_seed=2410770935:cts=off:i=278:sd=1:av=off:ss=included_272 on p for (272ds/278Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% ott-1010_32:1_to=lpo:sil=2000:sp=arity:sos=all:s2agt=16:random_seed=4031353754:st=2:s2a=on:cond=fast:i=194:av=off:gsp=on:ss=axioms_272 on p for (272ds/194Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% dis+10_1_sfv=off:slsqr=1,2:to=lpo:sil=2000:tgt=full:urr=on:br=off:flr=on:slsq=on:random_seed=2885506555:st=2:i=292:sd=2:slsql=off:nm=0:ins=20:gsp=on:ss=axioms:fsd=on_272 on p for (272ds/292Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.040 s
+% Peak memory usage: 13 MB
+% Instructions burned: 294 (million)
+% lrs+10_1_to=lpo:sil=4000:plsq=on:plsqc=1:plsqr=64,1:etr=on:sp=const_min:sos=on:spb=goal_then_units:br=off:sac=on:random_seed=143560796:i=196:nm=0_271 on p for (271ds/196Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1010_6:1_to=lpo:sil=32000:plsq=on:plsqr=128,1:sos=on:urr=on:plsql=on:flr=on:newcnf=on:lwlo=on:random_seed=4185700114:lrd=on:s2pl=on:i=148:ep=RS_271 on p for (271ds/148Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% dis+10_1_slsqr=4,1:to=lpo:sil=8000:urr=ec_only:br=off:slsqc=2:slsq=on:random_seed=1584388487:s2a=on:i=148:s2at=2:ins=1:gtg=position:fsd=on_271 on p for (271ds/148Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.021 s
+% Peak memory usage: 12 MB
+% Instructions burned: 149 (million)
+% lrs+10_1_to=lpo:sil=16000:irw=on:sos=all:spb=goal:acc=on:urr=on:br=off:newcnf=on:random_seed=2048113349:s2a=on:i=148:bd=preordered:nm=6:ins=10_271 on p for (271ds/148Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% lrs+1011_32_to=lpo:sil=2000:bce=on:nwc=5:alpa=false:slsq=on:random_seed=3341794437:cts=off:i=543:aac=none:fsr=off:amm=off:rawr=on_271 on p for (271ds/543Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.087 s
+% Peak memory usage: 20 MB
+% Instructions burned: 545 (million)
+% dis-1011_128_to=lpo:sil=4000:tgt=full:sas=cadical:bce=on:fd=off:rp=on:slsqc=2:sac=on:slsq=on:random_seed=3451880966:i=153:s2at=3:ins=1_270 on p for (270ds/153Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.025 s
+% Peak memory usage: 14 MB
+% Instructions burned: 157 (million)
+% dis-1002_3:2_to=lpo:sil=16000:plsq=on:plsqc=1:plsqr=3,1:plsql=on:newcnf=on:random_seed=1598560279:s2a=on:i=632:av=off:gtg=position_270 on p for (270ds/632Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.088 s
+% Peak memory usage: 16 MB
+% Instructions burned: 635 (million)
+% ott+10_14_to=lpo:sil=8000:tgt=full:prc=on:random_seed=2863682255:i=2501:fsr=off_269 on p for (269ds/2501Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.393 s
+% Peak memory usage: 56 MB
+% Instructions burned: 2505 (million)
+% dis+1011_1024_slsqr=1,128:to=lpo:sil=8000:gs=on:br=off:slsqc=1:slsq=on:random_seed=3217098949:i=367:s2at=5:sd=3:slsql=off:ss=axioms:sgt=10_265 on p for (265ds/367Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.048 s
+% Peak memory usage: 14 MB
+% Instructions burned: 369 (million)
+% lrs+10_8_to=lpo:sil=4000:plsq=on:plsqc=1:urr=on:br=off:flr=on:newcnf=on:random_seed=1496851785:st=4:i=207:sd=1:fsr=off:gsp=on:ss=axioms_264 on p for (264ds/207Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.032 s
+% Peak memory usage: 15 MB
+% Instructions burned: 213 (million)
+% lrs-1010_1_to=lpo:sil=4000:sos=on:random_seed=1535236274:i=3739:sd=2:ins=10:ss=axioms_264 on p for (264ds/3739Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis-1011_1_to=lpo:sil=4000:plsq=on:plsqr=32,1:sos=on:erd=off:lsd=5:fd=off:random_seed=1976060294:i=157:nm=16:av=off_264 on p for (264ds/157Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% lrs+10_1_to=lpo:sil=4000:sp=occurrence:urr=on:br=off:random_seed=3419964976:st=1.2:s2a=on:i=1800:s2at=2:sd=3:ss=included:sgt=20_264 on p for (264ds/1800Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.278 s
+% Peak memory usage: 39 MB
+% Instructions burned: 1802 (million)
+% lrs+1010_4_to=lpo:sil=2000:plsq=on:prc=on:plsqr=18,1:sp=occurrence:fd=off:sac=on:random_seed=1732134237:s2a=on:i=163:nm=7:rawr=on_261 on p for (261ds/163Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.028 s
+% Peak memory usage: 15 MB
+% Instructions burned: 163 (million)
+% lrs-1011_4:1_anc=all_dependent:slsqr=5,4:to=kbo:sil=16000:tgt=ground:fde=none:sas=cadical:erd=off:fd=preordered:nwc=3:s2agt=16:alpa=true:flr=on:sac=on:lftc=80:slsq=on:avsqc=2:random_seed=458632741:avsq=on:s2a=on:i=163:avsqr=7,8:ep=RST:fdi=8_261 on p for (261ds/163Mi)
+% Aborted by signal SIGSEGV on /tmp/tmpf0kor9jp/p.p
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Unknown
+% Termination phase: Saturation
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% dis-1011_2:1_to=lpo:sil=8000:plsq=on:plsqr=1,8:sos=on:erd=off:gs=on:random_seed=2421472517:st=10:i=164:sd=1:aac=none:bd=all:nm=3:ss=included:rawr=on_261 on p for (261ds/164Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% lrs+10_2:5_slsqr=2,1:to=lpo:sil=2000:plsq=on:plsqc=1:sas=cadical:plsqr=64,1:sp=const_min:acc=on:bce=on:plsql=on:alpa=random:flr=on:sac=on:slsq=on:random_seed=3281765262:s2a=on:i=230:s2at=2:slsql=off:fsr=off:gsp=on:ss=included:sgt=32:rawr=on_261 on p for (261ds/230Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.035 s
+% Peak memory usage: 17 MB
+% Instructions burned: 236 (million)
+% dis+1010_16_anc=all_dependent:to=lpo:sil=8000:sp=arity:fd=off:sac=on:random_seed=2490372309:st=5:i=165:sd=2:aac=none:ins=10:fsr=off:ss=axioms:fsd=on_260 on p for (260ds/165Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.026 s
+% Peak memory usage: 13 MB
+% Instructions burned: 168 (million)
+% lrs-2_64_to=lpo:sil=4000:sos=on:lcm=predicate:random_seed=2083887191:st=3:i=361:sd=5:av=off:ss=included_260 on p for (260ds/361Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% ------------------------------
+% ------------------------------
+% dis-1011_8_to=lpo:sil=4000:fde=none:nwc=2:random_seed=382313468:st=5:s2a=on:i=231:s2at=2:sd=6:ep=RS:ins=1:ss=axioms_260 on p for (260ds/231Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% Aborted by signal SIGSEGV on /tmp/tmpf0kor9jp/p.p
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% lrs-1010_8:1_anc=none:slsqr=4,1:to=lpo:sil=4000:tgt=ground:plsq=on:plsqc=1:plsqr=32,1:nwc=3:slsqc=1:slsq=on:avsqc=1:random_seed=4188216681:avsq=on:i=169:doe=on:nicw=on:nm=16:ss=axioms_260 on p for (260ds/169Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+11_32_anc=all:to=lpo:sil=4000:sos=all:erd=off:urr=on:sac=on:random_seed=769289653:s2a=on:i=169:nicw=on:gtg=position:gsp=on:ss=axioms:sgt=8_260 on p for (260ds/169Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% ott+1011_16_to=lpo:sil=2000:lsd=100:newcnf=on:random_seed=1807545446:st=3:s2a=on:i=169:sd=1:av=off:fsr=off:ss=axioms_260 on p for (260ds/169Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.031 s
+% Peak memory usage: 14 MB
+% Instructions burned: 173 (million)
+% lrs+1002_1_to=lpo:sil=128000:sos=on:random_seed=3648105040:st=1.5:i=170:sd=2:nm=2:gtg=all:ss=axioms:fsd=on_260 on p for (260ds/170Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.026 s
+% Peak memory usage: 14 MB
+% Instructions burned: 174 (million)
+% dis+4_4_to=lpo:sil=16000:plsq=on:plsqr=1,32:sp=unary_frequency:lcm=predicate:fd=off:rp=on:random_seed=1009479572:i=170:bd=preordered:nm=2:av=off:sup=off_259 on p for (259ds/170Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% dis-1011_5:1_to=lpo:sil=4000:lsd=50:random_seed=1603416679:s2a=on:i=171:s2at=1.2:ep=R:gtg=position_259 on p for (259ds/171Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+10_1_to=lpo:sil=4000:plsq=on:plsqr=32,1:sos=on:fs=off:acc=on:urr=ec_only:gs=on:sac=on:random_seed=289603326:i=530:nm=0:fsr=off_259 on p for (259ds/530Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% lrs+1002_1_to=lpo:sil=8000:sos=on:erd=off:sac=on:random_seed=2080663536:st=6:i=1370:sd=4:aac=none:sup=off:ss=axioms:sgt=16_259 on p for (259ds/1370Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(arity_squared) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% dis+1011_64_to=lpo:sil=128000:bsd=on:sp=arity:sos=on:lsd=50:fd=off:random_seed=3524446097:i=252:gtgl=4:kws=arity_squared:nm=16:av=off:gtg=exists_sym:gsp=on:fsd=on_259 on p for (259ds/252Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.040 s
+% Peak memory usage: 13 MB
+% Instructions burned: 254 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(precedence) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% dis+1010_3:1_to=lpo:sil=2000:tgt=full:prc=on:drc=off:fde=none:bsd=on:sp=unary_first:gs=on:br=off:random_seed=2673036526:i=178:kws=precedence:av=off:fsd=on_259 on p for (259ds/178Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.024 s
+% Peak memory usage: 13 MB
+% Instructions burned: 179 (million)
+% dis+10_8:1_to=lpo:sil=4000:sp=arity:sos=on:acc=on:fd=off:random_seed=472404690:s2a=on:i=927:sd=2:ss=axioms_259 on p for (259ds/927Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+10_1_to=lpo:sil=4000:sos=on:spb=goal:lcm=predicate:urr=on:s2agt=8:sac=on:slsq=on:random_seed=3267352206:st=3.3:s2a=on:i=269:sd=2:doe=on:nm=2:gtg=position:sup=off:ss=axioms_258 on p for (258ds/269Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(arity_squared) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs+21_32:1_to=lpo:sil=16000:bsd=on:sos=on:spb=goal_then_units:lcm=predicate:flr=on:random_seed=1383330822:s2a=on:i=185:s2at=3.5:kws=arity_squared_258 on p for (258ds/185Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1010_64_to=lpo:sil=2000:sos=on:erd=off:bce=on:bsr=on:nwc=1:flr=on:newcnf=on:random_seed=2788245065:i=277:av=off:fdi=64_258 on p for (258ds/277Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% ------------------------------
+% ------------------------------
+% lrs-1011_64_to=lpo:sil=4000:fd=preordered:br=off:random_seed=349034389:i=456:sd=2:av=off:ss=axioms:sgt=32_258 on p for (258ds/456Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.073 s
+% Peak memory usage: 19 MB
+% Instructions burned: 457 (million)
+% lrs+10_32_to=lpo:sil=2000:sp=occurrence:sos=all:urr=on:br=off:random_seed=4234739931:st=3:i=635:sd=5:sup=off:ss=included_258 on p for (258ds/635Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1011_23:4_slsqr=8,1:to=lpo:sil=32000:plsq=on:fde=none:plsqc=4:plsqr=64,1:spb=goal_then_units:acc=on:urr=on:plsql=on:gs=on:slsqc=4:alpa=true:slsq=on:random_seed=3297196139:cond=on:i=190:add=on:aac=none:doe=on:slsql=off:bd=preordered:nm=2:sup=off:ss=axioms_258 on p for (258ds/190Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% dis+1010_32:1_to=lpo:sil=2000:bsd=on:fd=off:slsq=on:random_seed=3039015161:cts=off:i=1282:sd=1:av=off:gtg=position:ss=axioms_258 on p for (258ds/1282Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% ------------------------------
+% ------------------------------
+% lrs+1011_16_anc=all_dependent:to=lpo:sil=4000:plsq=on:fde=none:plsqc=1:sas=cadical:plsqr=64,1:sos=on:spb=non_intro:plsql=on:fd=off:alpa=random:sac=on:random_seed=2621090947:avsq=on:i=191:avsqr=1,16:nm=16:ins=1:rawr=on_258 on p for (258ds/191Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_max_zero(on) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% WARNING Broken Constraint: if kbo_weight_scheme(precedence) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs+11_1_anc=all_dependent:to=lpo:sil=2000:plsq=on:fde=unused:plsqr=32,1:spb=intro:bsr=unit_only:gs=on:kmz=on:newcnf=on:random_seed=2510895921:st=1.2:i=564:gtgl=3:sd=3:kws=precedence:gtg=exists_top:fdi=4:ss=axioms:sgt=10_257 on p for (257ds/564Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.084 s
+% Peak memory usage: 19 MB
+% Instructions burned: 569 (million)
+% dis-1011_25:7_to=lpo:sil=4000:sas=cadical:avsql=on:lsd=50:acc=on:bsr=unit_only:nwc=4:newcnf=on:avsqc=2:random_seed=3982555557:avsq=on:s2a=on:i=193:s2at=-1:avsqr=2,3:aac=none:ep=RSTC:rawr=on_257 on p for (257ds/193Mi)
+% Aborted by signal SIGSEGV on /tmp/tmpf0kor9jp/p.p
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Unknown
+% Termination phase: Saturation
+% Time elapsed: 0.003 s
+% Peak memory usage: 12 MB
+% Instructions burned: 15 (million)
+% dis+1003_12_to=lpo:sil=4000:plsq=on:plsqr=32,1:sp=weighted_frequency:sos=all:erd=off:lma=off:spb=intro:lcm=predicate:acc=on:urr=full:slsqc=2:updr=off:newcnf=on:slsq=on:random_seed=2727108215:i=195:ins=10:fsr=off:fdi=4:gsp=on_257 on p for (257ds/195Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% lrs+1010_4_to=lpo:sil=4000:drc=off:sp=weighted_frequency:spb=goal_then_units:nwc=5:lftc=50:random_seed=1488828119:s2a=on:i=302:fgj=on:bd=all_257 on p for (257ds/302Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.042 s
+% Peak memory usage: 15 MB
+% Instructions burned: 304 (million)
+% lrs+1011_1_sfv=off:to=lpo:sil=4000:sp=arity:sos=all:spb=goal:urr=ec_only:br=off:random_seed=3166874637:i=2020:sd=1:ss=included_256 on p for (256ds/2020Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis+1011_32_slsqr=1,4:to=lpo:sil=4000:erd=off:s2agt=8:slsqc=3:slsq=on:random_seed=2818964544:i=912:sd=4:nicw=on:ep=RS:ss=axioms:sgt=32_256 on p for (256ds/912Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% Aborted by signal SIGSEGV on /tmp/tmpf0kor9jp/p.p
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% lrs-11_23:64_sfv=off:to=lpo:sil=4000:tgt=ground:sp=const_min:sos=all:spb=goal:lcm=predicate:urr=on:fd=preordered:nwc=1:flr=on:lftc=40:random_seed=1465871935:st=1.38385:i=303:add=off:aac=none:ss=axioms_256 on p for (256ds/303Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis+1011_3:1_to=lpo:sil=8000:prc=on:drc=off:fde=unused:sp=reverse_arity:spb=non_intro:random_seed=728270713:i=817:ins=20:av=off_256 on p for (256ds/817Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.119 s
+% Peak memory usage: 14 MB
+% Instructions burned: 820 (million)
+% dis+1_32:1_to=lpo:sil=128000:sp=occurrence:acc=on:s2agt=30:random_seed=988421741:s2pl=no:s2a=on:i=1164:sd=2:nicw=on:fsr=off:ss=included_255 on p for (255ds/1164Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.156 s
+% Peak memory usage: 19 MB
+% Instructions burned: 1172 (million)
+% lrs-1011_1_to=lpo:sil=2000:sos=all:spb=goal_then_units:random_seed=2147626482:i=208_253 on p for (253ds/208Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1011_1_to=lpo:sil=32000:sp=occurrence:sos=all:random_seed=2807798253:st=2.3:i=7185:sd=14:ss=axioms:sgt=16_253 on p for (253ds/7185Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis+1002_2_to=lpo:sil=8000:sos=on:random_seed=2846150593:i=322:sd=2:ep=R:nm=4:gtg=position:ss=axioms:sgt=4_253 on p for (253ds/322Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_arity_squared) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs-1010_1_to=lpo:sil=2000:plsq=on:plsqr=50755291,524288:urr=on:rp=on:s2agt=40:br=off:random_seed=1492418574:s2a=on:i=329:add=off:sd=1:kws=inv_arity_squared:gsp=on:ss=axioms:sgt=8_253 on p for (253ds/329Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.051 s
+% Peak memory usage: 17 MB
+% Instructions burned: 332 (million)
+% lrs-1011_1_to=lpo:sil=2000:erd=off:random_seed=1407363771:i=215:ep=RS:nm=2_252 on p for (252ds/215Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% Aborted by signal SIGSEGV on /tmp/tmpf0kor9jp/p.p
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% dis+1011_20_to=lpo:sil=4000:bsd=on:newcnf=on:slsq=on:random_seed=3125340640:i=215:sd=1:slsql=off:ss=axioms:fsd=on_252 on p for (252ds/215Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% lrs+1011_1_to=lpo:sil=256000:plsq=on:newcnf=on:random_seed=2090814253:st=2:i=216:sd=3:ep=R:av=off:ss=included:sgt=16_252 on p for (252ds/216Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% ------------------------------
+% ------------------------------
+% lrs-1002_50_to=lpo:sil=2000:sas=cadical:sos=on:spb=non_intro:random_seed=802425310:i=223:doe=on:bd=all:fsr=off:fsd=on:fsdmm=1_252 on p for (252ds/223Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% lrs+1010_1_to=lpo:sil=16000:plsq=on:fde=none:plsqr=32,1:sos=on:erd=off:random_seed=2130493628:cts=off:i=227:av=off_252 on p for (252ds/227Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% lrs+1002_1_to=lpo:sil=4000:sp=occurrence:sos=on:erd=off:random_seed=3288852775:i=1636:sd=2:ep=RS:av=off:ss=axioms_252 on p for (252ds/1636Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% dis-30_1_to=lpo:sil=16000:random_seed=1498479950:st=3:i=6010:ep=RST:av=off:ss=included_252 on p for (252ds/6010Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.763 s
+% Peak memory usage: 14 MB
+% Instructions burned: 6010 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(precedence) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs+2_1_to=lpo:sil=2000:random_seed=2877262857:i=1044:kws=precedence:fsr=off_245 on p for (245ds/1044Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.159 s
+% Peak memory usage: 30 MB
+% Instructions burned: 1045 (million)
+% lrs+0_32:1_to=lpo:sil=64000:tgt=ground:irw=on:prc=on:sp=reverse_frequency:bce=on:bsr=on:random_seed=842718418:i=372:sd=1:erml=2:bs=unit_only:bd=all:av=off:gtg=exists_sym:ss=axioms:er=filter_243 on p for (243ds/372Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.055 s
+% Peak memory usage: 16 MB
+% Instructions burned: 377 (million)
+% lrs+1010_32_to=lpo:sil=4000:plsq=on:bsr=unit_only:nwc=3:newcnf=on:random_seed=266607571:cts=off:i=516:gtgl=5:nm=16:av=off:gtg=exists_sym_242 on p for (242ds/516Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.080 s
+% Peak memory usage: 20 MB
+% Instructions burned: 519 (million)
+% lrs-1010_3:2_to=lpo:sil=4000:irw=on:plsq=on:plsqc=4:fd=preordered:updr=off:lwlo=on:random_seed=1822024025:lrd=on:i=2469:bd=preordered_242 on p for (242ds/2469Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.369 s
+% Peak memory usage: 35 MB
+% Instructions burned: 2472 (million)
+% dis+1011_128_to=lpo:sil=4000:tgt=full:sos=on:spb=goal:lsd=100:bsr=on:br=off:random_seed=2756102240:i=242:sd=1:gtg=position:ss=axioms:sgt=64_238 on p for (238ds/242Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs-1011_12_to=lpo:sil=8000:prc=on:drc=off:sp=reverse_frequency:erd=off:lsd=1:urr=on:bce=on:rp=on:nwc=0.6:newcnf=on:avsqc=1:random_seed=1527061088:avsq=on:s2a=on:i=242:bd=preordered:nm=2:fsd=on_238 on p for (238ds/242Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.033 s
+% Peak memory usage: 15 MB
+% Instructions burned: 244 (million)
+% dis+1010_6_to=lpo:sil=16000:tgt=full:sp=unary_first:nwc=2:random_seed=2565392611:s2a=on:i=2051:sd=1:nm=4:gsp=on:ss=included_237 on p for (237ds/2051Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.281 s
+% Peak memory usage: 23 MB
+% Instructions burned: 2051 (million)
+% lrs-1011_1_to=lpo:sil=2000:plsq=on:plsqr=128,1:flr=on:random_seed=501254603:i=253:gtgl=2:sd=1:gtg=exists_all:ss=axioms_235 on p for (235ds/253Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.038 s
+% Peak memory usage: 16 MB
+% Instructions burned: 256 (million)
+% lrs+10_1_slsqr=8,1:to=lpo:sil=16000:plsq=on:plsqr=32,1:sp=unary_first:erd=off:spb=units:lcm=reverse:urr=on:slsqc=1:flr=on:slsq=on:random_seed=3200491583:i=256:s2at=9:bd=preordered:av=off:fsr=off:fdi=8_234 on p for (234ds/256Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.036 s
+% Peak memory usage: 14 MB
+% Instructions burned: 258 (million)
+% dis+11_1_to=lpo:sil=32000:tgt=full:plsq=on:fde=unused:plsqc=1:plsqr=128,1:sos=on:erd=off:plsql=on:newcnf=on:random_seed=4206844670:s2pl=on:cts=off:i=259:bs=on:av=off:fsr=off:ss=axioms:fsd=on:sgt=32:rawr=on_234 on p for (234ds/259Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% lrs-1010_16:1_to=lpo:sil=8000:sp=occurrence:sos=on:acc=on:random_seed=2325588035:i=1549:sd=1:nm=12:fsr=off:ss=included_234 on p for (234ds/1549Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+33_2003:644_to=lpo:sil=4000:sp=reverse_frequency:lcm=predicate:urr=on:s2agt=10:random_seed=714881733:s2a=on:i=751:bd=preordered:ins=1:fdi=8:gsp=on_234 on p for (234ds/751Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.110 s
+% Peak memory usage: 20 MB
+% Instructions burned: 751 (million)
+% lrs+10_1_to=lpo:sil=16000:sp=occurrence:urr=on:br=off:random_seed=669121463:st=5:s2a=on:i=758:s2at=2:sd=2:nm=2:gtg=exists_top:sup=off:ss=axioms_233 on p for (233ds/758Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1010_64_to=lpo:sil=2000:fde=none:sp=const_max:sos=on:urr=ec_only:bsr=unit_only:fd=off:rp=on:br=off:alpa=true:sac=on:random_seed=3855175937:avsq=on:i=596:avsqr=8,1:ins=2:fdi=1024:rawr=on_233 on p for (233ds/596Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% ott+1011_2:7_to=lpo:sil=2000:tgt=full:plsq=on:fde=none:plsqc=5:sims=off:sp=unary_first:spb=non_intro:lsd=10:plsql=on:nwc=20:s2agt=128:random_seed=2740690234:s2a=on:i=1443:s2at=3:bd=preordered:av=off:gtg=exists_top:fdi=8_232 on p for (232ds/1443Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.220 s
+% Peak memory usage: 27 MB
+% Instructions burned: 1444 (million)
+% lrs-1011_4_to=lpo:sil=2000:sp=arity:flr=on:random_seed=185250243:st=3:i=268:bd=preordered:ss=axioms_230 on p for (230ds/268Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.041 s
+% Peak memory usage: 15 MB
+% Instructions burned: 272 (million)
+% lrs+1011_4_sfv=off:to=lpo:sil=2000:fde=none:sp=const_frequency:sos=all:br=off:random_seed=2960793368:st=4:i=269:sd=3:doe=on:ins=10:av=off:ss=axioms_230 on p for (230ds/269Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% dis+1011_10_to=lpo:sil=4000:sp=const_min:erd=off:spb=non_intro:bsr=unit_only:rp=on:flr=on:newcnf=on:random_seed=1652983395:cts=off:s2a=on:i=269:s2at=5:bd=preordered:av=off:fsr=off:rawr=on_230 on p for (230ds/269Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.044 s
+% Peak memory usage: 13 MB
+% Instructions burned: 269 (million)
+% lrs+10_3_to=lpo:sil=8000:tgt=ground:fde=none:sp=reverse_arity:lcm=predicate:random_seed=3855594924:i=3317:sd=1:av=off:ss=axioms:sgt=50_229 on p for (229ds/3317Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.534 s
+% Peak memory usage: 66 MB
+% Instructions burned: 3322 (million)
+% WARNING Broken Constraint: if kbo_max_zero(on) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% WARNING Broken Constraint: if kbo_weight_scheme(precedence) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% ott+11_3_sfv=off:to=lpo:sil=2000:tgt=full:sp=reverse_frequency:spb=goal_then_units:urr=on:nwc=5:s2agt=100:br=off:kmz=on:updr=off:slsq=on:random_seed=1497107331:s2a=on:i=286:kws=precedence:bd=preordered:ins=20:av=off_224 on p for (224ds/286Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.040 s
+% Peak memory usage: 15 MB
+% Instructions burned: 288 (million)
+% lrs+1010_1_to=lpo:sil=4000:plsq=on:plsqr=64,1:sos=on:spb=goal:alpa=true:random_seed=3661436893:st=2:i=1238:sd=2:fsr=off:ss=axioms:fsd=on_223 on p for (223ds/1238Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1002_8:1_to=lpo:sil=4000:urr=on:br=off:random_seed=1169749139:st=3:s2a=on:i=291:s2at=2:sd=1:doe=on:av=off:ss=axioms_223 on p for (223ds/291Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.043 s
+% Peak memory usage: 16 MB
+% Instructions burned: 291 (million)
+% lrs+10_1_sfv=off:to=lpo:sil=2000:sos=all:lma=off:random_seed=2472801032:st=1.5:i=291:gtgl=2:sd=2:av=off:gtg=exists_sym:ss=axioms_223 on p for (223ds/291Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.044 s
+% Peak memory usage: 16 MB
+% Instructions burned: 293 (million)
+% dis-1011_5:1_anc=all_dependent:to=lpo:sil=4000:erd=off:lsd=60:alpa=true:sac=on:random_seed=1037115451:avsq=on:i=300:ep=R:gsp=on_222 on p for (222ds/300Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs-1011_8:1_to=lpo:sil=8000:sp=unary_first:bsr=on:fd=off:random_seed=4287695441:i=305_222 on p for (222ds/305Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.047 s
+% Peak memory usage: 17 MB
+% Instructions burned: 306 (million)
+% lrs+1011_3:1_to=lpo:sil=2000:plsq=on:plsqc=1:plsqr=32,1:sos=all:bsr=unit_only:s2agt=8:random_seed=3510582051:s2a=on:i=511:bd=all:nm=4:av=off:ss=axioms:sgt=8_222 on p for (222ds/511Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% dis-1010_16:1_to=lpo:sil=16000:fde=unused:fd=off:newcnf=on:slsq=on:random_seed=1976825787:s2a=on:i=1555:nm=2:gtg=position:ss=axioms_222 on p for (222ds/1555Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs-1010_20_to=lpo:sil=4000:prc=on:drc=ordering:fde=unused:sp=const_min:sos=all:spb=goal:urr=ec_only:nwc=8:br=off:lftc=40:random_seed=3087064176:s2a=on:i=744:aac=none:doe=on:bd=preordered:amm=off:fdi=8_222 on p for (222ds/744Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+10_7_to=lpo:sil=64000:tgt=ground:drc=off:fde=none:sp=const_frequency:slsqc=4:slsq=on:random_seed=3760972814:i=10680:bd=all:gtg=exists_sym_222 on p for (222ds/10680Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 1.751 s
+% Peak memory usage: 74 MB
+% Instructions burned: 10682 (million)
+% dis-1002_7_anc=all_dependent:to=kbo:sil=16000:drc=off:etr=on:sos=on:nwc=1:kmz=on:newcnf=on:random_seed=3563823855:i=317:kws=frequency:doe=on:bs=unit_only:nm=0:ins=10:amm=off:gtg=exists_sym_204 on p for (204ds/317Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.048 s
+% Peak memory usage: 13 MB
+% Instructions burned: 321 (million)
+% dis+1010_3_to=lpo:sil=4000:sp=const_frequency:sos=on:rnwc=on:nwc=3:flr=on:random_seed=505890016:i=317:add=off:doe=on:nicw=on_204 on p for (204ds/317Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.001 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis+1002_2_to=lpo:sil=4000:nwc=1:slsqc=2:flr=on:newcnf=on:slsq=on:random_seed=3480728997:s2a=on:i=2524:s2at=1.5:sd=5:ep=R:ss=axioms:sgt=16_204 on p for (204ds/2524Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1002_1_to=lpo:sil=4000:sims=off:sos=on:bsr=on:fd=off:slsqc=1:slsq=on:random_seed=2462651252:i=544:s2at=2:gtg=all_203 on p for (203ds/544Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.088 s
+% Peak memory usage: 23 MB
+% Instructions burned: 550 (million)
+% lrs+1002_32_to=lpo:sil=2000:sp=occurrence:sos=on:erd=off:random_seed=3938051230:st=3:cts=off:i=548:sd=5:ss=included_203 on p for (203ds/548Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1_1_to=lpo:sil=8000:plsq=on:sos=on:lcm=reverse:random_seed=3962008725:s2a=on:i=6200:s2at=2:sd=1:ss=included_203 on p for (203ds/6200Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.001 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs-1011_16:1_to=lpo:sil=8000:fde=none:sp=occurrence:urr=on:s2agt=64:newcnf=on:random_seed=3234892178:s2a=on:i=567:sd=2:av=off:ss=axioms_202 on p for (202ds/567Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% ------------------------------
+% ------------------------------
+% lrs+10_1024_to=lpo:sil=4000:sp=occurrence:sos=all:urr=on:rnwc=on:nwc=0.5:br=off:random_seed=1931440021:st=4:i=335:sd=4:ep=RST:ss=included_202 on p for (202ds/335Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.041 s
+% Peak memory usage: 14 MB
+% Instructions burned: 340 (million)
+% lrs-1010_1_to=lpo:sil=4000:fde=none:sp=unary_frequency:sos=on:spb=units:random_seed=292920477:st=2:cts=off:i=2004:sd=2:ins=10:av=off:ss=included_202 on p for (202ds/2004Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% lrs+1002_128_anc=all:to=lpo:sil=16000:drc=ordering:sp=reverse_frequency:fd=off:sac=on:random_seed=3729637686:lrd=on:i=338:fgj=on:bd=all:ins=7_202 on p for (202ds/338Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.049 s
+% Peak memory usage: 16 MB
+% Instructions burned: 345 (million)
+% dis+1011_4_to=lpo:sil=4000:fde=unused:bsr=on:nwc=5:slsqc=1:slsq=on:random_seed=837246070:i=819:s2at=-1:slsql=off:ep=R:ins=1:av=off:gsp=on_201 on p for (201ds/819Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% dis+10_16:1_to=lpo:sil=4000:urr=on:bce=on:rnwc=on:br=off:slsq=on:random_seed=2064010505:st=1.78:s2a=on:i=608:s2at=7.4:sd=11:av=off:ss=included_201 on p for (201ds/608Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.083 s
+% Peak memory usage: 15 MB
+% Instructions burned: 608 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_arity_squared) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% dis+1002_24_anc=all_dependent:slsqr=4,3:to=lpo:sil=2000:tgt=ground:sims=off:sas=cadical:spb=non_intro:acc=on:bsr=on:gs=on:slsqc=1:alpa=random:flr=on:sac=on:slsq=on:random_seed=2244900848:st=1.2:cts=off:s2a=on:i=363:add=on:kws=inv_arity_squared:nm=16:ins=1:ss=axioms:rawr=on_201 on p for (201ds/363Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% lrs+10_10_to=lpo:sil=4000:tgt=full:prc=on:drc=off:sp=const_min:sos=on:urr=on:rnwc=on:br=off:random_seed=1019406995:i=646:av=off:proc=on_200 on p for (200ds/646Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% ott+1002_24_to=lpo:sil=2000:sp=occurrence:urr=on:bce=on:s2agt=32:br=off:slsqc=1:slsq=on:random_seed=1200871565:st=2.7:s2a=on:i=382:s2at=1.1:sd=3:nm=0:ins=25:av=off:ss=axioms:sgt=15_200 on p for (200ds/382Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.061 s
+% Peak memory usage: 18 MB
+% Instructions burned: 387 (million)
+% dis+1011_2:3_anc=all_dependent:to=lpo:sil=2000:plsq=on:plsqc=2:sas=cadical:plsqr=44827,1048576:sos=on:erd=off:bsr=unit_only:plsql=on:sac=on:avsqc=1:random_seed=1918445132:avsq=on:i=666:avsqr=1,16:bs=unit_only:bd=all_200 on p for (200ds/666Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% lrs-1010_1_to=lpo:sil=2000:sp=occurrence:random_seed=3972573439:st=2:i=953:sd=3:ss=axioms:sgt=10_200 on p for (200ds/953Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.146 s
+% Peak memory usage: 27 MB
+% Instructions burned: 958 (million)
+% lrs+1002_1_to=lpo:sil=8000:sp=occurrence:sos=on:random_seed=2009771140:st=4:cts=off:i=708:sd=2:ep=R:ss=axioms_198 on p for (198ds/708Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_max_zero(on) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_arity) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% dis-1011_8_to=lpo:sil=4000:plsq=on:prc=on:fde=unused:plsqr=64,1:sp=reverse_frequency:erd=off:spb=goal_then_units:bsr=unit_only:s2agt=60:kmz=on:flr=on:random_seed=1939435020:s2a=on:i=413:kws=inv_arity:doe=on:bs=on:bd=preordered:nm=32:av=off:fsr=off:fsd=on_198 on p for (198ds/413Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.061 s
+% Peak memory usage: 16 MB
+% Instructions burned: 415 (million)
+% lrs+10_5:1_to=lpo:sil=2000:plsq=on:plsqc=1:plsqr=64,1:sp=reverse_frequency:urr=on:fd=preordered:nwc=1:br=off:flr=on:random_seed=3902944155:s2a=on:i=429:s2at=5:nm=2:ins=1:sup=off_198 on p for (198ds/429Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis+10_4096_to=lpo:sil=2000:drc=ordering:urr=ec_only:fd=preordered:nwc=5:br=off:random_seed=2058284230:i=432:gtgl=4:fgj=on:gtg=exists_all:ss=axioms_198 on p for (198ds/432Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.061 s
+% Peak memory usage: 14 MB
+% Instructions burned: 433 (million)
+% lrs+1010_2_to=lpo:sil=4000:tgt=full:sp=reverse_frequency:spb=goal_then_units:acc=on:fd=preordered:sac=on:random_seed=1544201751:i=3109:gtgl=2:gtg=exists_sym_197 on p for (197ds/3109Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.540 s
+% Peak memory usage: 51 MB
+% Instructions burned: 3114 (million)
+% dis+1011_32:1_slsqr=1,16:to=lpo:sil=4000:lcm=reverse:urr=on:slsqc=4:flr=on:slsq=on:random_seed=786057069:st=4:i=438:s2at=2:sd=3:slsql=off:ep=RST:fdi=2:ss=axioms_191 on p for (191ds/438Mi)
+% Aborted by signal SIGSEGV on /tmp/tmpf0kor9jp/p.p
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Unknown
+% Termination phase: Saturation
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% lrs+10_64_to=lpo:sil=16000:plsq=on:sp=occurrence:sos=on:urr=full:random_seed=659272988:st=3.6:i=1466:sd=5:nm=4:ss=included_191 on p for (191ds/1466Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1010_2_to=lpo:sil=16000:plsq=on:plsqc=1:erd=off:urr=ec_only:nwc=1:random_seed=4130154933:i=445:fgj=on:ep=RS:av=off:sup=off_191 on p for (191ds/445Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(frequency) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs+1011_4_to=lpo:sil=128000:tgt=ground:acc=on:rp=on:s2agt=23:slsqc=1:alpa=false:flr=on:sac=on:newcnf=on:slsq=on:random_seed=1753395726:cts=off:s2a=on:i=448:add=off:kws=frequency:aac=none:slsql=off:nicw=on:bs=on:bd=preordered:fsr=off:fsd=on_191 on p for (191ds/448Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.063 s
+% Peak memory usage: 16 MB
+% Instructions burned: 453 (million)
+% lrs-1010_1_to=lpo:sil=4000:sp=occurrence:sos=on:random_seed=625026845:i=3603:ss=axioms_191 on p for (191ds/3603Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_frequency) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% ott+10_1_to=lpo:sil=8000:fde=none:sp=occurrence:sos=all:urr=on:br=off:random_seed=3478001406:i=4064:sd=2:kws=inv_frequency:bd=all:gsp=on:sup=off:ss=axioms_191 on p for (191ds/4064Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1010_32_to=lpo:sil=2000:fde=none:sas=cadical:sp=occurrence:sos=on:urr=ec_only:br=off:random_seed=1894377999:avsq=on:i=464:avsqr=1,16:bd=preordered:gtg=exists_top_191 on p for (191ds/464Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% dis+35_1024_to=lpo:sil=32000:sos=on:spb=goal:updr=off:random_seed=193445176:s2pl=on:i=828:nm=4:av=off_191 on p for (191ds/828Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% ------------------------------
+% ------------------------------
+% dis-1011_1024_to=lpo:sil=2000:rp=on:nwc=1:random_seed=105125164:st=5:i=466:sd=3:av=off:gtg=exists_top:fdi=32:sup=off:ss=axioms:fsd=on_191 on p for (191ds/466Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% ------------------------------
+% ------------------------------
+% lrs-1010_5:4_to=lpo:sil=2000:sp=const_frequency:sos=on:random_seed=553412414:st=2:cond=fast:i=1578:ss=included:sgt=10_190 on p for (190ds/1578Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs-1011_1_to=lpo:sil=16000:sos=on:lsd=10:newcnf=on:random_seed=1620916108:i=852:sd=1:sup=off:ss=axioms_190 on p for (190ds/852Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1010_1_to=lpo:sil=4000:fde=none:sp=arity:sos=on:erd=off:fs=off:random_seed=1022969733:st=1.5:i=488:sd=2:fsr=off:ss=axioms_190 on p for (190ds/488Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(precedence) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs+10_16_anc=all:to=lpo:sil=128000:tgt=full:drc=off:spb=goal:nwc=1:random_seed=371867574:i=6037:kws=precedence:bd=preordered_190 on p for (190ds/6037Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.909 s
+% Peak memory usage: 63 MB
+% Instructions burned: 6041 (million)
+% dis+1010_2_to=lpo:sil=4000:spb=units:rp=on:s2agt=10:slsqc=1:flr=on:slsq=on:random_seed=1666893102:s2pl=no:s2a=on:i=2942:s2at=6:sd=3:ep=R:nm=4:ss=axioms:sgt=40_181 on p for (181ds/2942Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs-1011_128_to=lpo:sil=4000:sos=on:erd=off:lsd=10:rnwc=on:fd=off:nwc=3:random_seed=71350473:cts=off:i=511:av=off:fsr=off_181 on p for (181ds/511Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_frequency) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% dis-1011_81:16_to=lpo:sil=16000:tgt=full:plsq=on:bsd=on:plsqr=32,1:acc=on:bce=on:random_seed=1030669303:i=3459:kws=inv_frequency:nicw=on:gsp=on:fsd=on_181 on p for (181ds/3459Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.442 s
+% Peak memory usage: 27 MB
+% Instructions burned: 3465 (million)
+% lrs+10_64:1_sfv=off:to=lpo:sil=4000:fde=none:sos=all:spb=non_intro:urr=on:random_seed=3784424759:i=948:aac=none:doe=on:bd=preordered:ins=4:ss=included_177 on p for (177ds/948Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+21_6_anc=none:to=lpo:sil=16000:fde=none:avsql=on:sos=on:sac=on:random_seed=2107435015:avsq=on:i=526:add=off:ep=RSTC_177 on p for (177ds/526Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+21_1_to=lpo:sil=16000:sp=arity:sos=on:lcm=predicate:urr=on:random_seed=1277035127:avsq=on:i=1389:avsqr=1,32:sd=2:ep=RS:ss=axioms_177 on p for (177ds/1389Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_max_zero(on) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs+11_3:1_anc=all_dependent:slsqr=11,2:to=lpo:sil=32000:fde=none:etr=on:erd=off:lma=off:lsd=100:urr=on:slsqc=1:kmz=on:flr=on:slsq=on:avsqc=5:random_seed=2195267465:st=1.326:avsq=on:i=538:s2at=2.3:gtgl=5:avsqr=46,3:bd=preordered:ins=10:gtg=exists_top:sup=off:ss=axioms:sgt=20_177 on p for (177ds/538Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% dis+1011_1_to=lpo:sil=2000:tgt=full:prc=on:drc=off:random_seed=576301785:i=988:av=off:fsr=off_177 on p for (177ds/988Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.136 s
+% Peak memory usage: 15 MB
+% Instructions burned: 989 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_frequency) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% dis-1010_2:3_to=lpo:sil=16000:prc=on:bsd=on:acc=on:bce=on:gs=on:nwc=5:s2agt=8:newcnf=on:random_seed=1490178254:avsq=on:s2a=on:i=552:avsqr=8,1:kws=inv_frequency:doe=on:nm=16:fsd=on_175 on p for (175ds/552Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.077 s
+% Peak memory usage: 18 MB
+% Instructions burned: 560 (million)
+% dis+3_1_to=lpo:sil=4000:plsq=on:plsqc=1:plsqr=64,1:sac=on:random_seed=1491582341:i=1469:nm=5:amm=off_174 on p for (174ds/1469Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.202 s
+% Peak memory usage: 20 MB
+% Instructions burned: 1473 (million)
+% dis+10_1024_to=lpo:sil=8000:prc=on:drc=off:sp=arity:random_seed=2326287451:i=7157:bd=preordered_172 on p for (172ds/7157Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.961 s
+% Peak memory usage: 27 MB
+% Instructions burned: 7159 (million)
+% lrs+1011_3:1_to=lpo:sil=4000:sp=occurrence:random_seed=3653757819:i=4424:sd=1:ep=R:ss=axioms:sgt=64_163 on p for (163ds/4424Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_frequency) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs+10_1_to=lpo:sil=4000:erd=off:random_seed=3260028409:i=1077:sd=3:kws=inv_frequency:bd=preordered:ss=axioms:sgt=16_163 on p for (163ds/1077Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.155 s
+% Peak memory usage: 23 MB
+% Instructions burned: 1080 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(precedence) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs+21_1_to=lpo:sil=4000:fde=none:sos=on:lcm=predicate:random_seed=3613992105:i=3573:kws=precedence:ss=included:sgt=14_161 on p for (161ds/3573Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+1011_1_to=kbo:sil=4000:drc=ordering:sas=cadical:lma=off:spb=non_intro:lcm=reverse:foolp=on:rp=on:nwc=20:flr=on:slsq=on:random_seed=2758909146:avsq=on:s2a=on:i=1625:add=on:ep=R:ins=5_161 on p for (161ds/1625Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% lrs-35_1_slsqr=1,64:to=lpo:sil=128000:bsr=unit_only:nwc=0.5:slsq=on:random_seed=3484163375:i=1120:bd=preordered:av=off:fdi=32_161 on p for (161ds/1120Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.166 s
+% Peak memory usage: 24 MB
+% Instructions burned: 1121 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_arity_squared) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% dis+1002_2048_to=lpo:sil=4000:sp=arity:sos=on:spb=goal_then_units:flr=on:avsqc=1:random_seed=4285251213:avsq=on:i=1637:add=on:sd=2:kws=inv_arity_squared:ss=axioms_159 on p for (159ds/1637Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+31_1024_to=lpo:sil=128000:drc=ordering:sp=unary_frequency:bsr=unit_only:random_seed=3044029028:cond=fast:i=652:fgj=on:bd=preordered_159 on p for (159ds/652Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.093 s
+% Peak memory usage: 20 MB
+% Instructions burned: 653 (million)
+% lrs+10_4_to=lpo:sil=16000:spb=goal_then_units:nwc=2:random_seed=72256809:s2pl=no:st=1.8:i=660:gtgl=3:sd=6:av=off:gtg=all:ss=included:sgt=2_158 on p for (158ds/660Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.100 s
+% Peak memory usage: 24 MB
+% Instructions burned: 663 (million)
+% lrs+1010_1_to=lpo:sil=8000:fde=none:sos=on:random_seed=4144405391:i=1786:sd=2:ss=axioms_157 on p for (157ds/1786Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_frequency) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs-1011_3_to=lpo:sil=8000:fde=unused:sp=occurrence:urr=on:nwc=1:random_seed=4044590245:s2a=on:i=2383:sd=1:kws=inv_frequency:nm=0:ss=included_157 on p for (157ds/2383Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.369 s
+% Peak memory usage: 49 MB
+% Instructions burned: 2388 (million)
+% dis+1002_1_to=lpo:sil=8000:sp=occurrence:fd=off:sac=on:random_seed=1827342494:s2a=on:i=1267:s2at=5:sd=2:nm=3:ss=included_153 on p for (153ds/1267Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.185 s
+% Peak memory usage: 22 MB
+% Instructions burned: 1268 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_arity) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% dis+2_8_anc=none:to=lpo:sil=32000:plsq=on:prc=on:drc=off:bsd=on:plsqr=7,8:sp=const_min:sos=all:lma=off:lcm=reverse:updr=off:slsq=on:random_seed=2238915960:avsq=on:cond=fast:i=689:avsqr=11,4:kws=inv_arity:fgj=on:bs=unit_only:bd=all:rawr=on_151 on p for (151ds/689Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_frequency) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% ott+1010_1_to=lpo:sil=4000:sos=on:acc=on:urr=on:bsr=on:rnwc=on:fd=preordered:slsqc=1:slsq=on:random_seed=1651116272:i=691:kws=inv_frequency:aac=none:bd=all:ins=5:fsr=off_151 on p for (151ds/691Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% WARNING Broken Constraint: if kbo_weight_scheme(frequency) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs+34_4096_to=lpo:sil=8000:tgt=ground:prc=on:drc=off:sp=reverse_frequency:sos=on:fd=preordered:random_seed=3682215637:s2pl=no:s2a=on:i=1287:kws=frequency:fsr=off_151 on p for (151ds/1287Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+10_1_to=lpo:sil=16000:tgt=ground:sims=off:erd=off:urr=ec_only:rnwc=on:lftc=10:lwlo=on:random_seed=1142553730:lrd=on:st=2:s2a=on:i=1903:s2at=3:doe=on:fgj=on:gtg=exists_top:ss=included_151 on p for (151ds/1903Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.292 s
+% Peak memory usage: 42 MB
+% Instructions burned: 1908 (million)
+% lrs-1002_7_anc=none:sfv=off:to=lpo:sil=128000:tgt=ground:prc=on:drc=off:fde=unused:etr=on:spb=non_intro:bce=on:bsr=unit_only:flr=on:updr=off:random_seed=3094823593:prac=on:i=710:doe=on:nicw=on:bd=preordered:fsr=off:gsp=on:proc=on:rawr=on_148 on p for (148ds/710Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.088 s
+% Peak memory usage: 21 MB
+% Instructions burned: 715 (million)
+% lrs+1011_256_to=kbo:sil=2000:tgt=ground:irw=on:drc=off:fde=none:lma=off:rnwc=on:fd=preordered:br=off:slsqc=1:slsq=on:random_seed=2044008239:st=1.2:i=714:s2at=3:sd=10:kws=inv_arity:fgj=on:nicw=on:amm=off:ss=included_147 on p for (147ds/714Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.109 s
+% Peak memory usage: 23 MB
+% Instructions burned: 715 (million)
+% lrs+10_4:1_to=lpo:sil=4000:erd=off:urr=on:s2agt=8:br=off:random_seed=3695000151:s2a=on:i=1975:bd=all_146 on p for (146ds/1975Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.282 s
+% Peak memory usage: 31 MB
+% Instructions burned: 1980 (million)
+% ott-1010_8_to=lpo:sil=4000:fde=none:sp=arity:spb=goal_then_units:nwc=3:s2agt=16:flr=on:slsq=on:random_seed=3594206970:s2a=on:i=4528:bd=all_143 on p for (143ds/4528Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.693 s
+% Peak memory usage: 52 MB
+% Instructions burned: 4528 (million)
+% lrs+1002_1_to=lpo:sil=4000:sp=unary_first:sos=on:spb=units:random_seed=3984290773:i=2020:sd=2:nm=6:av=off:ss=axioms_136 on p for (136ds/2020Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% ------------------------------
+% ------------------------------
+% dis+1002_1_to=kbo:sil=256000:plsq=on:sp=weighted_frequency:sos=on:erd=off:spb=units:acc=on:urr=ec_only:plsql=on:nwc=20:random_seed=2496364259:avsq=on:i=753:gtgl=2:avsqr=12,1:nicw=on:ep=RST:gtg=exists_sym:ss=axioms:sgt=8_136 on p for (136ds/753Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.101 s
+% Peak memory usage: 12 MB
+% Instructions burned: 760 (million)
+% lrs+10_128_to=lpo:sil=4000:sp=occurrence:sos=all:urr=full:br=off:random_seed=3202783591:st=4.8:s2a=on:i=1412:sd=4:sup=off:ss=included_135 on p for (135ds/1412Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+10_1_to=lpo:sil=128000:sp=occurrence:random_seed=1213850065:st=3:i=37942:sd=4:ss=included:sgt=16_135 on p for (135ds/37942Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 5.911 s
+% Peak memory usage: 209 MB
+% Instructions burned: 37947 (million)
+% lrs+11_1_to=lpo:sil=2000:tgt=full:plsq=on:sp=reverse_frequency:sos=all:erd=off:plsql=on:nwc=3:random_seed=1722369599:s2pl=on:i=1495:s2at=5:bd=preordered:av=off_76 on p for (76ds/1495Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 8 MB
+% ------------------------------
+% ------------------------------
+% lrs+1002_16_anc=all_dependent:to=lpo:sil=16000:sas=cadical:sos=on:rp=on:s2agt=10:sac=on:random_seed=1121435166:st=5:s2a=on:i=798:sd=5:bs=unit_only:ep=RS:ss=included_76 on p for (76ds/798Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% lrs+1002_512_to=lpo:sil=4000:plsq=on:plsqc=2:plsqr=64,1:rp=on:gs=on:random_seed=1137506232:i=861:aac=none:nm=2:gsp=on_76 on p for (76ds/861Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.121 s
+% Peak memory usage: 25 MB
+% Instructions burned: 862 (million)
+% dis-1010_2_sfv=off:to=lpo:sil=4000:plsq=on:plsqc=1:plsqr=64,1:erd=off:newcnf=on:random_seed=319720136:cond=fast:i=1675:doe=on:av=off_75 on p for (75ds/1675Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.226 s
+% Peak memory usage: 21 MB
+% Instructions burned: 1681 (million)
+% lrs+1011_2_to=lpo:sil=16000:prc=on:drc=off:sp=const_frequency:nwc=1:random_seed=434865614:i=897:sd=3:doe=on:bd=preordered:nm=4:ins=2:av=off:gtg=exists_all:ss=axioms:sgt=27_72 on p for (72ds/897Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.110 s
+% Peak memory usage: 23 MB
+% Instructions burned: 906 (million)
+% lrs-1010_1_to=lpo:sil=8000:sos=on:random_seed=96135017:st=2:i=3392:sd=2:ss=axioms_71 on p for (71ds/3392Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs-1011_4_to=lpo:sil=4000:sos=all:lsd=10:random_seed=3928651317:s2a=on:i=2612:s2at=5:ep=RS:av=off:ss=included:sgt=10_71 on p for (71ds/2612Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% ------------------------------
+% ------------------------------
+% dis+1011_8_to=lpo:sil=4000:lsd=50:nwc=2:random_seed=592107230:cond=fast:i=948:gtgl=2:ep=RS:av=off:gtg=exists_all_71 on p for (71ds/948Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% ------------------------------
+% ------------------------------
+% lrs+1011_6:5_sfv=off:to=lpo:sil=32000:tgt=ground:sos=all:erd=off:urr=on:rnwc=on:gs=on:flr=on:random_seed=292832018:s2a=on:i=951:s2at=2:sd=2:av=off:fsr=off:ss=axioms_71 on p for (71ds/951Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% lrs+11_1_to=lpo:sil=8000:flr=on:random_seed=199455779:i=982:sd=2:sup=off:ss=axioms:sgt=8_71 on p for (71ds/982Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+10_1_to=lpo:sil=8000:sp=occurrence:sos=on:fs=off:random_seed=1457832301:st=1.2:i=2778:sd=2:ep=R:fsr=off:ss=included_71 on p for (71ds/2778Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs-1002_32_to=lpo:sil=4000:sp=occurrence:nwc=1:random_seed=2039024434:st=3.4:i=1009:sd=4:ep=RST:ss=axioms:sgt=8_71 on p for (71ds/1009Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.117 s
+% Peak memory usage: 12 MB
+% Instructions burned: 1014 (million)
+% dis+10_2:13_anc=all_dependent:sfv=off:to=lpo:sil=2000:sos=on:rnwc=on:sac=on:random_seed=2773257102:st=2:avsq=on:s2a=on:i=1019:sd=2:aac=none:doe=on:nicw=on:bs=unit_only:nm=2:amm=off:ss=axioms_70 on p for (70ds/1019Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis+1010_2_slsqr=3,53:to=lpo:sil=8000:tgt=full:plsq=on:plsqc=1:sims=off:sas=cadical:plsqr=5241031,262144:sp=arity:sos=on:spb=units:bsr=unit_only:rp=on:nwc=1:slsqc=1:newcnf=on:slsq=on:random_seed=2531209408:i=1040:s2at=5:doe=on:bs=on_70 on p for (70ds/1040Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% ott+1011_1024_to=lpo:sil=8000:prc=on:sos=on:fd=off:br=off:random_seed=4220381426:cts=off:i=1043:gtgl=4:sd=1:gtg=exists_sym:ss=axioms_70 on p for (70ds/1043Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.164 s
+% Peak memory usage: 29 MB
+% Instructions burned: 1049 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_precedence) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% lrs+1011_1_to=lpo:sil=32000:fde=unused:sp=unary_frequency:spb=goal_then_units:lsd=100:sac=on:random_seed=1161195751:i=1045:kws=inv_precedence:bd=all:nm=2:fsr=off_68 on p for (68ds/1045Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.158 s
+% Peak memory usage: 23 MB
+% Instructions burned: 1049 (million)
+% WARNING Broken Constraint: if kbo_weight_scheme(inv_frequency) has been set then term_ordering(lpo) is equal to kbo or term_ordering(lpo) is equal to auto_kbo
+% dis+1002_8_sfv=off:to=lpo:sil=16000:tgt=full:plsq=on:sos=on:erd=off:spb=goal_then_units:gs=on:nwc=9:random_seed=2320072282:cond=on:i=12085:sd=2:kws=inv_frequency:bd=preordered:nm=20:gtg=position:gsp=on:ss=included_66 on p for (66ds/12085Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% dis+1010_2_to=lpo:sil=8000:fde=none:sp=const_frequency:bce=on:sac=on:random_seed=1260096797:s2a=on:cond=on:i=1111:s2at=1.5:fsr=off_66 on p for (66ds/1111Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.156 s
+% Peak memory usage: 19 MB
+% Instructions burned: 1114 (million)
+% dis+10_1_to=lpo:sil=8000:plsq=on:sp=occurrence:acc=on:urr=on:s2agt=16:br=off:random_seed=1052811766:s2a=on:i=2126:sd=3:nm=16:ss=axioms_65 on p for (65ds/2126Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% lrs-1011_1_to=lpo:sil=32000:plsq=on:fde=none:plsqr=2,1:gs=on:slsqc=3:slsq=on:random_seed=4061366635:s2a=on:i=1118:gtgl=2:slsql=off:ep=R:av=off:fsr=off:gtg=exists_sym:gsp=on_65 on p for (65ds/1118Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 12 MB
+% ------------------------------
+% ------------------------------
+% lrs+1002_1_to=lpo:sil=32000:fde=unused:bsd=on:random_seed=1325379885:s2a=on:i=1125:s2at=5:bs=unit_only:bsdmm=1:av=off:gtg=exists_all:fsd=on_65 on p for (65ds/1125Mi)
+% Instruction limit reached! 
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Instruction limit
+% Termination phase: Saturation
+% Time elapsed: 0.163 s
+% Peak memory usage: 21 MB
+% Instructions burned: 1130 (million)
+% lrs-1010_1_to=lpo:sil=2000:sp=occurrence:sos=on:urr=ec_only:random_seed=2035776511:st=2:i=1131:sd=2:aac=none:ss=axioms:sgt=40_63 on p for (63ds/1131Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% dis+1011_1_slsqr=4,1:to=lpo:sil=4000:fde=none:erd=off:newcnf=on:slsq=on:random_seed=1585937374:cond=fast:i=3294:bs=unit_only:ep=RST:nm=2:ins=1:av=off:rawr=on_63 on p for (63ds/3294Mi)
+% Aborted by signal SIGSEGV on /tmp/tmpf0kor9jp/p.p
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Unknown
+% Termination phase: Saturation
+% Time elapsed: 0.0000 s
+% Peak memory usage: 9 MB
+% lrs-21_8:1_to=lpo:sil=8000:sos=on:lcm=predicate:acc=on:fd=off:random_seed=1327868429:i=1213:sd=1:fsr=off:amm=off:gsp=on:ss=included_63 on p for (63ds/1213Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+10_4096_to=lpo:sil=16000:sos=on:acc=on:urr=on:s2agt=16:sac=on:random_seed=2169633814:s2a=on:i=1231:sd=3:nicw=on:ep=RS:ss=axioms:sgt=16_63 on p for (63ds/1231Mi)
+% Refutation not found, incomplete strategy
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation not found, incomplete strategy
+% Time elapsed: 0.0000 s
+% Peak memory usage: 11 MB
+% ------------------------------
+% ------------------------------
+% lrs+10_28_to=lpo:sil=64000:tgt=full:drc=off:fde=none:spb=goal:acc=on:nwc=1:random_seed=2189621479:i=35242:fgj=on:nicw=on:bd=all:fsr=off:ss=axioms:sgt=8_63 on p for (63ds/35242Mi)
+% Solution written to "/tmp/vampire-proof-478712"
+% Refutation found. Thanks to Tanya!
+% SZS status Theorem for p
+% SZS output start Proof for p
+fof(f1,axiom,(
+  ! [X0,X1,X2,X3] : X1 = f(f(f(f(X2,X3),f(X1,f(X3,f(X2,X0)))),f(X2,X1)),X2)),
+  file('/tmp/tmpf0kor9jp/p.p',unknown)).
+fof(f2,conjecture,(
+  ! [X0,X1] : X0 = X1),
+  file('/tmp/tmpf0kor9jp/p.p',unknown)).
+fof(f3,negated_conjecture,(
+  ~! [X0,X1] : X0 = X1),
+  inference(negated_conjecture,[status(cth)],[f2])).
+fof(f4,plain,(
+  ? [X0,X1] : X0 != X1),
+  inference(ennf_transformation,[],[f3])).
+fof(f5,plain,(
+  ? [X0,X1] : X0 != X1 => sK0 != sK1),
+  introduced(definition,[],[skolem_symbol_introduction])).
+fof(f6,plain,(
+  sK0 != sK1),
+  inference(skolemisation,[status(esa),new_symbols(skolem,[sK0,sK1])],[f4,f5])).
+fof(f7,plain,(
+  sK0 != sK1),
+  inference(cnf_transformation,[],[f6])).
+fof(f8,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(f(f(X2,X3),f(X1,f(X3,f(X2,X0)))),f(X2,X1)),X2) = X1) )),
+  inference(cnf_transformation,[],[f1])).
+fof(f10,definition,(
+  spl2_1 <=> sK0 = sK1),
+  introduced(definition,[new_symbols(naming,[spl2_1])],[avatar_definition])).
+fof(f12,plain,(
+  sK0 != sK1 | spl2_1),
+  inference(avatar_component_clause,[],[f10])).
+fof(f13,plain,(
+  ~spl2_1),
+  inference(avatar_split_clause,[],[f7,f10])).
+fof(f14,plain,(
+  ( ! [X2,X3,X0,X1,X4,X5] : (f(f(f(X0,f(X4,f(X1,f(f(f(f(X1,X2),f(X0,f(X2,f(X1,X3)))),f(X1,X0)),X5)))),f(f(f(f(X1,X2),f(X0,f(X2,f(X1,X3)))),f(X1,X0)),X4)),f(f(f(X1,X2),f(X0,f(X2,f(X1,X3)))),f(X1,X0))) = X4) )),
+  inference(superposition,[],[f8,f8])).
+fof(f15,plain,(
+  ( ! [X2,X3,X0,X1,X4,X5] : (f(f(f(f(f(f(f(X1,X2),f(X0,f(X2,f(X1,X3)))),f(X1,X0)),X4),f(X5,f(X4,X0))),f(f(f(f(X1,X2),f(X0,f(X2,f(X1,X3)))),f(X1,X0)),X5)),f(f(f(X1,X2),f(X0,f(X2,f(X1,X3)))),f(X1,X0))) = X5) )),
+  inference(superposition,[],[f8,f8])).
+fof(f86,plain,(
+  ( ! [X2,X3,X0,X1,X4] : (f(f(f(X0,f(X1,f(X2,X0))),f(f(f(f(X2,X3),f(X0,f(X3,f(X2,X4)))),f(X2,X0)),X1)),f(f(f(X2,X3),f(X0,f(X3,f(X2,X4)))),f(X2,X0))) = X1) )),
+  inference(superposition,[],[f14,f8])).
+fof(f140,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(f(X0,f(X1,f(X1,X0))),X0),f(f(f(X1,X2),f(X0,f(X2,f(X1,X3)))),f(X1,X0))) = X1) )),
+  inference(superposition,[],[f86,f8])).
+fof(f248,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(f(f(f(f(X1,f(X0,f(X0,X1))),X1),X2),f(X3,f(X2,X0))),f(f(f(X1,f(X0,f(X0,X1))),X1),X3)),f(f(X1,f(X0,f(X0,X1))),X1)) = X3) )),
+  inference(superposition,[],[f8,f140])).
+fof(f340,plain,(
+  ( ! [X2,X3,X0,X1,X4] : (f(f(f(X0,f(X4,f(f(f(f(X0,X2),f(X1,f(X2,f(X0,X3)))),f(X0,X1)),X0))),f(f(f(X1,f(X0,f(X0,X1))),X1),X4)),f(f(X1,f(X0,f(X0,X1))),X1)) = X4) )),
+  inference(superposition,[],[f248,f140])).
+fof(f412,plain,(
+  ( ! [X0,X1,X4] : (f(f(f(X0,f(X4,X1)),f(f(f(X1,f(X0,f(X0,X1))),X1),X4)),f(f(X1,f(X0,f(X0,X1))),X1)) = X4) )),
+  inference(forward_demodulation,[],[f340,f8])).
+fof(f432,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(f(X0,X1),f(X2,f(X1,f(X0,X3)))),f(X0,X2)) = f(f(f(X0,f(f(f(f(X0,X1),f(X2,f(X1,f(X0,X3)))),f(X0,X2)),X2)),X0),f(f(X2,f(X0,f(X0,X2))),X2))) )),
+  inference(superposition,[],[f412,f140])).
+fof(f906,plain,(
+  ( ! [X2,X0,X1] : (f(f(f(X0,X1),f(X0,f(X1,f(X0,X2)))),f(X0,X0)) = f(f(f(X0,X0),X0),f(f(X0,f(X0,f(X0,X0))),X0))) )),
+  inference(superposition,[],[f432,f8])).
+fof(f1036,plain,(
+  ( ! [X0] : (f(f(f(X0,f(X0,f(X0,X0))),X0),f(f(f(X0,X0),X0),f(f(X0,f(X0,f(X0,X0))),X0))) = X0) )),
+  inference(superposition,[],[f140,f906])).
+fof(f1039,plain,(
+  ( ! [X0] : (f(f(f(f(X0,X0),X0),f(f(X0,f(X0,f(X0,X0))),X0)),X0) = X0) )),
+  inference(superposition,[],[f8,f906])).
+fof(f1235,plain,(
+  ( ! [X2,X0,X1] : (f(f(f(f(f(f(X1,f(X0,f(X0,X1))),X1),f(f(f(X0,X0),X0),f(f(X0,f(X0,f(X0,X0))),X0))),f(X2,X0)),f(f(f(X1,f(X0,f(X0,X1))),X1),X2)),f(f(X1,f(X0,f(X0,X1))),X1)) = X2) )),
+  inference(superposition,[],[f248,f1039])).
+fof(f3674,plain,(
+  ( ! [X2,X3,X0,X1,X4] : (f(f(f(f(f(f(f(X1,X2),f(X0,f(X2,f(X1,X3)))),f(X1,X0)),X4),f(X1,f(X4,X0))),X0),f(f(f(X1,X2),f(X0,f(X2,f(X1,X3)))),f(X1,X0))) = X1) )),
+  inference(superposition,[],[f15,f8])).
+fof(f3735,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(f(f(f(f(f(X1,X2),f(X0,f(X2,f(X1,X3)))),f(X1,X0)),f(f(f(X0,X0),X0),f(f(X0,f(X0,f(X0,X0))),X0))),f(X1,X0)),X0),f(f(f(X1,X2),f(X0,f(X2,f(X1,X3)))),f(X1,X0))) = X1) )),
+  inference(superposition,[],[f3674,f1039])).
+fof(f4489,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(f(X0,X2),f(X1,f(X2,f(X0,X3)))),f(X0,X1)) = f(f(f(f(f(f(X1,f(X0,f(X0,X1))),X1),f(f(f(X0,X0),X0),f(f(X0,f(X0,f(X0,X0))),X0))),f(f(f(f(X0,X2),f(X1,f(X2,f(X0,X3)))),f(X0,X1)),X0)),X0),f(f(X1,f(X0,f(X0,X1))),X1))) )),
+  inference(superposition,[],[f1235,f140])).
+fof(f4498,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(f(X0,X2),f(X1,f(X2,f(X0,X3)))),f(X0,X1)) = f(f(f(f(f(f(X1,f(X0,f(X0,X1))),X1),f(f(f(X0,X0),X0),f(f(X0,f(X0,f(X0,X0))),X0))),X1),X0),f(f(X1,f(X0,f(X0,X1))),X1))) )),
+  inference(forward_demodulation,[],[f4489,f8])).
+fof(f4916,plain,(
+  ( ! [X2,X3,X0,X1,X4,X5] : (f(f(f(X0,X1),f(X2,f(X1,f(X0,X3)))),f(X0,X2)) = f(f(f(X0,X4),f(X2,f(X4,f(X0,X5)))),f(X0,X2))) )),
+  inference(superposition,[],[f4498,f4498])).
+fof(f4963,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(f(X0,X1),f(f(X2,X0),f(X1,f(X0,X3)))),f(X0,f(X2,X0))) = X2) )),
+  inference(superposition,[],[f3735,f4498])).
+fof(f7002,plain,(
+  ( ! [X2,X3,X0,X1,X6,X7,X4,X5] : (f(f(X0,X5),f(X2,f(X5,f(X0,X6)))) = f(f(f(f(X0,X2),X4),f(f(f(f(X0,X1),f(X2,f(X1,f(X0,X3)))),f(X0,X2)),f(X4,f(f(X0,X2),X7)))),f(f(X0,X2),f(f(f(X0,X1),f(X2,f(X1,f(X0,X3)))),f(X0,X2))))) )),
+  inference(superposition,[],[f4963,f4916])).
+fof(f7006,plain,(
+  ( ! [X2,X3,X0,X1,X6,X5] : (f(f(X0,X1),f(X2,f(X1,f(X0,X3)))) = f(f(X0,X5),f(X2,f(X5,f(X0,X6))))) )),
+  inference(forward_demodulation,[],[f7002,f4963])).
+fof(f7225,plain,(
+  ( ! [X2,X3,X0,X1,X6,X4,X5] : (f(f(X1,X2),f(X3,f(X2,f(X1,X4)))) = f(f(X1,f(f(X1,X5),f(f(X0,X1),f(X5,f(X1,X6))))),f(X3,X0))) )),
+  inference(superposition,[],[f7006,f4963])).
+fof(f7247,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(f(f(X0,X0),X0),f(f(X0,f(X0,f(X0,X0))),X0)),f(X2,X0)) = f(f(f(f(X0,X0),X0),X1),f(X2,f(X1,f(f(f(X0,X0),X0),X3))))) )),
+  inference(superposition,[],[f7006,f1036])).
+fof(f7259,plain,(
+  ( ! [X2,X3,X0,X1,X4,X5] : (f(f(X0,X2),X0) = f(f(X0,X1),f(f(f(X2,X3),f(f(X0,X2),f(X3,f(X2,X4)))),f(X1,f(X0,X5))))) )),
+  inference(superposition,[],[f7006,f4963])).
+fof(f7282,plain,(
+  ( ! [X2,X3,X0,X1,X6,X4,X5] : (f(f(X4,X5),f(f(X0,X4),f(X5,f(X4,X6)))) = f(f(X4,X2),f(f(X0,X1),f(X2,f(X1,f(X0,X3)))))) )),
+  inference(superposition,[],[f7006,f7006])).
+fof(f7522,plain,(
+  ( ! [X2,X3,X0,X1,X4] : (f(f(f(X4,X2),f(f(X0,X1),f(X2,f(X1,f(X0,X3))))),f(X4,f(X0,X4))) = X0) )),
+  inference(superposition,[],[f4963,f7006])).
+fof(f7775,plain,(
+  ( ! [X0,X1] : (f(X0,f(X0,f(X0,X0))) = f(f(f(X1,f(f(X0,f(X0,f(X0,X0))),X0)),f(f(f(X0,f(X0,f(X0,X0))),f(f(X0,X0),X0)),X0)),f(X1,f(f(X0,f(X0,f(X0,X0))),X1)))) )),
+  inference(superposition,[],[f7522,f1036])).
+fof(f8363,plain,(
+  ( ! [X2,X3,X0,X1,X4] : (f(f(X1,X2),f(f(f(f(X0,X0),X0),X1),f(X2,f(X1,X3)))) = f(f(X1,X4),f(f(f(f(X0,X0),X0),f(f(X0,f(X0,f(X0,X0))),X0)),f(X4,X0)))) )),
+  inference(superposition,[],[f7282,f1036])).
+fof(f8377,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(X1,f(f(X0,f(X0,f(X0,X0))),X0)),f(f(f(X0,f(X0,f(X0,X0))),f(f(X0,X0),X0)),X0)) = f(f(X1,X2),f(f(f(X0,f(X0,f(X0,X0))),X1),f(X2,f(X1,X3))))) )),
+  inference(superposition,[],[f7282,f1036])).
+fof(f8492,plain,(
+  ( ! [X2,X3,X0,X1,X4,X5] : (f(f(f(X4,f(X2,X5)),f(f(X0,X1),f(f(X2,X0),f(X1,f(X0,X3))))),f(X4,f(X0,X4))) = X0) )),
+  inference(superposition,[],[f4963,f7282])).
+fof(f8640,plain,(
+  ( ! [X2,X3,X0,X1,X6,X4,X5] : (f(f(f(X5,f(X2,X6)),f(f(X0,X1),f(f(X2,X3),f(X1,f(X3,f(X2,X4)))))),f(X5,f(X0,X5))) = X0) )),
+  inference(superposition,[],[f8492,f7282])).
+fof(f9414,plain,(
+  ( ! [X2,X3,X0,X1,X4] : (f(f(f(X0,X1),f(f(X2,X3),f(X1,f(X0,X4)))),f(X0,f(X2,X0))) = X2) )),
+  inference(superposition,[],[f8640,f7225])).
+fof(f9519,plain,(
+  ( ! [X3,X0,X1] : (f(X1,X3) = f(f(f(X0,X1),X0),f(X0,f(f(X1,X3),X0)))) )),
+  inference(superposition,[],[f9414,f7259])).
+fof(f9566,plain,(
+  ( ! [X2,X3,X0,X1,X4,X5] : (f(f(f(X1,f(X2,f(X2,X1))),X1),f(f(f(X2,f(f(X2,X3),f(f(X0,X4),f(X3,f(X2,X5))))),f(X1,X0)),f(X2,X1))) = X2) )),
+  inference(superposition,[],[f140,f9414])).
+fof(f9622,plain,(
+  ( ! [X0,X1] : (f(X0,X1) = f(f(f(f(f(f(X0,X1),f(X0,X1)),f(X0,X1)),X0),f(f(f(X0,X1),f(X0,X1)),f(X0,X1))),f(f(X0,X1),f(X0,X1)))) )),
+  inference(superposition,[],[f9519,f9519])).
+fof(f9626,plain,(
+  ( ! [X2,X3,X0,X1] : (f(X0,X1) = f(f(f(X2,f(f(f(X0,X1),X0),X3)),f(f(f(X0,X1),f(X0,X1)),f(X0,X1))),f(X2,f(f(X0,X1),X2)))) )),
+  inference(superposition,[],[f8492,f9519])).
+fof(f9645,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(f(f(X2,f(f(X2,X0),X2)),f(X3,f(X0,X1))),f(X2,X3)),X2) = X3) )),
+  inference(superposition,[],[f8,f9519])).
+fof(f9675,plain,(
+  ( ! [X2,X3,X0,X1,X4] : (f(f(f(X2,f(f(X2,X0),X2)),f(f(X3,X4),f(X0,X1))),f(X2,f(X3,X2))) = X3) )),
+  inference(superposition,[],[f9414,f9519])).
+fof(f9801,plain,(
+  ( ! [X2,X3,X0,X1] : (f(X2,X3) = f(f(f(X1,f(f(X1,X2),X1)),X0),f(X1,f(f(X2,X3),X1)))) )),
+  inference(superposition,[],[f9675,f9414])).
+fof(f9828,plain,(
+  ( ! [X0] : (f(f(f(X0,f(f(X0,X0),X0)),f(f(X0,f(f(X0,X0),X0)),X0)),f(X0,f(f(X0,X0),X0))) = X0) )),
+  inference(superposition,[],[f9645,f9675])).
+fof(f9865,plain,(
+  ( ! [X0] : (f(X0,X0) = X0) )),
+  inference(backward_demodulation,[],[f9828,f9801])).
+fof(f10581,plain,(
+  ( ! [X0,X1] : (f(X0,X1) = f(f(f(f(f(X0,X1),f(X0,X1)),X0),f(f(X0,X1),f(X0,X1))),f(X0,X1))) )),
+  inference(backward_demodulation,[],[f9622,f9865])).
+fof(f10583,plain,(
+  ( ! [X2,X3,X0,X1] : (f(X0,X1) = f(f(f(X2,f(f(f(X0,X1),X0),X3)),f(f(X0,X1),f(X0,X1))),f(X2,f(f(X0,X1),X2)))) )),
+  inference(backward_demodulation,[],[f9626,f9865])).
+fof(f11985,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(f(X0,X0),X1),f(X2,f(X1,f(f(X0,X0),X3)))) = f(f(f(X0,X0),f(f(X0,f(X0,X0)),X0)),f(X2,X0))) )),
+  inference(backward_demodulation,[],[f7247,f9865])).
+fof(f12034,plain,(
+  ( ! [X0,X1] : (f(X0,f(X0,X0)) = f(f(f(X1,f(f(X0,f(X0,X0)),X0)),f(f(f(X0,f(X0,X0)),f(X0,X0)),X0)),f(X1,f(f(X0,f(X0,X0)),X1)))) )),
+  inference(backward_demodulation,[],[f7775,f9865])).
+fof(f12075,plain,(
+  ( ! [X2,X3,X0,X1,X4] : (f(f(X1,X2),f(f(f(X0,X0),X1),f(X2,f(X1,X3)))) = f(f(X1,X4),f(f(f(X0,X0),f(f(X0,f(X0,X0)),X0)),f(X4,X0)))) )),
+  inference(backward_demodulation,[],[f8363,f9865])).
+fof(f12076,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(X1,f(f(X0,f(X0,X0)),X0)),f(f(f(X0,f(X0,X0)),f(X0,X0)),X0)) = f(f(X1,X2),f(f(f(X0,f(X0,X0)),X1),f(X2,f(X1,X3))))) )),
+  inference(backward_demodulation,[],[f8377,f9865])).
+fof(f12164,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(X1,X2),f(f(f(X0,X0),X1),f(X2,f(X1,X3)))) = f(f(X1,f(f(X0,X0),X0)),f(f(f(X0,X0),X0),X0))) )),
+  inference(forward_demodulation,[],[f12076,f9865])).
+fof(f12165,plain,(
+  ( ! [X2,X3,X0,X1,X4] : (f(f(X1,X2),f(f(X0,X1),f(X2,f(X1,X3)))) = f(f(X1,X4),f(f(X0,f(f(X0,X0),X0)),f(X4,X0)))) )),
+  inference(forward_demodulation,[],[f12075,f9865])).
+fof(f12179,plain,(
+  ( ! [X0,X1] : (f(X0,X0) = f(f(f(X1,f(f(X0,X0),X0)),f(f(f(X0,X0),X0),X0)),f(X1,f(f(X0,X0),X1)))) )),
+  inference(forward_demodulation,[],[f12034,f9865])).
+fof(f12188,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(X0,X1),f(X2,f(X1,f(X0,X3)))) = f(f(X0,f(f(X0,X0),X0)),f(X2,X0))) )),
+  inference(forward_demodulation,[],[f11985,f9865])).
+fof(f12216,plain,(
+  ( ! [X2,X3,X0,X1] : (f(X0,X1) = f(f(f(X2,f(f(f(X0,X1),X0),X3)),f(X0,X1)),f(X2,f(f(X0,X1),X2)))) )),
+  inference(forward_demodulation,[],[f10583,f9865])).
+fof(f12218,plain,(
+  ( ! [X0,X1] : (f(X0,X1) = f(f(f(f(X0,X1),X0),f(X0,X1)),f(X0,X1))) )),
+  inference(forward_demodulation,[],[f10581,f9865])).
+fof(f12251,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(X1,X2),f(f(X0,X1),f(X2,f(X1,X3)))) = f(f(X1,f(X0,X0)),f(f(X0,X0),X0))) )),
+  inference(forward_demodulation,[],[f12164,f9865])).
+fof(f12252,plain,(
+  ( ! [X2,X3,X0,X1,X4] : (f(f(X1,X2),f(f(X0,X1),f(X2,f(X1,X3)))) = f(f(X1,X4),f(f(X0,f(X0,X0)),f(X4,X0)))) )),
+  inference(forward_demodulation,[],[f12165,f9865])).
+fof(f12264,plain,(
+  ( ! [X0,X1] : (f(f(f(X1,f(X0,X0)),f(f(X0,X0),X0)),f(X1,f(X0,X1))) = X0) )),
+  inference(forward_demodulation,[],[f12179,f9865])).
+fof(f12271,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(X0,X1),f(X2,f(X1,f(X0,X3)))) = f(f(X0,f(X0,X0)),f(X2,X0))) )),
+  inference(forward_demodulation,[],[f12188,f9865])).
+fof(f12321,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(X1,X2),f(f(X0,X1),f(X2,f(X1,X3)))) = f(f(X1,X0),f(X0,X0))) )),
+  inference(forward_demodulation,[],[f12251,f9865])).
+fof(f12322,plain,(
+  ( ! [X2,X3,X0,X1,X4] : (f(f(X1,X2),f(f(X0,X1),f(X2,f(X1,X3)))) = f(f(X1,X4),f(f(X0,X0),f(X4,X0)))) )),
+  inference(forward_demodulation,[],[f12252,f9865])).
+fof(f12333,plain,(
+  ( ! [X0,X1] : (f(f(f(X1,X0),f(X0,X0)),f(X1,f(X0,X1))) = X0) )),
+  inference(forward_demodulation,[],[f12264,f9865])).
+fof(f12339,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(X0,X1),f(X2,f(X1,f(X0,X3)))) = f(f(X0,X0),f(X2,X0))) )),
+  inference(forward_demodulation,[],[f12271,f9865])).
+fof(f12380,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(X1,X2),f(f(X0,X1),f(X2,f(X1,X3)))) = f(f(X1,X0),X0)) )),
+  inference(forward_demodulation,[],[f12321,f9865])).
+fof(f12381,plain,(
+  ( ! [X2,X3,X0,X1,X4] : (f(f(X1,X2),f(f(X0,X1),f(X2,f(X1,X3)))) = f(f(X1,X4),f(X0,f(X4,X0)))) )),
+  inference(forward_demodulation,[],[f12322,f9865])).
+fof(f12389,plain,(
+  ( ! [X0,X1] : (f(f(f(X1,X0),X0),f(X1,f(X0,X1))) = X0) )),
+  inference(forward_demodulation,[],[f12333,f9865])).
+fof(f12395,plain,(
+  ( ! [X2,X3,X0,X1] : (f(f(X0,X1),f(X2,f(X1,f(X0,X3)))) = f(X0,f(X2,X0))) )),
+  inference(forward_demodulation,[],[f12339,f9865])).
+fof(f14061,plain,(
+  ( ! [X0,X1] : (f(f(X1,X0),X0) = f(X1,f(f(X0,X1),X1))) )),
+  inference(backward_demodulation,[],[f12380,f12395])).
+fof(f14062,plain,(
+  ( ! [X0,X1,X4] : (f(f(X1,X4),f(X0,f(X4,X0))) = f(X1,f(f(X0,X1),X1))) )),
+  inference(backward_demodulation,[],[f12381,f12395])).
+fof(f14089,plain,(
+  ( ! [X2,X0,X1,X4] : (f(f(f(X1,f(X2,f(X2,X1))),X1),f(f(f(X2,f(X2,f(f(X0,X4),X2))),f(X1,X0)),f(X2,X1))) = X2) )),
+  inference(backward_demodulation,[],[f9566,f12395])).
+fof(f14169,plain,(
+  ( ! [X0,X1] : (f(f(X1,X0),f(f(X1,f(X1,X0)),f(X1,X0))) = X0) )),
+  inference(backward_demodulation,[],[f12389,f14062])).
+fof(f14170,plain,(
+  ( ! [X2,X3,X0,X1] : (f(X0,X1) = f(f(X2,f(f(f(X0,X1),X0),X3)),f(f(X2,f(X2,f(f(f(X0,X1),X0),X3))),f(X2,f(f(f(X0,X1),X0),X3))))) )),
+  inference(backward_demodulation,[],[f12216,f14062])).
+fof(f14175,plain,(
+  ( ! [X0,X1] : (f(X0,X1) = f(f(f(X0,X1),X0),f(f(f(X0,X1),f(f(X0,X1),X0)),f(f(X0,X1),X0)))) )),
+  inference(backward_demodulation,[],[f12218,f14061])).
+fof(f14419,plain,(
+  ( ! [X3,X0,X1] : (f(X0,X1) = f(f(f(X0,X1),X0),X3)) )),
+  inference(backward_demodulation,[],[f14170,f14169])).
+fof(f14421,plain,(
+  ( ! [X0,X1] : (f(X0,X1) = X0) )),
+  inference(forward_demodulation,[],[f14175,f14169])).
+fof(f14672,plain,(
+  ( ! [X2,X1] : (f(X1,f(X2,f(X2,X1))) = X2) )),
+  inference(backward_demodulation,[],[f14089,f14419])).
+fof(f15366,plain,(
+  ( ! [X2,X1] : (X1 = X2) )),
+  inference(forward_demodulation,[],[f14672,f14421])).
+fof(f16115,plain,(
+  ( ! [X0] : (sK0 != X0) ) | spl2_1),
+  inference(superposition,[],[f12,f15366])).
+fof(f16118,plain,(
+  $false | spl2_1),
+  inference(equality_resolution,[],[f16115])).
+fof(f16119,plain,(
+  spl2_1),
+  inference(avatar_contradiction_clause,[],[f16118])).
+cnf(s1, plain, ~spl2_1, inference(sat_conversion,[],[f13])).
+cnf(s2, plain, spl2_1, inference(sat_conversion,[],[f16119])).
+cnf(s3, plain, $false, inference(rat,[],[s1,s2])).
+fof(f16120,plain,(
+  $false),
+  inference(avatar_sat_refutation,[],[s3])).
+% SZS output end Proof for p
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation
+% Time elapsed: 2.026 s
+% Peak memory usage: 60 MB
+% Instructions burned: 12898 (million)
+% ------------------------------
+% ------------------------------
+% Success in time 25.696 s
