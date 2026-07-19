@@ -2,6 +2,11 @@
 
 First-draft prose for the two most settled sections. Register is academic; math in
 inline LaTeX-ready notation. Edit freely — this is a page to react to, not a final.
+
+> **STALE (2026-07-17 pivot):** the "an answer is a Lean proof / the space of Lean proofs" framing
+> below is superseded — judging is multi-channel (TRIVIAL = Lean proof; AUSTIN = Vampire-certified
+> presentation `E`). No Austin model is an arithmetic formula (descent theorem). Rewrite the
+> judging paragraphs against `TASK_AND_JUDGING.md` before using this prose.
 Placeholders in `\cref{}` style point at figures/sections to be numbered later.
 
 ---

@@ -1,5 +1,9 @@
 # paper/ — Austin-law benchmark
 
+> **Judging pivot (2026-07-17):** answers are "machine-checked" but NOT Lean-only. TRIVIAL side =
+> Lean proof; AUSTIN/construction side = solver proposes a presentation `E`, **Vampire** certifies.
+> Canonical definition + current state: `TASK_AND_JUDGING.md` (then `PAPER_HANDOFF.md`).
+
 A graded, machine-checked corpus of **Austin laws**: magma laws `x = T` with no
 nontrivial finite model but an infinite one. They are the exact locus of
 undecidability for equational implication into `Eq2` (`x = y`), and the only class

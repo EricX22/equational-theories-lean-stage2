@@ -107,15 +107,28 @@ def attempt(law, lean_dir, rounds, api_key, model, effort, timeout):
 
 
 def load_trivial(pattern):
-    laws = []
+    """Laws from a corpus file (filtered to TRIVIAL) OR from a pre-filtered/pre-ranked list.
+
+    A pre-ranked file (e.g. trivial_easy20.jsonl / trivial_easy_ranked.jsonl) has rows with just
+    `law` (+ `waypoints`) and no status/gold — take those as-is and PRESERVE FILE ORDER, otherwise
+    the waypoint ranking is silently replaced by a ◇-count sort and `--n` picks the wrong laws.
+    """
+    laws, preranked = [], False
     for fn in glob.glob(pattern):
         for line in open(fn, encoding="utf-8"):
             if not line.strip():
                 continue
             r = json.loads(line)
-            if r.get("status") == "TRIVIAL" or r.get("gold") == "trivial":
+            if "waypoints" in r or ("status" not in r and "gold" not in r):
+                preranked = True
                 laws.append(r["law"])
-    return sorted(set(laws), key=lambda s: s.count("◇"))     # shortest (easiest) first
+            elif r.get("status") == "TRIVIAL" or r.get("gold") == "trivial":
+                laws.append(r["law"])
+    seen, out = set(), []
+    for lw in laws:                                          # dedupe, order-preserving
+        if lw not in seen:
+            seen.add(lw); out.append(lw)
+    return out if preranked else sorted(out, key=lambda s: s.count("◇"))
 
 
 def dry_run():

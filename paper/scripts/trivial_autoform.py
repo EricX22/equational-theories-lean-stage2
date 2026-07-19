@@ -174,7 +174,11 @@ def assemble(law, chain):
     lines = [f"  calc {_render(expanded[0])} = {_render(expanded[1])} := {justs[0]}"]
     for i in range(1, len(justs)):
         lines.append(f"    _ = {_render(expanded[i+1])} := {justs[i]}")
-    body = "theorem solution : Problem.TrivialGoal := by\n  intro M op h a b\n" + "\n".join(lines) + "\n"
+    # maxRecDepth: assembled congrArg chains elaborate deep; without this the judge can reject a
+    # VALID proof for a technical reason (the ~28-discarded-certs trap). See the maxRecDepth memory.
+    body = ("set_option maxRecDepth 8000 in\n"
+            "theorem solution : Problem.TrivialGoal := by\n  intro M op h a b\n"
+            + "\n".join(lines) + "\n")
     return body, None
 
 

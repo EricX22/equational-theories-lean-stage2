@@ -1,5 +1,11 @@
 # HANDOFF — Austin-law benchmark
 
+> **Read `PAPER_HANDOFF.md` first — it is the current resume file; this one is older (2026-07-09).**
+> **Judging pivot (2026-07-17):** the construction side is NOT Lean-verified — no Lean path exists
+> (confluence `sorry`) and no Austin model is arithmetic (descent theorem). It is certified by
+> **Vampire** (solver proposes a presentation `E`; `E⊢law` + `E∪{a≠b}` saturates). Trivial side is
+> Lean. Canonical: `TASK_AND_JUDGING.md`.
+
 Everything a new reader (or a future us) needs: the thesis, what is *proved* vs
 merely *observed*, the code that is live, the numbers as of 2026-07-09, the open
 question that blocks the paper, and what to do next in priority order.

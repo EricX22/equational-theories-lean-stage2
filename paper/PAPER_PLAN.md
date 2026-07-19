@@ -1,5 +1,11 @@
 # PAPER_PLAN — benchmark design
 
+> **STALE framing (2026-07-17 pivot):** judging is MULTI-CHANNEL, not Lean-only. TRIVIAL = Lean
+> proof; AUSTIN/construction = solver proposes a presentation `E`, **Vampire** certifies (`E⊢law`
+> + `E∪{a≠b}` saturates). No Lean construction path exists yet (confluence `sorry`) and no Austin
+> model is arithmetic (descent theorem), so "Lean-checkable is findable / self-certifying via Lean"
+> claims below are outdated. Canonical: `TASK_AND_JUDGING.md`.
+
 Supersedes the pivot plan in `attic/`. Read `HANDOFF.md` for state, `HISTORY.md` for
 the wrong turns. This file answers one question: **what must an instance do, and what
 must we build, for the measurement to mean what the abstract will say it means.**

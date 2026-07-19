@@ -95,6 +95,17 @@ Distinct Austin classes FIRST appearing at each order:
 - order 8: +67  (cum 195)
 Every order adds substantial new classes; nothing re-collapses onto low-order seeds =>
 extension sustains yield, higher orders keep minting fresh (contamination-free) instances.
+
+REPORT AS DENSITY, not raw counts (2026-07-18). Raw Austin dips at order 8 only because we
+SCREENED fewer order-8 laws (4,138 vs 4,803 at order 7) — a sampling-volume artifact, not a
+decline. Normalize to Austin laws per 1,000 screened, over the ALPS-generated orders 6-8:
+- order 6:  29 austin / 1,418 screened =  20.5 / 1k
+- order 7: 117 austin / 4,803 screened =  24.4 / 1k
+- order 8: 105 austin / 4,138 screened =  25.4 / 1k
+Density RISES monotonically 6->7->8 (the clean claim). New-class density is ~flat
+(16.9/19.4/16.2 per 1k) — supports "no saturation / novelty persists", but is NOT monotonic, so
+don't frame it as increasing. EXCLUDE order 5 from the curve: those laws are given by ETP's
+enumeration (curated, not a uniform ALPS draw; anomalous 95.7/1k). Order = # of ◇ symbols.
 (Refinement: normalize by generation volume -> "classes per thousand surviving extensions"
 for a rate; raw counts already show no saturation.)
 

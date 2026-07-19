@@ -1,5 +1,11 @@
 # OUTLINE — the benchmark paper (writing skeleton)
 
+> **STALE framing (2026-07-17 pivot):** "Lean as the single arbiter / an answer is a Lean proof"
+> throughout this file is superseded. Judging is now MULTI-CHANNEL — TRIVIAL side = Lean proof,
+> AUSTIN/construction side = solver proposes a presentation `E` and **Vampire** certifies it (no
+> Lean construction path exists yet; no Austin model is arithmetic — descent theorem). Canonical:
+> `TASK_AND_JUDGING.md`. Read section content for structure, not for the judging specifics.
+
 Section titles in standard-AAAI shape (Intro / Related / Method / Experiments /
 Discussion / Conclusion). The benchmark design lives as subsections of the "Method"
 section (§3), which is the slot a standard reader parses as the contribution. Each bullet
