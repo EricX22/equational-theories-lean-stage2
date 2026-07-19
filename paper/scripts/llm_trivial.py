@@ -113,17 +113,25 @@ def load_trivial(pattern):
     `law` (+ `waypoints`) and no status/gold — take those as-is and PRESERVE FILE ORDER, otherwise
     the waypoint ranking is silently replaced by a ◇-count sort and `--n` picks the wrong laws.
     """
-    laws, preranked = [], False
+    recs = []
     for fn in glob.glob(pattern):
         for line in open(fn, encoding="utf-8"):
-            if not line.strip():
-                continue
-            r = json.loads(line)
-            if "waypoints" in r or ("status" not in r and "gold" not in r):
-                preranked = True
-                laws.append(r["law"])
-            elif r.get("status") == "TRIVIAL" or r.get("gold") == "trivial":
-                laws.append(r["law"])
+            if line.strip():
+                recs.append(json.loads(line))
+
+    # A harvest file carries ground-truth chains for only SOME rows (e.g. 63 of 400). Testing the
+    # rest is unfair — we cannot exhibit a passing submission for them. If any row has a chain,
+    # this is a CERTIFIED set: keep only the certified rows.
+    if any(r.get("chain") for r in recs):
+        return [r["law"] for r in recs if r.get("chain")]
+
+    laws, preranked = [], False
+    for r in recs:
+        if "waypoints" in r or ("status" not in r and "gold" not in r):
+            preranked = True
+            laws.append(r["law"])
+        elif r.get("status") == "TRIVIAL" or r.get("gold") == "trivial":
+            laws.append(r["law"])
     seen, out = set(), []
     for lw in laws:                                          # dedupe, order-preserving
         if lw not in seen:
