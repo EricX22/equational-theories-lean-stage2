@@ -1,0 +1,144 @@
+% ============================================================================
+% §4 EXPERIMENTS — v2 draft (2026-07-19)
+% Revises the existing §4.1–4.2 and drafts §4.3–4.4. Key changes:
+%   (1) hard tier redefined as the residual of the FULL portfolio sweep — the
+%       partial sweep found 44 trivial + 4 completion-only Austin among the
+%       first 1,789 of 4,141, so "not one model" / "Twee produces no model of
+%       its own" are now false and are rewritten as two-sided contamination
+%       the sweep absorbs;
+%   (2) the method-bound claim framed as STABILITY (more compute and more
+%       provers shed contamination but do not dent the residual), not as the
+%       circular "portfolio's residual resists the portfolio";
+%   (3) §4.3 written protocol-first so it stands regardless of how the final
+%       reasoner run lands; results paragraph is Branch B with [FILL] slots;
+%   (4) §4.4 case study drafted (one order-5 case up to duality, positioned
+%       as a pipeline demonstration, never as beating the baseline).
+% All [FILL] values freeze when the sweep and the last LLM run complete.
+% ============================================================================
+
+\section{Experiments}
+
+\subsection{Baseline Portfolio}
+
+We establish the difficulty of the benchmark against a strong portfolio of
+automated off-the-shelf provers. Because the task is two-sided, the portfolio
+must be as well: proving a law trivial requires proof search, while finding a
+nontrivial model requires a saturation or completion that terminates. The
+portfolio spans eight configurations — Vampire~5.0.1 in five modes (proof
+search and saturation, under both Knuth-Bendix and lexicographic path
+orderings) \citep{kovacs2013first}, the E prover in a proof and a saturation
+mode \citep{schulz2019faster}, and Twee~2.6.1, an implementation of unfailing
+completion built for equational reasoning \citep{smallbone2021twee} — each run
+over a ladder of per-prover budgets of 30, 60, 120, 300, and 600 seconds. A
+law counts as resolved as soon as any configuration returns a verdict, and a
+claimed model or triviality proof is one the tool itself reports rather than
+one we infer. Provers, versions, and exact flags are pinned in a released
+container image. We deliberately omit finite-model finders such as Mace4 and
+Paradox: admissibility certifies that no nontrivial finite model exists, so
+these tools cannot succeed by theorem. Saturation and completion are the
+automated methods able to attempt infinite-model construction at all.
+
+The \emph{hard tier} is the set of admissible laws that no configuration of
+this portfolio resolves. The screening pass of the previous section runs a
+single prover at the shortest budget; the full portfolio then sweeps its
+residual, so the tier is defined against every prover, ordering, and budget we
+have, not against any one tool.
+
+\subsection{The Method-Bound Frontier}
+
+The screening prover resolves the easy mass of the pool cheaply, building all
+262 Austin models in a median of 0.1 seconds each. Sweeping the 4,141-law
+residual with the full portfolio recovers a thin layer the short pass missed:
+[FILL: final counts — at 43\% of the sweep, 44 laws prove trivial and 4 yield
+completion-only models, about 3\% of laws swept]. This is contamination the
+stronger portfolio sheds, on both sides of the task, and the two-sided design
+absorbs it — every such law simply moves to its proper tier. What remains
+after the sweep, [FILL: final residual count] laws, is the hard tier.
+
+Its difficulty is bound by method rather than budget, and Table~\ref{tab:curve}
+shows the evidence. If compute were the limit, resolution would climb as the
+budget grows. Instead, on a 120-law sample re-attacked with all eight
+configurations, three laws resolve at the 30-second rung — all trivial — and
+none at 60, 120, 300, or 600 seconds, roughly $170\times$ the per-law time of
+the screening pass. A separate retry of 294 unresolved laws at ten times the
+screening budget converts 3.7\%, all to trivial, and none to a model.
+Resolutions arrive cheaply or never: models are found in fractions of a
+second when completion terminates, and no additional budget makes it
+terminate. The residual is stable under more time and more provers; what it
+resists is the methods themselves.
+
+Nor is the difficulty one prover's blind spot. Vampire and E search by
+superposition, deriving consequences until a contradiction or closure; Twee
+runs unfailing completion, orienting the law into rewrite rules. The two
+paradigms explore the space differently enough that each resolves instances
+the other diverges on — Twee completes in seconds an order-five law whose
+saturation runs Vampire to hundreds of clauses, and the sweep's [FILL: 4]
+recovered models are completion-only. Yet the paradigms' reach ends in the
+same place: past the shed contamination, neither constructs a model the other
+misses, and the residual resists both. The hard frontier is a property of the
+laws, not of a tool.
+
+\subsection{LLM Baseline}
+
+Current language models enter ALPS with the same standing as the portfolio:
+nothing in the task references how an answer is produced, only that it
+certifies. We evaluate them under a protocol designed so that a failure is
+attributable and a zero is meaningful. Every model receives identical inputs
+— the law, the task statement, and a fixed answer format — and interacts with
+the judge as a verification oracle over a fixed number of feedback rounds.
+On the trivial side we remove the formalization burden entirely: the model
+emits only a chain of terms, each step one application of the law, and the
+harness matches every step, fills short gaps, and assembles the Lean proof
+itself, so the test is finding the derivation rather than writing Lean.
+Support is graded: runs range from the bare law to full reveal, where the
+prover-derived waypoint lemmas of the reference refutation are included in
+the prompt. Saturation provers are withheld from the models — with them, a
+model would simply re-run the baseline at larger budget — while the judge and
+the assembler are exactly what any solver built on ALPS would use.
+
+Instance selection is the part we control most carefully. From the trivial
+tier we isolate a certified-easy set: laws whose complete collapse chains a
+blind bidirectional search finds in under five seconds, most only three
+applications long. Each such law carries a privately held, machine-found
+solution, and one of them, driven through the assembler and the Lean kernel,
+serves as an end-to-end positive control. A zero on this set cannot be
+blamed on the instances: the answers exist, are short, and are found by
+uninformed search almost instantly.
+
+[FILL — results paragraph, Branch B shape, pending the frontier-reasoner run:]
+Across [N] models — [list: GPT-4.1, o4-mini, o3, Claude Opus, ...] — no run
+produced a verified solve: [0/63] on the certified-easy set at full support
+and feedback, and 0 everywhere above it. The failures are not near-misses.
+Roughly two-thirds of rejected chains contain steps that are not instances of
+the law at all — asserted idempotence, substitution inside ground terms — and
+the remainder fail the answer format itself despite per-round corrective
+feedback. Instances whose three-step solutions a blind search finds in
+seconds defeat models given the law, the rules, the waypoints, and three
+rounds of feedback. The same asymmetry the portfolio exhibits thus reappears
+one level up: the deductive side of ALPS falls to uninformed search, while
+nothing we can run — prover, completion, or language model — touches the
+construction side.
+
+\subsection{Case Study: an Order-5 Law Left Open by ETP}
+
+% Positioning guardrails: resolved by the AUTOMATED pipeline; NOT hard-tier;
+% "an order-5 law and its dual" (ONE case up to duality), never "two problems".
+
+The Equational Theories Project's order-five chapter lists the laws it proved
+to admit only trivial finite models but whose infinite-model existence it
+left unresolved. Two of them — law 12857,
+$x = y \op ((x \op (y \op (z \op z))) \op y)$, and its mirror image 33436 —
+sit in our pool, and our pipeline settles them: one open case, up to duality.
+Both are confirmed Austin by two independent routes, a Vampire saturation and
+a Twee completion, and the extracted model is exercised directly — every rule
+of the 27-rule system fires, and $x = y$ is refuted in it. The case is a
+demonstration that the pipeline produces mathematics on literature-open
+questions, not a claim against the baseline: the portfolio itself resolves
+these laws. What the example also shows is why the construction side is hard
+to formalize — the completed system is not orientable into a plain rewrite
+system, which is precisely the ground-confluence obstacle the verification
+section defers to companion work.
+
+% [Optional closer, if space allows: walk 3–4 rules of the 12857 model as a
+% worked example of what an Austin answer looks like — the strongest concrete
+% image the paper can leave the reader with.]

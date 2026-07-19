@@ -40,27 +40,64 @@ import answer_spec as asp   # problem_header(law); judge(law, side, path, lean_d
 # it real room. o3's ceiling is 100k output tokens.
 MAX_TOKENS_BY_EFFORT = {"low": 16000, "medium": 48000, "high": 100000}
 ENDPOINT = "https://openrouter.ai/api/v1/chat/completions"
+CEILING = 100000
+
+
+def _post(payload: dict, api_key: str, timeout: int) -> dict:
+    """One HTTP call with exponential backoff on 429/5xx."""
+    import urllib.error
+    body = json.dumps(payload).encode()
+    for i in range(4):
+        req = urllib.request.Request(ENDPOINT, data=body, headers={
+            "Authorization": "Bearer " + api_key, "Content-Type": "application/json"})
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return json.loads(resp.read())
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 500, 502, 503) and i < 3:
+                time.sleep(5 * (2 ** i))
+                continue
+            raise
+    raise RuntimeError("unreachable")
 
 
 def call_llm(prompt: str, api_key: str, model: str, effort: str, timeout: int = 300):
-    body = json.dumps({
-        "model": model,
-        "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": MAX_TOKENS_BY_EFFORT.get(effort, 8000),
-        "reasoning": {"effort": effort},
-    }).encode()
-    req = urllib.request.Request(ENDPOINT, data=body, headers={
-        "Authorization": "Bearer " + api_key, "Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        data = json.loads(resp.read())
-    choice = data["choices"][0]
-    content = choice["message"].get("content")
-    usage = dict(data.get("usage", {}))
-    usage["finish_reason"] = choice.get("finish_reason")
-    if content is None:
-        raise RuntimeError(f"empty content (finish_reason={usage.get('finish_reason')}, "
-                           f"usage={usage}); raise --reasoning-effort or MAX_TOKENS_BY_EFFORT")
-    return content, usage
+    """One LLM call, starvation-proofed.
+
+    The o3 starvation bug has TWO shapes: content=None, and content="" (OpenRouter
+    returns an empty string when the whole budget went to reasoning — the old check
+    missed this and the empty answer surfaced downstream as 'no JSON'). Both now count
+    as starvation. Ladder: requested cap -> the 100k ceiling at the same effort -> the
+    ceiling at effort=low (smallest trace). finish_reason and reasoning_tokens are
+    recorded in usage so a starved call is visible in the result logs.
+    """
+    tries = [(MAX_TOKENS_BY_EFFORT.get(effort, 16000), effort)]
+    if tries[0][0] < CEILING:
+        tries.append((CEILING, effort))
+    if effort != "low":
+        tries.append((CEILING, "low"))
+    last_usage = None
+    for cap, eff in tries:
+        data = _post({
+            "model": model,
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": cap,
+            "reasoning": {"effort": eff},
+        }, api_key, timeout)
+        choice = data["choices"][0]
+        content = choice["message"].get("content") or ""
+        usage = dict(data.get("usage", {}))
+        det = usage.get("completion_tokens_details") or {}
+        if isinstance(det, dict) and det.get("reasoning_tokens") is not None:
+            usage["reasoning_tokens"] = det.get("reasoning_tokens")
+        usage["finish_reason"] = choice.get("finish_reason")
+        usage["cap"] = cap
+        usage["effort"] = eff
+        if content.strip():
+            return content, usage
+        last_usage = usage
+    raise RuntimeError(f"starved after {len(tries)} tries (last usage={last_usage}); "
+                       "the model spent every budget on reasoning")
 
 
 _BLOCK = re.compile(r"```[a-zA-Z0-9]*\s*(.*?)```", re.DOTALL)
