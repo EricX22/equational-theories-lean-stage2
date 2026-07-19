@@ -85,8 +85,65 @@ def justify_step(T, vs, s, t):
     return None
 
 
+# --- gap-filling: bridge a coarse step with a few single law applications --------
+GAP_K = 3                                            # max law applications per bridged gap
+
+def _subterms(node, pos=()):
+    out = [(pos, node)]
+    if node[0] == "op":
+        out += _subterms(node[1], pos + (1,))
+        out += _subterms(node[2], pos + (2,))
+    return out
+
+def _replace(node, pos, new):
+    if not pos:
+        return new
+    if pos[0] == 1:
+        return ("op", _replace(node[1], pos[1:], new), node[2])
+    return ("op", node[1], _replace(node[2], pos[1:], new))
+
+def _reduce_neighbors(u, T):
+    """Terms one REVERSE law application from u: a subterm matching the law RHS `T` collapses
+    to its x-value. Reverse apps strictly shrink the term, so search is finite."""
+    out = []
+    for pos, sub in _subterms(u):
+        subst = {}
+        if _match(T, sub, subst) and "x" in subst:
+            nu = _replace(u, pos, subst["x"])
+            if nu != u and nu not in out:
+                out.append(nu)
+    return out
+
+def _find_path(a, b, T, k):
+    from collections import deque
+    if a == b:
+        return [a]
+    seen = {a}; q = deque([[a]])
+    while q:
+        path = q.popleft()
+        if len(path) - 1 >= k:
+            continue
+        for nb in _reduce_neighbors(path[-1], T):
+            if nb in seen:
+                continue
+            np = path + [nb]
+            if nb == b:
+                return np
+            seen.add(nb); q.append(np)
+    return None
+
+def _bridge(s, t, T, k):
+    """A path s -> ... -> t of ≤k single law applications (reductions, either direction)."""
+    p = _find_path(s, t, T, k)
+    if p:
+        return p
+    p = _find_path(t, s, T, k)
+    return p[::-1] if p else None
+
+
 def assemble(law, chain):
-    """chain = list of ◇-term strings, chain[0]='a', chain[-1]='b'. -> (lean_body, err)."""
+    """chain = list of ◇-term strings, chain[0]='a', chain[-1]='b'. Coarse steps are bridged
+    by up to GAP_K single law applications, so the model only needs waypoints. -> (lean, err)."""
     if len(chain) < 2:
         return None, "chain too short"
     try:
@@ -96,20 +153,37 @@ def assemble(law, chain):
     if terms[0] != ("var", "a") or terms[-1] != ("var", "b"):
         return None, "chain must start at `a` and end at `b`"
     T, vs = _law(law)
-    justs = []
+    expanded = [terms[0]]                           # gap-fill to atomic single-application steps
     for i in range(len(terms) - 1):
-        j = justify_step(T, vs, terms[i], terms[i + 1])
+        s, t = expanded[-1], terms[i + 1]
+        if s == t:
+            continue
+        if justify_step(T, vs, s, t) is not None:
+            expanded.append(t); continue
+        path = _bridge(s, t, T, GAP_K)
+        if path is None:
+            return None, (f"step {i+1} ({chain[i]} = {chain[i+1]}) is not a law application and "
+                          f"could not be bridged within {GAP_K} steps")
+        expanded.extend(path[1:])
+    justs = []
+    for i in range(len(expanded) - 1):
+        j = justify_step(T, vs, expanded[i], expanded[i + 1])
         if j is None:
-            return None, f"step {i+1} ({chain[i]} = {chain[i+1]}) is not a whole-term law application"
+            return None, f"internal: bridged step {i+1} unjustifiable"
         justs.append(j)
-    lines = [f"  calc {_render(terms[0])} = {_render(terms[1])} := {justs[0]}"]
+    lines = [f"  calc {_render(expanded[0])} = {_render(expanded[1])} := {justs[0]}"]
     for i in range(1, len(justs)):
-        lines.append(f"    _ = {_render(terms[i+1])} := {justs[i]}")
+        lines.append(f"    _ = {_render(expanded[i+1])} := {justs[i]}")
     body = "theorem solution : Problem.TrivialGoal := by\n  intro M op h a b\n" + "\n".join(lines) + "\n"
     return body, None
 
 
-def build_prompt(law, feedback=None):
+def build_prompt(law, feedback=None, waypoints=None):
+    hint_block = ""
+    if waypoints:
+        hint_block = ("\n\nThe collapse passes through these consequences of the law (aim your chain "
+                      "through them; each is derivable from the law):\n"
+                      + "\n".join(f"    - {w}" for w in waypoints))
     p = f"""You are proving a magma law forces triviality. You will NOT write Lean — you give only a
 sequence of terms, and a theorem prover checks each step.
 
@@ -121,18 +195,21 @@ R is the big right-hand term. ONE step does exactly one of:
   • the reverse — replace a subterm that exactly matches an instance of R by the corresponding `e`.
 Everything OUTSIDE that one chosen subterm stays byte-for-byte identical.
 
-Goal: build  a = t1 = t2 = ... = b  where each adjacent pair differs by exactly ONE such step.
+Goal: build  a = t1 = t2 = ... = b. Adjacent terms should be only a FEW (1–3) such steps apart —
+you may skip intermediate terms and the checker will fill short gaps automatically, so give
+WAYPOINTS, not necessarily every atomic step. Prefer smaller jumps.
 
-HARD RULES — a step breaking any of these is rejected, so self-check each one before writing it:
+HARD RULES — a jump breaking any of these is rejected, so self-check each one before writing it:
   • You may NOT write "a = b" or otherwise relate a and b directly. They are opaque atoms; the only
-    way to connect them is through the law. (A step like `a → b`, or a subterm `a → b`, is illegal.)
-  • Exactly ONE subterm changes per step; the rest is identical.
-  • The changed subterm must be a REAL instance: is it `e → R[L:=e]` (or its reverse) for some choice
-    of the law's other variables? If you can't name that instance, the step is invalid.
+    way to connect them is through the law. (A jump like `a → b`, or a subterm `a → b`, is illegal.)
+  • Each jump must be a GENUINE short derivation — at most ~3 single law applications apart. A leap
+    between unrelated terms cannot be bridged and is rejected.
+  • Every application is a REAL instance: a subterm `e → R[L:=e]` (or its reverse) for some choice of
+    the law's other variables. If you can't name that instance, the step is invalid.
 
 STRATEGY: rewrite FORWARD from `a` (each rewrite grows the term via the law) toward a term the law
 forces to collapse — these laws let you derive `op(_, _) = (any element)`; once both `a` and `b`
-reduce to a common term, the chain closes.
+reduce to a common term, the chain closes.{hint_block}
 
 Return ONLY JSON:  {{"chain": ["a", "<term>", ..., "b"]}}   first "a", last "b"; use only a, b, ◇, ().
 Example (toy law  x = y ◇ y):  {{"chain": ["a", "(a ◇ a)", "b"]}}
@@ -164,11 +241,16 @@ def parse_chain(content):
 def attempt(law, lean_dir, rounds, api_key, model, effort, timeout):
     import tempfile
     import llm_solve as L
+    import trivial_hints as H
+    try:
+        waypoints = H.lemmas(law)                   # Vampire-derived collapse lemmas as hints
+    except Exception:                               # noqa: BLE001
+        waypoints = None
     feedback = None
     usage = {"prompt_tokens": 0, "completion_tokens": 0}
     for rnd in range(1, rounds + 1):
         try:
-            content, u = L.call_llm(build_prompt(law, feedback), api_key, model, effort, timeout)
+            content, u = L.call_llm(build_prompt(law, feedback, waypoints), api_key, model, effort, timeout)
         except Exception as e:                          # noqa: BLE001
             return {"solved": False, "rounds_used": rnd, "error": f"api: {e}", "usage": usage}
         for k in usage:
@@ -198,9 +280,10 @@ def selftest():
     # congruence: rewrite the LEFT child  a -> (a ◇ a)  inside (a ◇ c), keeping c fixed
     s = et.parse_term("(a ◇ c)"); t = et.parse_term("((a ◇ a) ◇ c)")
     print("congruence step ->", justify_step(T, vs, s, t))
-    # two positions changed at once -> rejected
-    bad = justify_step(T, vs, et.parse_term("(a ◇ a)"), et.parse_term("((a ◇ a) ◇ (a ◇ a))"))
-    print("two-position step rejected:", bad is None)
+    # gap-filling: law with x in T; bridge a 2-reduction coarse gap  ((a◇p)◇q) -> a
+    T2, _ = _law("x = (x ◇ y)")
+    path = _bridge(et.parse_term("((a ◇ p) ◇ q)"), et.parse_term("a"), T2, 3)
+    print("bridge coarse gap ->", [_render(x) for x in path] if path else None)
 
 
 def main():
