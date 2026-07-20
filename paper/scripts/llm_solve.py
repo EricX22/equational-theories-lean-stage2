@@ -44,21 +44,35 @@ CEILING = 100000
 
 
 def _post(payload: dict, api_key: str, timeout: int) -> dict:
-    """One HTTP call with exponential backoff on 429/5xx."""
+    """One HTTP call; backoff on 429/5xx AND on unparsable response bodies.
+
+    OpenRouter pads long non-streaming requests with keep-alive lines; a dropped
+    connection can deliver only that prefix, which json.loads rejects with
+    'Expecting value: line N column 1'. That is transport, not the model — retry."""
     import urllib.error
     body = json.dumps(payload).encode()
+    last_err = None
     for i in range(4):
         req = urllib.request.Request(ENDPOINT, data=body, headers={
             "Authorization": "Bearer " + api_key, "Content-Type": "application/json"})
+        raw = b""
         try:
             with urllib.request.urlopen(req, timeout=timeout) as resp:
-                return json.loads(resp.read())
+                raw = resp.read()
+            return json.loads(raw)
         except urllib.error.HTTPError as e:
+            last_err = e
             if e.code in (429, 500, 502, 503) and i < 3:
                 time.sleep(5 * (2 ** i))
                 continue
             raise
-    raise RuntimeError("unreachable")
+        except (json.JSONDecodeError, TimeoutError, OSError) as e:
+            last_err = RuntimeError(f"bad response body ({len(raw)} bytes): {e}")
+            if i < 3:
+                time.sleep(5 * (2 ** i))
+                continue
+            raise last_err
+    raise last_err
 
 
 def call_llm(prompt: str, api_key: str, model: str, effort: str, timeout: int = 300):
