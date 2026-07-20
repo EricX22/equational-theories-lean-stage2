@@ -175,7 +175,7 @@ def attempt(law, vbin, rounds, api_key, model, effort, timeout, certdir):
     usage = {"prompt_tokens": 0, "completion_tokens": 0}
     for rnd in range(1, rounds + 1):
         try:
-            content, u = L.call_llm(build_prompt(law, feedback), api_key, model, effort, timeout=300)
+            content, u = L.call_llm(build_prompt(law, feedback), api_key, model, effort, timeout=600)
         except Exception as e:                    # noqa: BLE001
             return {"solved": False, "rounds_used": rnd, "error": f"api: {e}", "usage": usage}
         for k in usage:
