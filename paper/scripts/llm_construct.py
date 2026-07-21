@@ -173,23 +173,30 @@ def attempt(law, vbin, rounds, api_key, model, effort, timeout, certdir):
     import llm_solve as L
     feedback = None
     usage = {"prompt_tokens": 0, "completion_tokens": 0}
-    for rnd in range(1, rounds + 1):
+    attempts = []                                 # every proposed E + its query outcomes,
+    for rnd in range(1, rounds + 1):              # kept for the failure-mode audit
         try:
             content, u = L.call_llm(build_prompt(law, feedback), api_key, model, effort, timeout=600)
         except Exception as e:                    # noqa: BLE001
-            return {"solved": False, "rounds_used": rnd, "error": f"api: {e}", "usage": usage}
+            return {"solved": False, "rounds_used": rnd, "error": f"api: {e}",
+                    "attempts": attempts, "usage": usage}
         for k in usage:
             usage[k] += (u.get(k) or 0)
         E, why = parse_E(content)
         if E is None:
+            attempts.append({"round": rnd, "parse_error": why})
             feedback = why
             continue
         res = certify(law, E, vbin, timeout, certdir)
+        attempts.append({"round": rnd, "E": E, "corr": res["corr_theorem"],
+                         "nonvac": res["nonvac_satisfiable"]})
         if res["certified"]:
-            return {"solved": True, "rounds_used": rnd, "E": E, "cert": res.get("cert"), "usage": usage}
+            return {"solved": True, "rounds_used": rnd, "E": E, "cert": res.get("cert"),
+                    "attempts": attempts, "usage": usage}
         feedback = (f"correctness(E|-law)={res['corr_theorem']}, "
                     f"nonvacuity(E+a!=b sat)={res['nonvac_satisfiable']}")
-    return {"solved": False, "rounds_used": rounds, "last": feedback, "usage": usage}
+    return {"solved": False, "rounds_used": rounds, "last": feedback,
+            "attempts": attempts, "usage": usage}
 
 
 # ------------------------------------------------------------------ CLI ---

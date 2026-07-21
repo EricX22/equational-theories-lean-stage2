@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+ & \multicolumn{3}{c}{Certified-easy ($n=63$)} & Hard ($n=25$) \\
+\cmidrule(lr){2-4}
+Model & full support & no waypoints & low effort & construction \\
+\midrule
+GPT-4.1 & 0 & 0$^{*}$ & ---        & --- \\
+o4-mini & 0 & 0$^{*}$ & 0$^{*}$    & --- \\
+o3      & 9 & 4$^{*}$ & 0$^{*}$    & 0   \\
+\bottomrule
+\end{tabular}
+\caption{Verified LLM solves under the fixed protocol (identical inputs,
+three feedback rounds against the judge). Full support = waypoint lemmas in
+the prompt, medium reasoning effort; trivial-side solves are Lean-verified,
+construction submissions ATP-certified. $^{*}$Reduced-support settings rerun
+only the laws solved at full support; since waypoints and reasoning effort
+can only help, laws unsolved at the stronger setting are counted as
+unsolved. Dashes: setting not applicable or not run.}
+\label{tab:llm}
+\end{table}
