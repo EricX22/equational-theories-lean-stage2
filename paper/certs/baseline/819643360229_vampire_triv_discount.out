@@ -1,0 +1,74 @@
+% law: x = (y ◇ (((x ◇ y) ◇ (y ◇ x)) ◇ ((x ◇ z) ◇ (x ◇ y))))
+% config: vampire/triv/discount @ 30s
+
+% Running in auto input_syntax mode. Trying TPTP
+% Refutation found. Thanks to Tanya!
+% SZS status Theorem for p
+% SZS output start Proof for p
+1. ! [X0,X1,X2] : X0 = f(X1,f(f(f(X0,X1),f(X1,X0)),f(f(X0,X2),f(X0,X1)))) [input(axiom)]
+2. ! [X0,X1] : X0 = X1 [input(conjecture)]
+3. ~! [X0,X1] : X0 = X1 [negated conjecture 2]
+4. ? [X0,X1] : X0 != X1 [ennf transformation 3]
+5. ? [X0,X1] : X0 != X1 => sK0 != sK1 [skolem symbol introduction]
+6. sK0 != sK1 [skolemisation 4,5]
+7. f(X1,f(f(f(X0,X1),f(X1,X0)),f(f(X0,X2),f(X0,X1)))) = X0 [cnf transformation 1]
+8. sK0 != sK1 [cnf transformation 6]
+10. f(X1,f(f(f(X2,X1),f(X1,X2)),f(X0,f(X2,X1)))) = X2 [superposition 7,7]
+13. f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))) = f(X1,f(f(f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1),X0),f(X3,f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1)))) [superposition 10,10]
+15. f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),f(f(X0,f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1)),f(X3,X0))) = X1 [superposition 10,10]
+17. f(f(X0,X2),f(X2,X0)) = f(f(X1,f(X0,X2)),f(f(f(f(f(X0,X2),f(X2,X0)),f(X1,f(X0,X2))),f(f(X1,f(X0,X2)),f(f(X0,X2),f(X2,X0)))),X0)) [superposition 10,10]
+59. f(X2,f(f(f(f(X2,X0),f(X0,X2)),f(X3,f(X2,X0))),X0)) = f(f(X1,X2),f(f(f(f(X2,f(f(f(f(X2,X0),f(X0,X2)),f(X3,f(X2,X0))),X0)),f(X1,X2)),f(f(X1,X2),f(X2,f(f(f(f(X2,X0),f(X0,X2)),f(X3,f(X2,X0))),X0)))),X0)) [superposition 10,15]
+163. f(X3,f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1)) = f(f(f(f(f(f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1),X0),f(X3,f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1))),f(f(X3,f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1)),f(f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1),X0))),f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1)))),f(f(f(f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1),X0),f(f(f(f(f(f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1),X0),f(X3,f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1))),f(f(X3,f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1)),f(f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1),X0))),f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1)))),f(X3,f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1)))),f(X4,f(f(f(f(f(X0,X1),f(X1,X0)),f(X2,f(X0,X1))),X1),X0)))) [superposition 15,13]
+290. f(f(f(X0,X1),f(f(f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(X0,X1))),f(X2,f(f(X0,X1),f(X1,X0)))),f(X1,X0))),f(f(X1,f(f(f(X0,X1),f(f(f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(X0,X1))),f(X2,f(f(X0,X1),f(X1,X0)))),f(X1,X0))),X0)),f(X3,X1))) = X0 [superposition 15,59]
+291. f(X0,f(f(X0,X1),f(f(f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(X0,X1))),f(X2,f(f(X0,X1),f(X1,X0)))),f(X1,X0)))) = X1 [superposition 10,59]
+429. f(X1,X0) = f(f(X0,X1),f(f(f(X0,X1),f(X1,X0)),f(f(f(f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(X0,X1))),f(f(f(X1,X0),f(X0,X1)),f(f(X0,X1),f(X1,X0)))),X0),f(f(X1,X0),f(X0,X1))))) [superposition 291,10]
+1509. f(X1,X0) = f(f(f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(X0,X1))),f(X2,f(f(X0,X1),f(X1,X0)))),X0) [superposition 15,290]
+1634. f(X0,X1) = f(f(X1,X0),f(f(f(X1,X0),f(X0,X1)),f(f(X0,X1),f(f(X0,X1),f(X1,X0))))) [superposition 429,1509]
+1635. f(f(X1,X0),f(X0,X1)) = f(f(f(X0,X1),f(X1,X0)),f(X0,X1)) [superposition 17,1509]
+1745. f(f(X0,X1),f(X1,f(f(f(f(X1,X0),f(X0,X1)),f(f(X0,X1),f(X1,X0))),f(X2,f(f(X1,X0),f(X0,X1)))))) = f(f(f(X1,f(f(f(f(X1,X0),f(X0,X1)),f(f(X0,X1),f(X1,X0))),f(X2,f(f(X1,X0),f(X0,X1))))),f(X0,X1)),f(X1,f(f(f(f(X1,X0),f(X0,X1)),f(f(X0,X1),f(X1,X0))),f(X2,f(f(X1,X0),f(X0,X1)))))) [superposition 1635,1509]
+1800. f(f(X1,X0),f(X0,X1)) = f(f(X1,X0),f(f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(f(X1,X0),f(X0,X1)))),f(X2,f(f(X0,X1),f(X1,X0))))) [superposition 10,1635]
+1851. f(f(X1,X0),f(f(X1,X0),f(X0,X1))) = f(f(f(f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(f(X1,X0),f(X0,X1)))),f(f(f(X1,X0),f(f(X1,X0),f(X0,X1))),f(f(X0,X1),f(X1,X0)))),f(X2,f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(f(X1,X0),f(X0,X1)))))),f(f(X1,X0),f(X0,X1))) [superposition 1509,1635]
+1914. f(f(X1,X0),f(X0,X1)) = f(f(f(X0,X1),f(f(X0,X1),f(X1,X0))),f(f(f(f(f(X1,X0),f(X0,X1)),f(f(X0,X1),f(f(X0,X1),f(X1,X0)))),f(f(f(X0,X1),f(f(X0,X1),f(X1,X0))),f(f(X1,X0),f(X0,X1)))),f(X0,X1))) [superposition 10,1634]
+8314. f(f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(f(X1,X0),f(X0,X1)))),f(f(f(X1,X0),f(f(X1,X0),f(X0,X1))),f(f(X0,X1),f(X1,X0)))) = f(f(X1,X0),f(f(f(f(f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(f(X1,X0),f(X0,X1)))),f(f(f(X1,X0),f(f(X1,X0),f(X0,X1))),f(f(X0,X1),f(X1,X0)))),f(X1,X0)),f(f(X1,X0),f(f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(f(X1,X0),f(X0,X1)))),f(f(f(X1,X0),f(f(X1,X0),f(X0,X1))),f(f(X0,X1),f(X1,X0)))))),f(f(X0,X1),f(X1,X0)))) [superposition 10,1914]
+8471. f(f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(f(X1,X0),f(X0,X1)))),f(f(f(X1,X0),f(f(X1,X0),f(X0,X1))),f(f(X0,X1),f(X1,X0)))) = f(f(X1,X0),f(f(f(f(f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(f(X1,X0),f(X0,X1)))),f(f(f(X1,X0),f(f(X1,X0),f(X0,X1))),f(f(X0,X1),f(X1,X0)))),f(X1,X0)),f(f(X1,X0),f(X0,X1))),f(f(X0,X1),f(X1,X0)))) [forward demodulation 8314,1800]
+26925. f(f(X0,X1),f(f(X0,X1),f(X1,X0))) = f(f(f(f(f(f(X1,X0),f(X0,X1)),f(f(X0,X1),f(f(X0,X1),f(X1,X0)))),f(f(f(X0,X1),f(f(X0,X1),f(X1,X0))),f(f(X1,X0),f(X0,X1)))),f(X0,X1)),f(f(X0,X1),f(X1,X0))) [superposition 1851,1634]
+61685. f(f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(f(X1,X0),f(X0,X1)))),f(f(f(X1,X0),f(f(X1,X0),f(X0,X1))),f(f(X0,X1),f(X1,X0)))) = f(f(X1,X0),f(f(f(X1,X0),f(f(X1,X0),f(X0,X1))),f(f(X0,X1),f(X1,X0)))) [forward demodulation 8471,26925]
+62906. f(f(X0,X1),f(f(X0,X1),f(X1,X0))) = f(f(f(f(X0,X1),f(f(f(X0,X1),f(f(X0,X1),f(X1,X0))),f(f(X1,X0),f(X0,X1)))),f(X0,X1)),f(f(X0,X1),f(X1,X0))) [superposition 26925,61685]
+62908. f(f(X1,X0),f(X0,X1)) = f(f(f(X0,X1),f(f(X0,X1),f(X1,X0))),f(f(f(X0,X1),f(f(f(X0,X1),f(f(X0,X1),f(X1,X0))),f(f(X1,X0),f(X0,X1)))),f(X0,X1))) [superposition 1914,61685]
+62912. f(f(X0,X1),f(X1,X0)) = f(f(X0,X1),f(f(X0,X1),f(f(f(X0,X1),f(f(X0,X1),f(X1,X0))),f(f(X1,X0),f(X0,X1))))) [superposition 1800,61685]
+64106. f(f(f(X0,X1),f(X1,X0)),f(f(f(X0,X1),f(f(f(X0,X1),f(f(X0,X1),f(X1,X0))),f(f(X1,X0),f(X0,X1)))),f(X0,X1))) = f(f(f(f(f(X0,X1),f(f(f(X0,X1),f(f(X0,X1),f(X1,X0))),f(f(X1,X0),f(X0,X1)))),f(X0,X1)),f(f(X0,X1),f(X1,X0))),f(f(f(X0,X1),f(f(f(X0,X1),f(f(X0,X1),f(X1,X0))),f(f(X1,X0),f(X0,X1)))),f(X0,X1))) [superposition 1635,62912]
+87383. f(f(f(X0,X1),f(f(X0,X1),f(X1,X0))),f(f(f(X0,X1),f(f(f(X0,X1),f(f(X0,X1),f(X1,X0))),f(f(X1,X0),f(X0,X1)))),f(X0,X1))) = f(f(f(X0,X1),f(X1,X0)),f(f(f(X0,X1),f(f(f(X0,X1),f(f(X0,X1),f(X1,X0))),f(f(X1,X0),f(X0,X1)))),f(X0,X1))) [forward demodulation 64106,62906]
+87384. f(f(X1,X0),f(X0,X1)) = f(f(f(X0,X1),f(X1,X0)),f(f(f(X0,X1),f(f(f(X0,X1),f(f(X0,X1),f(X1,X0))),f(f(X1,X0),f(X0,X1)))),f(X0,X1))) [forward demodulation 87383,62908]
+87733. f(X0,f(f(X0,X1),f(X1,X0))) = X1 [superposition 10,87384]
+87800. f(f(X0,X1),f(X1,f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(X0,X1))))) = f(f(f(X1,f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(X0,X1)))),f(X0,X1)),f(X1,f(f(f(X0,X1),f(X1,X0)),f(f(X1,X0),f(X0,X1))))) [superposition 1745,87384]
+88699. f(f(X0,X1),X0) = f(f(X0,f(X0,X1)),X0) [forward demodulation 87800,10]
+90887. f(X0,X1) = f(f(X1,X0),X1) [superposition 88699,7]
+91869. f(X0,X1) = f(f(f(X1,X0),f(X0,X1)),X1) [superposition 90887,87733]
+97337. f(f(f(X1,X0),f(X0,X1)),f(f(X0,X1),f(X1,f(f(X1,X0),f(X0,X1))))) = X1 [superposition 87733,91869]
+97497. f(f(f(X1,X0),f(X0,X1)),f(f(X0,X1),X0)) = X1 [forward demodulation 97337,87733]
+97863. f(f(f(X1,X0),f(X0,X1)),f(X1,X0)) = X1 [forward demodulation 97497,90887]
+98111. f(f(X0,X1),f(X1,X0)) = X1 [forward demodulation 97863,90887]
+98763. f(X1,X0) = X0 [superposition 87733,98111]
+103144. f(X3,f(f(X1,f(X2,f(X0,X1))),X1)) = f(f(f(f(f(f(f(X1,f(X2,f(X0,X1))),X1),X0),f(X3,f(f(X1,f(X2,f(X0,X1))),X1))),f(f(X3,f(f(X1,f(X2,f(X0,X1))),X1)),f(f(f(X1,f(X2,f(X0,X1))),X1),X0))),f(X1,f(X2,f(X0,X1)))),f(f(f(f(f(X1,f(X2,f(X0,X1))),X1),X0),f(f(f(f(f(f(f(X1,f(X2,f(X0,X1))),X1),X0),f(X3,f(f(X1,f(X2,f(X0,X1))),X1))),f(f(X3,f(f(X1,f(X2,f(X0,X1))),X1)),f(f(f(X1,f(X2,f(X0,X1))),X1),X0))),f(X1,f(X2,f(X0,X1)))),f(X3,f(f(X1,f(X2,f(X0,X1))),X1)))),f(X4,f(f(f(X1,f(X2,f(X0,X1))),X1),X0)))) [forward demodulation 163,98111]
+103145. f(X3,f(f(X2,f(X0,X1)),X1)) = f(f(f(f(f(f(f(X2,f(X0,X1)),X1),X0),f(X3,f(f(X2,f(X0,X1)),X1))),f(f(X3,f(f(X2,f(X0,X1)),X1)),f(f(f(X2,f(X0,X1)),X1),X0))),f(X1,f(X2,f(X0,X1)))),f(f(f(f(f(X2,f(X0,X1)),X1),X0),f(f(f(f(f(f(f(X2,f(X0,X1)),X1),X0),f(X3,f(f(X2,f(X0,X1)),X1))),f(f(X3,f(f(X2,f(X0,X1)),X1)),f(f(f(X2,f(X0,X1)),X1),X0))),f(X1,f(X2,f(X0,X1)))),f(X3,f(f(X2,f(X0,X1)),X1)))),f(X4,f(f(f(X2,f(X0,X1)),X1),X0)))) [forward demodulation 103144,90887]
+103146. f(X3,f(f(X2,f(X0,X1)),X1)) = f(f(f(X3,f(f(X2,f(X0,X1)),X1)),f(X1,f(X2,f(X0,X1)))),f(f(f(f(f(X2,f(X0,X1)),X1),X0),f(f(f(X3,f(f(X2,f(X0,X1)),X1)),f(X1,f(X2,f(X0,X1)))),f(X3,f(f(X2,f(X0,X1)),X1)))),f(X4,f(f(f(X2,f(X0,X1)),X1),X0)))) [forward demodulation 103145,98111]
+103147. f(X3,f(f(X2,f(X0,X1)),X1)) = f(f(f(X3,f(f(X2,f(X0,X1)),X1)),f(X1,f(X2,f(X0,X1)))),f(f(f(f(f(X2,f(X0,X1)),X1),X0),f(f(X1,f(X2,f(X0,X1))),f(X3,f(f(X2,f(X0,X1)),X1)))),f(X4,f(f(f(X2,f(X0,X1)),X1),X0)))) [forward demodulation 103146,90887]
+113509. f(X3,f(f(X2,f(X0,X1)),X1)) = f(f(f(f(f(X2,f(X0,X1)),X1),X0),f(f(X1,f(X2,f(X0,X1))),f(X3,f(f(X2,f(X0,X1)),X1)))),f(X4,f(f(f(X2,f(X0,X1)),X1),X0))) [forward demodulation 103147,98763]
+113510. f(X3,f(f(X2,f(X0,X1)),X1)) = f(X4,f(f(f(X2,f(X0,X1)),X1),X0)) [forward demodulation 113509,98763]
+113511. f(f(f(X2,f(X0,X1)),X1),X0) = f(X3,f(f(X2,f(X0,X1)),X1)) [forward demodulation 113510,98763]
+113512. f(f(X2,f(X0,X1)),X1) = f(f(f(X2,f(X0,X1)),X1),X0) [forward demodulation 113511,98763]
+113513. f(f(X2,f(X0,X1)),X1) = X0 [forward demodulation 113512,98763]
+113514. X0 = X1 [forward demodulation 113513,98763]
+115749. sK0 != X0 [superposition 8,113514]
+117983. $false [forward subsumption resolution 115749,113514]
+% SZS output end Proof for p
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation
+% Time elapsed: 8.112 s
+% Peak memory usage: 121 MB
+% Instructions burned: 62693 (million)
+% ------------------------------
+% ------------------------------
