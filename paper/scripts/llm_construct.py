@@ -160,12 +160,22 @@ def parse_E(content):
     except json.JSONDecodeError as e:
         return None, f"bad JSON: {e}"
     E = obj.get("E")
-    if not isinstance(E, list) or not E or not all(isinstance(s, str) and "=" in s for s in E):
+    if not isinstance(E, list) or not E or not all(isinstance(s, str) for s in E):
         return None, "E must be a nonempty list of 'LHS = RHS' strings"
-    for e in E:                                  # reject a lazy `x = y` restatement
+    for e in E:
+        if any(c in e for c in ("\u21d2", "=>", "->", "\u2192", "!=", "\u2260", "&", "|")):
+            return None, (f"equation {e!r} is not a plain equation: E must be a set of "
+                          "unconditional identities 'LHS = RHS' — no implications, "
+                          "disequations, or logical connectives")
+        if e.count("=") != 1:
+            return None, f"equation {e!r} must contain exactly one '='"
         l, r = (s.strip() for s in e.split("=", 1))
-        if {l, r} <= {"x", "y", "z", "w"}:
+        if {l, r} <= {"x", "y", "z", "w"}:       # reject a lazy `x = y` restatement
             return None, f"degenerate equation {e!r}"
+        try:
+            et.tptp_eq_vars(e)                   # must survive the TPTP emitter
+        except Exception as ex:                  # noqa: BLE001
+            return None, f"equation {e!r} failed to parse: {ex}"
     return E, None
 
 
@@ -187,7 +197,12 @@ def attempt(law, vbin, rounds, api_key, model, effort, timeout, certdir):
             attempts.append({"round": rnd, "parse_error": why})
             feedback = why
             continue
-        res = certify(law, E, vbin, timeout, certdir)
+        try:
+            res = certify(law, E, vbin, timeout, certdir)
+        except Exception as ex:                   # noqa: BLE001
+            attempts.append({"round": rnd, "E": E, "parse_error": f"certify: {ex}"})
+            feedback = f"E could not be certified as submitted ({ex}); emit plain equations only"
+            continue
         attempts.append({"round": rnd, "E": E, "corr": res["corr_theorem"],
                          "nonvac": res["nonvac_satisfiable"]})
         if res["certified"]:
