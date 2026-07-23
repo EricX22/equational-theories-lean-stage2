@@ -1,0 +1,212 @@
+% ============================================================================
+% §3 THE AUSTIN-LAW PROOF-SYNTHESIS BENCHMARK — v2 draft (2026-07-19)
+% Drop-in replacement for the current §3. Changes from the compiled version:
+%   (1) new Overview paragraph anchored on the two methodology figures;
+%   (2) Problem Formulation compressed (~40% shorter, same claims);
+%   (3) Corpus Construction now narrated against the figures, which carry the
+%       counts; duplicated sentences removed; renewability gets the density
+%       sentence (its own figure can follow);
+%   (4) Answer Verification REWRITTEN to the multi-channel judge
+%       (Lean = trivial side, ATP certificate = construction side), replacing
+%       the stale Lean-only text; adds the descent-theorem paragraph;
+%   (5) ordering: Corpus Construction now precedes Answer Verification, so the
+%       section ends on "everything is machine-checked" — the note §4 opens on;
+%   (6) figures get real captions and distinct labels (they currently share
+%       \label{fig:methodology}, which breaks \ref).
+% Citation keys marked %% VERIFY where not already in references.bib.
+% ============================================================================
+
+\section{The Austin-Law Proof-Synthesis Benchmark}
+
+ALPS is built in three parts, displayed in Figures~\ref{fig:extension}
+and~\ref{fig:funnel}: a \textbf{two-sided task} posed over laws certified to
+have no nontrivial finite model, a \textbf{corpus construction} that mints such
+laws at any order by extending known Austin laws and screening the results, and
+an \textbf{automated judge} that verifies an answer to either side of the task
+with a machine-checked certificate. We describe each component below.
+
+\subsection{Problem Formulation}
+
+A magma is a set $M$, the carrier, together with a single binary operation
+${\op}\colon M \times M \to M$ and no further axioms. An equational law is a
+universally quantified identity between two terms built from variables and
+$\op$; its order is the number of times the operation appears, so the
+commutative law $x \op y = y \op x$ has order two. A magma \emph{satisfies} a
+law when the identity holds under every assignment of carrier elements to its
+variables, and is then called a model of the law. Every ALPS instance is a law
+of the form $L\colon x = T[x, y, z, \dots]$, a single variable equated with a
+term $T$ of order five or more. The one-element magma is a model of every law
+and so carries no information; we call it trivial, and call a model nontrivial
+when its carrier holds at least two distinct elements. The question ALPS poses
+for each $L$ is whether a nontrivial model exists at all: either $L$ entails
+$x = y$, collapsing every model to a point, or some nontrivial magma satisfies
+it.
+
+A nontrivial model, when one exists, may be finite or infinite, and the finite
+case is a matter of search: enumerating operations on carriers of increasing
+size must eventually find it, requiring none of the law-specific construction
+the benchmark aims to measure. We therefore admit a law only when it carries a
+machine-checked proof that no nontrivial finite model exists, and call such a
+law \emph{admissible}. Admissibility forces a dichotomy. Every law either
+entails $x = y$ or it does not, so each instance has a determinate answer; for
+an admissible law the two cases are exactly
+\begin{equation}
+\label{eq:dichotomy}
+\underbrace{L \models x = y}_{\text{trivial}}
+\quad\text{or}\quad
+\underbrace{L \text{ has a nontrivial model, necessarily infinite.}}_{\text{Austin}}
+\end{equation}
+Laws of the second kind are the Austin laws \citep{kisielewicz1997austin}. No
+instance is unanswerable: the difficulty of ALPS lies in finding the answer,
+never in whether one exists.
+
+The two sides of \eqref{eq:dichotomy} are not symmetric, and the asymmetry is
+what the benchmark measures. Whether $L$ entails $x = y$ is a first-order
+consequence, so a complete proof search confirms it whenever it holds; the
+trivial side is, in principle, settled by deduction. The Austin side has no
+such guarantee. A search that fails to derive $x = y$, however long it runs,
+is not a model, and since equational entailment is undecidable in general
+\citep{baader1998term}, no uniform procedure can be expected to close the gap.
+Establishing that a law is Austin means producing an infinite magma that
+satisfies it — a structure that is not selected from a catalogue but invented,
+tailored to the individual law. This synthesis, which deductive search does
+not supply, is the capability ALPS isolates.
+
+\subsection{Corpus Construction}
+
+\textbf{Generation by extension.} Admissible laws are too rare for random
+sampling to surface in quantity, and the few it does surface are often
+redundant or already enumerated. We instead grow the corpus outward from laws
+already known to be Austin (Figure~\ref{fig:extension}): a seed law $x = T$ is
+extended by selecting a variable $v$ in $T$ and replacing one occurrence with
+$v \op w$ or $w \op v$ for some other variable $w$, yielding candidates one
+order higher. Because a candidate inherits most of the seed's term structure,
+it often inherits the mechanism that denies the seed a finite model, which is
+why extension produces admissible laws at a rate random sampling cannot
+approach. The construction is recursive — laws confirmed Austin at order $n$
+seed the round at order $n{+}1$ — so the corpus has no terminal order.
+
+\textbf{Screening.} Each candidate then passes screens ordered from cheap to
+expensive (Figure~\ref{fig:funnel}). A fast proof search first removes
+candidates it can already prove trivial at generation time. The remainder go
+to the admissibility prover, a first-order query whose success is a proof that
+no nontrivial finite model exists: when some subterm of $T$ contains every
+occurrence of $x$, that subterm acts as a left inverse, making the map
+$x \mapsto T$ injective; on a finite carrier an injective map is surjective,
+and asserting that surjectivity lets the prover derive $x = y$. Admission
+therefore requires an actual proof, and no such proof exists for a law with a
+finite model, so none can enter the corpus. The price is incompleteness: when
+the occurrences of $x$ are split across the root, the query certifies nothing,
+and those candidates are discarded even though some are admissible. What
+remains after screening is the admissible pool, split by
+\eqref{eq:dichotomy} into laws proved trivial, laws whose models the screening
+provers construct outright, and the residual the baseline of the next section
+attacks.
+
+\textbf{Distinctness.} Because every law descends from a small seed set,
+extensions may be equivalent to their seed or to a sibling, and equivalence in
+general demands a prover call per pair. For laws proved Austin, the models
+found along the way decide almost all of it for free: a magma in which one law
+holds and the other fails is a certificate that the two are distinct. Of the
+34{,}191 pairs across the 262 laws proved Austin, 33{,}936 are separated by
+such a model, 255 are proved equivalent by the prover, and none are left
+undecided, collapsing the 262 laws to 195 classes — a reduction of roughly a
+quarter. We report corpus size in classes rather than laws so that the count
+reflects distinct problems.
+
+\textbf{Renewability.} Extension does not exhaust itself. Normalizing by the
+number of laws screened, the yield of Austin laws \emph{rises} with order —
+20.5, 24.4, and 25.4 per thousand screened at orders six, seven, and eight —
+and each order contributes classes no earlier order is equivalent to.
+%% (density figure can anchor this sentence when built)
+Since the construction applies at every order, the corpus can always be
+extended past whatever has been enumerated or released before. Evaluation can
+therefore always draw on instances minted after the model under test was
+trained: the corpus is renewable, and in turn contamination-free, in a way no
+fixed problem set can be.
+
+\subsection{Answer Verification}
+
+A solved ALPS instance is a verified mathematical fact, not a predicted label.
+The two sides of the task call for different machinery, so the judge issues a
+certificate through the channel that fits the answer: a proof checked by the
+Lean kernel for the trivial side, and an automated-prover certificate for a
+constructed model. Both channels are fully automatic, and a submission is
+accepted only when its check succeeds.
+
+\textbf{The trivial channel.} For each law the judge generates the proposition
+\begin{equation}
+\label{eq:trivialgoal}
+\textsc{TrivialGoal} \equiv \forall M\ \forall {\op}\colon M \times M \to M,\;
+\mathrm{Law}(\op) \rightarrow \forall a, b : M,\ a = b,
+\end{equation}
+where $\mathrm{Law}(\op)$ asserts that $\op$ satisfies $L$, and a submission
+is a Lean proof of it. The statement is generated, never written by the
+submitter: the judged file sandwiches the submitted proof between a header
+that fixes \eqref{eq:trivialgoal} and a footer that forces the proof to
+elaborate at exactly that type, and the proof's axiom footprint must fall
+within a fixed allowlist. A proof the kernel accepts under these constraints
+is correct by construction \citep{moura2021lean}.
+
+\textbf{The construction channel.} A solver that believes $L$ is Austin does
+not write a Lean proof about an infinite object. It submits the model itself,
+as a finite presentation $E$ — a set of equations over $\op$ that pins down
+the intended structure. The judge then runs two independent prover queries
+\citep{kovacs2013first}:
+\begin{equation}
+\label{eq:construction}
+\text{(a)}\;\; E \vdash L
+\qquad\qquad
+\text{(b)}\;\; E \cup \{\,a \neq b\,\} \text{ is satisfiable,}
+\end{equation}
+certifying the submission only when both succeed. Query (a) is a refutation
+proof that every model of $E$ satisfies $L$; query (b) is a terminating
+saturation establishing that $E$ has a model with two distinct elements.
+Together they exhibit a nontrivial model of $L$, which admissibility forces to
+be infinite, so $L$ is Austin. The pair is also self-policing. Submitting the
+law itself as $E$ gains nothing: (a) becomes immediate, but (b) becomes the
+bare saturation of $L$, which is exactly what diverges on hard instances. A
+collapsing presentation such as $\{x = y\}$ passes (a) but fails (b). The
+judge accepts a certificate from any trusted checker — the construction
+certificates are cross-checkable by a second prover
+\citep{smallbone2021twee}, and a Lean proof of the corresponding existential
+goal would equally count — so its trust base is stated plainly: the Lean
+kernel on the trivial side, prover saturation on the construction side, the
+same base on which the corpus labels themselves rest.
+
+\textbf{Why two channels.} A single Lean arbiter for both sides is not
+available, for a reason that strengthens the benchmark's premise. If an
+admissible law had a model whose operation is a polynomial or affine formula
+over $\mathbb{Z}$, $\mathbb{Z}^k$, or $\mathbb{Z}/n$, the identity would
+survive reduction modulo two and yield a nontrivial \emph{finite} model,
+contradicting admissibility. No Austin model is an arithmetic formula: the
+familiar, easily formalized model families are provably empty here, so an
+Austin answer cannot be a memorized pattern, and the structures that do work —
+term models built from saturations — await a formalization of ground
+confluence that we develop as companion work. The two-channel judge is what
+makes the construction side gradable today, at the cost of one additional
+trusted checker.
+
+% ---------------------------------------------------------------------------
+% FIGURE CAPTIONS (replace the placeholders)
+% ---------------------------------------------------------------------------
+% Extension engine (currently Figures/ALPS_Methodology_a.pdf):
+%
+% \caption{Corpus generation by extension. A seed Austin law is extended by
+% replacing one variable occurrence $v$ with $v \op w$, yielding candidate
+% laws one order higher that tend to inherit the seed's lack of finite models.
+% Laws confirmed Austin re-seed the next round, so generation applies
+% recursively at every order.}
+% \label{fig:extension}
+%
+% Screening funnel (currently Figures/ALPS_Methodology_b.pdf):
+%
+% \caption{Screening the candidate pool. Each candidate passes screens ordered
+% from cheap to expensive: a finite-model filter discards laws with small
+% nontrivial models, and the admissibility prover certifies the rest or
+% discards what it cannot certify. Band width tracks the number of surviving
+% laws; the admissible pool splits into laws proved trivial, Austin classes
+% with exhibited models, and the unresolved hard tier. Counts are provisional
+% pending the full portfolio sweep.}
+% \label{fig:funnel}
+% ---------------------------------------------------------------------------
