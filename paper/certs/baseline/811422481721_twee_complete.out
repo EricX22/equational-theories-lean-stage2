@@ -1,0 +1,807 @@
+% law: x = (y ◇ ((y ◇ x) ◇ (x ◇ (((x ◇ w) ◇ y) ◇ (z ◇ y)))))
+% config: twee/complete @ 30s
+
+Here is the input problem:
+  Axiom 1 (hyp): X = f(Y, f(f(Y, X), f(X, f(f(f(X, Z), Y), f(W, Y))))).
+  Goal 1 (goal): x = y.
+
+1. f(X, f(f(X, Y), f(Y, f(f(f(Y, Z), X), f(W, X))))) -> Y
+2. f(X, f(f(X, Y), f(Y, f(f(Z, X), f(W, X))))) -> Y
+3. f(f(f(X, Y), f(Z, Y)), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y)))) -> Y
+4. f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), W), f(W, f(Y, f(V, f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y)))))))) -> W
+5. f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), W), f(W, f(f(f(X, Y), f(Z, Y)), Y)))) -> W
+6. f(f(f(f(X, Y), f(Z, Y)), Y), f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y)))), f(f(f(X, Y), f(Z, Y)), Y))) -> f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y)))
+7. f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), W), f(W, f(Y, Y)))) -> W
+8. f(f(X, Y), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))) -> f(f(X, Y), f(Y, Y))
+9. f(f(f(X, Y), f(Y, Y)), f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y)))) -> Z
+10. f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), Z), f(Z, f(f(X, Y), f(f(X, Y), f(Y, Y)))))) -> Z
+11. f(f(f(X, Y), f(Y, Y)), f(Y, f(f(f(f(f(X, Y), f(Y, Y)), Y), f(f(X, Y), f(Y, Y))), f(X, Y)))) -> f(f(f(f(X, Y), f(Y, Y)), Y), f(f(X, Y), f(Y, Y)))
+12. f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))), f(f(X, Y), f(f(X, Y), f(Y, Y))))) -> f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))
+13. f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), Z), f(Z, f(f(f(X, Y), f(Y, Y)), f(f(X, Y), f(Y, Y)))))) -> Z
+14. f(f(X, X), f(f(f(X, X), f(f(f(f(Y, X), f(Z, X)), X), f(f(Y, X), f(Z, X)))), f(X, X))) -> f(f(f(f(Y, X), f(Z, X)), X), f(f(Y, X), f(Z, X)))
+15. f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), W), f(W, f(f(V, f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y)))), Y)))) -> W
+16. f(f(f(X, Y), f(Y, Y)), f(Z, f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), f(X, Y)))) -> f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y)))
+17. f(f(f(f(X, Y), f(Y, Y)), f(f(X, Y), f(Y, Y))), f(f(f(f(f(X, Y), f(Y, Y)), f(f(X, Y), f(Y, Y))), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))), f(f(f(X, Y), f(Y, Y)), f(f(X, Y), f(Y, Y))))) -> f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))
+18. f(f(f(X, f(f(f(f(Y, Z), f(W, Z)), Z), f(f(Y, Z), f(W, Z)))), Z), f(f(f(f(X, f(f(f(f(Y, Z), f(W, Z)), Z), f(f(Y, Z), f(W, Z)))), Z), f(f(f(f(Y, Z), f(W, Z)), Z), f(f(Y, Z), f(W, Z)))), f(f(X, f(f(f(f(Y, Z), f(W, Z)), Z), f(f(Y, Z), f(W, Z)))), Z))) -> f(f(f(f(Y, Z), f(W, Z)), Z), f(f(Y, Z), f(W, Z)))
+19. f(f(X, f(Y, f(f(f(f(Z, X), f(W, X)), X), f(f(Z, X), f(W, X))))), f(f(f(X, f(Y, f(f(f(f(Z, X), f(W, X)), X), f(f(Z, X), f(W, X))))), f(f(f(f(Z, X), f(W, X)), X), f(f(Z, X), f(W, X)))), f(X, f(Y, f(f(f(f(Z, X), f(W, X)), X), f(f(Z, X), f(W, X))))))) -> f(f(f(f(Z, X), f(W, X)), X), f(f(Z, X), f(W, X)))
+20. f(f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(X, Y), f(X, Y))), f(f(f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(X, Y), f(X, Y))), f(X, Y)), f(f(X, Y), f(Y, Y)))) -> f(X, Y)
+21. f(f(X, X), f(f(f(X, X), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), f(f(X, X), f(X, X)))), f(X, X))) -> f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), f(f(X, X), f(X, X)))
+22. f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), f(f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), Y), f(Y, f(f(f(X, X), f(X, X)), f(Z, f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X))))))) -> Y
+23. f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), f(f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), Y), f(Y, f(f(Z, f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X))), f(f(X, X), f(X, X)))))) -> Y
+24. f(f(f(X, f(f(f(Y, Y), f(f(Y, Y), f(Y, Y))), f(Y, Y))), f(f(Y, Y), f(Y, Y))), f(f(f(f(X, f(f(f(Y, Y), f(f(Y, Y), f(Y, Y))), f(Y, Y))), f(f(Y, Y), f(Y, Y))), f(f(f(Y, Y), f(f(Y, Y), f(Y, Y))), f(Y, Y))), f(f(X, f(f(f(Y, Y), f(f(Y, Y), f(Y, Y))), f(Y, Y))), f(f(Y, Y), f(Y, Y))))) -> f(f(f(Y, Y), f(f(Y, Y), f(Y, Y))), f(Y, Y))
+25. f(f(f(f(X, X), f(X, X)), f(Y, f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)))), f(f(f(f(f(X, X), f(X, X)), f(Y, f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)))), f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X))), f(f(f(X, X), f(X, X)), f(Y, f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)))))) -> f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X))
+26. f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), V), f(V, f(Y, f(U, f(f(X, Y), f(Y, f(f(Z, X), f(W, X))))))))) -> V
+27. f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), V), f(V, f(Y, Y)))) -> V
+28. f(f(X, Y), f(f(f(X, Y), f(f(X, Y), f(f(X, Y), f(X, Y)))), f(X, Y))) -> f(f(X, Y), f(f(X, Y), f(X, Y)))
+29. f(X, f(f(X, f(X, f(X, X))), X)) -> f(X, f(X, X))
+30. f(f(f(X, Y), f(f(X, Y), f(X, Y))), f(f(f(f(X, Y), f(f(X, Y), f(X, Y))), Y), f(Y, f(X, Y)))) -> Y
+31. f(f(f(X, Y), f(f(X, Y), f(X, Y))), f(f(f(f(X, Y), f(f(X, Y), f(X, Y))), Z), f(Z, f(X, Y)))) -> Z
+32. f(f(X, Y), f(f(f(X, Y), f(f(X, Y), f(X, Y))), f(X, Y))) -> f(f(X, Y), f(X, Y))
+33. f(X, f(f(X, f(X, X)), X)) -> f(X, X)
+34. f(f(X, f(X, X)), f(f(f(X, f(X, X)), Y), f(Y, X))) -> Y
+35. f(f(X, X), f(f(f(X, X), Y), f(Y, X))) -> Y
+36. f(f(X, f(X, X)), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))) -> f(f(X, f(X, X)), X)
+37. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X))))) -> Y
+38. f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X))) -> X
+39. f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X))) -> X
+40. f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X)))) -> f(f(X, f(X, X)), X)
+41. f(f(f(f(X, f(X, f(X, X))), X), f(X, X)), f(f(f(f(f(X, f(X, f(X, X))), X), f(X, X)), X), f(X, f(X, X)))) -> X
+42. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), Y), f(Y, f(f(X, X), f(X, X))))) -> Y
+43. f(f(X, X), f(Y, f(f(f(f(X, X), Y), f(Y, X)), X))) -> f(f(f(X, X), Y), f(Y, X))
+44. f(f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)), f(f(f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)), X), f(X, f(X, X)))) -> X
+45. f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), f(X, X))) -> X
+46. f(f(f(X, Y), f(X, Y)), f(Y, f(f(f(f(f(X, Y), f(X, Y)), Y), f(f(X, Y), f(X, Y))), f(X, Y)))) -> f(f(f(f(X, Y), f(X, Y)), Y), f(f(X, Y), f(X, Y)))
+47. f(X, f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X)) -> f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))
+48. f(X, f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X)) -> f(f(f(X, f(X, X)), X), f(X, X))
+49. f(f(X, X), f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X))) -> f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X))
+50. f(f(f(f(f(X, X), Y), f(Y, X)), f(f(f(X, X), Y), f(Y, X))), f(f(f(f(f(f(X, X), Y), f(Y, X)), f(f(f(X, X), Y), f(Y, X))), f(X, X)), Y)) -> f(X, X)
+51. f(f(f(f(f(X, X), X), f(X, X)), f(f(f(f(X, X), X), f(X, X)), f(f(f(X, X), X), f(X, X)))), f(f(f(f(f(f(X, X), X), f(X, X)), f(f(f(f(X, X), X), f(X, X)), f(f(f(X, X), X), f(X, X)))), f(X, X)), X)) -> f(X, X)
+52. f(X, f(f(X, f(X, X)), f(f(f(X, X), f(Y, X)), f(f(Y, X), X)))) -> f(X, X)
+53. f(f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y)), f(f(f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y)), f(f(Y, f(Y, Y)), Y)), f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y)))) -> f(f(Y, f(Y, Y)), Y)
+54. f(f(f(X, X), f(Y, f(f(X, f(X, X)), X))), f(f(f(f(X, X), f(Y, f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X)), f(f(X, X), f(Y, f(f(X, f(X, X)), X))))) -> f(f(X, f(X, X)), X)
+55. f(f(f(f(X, X), Y), f(Y, X)), f(f(f(f(f(X, X), Y), f(Y, X)), Z), f(Z, f(Y, Y)))) -> Z
+56. f(f(f(X, f(X, f(X, X))), X), f(f(f(f(X, f(X, f(X, X))), X), Y), f(Y, f(X, f(X, f(X, X)))))) -> Y
+57. f(f(X, f(X, f(X, X))), f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(X, f(X, f(X, X))))) -> f(f(X, f(X, f(X, X))), X)
+58. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), Y), f(Y, f(f(X, X), f(Z, f(f(X, f(X, X)), X)))))) -> Y
+59. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), Y), f(Y, f(f(Z, f(f(X, f(X, X)), X)), f(X, X))))) -> Y
+60. f(f(f(X, f(X, f(X, X))), X), f(f(f(f(X, f(X, f(X, X))), X), Y), f(Y, f(f(X, f(X, X)), f(X, f(X, X)))))) -> Y
+61. f(f(f(f(X, f(X, f(X, X))), X), f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X))), f(f(f(f(f(X, f(X, f(X, X))), X), f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X))), X), f(X, f(X, X)))) -> X
+62. f(f(X, f(X, X)), f(Y, f(f(f(f(X, f(X, X)), Y), f(Y, X)), X))) -> f(f(f(X, f(X, X)), Y), f(Y, X))
+63. f(f(X, X), f(f(f(X, X), f(f(f(Y, Y), X), f(X, Y))), f(X, X))) -> f(f(f(Y, Y), X), f(X, Y))
+64. f(f(f(X, X), X), f(X, X)) -> f(f(X, X), f(X, f(X, X)))
+65. f(f(X, X), f(f(X, X), f(X, f(X, X)))) -> X
+66. f(X, f(f(X, X), f(X, f(f(X, X), f(X, f(X, X)))))) -> X
+67. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))) -> X
+68. f(f(X, X), f(X, f(f(f(X, X), f(X, f(X, X))), X))) -> f(f(X, X), f(X, f(X, X)))
+69. f(X, f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X)))))) -> Y
+70. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), Y), f(Y, f(X, X)))) -> Y
+71. f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)), X)) -> f(X, X)
+72. f(f(f(X, X), X), f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X))) -> f(f(X, X), f(X, f(X, X)))
+73. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))) -> f(f(X, X), X)
+74. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), Y), f(Y, f(f(X, X), X)))) -> Y
+75. f(X, f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X)))))) -> f(f(X, f(X, X)), X)
+76. f(f(f(f(X, X), f(X, f(X, X))), f(Y, f(X, X))), f(f(f(f(f(X, X), f(X, f(X, X))), f(Y, f(X, X))), f(X, X)), f(f(f(X, X), f(X, f(X, X))), f(Y, f(X, X))))) -> f(X, X)
+77. f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))) -> f(X, X)
+78. f(f(f(X, f(Y, Y)), f(f(Y, Y), f(Y, f(Y, Y)))), f(f(f(f(X, f(Y, Y)), f(f(Y, Y), f(Y, f(Y, Y)))), f(Y, Y)), f(f(X, f(Y, Y)), f(f(Y, Y), f(Y, f(Y, Y)))))) -> f(Y, Y)
+79. f(f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))), f(X, X)), X)) -> f(X, X)
+80. f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(f(X, f(X, X)), f(X, f(X, X))))) -> f(f(X, f(X, f(X, X))), X)
+81. f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), Y), f(Y, f(X, X)))) -> Y
+82. f(f(X, f(X, X)), f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))), X))) -> f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X)))
+83. f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))) -> f(f(X, X), X)
+84. f(f(f(f(X, X), f(X, f(X, X))), f(f(X, f(X, X)), f(X, f(X, X)))), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), X)) -> f(X, X)
+85. f(f(f(f(f(X, X), Y), f(Y, X)), f(f(Y, X), f(Y, X))), f(f(f(f(f(f(X, X), Y), f(Y, X)), f(f(Y, X), f(Y, X))), f(X, X)), Y)) -> f(X, X)
+86. f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, X))), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, X))), f(X, X)), X)) -> f(X, X)
+87. f(f(f(f(f(X, X), Y), f(Y, X)), f(f(f(f(X, X), Y), f(Y, X)), f(f(f(X, X), Y), f(Y, X)))), f(f(f(f(f(f(X, X), Y), f(Y, X)), f(f(f(f(X, X), Y), f(Y, X)), f(f(f(X, X), Y), f(Y, X)))), f(X, X)), Y)) -> f(X, X)
+88. f(f(X, f(X, X)), f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), X))) -> f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))
+89. f(X, f(f(X, f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))))) -> f(X, f(X, X))
+90. f(f(X, f(X, X)), f(f(f(X, f(X, X)), X), f(X, f(X, X)))) -> X
+91. f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), Y), f(Y, f(X, X)))) -> Y
+92. f(f(X, f(X, X)), f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), X))) -> f(f(f(X, f(X, X)), X), f(X, f(X, X)))
+93. f(f(X, X), f(f(f(X, X), f(f(f(X, f(X, X)), X), f(X, f(X, X)))), f(X, X))) -> f(f(f(X, f(X, X)), X), f(X, f(X, X)))
+94. f(f(f(X, X), f(X, f(X, X))), f(X, f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(X, X)))) -> f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))
+95. f(f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(X, f(X, X)), X), f(X, f(X, X)))), f(f(f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(X, f(X, X)), X), f(X, f(X, X)))), f(X, f(X, X))), X)) -> f(X, f(X, X))
+96. f(X, f(f(X, f(X, f(X, X))), f(f(f(X, f(X, X)), f(Y, X)), f(f(Y, X), X)))) -> f(X, f(X, X))
+97. f(f(X, X), f(f(f(X, X), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), f(X, X))) -> f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))
+98. f(X, f(f(X, f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), X)) -> f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))
+99. f(f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))), f(f(f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))), f(X, Y)), f(f(X, Y), f(Y, Y)))) -> f(X, Y)
+100. f(X, f(f(X, f(f(f(Y, X), f(Y, X)), f(Y, X))), f(f(f(Y, X), f(Y, X)), f(f(Y, X), f(f(Y, X), f(Y, X)))))) -> f(f(f(Y, X), f(Y, X)), f(Y, X))
+101. f(f(f(f(f(X, f(X, X)), Y), f(Y, X)), f(f(f(X, f(X, X)), Y), f(Y, X))), f(f(f(f(f(f(X, f(X, X)), Y), f(Y, X)), f(f(f(X, f(X, X)), Y), f(Y, X))), f(X, f(X, X))), Y)) -> f(X, f(X, X))
+102. f(f(X, X), f(f(f(X, X), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(f(X, X), f(f(X, X), f(X, X)))), f(X, X)), X))) -> f(f(f(X, X), f(f(X, X), f(f(X, X), f(X, X)))), f(X, X))
+103. f(X, f(f(X, X), f(f(f(X, f(X, X)), X), f(f(Y, X), f(Z, X))))) -> f(f(X, f(X, X)), X)
+104. f(f(X, X), f(f(f(X, X), Y), f(Y, f(f(f(X, X), f(X, f(X, X))), f(Z, f(X, X)))))) -> Y
+105. f(f(X, X), f(f(f(X, X), Y), f(Y, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))))) -> Y
+106. f(f(X, X), f(X, f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))))) -> f(f(X, X), f(X, f(X, X)))
+107. f(f(X, X), f(f(f(X, X), Y), f(Y, f(f(Z, f(X, X)), f(f(X, X), f(X, f(X, X))))))) -> Y
+108. f(f(X, X), f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X))) -> f(f(X, f(X, X)), X)
+109. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(X, f(X, X)), X))) -> f(X, X)
+110. f(f(X, X), f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X))) -> f(f(X, f(X, X)), f(X, f(X, X)))
+111. f(f(X, X), f(f(f(X, X), f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))), f(X, X))) -> f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))
+112. f(f(X, X), f(f(f(X, X), f(f(X, f(X, X)), f(f(X, X), f(X, X)))), f(X, X))) -> f(f(X, f(X, X)), f(f(X, X), f(X, X)))
+113. f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), Y), f(Y, f(f(f(X, X), f(X, f(X, X))), X)))) -> Y
+114. f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), Y), f(Y, f(X, X)))) -> Y
+115. f(f(X, f(Y, f(f(X, X), f(X, f(X, X))))), f(f(f(X, f(Y, f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(X, X)))), f(X, f(Y, f(f(X, X), f(X, f(X, X))))))) -> f(f(X, X), f(X, f(X, X)))
+116. f(f(f(X, f(f(Y, Y), f(Y, f(Y, Y)))), Y), f(f(f(f(X, f(f(Y, Y), f(Y, f(Y, Y)))), Y), f(f(Y, Y), f(Y, f(Y, Y)))), f(f(X, f(f(Y, Y), f(Y, f(Y, Y)))), Y))) -> f(f(Y, Y), f(Y, f(Y, Y)))
+117. f(f(X, X), f(X, f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(Y, f(X, X)))))) -> f(f(X, X), f(X, f(X, X)))
+118. f(f(X, X), f(X, f(f(f(X, X), f(X, f(X, X))), f(f(Y, f(X, X)), f(f(X, X), f(X, f(X, X))))))) -> f(f(X, X), f(X, f(X, X)))
+119. f(f(f(f(X, X), Y), f(Y, X)), f(f(f(f(f(X, X), Y), f(Y, X)), Z), f(Z, f(Y, f(W, f(f(f(X, X), Y), f(Y, X))))))) -> Z
+120. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), Y), f(Y, f(X, f(Z, f(f(X, X), f(X, f(X, X)))))))) -> Y
+121. f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, X))), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, X))), Y), f(Y, f(f(X, X), f(X, f(X, X)))))) -> Y
+122. f(f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))), f(f(f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))), f(X, f(X, X))), f(f(X, f(X, X)), X))) -> f(X, f(X, X))
+123. f(f(f(X, f(X, f(X, X))), X), f(f(f(f(X, f(X, f(X, X))), X), Y), f(Y, f(f(X, f(X, X)), f(Z, f(f(X, f(X, f(X, X))), X)))))) -> Y
+124. f(f(f(X, f(X, f(X, X))), X), f(f(f(f(X, f(X, f(X, X))), X), Y), f(Y, f(f(Z, f(f(X, f(X, f(X, X))), X)), f(X, f(X, X)))))) -> Y
+125. f(f(f(X, f(X, X)), f(Y, f(f(X, f(X, f(X, X))), X))), f(f(f(f(X, f(X, X)), f(Y, f(f(X, f(X, f(X, X))), X))), f(f(X, f(X, f(X, X))), X)), f(f(X, f(X, X)), f(Y, f(f(X, f(X, f(X, X))), X))))) -> f(f(X, f(X, f(X, X))), X)
+126. f(f(f(X, f(f(Y, f(Y, f(Y, Y))), Y)), f(Y, f(Y, Y))), f(f(f(f(X, f(f(Y, f(Y, f(Y, Y))), Y)), f(Y, f(Y, Y))), f(f(Y, f(Y, f(Y, Y))), Y)), f(f(X, f(f(Y, f(Y, f(Y, Y))), Y)), f(Y, f(Y, Y))))) -> f(f(Y, f(Y, f(Y, Y))), Y)
+127. f(X, f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))))) -> f(f(X, f(X, f(X, X))), X)
+128. f(f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X))), f(f(f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X))), Y), f(Y, f(X, f(X, X))))) -> Y
+129. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), Y), f(Y, f(f(Z, f(f(X, X), f(X, f(X, X)))), X)))) -> Y
+130. f(f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))), f(f(f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))), Y), f(Y, X))) -> Y
+131. f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y)))), f(f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y)))), f(f(X, Y), f(Z, Y))), Y)) -> f(f(X, Y), f(Z, Y))
+132. f(f(f(f(X, f(X, X)), Y), f(Y, X)), f(f(f(f(f(X, f(X, X)), Y), f(Y, X)), Z), f(Z, f(Y, Y)))) -> Z
+133. f(f(f(f(X, X), f(X, f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(f(X, X), f(X, f(X, X)))))), f(f(f(f(f(X, X), f(X, f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(f(X, X), f(X, f(X, X)))))), X), X)) -> X
+134. f(f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(X, Y), f(Y, f(f(Z, X), f(W, X))))), f(f(f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(X, Y), f(Y, f(f(Z, X), f(W, X))))), X), Y)) -> X
+135. f(f(f(f(X, X), Y), f(Y, X)), f(f(f(f(f(X, X), Y), f(Y, X)), Z), f(Z, f(f(W, f(f(f(X, X), Y), f(Y, X))), Y)))) -> Z
+136. f(f(X, f(f(f(f(Y, Y), X), f(X, Y)), f(f(f(Y, Y), X), f(X, Y)))), f(f(f(X, f(f(f(f(Y, Y), X), f(X, Y)), f(f(f(Y, Y), X), f(X, Y)))), Z), f(Z, X))) -> Z
+137. f(f(f(f(X, X), f(X, f(X, X))), X), f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))), f(f(f(X, X), f(X, f(X, X))), X))) -> f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))
+138. f(f(X, X), f(f(f(X, X), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))), f(X, X))) -> f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))
+139. f(f(X, f(Y, f(f(f(Z, Z), X), f(X, Z)))), f(f(f(X, f(Y, f(f(f(Z, Z), X), f(X, Z)))), f(f(f(Z, Z), X), f(X, Z))), f(X, f(Y, f(f(f(Z, Z), X), f(X, Z)))))) -> f(f(f(Z, Z), X), f(X, Z))
+140. f(f(f(X, f(f(f(Y, Y), Z), f(Z, Y))), Z), f(f(f(f(X, f(f(f(Y, Y), Z), f(Z, Y))), Z), f(f(f(Y, Y), Z), f(Z, Y))), f(f(X, f(f(f(Y, Y), Z), f(Z, Y))), Z))) -> f(f(f(Y, Y), Z), f(Z, Y))
+141. f(X, f(f(X, f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), X)) -> f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))
+142. f(f(X, X), f(f(f(X, X), f(X, f(X, X))), f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), X))) -> f(X, f(f(f(X, X), f(X, f(X, X))), X))
+143. f(f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X)), f(f(f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X)), Y), f(Y, f(X, X)))) -> Y
+144. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, X)))), f(f(X, X), f(X, f(X, X))))) -> f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, X)))
+145. f(X, f(X, f(f(f(X, X), f(X, f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(X, X)))))) -> f(f(X, X), f(X, f(f(X, X), f(X, f(X, X)))))
+146. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(f(X, X), f(X, f(X, X))))))) -> X
+147. f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), Y), f(Y, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))))) -> Y
+148. f(f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(X, f(f(f(X, X), f(X, f(X, X))), X))), f(f(f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(X, f(f(f(X, X), f(X, f(X, X))), X))), f(X, X)), f(f(X, X), f(X, f(X, X))))) -> f(X, X)
+149. f(f(f(X, X), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))) -> f(f(X, X), X)
+150. f(f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)))), f(f(f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)))), f(X, Y)), f(f(X, Y), f(Y, Y)))) -> f(X, Y)
+151. f(f(f(f(f(X, f(X, X)), Y), f(Y, X)), f(f(Y, X), f(Y, X))), f(f(f(f(f(f(X, f(X, X)), Y), f(Y, X)), f(f(Y, X), f(Y, X))), f(X, f(X, X))), Y)) -> f(X, f(X, X))
+152. f(f(f(f(f(X, f(X, X)), Y), f(Y, X)), f(f(f(f(X, f(X, X)), Y), f(Y, X)), f(f(f(X, f(X, X)), Y), f(Y, X)))), f(f(f(f(f(f(X, f(X, X)), Y), f(Y, X)), f(f(f(f(X, f(X, X)), Y), f(Y, X)), f(f(f(X, f(X, X)), Y), f(Y, X)))), f(X, f(X, X))), Y)) -> f(X, f(X, X))
+153. f(f(f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X)), f(f(f(f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))) -> X
+154. f(f(f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X), f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X)), f(f(f(f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X), f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X)), X), f(f(f(X, f(X, X)), X), f(X, X)))) -> X
+155. f(X, f(f(X, f(X, f(f(f(f(Y, Y), X), f(X, Y)), f(f(f(Y, Y), X), f(X, Y))))), X)) -> f(X, f(f(f(f(Y, Y), X), f(X, Y)), f(f(f(Y, Y), X), f(X, Y))))
+156. f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))))), f(f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))))), f(f(X, Y), f(Z, Y))), Y)) -> f(f(X, Y), f(Z, Y))
+157. f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), f(f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), W), f(W, f(Z, Z)))) -> W
+158. f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)), f(f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)), Y), f(Y, f(X, X)))) -> Y
+159. f(f(X, f(X, X)), f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)))), f(X, f(X, X)))) -> f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)))
+160. f(f(X, X), f(f(f(X, f(X, X)), X), f(f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X)), X))) -> f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X))
+161. f(X, f(f(X, f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X)))) -> f(X, X)
+162. f(f(X, X), f(f(f(X, X), f(f(f(Y, f(Y, Y)), X), f(X, Y))), f(X, X))) -> f(f(f(Y, f(Y, Y)), X), f(X, Y))
+163. f(f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))))), f(f(f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))))), X), Y)) -> X
+164. f(f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(X, f(X, X)), X), f(X, f(X, X))))), f(f(f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(X, f(X, X)), X), f(X, f(X, X))))), f(X, f(X, X))), X)) -> f(X, f(X, X))
+165. f(f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(X, f(X, X)), f(X, f(X, X)))), f(f(f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))), X)) -> f(X, f(X, X))
+166. f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))) -> f(f(X, X), X)
+167. f(f(f(X, X), f(X, f(f(X, X), f(X, f(X, X))))), f(f(f(f(X, X), f(X, f(f(X, X), f(X, f(X, X))))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))) -> f(f(X, X), X)
+168. f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))) -> f(f(X, X), X)
+169. f(f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))), f(f(f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(X, X)))), X)) -> f(f(X, X), f(X, f(X, X)))
+170. f(f(f(X, Y), f(Y, Y)), f(f(f(f(X, Y), f(Y, Y)), f(f(X, Y), f(Y, Y))), f(f(f(f(f(X, Y), f(Y, Y)), f(f(f(X, Y), f(Y, Y)), f(f(X, Y), f(Y, Y)))), f(f(X, Y), f(Y, Y))), f(X, Y)))) -> f(f(f(f(X, Y), f(Y, Y)), f(f(f(X, Y), f(Y, Y)), f(f(X, Y), f(Y, Y)))), f(f(X, Y), f(Y, Y)))
+171. f(f(f(X, f(X, X)), X), f(Y, f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), f(X, f(X, X))))) -> f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X))))
+172. f(f(X, X), f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), X))) -> f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X))
+173. f(f(X, f(X, X)), f(f(f(X, f(X, X)), f(f(X, X), f(X, X))), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(f(X, X), f(X, X)))), f(X, f(X, X))), X))) -> f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(f(X, X), f(X, X)))), f(X, f(X, X)))
+174. f(f(X, f(X, X)), f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))), f(X, f(X, X))), X))) -> f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))), f(X, f(X, X)))
+175. f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), Y), f(Y, f(X, f(Z, f(f(f(X, f(X, X)), X), f(X, f(X, X)))))))) -> Y
+176. f(f(f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X))))), f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X)))))), f(f(f(f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X))))), f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X)))))), X), Y)) -> X
+177. f(f(f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X))), f(f(f(f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X))), f(X, X)), f(f(X, f(X, X)), X))) -> f(X, X)
+178. f(X, f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(Y, X), f(Z, X))))) -> f(f(X, f(X, f(X, X))), X)
+179. f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), V), f(V, f(f(U, f(f(X, Y), f(Y, f(f(Z, X), f(W, X))))), Y)))) -> V
+180. f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), Y), f(Y, f(f(Z, f(f(f(X, f(X, X)), X), f(X, f(X, X)))), X)))) -> Y
+181. f(f(f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y)), f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y))), f(f(f(f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y)), f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y))), f(Y, Y)), f(f(f(Y, Y), X), f(X, Y)))) -> f(Y, Y)
+182. f(f(f(X, X), f(X, f(X, X))), f(Y, f(f(f(f(f(X, X), f(X, f(X, X))), Y), f(Y, f(f(X, X), X))), f(X, X)))) -> f(f(f(f(X, X), f(X, f(X, X))), Y), f(Y, f(f(X, X), X)))
+183. f(f(X, X), f(f(f(X, X), f(f(Y, X), f(X, f(f(Z, Y), f(W, Y))))), f(X, X))) -> f(f(Y, X), f(X, f(f(Z, Y), f(W, Y))))
+184. f(f(f(X, X), X), f(X, f(f(Y, f(X, X)), f(Z, f(X, X))))) -> f(f(X, X), f(X, f(X, X)))
+185. f(f(f(X, X), X), f(X, f(f(f(X, X), f(X, X)), f(f(X, X), f(f(X, X), f(X, X)))))) -> f(f(X, X), f(X, f(X, X)))
+186. f(f(f(X, X), X), f(X, f(f(f(X, X), f(X, f(X, X))), f(Y, f(X, X))))) -> f(f(X, X), f(X, f(X, X)))
+187. f(f(f(X, X), X), f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))) -> f(f(X, X), f(X, f(X, X)))
+188. f(f(f(X, X), X), f(X, f(f(Y, f(X, X)), f(f(X, X), f(X, f(X, X)))))) -> f(f(X, X), f(X, f(X, X)))
+189. f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))) -> f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))
+190. f(f(f(f(X, f(X, X)), X), f(X, X)), f(X, f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)), f(f(X, f(X, X)), X)))) -> f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X))
+  (simplifying rules with respect to one another...)
+  (delete rule 1)
+  (delete rule 21)
+  (delete rule 22)
+  (delete rule 23)
+  (delete rule 24)
+  (delete rule 25)
+  (delete rule 28)
+  (delete rule 30)
+  (delete rule 31)
+  (delete rule 32)
+  (delete rule 51)
+  (delete rule 66)
+  (delete rule 133)
+191. f(f(f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X), f(X, X)), f(f(f(f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X), f(X, X)), X), f(f(f(X, f(X, X)), X), f(X, X)))) -> X
+192. f(f(f(X, X), f(X, f(X, X))), f(Y, f(f(f(f(f(X, X), f(X, f(X, X))), Y), f(Y, f(X, X))), f(f(X, X), X)))) -> f(f(f(f(X, X), f(X, f(X, X))), Y), f(Y, f(X, X)))
+193. f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), Z), f(Z, f(f(f(X, Y), f(Y, Y)), f(W, f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))))))) -> Z
+194. f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), Z), f(Z, f(f(W, f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))), f(f(X, Y), f(Y, Y)))))) -> Z
+195. f(f(f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), f(X, X)), f(f(f(f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))) -> X
+196. f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(X, Y), f(Z, Y)), f(f(X, Y), f(Z, Y)))), f(f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(X, Y), f(Z, Y)), f(f(X, Y), f(Z, Y)))), f(f(X, Y), f(Z, Y))), Y)) -> f(f(X, Y), f(Z, Y))
+197. f(f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X))), f(f(f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X))), f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))) -> f(X, X)
+198. f(f(X, X), f(X, f(f(f(X, X), f(X, f(X, X))), f(f(Y, f(X, X)), f(Z, f(X, X)))))) -> f(f(X, X), f(X, f(X, X)))
+199. f(f(f(f(X, f(X, X)), Y), f(Y, X)), f(f(f(f(f(X, f(X, X)), Y), f(Y, X)), Z), f(Z, f(Y, f(W, f(f(f(X, f(X, X)), Y), f(Y, X))))))) -> Z
+200. f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))) -> f(f(X, X), X)
+201. f(f(f(f(X, f(X, X)), Y), f(Y, X)), f(f(f(f(f(X, f(X, X)), Y), f(Y, X)), Z), f(Z, f(f(W, f(f(f(X, f(X, X)), Y), f(Y, X))), Y)))) -> Z
+202. f(f(X, f(f(f(f(Y, f(Y, Y)), X), f(X, Y)), f(f(f(Y, f(Y, Y)), X), f(X, Y)))), f(f(f(X, f(f(f(f(Y, f(Y, Y)), X), f(X, Y)), f(f(f(Y, f(Y, Y)), X), f(X, Y)))), Z), f(Z, X))) -> Z
+203. f(f(X, X), f(f(f(f(X, X), Y), f(Y, X)), f(f(Y, f(f(f(f(X, X), Y), f(Y, X)), X)), X))) -> f(Y, f(f(f(f(X, X), Y), f(Y, X)), X))
+204. f(f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X)), f(f(f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X)), Y), f(Y, f(f(f(X, X), X), f(f(X, X), f(X, f(X, X))))))) -> Y
+205. f(f(X, f(f(f(f(f(Y, X), f(Z, X)), X), f(f(Y, X), f(Z, X))), f(f(f(f(Y, X), f(Z, X)), X), f(f(Y, X), f(Z, X))))), f(f(f(X, f(f(f(f(f(Y, X), f(Z, X)), X), f(f(Y, X), f(Z, X))), f(f(f(f(Y, X), f(Z, X)), X), f(f(Y, X), f(Z, X))))), W), f(W, X))) -> W
+206. f(f(X, X), f(X, f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), X))))) -> f(f(X, X), f(X, f(X, X)))
+207. f(f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(Y, f(f(Z, X), f(W, X))), f(Y, f(f(Z, X), f(W, X))))), f(f(f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(Y, f(f(Z, X), f(W, X))), f(Y, f(f(Z, X), f(W, X))))), X), Y)) -> X
+208. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(X, X))), f(f(X, f(X, X)), X)), f(X, f(X, X))))) -> f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(X, X))), f(f(X, f(X, X)), X))
+209. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), f(f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X)), f(X, f(X, X))))) -> f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X))
+210. f(f(f(X, X), f(X, X)), f(f(f(X, f(X, X)), X), f(f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))), f(X, X)))) -> f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X)))
+211. f(f(f(X, f(X, X)), X), f(f(X, X), f(f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))))) -> f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(X, f(X, X)), X))
+212. f(f(f(X, X), f(X, X)), f(f(f(f(f(X, X), f(X, X)), X), f(f(X, X), f(X, X))), f(f(X, f(f(f(f(f(X, X), f(X, X)), X), f(f(X, X), f(X, X))), f(X, X))), f(X, X)))) -> f(X, f(f(f(f(f(X, X), f(X, X)), X), f(f(X, X), f(X, X))), f(X, X)))
+213. f(f(f(f(f(f(X, f(X, f(X, X))), X), f(X, X)), X), f(X, f(X, X))), f(f(f(f(f(f(f(X, f(X, f(X, X))), X), f(X, X)), X), f(X, f(X, X))), Y), f(Y, f(X, X)))) -> Y
+214. f(f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(X, f(X, X)), f(X, f(X, X)))), f(f(f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))), f(f(X, f(X, X)), X))) -> f(X, f(X, X))
+215. f(f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))))), f(f(f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))))), f(X, f(X, X))), f(f(X, f(X, X)), X))) -> f(X, f(X, X))
+216. f(f(X, X), f(X, f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(f(X, X), f(X, X))))))) -> f(f(X, X), f(X, f(X, X)))
+217. f(f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(X, f(X, X)), X), f(X, f(X, X))))), f(f(f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(X, f(X, X)), X), f(X, f(X, X))))), Y), f(Y, X))) -> Y
+218. f(f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y)))), f(f(f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y)))), f(f(X, Y), f(Y, Y))), Z)) -> f(f(X, Y), f(Y, Y))
+219. f(f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X))))), f(f(f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X))))), f(f(X, f(X, X)), X)), Y)) -> f(f(X, f(X, X)), X)
+220. f(f(f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X)))), f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X)))), f(f(X, X), f(X, X))), f(f(X, f(X, X)), X))) -> f(f(X, X), f(X, X))
+221. f(f(f(f(X, f(X, X)), X), f(X, X)), f(X, f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(f(f(X, f(X, X)), X), f(X, X))), f(X, X)))) -> f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(f(f(X, f(X, X)), X), f(X, X)))
+222. f(f(f(f(X, f(X, X)), X), f(X, X)), f(X, f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)), f(X, X)))) -> f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X))
+223. f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), f(X, f(f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X)), f(f(X, f(X, X)), X)))) -> f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X))
+224. f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), Y), f(Y, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))))) -> Y
+225. f(f(f(X, X), f(X, f(X, X))), f(X, f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X)))) -> f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))
+226. f(f(X, f(Y, f(f(f(X, f(X, X)), X), f(X, f(X, X))))), f(f(f(X, f(Y, f(f(f(X, f(X, X)), X), f(X, f(X, X))))), f(f(f(X, f(X, X)), X), f(X, f(X, X)))), f(X, f(Y, f(f(f(X, f(X, X)), X), f(X, f(X, X))))))) -> f(f(f(X, f(X, X)), X), f(X, f(X, X)))
+227. f(f(f(X, f(f(f(Y, f(Y, Y)), Y), f(Y, f(Y, Y)))), Y), f(f(f(f(X, f(f(f(Y, f(Y, Y)), Y), f(Y, f(Y, Y)))), Y), f(f(f(Y, f(Y, Y)), Y), f(Y, f(Y, Y)))), f(f(X, f(f(f(Y, f(Y, Y)), Y), f(Y, f(Y, Y)))), Y))) -> f(f(f(Y, f(Y, Y)), Y), f(Y, f(Y, Y)))
+228. f(f(f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X)), f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X))), f(f(f(f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X)), f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X))), f(X, X)), f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)))) -> f(X, X)
+229. f(f(f(X, X), X), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(f(Y, f(f(X, X), X)), f(Z, f(f(X, X), X)))))) -> f(X, X)
+230. f(f(X, X), f(f(f(X, X), f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X))), f(X, X))) -> f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X))
+231. f(f(X, X), f(f(f(X, X), f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X))), f(X, X))) -> f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X))
+232. f(f(f(f(X, Y), f(Y, Y)), f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)))), f(f(f(f(f(X, Y), f(Y, Y)), f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)))), Z), f(Z, f(f(X, Y), f(Y, Y))))) -> Z
+233. f(f(X, f(Y, f(f(f(Z, f(Z, Z)), X), f(X, Z)))), f(f(f(X, f(Y, f(f(f(Z, f(Z, Z)), X), f(X, Z)))), f(f(f(Z, f(Z, Z)), X), f(X, Z))), f(X, f(Y, f(f(f(Z, f(Z, Z)), X), f(X, Z)))))) -> f(f(f(Z, f(Z, Z)), X), f(X, Z))
+234. f(f(f(X, f(f(f(Y, f(Y, Y)), Z), f(Z, Y))), Z), f(f(f(f(X, f(f(f(Y, f(Y, Y)), Z), f(Z, Y))), Z), f(f(f(Y, f(Y, Y)), Z), f(Z, Y))), f(f(X, f(f(f(Y, f(Y, Y)), Z), f(Z, Y))), Z))) -> f(f(f(Y, f(Y, Y)), Z), f(Z, Y))
+235. f(f(X, X), f(f(f(X, X), f(f(f(f(Y, Z), f(Z, Z)), X), f(X, f(Y, Z)))), f(X, X))) -> f(f(f(f(Y, Z), f(Z, Z)), X), f(X, f(Y, Z)))
+236. f(f(X, Y), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(f(f(f(X, Y), f(Y, Y)), f(Z, f(X, Y))), f(f(Z, f(X, Y)), f(X, Y))))) -> f(f(X, Y), f(Y, Y))
+237. f(f(f(X, f(f(f(Y, Z), f(f(Y, Z), f(Z, Z))), f(Y, Z))), f(f(Y, Z), f(Z, Z))), f(f(f(f(X, f(f(f(Y, Z), f(f(Y, Z), f(Z, Z))), f(Y, Z))), f(f(Y, Z), f(Z, Z))), f(f(f(Y, Z), f(f(Y, Z), f(Z, Z))), f(Y, Z))), f(f(X, f(f(f(Y, Z), f(f(Y, Z), f(Z, Z))), f(Y, Z))), f(f(Y, Z), f(Z, Z))))) -> f(f(f(Y, Z), f(f(Y, Z), f(Z, Z))), f(Y, Z))
+238. f(f(f(f(X, Y), f(Y, Y)), f(Z, f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)))), f(f(f(f(f(X, Y), f(Y, Y)), f(Z, f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)))), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))), f(f(f(X, Y), f(Y, Y)), f(Z, f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)))))) -> f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))
+239. f(f(X, X), f(Y, f(f(f(f(X, X), Y), f(Y, X)), f(f(Z, f(X, X)), f(W, f(X, X)))))) -> f(f(f(X, X), Y), f(Y, X))
+240. f(f(f(f(X, X), f(X, X)), f(f(X, X), f(f(X, X), f(X, X)))), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(f(X, X), f(X, X)))), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), X)))) -> f(X, X)
+241. f(f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), f(f(X, X), f(X, X))), f(f(f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), X)))) -> f(X, X)
+242. f(f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y)), f(f(f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y)), Z), f(Z, f(f(f(f(Y, Y), X), f(X, Y)), f(f(f(Y, Y), X), f(X, Y)))))) -> Z
+243. f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X)))))), f(f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X)))))), X), f(f(X, f(X, X)), X))) -> X
+244. f(f(X, X), f(f(f(X, X), f(f(f(f(X, X), f(Y, f(X, X))), f(f(Y, f(X, X)), X)), f(f(f(X, X), f(Y, f(X, X))), f(f(Y, f(X, X)), X)))), f(X, X))) -> f(f(f(f(X, X), f(Y, f(X, X))), f(f(Y, f(X, X)), X)), f(f(f(X, X), f(Y, f(X, X))), f(f(Y, f(X, X)), X)))
+245. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))))), f(f(X, X), f(X, f(X, X))))) -> f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))))
+246. f(f(f(X, Y), f(X, Y)), f(f(f(f(f(X, Y), f(X, Y)), Y), f(f(X, Y), f(X, Y))), f(f(Y, f(f(f(f(f(X, Y), f(X, Y)), Y), f(f(X, Y), f(X, Y))), f(X, Y))), f(X, Y)))) -> f(Y, f(f(f(f(f(X, Y), f(X, Y)), Y), f(f(X, Y), f(X, Y))), f(X, Y)))
+247. f(f(X, X), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X)), X))) -> f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X))
+248. f(f(f(f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)), X), f(X, f(X, X))), f(f(f(f(f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)), X), f(X, f(X, X))), Y), f(Y, f(X, X)))) -> Y
+249. f(f(f(X, f(f(f(f(f(Y, X), f(Y, X)), X), f(f(Y, X), f(Y, X))), f(Y, X))), f(X, f(f(f(f(f(Y, X), f(Y, X)), X), f(f(Y, X), f(Y, X))), f(Y, X)))), f(f(f(f(X, f(f(f(f(f(Y, X), f(Y, X)), X), f(f(Y, X), f(Y, X))), f(Y, X))), f(X, f(f(f(f(f(Y, X), f(Y, X)), X), f(f(Y, X), f(Y, X))), f(Y, X)))), f(f(Y, X), f(Y, X))), f(f(f(f(Y, X), f(Y, X)), X), f(f(Y, X), f(Y, X))))) -> f(f(Y, X), f(Y, X))
+250. f(f(f(f(f(X, X), f(Y, f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X)), f(f(X, X), f(Y, f(f(X, f(X, X)), X)))), f(f(f(f(f(f(X, X), f(Y, f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X)), f(f(X, X), f(Y, f(f(X, f(X, X)), X)))), Z), f(Z, f(f(f(X, X), f(Y, f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X))))) -> Z
+251. f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), Y), f(Y, f(f(X, f(X, X)), f(f(X, f(X, X)), X))))) -> Y
+252. f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))), f(f(X, f(X, X)), f(f(X, f(X, X)), X)))) -> f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))
+  (simplifying rules with respect to one another...)
+  (delete rule 212)
+253. f(f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))), Y), f(Y, f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X))))) -> Y
+254. f(f(f(f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y)), f(f(Y, f(Y, Y)), Y)), f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y))), f(f(f(f(f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y)), f(f(Y, f(Y, Y)), Y)), f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y))), Z), f(Z, f(f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y)), f(f(Y, f(Y, Y)), Y))))) -> Z
+255. f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), Y), f(Y, f(f(f(X, f(X, X)), X), f(Z, f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))))))) -> Y
+256. f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), Y), f(Y, f(f(Z, f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))), f(f(X, f(X, X)), X))))) -> Y
+257. f(f(f(X, f(f(Y, X), f(Y, X))), f(f(f(Y, X), f(Y, X)), f(f(Y, X), f(Y, X)))), f(f(f(f(X, f(f(Y, X), f(Y, X))), f(f(f(Y, X), f(Y, X)), f(f(Y, X), f(Y, X)))), f(f(Y, X), f(Y, X))), f(f(f(f(Y, X), f(Y, X)), f(f(Y, X), f(Y, X))), f(f(f(Y, X), f(Y, X)), f(Y, X))))) -> f(f(Y, X), f(Y, X))
+258. f(f(X, X), f(X, f(f(f(f(X, X), f(X, f(X, X))), f(Y, f(X, X))), f(f(Y, f(X, X)), f(f(X, X), X))))) -> f(f(X, X), f(X, f(X, X)))
+259. f(f(X, X), f(f(f(X, X), f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(X, f(f(f(X, X), f(X, f(X, X))), X)))), f(X, X))) -> f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(X, f(f(f(X, X), f(X, f(X, X))), X)))
+260. f(f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))))), f(f(f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))))), Y), f(Y, f(f(X, f(X, X)), X)))) -> Y
+261. f(f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))))), f(f(f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))))), X), f(X, X))) -> X
+262. f(f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))), Y), f(Y, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))))) -> Y
+263. f(f(X, f(f(f(f(f(Y, X), f(Y, X)), X), f(f(Y, X), f(Y, X))), f(Y, X))), f(f(f(X, f(f(f(f(f(Y, X), f(Y, X)), X), f(f(Y, X), f(Y, X))), f(Y, X))), Z), f(Z, f(f(f(f(f(Y, X), f(Y, X)), X), f(f(Y, X), f(Y, X))), f(f(f(f(Y, X), f(Y, X)), X), f(f(Y, X), f(Y, X))))))) -> Z
+264. f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, f(f(f(X, X), f(X, f(X, X))), X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))) -> f(X, f(f(f(X, X), f(X, f(X, X))), X))
+265. f(f(f(f(X, X), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), f(X, X)), f(f(f(f(f(X, X), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), f(X, X)), Y), f(Y, f(f(X, X), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))))))) -> Y
+266. f(X, f(Y, f(f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(X, X)))))) -> f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X)))))
+267. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, f(Y, f(f(X, X), f(X, f(X, X))))), f(f(Y, f(f(X, X), f(X, f(X, X)))), f(f(X, X), f(X, f(X, X))))))) -> X
+268. f(f(f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(X, f(X, f(X, X)))), f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(X, f(X, f(X, X))))), f(f(f(f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(X, f(X, f(X, X)))), f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(X, f(X, f(X, X))))), f(X, f(X, f(X, X)))), f(f(X, f(X, f(X, X))), X))) -> f(X, f(X, f(X, X)))
+269. f(f(X, f(X, X)), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(f(f(f(X, f(X, X)), X), f(Y, f(X, f(X, X)))), f(f(Y, f(X, f(X, X))), f(X, f(X, X)))))) -> f(f(X, f(X, X)), X)
+270. f(f(f(X, Y), f(Z, Y)), f(Y, f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(W, f(f(X, Y), f(Z, Y))), f(V, f(f(X, Y), f(Z, Y))))))) -> f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y)))
+271. f(X, f(f(X, f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(X, f(X, X)), X), f(X, f(X, X)))))), X)) -> f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(X, f(X, X)), X), f(X, f(X, X)))))
+272. f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))) -> f(f(X, X), X)
+273. f(f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(X, f(f(f(X, X), f(X, f(X, X))), X)))), f(f(f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(X, f(f(f(X, X), f(X, f(X, X))), X)))), f(X, X)), f(f(X, X), f(X, f(X, X))))) -> f(X, X)
+274. f(f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(f(X, X), f(X, f(X, X))), X))), f(f(f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(f(X, X), f(X, f(X, X))), X))), f(X, X)), f(f(X, X), f(X, f(X, X))))) -> f(X, X)
+275. f(f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X)), f(f(f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X)), Y), f(Y, f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)))))) -> Y
+276. f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X))), f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))))) -> f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X))
+277. f(f(X, f(X, X)), f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), X)), X))) -> f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), X))
+278. f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(X, f(X, X)), X)), f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(X, f(X, X)), X))), f(f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(X, f(X, X)), X)), f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X)), f(X, X))) -> f(f(X, f(X, X)), X)
+279. f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), X), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X)))) -> f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))
+280. f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X)))), f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)))) -> f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X)))
+281. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(X, X))), f(f(f(f(f(X, f(X, X)), X), f(X, X)), f(X, X)), f(f(X, X), f(f(X, f(X, X)), X))))) -> f(f(f(X, f(X, X)), X), f(X, X))
+282. f(X, f(f(X, f(X, f(f(f(f(Y, f(Y, Y)), X), f(X, Y)), f(f(f(Y, f(Y, Y)), X), f(X, Y))))), X)) -> f(X, f(f(f(f(Y, f(Y, Y)), X), f(X, Y)), f(f(f(Y, f(Y, Y)), X), f(X, Y))))
+283. f(f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), f(f(f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), Y), f(Y, f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))))) -> Y
+284. f(f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X), f(f(f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X), Y), f(Y, f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(f(X, f(X, X)), X), f(X, X)))))) -> Y
+285. f(f(f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X)), f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X))), f(f(f(f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X)), f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))) -> f(f(X, X), X)
+286. f(f(f(X, X), f(X, f(X, X))), f(X, f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(X, f(Y, f(f(X, X), f(X, f(X, X)))))))) -> f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))
+287. f(f(f(X, X), X), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(f(f(f(X, X), X), f(f(X, X), X)), f(f(f(X, X), X), f(f(f(X, X), X), f(f(X, X), X))))))) -> f(X, X)
+288. f(f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(f(f(X, f(X, X)), X), f(X, f(X, X)))), f(X, X))), f(f(f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(f(f(X, f(X, X)), X), f(X, f(X, X)))), f(X, X))), f(X, X)), f(f(f(X, f(X, X)), X), f(X, f(X, X))))) -> f(X, X)
+289. f(f(f(X, X), f(X, f(X, X))), f(X, f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(Y, f(f(X, X), f(X, f(X, X)))), X)))) -> f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))
+290. f(f(f(X, X), f(X, f(X, X))), f(Y, f(f(f(f(f(X, X), f(X, f(X, X))), Y), f(Y, f(X, X))), f(X, X)))) -> f(f(f(f(X, X), f(X, f(X, X))), Y), f(Y, f(X, X)))
+291. f(f(X, X), f(X, f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(f(f(X, X), f(X, f(X, X))), f(X, X))))) -> f(f(X, X), f(X, f(X, X)))
+292. f(f(X, X), f(X, f(f(f(f(X, X), f(X, f(X, X))), f(Y, f(X, X))), f(f(Y, f(X, X)), f(X, X))))) -> f(f(X, X), f(X, f(X, X)))
+293. f(f(X, f(Y, f(f(Z, X), f(X, f(f(W, Z), f(V, Z)))))), f(f(f(X, f(Y, f(f(Z, X), f(X, f(f(W, Z), f(V, Z)))))), f(f(Z, X), f(X, f(f(W, Z), f(V, Z))))), f(X, f(Y, f(f(Z, X), f(X, f(f(W, Z), f(V, Z)))))))) -> f(f(Z, X), f(X, f(f(W, Z), f(V, Z))))
+294. f(f(f(X, f(f(Y, Z), f(Z, f(f(W, Y), f(V, Y))))), Z), f(f(f(f(X, f(f(Y, Z), f(Z, f(f(W, Y), f(V, Y))))), Z), f(f(Y, Z), f(Z, f(f(W, Y), f(V, Y))))), f(f(X, f(f(Y, Z), f(Z, f(f(W, Y), f(V, Y))))), Z))) -> f(f(Y, Z), f(Z, f(f(W, Y), f(V, Y))))
+295. f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(f(X, X), f(f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(X, X)))))) -> f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))
+296. f(f(f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), f(X, X)), f(f(f(f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), f(X, X)), Y), f(Y, f(X, X)))) -> Y
+297. f(f(f(f(X, f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), X), f(f(X, f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), X)), f(f(f(f(f(X, f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), X), f(f(X, f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), X)), X), f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))))) -> X
+298. f(f(f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), f(f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X))), f(f(f(f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), f(f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X))), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))) -> X
+299. f(f(f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X), f(f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X), f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X))), f(f(f(f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X), f(f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X), f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X))), X), f(f(f(X, f(X, X)), X), f(X, X)))) -> X
+300. f(f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(X, f(X, f(X, X)))), f(f(f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(X, f(X, f(X, X)))), Y), f(Y, f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X))))) -> Y
+301. f(f(f(f(X, f(X, X)), f(f(f(X, X), f(Y, X)), f(f(Y, X), X))), f(f(X, f(X, X)), f(f(f(X, X), f(Y, X)), f(f(Y, X), X)))), f(f(f(f(f(X, f(X, X)), f(f(f(X, X), f(Y, X)), f(f(Y, X), X))), f(f(X, f(X, X)), f(f(f(X, X), f(Y, X)), f(f(Y, X), X)))), X), f(X, X))) -> X
+302. f(f(f(f(X, f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), X), f(X, X)), f(f(f(f(f(X, f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), X), f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))))) -> X
+303. f(X, f(f(X, f(X, f(f(f(f(f(Y, X), f(Z, X)), X), f(f(Y, X), f(Z, X))), f(f(f(f(Y, X), f(Z, X)), X), f(f(Y, X), f(Z, X)))))), X)) -> f(X, f(f(f(f(f(Y, X), f(Z, X)), X), f(f(Y, X), f(Z, X))), f(f(f(f(Y, X), f(Z, X)), X), f(f(Y, X), f(Z, X)))))
+304. f(f(f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X)), f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X))), f(f(f(f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X)), f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X))), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X)) -> f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))
+  (simplifying rules with respect to one another...)
+  (delete rule 145)
+305. f(f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)), f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X))), f(f(f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)), f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X))), f(f(f(X, f(X, X)), X), f(X, X))), X)) -> f(f(f(X, f(X, X)), X), f(X, X))
+306. f(f(X, X), f(f(f(X, X), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, f(X, X)))), f(f(f(X, X), f(X, f(X, X))), f(X, X))))) -> f(f(X, X), f(X, X))
+307. f(f(f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), X)), f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), X))), f(f(f(f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), X)), f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), X))), f(X, f(X, X))), f(f(f(X, f(X, X)), X), f(X, f(X, X))))) -> f(X, f(X, X))
+308. f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), f(f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), W), f(W, f(Z, f(V, f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y)))))))) -> W
+309. f(f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X))))), f(f(f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X))))), Z), f(Z, f(Y, Y)))) -> Z
+310. f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), f(f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), W), f(W, f(f(V, f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y)))), Z)))) -> W
+311. f(f(X, X), f(f(f(X, X), f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)))), f(X, X))) -> f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)))
+312. f(f(X, X), f(f(f(X, X), f(X, f(X, X))), f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))))) -> f(X, f(f(f(X, X), f(X, f(X, X))), X))
+313. f(f(f(f(X, f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))), f(f(X, f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))))), f(f(f(f(f(X, f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))), f(f(X, f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))))), X), f(X, f(X, X)))) -> X
+314. f(f(f(f(X, f(X, X)), X), f(Y, f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))))), f(f(f(f(f(X, f(X, X)), X), f(Y, f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))), f(f(f(X, f(X, X)), X), f(Y, f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))))))) -> f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))
+315. f(f(f(X, f(f(f(Y, f(Y, Y)), f(f(Y, f(Y, Y)), Y)), f(Y, f(Y, Y)))), f(f(Y, f(Y, Y)), Y)), f(f(f(f(X, f(f(f(Y, f(Y, Y)), f(f(Y, f(Y, Y)), Y)), f(Y, f(Y, Y)))), f(f(Y, f(Y, Y)), Y)), f(f(f(Y, f(Y, Y)), f(f(Y, f(Y, Y)), Y)), f(Y, f(Y, Y)))), f(f(X, f(f(f(Y, f(Y, Y)), f(f(Y, f(Y, Y)), Y)), f(Y, f(Y, Y)))), f(f(Y, f(Y, Y)), Y)))) -> f(f(f(Y, f(Y, Y)), f(f(Y, f(Y, Y)), Y)), f(Y, f(Y, Y)))
+316. f(f(X, X), f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(X, f(X, X)))), f(X, X)), X))) -> f(f(f(X, X), f(f(f(X, f(X, X)), X), f(X, f(X, X)))), f(X, X))
+317. f(f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))))), f(f(f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))))), f(f(X, X), f(X, f(X, X)))), X)) -> f(f(X, X), f(X, f(X, X)))
+318. f(f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))), f(f(f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(X, X)))), X)) -> f(f(X, X), f(X, f(X, X)))
+319. f(f(f(f(X, X), f(X, f(X, X))), f(f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X)), f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X)))), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X)), f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X)))), f(X, X)), X)) -> f(X, X)
+320. f(f(f(X, f(f(f(f(Y, f(Y, Y)), X), f(X, Y)), Y)), f(X, f(f(f(f(Y, f(Y, Y)), X), f(X, Y)), Y))), f(f(f(f(X, f(f(f(f(Y, f(Y, Y)), X), f(X, Y)), Y)), f(X, f(f(f(f(Y, f(Y, Y)), X), f(X, Y)), Y))), f(Y, f(Y, Y))), f(f(f(Y, f(Y, Y)), X), f(X, Y)))) -> f(Y, f(Y, Y))
+321. f(f(f(f(X, f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X))), f(f(X, f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X)))), f(f(f(f(f(X, f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X))), f(f(X, f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X)))), X), f(X, X))) -> X
+322. f(f(f(X, f(X, X)), X), f(Y, f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), f(f(X, X), f(X, X))))) -> f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X))))
+323. f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(f(X, X), f(f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)), X), f(f(X, X), f(X, f(X, X)))))) -> f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)), X)
+324. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), f(X, X)), f(f(X, X), f(f(X, f(X, X)), X))))) -> f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))
+325. f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), Y), f(Y, f(X, f(Z, f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))))))) -> Y
+326. f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), Y), f(Y, f(f(Z, f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))), X)))) -> Y
+327. f(f(f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X))))), f(f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X))))), f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X))))))), f(f(f(f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X))))), f(f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X))))), f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X))))))), X), Y)) -> X
+328. f(f(X, f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))))), f(f(f(X, f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))))), Y), f(Y, X))) -> Y
+329. f(f(f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X))))), f(f(Y, f(f(X, X), f(X, f(X, X)))), f(Y, f(f(X, X), f(X, f(X, X)))))), f(f(f(f(f(X, Y), f(Y, f(f(X, X), f(X, f(X, X))))), f(f(Y, f(f(X, X), f(X, f(X, X)))), f(Y, f(f(X, X), f(X, f(X, X)))))), X), Y)) -> X
+330. f(f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), f(f(Z, f(X, Y)), f(Z, f(X, Y)))), f(f(f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), f(f(Z, f(X, Y)), f(Z, f(X, Y)))), f(f(X, Y), f(Y, Y))), Z)) -> f(f(X, Y), f(Y, Y))
+331. f(f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))))), f(f(f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), f(f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))), f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))))), f(f(X, Y), f(Y, Y))), Z)) -> f(f(X, Y), f(Y, Y))
+332. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), f(f(f(X, X), f(X, X)), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(f(X, X), f(X, X)))))) -> f(f(f(X, X), f(X, X)), f(X, X))
+333. f(f(f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X)), f(f(X, X), f(X, X))), f(f(f(f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(X, f(X, X)), X))) -> f(X, X)
+334. f(f(f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X)), f(f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X)))), f(f(f(f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X)), f(f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), X)), f(X, X)))), f(X, X)), f(f(X, f(X, X)), X))) -> f(X, X)
+335. f(f(X, f(f(f(Y, X), f(X, f(f(Z, Y), f(W, Y)))), f(f(Y, X), f(X, f(f(Z, Y), f(W, Y)))))), f(f(f(X, f(f(f(Y, X), f(X, f(f(Z, Y), f(W, Y)))), f(f(Y, X), f(X, f(f(Z, Y), f(W, Y)))))), V), f(V, X))) -> V
+336. f(f(X, X), f(f(f(X, X), f(f(f(f(f(X, f(X, f(X, X))), X), f(X, X)), X), f(X, f(X, X)))), f(X, X))) -> f(f(f(f(f(X, f(X, f(X, X))), X), f(X, X)), X), f(X, f(X, X)))
+337. f(f(X, f(X, X)), f(f(f(f(X, f(X, X)), Y), f(Y, X)), f(f(Y, f(f(f(f(X, f(X, X)), Y), f(Y, X)), X)), X))) -> f(Y, f(f(f(f(X, f(X, X)), Y), f(Y, X)), X))
+338. f(f(f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y)), f(f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y)), f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y)))), f(f(f(f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y)), f(f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y)), f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y)))), f(Y, Y)), f(f(f(Y, Y), X), f(X, Y)))) -> f(Y, Y)
+  (simplifying rules with respect to one another...)
+339. f(f(f(f(f(X, X), f(f(f(Y, Y), X), f(X, Y))), f(X, X)), f(f(f(X, X), f(f(f(Y, Y), X), f(X, Y))), f(X, X))), f(f(f(f(f(f(X, X), f(f(f(Y, Y), X), f(X, Y))), f(X, X)), f(f(f(X, X), f(f(f(Y, Y), X), f(X, Y))), f(X, X))), f(X, X)), f(f(f(Y, Y), X), f(X, Y)))) -> f(X, X)
+340. f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), f(f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), Y), f(Y, f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(X, f(X, X)), f(X, f(X, X))))))) -> Y
+341. f(f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(X, f(X, X)), f(X, f(X, X)))), f(f(f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(X, f(X, X)), f(X, f(X, X)))), f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X))), f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(X, f(X, X)), f(X, f(X, X)))))) -> f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X))
+342. f(f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)))), f(f(f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)))), f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))) -> f(X, X)
+343. f(f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), f(f(X, X), f(X, X))), f(f(f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))) -> f(X, X)
+344. f(f(f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y)), f(f(f(f(f(Y, Y), X), f(X, Y)), Y), f(f(f(f(Y, Y), X), f(X, Y)), Y))), f(f(f(f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y)), f(f(f(f(f(Y, Y), X), f(X, Y)), Y), f(f(f(f(Y, Y), X), f(X, Y)), Y))), f(Y, Y)), f(f(f(Y, Y), X), f(X, Y)))) -> f(Y, Y)
+345. f(f(X, X), f(Y, f(f(f(f(X, X), Y), f(Y, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(f(X, X), f(X, X))))))) -> f(f(f(X, X), Y), f(Y, X))
+346. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(X, X)))), f(X, X)))) -> f(f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(X, X))))
+347. f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y)))), f(f(f(X, Y), f(Z, Y)), Y)), f(f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y)))), f(f(f(X, Y), f(Z, Y)), Y)), W), f(W, f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))))))) -> W
+348. f(f(f(f(f(X, X), f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))), f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))), f(X, X))), f(f(f(f(f(f(X, X), f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))), f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))), f(X, X))), f(X, X)), f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))))) -> f(X, X)
+349. f(f(f(f(f(X, X), f(f(X, f(X, X)), f(f(X, X), f(X, X)))), f(X, X)), f(f(X, X), f(X, X))), f(f(f(f(f(f(X, X), f(f(X, f(X, X)), f(f(X, X), f(X, X)))), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(X, f(X, X)), f(f(X, X), f(X, X))))) -> f(X, X)
+350. f(f(f(f(f(X, X), f(f(X, f(X, X)), f(f(X, X), f(X, X)))), f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), f(f(X, X), f(X, X)))), f(X, X))), f(f(f(f(f(f(X, X), f(f(X, f(X, X)), f(f(X, X), f(X, X)))), f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), f(f(X, X), f(X, X)))), f(X, X))), f(X, X)), f(f(X, f(X, X)), f(f(X, X), f(X, X))))) -> f(X, X)
+351. f(f(f(f(f(f(X, X), f(X, f(X, X))), Y), f(Y, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), Y), f(Y, f(X, X)))), f(f(f(f(f(f(f(X, X), f(X, f(X, X))), Y), f(Y, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), Y), f(Y, f(X, X)))), f(f(X, X), f(X, f(X, X)))), Y)) -> f(f(X, X), f(X, f(X, X)))
+352. f(f(X, f(f(f(f(f(Y, Z), f(Z, Z)), X), f(X, f(Y, Z))), f(f(f(f(Y, Z), f(Z, Z)), X), f(X, f(Y, Z))))), f(f(f(X, f(f(f(f(f(Y, Z), f(Z, Z)), X), f(X, f(Y, Z))), f(f(f(f(Y, Z), f(Z, Z)), X), f(X, f(Y, Z))))), W), f(W, X))) -> W
+353. f(f(f(X, f(Y, Y)), f(Z, f(Y, Y))), f(f(f(f(X, f(Y, Y)), f(Z, f(Y, Y))), f(Y, Y)), f(f(f(Y, Y), f(W, f(f(X, f(Y, Y)), f(Z, f(Y, Y))))), f(f(W, f(f(X, f(Y, Y)), f(Z, f(Y, Y)))), Y)))) -> f(Y, Y)
+354. f(f(f(f(f(f(X, X), f(X, f(X, X))), f(Y, f(X, X))), f(X, X)), f(f(f(X, X), f(X, f(X, X))), f(Y, f(X, X)))), f(f(f(f(f(f(f(X, X), f(X, f(X, X))), f(Y, f(X, X))), f(X, X)), f(f(f(X, X), f(X, f(X, X))), f(Y, f(X, X)))), Z), f(Z, f(f(f(f(X, X), f(X, f(X, X))), f(Y, f(X, X))), f(X, X))))) -> Z
+355. f(f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))), f(f(f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))), Y), f(Y, f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X))))) -> Y
+356. f(f(f(f(f(X, f(Y, Y)), f(f(Y, Y), f(Y, f(Y, Y)))), f(Y, Y)), f(f(X, f(Y, Y)), f(f(Y, Y), f(Y, f(Y, Y))))), f(f(f(f(f(f(X, f(Y, Y)), f(f(Y, Y), f(Y, f(Y, Y)))), f(Y, Y)), f(f(X, f(Y, Y)), f(f(Y, Y), f(Y, f(Y, Y))))), Z), f(Z, f(f(f(X, f(Y, Y)), f(f(Y, Y), f(Y, f(Y, Y)))), f(Y, Y))))) -> Z
+357. f(f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X)), f(f(f(f(f(f(X, X), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X)), Y), f(Y, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))))) -> Y
+358. f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), f(f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), Y), f(Y, f(f(f(X, f(X, X)), f(X, f(X, X))), f(Z, f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X))))))) -> Y
+359. f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), f(f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), Y), f(Y, f(f(Z, f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X))), f(f(X, f(X, X)), f(X, f(X, X))))))) -> Y
+360. f(f(X, X), f(Y, f(f(f(f(X, X), Y), f(Y, f(f(Z, f(X, X)), f(W, f(X, X))))), X))) -> f(f(f(X, X), Y), f(Y, f(f(Z, f(X, X)), f(W, f(X, X)))))
+361. f(X, f(f(X, f(X, X)), f(f(f(X, X), f(Y, X)), f(f(Y, X), f(f(Z, f(X, X)), f(W, f(X, X))))))) -> f(X, X)
+362. f(X, f(f(f(X, f(X, X)), X), f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(X, X)))))) -> f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X)))))
+363. f(f(f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))), f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), f(f(f(f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))), f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))) -> f(f(X, X), X)
+364. f(f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(X, X))), f(f(X, f(X, X)), X)), f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(X, X))), f(f(X, f(X, X)), X)))), f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(X, X))), f(f(X, f(X, X)), X)), f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(X, X))), f(f(X, f(X, X)), X)))), f(X, f(X, X))), X)) -> f(X, f(X, X))
+365. f(f(f(f(f(X, X), Y), f(Y, X)), f(f(f(X, X), Y), f(Y, X))), f(f(f(f(f(f(X, X), Y), f(Y, X)), f(f(f(X, X), Y), f(Y, X))), f(Y, f(f(f(f(X, X), Y), f(Y, X)), X))), f(f(f(f(X, X), Y), f(Y, X)), f(f(f(X, X), Y), f(Y, X))))) -> f(Y, f(f(f(f(X, X), Y), f(Y, X)), X))
+366. f(f(f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, X)))), f(f(X, X), f(X, f(X, X)))), f(f(f(f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, X)))), f(f(X, X), f(X, f(X, X)))), Y), f(Y, f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, X))))))) -> Y
+367. f(f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)))), f(f(f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, X)))), Y), f(Y, f(f(X, f(X, X)), f(X, f(X, X)))))) -> Y
+  (simplifying rules with respect to one another...)
+368. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(X, X))), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))))) -> f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(X, X))), f(f(X, f(X, X)), X))
+369. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), f(f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))))) -> f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X))
+370. f(f(f(X, f(X, X)), X), f(Y, f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(f(X, X), f(X, X)))), f(X, f(X, X))))) -> f(f(f(f(X, f(X, X)), X), Y), f(Y, f(f(X, X), f(X, X))))
+371. f(f(f(X, f(X, X)), X), f(Y, f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(f(X, X), f(X, X)))), f(f(X, X), f(X, X))))) -> f(f(f(f(X, f(X, X)), X), Y), f(Y, f(f(X, X), f(X, X))))
+372. f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), X), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X)))), f(X, X)))) -> f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))
+373. f(f(f(X, f(X, X)), X), f(f(X, X), f(f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))))) -> f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(X, f(X, X)), X))
+374. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), f(f(f(f(f(X, X), f(X, f(X, X))), X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), X), f(X, f(X, X))))), f(f(X, X), f(X, f(X, X))))) -> f(f(f(f(f(X, X), f(X, f(X, X))), X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), X), f(X, f(X, X))))
+375. f(f(f(X, Y), f(Y, Y)), f(f(f(f(X, Y), f(Y, Y)), f(f(f(X, Y), f(Y, Y)), f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))))), f(f(X, Y), f(Y, Y)))) -> f(f(f(X, Y), f(Y, Y)), f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))))
+376. f(f(f(X, Y), f(Y, Y)), f(f(f(f(X, Y), f(Y, Y)), f(f(Y, Y), f(Y, Y))), f(f(f(f(f(X, Y), f(Y, Y)), f(f(f(X, Y), f(Y, Y)), f(f(Y, Y), f(Y, Y)))), f(f(X, Y), f(Y, Y))), f(X, Y)))) -> f(f(f(f(X, Y), f(Y, Y)), f(f(f(X, Y), f(Y, Y)), f(f(Y, Y), f(Y, Y)))), f(f(X, Y), f(Y, Y)))
+377. f(f(f(X, Y), f(Y, Y)), f(f(f(f(X, Y), f(Y, Y)), f(f(f(X, Y), f(Y, Y)), f(f(X, Y), f(Y, Y)))), f(f(f(f(f(X, Y), f(Y, Y)), f(f(f(X, Y), f(Y, Y)), f(f(f(X, Y), f(Y, Y)), f(f(X, Y), f(Y, Y))))), f(f(X, Y), f(Y, Y))), f(X, Y)))) -> f(f(f(f(X, Y), f(Y, Y)), f(f(f(X, Y), f(Y, Y)), f(f(f(X, Y), f(Y, Y)), f(f(X, Y), f(Y, Y))))), f(f(X, Y), f(Y, Y)))
+378. f(f(f(f(X, f(X, f(X, X))), X), f(X, X)), f(X, f(f(f(f(f(f(X, f(X, f(X, X))), X), f(X, X)), X), f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)))) -> f(f(f(f(f(X, f(X, f(X, X))), X), f(X, X)), X), f(X, f(X, X)))
+379. f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X)))), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))) -> f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X)))
+380. f(f(f(X, f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), X), f(f(f(f(X, f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), X), Y), f(Y, f(X, f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))))))) -> Y
+381. f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), Y), f(Y, f(f(f(X, X), f(X, f(X, X))), f(Z, f(X, f(f(f(X, X), f(X, f(X, X))), X))))))) -> Y
+382. f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), Y), f(Y, f(f(Z, f(X, f(f(f(X, X), f(X, f(X, X))), X))), f(f(X, X), f(X, f(X, X))))))) -> Y
+383. f(f(X, X), f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(f(f(f(X, X), f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))), f(X, X)), X))) -> f(f(f(X, X), f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))), f(X, X))
+384. f(f(X, X), f(f(f(X, f(X, X)), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(f(X, f(X, X)), f(f(X, X), f(X, X)))), f(X, X)), X))) -> f(f(f(X, X), f(f(X, f(X, X)), f(f(X, X), f(X, X)))), f(X, X))
+385. f(f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), X)), f(f(f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), X)), Y), f(Y, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(X, f(X, X)), X), f(X, f(X, X))))))) -> Y
+386. f(f(f(f(f(X, f(X, X)), f(Y, f(f(X, f(X, f(X, X))), X))), f(f(X, f(X, f(X, X))), X)), f(f(X, f(X, X)), f(Y, f(f(X, f(X, f(X, X))), X)))), f(f(f(f(f(f(X, f(X, X)), f(Y, f(f(X, f(X, f(X, X))), X))), f(f(X, f(X, f(X, X))), X)), f(f(X, f(X, X)), f(Y, f(f(X, f(X, f(X, X))), X)))), Z), f(Z, f(f(f(X, f(X, X)), f(Y, f(f(X, f(X, f(X, X))), X))), f(f(X, f(X, f(X, X))), X))))) -> Z
+387. f(f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(X, f(X, f(X, X)))), f(f(f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(X, f(X, f(X, X)))), Y), f(Y, f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X))))) -> Y
+388. f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(X, f(X, f(X, X))))), f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)))) -> f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(X, f(X, f(X, X))))
+389. f(f(f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(f(f(f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(f(X, f(X, X)), f(X, f(X, X)))), Y), f(Y, f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(X, f(X, f(X, X))), X))))) -> Y
+390. f(f(f(f(f(X, f(f(Y, f(Y, f(Y, Y))), Y)), f(Y, f(Y, Y))), f(f(Y, f(Y, f(Y, Y))), Y)), f(f(X, f(f(Y, f(Y, f(Y, Y))), Y)), f(Y, f(Y, Y)))), f(f(f(f(f(f(X, f(f(Y, f(Y, f(Y, Y))), Y)), f(Y, f(Y, Y))), f(f(Y, f(Y, f(Y, Y))), Y)), f(f(X, f(f(Y, f(Y, f(Y, Y))), Y)), f(Y, f(Y, Y)))), Z), f(Z, f(f(f(X, f(f(Y, f(Y, f(Y, Y))), Y)), f(Y, f(Y, Y))), f(f(Y, f(Y, f(Y, Y))), Y))))) -> Z
+391. f(f(f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))), X)), f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))), X))), f(f(f(f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))), X)), f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))), X))), f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))))) -> f(X, f(X, X))
+392. f(f(X, f(f(f(f(f(Y, X), f(X, X)), X), f(f(Y, X), f(X, X))), f(Y, X))), f(f(f(X, f(f(f(f(f(Y, X), f(X, X)), X), f(f(Y, X), f(X, X))), f(Y, X))), Z), f(Z, f(f(f(f(f(Y, X), f(X, X)), X), f(f(Y, X), f(X, X))), f(f(f(f(Y, X), f(X, X)), X), f(f(Y, X), f(X, X))))))) -> Z
+393. f(f(X, f(X, X)), f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(Y, f(X, f(X, X))), f(Z, f(X, f(X, X))))))) -> f(f(f(X, f(X, X)), X), f(X, f(X, X)))
+394. f(f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), f(f(Y, f(X, f(X, X))), f(Y, f(X, f(X, X))))), f(f(f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), f(f(Y, f(X, f(X, X))), f(Y, f(X, f(X, X))))), f(f(X, f(X, X)), X)), Y)) -> f(f(X, f(X, X)), X)
+395. f(f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))))), f(f(f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))))), f(f(X, f(X, X)), X)), Y)) -> f(f(X, f(X, X)), X)
+396. f(f(f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(X, X), f(X, X))), f(f(X, f(X, X)), X))) -> f(f(X, X), f(X, X))
+397. f(f(f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))), f(f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))))), f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))), f(f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(X, X)), f(f(X, f(X, X)), X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), f(f(X, f(X, X)), X))) -> f(f(X, X), f(X, X))
+398. f(f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(f(X, X), f(X, X)))), f(f(f(f(X, f(X, X)), X), Y), f(Y, f(f(X, X), f(X, X))))), f(f(f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(f(X, X), f(X, X)))), f(f(f(f(X, f(X, X)), X), Y), f(Y, f(f(X, X), f(X, X))))), f(f(X, f(X, X)), X)), Y)) -> f(f(X, f(X, X)), X)
+399. f(f(f(f(f(X, X), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), f(X, X)), f(f(f(X, X), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), f(X, X))), f(f(f(f(f(f(X, X), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), f(X, X)), f(f(f(X, X), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), f(X, X))), f(X, X)), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))))) -> f(X, X)
+400. f(f(f(X, f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), f(X, f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))))), f(f(f(f(X, f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), f(X, f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))))), f(X, X)), f(f(X, X), f(X, f(X, X))))) -> f(X, X)
+401. f(X, f(Y, f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(V, X), f(U, X))))) -> f(f(X, Y), f(Y, f(f(Z, X), f(W, X))))
+  (simplifying rules with respect to one another...)
+402. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(f(Y, X), f(Z, X)))))) -> X
+403. f(f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))), f(f(f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X))))), f(X, f(X, X))), f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(X, f(X, X)), X)))) -> f(X, f(X, X))
+404. f(f(f(f(X, f(f(f(Y, X), f(Y, X)), f(Y, X))), f(f(f(Y, X), f(Y, X)), f(f(Y, X), f(f(Y, X), f(Y, X))))), f(f(X, f(f(f(Y, X), f(Y, X)), f(Y, X))), f(f(f(Y, X), f(Y, X)), f(f(Y, X), f(f(Y, X), f(Y, X)))))), f(f(f(f(f(X, f(f(f(Y, X), f(Y, X)), f(Y, X))), f(f(f(Y, X), f(Y, X)), f(f(Y, X), f(f(Y, X), f(Y, X))))), f(f(X, f(f(f(Y, X), f(Y, X)), f(Y, X))), f(f(f(Y, X), f(Y, X)), f(f(Y, X), f(f(Y, X), f(Y, X)))))), X), f(f(f(Y, X), f(Y, X)), f(Y, X)))) -> X
+405. f(f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X)))), f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))), f(f(f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X)))), f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X))) -> f(f(X, X), f(X, f(X, X)))
+406. f(f(f(X, Y), f(Z, Y)), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(Y, f(W, f(f(X, Y), f(Z, Y)))), f(f(W, f(f(X, Y), f(Z, Y))), f(f(V, Y), f(U, Y)))))) -> Y
+407. f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(f(X, f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), X))) -> X
+408. f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(f(X, X), f(X, f(f(Y, X), f(Z, X)))))) -> X
+409. f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(f(X, X), f(X, f(f(X, X), f(X, f(X, X))))))) -> X
+410. f(f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))), f(f(X, f(X, X)), f(X, f(X, X)))), f(f(f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))), f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(X, f(X, X)), X)))) -> f(X, f(X, X))
+411. f(f(f(X, Y), f(Y, Y)), f(f(f(f(f(X, Y), f(Y, Y)), Y), f(f(X, Y), f(Y, Y))), f(f(Y, f(f(f(f(f(X, Y), f(Y, Y)), Y), f(f(X, Y), f(Y, Y))), f(X, Y))), f(X, Y)))) -> f(Y, f(f(f(f(f(X, Y), f(Y, Y)), Y), f(f(X, Y), f(Y, Y))), f(X, Y)))
+412. f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X)), f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))))) -> f(f(X, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X)
+413. f(f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(f(X, f(X, X)), X), f(X, X))), f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(f(X, f(X, X)), X), f(X, X))), f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X)), f(f(f(f(X, f(X, X)), X), f(X, X)), f(f(f(X, f(X, X)), X), f(X, X))))) -> f(f(X, f(f(f(X, f(X, X)), X), f(X, X))), X)
+414. f(X, f(f(X, f(X, X)), f(f(f(X, X), f(Y, X)), f(f(Y, X), f(f(Z, f(X, X)), f(f(X, X), f(X, f(X, X)))))))) -> f(X, X)
+415. f(X, f(f(X, f(X, X)), f(f(f(X, X), f(Y, X)), f(f(Y, X), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))))) -> f(X, X)
+416. f(X, f(f(X, f(X, X)), f(f(f(X, X), f(Y, X)), f(f(Y, X), f(f(f(X, X), f(X, f(X, X))), f(Z, f(X, X))))))) -> f(X, X)
+417. f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(X, f(f(f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), f(X, X)), f(f(X, f(X, X)), X)))) -> f(f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), X), f(X, X))
+418. f(f(X, f(X, X)), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), X)), X))) -> f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), X))
+419. f(f(f(f(X, f(Y, f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(X, X)))), f(X, f(Y, f(f(X, X), f(X, f(X, X)))))), f(f(f(f(f(X, f(Y, f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(X, X)))), f(X, f(Y, f(f(X, X), f(X, f(X, X)))))), Z), f(Z, f(f(X, f(Y, f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(X, f(X, X))))))) -> Z
+420. f(f(f(f(f(X, f(f(Y, Y), f(Y, f(Y, Y)))), Y), f(f(Y, Y), f(Y, f(Y, Y)))), f(f(X, f(f(Y, Y), f(Y, f(Y, Y)))), Y)), f(f(f(f(f(f(X, f(f(Y, Y), f(Y, f(Y, Y)))), Y), f(f(Y, Y), f(Y, f(Y, Y)))), f(f(X, f(f(Y, Y), f(Y, f(Y, Y)))), Y)), Z), f(Z, f(f(f(X, f(f(Y, Y), f(Y, f(Y, Y)))), Y), f(f(Y, Y), f(Y, f(Y, Y))))))) -> Z
+421. f(f(f(f(X, f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), X), f(X, X)), f(f(f(f(f(X, f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), X), f(X, X)), X), f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))))) -> X
+422. f(f(f(f(X, X), f(X, f(X, X))), f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(X, f(f(f(X, X), f(X, f(X, X))), X)))), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(X, f(f(f(X, X), f(X, f(X, X))), X)))), Y), f(Y, f(f(X, X), f(X, f(X, X)))))) -> Y
+423. f(f(f(f(X, X), f(X, f(X, X))), f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(X, f(f(f(X, X), f(X, f(X, X))), X)))), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, f(f(f(X, X), f(X, f(X, X))), X)), f(X, f(f(f(X, X), f(X, f(X, X))), X)))), f(X, X)), X)) -> f(X, X)
+424. f(f(f(f(X, f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), X), f(f(X, f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), X)), f(f(f(f(f(X, f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), X), f(f(X, f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), X)), X), f(X, f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))))) -> X
+425. f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)), f(f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)))) -> f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))
+426. f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)))), f(X, f(X, X))), f(f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)))), f(X, f(X, X))), Y), f(Y, f(f(X, f(X, X)), f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X))))))) -> Y
+427. f(f(X, f(X, X)), f(Y, f(f(f(f(X, f(X, X)), Y), f(Y, X)), f(f(Z, f(X, f(X, X))), f(W, f(X, f(X, X))))))) -> f(f(f(X, f(X, X)), Y), f(Y, X))
+  (simplifying rules with respect to one another...)
+428. f(f(f(X, f(f(f(f(Y, Y), f(Y, f(Y, Y))), Y), f(f(Y, Y), f(Y, f(Y, Y))))), Y), f(f(f(f(X, f(f(f(f(Y, Y), f(Y, f(Y, Y))), Y), f(f(Y, Y), f(Y, f(Y, Y))))), Y), f(f(f(f(Y, Y), f(Y, f(Y, Y))), Y), f(f(Y, Y), f(Y, f(Y, Y))))), f(f(X, f(f(f(f(Y, Y), f(Y, f(Y, Y))), Y), f(f(Y, Y), f(Y, f(Y, Y))))), Y))) -> f(f(f(f(Y, Y), f(Y, f(Y, Y))), Y), f(f(Y, Y), f(Y, f(Y, Y))))
+429. f(f(X, f(Y, f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))))), f(f(f(X, f(Y, f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))))), f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))), f(X, f(Y, f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))))))) -> f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))
+430. f(f(X, Y), f(f(f(X, Y), f(Y, Y)), f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(Z, f(X, Y)), f(W, f(X, Y)))))) -> f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))
+431. f(f(f(X, f(f(f(f(f(Y, X), f(X, X)), X), f(f(Y, X), f(X, X))), f(Y, X))), f(X, f(f(f(f(f(Y, X), f(X, X)), X), f(f(Y, X), f(X, X))), f(Y, X)))), f(f(f(f(X, f(f(f(f(f(Y, X), f(X, X)), X), f(f(Y, X), f(X, X))), f(Y, X))), f(X, f(f(f(f(f(Y, X), f(X, X)), X), f(f(Y, X), f(X, X))), f(Y, X)))), f(f(Y, X), f(X, X))), f(f(f(f(Y, X), f(X, X)), X), f(f(Y, X), f(X, X))))) -> f(f(Y, X), f(X, X))
+432. f(f(f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X)), f(f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X))), f(f(f(f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X)), f(f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X))), f(X, X)), f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)))) -> f(X, X)
+433. f(f(f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X)), f(f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X)), f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X)), f(f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X)), f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)), X)))), f(X, X)), f(f(f(X, X), f(f(X, X), f(X, X))), f(X, X)))) -> f(X, X)
+434. f(f(f(f(f(X, X), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(f(X, X), f(f(X, X), f(X, X)))), f(X, X)), X)), f(f(f(X, X), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(f(X, X), f(f(X, X), f(X, X)))), f(X, X)), X))), f(f(f(f(f(f(X, X), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(f(X, X), f(f(X, X), f(X, X)))), f(X, X)), X)), f(f(f(X, X), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(f(X, X), f(f(X, X), f(X, X)))), f(X, X)), X))), f(X, X)), f(f(f(X, X), f(f(X, X), f(f(X, X), f(X, X)))), f(X, X)))) -> f(X, X)
+435. f(f(f(X, f(X, f(f(f(f(Y, Y), X), f(X, Y)), f(f(f(Y, Y), X), f(X, Y))))), X), f(f(f(f(X, f(X, f(f(f(f(Y, Y), X), f(X, Y)), f(f(f(Y, Y), X), f(X, Y))))), X), Z), f(Z, f(X, f(X, f(f(f(f(Y, Y), X), f(X, Y)), f(f(f(Y, Y), X), f(X, Y)))))))) -> Z
+436. f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), f(f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), Z), f(Z, f(Y, f(W, f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X))))))))) -> Z
+437. f(f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(X, f(X, X)), f(X, f(X, X)))), f(f(f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))), f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(X, f(X, X)), X)))) -> f(X, f(X, X))
+438. f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), f(f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), Z), f(Z, f(Y, Y)))) -> Z
+439. f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), f(f(f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X)))), Z), f(Z, f(f(W, f(f(f(f(X, f(X, X)), X), Y), f(Y, f(X, f(X, X))))), Y)))) -> Z
+440. f(f(X, f(f(f(f(f(Y, f(Y, Y)), Y), X), f(X, f(Y, f(Y, Y)))), f(f(f(f(Y, f(Y, Y)), Y), X), f(X, f(Y, f(Y, Y)))))), f(f(f(X, f(f(f(f(f(Y, f(Y, Y)), Y), X), f(X, f(Y, f(Y, Y)))), f(f(f(f(Y, f(Y, Y)), Y), X), f(X, f(Y, f(Y, Y)))))), Z), f(Z, X))) -> Z
+441. f(f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y)), f(f(f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y)), Z), f(Z, f(f(f(f(Y, Y), X), f(X, Y)), f(W, f(X, f(f(f(f(Y, Y), X), f(X, Y)), Y))))))) -> Z
+442. f(X, f(f(X, f(X, X)), f(f(f(X, X), f(Y, X)), f(f(Y, X), f(f(f(X, X), f(X, X)), f(f(X, X), f(f(X, X), f(X, X)))))))) -> f(X, X)
+443. f(f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))), f(f(X, Y), f(f(X, Y), f(Y, Y)))), f(f(f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y))), f(f(X, Y), f(f(X, Y), f(Y, Y)))), Z), f(Z, f(f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(f(X, Y), f(f(X, Y), f(Y, Y))), f(X, Y)))))) -> Z
+444. f(f(f(f(X, X), f(Y, f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X)), f(f(f(f(f(X, X), f(Y, f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X)), f(f(f(f(X, X), f(Y, f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X)), f(f(X, X), f(Y, f(f(X, f(X, X)), X))))), f(f(f(X, X), f(Y, f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X)))) -> f(f(f(f(X, X), f(Y, f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X)), f(f(X, X), f(Y, f(f(X, f(X, X)), X))))
+445. f(f(f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y)), f(f(Y, f(Y, Y)), Y)), f(f(f(f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y)), f(f(Y, f(Y, Y)), Y)), f(f(f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y)), f(f(Y, f(Y, Y)), Y)), f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y)))), f(f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y)), f(f(Y, f(Y, Y)), Y)))) -> f(f(f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y)), f(f(Y, f(Y, Y)), Y)), f(f(X, f(f(Y, f(Y, Y)), Y)), f(Y, Y)))
+446. f(f(X, X), f(f(f(f(Y, Y), X), f(X, Y)), f(f(f(f(X, X), f(f(f(Y, Y), X), f(X, Y))), f(X, X)), X))) -> f(f(f(X, X), f(f(f(Y, Y), X), f(X, Y))), f(X, X))
+  (simplifying rules with respect to one another...)
+447. f(f(f(X, f(X, f(X, X))), X), f(Y, f(f(f(f(f(X, f(X, f(X, X))), X), Y), f(Y, f(X, f(X, f(X, X))))), f(X, f(X, f(X, X)))))) -> f(f(f(f(X, f(X, f(X, X))), X), Y), f(Y, f(X, f(X, f(X, X)))))
+448. f(f(f(f(X, X), Y), f(Y, X)), f(f(f(f(f(X, X), Y), f(Y, X)), f(f(Y, Y), Y)), f(f(Y, Y), f(Y, f(Y, Y))))) -> f(f(Y, Y), Y)
+449. f(f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)), X), f(f(f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), f(X, X)), X), Y), f(Y, f(f(X, X), f(X, X))))) -> Y
+450. f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(X, f(X, X)))), f(X, X)), f(f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(X, f(X, X)))), f(X, X)), Y), f(Y, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(X, f(X, X)), X), f(X, f(X, X))))))) -> Y
+451. f(f(f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))), f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))))), f(f(f(f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X))))), f(f(X, f(X, X)), f(f(f(X, f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))))), X), f(f(X, f(X, f(X, X))), X))) -> X
+452. f(f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)), f(f(f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)), f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(X, f(X, f(X, X))))), f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)))) -> f(f(f(X, f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)), f(X, f(X, f(X, X))))
+453. f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X))))), f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X))))), Y), f(Y, f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))))) -> Y
+454. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(X, f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X))), f(X, X)))) -> f(X, f(f(f(f(f(X, X), f(X, f(X, X))), X), f(f(X, X), f(X, f(X, X)))), f(f(X, X), X)))
+455. f(f(X, X), f(f(f(X, X), f(f(Y, X), f(X, f(f(Y, Y), f(Y, f(Y, Y)))))), f(X, X))) -> f(f(Y, X), f(X, f(f(Y, Y), f(Y, f(Y, Y)))))
+456. f(f(f(X, f(f(f(f(Y, Z), f(Z, Z)), W), f(W, f(Y, Z)))), W), f(f(f(f(X, f(f(f(f(Y, Z), f(Z, Z)), W), f(W, f(Y, Z)))), W), f(f(f(f(Y, Z), f(Z, Z)), W), f(W, f(Y, Z)))), f(f(X, f(f(f(f(Y, Z), f(Z, Z)), W), f(W, f(Y, Z)))), W))) -> f(f(f(f(Y, Z), f(Z, Z)), W), f(W, f(Y, Z)))
+457. f(f(X, X), f(f(f(X, X), f(f(f(f(Y, f(Y, Y)), Y), X), f(X, f(Y, f(Y, Y))))), f(X, X))) -> f(f(f(f(Y, f(Y, Y)), Y), X), f(X, f(Y, f(Y, Y))))
+458. f(f(X, X), f(f(f(X, X), f(X, f(X, X))), f(f(X, f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), X))) -> f(X, f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))))
+459. f(f(X, f(Y, f(f(f(f(Z, W), f(W, W)), X), f(X, f(Z, W))))), f(f(f(X, f(Y, f(f(f(f(Z, W), f(W, W)), X), f(X, f(Z, W))))), f(f(f(f(Z, W), f(W, W)), X), f(X, f(Z, W)))), f(X, f(Y, f(f(f(f(Z, W), f(W, W)), X), f(X, f(Z, W))))))) -> f(f(f(f(Z, W), f(W, W)), X), f(X, f(Z, W)))
+460. f(f(X, f(X, X)), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))), f(f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))), X)), X))) -> f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))), f(X, f(X, X))), X))
+461. f(f(X, f(X, X)), f(X, f(f(f(f(X, f(X, X)), X), f(X, f(X, X))), f(f(f(X, f(X, X)), f(X, f(X, X))), f(f(X, f(X, X)), f(f(X, f(X, X)), f(X, f(X, X)))))))) -> f(f(f(X, f(X, X)), X), f(X, f(X, X)))
+462. f(f(f(f(X, f(Y, f(f(f(Z, Z), X), f(X, Z)))), f(f(f(Z, Z), X), f(X, Z))), f(X, f(Y, f(f(f(Z, Z), X), f(X, Z))))), f(f(f(f(f(X, f(Y, f(f(f(Z, Z), X), f(X, Z)))), f(f(f(Z, Z), X), f(X, Z))), f(X, f(Y, f(f(f(Z, Z), X), f(X, Z))))), W), f(W, f(f(X, f(Y, f(f(f(Z, Z), X), f(X, Z)))), f(f(f(Z, Z), X), f(X, Z)))))) -> W
+463. f(f(f(f(X, X), f(f(f(Y, Y), X), f(X, Y))), f(X, X)), f(f(f(f(f(X, X), f(f(f(Y, Y), X), f(X, Y))), f(X, X)), Z), f(Z, f(f(X, X), f(f(f(Y, Y), X), f(X, Y)))))) -> Z
+464. f(f(f(f(f(X, f(f(f(Y, Y), Z), f(Z, Y))), Z), f(f(f(Y, Y), Z), f(Z, Y))), f(f(X, f(f(f(Y, Y), Z), f(Z, Y))), Z)), f(f(f(f(f(f(X, f(f(f(Y, Y), Z), f(Z, Y))), Z), f(f(f(Y, Y), Z), f(Z, Y))), f(f(X, f(f(f(Y, Y), Z), f(Z, Y))), Z)), W), f(W, f(f(f(X, f(f(f(Y, Y), Z), f(Z, Y))), Z), f(f(f(Y, Y), Z), f(Z, Y)))))) -> W
+465. f(f(f(f(X, X), f(f(f(Y, Y), X), f(X, Y))), f(X, X)), f(f(f(f(f(X, X), f(f(f(Y, Y), X), f(X, Y))), f(X, X)), Z), f(Z, f(f(f(f(Y, Y), X), f(X, Y)), f(f(f(Y, Y), X), f(X, Y)))))) -> Z
+  (simplifying rules with respect to one another...)
+466. f(f(f(X, X), f(X, f(X, X))), f(f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))), X), f(X, f(f(X, X), f(X, f(X, X))))))) -> f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))
+467. f(f(f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), X)), f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), X))), f(f(f(f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), X)), f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), X))), f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))))) -> f(X, f(X, X))
+468. f(f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X)), f(f(f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X)), Y), f(Y, f(X, f(Z, f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X))))))) -> Y
+469. f(f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X)), f(f(f(f(f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)), X), f(X, X)), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))) -> f(f(X, X), X)
+470. f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)), f(f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)), Y), f(Y, f(X, f(Z, f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X))))))) -> Y
+471. f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)), f(f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)), f(f(X, X), X)), f(f(X, X), f(X, f(X, X))))) -> f(f(X, X), X)
+472. f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)), f(f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)), Y), f(Y, f(f(Z, f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X))), X)))) -> Y
+473. f(f(X, f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)), f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)))), f(f(f(X, f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)), f(f(f(f(f(X, f(X, X)), X), f(X, X)), X), f(X, X)))), Y), f(Y, X))) -> Y
+474. f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X))))), f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X))))))), f(f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X))))), f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X))))), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X))))))), X), f(f(X, f(X, X)), X))) -> X
+475. f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X))))), f(f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X)))), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X)))))), f(f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X))))), f(f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X)))), f(f(f(X, f(X, X)), X), f(f(X, X), f(X, f(X, X)))))), X), f(f(X, f(X, X)), X))) -> X
+476. f(f(f(f(X, f(X, X)), X), f(X, X)), f(Y, f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), Y), f(Y, f(f(X, f(X, X)), X))), f(X, X)))) -> f(f(f(f(f(X, f(X, X)), X), f(X, X)), Y), f(Y, f(f(X, f(X, X)), X)))
+477. f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(f(X, f(X, X)), X), f(f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X)), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), f(X, X)))) -> f(f(f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(X, f(X, X)), X)), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))))
+478. f(f(f(X, X), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), f(f(f(f(X, X), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), f(f(f(X, X), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), f(X, X))), f(f(X, X), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))))) -> f(f(f(X, X), f(f(X, X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), f(X, X))
+479. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))))), f(f(X, f(X, X)), X))) -> f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X))), f(f(f(X, f(X, X)), f(f(X, f(X, X)), X)), f(X, f(X, X)))))
+480. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X))), f(f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), f(f(X, f(X, X)), X)), f(X, f(X, X))))) -> f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(f(X, f(X, X)), X)))), f(f(X, f(X, X)), X))
+481. f(f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)), f(X, f(f(f(f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)), X), f(X, f(X, X))), f(f(X, f(X, f(X, X))), X)))) -> f(f(f(f(f(X, f(X, f(X, X))), X), f(f(X, f(X, f(X, X))), X)), X), f(X, f(X, X)))
+482. f(f(f(f(f(f(X, Y), f(X, Y)), Y), f(f(X, Y), f(X, Y))), f(f(f(f(X, Y), f(X, Y)), Y), f(f(X, Y), f(X, Y)))), f(f(f(f(f(f(f(X, Y), f(X, Y)), Y), f(f(X, Y), f(X, Y))), f(f(f(f(X, Y), f(X, Y)), Y), f(f(X, Y), f(X, Y)))), f(Y, f(f(f(f(f(X, Y), f(X, Y)), Y), f(f(X, Y), f(X, Y))), f(X, Y)))), f(f(f(f(f(X, Y), f(X, Y)), Y), f(f(X, Y), f(X, Y))), f(f(f(f(X, Y), f(X, Y)), Y), f(f(X, Y), f(X, Y)))))) -> f(Y, f(f(f(f(f(X, Y), f(X, Y)), Y), f(f(X, Y), f(X, Y))), f(X, Y)))
+483. f(f(X, X), f(f(f(X, X), f(X, f(X, X))), f(f(X, f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X)))))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))))) -> f(X, f(f(f(X, X), f(X, f(X, X))), f(f(f(X, X), f(X, f(X, X))), f(f(X, X), f(X, f(X, X))))))
+484. f(f(f(f(X, f(X, X)), X), f(X, X)), f(Y, f(f(f(f(f(f(X, f(X, X)), X), f(X, X)), Y), f(Y, f(X, X))), f(f(X, f(X, X)), X)))) -> f(f(f(f(f(X, f(X, X)), X), f(X, X)), Y), f(Y, f(X, X)))
+485. f(f(f(X, f(X, X)), X), f(f(f(f(X, f(X, X)), X), f(f(f(X, f(X, X)), X), f(X, X))), f(f(f(f(f(X, f(X, X)), X), f(X, X)), f(X, X)), f(f(X, X), f(X, X))))) -> f(f(f(X, f(X, X)), X), f(X, X))
+486. f(f(f(f(f(f(f(X, X), Y), f(Y, X)), f(f(f(X, X), Y), f(Y, X))), f(X, X)), Y), f(f(f(f(f(f(f(f(X, X), Y), f(Y, X)), f(f(f(X, X), Y), f(Y, X))), f(X, X)), Y), Z), f(Z, f(f(X, X), f(X, X))))) -> Z
+487. f(X, f(f(X, f(X, f(f(Y, Y), f(Y, Y)))), X)) -> f(X, f(f(Y, Y), f(Y, Y)))
+488. f(f(X, f(f(Y, Y), f(Y, Y))), f(f(f(X, f(f(Y, Y), f(Y, Y))), Z), f(Z, X))) -> Z
+489. f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), X), f(f(X, f(X, f(f(X, X), f(X, X)))), X))) -> X
+490. f(X, f(f(X, f(f(X, X), f(X, X))), X)) -> f(f(X, X), f(X, X))
+491. f(f(f(f(X, f(f(X, X), f(X, X))), X), f(f(X, f(f(X, X), f(X, X))), X)), f(f(f(f(f(X, f(f(X, X), f(X, X))), X), f(f(X, f(f(X, X), f(X, X))), X)), X), f(f(X, X), f(X, X)))) -> X
+492. f(f(f(f(X, f(f(X, X), f(X, X))), X), f(X, X)), f(f(f(f(f(X, f(f(X, X), f(X, X))), X), f(X, X)), X), f(f(X, X), f(X, X)))) -> X
+493. f(f(f(X, f(X, f(f(Y, Y), f(Y, Y)))), X), f(f(f(f(X, f(X, f(f(Y, Y), f(Y, Y)))), X), Z), f(Z, f(X, f(X, f(f(Y, Y), f(Y, Y))))))) -> Z
+494. f(f(f(f(X, f(X, f(f(Y, Y), f(Y, Y)))), X), f(f(X, f(X, f(f(Y, Y), f(Y, Y)))), X)), f(f(f(f(f(X, f(X, f(f(Y, Y), f(Y, Y)))), X), f(f(X, f(X, f(f(Y, Y), f(Y, Y)))), X)), X), f(X, f(f(Y, Y), f(Y, Y))))) -> X
+  (simplifying rules with respect to one another...)
+  (delete rule 121)
+  (delete rule 144)
+  (delete rule 253)
+  (delete rule 280)
+  (delete rule 366)
+495. f(f(f(f(X, f(X, X)), X), f(f(Y, Y), f(Y, Y))), f(f(f(f(f(X, f(X, X)), X), f(f(Y, Y), f(Y, Y))), X), f(X, X))) -> X
+496. f(f(X, f(X, f(f(Y, Y), f(Y, Y)))), f(f(f(X, f(X, f(f(Y, Y), f(Y, Y)))), f(f(X, f(X, f(f(Y, Y), f(Y, Y)))), X)), f(X, f(X, f(f(Y, Y), f(Y, Y)))))) -> f(f(X, f(X, f(f(Y, Y), f(Y, Y)))), X)
+497. f(f(f(X, f(f(X, X), f(X, X))), X), f(f(f(f(X, f(f(X, X), f(X, X))), X), Y), f(Y, f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))))) -> Y
+498. f(f(f(f(X, f(f(X, X), f(X, X))), X), f(f(f(X, f(f(X, X), f(X, X))), X), f(f(X, f(f(X, X), f(X, X))), X))), f(f(f(f(f(X, f(f(X, X), f(X, X))), X), f(f(f(X, f(f(X, X), f(X, X))), X), f(f(X, f(f(X, X), f(X, X))), X))), X), f(f(X, X), f(X, X)))) -> X
+499. f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(X, f(f(X, X), f(X, X))), X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))) -> f(f(X, f(f(X, X), f(X, X))), X)
+500. f(f(f(f(X, X), f(X, f(X, X))), f(f(Y, Y), f(Y, Y))), f(f(f(f(f(X, X), f(X, f(X, X))), f(f(Y, Y), f(Y, Y))), f(X, X)), X)) -> f(X, X)
+501. f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), Y), f(Y, f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))))) -> Y
+502. f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(X, X), f(X, X)))) -> f(f(X, X), f(X, X))
+503. f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(X, X), f(X, X))) -> f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))
+504. f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))) -> f(f(X, X), f(X, X))
+505. f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))) -> f(f(X, X), f(X, X))
+506. f(f(X, X), f(X, X)) -> f(X, X)
+507. f(X, X) -> X
+508. f(X, f(Y, X)) -> X
+509. f(X, Y) -> Y
+510. X ~> ?
+
+% SZS status Theorem
+
+% SZS output start Proof
+Axiom 1 (hyp): X = f(Y, f(f(Y, X), f(X, f(f(f(X, Z), Y), f(W, Y))))).
+
+Lemma 2: f(X, f(f(X, Y), f(Y, f(f(Z, X), f(W, X))))) = Y.
+Proof:
+  f(X, f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))))
+= { by axiom 1 (hyp) }
+  f(X, f(f(X, Y), f(Y, f(f(f(Y, f(f(Y, Z), f(Z, f(f(f(Z, V), Y), f(U, Y))))), X), f(W, X)))))
+= { by axiom 1 (hyp) R->L }
+  Y
+
+Lemma 3: f(f(f(X, Y), f(Z, Y)), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y)))) = Y.
+Proof:
+  f(f(f(X, Y), f(Z, Y)), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))))
+= { by lemma 2 R->L }
+  f(f(f(X, Y), f(Z, Y)), f(f(f(f(X, Y), f(Z, Y)), Y), f(Y, f(f(Y, f(f(X, Y), f(Z, Y))), f(f(f(X, Y), f(Z, Y)), f(f(X, Y), f(Z, Y)))))))
+= { by lemma 2 }
+  Y
+
+Lemma 4: f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), W), f(W, f(Y, Y)))) = W.
+Proof:
+  f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), W), f(W, f(Y, Y))))
+= { by lemma 3 R->L }
+  f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), W), f(W, f(Y, f(f(f(X, Y), f(Z, Y)), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))))))))
+= { by lemma 3 R->L }
+  f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), f(f(f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))), W), f(W, f(f(f(f(X, Y), f(Z, Y)), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y)))), f(f(f(X, Y), f(Z, Y)), f(f(f(f(X, Y), f(Z, Y)), Y), f(f(X, Y), f(Z, Y))))))))
+= { by lemma 2 }
+  W
+
+Lemma 5: f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), V), f(V, f(Y, Y)))) = V.
+Proof:
+  f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), V), f(V, f(Y, Y))))
+= { by lemma 2 R->L }
+  f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), V), f(V, f(Y, f(X, f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))))))))
+= { by lemma 2 R->L }
+  f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), f(f(f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))), V), f(V, f(f(X, f(f(X, Y), f(Y, f(f(Z, X), f(W, X))))), f(X, f(f(X, Y), f(Y, f(f(Z, X), f(W, X)))))))))
+= { by lemma 2 }
+  V
+
+Lemma 6: f(f(X, f(X, X)), f(f(f(X, f(X, X)), Y), f(Y, X))) = Y.
+Proof:
+  f(f(X, f(X, X)), f(f(f(X, f(X, X)), Y), f(Y, X)))
+= { by axiom 1 (hyp) }
+  f(f(X, f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), X)), f(f(f(X, f(X, X)), Y), f(Y, X)))
+= { by axiom 1 (hyp) }
+  f(f(X, f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))))), f(f(f(X, f(X, X)), Y), f(Y, X)))
+= { by axiom 1 (hyp) }
+  f(f(X, f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))))), f(f(f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(X, X)), Y), f(Y, X)))
+= { by axiom 1 (hyp) }
+  f(f(X, f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))))), f(f(f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), X)), Y), f(Y, X)))
+= { by axiom 1 (hyp) }
+  f(f(X, f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))))), f(f(f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))))), Y), f(Y, X)))
+= { by axiom 1 (hyp) }
+  f(f(X, f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))))), f(f(f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))))), Y), f(Y, f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))))))
+= { by axiom 1 (hyp) }
+  f(f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))))), f(f(f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))))), Y), f(Y, f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))))))
+= { by lemma 5 R->L }
+  f(f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))))), f(f(f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))))), Y), f(Y, f(f(f(f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z)))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z)))))), f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z)))))))), f(f(f(f(f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z)))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z)))))), f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z)))))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z)))))), f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))), f(Z, f(f(Z, X), f(X, f(f(f(X, W), Z), f(V, Z))))))))))))
+= { by lemma 2 }
+  Y
+
+Lemma 7: f(f(X, X), f(f(f(X, X), Y), f(Y, X))) = Y.
+Proof:
+  f(f(X, X), f(f(f(X, X), Y), f(Y, X)))
+= { by lemma 6 R->L }
+  f(f(X, X), f(f(f(X, X), Y), f(Y, f(f(X, f(X, X)), f(f(f(X, f(X, X)), X), f(X, X))))))
+= { by lemma 2 }
+  Y
+
+Lemma 8: f(f(f(f(X, X), Y), f(Y, X)), f(f(f(f(f(X, X), Y), f(Y, X)), Z), f(Z, f(Y, Y)))) = Z.
+Proof:
+  f(f(f(f(X, X), Y), f(Y, X)), f(f(f(f(f(X, X), Y), f(Y, X)), Z), f(Z, f(Y, Y))))
+= { by lemma 6 R->L }
+  f(f(f(f(X, X), Y), f(Y, X)), f(f(f(f(f(X, X), Y), f(Y, f(f(X, f(X, X)), f(f(f(X, f(X, X)), X), f(X, X))))), Z), f(Z, f(Y, Y))))
+= { by lemma 6 R->L }
+  f(f(f(f(X, X), Y), f(Y, f(f(X, f(X, X)), f(f(f(X, f(X, X)), X), f(X, X))))), f(f(f(f(f(X, X), Y), f(Y, f(f(X, f(X, X)), f(f(f(X, f(X, X)), X), f(X, X))))), Z), f(Z, f(Y, Y))))
+= { by lemma 5 }
+  Z
+
+Lemma 9: f(f(f(X, X), X), f(X, X)) = f(f(X, X), f(X, f(X, X))).
+Proof:
+  f(f(f(X, X), X), f(X, X))
+= { by lemma 2 R->L }
+  f(f(X, X), f(f(f(X, X), f(f(f(X, X), X), f(X, X))), f(f(f(f(X, X), X), f(X, X)), f(f(f(f(f(X, X), X), f(X, X)), f(X, X)), f(f(X, X), f(X, X))))))
+= { by lemma 8 }
+  f(f(X, X), f(f(f(X, X), f(f(f(X, X), X), f(X, X))), f(X, X)))
+= { by lemma 7 }
+  f(f(X, X), f(X, f(X, X)))
+
+Lemma 10: f(f(X, X), f(f(X, X), f(X, f(X, X)))) = X.
+Proof:
+  f(f(X, X), f(f(X, X), f(X, f(X, X))))
+= { by lemma 9 R->L }
+  f(f(X, X), f(f(f(X, X), X), f(X, X)))
+= { by lemma 7 }
+  X
+
+Lemma 11: f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), Y), f(Y, f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))))) = Y.
+Proof:
+  f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), Y), f(Y, f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))))
+= { by lemma 2 R->L }
+  f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), Y), f(Y, f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(f(f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X)), f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X))), f(X, X)), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X)), f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X))), f(X, X)), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))))), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))))))))))
+= { by lemma 7 R->L }
+  f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), Y), f(Y, f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(f(f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X)), f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X))), f(X, X)), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X)), f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X))), f(X, X)), f(f(X, X), f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X)))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))))), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))))))))))
+= { by lemma 7 R->L }
+  f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), Y), f(Y, f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(f(f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X)), f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X))), f(X, X)), f(f(X, X), f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X)))), f(f(f(f(f(f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X)), f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X))), f(X, X)), f(f(X, X), f(f(f(X, X), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), X)))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))))), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X)))))))))))
+= { by lemma 8 }
+  f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), Y), f(Y, f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))))))))))
+= { by lemma 10 }
+  f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), Y), f(Y, f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(X, X), f(X, X)))))))
+= { by lemma 2 }
+  Y
+
+Lemma 12: f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(X, X), f(X, X)))) = f(f(X, X), f(X, X)).
+Proof:
+  f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(X, X), f(X, X))))
+= { by lemma 11 R->L }
+  f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))))))
+= { by lemma 9 R->L }
+  f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))))))
+= { by lemma 2 }
+  f(f(X, X), f(X, X))
+
+Lemma 13: f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))) = f(f(X, X), f(X, X)).
+Proof:
+  f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))
+= { by lemma 11 R->L }
+  f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))))))
+= { by lemma 9 R->L }
+  f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))))))
+= { by lemma 12 R->L }
+  f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(X, X), f(X, X)))), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))))))
+= { by lemma 11 }
+  f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(X, X), f(X, X))))
+= { by lemma 12 }
+  f(f(X, X), f(X, X))
+
+Lemma 14: f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))) = f(f(X, X), f(X, X)).
+Proof:
+  f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))
+= { by lemma 3 R->L }
+  f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))))))
+= { by lemma 4 }
+  f(f(f(X, X), f(X, X)), f(f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))))))
+= { by lemma 4 }
+  f(f(f(X, X), f(X, X)), f(f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(X, X), f(X, X))))
+= { by lemma 4 }
+  f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(X, X), f(X, X))))
+= { by lemma 13 }
+  f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))))
+= { by lemma 13 }
+  f(f(X, X), f(X, X))
+
+Lemma 15: f(X, f(f(X, f(X, X)), f(f(f(X, X), f(Y, X)), f(f(Y, X), X)))) = f(X, X).
+Proof:
+  f(X, f(f(X, f(X, X)), f(f(f(X, X), f(Y, X)), f(f(Y, X), X))))
+= { by lemma 7 R->L }
+  f(X, f(f(X, f(X, X)), f(f(X, X), f(f(f(X, X), f(f(f(X, X), f(Y, X)), f(f(Y, X), X))), f(f(f(f(X, X), f(Y, X)), f(f(Y, X), X)), X)))))
+= { by lemma 7 }
+  f(X, f(f(X, f(X, X)), f(f(X, X), f(f(Y, X), f(f(f(f(X, X), f(Y, X)), f(f(Y, X), X)), X)))))
+= { by lemma 2 }
+  f(X, X)
+
+Lemma 16: f(f(X, X), f(f(f(X, X), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, f(X, X)))), f(f(f(X, X), f(X, f(X, X))), f(X, X))))) = f(f(X, X), f(X, X)).
+Proof:
+  f(f(X, X), f(f(f(X, X), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, f(X, X)))), f(f(f(X, X), f(X, f(X, X))), f(X, X)))))
+= { by lemma 9 R->L }
+  f(f(X, X), f(f(f(X, X), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, f(X, X)))), f(f(f(f(X, X), X), f(X, X)), f(X, X)))))
+= { by lemma 9 R->L }
+  f(f(X, X), f(f(f(X, X), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(X, X)), f(f(f(X, X), X), f(X, X))), f(f(f(f(X, X), X), f(X, X)), f(X, X)))))
+= { by lemma 15 }
+  f(f(X, X), f(X, X))
+
+Lemma 17: f(f(f(X, Y), f(Y, Y)), f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y)))) = Z.
+Proof:
+  f(f(f(X, Y), f(Y, Y)), f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(X, Y))))
+= { by lemma 4 R->L }
+  f(f(f(X, Y), f(Y, Y)), f(f(f(f(X, Y), f(Y, Y)), Z), f(Z, f(f(f(f(f(X, Y), f(Y, Y)), Y), f(f(X, Y), f(Y, Y))), f(f(f(f(f(f(X, Y), f(Y, Y)), Y), f(f(X, Y), f(Y, Y))), f(X, Y)), f(f(X, Y), f(Y, Y)))))))
+= { by lemma 2 }
+  Z
+
+Lemma 18: f(f(X, X), f(X, X)) = f(X, X).
+Proof:
+  f(f(X, X), f(X, X))
+= { by lemma 14 R->L }
+  f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))
+= { by lemma 16 R->L }
+  f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(f(X, X), f(X, X))))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(f(X, X), f(X, X)))), f(f(X, X), f(X, X))))))
+= { by lemma 14 }
+  f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(f(X, X), f(X, X))))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(f(X, X), f(X, X)))), f(f(X, X), f(X, X))))))
+= { by lemma 17 }
+  f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(X, X), f(f(X, X), f(X, X)))))
+= { by lemma 10 }
+  f(X, X)
+
+Lemma 19: f(X, X) = X.
+Proof:
+  f(X, X)
+= { by lemma 18 R->L }
+  f(f(X, X), f(X, X))
+= { by lemma 16 R->L }
+  f(f(X, X), f(f(f(X, X), f(f(X, X), f(X, X))), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, f(X, X)))), f(f(f(X, X), f(X, f(X, X))), f(X, X)))))
+= { by lemma 18 }
+  f(f(X, X), f(f(f(X, X), f(X, X)), f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, f(X, X)))), f(f(f(X, X), f(X, f(X, X))), f(X, X)))))
+= { by lemma 17 }
+  f(f(X, X), f(f(X, X), f(X, f(X, X))))
+= { by lemma 10 }
+  X
+
+Lemma 20: f(X, f(Y, X)) = X.
+Proof:
+  f(X, f(Y, X))
+= { by lemma 7 R->L }
+  f(X, f(f(X, X), f(f(f(X, X), f(Y, X)), f(f(Y, X), X))))
+= { by lemma 19 R->L }
+  f(X, f(f(X, f(X, X)), f(f(f(X, X), f(Y, X)), f(f(Y, X), X))))
+= { by lemma 15 }
+  f(X, X)
+= { by lemma 19 }
+  X
+
+Lemma 21: f(X, Y) = Y.
+Proof:
+  f(X, Y)
+= { by lemma 2 R->L }
+  f(Y, f(f(Y, f(X, Y)), f(f(X, Y), f(f(Z, Y), f(X, Y)))))
+= { by lemma 20 }
+  f(Y, f(f(Y, f(X, Y)), f(X, Y)))
+= { by lemma 20 }
+  f(Y, f(Y, f(X, Y)))
+= { by lemma 20 }
+  f(Y, Y)
+= { by lemma 19 }
+  Y
+
+Goal 1 (goal): x = y.
+Proof:
+  x
+= { by lemma 2 R->L }
+  f(X, f(f(X, x), f(x, f(f(Y, X), f(Z, X)))))
+= { by lemma 21 }
+  f(f(X, x), f(x, f(f(Y, X), f(Z, X))))
+= { by lemma 21 }
+  f(x, f(f(Y, X), f(Z, X)))
+= { by lemma 21 }
+  f(f(Y, X), f(Z, X))
+= { by lemma 21 R->L }
+  f(y, f(f(Y, X), f(Z, X)))
+= { by lemma 21 R->L }
+  f(f(X, y), f(y, f(f(Y, X), f(Z, X))))
+= { by lemma 21 R->L }
+  f(X, f(f(X, y), f(y, f(f(Y, X), f(Z, X)))))
+= { by lemma 2 }
+  y
+% SZS output end Proof
+
+RESULT: Theorem (the conjecture is true).
