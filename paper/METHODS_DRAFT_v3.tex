@@ -1,0 +1,201 @@
+% ============================================================================
+% §3.2 (Screening ¶) + §3.3 ANSWER VERIFICATION — v3 draft (2026-07-24)
+% Written in the post-07-23 register (technical, formal, direct; KDD-level).
+%
+% WHAT THIS DELIVERS
+%   (1) §3.2 "Screening" paragraph, replacement. Now shows exactly what the
+%       admissibility prover proves: the subterm S, the syntactic injectivity
+%       argument, the surjectivity axiom as displayed first-order sentence,
+%       the exact prover query, and the scope of the conclusion.
+%       *** CORRECTNESS FIX (not just style): the compiled text says "that
+%       subterm acts as a left inverse, making the map x -> T injective".
+%       Both halves are off: the x-free CONTEXT C is the left inverse, and the
+%       injective map is S (the subterm), not T. Fixed below; verify against
+%       prove_status.py before merging. ***
+%   (2) §3.3 full replacement, including the sentence at the literal
+%       "Figure 3 ..." placeholder, the explicit three-step argument for the
+%       construction channel, the "prover never reasons about infinity"
+%       sentence, the self-policing paragraph, and the negative-controls
+%       sentence (gate contents verified against llm_construct.py --selftest
+%       on 2026-07-24: positive control certifies; left projection rejected at
+%       check (a); collapsing presentation rejected at check (b); the parser
+%       additionally rejects literal variable-to-variable equations and any
+%       non-equational syntax).
+%
+% WHAT TO CHANGE BEFORE THE FIGURE-3 WALK-THROUGH (your question):
+%   - PDF ¶ "A solved ALPS instance is a verified mathematical fact, not a
+%     predicted label."  → replaced (second antithesis; abstract holds the
+%     paper's one allocation). New opener also states the trust base, which
+%     TASK_AND_JUDGING.md requires the paper to state and the compiled text
+%     currently omits.
+%   - PDF ¶ "The construction channel. ... In other words, E must impose
+%     enough constraints..." → kept in substance, tightened; the semantic
+%     reading of E now leads and the two claims are numbered so the Figure 3
+%     caption and the formal queries can refer to them.
+%   - The trivial-channel ¶ gains the header/footer/allowlist mechanism (in
+%     your v2 draft, dropped from the compile) and one show-don't-tell
+%     sentence giving the shape of a trivial-side proof (a chain of law
+%     applications), which §4.2's assembler then picks up as a breadcrumb.
+%
+% Citation keys and labels follow section3_draft.tex: kisielewicz1997austin,
+% baader1998term, moura2021lean, kovacs2013first, smallbone2021twee,
+% eq:dichotomy, eq:trivialgoal, eq:construction. %% VERIFY the Figure 3 label
+% (fig:toy below) against the Overleaf source.
+% ============================================================================
+
+% ---------------------------------------------------------------------------
+% §3.2 — replacement for the "Screening." paragraph
+% ---------------------------------------------------------------------------
+
+\textbf{Screening.} Each candidate then passes screens ordered from cheap to
+expensive (Figure~\ref{fig:funnel}). A fast proof search first removes
+candidates it can prove trivial at generation time, and a finite-model filter
+searches carriers of increasing size and discards every candidate it can
+satisfy nontrivially. The survivors go to the admissibility prover, which
+attempts a machine-checked proof that no nontrivial finite model exists. The
+proof has a fixed shape. For a candidate $L\colon x = T[x,\bar y]$, the
+screener selects a subterm $S$ of $T$ that contains every occurrence of $x$,
+so that $T = C[S]$ for a context $C$ in which $x$ does not appear. The law
+itself then reads $x = C[S(x,\bar y)]$: the context $C$ is a left inverse of
+$S$, so the map $x \mapsto S(x,\bar y)$ is injective, with no proof search
+required. On a finite carrier every injective map is surjective, so every
+finite model of $L$ additionally satisfies the first-order sentence
+\begin{equation}
+\label{eq:surj}
+\forall \bar y\ \forall u\ \exists x\colon\; S(x,\bar y) = u.
+\end{equation}
+The admissibility query submits $L$ together with \eqref{eq:surj} to the
+prover and asks for $x = y$. A refutation proof establishes that every model
+satisfying both is trivial; since every nontrivial finite model of $L$ would
+satisfy both, none exists. The certificate is that refutation proof, stored
+with the instance. Its scope is deliberately limited: \eqref{eq:surj} is
+asserted only inside the finite-model argument, so the proof establishes
+``no nontrivial finite model'' and never $L \models x = y$, leaving the
+dichotomy of \eqref{eq:dichotomy} intact. Admission requires this
+certificate, and no such certificate exists for a law with a nontrivial
+finite model, so none can enter the corpus. The price is incompleteness:
+when no subterm of $T$ contains every occurrence of $x$ and injectivity
+cannot be proved by other means, the query certifies nothing, and the
+candidate is discarded even though it may be admissible. What remains after
+screening is the admissible pool, split by \eqref{eq:dichotomy} into laws
+proved trivial, laws whose models the screening provers construct outright,
+and the residual that the baseline of the next section attempts.
+
+% ---------------------------------------------------------------------------
+% §3.3 — full replacement
+% ---------------------------------------------------------------------------
+
+\subsection{Answer Verification}
+
+Each solved ALPS instance is a machine-verified mathematical statement. The
+two sides of the task call for different verification machinery, so the judge
+issues a certificate through the channel that fits the answer: a proof
+checked by the Lean kernel for the trivial side, and an automated-prover
+certificate for a constructed model. Both channels are fully automatic, a
+submission is accepted only when its check succeeds, and the trust base is
+stated plainly: the Lean kernel on the trivial side
+\citep{moura2021lean}, and prover saturation on the construction side
+\citep{kovacs2013first}, cross-checkable by a second prover
+\citep{smallbone2021twee} and the same base on which the corpus labels
+themselves rest.
+
+\textbf{The trivial channel.} For each law the judge generates the
+proposition
+\begin{equation}
+\label{eq:trivialgoal}
+\textsc{TrivialGoal} \equiv \forall M\ \forall {\op}\colon M \times M \to
+M,\; \mathrm{Law}(\op) \rightarrow \forall a, b : M,\ a = b,
+\end{equation}
+where $\mathrm{Law}(\op)$ asserts that $\op$ satisfies $L$, and a submission
+is a Lean proof of it. The statement is generated, never written by the
+submitter: the judged file fixes \eqref{eq:trivialgoal} in a header, inserts
+the submitted proof, and forces it to elaborate at exactly that type, and the
+proof's axiom footprint must fall within a fixed allowlist. A proof the
+kernel accepts under these constraints is correct by construction. In
+practice a proof of \eqref{eq:trivialgoal} formalizes a chain of equalities
+$a = t_1 = \cdots = t_k = b$ in which each step applies one instance of $L$;
+the evaluation harness of Section~4.2 is built around this shape.
+
+\textbf{The construction channel.} A solver that judges $L$ to be Austin
+does not write a Lean proof about an infinite object. It submits the model
+itself, as a finite presentation $E$: a set of equations over $\op$, distinct
+from $L$, whose models are all the magmas that satisfy them. The submission
+makes two claims about this class: (i) every model of $E$ satisfies $L$, and
+(ii) some model of $E$ has two distinct elements. The two claims pull in
+opposite directions — $E$ must impose enough structure to entail the law
+without imposing so much that all elements collapse to one — and the
+certificate requires both. Figure~\ref{fig:toy} traces the full certificate
+on a toy law. Formally, the judge issues two prover queries
+\citep{kovacs2013first},
+\begin{equation}
+\label{eq:construction}
+\text{(a)}\;\; E \vdash L
+\qquad\qquad
+\text{(b)}\;\; E \cup \{\,a \neq b\,\} \text{ is satisfiable,}
+\end{equation}
+and certifies the submission only when both succeed. Check (a) returns a
+refutation proof, which establishes claim (i). Check (b) is a saturation
+that terminates without contradiction under a completeness-preserving
+strategy; the saturated clause set describes a model of $E$ with two
+distinct elements, which establishes claim (ii). The two checks compose
+into a three-step argument: some magma satisfies $E$ with $a \neq b$, every
+magma satisfying $E$ satisfies $L$, and therefore $L$ has a nontrivial
+model, which the admissibility certificate of Section~3.2 forces to be
+infinite. Neither query mentions infinity. Both are finite first-order
+tasks, and infinitude enters only through the admissibility proof already
+carried by the instance.
+
+The pair of checks is resistant to degenerate submissions. Submitting the
+law itself as $E$ gains nothing: check (a) becomes immediate, but check (b)
+reduces to the bare saturation of $L$, which is the computation that fails
+to terminate on the hard tier. A collapsing presentation such as
+$\{x \op y = x,\ x \op y = y\}$ entails every law and passes check (a), but
+fails check (b), because $E \cup \{a \neq b\}$ is unsatisfiable. A
+presentation too weak to force the law, such as the left projection
+$\{x \op y = x\}$, passes check (b) but fails check (a). The judge is
+validated against controls of all three kinds before any evaluation run: a
+known-correct presentation certifies, the left projection is rejected at
+check (a), and the collapsing presentation is rejected at check (b). The
+submission parser additionally rejects anything that is not a set of
+unconditional equations, so implications, disequations, and literal
+restatements of $x = y$ never reach the prover.
+
+\textbf{Why two channels.} A single Lean judge covering both sides is not
+available. If an admissible law had a model whose operation is a polynomial
+or affine formula over $\mathbb{Z}$, $\mathbb{Z}^k$, or $\mathbb{Z}/n$, the
+identity would survive reduction modulo two and yield a nontrivial
+\emph{finite} model, contradicting admissibility. No Austin model is an
+arithmetic formula, so the model families that are straightforward to
+formalize in Lean are provably empty here, and an Austin answer cannot be a
+small arithmetic expression recalled from training. The structures that do
+satisfy these laws — term models built from saturations — await a
+formalization of ground confluence, which we develop as companion work
+\citep{janota2026case}. The two-channel judge is what makes the construction
+side gradable today, at the cost of one additional trusted checker.
+
+% ---------------------------------------------------------------------------
+% NOTES (delete before merge)
+% ---------------------------------------------------------------------------
+% 1. eq:surj adds one numbered display to §3.2. If space is tight, inline it:
+%    "the first-order sentence  ∀ȳ∀u∃x: S(x,ȳ)=u  (surjectivity of S)".
+% 2. The collapsing-control example was changed from {x = y} to
+%    {x◇y = x, x◇y = y}. The submission parser rejects the literal string
+%    "x = y" (degenerate-equation gate in llm_construct.py), so {x = y} is a
+%    control the parser, not the prover, would catch; the two-equation form
+%    is what actually reaches check (b) and is rejected there. Figure 3's
+%    caption uses the same logic on E0 and needs no change. If you prefer to
+%    keep {x = y} for readability, add "(rejected at the parser in our
+%    implementation)".
+% 3. "distinct from L" in the construction ¶: strictly, the harness does not
+%    forbid E = {L}; it is self-defeating rather than forbidden. Current
+%    phrasing survives because the self-policing ¶ explains it, but if you
+%    want exactness, replace "distinct from L" with "typically distinct
+%    from L".
+% 4. The trust-base sentence is required by TASK_AND_JUDGING.md ("state that
+%    in the paper") and is currently absent from the compile.
+% 5. Breadcrumb "the evaluation harness of Section 4.2 is built around this
+%    shape" plants the assembler; keep §4.2's "the judge and assembler are
+%    exactly the tools any solver built on ALPS would use" as the payoff.
+% 6. Terminology check against the fixed list: "checks (a) and (b)",
+%    "presentation E", "admissible", "hard tier" all used; no "horns".
+% ============================================================================
