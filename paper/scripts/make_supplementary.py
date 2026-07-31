@@ -216,13 +216,29 @@ def main():
         print(note)
 
     # ---- cert-63 law list, chains withheld --------------------------------
-    src = os.path.join(root, CHAIN_SOURCE)
-    if os.path.exists(src):
-        kept, _ = filter_jsonl(src, os.path.join(stage, "corpus", "cert63_laws.jsonl"),
-                               keep_keys=CHAIN_KEEP_KEYS)
-        print(f"  cert63_laws.jsonl{'':<24} {kept:>5} laws   (chains withheld)")
-    else:
-        die(f"{CHAIN_SOURCE} not found; cannot derive the cert-63 law list")
+    # The certified-easy set is DEFINED by what was evaluated, so we derive it
+    # from the laws appearing in the cert-63 result files rather than from
+    # easy_chain_harvest.jsonl, which is the wider harvest pool (400 laws) and
+    # carries the chains we withhold.
+    laws, seen = [], set()
+    for rel in CERT63_RESULTS:
+        with open(os.path.join(root, rel), encoding="utf-8") as fh:
+            for line in fh:
+                if not line.strip():
+                    continue
+                lw = json.loads(line).get("law")
+                if lw and lw not in seen:
+                    seen.add(lw)
+                    laws.append(lw)
+    if len(laws) != 63:
+        die(f"cert-63 law list came to {len(laws)} laws, expected 63; "
+            "check which result files define the set")
+    dst = os.path.join(stage, "corpus", "cert63_laws.jsonl")
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    with open(dst, "w", encoding="utf-8") as fh:
+        for lw in laws:
+            fh.write(json.dumps({"law": lw}, ensure_ascii=False) + "\n")
+    print(f"  cert63_laws.jsonl{'':<24} {len(laws):>5} laws   (chains withheld)")
 
     if a.readme:
         copy_scrubbed(a.readme, os.path.join(stage, "README.md"))
