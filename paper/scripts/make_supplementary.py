@@ -82,14 +82,23 @@ MANIFEST = [
 
 # Result files whose rows may contain a cert-63 SOLUTION in `last`.
 # Solved rows get `last` stripped; failed rows keep it.
-CERT63_RESULTS = [
-    "paper/results/llm_autoform_o3_cert63.jsonl",
-    "paper/results/llm_autoform_o3_nohints63.jsonl",
-    "paper/results/llm_autoform_o3_low.jsonl",
-    "paper/results/llm_autoform_o3_repro.jsonl",
-    "paper/results/llm_autoform_o4mini_cert63.jsonl",
-    "paper/results/llm_autoform_gpt41.jsonl",
+# Runs that cover the whole certified-easy set. Each must contain all 63 laws;
+# a run may cover MORE (GPT-4.1's covers 95), which is fine -- the reported cell
+# is still 0 out of 63.
+CERT63_FULL = [
+    "paper/results/llm_autoform_o3_cert63.jsonl",      # o3, waypoints
+    "paper/results/llm_autoform_o3_nohints63.jsonl",   # o3, no waypoints
+    "paper/results/llm_autoform_o4mini_cert63.jsonl",  # o4-mini
+    "paper/results/llm_autoform_cert63.jsonl",         # GPT-4.1 (model not in filename)
 ]
+
+# Deliberate subset runs. Each must contain ONLY certified-easy laws.
+CERT63_PARTIAL = [
+    "paper/results/llm_autoform_o3_low.jsonl",         # o3 at low effort, 9 laws
+    "paper/results/llm_autoform_o3_repro.jsonl",       # reproduction run, 14 laws
+]
+
+CERT63_RESULTS = CERT63_FULL + CERT63_PARTIAL
 
 # Hard-tier results: nothing solved, so `last` is a failed submission throughout.
 HARD25_RESULTS = [
@@ -99,9 +108,9 @@ HARD25_RESULTS = [
     "paper/results/llm_construct_gpt41_hard25.jsonl",
 ]
 
-# Reduced to a law list: the chains are the withheld solutions.
-CHAIN_SOURCE = "paper/results/easy_chain_harvest.jsonl"
-CHAIN_KEEP_KEYS = ("law", "id", "law_id")
+# The file that DEFINES the certified-easy set. All other cert-63 runs must be
+# subsets of it; the build aborts otherwise.
+CERT63_REFERENCE = "paper/results/llm_autoform_o3_cert63.jsonl"
 
 # --------------------------------------------------------------------- safety
 
@@ -220,19 +229,35 @@ def main():
     # from the laws appearing in the cert-63 result files rather than from
     # easy_chain_harvest.jsonl, which is the wider harvest pool (400 laws) and
     # carries the chains we withhold.
-    laws, seen = [], set()
-    for rel in CERT63_RESULTS:
+    def laws_in(rel):
+        out, seen_ = [], set()
         with open(os.path.join(root, rel), encoding="utf-8") as fh:
             for line in fh:
                 if not line.strip():
                     continue
                 lw = json.loads(line).get("law")
-                if lw and lw not in seen:
-                    seen.add(lw)
-                    laws.append(lw)
+                if lw and lw not in seen_:
+                    seen_.add(lw)
+                    out.append(lw)
+        return out
+
+    laws = laws_in(CERT63_REFERENCE)
     if len(laws) != 63:
-        die(f"cert-63 law list came to {len(laws)} laws, expected 63; "
-            "check which result files define the set")
+        die(f"{CERT63_REFERENCE} defines {len(laws)} laws, expected 63")
+
+    # Every other certified-easy run must be a SUBSET of that set. A run on
+    # laws outside it is not a result on the certified-easy set, and reporting
+    # it in that column would misstate what was evaluated.
+    ref = set(laws)
+    for rel in CERT63_FULL:
+        missing_laws = ref - set(laws_in(rel))
+        if missing_laws:
+            die(f"{rel}: does not cover {len(missing_laws)} of the 63 certified-easy "
+                "laws, so it cannot support a result reported over that set.")
+    for rel in CERT63_PARTIAL:
+        outside = [lw for lw in laws_in(rel) if lw not in ref]
+        if outside:
+            die(f"{rel}: {len(outside)} of its laws lie outside the certified-easy set.")
     dst = os.path.join(stage, "corpus", "cert63_laws.jsonl")
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     with open(dst, "w", encoding="utf-8") as fh:
