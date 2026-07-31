@@ -139,8 +139,10 @@ APIs expose no seed parameter, and the reasoning LLMs are nondeterministic at
 any setting, so bitwise reproduction of a run is not available. Run-to-run
 variation is therefore measured rather than controlled: the reproduction run
 of Section~4.2 repeats the nine solved and five matched unsolved laws under
-the identical frozen harness, and the result files in the supplementary
-material record every attempt verbatim.
+the identical frozen harness. The result files in the supplementary material
+record every attempt; the submitted chain is withheld from solved rows, since
+a verified chain is a solution to a certified-easy law, and every reported
+count is reproducible from the retained fields.
 
 \subsection{The trivial channel}
 
@@ -514,13 +516,14 @@ o3 reproduction          & 14  & 575,997   & 59,653 \\
 o4-mini cert-63          & 63  & 974,972   & 147,300 \\
 GPT-4.1 cert-63, waypoints    & 63 & 61,670 & 149,538 \\
 GPT-4.1 cert-63, no waypoints & 63 & 71,736 & 139,620 \\
+GPT-4.1 early run (95 laws)   & 100 & 192,466 & 269,443 \\
 GPT-4.1 pilot (10 laws)  & 10  & 9,234     & 31,870 \\
 o3 trivial, hard-25      & 25  & 1,226,978 & 53,475 \\
 o3 construct, hard-25    & 25  & 1,120,628 & 144,122 \\
 o4-mini construct        & 25  & 554,835   & 24,818 \\
 GPT-4.1 construct        & 46  & 6,605     & 45,755 \\
 \midrule
-Total                    & 569 & 11,139,068 & 1,111,882 \\
+Total                    & 669 & 11,331,534 & 1,381,325 \\
 \bottomrule
 \end{tabular}
 \caption{Token usage across all reported language-model runs. A solved

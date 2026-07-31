@@ -32,6 +32,8 @@ import argparse, json, os, re, shutil, sys, zipfile
 
 # (destination directory, source path relative to repo root)
 MANIFEST = [
+    # --- archive root -------------------------------------------------------
+    ("", "paper/latex/appendix.pdf"),
     # --- generator: extension, screening, admissibility, deduplication -----
     ("generator", "paper/scripts/prove_status.py"),
     ("generator", "paper/scripts/etp_terms.py"),
@@ -47,14 +49,17 @@ MANIFEST = [
     ("judge", "paper/scripts/lean_oracle.py"),
     ("judge", "paper/scripts/confluence_cert.py"),
     ("judge", "paper/scripts/ordered_model.py"),
+    ("judge", "paper/bin/vampire"),          # BSD 3-clause; notice ships alongside
+    ("judge", "paper/bin/VAMPIRE_LICENCE"),
 
     # --- baseline: the automated portfolio sweep ---------------------------
     ("baseline", "paper/scripts/baseline_probe.py"),
     ("baseline", "paper/scripts/resume_sweep.sh"),
     ("baseline", "paper/scripts/run_all.sh"),
+    ("baseline", "paper/scripts/run_remaining.sh"),
     ("baseline", "paper/scripts/rescore_baselines.py"),
     ("baseline", "paper/scripts/retry_curve.py"),
-    ("baseline", "paper/results/baseline_full.jsonl"),
+    ("baseline", "paper/results/baseline_full_final.jsonl"),
 
     # --- llm_runs: harnesses ----------------------------------------------
     ("llm_runs", "paper/scripts/trivial_autoform.py"),
@@ -64,6 +69,12 @@ MANIFEST = [
     ("llm_runs", "paper/scripts/construct_hints.py"),
     ("llm_runs", "paper/scripts/llm_failure_breakdown.py"),
     ("llm_runs", "paper/scripts/finalize_llm.sh"),
+    ("llm_runs", "paper/scripts/gpt41_fill63.sh"),
+    ("llm_runs", "paper/results/cert63_input.jsonl"),
+    ("llm_runs", "paper/results/hard25_trivial_input.jsonl"),
+    # GPT-4.1 pilot: 10 laws OUTSIDE the certified-easy set (0 solves, so no
+    # withheld content); listed in the appendix cost table as the pilot row.
+    ("llm_runs", "paper/results/llm_autoform_gpt41.jsonl"),
 
     # --- corpus ------------------------------------------------------------
     ("corpus", "paper/results/final_status.jsonl"),
@@ -89,7 +100,9 @@ CERT63_FULL = [
     "paper/results/llm_autoform_o3_cert63.jsonl",      # o3, waypoints
     "paper/results/llm_autoform_o3_nohints63.jsonl",   # o3, no waypoints
     "paper/results/llm_autoform_o4mini_cert63.jsonl",  # o4-mini
-    "paper/results/llm_autoform_cert63.jsonl",         # GPT-4.1 (model not in filename)
+    "paper/results/llm_autoform_cert63.jsonl",         # GPT-4.1 early run (95 laws)
+    "paper/results/llm_autoform_gpt41_cert63.jsonl",   # GPT-4.1, waypoints, exact 63
+    "paper/results/llm_autoform_gpt41_nohints63.jsonl",# GPT-4.1, no waypoints, exact 63
 ]
 
 # Deliberate subset runs. Each must contain ONLY certified-easy laws.
