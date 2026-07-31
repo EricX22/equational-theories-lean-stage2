@@ -1,0 +1,46 @@
+% law: x = ((y ◇ (((x ◇ y) ◇ (y ◇ (z ◇ w))) ◇ x)) ◇ (z ◇ y))
+% config: vampire/triv/discount @ 30s
+
+% Running in auto input_syntax mode. Trying TPTP
+% Refutation found. Thanks to Tanya!
+% SZS status Theorem for p
+% SZS output start Proof for p
+1. ! [X0,X1,X2,X3] : X1 = f(f(X2,f(f(f(X1,X2),f(X2,f(X3,X0))),X1)),f(X3,X2)) [input(axiom)]
+2. ! [X0,X1] : X0 = X1 [input(conjecture)]
+3. ~! [X0,X1] : X0 = X1 [negated conjecture 2]
+4. ? [X0,X1] : X0 != X1 [ennf transformation 3]
+5. ? [X0,X1] : X0 != X1 => sK0 != sK1 [skolem symbol introduction]
+6. sK0 != sK1 [skolemisation 4,5]
+7. f(f(X2,f(f(f(X1,X2),f(X2,f(X3,X0))),X1)),f(X3,X2)) = X1 [cnf transformation 1]
+8. sK0 != sK1 [cnf transformation 6]
+10. f(f(X1,f(f(f(X2,X1),f(X1,X0)),X2)),f(f(X3,f(f(f(X0,X3),f(X3,f(X4,X5))),X0)),X1)) = X2 [superposition 7,7]
+12. f(f(f(X1,X2),f(f(f(X3,f(X1,X2)),f(f(X1,X2),f(f(X2,f(f(f(X0,X2),f(X2,f(X1,X4))),X0)),X5))),X3)),X0) = X3 [superposition 7,7]
+47. f(f(f(X1,f(f(f(X0,X1),f(X1,X2)),X0)),f(f(f(X3,f(X1,f(f(f(X0,X1),f(X1,X2)),X0))),X0),X3)),X2) = X3 [superposition 12,10]
+48. f(f(X1,f(f(f(X2,X1),f(X1,X0)),X2)),X0) = X2 [superposition 10,12]
+62. f(X2,f(f(f(X0,X2),f(X2,X1)),X0)) = f(f(X1,f(f(X0,f(X1,X3)),f(X2,f(f(f(X0,X2),f(X2,X1)),X0)))),X3) [superposition 48,48]
+69. f(X2,f(f(f(X0,X2),f(X2,X1)),X0)) = f(f(X1,f(f(X0,f(X1,f(X3,X4))),f(X2,f(f(f(X0,X2),f(X2,X1)),X0)))),f(X3,X1)) [superposition 7,48]
+270. f(X4,f(f(f(X0,X4),f(X4,f(X1,f(f(f(X2,X1),f(X1,X3)),X2)))),X0)) = f(f(f(X1,f(f(f(X2,X1),f(X1,X3)),X2)),f(f(X0,X2),f(X4,f(f(f(X0,X4),f(X4,f(X1,f(f(f(X2,X1),f(X1,X3)),X2)))),X0)))),X3) [superposition 47,48]
+631. f(f(X1,X2),f(f(X0,f(f(X1,X2),X4)),f(X2,f(f(f(X0,X2),f(X2,f(X1,X3))),X0)))) = f(f(X4,f(f(f(X2,f(f(f(X0,X2),f(X2,f(X1,X3))),X0)),f(X4,X5)),f(f(X1,X2),f(f(X0,f(f(X1,X2),X4)),f(X2,f(f(f(X0,X2),f(X2,f(X1,X3))),X0)))))),X5) [superposition 62,7]
+118887. f(f(f(f(f(X1,X2),f(X2,X2)),X1),f(X0,f(f(f(f(f(X1,X2),f(X2,X2)),X0),f(X0,f(X2,f(f(f(X1,X2),f(X2,X2)),X1)))),f(f(X1,X2),f(X2,X2))))),f(X0,f(f(f(X1,X2),f(X2,X2)),X1))) = X2 [superposition 7,270]
+325452. f(f(X1,X2),f(f(X0,f(f(X1,X2),X1)),f(X2,f(f(f(X0,X2),f(X2,f(X1,X3))),X0)))) = f(f(X1,f(X0,f(f(X1,X2),f(f(X0,f(f(X1,X2),X1)),f(X2,f(f(f(X0,X2),f(X2,f(X1,X3))),X0)))))),X2) [superposition 631,7]
+325497. f(f(X1,X2),f(f(X0,f(f(X1,X2),X1)),f(X2,f(f(f(X0,X2),f(X2,f(X1,X3))),X0)))) = f(f(X1,f(X0,f(f(X1,X2),f(f(X0,f(f(X1,X2),X1)),f(X2,f(f(f(X0,X2),f(X2,f(X1,X3))),X0)))))),X3) [superposition 631,48]
+329508. f(f(X1,f(f(f(X0,X1),X0),f(f(X1,f(f(f(X0,X1),X0),f(X0,X1))),f(X0,f(f(f(X1,X0),f(X0,f(f(X0,X1),X2))),X1))))),f(f(f(X0,X1),X0),X1)) = X0 [superposition 7,325452]
+338029. f(X3,f(f(f(X0,X3),f(X3,X2)),X0)) = f(f(X2,f(f(X0,X1),f(f(X2,f(f(X0,X1),X0)),f(X1,f(f(f(X2,X1),f(X1,f(X0,f(X3,f(f(f(X0,X3),f(X3,X2)),X0))))),X2))))),f(f(X0,X1),X2)) [superposition 69,325497]
+346608. f(X1,f(f(f(f(X0,X2),X1),f(X1,X2)),f(X0,X2))) = X0 [superposition 338029,329508]
+348850. f(X0,f(X2,X3)) = f(X0,f(X2,X1)) [superposition 7,346608]
+351091. f(X1,X0) = f(X1,f(X2,X4)) [superposition 348850,346608]
+361327. f(X1,X2) = X0 [superposition 351091,346608]
+370251. X0 = X3 [superposition 361327,118887]
+383839. sK0 != X0 [superposition 8,370251]
+388298. $false [forward subsumption resolution 383839,370251]
+% SZS output end Proof for p
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eaf on 2026-01-18 12:14:50 +0000)
+% Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 NOTFOUND
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation
+% Time elapsed: 27.854 s
+% Peak memory usage: 634 MB
+% Instructions burned: 156907 (million)
+% ------------------------------
+% ------------------------------

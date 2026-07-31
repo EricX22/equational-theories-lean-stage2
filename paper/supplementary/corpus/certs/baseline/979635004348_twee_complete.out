@@ -1,0 +1,250 @@
+% law: x = ((z ◇ y) ◇ ((x ◇ y) ◇ (y ◇ (((z ◇ w) ◇ x) ◇ y))))
+% config: twee/complete @ 30s
+
+Here is the input problem:
+  Axiom 1 (hyp): X = f(f(Y, Z), f(f(X, Z), f(Z, f(f(f(Y, W), X), Z)))).
+  Goal 1 (goal): x = y.
+
+1. f(f(X, Y), f(f(Z, Y), f(Y, f(f(f(X, W), Z), Y)))) -> Z
+2. f(f(f(X, Y), Z), f(f(W, Z), f(Z, f(f(V, W), Z)))) -> W
+3. f(f(X, Y), f(f(Z, Y), f(Y, f(f(W, Z), Y)))) -> Z
+4. f(f(X, f(f(Y, Z), f(Z, f(f(W, Y), Z)))), f(f(Z, f(f(Y, Z), f(Z, f(f(W, Y), Z)))), f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), Y))) -> Z
+5. f(X, f(f(Y, f(f(X, Y), f(Y, f(f(Z, X), Y)))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), X))) -> Y
+6. f(X, f(f(Y, f(f(X, Z), f(Z, f(f(W, X), Z)))), f(f(f(X, Z), f(Z, f(f(W, X), Z))), f(f(V, Y), f(f(X, Z), f(Z, f(f(W, X), Z))))))) -> Y
+7. f(X, f(X, f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(W, f(V, Y)), f(f(X, Y), f(Y, f(f(Z, X), Y))))))) -> f(V, Y)
+8. f(f(X, Y), f(f(f(f(Z, W), f(W, f(f(V, Z), W))), Y), f(Y, f(Z, Y)))) -> f(f(Z, W), f(W, f(f(V, Z), W)))
+9. f(f(X, f(f(Y, Z), f(Z, f(f(W, Y), Z)))), f(Y, f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), f(f(V, f(U, Z)), f(f(Y, Z), f(Z, f(f(W, Y), Z))))))) -> f(U, Z)
+10. f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(W, f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W), f(W, f(X, W)))), f(f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W), f(W, f(X, W))), f(f(X, Y), f(Y, f(f(Z, X), Y)))))) -> W
+11. f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), f(f(Y, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(X, Y)))), X)) -> Y
+12. f(X, f(f(f(f(Y, X), f(X, f(f(Z, Y), X))), f(f(X, f(f(Y, X), f(X, f(f(Z, Y), X)))), f(f(f(Y, X), f(X, f(f(Z, Y), X))), Y))), f(f(f(X, f(f(Y, X), f(X, f(f(Z, Y), X)))), f(f(f(Y, X), f(X, f(f(Z, Y), X))), Y)), X))) -> f(f(Y, X), f(X, f(f(Z, Y), X)))
+13. f(X, f(X, f(f(f(X, f(Y, f(f(Z, W), Y))), f(f(Y, f(f(Z, W), Y)), f(f(V, X), f(Y, f(f(Z, W), Y))))), f(W, f(f(X, f(Y, f(f(Z, W), Y))), f(f(Y, f(f(Z, W), Y)), f(f(V, X), f(Y, f(f(Z, W), Y))))))))) -> f(f(W, Y), f(Y, f(f(Z, W), Y)))
+14. f(X, f(f(Y, f(f(X, f(f(Z, X), f(X, f(f(W, Z), X)))), f(f(f(Z, X), f(X, f(f(W, Z), X))), Z))), f(f(f(X, f(f(Z, X), f(X, f(f(W, Z), X)))), f(f(f(Z, X), f(X, f(f(W, Z), X))), Z)), f(f(V, Y), f(f(X, f(f(Z, X), f(X, f(f(W, Z), X)))), f(f(f(Z, X), f(X, f(f(W, Z), X))), Z)))))) -> Y
+15. f(X, f(X, f(f(f(X, f(f(Y, X), f(X, f(f(Z, Y), X)))), f(f(f(Y, X), f(X, f(f(Z, Y), X))), Y)), f(f(W, Y), f(f(X, f(f(Y, X), f(X, f(f(Z, Y), X)))), f(f(f(Y, X), f(X, f(f(Z, Y), X))), Y)))))) -> Y
+16. f(X, f(f(Y, f(f(X, f(f(f(Z, Y), X), f(X, f(f(W, f(Z, Y)), X)))), f(f(f(f(Z, Y), X), f(X, f(f(W, f(Z, Y)), X))), f(Z, Y)))), f(f(f(X, f(f(f(Z, Y), X), f(X, f(f(W, f(Z, Y)), X)))), f(f(f(f(Z, Y), X), f(X, f(f(W, f(Z, Y)), X))), f(Z, Y))), X))) -> Y
+17. f(f(X, f(f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), V), f(V, f(Y, V)))), f(f(V, f(f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), V), f(V, f(Y, V)))), f(f(f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), V), f(V, f(Y, V))), f(f(Y, Z), f(Z, f(f(W, Y), Z)))))) -> V
+18. f(f(X, f(f(f(f(Y, f(Z, f(Y, Z))), f(f(Z, f(Y, Z)), f(f(W, Y), f(Z, f(Y, Z))))), Z), f(Z, f(Y, Z)))), f(f(Z, f(f(f(f(Y, f(Z, f(Y, Z))), f(f(Z, f(Y, Z)), f(f(W, Y), f(Z, f(Y, Z))))), Z), f(Z, f(Y, Z)))), Y)) -> Z
+19. f(f(X, f(f(f(f(Y, f(X, f(Y, X))), f(f(X, f(Y, X)), f(f(Z, Y), f(X, f(Y, X))))), X), f(X, f(Y, X)))), Y) -> f(?, f(?, f(f(f(?, Y), f(Y, f(f(?, ?), Y))), f(X, f(f(?, Y), f(Y, f(f(?, ?), Y)))))))
+20. f(X, f(X, f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(W, f(f(X, Y), f(Y, f(f(Z, X), Y))))))) ~> f(?, f(?, f(f(f(?, Y), f(Y, f(f(?, ?), Y))), f(W, f(f(?, Y), f(Y, f(f(?, ?), Y)))))))
+21. f(X, f(X, f(f(f(X, Y), f(Y, f(f(Z, X), Y))), X))) ~> f(?, f(?, f(f(f(?, Y), f(Y, f(f(?, ?), Y))), ?)))
+22. f(f(X, f(f(Y, Z), f(Z, f(f(W, Y), Z)))), f(Y, f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), f(V, f(f(Y, Z), f(Z, f(f(W, Y), Z))))))) -> f(?, f(?, f(f(f(?, Z), f(Z, f(f(?, ?), Z))), f(V, f(f(?, Z), f(Z, f(f(?, ?), Z)))))))
+23. f(f(X, f(f(Y, Z), f(Z, f(f(W, Y), Z)))), f(Y, f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), Y))) -> f(?, f(?, f(f(f(?, Z), f(Z, f(f(?, ?), Z))), ?)))
+24. f(f(X, f(f(Y, f(f(Z, Y), f(Y, f(f(W, Z), Y)))), f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), Z))), f(Y, f(f(f(Y, f(f(Z, Y), f(Y, f(f(W, Z), Y)))), f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), Z)), f(f(V, Z), f(f(Y, f(f(Z, Y), f(Y, f(f(W, Z), Y)))), f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), Z)))))) -> Z
+25. f(f(X, f(f(Y, f(f(Z, Y), f(Y, f(f(W, Z), Y)))), f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), Z))), f(f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), f(f(Y, f(f(Z, Y), f(Y, f(f(W, Z), Y)))), f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), Z))), f(f(f(Y, f(f(Z, Y), f(Y, f(f(W, Z), Y)))), f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), Z)), Y))) -> f(f(Z, Y), f(Y, f(f(W, Z), Y)))
+26. f(f(X, f(f(Y, f(f(f(Z, W), Y), f(Y, f(f(V, f(Z, W)), Y)))), f(f(f(f(Z, W), Y), f(Y, f(f(V, f(Z, W)), Y))), f(Z, W)))), f(f(W, f(f(Y, f(f(f(Z, W), Y), f(Y, f(f(V, f(Z, W)), Y)))), f(f(f(f(Z, W), Y), f(Y, f(f(V, f(Z, W)), Y))), f(Z, W)))), f(f(f(Y, f(f(f(Z, W), Y), f(Y, f(f(V, f(Z, W)), Y)))), f(f(f(f(Z, W), Y), f(Y, f(f(V, f(Z, W)), Y))), f(Z, W))), Y))) -> W
+27. f(?, f(?, f(f(f(?, f(f(X, Y), f(Y, f(f(Z, X), Y)))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(?, ?), f(f(X, Y), f(Y, f(f(Z, X), Y)))))), f(f(W, X), f(f(?, f(f(X, Y), f(Y, f(f(Z, X), Y)))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(?, ?), f(f(X, Y), f(Y, f(f(Z, X), Y)))))))))) -> X
+28. f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(W, f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), V), f(V, f(X, V)))), f(f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), V), f(V, f(X, V))), f(f(U, W), f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), V), f(V, f(X, V))))))) -> W
+29. f(X, f(f(Y, f(f(X, f(f(f(Z, Y), W), f(W, f(f(V, f(Z, Y)), W)))), f(f(f(f(Z, Y), W), f(W, f(f(V, f(Z, Y)), W))), f(f(U, X), f(f(f(Z, Y), W), f(W, f(f(V, f(Z, Y)), W))))))), f(f(f(X, f(f(f(Z, Y), W), f(W, f(f(V, f(Z, Y)), W)))), f(f(f(f(Z, Y), W), f(W, f(f(V, f(Z, Y)), W))), f(f(U, X), f(f(f(Z, Y), W), f(W, f(f(V, f(Z, Y)), W)))))), X))) -> Y
+30. f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W), f(W, f(X, W))), f(f(X, Y), f(Y, f(f(Z, X), Y)))))) -> f(?, f(?, f(f(f(?, W), f(W, f(f(?, ?), W))), ?)))
+31. f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), X)) -> f(?, f(?, f(f(f(?, Y), f(Y, f(f(?, ?), Y))), ?)))
+32. f(f(X, Y), f(f(Z, f(f(W, Z), f(f(f(f(W, Z), Y), f(Y, f(f(V, f(W, Z)), Y))), f(f(U, f(X, Y)), f(f(f(W, Z), Y), f(Y, f(f(V, f(W, Z)), Y))))))), f(f(f(W, Z), f(f(f(f(W, Z), Y), f(Y, f(f(V, f(W, Z)), Y))), f(f(U, f(X, Y)), f(f(f(W, Z), Y), f(Y, f(f(V, f(W, Z)), Y)))))), f(X, Y)))) -> Z
+33. f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W), f(W, f(X, W))), f(f(V, f(U, W)), f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W), f(W, f(X, W))))))) -> f(U, W)
+34. f(f(X, Y), f(f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), f(Z, f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), f(f(V, f(X, Y)), f(f(Z, Y), f(Y, f(f(W, Z), Y))))))), f(f(Z, f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), f(f(V, f(X, Y)), f(f(Z, Y), f(Y, f(f(W, Z), Y)))))), f(X, Y)))) -> f(f(Z, Y), f(Y, f(f(W, Z), Y)))
+35. f(X, f(X, f(f(f(X, f(f(Y, X), f(X, f(f(Z, Y), X)))), f(f(f(Y, X), f(X, f(f(Z, Y), X))), Y)), f(f(W, f(V, f(f(Y, X), f(X, f(f(Z, Y), X))))), f(f(X, f(f(Y, X), f(X, f(f(Z, Y), X)))), f(f(f(Y, X), f(X, f(f(Z, Y), X))), Y)))))) -> f(V, f(f(Y, X), f(X, f(f(Z, Y), X))))
+36. f(f(X, Y), f(f(f(f(Z, f(f(W, Z), f(Z, f(f(V, W), Z)))), f(f(f(W, Z), f(Z, f(f(V, W), Z))), W)), Y), f(Y, f(Z, Y)))) -> f(f(Z, f(f(W, Z), f(Z, f(f(V, W), Z)))), f(f(f(W, Z), f(Z, f(f(V, W), Z))), W))
+37. f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W), f(W, f(X, W))), f(V, f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W), f(W, f(X, W))))))) -> f(?, f(?, f(f(f(?, W), f(W, f(f(?, ?), W))), f(V, f(f(?, W), f(W, f(f(?, ?), W)))))))
+38. f(f(X, Y), f(f(Z, Y), f(Y, f(f(?, f(?, f(f(f(?, Z), f(Z, f(f(?, ?), Z))), f(X, f(f(?, Z), f(Z, f(f(?, ?), Z))))))), Y)))) -> Z
+39. f(f(?, f(?, f(f(f(?, X), f(X, f(f(?, ?), X))), f(Y, f(f(?, X), f(X, f(f(?, ?), X))))))), f(f(Z, X), f(X, f(f(W, Z), X)))) -> Z
+40. f(f(?, f(?, f(f(f(?, X), f(X, f(f(?, ?), X))), ?))), f(f(Y, X), f(X, f(f(Z, Y), X)))) -> Y
+41. f(f(f(?, f(?, f(f(f(?, X), f(X, f(f(?, ?), X))), ?))), Y), f(f(X, Y), f(Y, f(f(?, f(?, f(f(f(?, X), f(X, f(f(?, ?), X))), ?))), Y)))) -> X
+42. f(f(X, Y), f(f(Z, Y), f(Y, f(f(?, f(?, f(f(f(?, Z), f(Z, f(f(?, ?), Z))), f(W, f(f(?, Z), f(Z, f(f(?, ?), Z))))))), Y)))) -> Z
+43. f(f(X, Y), f(f(Z, Y), f(Y, f(f(?, f(?, f(f(f(?, Z), f(Z, f(f(?, ?), Z))), ?))), Y)))) -> Z
+44. f(f(X, Y), f(f(Z, f(W, f(f(f(W, Y), f(Y, f(f(V, W), Y))), f(f(U, f(X, Y)), f(f(W, Y), f(Y, f(f(V, W), Y))))))), f(f(W, f(f(f(W, Y), f(Y, f(f(V, W), Y))), f(f(U, f(X, Y)), f(f(W, Y), f(Y, f(f(V, W), Y)))))), f(f(T, Z), f(W, f(f(f(W, Y), f(Y, f(f(V, W), Y))), f(f(U, f(X, Y)), f(f(W, Y), f(Y, f(f(V, W), Y)))))))))) -> Z
+45. f(f(X, Y), f(f(X, Y), f(f(Z, f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), f(f(V, f(X, Y)), f(f(Z, Y), f(Y, f(f(W, Z), Y)))))), f(f(U, Z), f(Z, f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), f(f(V, f(X, Y)), f(f(Z, Y), f(Y, f(f(W, Z), Y)))))))))) -> Z
+46. f(f(X, f(f(Y, f(f(f(Z, W), V), f(V, f(f(U, f(Z, W)), V)))), f(f(f(f(Z, W), V), f(V, f(f(U, f(Z, W)), V))), f(f(T, Y), f(f(f(Z, W), V), f(V, f(f(U, f(Z, W)), V))))))), f(f(W, f(f(Y, f(f(f(Z, W), V), f(V, f(f(U, f(Z, W)), V)))), f(f(f(f(Z, W), V), f(V, f(f(U, f(Z, W)), V))), f(f(T, Y), f(f(f(Z, W), V), f(V, f(f(U, f(Z, W)), V))))))), f(f(f(Y, f(f(f(Z, W), V), f(V, f(f(U, f(Z, W)), V)))), f(f(f(f(Z, W), V), f(V, f(f(U, f(Z, W)), V))), f(f(T, Y), f(f(f(Z, W), V), f(V, f(f(U, f(Z, W)), V)))))), Y))) -> W
+47. f(X, f(f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), f(f(X, V), f(V, f(f(U, X), V)))), f(f(f(X, V), f(V, f(f(U, X), V))), f(Y, f(f(X, V), f(V, f(f(U, X), V))))))) -> f(f(Y, Z), f(Z, f(f(W, Y), Z)))
+48. f(f(X, f(f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), V), f(V, f(Y, V)))), f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), f(f(f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), V), f(V, f(Y, V))), f(f(Y, Z), f(Z, f(f(W, Y), Z)))))) -> f(?, f(?, f(f(f(?, V), f(V, f(f(?, ?), V))), ?)))
+49. f(f(X, f(f(f(f(Y, f(Z, f(Y, Z))), f(f(Z, f(Y, Z)), f(f(W, Y), f(Z, f(Y, Z))))), Z), f(Z, f(Y, Z)))), f(f(f(Y, f(Z, f(Y, Z))), f(f(Z, f(Y, Z)), f(f(W, Y), f(Z, f(Y, Z))))), Y)) -> f(?, f(?, f(f(f(?, Z), f(Z, f(f(?, ?), Z))), ?)))
+50. f(f(f(X, f(f(Y, X), f(X, f(f(Z, Y), X)))), f(f(f(Y, X), f(X, f(f(Z, Y), X))), Y)), f(f(W, f(f(f(f(X, f(f(Y, X), f(X, f(f(Z, Y), X)))), f(f(f(Y, X), f(X, f(f(Z, Y), X))), Y)), W), f(W, f(X, W)))), f(f(f(f(f(X, f(f(Y, X), f(X, f(f(Z, Y), X)))), f(f(f(Y, X), f(X, f(f(Z, Y), X))), Y)), W), f(W, f(X, W))), f(f(X, f(f(Y, X), f(X, f(f(Z, Y), X)))), f(f(f(Y, X), f(X, f(f(Z, Y), X))), Y))))) -> W
+51. f(f(X, f(Y, f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), f(f(V, f(U, Z)), f(f(Y, Z), f(Z, f(f(W, Y), Z))))))), f(f(U, Z), f(f(Y, f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), f(f(V, f(U, Z)), f(f(Y, Z), f(Z, f(f(W, Y), Z)))))), f(f(T, Y), f(Y, f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), f(f(V, f(U, Z)), f(f(Y, Z), f(Z, f(f(W, Y), Z)))))))))) -> Y
+52. f(f(X, f(Y, f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), f(f(V, f(U, Z)), f(f(Y, Z), f(Z, f(f(W, Y), Z))))))), f(f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), f(Y, f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), f(f(V, f(U, Z)), f(f(Y, Z), f(Z, f(f(W, Y), Z))))))), f(f(Y, f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), f(f(V, f(U, Z)), f(f(Y, Z), f(Z, f(f(W, Y), Z)))))), f(U, Z)))) -> f(f(Y, Z), f(Z, f(f(W, Y), Z)))
+53. f(f(X, f(f(Y, Z), f(f(f(f(Y, Z), W), f(W, f(f(V, f(Y, Z)), W))), f(f(U, f(T, W)), f(f(f(Y, Z), W), f(W, f(f(V, f(Y, Z)), W))))))), f(f(Z, f(f(Y, Z), f(f(f(f(Y, Z), W), f(W, f(f(V, f(Y, Z)), W))), f(f(U, f(T, W)), f(f(f(Y, Z), W), f(W, f(f(V, f(Y, Z)), W))))))), f(f(f(Y, Z), f(f(f(f(Y, Z), W), f(W, f(f(V, f(Y, Z)), W))), f(f(U, f(T, W)), f(f(f(Y, Z), W), f(W, f(f(V, f(Y, Z)), W)))))), f(T, W)))) -> Z
+54. f(f(X, f(f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), V), f(V, f(Y, V)))), f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), f(f(f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), V), f(V, f(Y, V))), f(f(U, f(T, V)), f(f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), V), f(V, f(Y, V))))))) -> f(T, V)
+55. f(f(X, f(f(Y, f(f(Z, Y), f(Y, f(f(W, Z), Y)))), f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), Z))), f(Y, f(f(f(Y, f(f(Z, Y), f(Y, f(f(W, Z), Y)))), f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), Z)), f(f(V, f(U, f(f(Z, Y), f(Y, f(f(W, Z), Y))))), f(f(Y, f(f(Z, Y), f(Y, f(f(W, Z), Y)))), f(f(f(Z, Y), f(Y, f(f(W, Z), Y))), Z)))))) -> f(U, f(f(Z, Y), f(Y, f(f(W, Z), Y))))
+56. f(X, f(f(f(f(f(Y, Z), W), f(W, f(f(V, f(Y, Z)), W))), f(f(X, Z), f(Z, f(f(U, X), Z)))), f(f(f(X, Z), f(Z, f(f(U, X), Z))), X))) -> f(f(f(Y, Z), W), f(W, f(f(V, f(Y, Z)), W)))
+57. f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(Y, f(f(X, Y), f(Y, f(f(Z, X), Y)))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), X))), f(f(f(Y, f(f(X, Y), f(Y, f(f(Z, X), Y)))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), X)), Y)), f(f(W, Y), f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(Y, f(f(X, Y), f(Y, f(f(Z, X), Y)))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), X))), f(f(f(Y, f(f(X, Y), f(Y, f(f(Z, X), Y)))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), X)), Y)))))) -> Y
+58. f(f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(W, f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W))), f(f(W, f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W)), f(X, f(W, f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W))))), f(f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(W, f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W))), f(f(W, f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W)), f(X, f(W, f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W))))), f(f(X, Y), f(Y, f(f(Z, X), Y))))) -> f(?, f(?, f(f(f(?, W), f(W, f(f(?, ?), W))), ?)))
+59. f(f(X, f(f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), V), f(V, f(Y, V)))), f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), f(f(f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), V), f(V, f(Y, V))), f(U, f(f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), V), f(V, f(Y, V))))))) -> f(?, f(?, f(f(f(?, V), f(V, f(f(?, ?), V))), f(U, f(f(?, V), f(V, f(f(?, ?), V)))))))
+60. f(?, f(?, f(f(f(?, X), f(X, f(f(?, ?), X))), f(f(Y, f(?, f(?, f(f(f(?, X), f(X, f(f(?, ?), X))), ?)))), f(f(?, X), f(X, f(f(?, ?), X))))))) -> f(?, f(?, f(f(f(?, X), f(X, f(f(?, ?), X))), ?)))
+61. f(f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(W, f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W))), f(f(W, f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W)), f(X, f(W, f(f(f(X, Y), f(Y, f(f(Z, X), Y))), W))))), f(?, f(?, f(f(f(?, f(f(X, Y), f(Y, f(f(Z, X), Y)))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(?, ?), f(f(X, Y), f(Y, f(f(Z, X), Y)))))), f(W, f(f(?, f(f(X, Y), f(Y, f(f(Z, X), Y)))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(?, ?), f(f(X, Y), f(Y, f(f(Z, X), Y))))))))))) -> W
+62. f(f(f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(W, X), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(W, X)))), f(f(f(W, X), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(W, X))), f(X, f(f(W, X), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(W, X)))))), X) -> f(W, X)
+  (simplifying rules with respect to one another...)
+  (delete rule 1)
+  (delete rule 2)
+  (delete rule 7)
+63. f(?, f(?, f(f(f(?, X), f(X, f(f(?, ?), X))), f(f(Y, f(Z, X)), f(f(?, X), f(X, f(f(?, ?), X))))))) -> f(Z, X)
+  (delete rule 9)
+  (delete rule 11)
+64. f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), f(?, f(?, f(f(f(?, X), f(X, f(f(?, ?), X))), f(Y, f(f(?, X), f(X, f(f(?, ?), X)))))))) -> Y
+  (delete rule 13)
+65. f(?, f(?, f(f(f(?, f(X, f(f(Y, Z), X))), f(f(X, f(f(Y, Z), X)), f(f(?, ?), f(X, f(f(Y, Z), X))))), f(Z, f(f(?, f(X, f(f(Y, Z), X))), f(f(X, f(f(Y, Z), X)), f(f(?, ?), f(X, f(f(Y, Z), X))))))))) -> f(f(Z, X), f(X, f(f(Y, Z), X)))
+  (delete rule 18)
+66. f(f(X, f(f(f(f(Y, f(Z, f(Y, Z))), f(f(Z, f(Y, Z)), f(f(W, Y), f(Z, f(Y, Z))))), Z), f(Z, f(Y, Z)))), f(?, f(?, f(f(f(?, Y), f(Y, f(f(?, ?), Y))), f(Z, f(f(?, Y), f(Y, f(f(?, ?), Y)))))))) -> Z
+  (delete rule 33)
+  (delete rule 38)
+  (delete rule 41)
+  (delete rule 54)
+67. f(f(f(X, f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X))))), f(f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X)))), f(f(W, X), f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X))))))), f(Z, X)) -> f(Y, f(Z, X))
+68. f(f(X, f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X))))), f(f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X)))), f(f(W, X), f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X))))))) -> f(f(?, f(Z, X)), f(f(Y, f(Z, X)), f(f(Z, X), f(X, f(Z, X)))))
+69. f(f(X, f(Y, Z)), f(f(W, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))) ~> f(f(?, f(Y, Z)), f(f(W, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))
+70. f(f(f(?, f(X, Y)), f(f(Z, f(X, Y)), f(f(X, Y), f(Y, f(X, Y))))), f(X, Y)) -> f(Z, f(X, Y))
+71. f(f(f(X, f(f(Y, Z), X)), f(Z, f(f(X, f(f(Y, Z), X)), Z))), f(f(Z, f(f(X, f(f(Y, Z), X)), Z)), f(f(W, f(X, f(f(Y, Z), X))), f(Z, f(f(X, f(f(Y, Z), X)), Z))))) -> f(f(Y, Z), X)
+72. f(f(X, f(Y, f(f(Z, f(f(W, Y), Z)), Y))), f(f(W, Y), Z)) -> f(Z, f(f(W, Y), Z))
+73. f(f(f(f(X, Y), Z), Y), f(Y, f(f(Z, f(f(X, Y), Z)), Y))) -> Z
+74. f(f(X, Y), Z) ~> f(f(?, Y), Z)
+75. f(f(?, f(f(?, f(X, Y)), f(f(?, Y), f(Y, f(X, Y))))), f(X, Y)) -> f(?, f(X, Y))
+76. f(X, f(Y, Z)) ~> f(?, f(Y, Z))
+77. f(X, Y) ~> f(?, Y)
+78. f(?, f(?, f(?, X))) -> ?
+79. X ~> ?
+
+% SZS status Theorem
+
+% SZS output start Proof
+Axiom 1 (hyp): X = f(f(Y, Z), f(f(X, Z), f(Z, f(f(f(Y, W), X), Z)))).
+
+Lemma 2: f(f(f(X, Y), Z), f(f(W, Z), f(Z, f(f(V, W), Z)))) = W.
+Proof:
+  f(f(f(X, Y), Z), f(f(W, Z), f(Z, f(f(V, W), Z))))
+= { by axiom 1 (hyp) }
+  f(f(f(X, Y), Z), f(f(W, Z), f(Z, f(f(f(f(X, Y), f(f(V, Y), f(Y, f(f(f(X, U), V), Y)))), W), Z))))
+= { by axiom 1 (hyp) R->L }
+  W
+
+Lemma 3: f(f(X, Y), f(f(Z, Y), f(Y, f(f(W, Z), Y)))) = Z.
+Proof:
+  f(f(X, Y), f(f(Z, Y), f(Y, f(f(W, Z), Y))))
+= { by axiom 1 (hyp) }
+  f(f(f(f(V, U), f(f(X, U), f(U, f(f(f(V, T), X), U)))), Y), f(f(Z, Y), f(Y, f(f(W, Z), Y))))
+= { by lemma 2 }
+  Z
+
+Lemma 4: f(X, f(X, f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(W, f(V, Y)), f(f(X, Y), f(Y, f(f(Z, X), Y))))))) = f(V, Y).
+Proof:
+  f(X, f(X, f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(W, f(V, Y)), f(f(X, Y), f(Y, f(f(Z, X), Y)))))))
+= { by lemma 3 R->L }
+  f(X, f(f(f(V, Y), f(f(X, Y), f(Y, f(f(Z, X), Y)))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(W, f(V, Y)), f(f(X, Y), f(Y, f(f(Z, X), Y)))))))
+= { by lemma 2 R->L }
+  f(f(f(f(U, T), Y), f(f(X, Y), f(Y, f(f(Z, X), Y)))), f(f(f(V, Y), f(f(X, Y), f(Y, f(f(Z, X), Y)))), f(f(f(X, Y), f(Y, f(f(Z, X), Y))), f(f(W, f(V, Y)), f(f(X, Y), f(Y, f(f(Z, X), Y)))))))
+= { by lemma 2 }
+  f(V, Y)
+
+Lemma 5: f(f(X, Y), f(f(f(f(Z, W), f(W, f(f(V, Z), W))), Y), f(Y, f(Z, Y)))) = f(f(Z, W), f(W, f(f(V, Z), W))).
+Proof:
+  f(f(X, Y), f(f(f(f(Z, W), f(W, f(f(V, Z), W))), Y), f(Y, f(Z, Y))))
+= { by lemma 3 R->L }
+  f(f(X, Y), f(f(f(f(Z, W), f(W, f(f(V, Z), W))), Y), f(Y, f(f(f(X, W), f(f(Z, W), f(W, f(f(V, Z), W)))), Y))))
+= { by axiom 1 (hyp) R->L }
+  f(f(Z, W), f(W, f(f(V, Z), W)))
+
+Lemma 6: f(f(X, f(f(Y, Z), f(Z, f(f(W, Y), Z)))), f(f(Z, f(f(Y, Z), f(Z, f(f(W, Y), Z)))), f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), Y))) = Z.
+Proof:
+  f(f(X, f(f(Y, Z), f(Z, f(f(W, Y), Z)))), f(f(Z, f(f(Y, Z), f(Z, f(f(W, Y), Z)))), f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), Y)))
+= { by lemma 2 R->L }
+  f(f(X, f(f(Y, Z), f(Z, f(f(W, Y), Z)))), f(f(Z, f(f(Y, Z), f(Z, f(f(W, Y), Z)))), f(f(f(Y, Z), f(Z, f(f(W, Y), Z))), f(f(f(X, V), Z), f(f(Y, Z), f(Z, f(f(W, Y), Z)))))))
+= { by axiom 1 (hyp) R->L }
+  Z
+
+Lemma 7: f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), f(W, f(W, f(f(f(W, X), f(X, f(f(V, W), X))), f(Y, f(f(W, X), f(X, f(f(V, W), X)))))))) = Y.
+Proof:
+  f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), f(W, f(W, f(f(f(W, X), f(X, f(f(V, W), X))), f(Y, f(f(W, X), f(X, f(f(V, W), X))))))))
+= { by lemma 6 R->L }
+  f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), f(W, f(W, f(f(f(W, X), f(X, f(f(V, W), X))), f(f(f(U, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(f(f(f(T, S), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))), Y)))), f(f(Y, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(f(f(f(T, S), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))), Y)))), f(f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(f(f(f(T, S), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))), Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))))), f(f(W, X), f(X, f(f(V, W), X))))))))
+= { by lemma 2 }
+  f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), f(W, f(W, f(f(f(W, X), f(X, f(f(V, W), X))), f(f(f(U, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(X, Y)))), f(f(Y, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(f(f(f(T, S), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))), Y)))), f(f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(f(f(f(T, S), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))), Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))))), f(f(W, X), f(X, f(f(V, W), X))))))))
+= { by lemma 2 }
+  f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), f(W, f(W, f(f(f(W, X), f(X, f(f(V, W), X))), f(f(f(U, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(X, Y)))), f(f(Y, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(f(f(f(T, S), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))), Y)))), f(f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))))), f(f(W, X), f(X, f(f(V, W), X))))))))
+= { by lemma 2 }
+  f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), f(W, f(W, f(f(f(W, X), f(X, f(f(V, W), X))), f(f(f(U, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(X, Y)))), f(f(Y, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(X, Y)))), f(f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))))), f(f(W, X), f(X, f(f(V, W), X))))))))
+= { by lemma 2 }
+  f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), f(W, f(W, f(f(f(W, X), f(X, f(f(V, W), X))), f(f(f(U, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(X, Y)))), f(f(Y, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(X, Y)))), X)), f(f(W, X), f(X, f(f(V, W), X))))))))
+= { by lemma 4 }
+  f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), f(f(Y, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(X, Y)))), X))
+= { by lemma 2 R->L }
+  f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), f(f(Y, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(X, Y)))), f(f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))))))
+= { by lemma 2 R->L }
+  f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), f(f(Y, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(X, Y)))), f(f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(f(f(f(X2, Y2), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))), Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))))))
+= { by lemma 2 R->L }
+  f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), f(f(Y, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(f(f(f(X2, Y2), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))), Y)))), f(f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(f(f(f(X2, Y2), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))), Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))))))
+= { by lemma 2 R->L }
+  f(f(f(f(Z2, W2), Y), f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(f(f(f(X2, Y2), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))), Y)))), f(f(Y, f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(f(f(f(X2, Y2), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))), Y)))), f(f(f(f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))), Y), f(Y, f(f(f(f(X2, Y2), f(Y, f(X, Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y)))))), Y))), f(f(X, f(Y, f(X, Y))), f(f(Y, f(X, Y)), f(f(Z, X), f(Y, f(X, Y))))))))
+= { by lemma 6 }
+  Y
+
+Lemma 8: f(f(X, f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X))))), f(f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X)))), f(f(W, X), f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X))))))) = f(f(V, f(Z, X)), f(f(Y, f(Z, X)), f(f(Z, X), f(X, f(Z, X))))).
+Proof:
+  f(f(X, f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X))))), f(f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X)))), f(f(W, X), f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X)))))))
+= { by lemma 5 R->L }
+  f(f(V, f(Z, X)), f(f(f(f(X, f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X))))), f(f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X)))), f(f(W, X), f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X))))))), f(Z, X)), f(f(Z, X), f(X, f(Z, X)))))
+= { by lemma 4 R->L }
+  f(f(V, f(Z, X)), f(f(f(f(X, f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X))))), f(f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X)))), f(f(W, X), f(f(Y, f(Z, X)), f(X, f(Y, f(Z, X))))))), f(U, f(U, f(f(f(U, X), f(X, f(f(T, U), X))), f(f(Y, f(Z, X)), f(f(U, X), f(X, f(f(T, U), X)))))))), f(f(Z, X), f(X, f(Z, X)))))
+= { by lemma 7 }
+  f(f(V, f(Z, X)), f(f(Y, f(Z, X)), f(f(Z, X), f(X, f(Z, X)))))
+
+Lemma 9: f(f(f(X, f(Y, Z)), f(f(W, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z)) = f(W, f(Y, Z)).
+Proof:
+  f(f(f(X, f(Y, Z)), f(f(W, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z))
+= { by lemma 4 R->L }
+  f(f(f(X, f(Y, Z)), f(f(W, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(V, f(V, f(f(f(V, Z), f(Z, f(f(U, V), Z))), f(f(W, f(Y, Z)), f(f(V, Z), f(Z, f(f(U, V), Z))))))))
+= { by lemma 8 R->L }
+  f(f(f(Z, f(f(W, f(Y, Z)), f(Z, f(W, f(Y, Z))))), f(f(f(W, f(Y, Z)), f(Z, f(W, f(Y, Z)))), f(f(T, Z), f(f(W, f(Y, Z)), f(Z, f(W, f(Y, Z))))))), f(V, f(V, f(f(f(V, Z), f(Z, f(f(U, V), Z))), f(f(W, f(Y, Z)), f(f(V, Z), f(Z, f(f(U, V), Z))))))))
+= { by lemma 7 }
+  f(W, f(Y, Z))
+
+Lemma 10: f(W, f(Y, Z)) = f(X, f(Y, Z)).
+Proof:
+  f(W, f(Y, Z))
+= { by lemma 9 R->L }
+  f(f(f(V, f(Y, Z)), f(f(W, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z))
+= { by lemma 3 R->L }
+  f(f(f(V, f(Y, Z)), f(f(W, f(Y, Z)), f(f(U, f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(Y, Z))
+= { by lemma 3 R->L }
+  f(f(f(V, f(Y, Z)), f(f(W, f(Y, Z)), f(f(U, f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(Y, Z)), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z)))), f(f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z)))), f(f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z))), f(f(S, f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z))))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(Y, Z))
+= { by lemma 3 R->L }
+  f(f(f(V, f(Y, Z)), f(f(W, f(Y, Z)), f(f(U, f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(Y, Z)), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z)))), f(f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z))), f(f(S, f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z))))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(Y, Z))
+= { by lemma 3 R->L }
+  f(f(f(V, f(Y, Z)), f(f(W, f(Y, Z)), f(f(U, f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(Y, Z)), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z)))), f(f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z))), f(f(S, f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z))))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(Y, Z))
+= { by lemma 3 R->L }
+  f(f(f(V, f(Y, Z)), f(f(W, f(Y, Z)), f(f(U, f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(Y, Z)), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z)))), f(f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))))), f(f(S, f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z))))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(Y, Z))
+= { by lemma 3 R->L }
+  f(f(f(V, f(Y, Z)), f(f(W, f(Y, Z)), f(f(U, f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(Y, Z)), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z)))), f(f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))))), f(f(S, f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))), f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z))))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(Y, Z))
+= { by lemma 3 R->L }
+  f(f(f(V, f(Y, Z)), f(f(W, f(Y, Z)), f(f(U, f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(Y, Z)), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z)))), f(f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))))), f(f(S, f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))), f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))))))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(Y, Z))
+= { by lemma 3 R->L }
+  f(f(f(V, f(Y, Z)), f(f(W, f(Y, Z)), f(f(U, f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(Y, Z)), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z)))), f(f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))))), f(f(S, f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))), f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))))))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(Y, Z))
+= { by lemma 8 }
+  f(f(f(V, f(Y, Z)), f(f(W, f(Y, Z)), f(f(U, f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(Y, Z)), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z)))), f(f(T, f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))), f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))), f(f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(Y, Z), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))))))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(Y, Z))
+= { by lemma 3 }
+  f(f(f(V, f(Y, Z)), f(f(W, f(Y, Z)), f(f(U, f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(Y, Z)), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z)))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))))))))), f(Y, Z))
+= { by lemma 5 }
+  f(f(f(V, f(Y, Z)), f(f(W, f(Y, Z)), f(f(f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z)))), f(Y, Z)), f(f(Y, Z), f(f(f(f(Y, Z), f(Z, f(Y, Z))), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z)))))), f(Y, Z))
+= { by lemma 3 }
+  f(f(f(V, f(Y, Z)), f(f(X, f(Y, Z)), f(f(Y, Z), f(Z, f(Y, Z))))), f(Y, Z))
+= { by lemma 9 }
+  f(X, f(Y, Z))
+
+Lemma 11: f(Z, Y) = f(X, Y).
+Proof:
+  f(Z, Y)
+= { by lemma 3 R->L }
+  f(Z, f(f(W, V), f(f(Y, V), f(V, f(f(U, Y), V)))))
+= { by lemma 10 }
+  f(X, f(f(W, V), f(f(Y, V), f(V, f(f(U, Y), V)))))
+= { by lemma 3 }
+  f(X, Y)
+
+Goal 1 (goal): x = y.
+Proof:
+  x
+= { by lemma 6 R->L }
+  f(f(X, f(f(Y, x), f(x, f(f(Z, Y), x)))), f(f(x, f(f(Y, x), f(x, f(f(Z, Y), x)))), f(f(f(Y, x), f(x, f(f(Z, Y), x))), Y)))
+= { by lemma 11 R->L }
+  f(f(W, f(f(Y, y), f(y, f(f(V, Y), y)))), f(f(x, f(f(Y, x), f(x, f(f(Z, Y), x)))), f(f(f(Y, x), f(x, f(f(Z, Y), x))), Y)))
+= { by lemma 10 R->L }
+  f(f(W, f(f(Y, y), f(y, f(f(V, Y), y)))), f(f(y, f(f(Y, y), f(y, f(f(V, Y), y)))), f(f(f(Y, x), f(x, f(f(Z, Y), x))), Y)))
+= { by lemma 11 R->L }
+  f(f(W, f(f(Y, y), f(y, f(f(V, Y), y)))), f(f(y, f(f(Y, y), f(y, f(f(V, Y), y)))), f(f(f(Y, y), f(y, f(f(V, Y), y))), Y)))
+= { by lemma 6 }
+  y
+% SZS output end Proof
+
+RESULT: Theorem (the conjecture is true).

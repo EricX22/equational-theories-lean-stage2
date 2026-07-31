@@ -1,0 +1,172 @@
+Here is the input problem:
+  Axiom 1 (hyp): X = f(Y, f(f(X, f(Y, f(Z, Z))), Y)).
+  Goal 1 (goal): x = y.
+
+1. f(X, f(f(Y, f(X, f(Z, Z))), X)) -> Y
+2. f(f(X, f(f(Y, Y), f(Z, Z))), f(X, f(X, f(f(Y, Y), f(Z, Z))))) -> f(Y, Y)
+3. f(f(f(X, X), f(Y, Y)), f(f(X, X), f(f(X, X), f(Y, Y)))) -> f(f(f(X, X), f(Y, Y)), f(f(X, X), f(Y, Y)))
+4. f(f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))), f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X)))) -> f(X, X)
+5. f(f(f(X, X), f(X, X)), f(f(X, X), f(X, X))) -> f(f(?, f(X, X)), f(?, f(?, f(X, X))))
+6. f(f(X, f(Y, Y)), f(X, f(X, f(Y, Y)))) ~> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+7. f(f(f(X, X), f(f(Y, Y), f(Y, Y))), f(f(X, X), f(f(Y, Y), f(Y, Y)))) -> f(Y, Y)
+8. f(f(X, X), f(f(Y, Y), f(Y, Y))) <-> f(f(X, X), f(f(Y, Y), f(X, X)))
+9. f(f(f(X, X), f(Y, Y)), f(f(X, X), f(Y, Y))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+10. f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(?, f(X, X)), f(?, f(?, f(X, X))))) -> f(X, X)
+11. f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, f(X, X)), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))) -> Y
+12. f(f(X, X), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(X, X))) -> f(f(X, X), f(X, X))
+13. f(f(X, X), f(f(Y, f(f(X, X), f(f(Z, Z), f(X, X)))), f(X, X))) -> Y
+14. f(f(X, X), f(f(f(Y, Y), f(Y, Y)), f(X, X))) = f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))))
+15. f(f(f(X, X), f(X, X)), f(f(Y, Y), f(f(X, X), f(Y, Y)))) -> f(f(f(X, X), f(X, X)), f(f(Y, Y), f(Y, Y)))
+16. f(f(f(X, X), f(f(Y, Y), f(X, X))), f(f(X, X), f(f(Y, Y), f(Y, Y)))) -> f(Y, Y)
+17. f(f(f(X, X), f(f(Y, Y), f(X, X))), f(f(X, X), f(f(Y, Y), f(X, X)))) -> f(Y, Y)
+18. f(f(X, f(f(Y, Y), f(f(Z, Z), f(Y, Y)))), f(X, f(X, f(f(Y, Y), f(f(Z, Z), f(Y, Y)))))) -> f(Y, Y)
+19. f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(X, X)), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(X, X))) -> f(f(?, f(X, X)), f(?, f(?, f(X, X))))
+20. f(f(X, f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))), f(X, f(X, f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))))) -> f(f(Y, Y), f(Y, Y))
+21. f(f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))), f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))))) -> f(f(Y, Y), f(Y, Y))
+22. f(f(X, X), f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(X, X))) -> f(f(X, X), f(Y, Y))
+23. f(X, f(f(Y, f(X, f(f(?, f(Z, Z)), f(?, f(?, f(Z, Z)))))), X)) -> Y
+24. f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(Y, Y)), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(Y, Y))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+25. f(f(f(X, X), f(X, X)), f(f(Y, f(f(?, f(X, X)), f(?, f(?, f(X, X))))), f(f(X, X), f(X, X)))) -> Y
+26. f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))) = f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(Y, Y)))
+27. f(f(f(f(X, X), f(X, X)), f(f(Y, Y), f(Y, Y))), f(f(f(X, X), f(X, X)), f(f(Y, Y), f(f(X, X), f(X, X))))) -> f(Y, Y)
+28. f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(?, f(X, X)), f(?, f(?, f(X, X))))))) -> f(Y, Y)
+29. f(f(X, f(f(Y, Y), f(f(?, f(Z, Z)), f(?, f(?, f(Z, Z)))))), f(X, f(X, f(f(Y, Y), f(f(?, f(Z, Z)), f(?, f(?, f(Z, Z)))))))) -> f(Y, Y)
+30. f(f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(Y, Y))), f(X, f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(Y, Y))))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+31. f(f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(Z, Z))), f(X, f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(Z, Z))))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+32. f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Z, Z), f(f(?, f(X, X)), f(?, f(?, f(X, X))))))), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))) -> Y
+33. f(f(f(X, X), f(X, X)), f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))))) -> f(f(f(X, X), f(X, X)), f(Y, Y))
+34. f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(Y, Y)))) -> f(Y, Y)
+35. f(f(f(X, X), f(f(f(Y, Y), f(Y, Y)), f(X, X))), f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))))) -> f(f(Y, Y), f(Y, Y))
+36. f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))))) -> f(f(Y, Y), f(Y, Y))
+37. f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(f(X, X), f(X, X)), f(Y, Y)))) -> f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(Y, Y)))
+38. f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(Y, Y))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(?, f(X, X)), f(?, f(?, f(X, X))))))) -> f(Y, Y)
+39. f(f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))), f(f(X, X), f(f(f(Y, Y), f(Y, Y)), f(X, X)))) -> f(f(Y, Y), f(Y, Y))
+40. f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(f(Y, Y), f(Y, Y)), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))) -> f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))))
+41. f(f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(Z, Z), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))))), f(X, f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(Z, Z), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))))))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+42. f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(Y, Y))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))))) -> f(Y, Y)
+43. f(f(f(f(X, X), f(X, X)), f(f(Y, Y), f(Y, Y))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(Y, Y), f(f(X, X), f(X, X)))))) -> f(Y, Y)
+44. f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(Y, Y))))) -> f(Y, Y)
+45. f(f(f(f(X, X), f(X, X)), f(f(Y, Y), f(f(X, X), f(X, X)))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(Y, Y), f(Y, Y))))) -> f(Y, Y)
+46. f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))) -> f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(Y, Y))
+47. f(f(f(X, X), f(f(f(Y, Y), f(Y, Y)), f(X, X))), f(f(X, X), f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))))) -> f(f(Y, Y), f(Y, Y))
+48. f(f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))), f(f(X, X), f(f(X, X), f(f(f(Y, Y), f(Y, Y)), f(X, X))))) -> f(f(Y, Y), f(Y, Y))
+49. f(f(X, f(f(f(Y, Y), f(Y, Y)), f(f(Z, Z), f(Z, Z)))), f(X, f(X, f(f(f(Y, Y), f(Y, Y)), f(f(Z, Z), f(f(Y, Y), f(Y, Y))))))) -> f(f(Y, Y), f(Y, Y))
+50. f(f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(?, f(Z, Z)), f(?, f(?, f(Z, Z)))))), f(X, f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(?, f(Z, Z)), f(?, f(?, f(Z, Z)))))))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+51. f(f(X, f(f(Y, Y), f(f(f(Z, Z), f(Z, Z)), f(Y, Y)))), f(X, f(X, f(f(Y, Y), f(f(?, f(Z, Z)), f(?, f(?, f(Z, Z)))))))) -> f(Y, Y)
+52. f(f(X, f(f(Y, Y), f(f(?, f(Z, Z)), f(?, f(?, f(Z, Z)))))), f(X, f(X, f(f(Y, Y), f(f(f(Z, Z), f(Z, Z)), f(Y, Y)))))) -> f(Y, Y)
+53. f(f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(Z, Z), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))))), f(X, f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(Z, Z), f(Z, Z)))))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+54. f(f(X, f(f(f(Y, Y), f(Y, Y)), f(f(Z, Z), f(f(Y, Y), f(Y, Y))))), f(X, f(X, f(f(f(Y, Y), f(Y, Y)), f(f(Z, Z), f(Z, Z)))))) -> f(f(Y, Y), f(Y, Y))
+55. f(f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(Z, Z), f(Z, Z)))), f(X, f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(Z, Z), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))))))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+
+% SZS status CounterSatisfiable
+
+% SZS output start Saturation
+cnf(c1, axiom, X=f(Y, f(f(X, f(Y, f(Z, Z))), Y)), file('/tmp/12857.p', hyp)).
+cnf(c2, plain, f(X3, f(f(X4, f(X3, f(X2, X2))), X3))=X4).
+cnf(c3, plain, f(f(X3, f(f(X2, X2), f(X4, X4))), f(X3, f(X3, f(f(X2, X2), f(X4, X4)))))=f(X2, X2)).
+cnf(c4, plain, f(f(f(X2, X2), f(X3, X3)), f(f(X2, X2), f(f(X2, X2), f(X3, X3))))=f(f(f(X2, X2), f(X3, X3)), f(f(X2, X2), f(X3, X3)))).
+cnf(c5, plain, f(f(f(f(X2, X2), f(X2, X2)), f(f(X2, X2), f(X2, X2))), f(f(f(X2, X2), f(X2, X2)), f(f(X2, X2), f(X2, X2))))=f(X2, X2)).
+cnf(c6, plain, f(f(f(X2, X2), f(X2, X2)), f(f(X2, X2), f(X2, X2)))=f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))).
+cnf(c7, plain, f(f(X3, f(X2, X2)), f(X3, f(X3, f(X2, X2))))=f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))).
+cnf(c8, plain, f(f(f(X3, X3), f(f(X2, X2), f(X2, X2))), f(f(X3, X3), f(f(X2, X2), f(X2, X2))))=f(X2, X2)).
+cnf(c9, plain, f(f(X2, X2), f(f(X3, X3), f(X3, X3)))=f(f(X2, X2), f(f(X3, X3), f(X2, X2)))).
+cnf(c10, plain, f(f(f(X3, X3), f(X2, X2)), f(f(X3, X3), f(X2, X2)))=f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))).
+cnf(c11, plain, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))))=f(X2, X2)).
+cnf(c12, plain, f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(X2, f(X3, X3)), f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3))))))=X2).
+cnf(c13, plain, f(f(X2, X2), f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(X2, X2)))=f(f(X2, X2), f(X2, X2))).
+cnf(c14, plain, f(f(X3, X3), f(f(X2, f(f(X3, X3), f(f(X4, X4), f(X3, X3)))), f(X3, X3)))=X2).
+cnf(c15, plain, f(f(X2, X2), f(f(f(X3, X3), f(X3, X3)), f(X2, X2)))=f(f(X2, X2), f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))))).
+cnf(c16, plain, f(f(f(X2, X2), f(X2, X2)), f(f(X3, X3), f(f(X2, X2), f(X3, X3))))=f(f(f(X2, X2), f(X2, X2)), f(f(X3, X3), f(X3, X3)))).
+cnf(c17, plain, f(f(f(X3, X3), f(f(X2, X2), f(X3, X3))), f(f(X3, X3), f(f(X2, X2), f(X2, X2))))=f(X2, X2)).
+cnf(c18, plain, f(f(f(X3, X3), f(f(X2, X2), f(X3, X3))), f(f(X3, X3), f(f(X2, X2), f(X3, X3))))=f(X2, X2)).
+cnf(c19, plain, f(f(X3, f(f(X2, X2), f(f(X4, X4), f(X2, X2)))), f(X3, f(X3, f(f(X2, X2), f(f(X4, X4), f(X2, X2))))))=f(X2, X2)).
+cnf(c20, plain, f(f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(X2, X2)), f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(X2, X2)))=f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))).
+cnf(c21, plain, f(f(X3, f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))), f(X3, f(X3, f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))))))=f(f(X2, X2), f(X2, X2))).
+cnf(c22, plain, f(f(f(X3, X3), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))), f(f(X3, X3), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))))=f(f(X2, X2), f(X2, X2))).
+cnf(c23, plain, f(f(X2, X2), f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(X2, X2)))=f(f(X2, X2), f(X3, X3))).
+cnf(c24, plain, f(X3, f(f(X2, f(X3, f(f(constant, f(X4, X4)), f(constant, f(constant, f(X4, X4)))))), X3))=X2).
+cnf(c25, plain, f(f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(X2, X2)), f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(X2, X2)))=f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))).
+cnf(c26, plain, f(f(f(X3, X3), f(X3, X3)), f(f(X2, f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3))))), f(f(X3, X3), f(X3, X3))))=X2).
+cnf(c27, plain, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(X3, X3), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))))=f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(X3, X3), f(X3, X3)))).
+cnf(c28, plain, f(f(f(f(X3, X3), f(X3, X3)), f(f(X2, X2), f(X2, X2))), f(f(f(X3, X3), f(X3, X3)), f(f(X2, X2), f(f(X3, X3), f(X3, X3)))))=f(X2, X2)).
+cnf(c29, plain, f(f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(X2, X2), f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))))), f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(X2, X2), f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))))))=f(X2, X2)).
+cnf(c30, plain, f(f(X3, f(f(X2, X2), f(f(constant, f(X4, X4)), f(constant, f(constant, f(X4, X4)))))), f(X3, f(X3, f(f(X2, X2), f(f(constant, f(X4, X4)), f(constant, f(constant, f(X4, X4))))))))=f(X2, X2)).
+cnf(c31, plain, f(f(X3, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(X2, X2))), f(X3, f(X3, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(X2, X2)))))=f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))).
+cnf(c32, plain, f(f(X3, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(X4, X4))), f(X3, f(X3, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(X4, X4)))))=f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))).
+cnf(c33, plain, f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(X2, f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(X4, X4), f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3))))))), f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3))))))=X2).
+cnf(c34, plain, f(f(f(X2, X2), f(X2, X2)), f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(X2, X2), f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))))))=f(f(f(X2, X2), f(X2, X2)), f(X3, X3))).
+cnf(c35, plain, f(f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(X2, X2), f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))))), f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(X2, X2), f(X2, X2))))=f(X2, X2)).
+cnf(c36, plain, f(f(f(X3, X3), f(f(f(X2, X2), f(X2, X2)), f(X3, X3))), f(f(X3, X3), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))))=f(f(X2, X2), f(X2, X2))).
+cnf(c37, plain, f(f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))), f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))))=f(f(X2, X2), f(X2, X2))).
+cnf(c38, plain, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(X3, X3), f(f(f(X2, X2), f(X2, X2)), f(X3, X3))))=f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(X3, X3), f(X3, X3)))).
+cnf(c39, plain, f(f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(X2, X2), f(X2, X2))), f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(X2, X2), f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))))))=f(X2, X2)).
+cnf(c40, plain, f(f(f(X3, X3), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))), f(f(X3, X3), f(f(f(X2, X2), f(X2, X2)), f(X3, X3))))=f(f(X2, X2), f(X2, X2))).
+cnf(c41, plain, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(f(X3, X3), f(X3, X3)), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))))=f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))))).
+cnf(c42, plain, f(f(X3, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(X4, X4), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))))), f(X3, f(X3, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(X4, X4), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))))))))=f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))).
+cnf(c43, plain, f(f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(X2, X2), f(X2, X2))), f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(X2, X2), f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3))))))))=f(X2, X2)).
+cnf(c44, plain, f(f(f(f(X3, X3), f(X3, X3)), f(f(X2, X2), f(X2, X2))), f(f(f(X3, X3), f(X3, X3)), f(f(f(X3, X3), f(X3, X3)), f(f(X2, X2), f(f(X3, X3), f(X3, X3))))))=f(X2, X2)).
+cnf(c45, plain, f(f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(X2, X2), f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))))), f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(X2, X2), f(X2, X2)))))=f(X2, X2)).
+cnf(c46, plain, f(f(f(f(X3, X3), f(X3, X3)), f(f(X2, X2), f(f(X3, X3), f(X3, X3)))), f(f(f(X3, X3), f(X3, X3)), f(f(f(X3, X3), f(X3, X3)), f(f(X2, X2), f(X2, X2)))))=f(X2, X2)).
+cnf(c47, plain, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(f(constant, f(X3, X3)), f(constant, f(constant, f(X3, X3)))), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))))=f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(X3, X3))).
+cnf(c48, plain, f(f(f(X3, X3), f(f(f(X2, X2), f(X2, X2)), f(X3, X3))), f(f(X3, X3), f(f(X3, X3), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))))))=f(f(X2, X2), f(X2, X2))).
+cnf(c49, plain, f(f(f(X3, X3), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))), f(f(X3, X3), f(f(X3, X3), f(f(f(X2, X2), f(X2, X2)), f(X3, X3)))))=f(f(X2, X2), f(X2, X2))).
+cnf(c50, plain, f(f(X3, f(f(f(X2, X2), f(X2, X2)), f(f(X4, X4), f(X4, X4)))), f(X3, f(X3, f(f(f(X2, X2), f(X2, X2)), f(f(X4, X4), f(f(X2, X2), f(X2, X2)))))))=f(f(X2, X2), f(X2, X2))).
+cnf(c51, plain, f(f(X3, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(constant, f(X4, X4)), f(constant, f(constant, f(X4, X4)))))), f(X3, f(X3, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(constant, f(X4, X4)), f(constant, f(constant, f(X4, X4))))))))=f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))).
+cnf(c52, plain, f(f(X3, f(f(X2, X2), f(f(f(X4, X4), f(X4, X4)), f(X2, X2)))), f(X3, f(X3, f(f(X2, X2), f(f(constant, f(X4, X4)), f(constant, f(constant, f(X4, X4))))))))=f(X2, X2)).
+cnf(c53, plain, f(f(X3, f(f(X2, X2), f(f(constant, f(X4, X4)), f(constant, f(constant, f(X4, X4)))))), f(X3, f(X3, f(f(X2, X2), f(f(f(X4, X4), f(X4, X4)), f(X2, X2))))))=f(X2, X2)).
+cnf(c54, plain, f(f(X3, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(X4, X4), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))))), f(X3, f(X3, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(X4, X4), f(X4, X4))))))=f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))).
+cnf(c55, plain, f(f(X3, f(f(f(X2, X2), f(X2, X2)), f(f(X4, X4), f(f(X2, X2), f(X2, X2))))), f(X3, f(X3, f(f(f(X2, X2), f(X2, X2)), f(f(X4, X4), f(X4, X4))))))=f(f(X2, X2), f(X2, X2))).
+cnf(c56, plain, f(f(X3, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(X4, X4), f(X4, X4)))), f(X3, f(X3, f(f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))), f(f(X4, X4), f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2)))))))))=f(f(constant, f(X2, X2)), f(constant, f(constant, f(X2, X2))))).
+% SZS output end Saturation
+
+Ran out of critical pairs. This means the conjecture is not true.
+Here is the final rewrite system:
+  f(X, f(f(Y, f(X, f(Z, Z))), X)) -> Y
+  f(f(X, X), f(f(Y, Y), f(Y, Y))) <-> f(f(X, X), f(f(Y, Y), f(X, X)))
+  f(f(X, f(Y, Y)), f(X, f(X, f(Y, Y)))) ~> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+  f(f(X, X), f(f(f(Y, Y), f(Y, Y)), f(X, X))) = f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))))
+  f(f(f(X, X), f(Y, Y)), f(f(X, X), f(Y, Y))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+  f(f(f(X, X), f(X, X)), f(f(Y, Y), f(f(X, X), f(Y, Y)))) -> f(f(f(X, X), f(X, X)), f(f(Y, Y), f(Y, Y)))
+  f(X, f(f(Y, f(X, f(f(?, f(Z, Z)), f(?, f(?, f(Z, Z)))))), X)) -> Y
+  f(f(X, X), f(f(Y, f(f(X, X), f(f(Z, Z), f(X, X)))), f(X, X))) -> Y
+  f(f(X, X), f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(X, X))) -> f(f(X, X), f(Y, Y))
+  f(f(X, f(f(Y, Y), f(Z, Z))), f(X, f(X, f(f(Y, Y), f(Z, Z))))) -> f(Y, Y)
+  f(f(f(X, X), f(f(Y, Y), f(X, X))), f(f(X, X), f(f(Y, Y), f(X, X)))) -> f(Y, Y)
+  f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(?, f(X, X)), f(?, f(?, f(X, X))))) -> f(X, X)
+  f(f(X, f(f(Y, Y), f(f(Z, Z), f(Y, Y)))), f(X, f(X, f(f(Y, Y), f(f(Z, Z), f(Y, Y)))))) -> f(Y, Y)
+  f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(f(X, X), f(X, X)), f(Y, Y)))) -> f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(Y, Y)))
+  f(f(f(X, X), f(X, X)), f(f(Y, f(f(?, f(X, X)), f(?, f(?, f(X, X))))), f(f(X, X), f(X, X)))) -> Y
+  f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))) = f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(Y, Y)))
+  f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, f(X, X)), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))) -> Y
+  f(f(X, f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))), f(X, f(X, f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))))) -> f(f(Y, Y), f(Y, Y))
+  f(f(f(X, X), f(f(f(Y, Y), f(Y, Y)), f(X, X))), f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))))) -> f(f(Y, Y), f(Y, Y))
+  f(f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))), f(f(X, X), f(f(f(Y, Y), f(Y, Y)), f(X, X)))) -> f(f(Y, Y), f(Y, Y))
+  f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(f(Y, Y), f(Y, Y)), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))) -> f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))))
+  f(f(f(f(X, X), f(X, X)), f(f(Y, Y), f(Y, Y))), f(f(f(X, X), f(X, X)), f(f(Y, Y), f(f(X, X), f(X, X))))) -> f(Y, Y)
+  f(f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))), f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))))) -> f(f(Y, Y), f(Y, Y))
+  f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(Y, Y)), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(Y, Y))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+  f(f(f(X, X), f(f(f(Y, Y), f(Y, Y)), f(X, X))), f(f(X, X), f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))))) -> f(f(Y, Y), f(Y, Y))
+  f(f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))), f(f(X, X), f(f(X, X), f(f(f(Y, Y), f(Y, Y)), f(X, X))))) -> f(f(Y, Y), f(Y, Y))
+  f(f(f(X, X), f(X, X)), f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(X, X), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))))) -> f(f(f(X, X), f(X, X)), f(Y, Y))
+  f(f(X, f(f(Y, Y), f(f(f(Z, Z), f(Z, Z)), f(Y, Y)))), f(X, f(X, f(f(Y, Y), f(f(?, f(Z, Z)), f(?, f(?, f(Z, Z)))))))) -> f(Y, Y)
+  f(f(X, f(f(Y, Y), f(f(?, f(Z, Z)), f(?, f(?, f(Z, Z)))))), f(X, f(X, f(f(Y, Y), f(f(f(Z, Z), f(Z, Z)), f(Y, Y)))))) -> f(Y, Y)
+  f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))) -> f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(Y, Y))
+  f(f(X, f(f(f(Y, Y), f(Y, Y)), f(f(Z, Z), f(Z, Z)))), f(X, f(X, f(f(f(Y, Y), f(Y, Y)), f(f(Z, Z), f(f(Y, Y), f(Y, Y))))))) -> f(f(Y, Y), f(Y, Y))
+  f(f(X, f(f(Y, Y), f(f(?, f(Z, Z)), f(?, f(?, f(Z, Z)))))), f(X, f(X, f(f(Y, Y), f(f(?, f(Z, Z)), f(?, f(?, f(Z, Z)))))))) -> f(Y, Y)
+  f(f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(Z, Z))), f(X, f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(Z, Z))))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+  f(f(X, f(f(f(Y, Y), f(Y, Y)), f(f(Z, Z), f(f(Y, Y), f(Y, Y))))), f(X, f(X, f(f(f(Y, Y), f(Y, Y)), f(f(Z, Z), f(Z, Z)))))) -> f(f(Y, Y), f(Y, Y))
+  f(f(f(f(X, X), f(X, X)), f(f(Y, Y), f(Y, Y))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(Y, Y), f(f(X, X), f(X, X)))))) -> f(Y, Y)
+  f(f(f(f(X, X), f(X, X)), f(f(Y, Y), f(f(X, X), f(X, X)))), f(f(f(X, X), f(X, X)), f(f(f(X, X), f(X, X)), f(f(Y, Y), f(Y, Y))))) -> f(Y, Y)
+  f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(Y, Y))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(?, f(X, X)), f(?, f(?, f(X, X))))))) -> f(Y, Y)
+  f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(Y, Y)))) -> f(Y, Y)
+  f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))))) -> f(f(Y, Y), f(Y, Y))
+  f(f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(Z, Z), f(Z, Z)))), f(X, f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(Z, Z), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))))))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+  f(f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(Z, Z), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))))), f(X, f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(Z, Z), f(Z, Z)))))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+  f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Z, Z), f(f(?, f(X, X)), f(?, f(?, f(X, X))))))), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))) -> Y
+  f(f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(?, f(Z, Z)), f(?, f(?, f(Z, Z)))))), f(X, f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(?, f(Z, Z)), f(?, f(?, f(Z, Z)))))))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+  f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(?, f(X, X)), f(?, f(?, f(X, X))))))) -> f(Y, Y)
+  f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(Y, Y))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))))) -> f(Y, Y)
+  f(f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(f(?, f(X, X)), f(?, f(?, f(X, X)))))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(f(?, f(X, X)), f(?, f(?, f(X, X)))), f(f(Y, Y), f(Y, Y))))) -> f(Y, Y)
+  f(f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(Z, Z), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))))), f(X, f(X, f(f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y)))), f(f(Z, Z), f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))))))) -> f(f(?, f(Y, Y)), f(?, f(?, f(Y, Y))))
+
+RESULT: CounterSatisfiable (the conjecture is false).
